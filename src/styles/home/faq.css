@@ -1,0 +1,801 @@
+/* ---------- Common highways / FAQ ---------- */
+.highways {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  color: #14151c;
+  background: var(--hero-fill);
+}
+
+.highways-inner {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.08fr);
+  column-gap: clamp(1.25rem, 4.5vw, 5.5rem);
+  align-items: start;
+  width: min(1240px, calc(100% - 5rem));
+  margin: 0 auto;
+  padding: clamp(4.25rem, 8.5vh, 6.25rem) 0 0.75rem;
+}
+
+.highways-left {
+  position: relative;
+  z-index: 1;
+}
+
+.highways-title {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-family: var(--font-quattrocento), Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(44px, 5.1vw, 62px);
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #111111;
+}
+
+.highways-lede {
+  max-width: 38ch;
+  margin: 1.15rem 0 0;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #6a6a6a;
+}
+
+.highways-visual {
+  position: relative;
+  z-index: 1;
+  width: min(590px, 128%);
+  margin-top: 1.65rem;
+  margin-left: -24px;
+}
+
+/* The truck idles: a fast engine shudder on `translate` and a slow body
+   roll on `rotate`, kept on separate properties so they don't fight. */
+.highways-rig {
+  position: relative;
+  transform-origin: 50% 100%;
+  animation:
+    highways-idle 0.42s linear infinite,
+    highways-roll 3.2s ease-in-out infinite alternate;
+}
+
+.highways-board {
+  position: absolute;
+  z-index: 2;
+  left: 5.2%;
+  top: 8.2%;
+  width: 56%;
+  height: 30%;
+}
+
+.highways-card {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 0.75rem 1.1rem 0.8rem;
+  border-radius: 10px;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgb(255 255 255 / 0.1), transparent 60%),
+    #6e1a35;
+  color: #ffffff;
+}
+
+/* Chasing bulbs around the board edge. */
+.highways-card-lights {
+  position: absolute;
+  inset: 4px;
+  z-index: 0;
+  border-radius: 7px;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, #ffe066 0 1.7px, transparent 2.3px),
+    radial-gradient(circle, #ffe066 0 1.7px, transparent 2.3px),
+    radial-gradient(circle, #ffe066 0 1.7px, transparent 2.3px),
+    radial-gradient(circle, #ffe066 0 1.7px, transparent 2.3px);
+  background-size: 12px 5px, 12px 5px, 5px 12px, 5px 12px;
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-position: 0 0, 0 100%, 0 0, 100% 0;
+  filter: drop-shadow(0 0 2px #ffcc33) drop-shadow(0 0 4px rgb(255 170 0 / 0.7));
+  animation: highways-chase 0.9s steps(3) infinite;
+}
+
+/* Light catching the painted metal. */
+.highways-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 38%,
+    rgb(255 255 255 / 0.32) 48%,
+    rgb(255 255 255 / 0.08) 54%,
+    transparent 62%
+  );
+  transform: translateX(-120%);
+  animation: highways-glint 5.5s ease-in-out 1.5s infinite;
+}
+
+.highways-card-title {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  margin: 0;
+  font-family: var(--font-yatra), var(--font-rye), Georgia, serif;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+}
+
+.highways-card-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.highways-card-line--1 {
+  font-size: clamp(16px, 1.75vw, 22px);
+  color: #ffd84a;
+  text-shadow:
+    1.5px 1.5px 0 #2a0a16,
+    2.5px 2.5px 0 #e8335d;
+}
+
+.highways-card-line--2 {
+  font-size: clamp(22px, 2.5vw, 32px);
+  color: #ffffff;
+  text-shadow:
+    2px 2px 0 #2a0a16,
+    3.5px 3.5px 0 #18b8c9,
+    0 0 10px rgb(255 216 74 / 0.55);
+  animation: highways-flicker 6s linear 2.5s infinite;
+}
+
+.highways-card-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.highways-card-char {
+  display: inline-block;
+  transform-origin: 50% 80%;
+}
+
+.highways-card:hover .highways-card-char {
+  animation: highways-wave 0.7s ease-in-out calc(var(--i) * 0.035s);
+}
+
+.highways-card-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: fit-content;
+  margin-top: 0.55rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: #e8b423;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #1a1208;
+}
+
+.highways-card-btn:hover {
+  filter: brightness(1.04);
+}
+
+/* Google search that pops out of the board on hover. */
+.highways-serp {
+  --serp-arrow: 34px;
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  top: calc(100% + 16px);
+  box-sizing: border-box;
+  width: min(400px, calc(100vw - 2rem));
+  padding: 12px 12px 14px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow:
+    0 28px 50px -22px rgb(30 10 20 / 0.55),
+    0 0 0 1px rgb(20 21 28 / 0.08);
+  color: #202124;
+  font-family: var(--font-inter), Inter, Arial, sans-serif;
+  text-align: left;
+  transform-origin: var(--serp-arrow) 0%;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.highways-serp[data-placement="above"] {
+  top: auto;
+  bottom: calc(100% + 16px);
+  transform-origin: var(--serp-arrow) 100%;
+}
+
+.highways-serp::after {
+  content: "";
+  position: absolute;
+  left: var(--serp-arrow);
+  top: -7px;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  border-radius: 3px 0 0;
+  background: #ffffff;
+  box-shadow: -1px -1px 0 rgb(20 21 28 / 0.08);
+  transform: rotate(45deg);
+}
+
+.highways-serp[data-placement="above"]::after {
+  top: auto;
+  bottom: -7px;
+  border-radius: 0 0 3px;
+  box-shadow: 1px 1px 0 rgb(20 21 28 / 0.08);
+}
+
+.highways-serp-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.highways-serp-logo {
+  flex: none;
+  font-family: var(--font-jakarta), Arial, sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -0.04em;
+}
+
+.highways-serp-bar {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  height: 38px;
+  padding: 0 14px 0 12px;
+  border: 1px solid #dfe1e5;
+  border-radius: 999px;
+  box-shadow: 0 1px 6px rgb(32 33 36 / 0.12);
+  overflow: hidden;
+}
+
+.highways-serp-icon {
+  flex: none;
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: #9aa0a6;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+.highways-serp-field {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: pre;
+}
+
+.highways-serp-caret {
+  flex: none;
+  width: 1.5px;
+  height: 16px;
+  margin-left: 1px;
+  background: #1a73e8;
+  animation: highways-caret 1s steps(1) infinite;
+}
+
+.highways-serp-progress {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #4285f4, #ea4335, #fbbc05, #34a853);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.highways-serp-results {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.highways-serp-result {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.highways-serp-result--top {
+  position: relative;
+  overflow: hidden;
+  padding: 10px 12px 11px;
+  border: 1px solid #f3d27a;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #fffaf0, #ffffff);
+}
+
+.highways-serp-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgb(255 216 74 / 0.45) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.highways-serp-rank {
+  position: absolute;
+  top: 9px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  min-width: 34px;
+  height: 22px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: #e0a01a;
+  color: #1a1208;
+  font-weight: 800;
+  font-size: 12px;
+  box-shadow: 0 6px 14px -6px rgb(224 160 26 / 0.9);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.highways-serp-site {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 44px;
+}
+
+.highways-serp-favicon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #e3e5e8;
+  border-radius: 50%;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.highways-serp-favicon img {
+  width: 17px;
+  height: 17px;
+  object-fit: contain;
+}
+
+.highways-serp-name {
+  display: block;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.highways-serp-url {
+  display: block;
+  color: #4d5156;
+  font-size: 10.5px;
+  line-height: 14px;
+}
+
+.highways-serp-title {
+  position: relative;
+  margin: 7px 0 0;
+  color: #1a0dab;
+  font-weight: 500;
+  font-size: 14.5px;
+  line-height: 19px;
+}
+
+.highways-serp-snippet {
+  position: relative;
+  margin: 3px 0 0;
+  color: #4d5156;
+  font-size: 11.5px;
+  line-height: 16px;
+}
+
+.highways-serp-result--ghost {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 2px 12px;
+}
+
+.highways-serp-result--ghost span {
+  display: block;
+  height: 7px;
+  border-radius: 4px;
+  background: #eceef1;
+}
+
+.highways-serp-result--ghost span:first-child {
+  width: 62%;
+  background: #dfe3f4;
+}
+
+.highways-serp-result--ghost span:last-child {
+  width: 88%;
+}
+
+.highways-serp-badge {
+  position: absolute;
+  right: -10px;
+  bottom: -14px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px 7px 9px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffd84a, #e0a01a);
+  box-shadow:
+    0 12px 24px -10px rgb(224 160 26 / 0.85),
+    inset 0 1px 0 rgb(255 255 255 / 0.5);
+  color: #1a1208;
+  font-family: var(--font-yatra), Georgia, serif;
+  font-size: 15px;
+  line-height: 1;
+  white-space: nowrap;
+  transform-origin: 85% 50%;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.highways-serp-badge svg {
+  width: 20px;
+  height: 20px;
+  padding: 4px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: #6e1a35;
+  fill: none;
+  stroke: #ffd84a;
+  stroke-width: 3.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.highways-truck {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin: 0;
+  pointer-events: none;
+}
+
+.highways-truck img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.highways-faqs {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.2rem;
+}
+
+.highways-faq {
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.highways-faq-trigger {
+  appearance: none;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) 32px;
+  align-items: center;
+  column-gap: 12px;
+  padding: 1.15rem 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  color: #111111;
+  white-space: normal;
+}
+
+.highways-faq.is-open .highways-faq-trigger {
+  align-items: start;
+  padding-bottom: 0.45rem;
+}
+
+.highways-faq-num {
+  padding-top: 2px;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.2;
+  color: #e0a01a;
+}
+
+.highways-faq-q {
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.35;
+  color: #111111;
+  white-space: normal;
+}
+
+.highways-faq-toggle {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: #111111;
+  color: #ffffff;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  transition: background 0.28s ease, color 0.28s ease;
+}
+
+.highways-faq.is-open .highways-faq-toggle {
+  background: #e0a01a;
+  color: #111111;
+}
+
+.highways-faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.35s ease,
+    max-height 0.35s ease,
+    opacity 0.22s ease;
+}
+
+.highways-faq.is-open .highways-faq-panel {
+  grid-template-rows: 1fr;
+  max-height: 240px;
+  opacity: 1;
+}
+
+.highways-faq-a {
+  overflow: hidden;
+  min-height: 0;
+  margin: 0;
+  padding: 0 42px 1.15rem 48px;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: #6d6d6d;
+}
+
+.highways-pattern {
+  margin-top: 0.35rem;
+}
+
+@keyframes highways-idle {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  20% {
+    translate: 0.4px -1px;
+  }
+  45% {
+    translate: -0.3px 0.3px;
+  }
+  70% {
+    translate: 0.3px -0.7px;
+  }
+  85% {
+    translate: -0.4px 0;
+  }
+}
+
+@keyframes highways-roll {
+  from {
+    rotate: -0.22deg;
+  }
+  to {
+    rotate: 0.22deg;
+  }
+}
+
+@keyframes highways-chase {
+  to {
+    background-position: 12px 0, -12px 100%, 0 -12px, 100% 12px;
+  }
+}
+
+@keyframes highways-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes highways-glint {
+  0%,
+  60% {
+    transform: translateX(-120%);
+  }
+  85%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+/* An old truck light: steady, then a quick stutter. */
+@keyframes highways-flicker {
+  0%,
+  70%,
+  74%,
+  78%,
+  100% {
+    opacity: 1;
+  }
+  72% {
+    opacity: 0.35;
+  }
+  76% {
+    opacity: 0.6;
+  }
+  77% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes highways-wave {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  40% {
+    translate: 0 -0.18em;
+    rotate: -6deg;
+  }
+  70% {
+    translate: 0 0.04em;
+    rotate: 3deg;
+  }
+}
+
+@media (max-width: 980px) {
+  .highways-inner {
+    grid-template-columns: 1fr;
+    width: min(1280px, calc(100% - 2rem));
+    padding-bottom: 0.5rem;
+  }
+
+  /* The card stays inside the truck's screen; `cqi` scales its type with
+     the truck so it fits the screen at any width. */
+  .highways-visual {
+    width: min(580px, 100%);
+    margin: 1.5rem auto 0;
+    container-type: inline-size;
+  }
+
+  .highways-board {
+    left: 6%;
+    top: 8.6%;
+    width: 54%;
+    height: 28.6%;
+  }
+
+  .highways-card {
+    padding: 1.8cqi 2.8cqi;
+    border-radius: 1.4cqi;
+  }
+
+  .highways-card-line--1 {
+    font-size: 3.9cqi;
+  }
+
+  .highways-card-line--2 {
+    font-size: 5.6cqi;
+  }
+
+  .highways-card-btn {
+    margin-top: 1.5cqi;
+    padding: 1.2cqi 2cqi;
+    border-radius: 1cqi;
+    font-size: 2.1cqi;
+  }
+
+  .highways-truck {
+    margin-top: 0;
+  }
+
+  .highways-faq-q {
+    font-size: 15px;
+  }
+
+  .highways-faq-a {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee,
+  .proof-logos-track {
+    animation: none;
+  }
+
+  .proof-logos {
+    clip-path: none;
+    will-change: auto;
+  }
+
+  html:not(.lenis) {
+    scroll-behavior: auto;
+  }
+
+  .hero-scene {
+    transform: none;
+  }
+
+  .hero [data-hero-item],
+  .site-header {
+    opacity: 1;
+  }
+
+  .road-lamp-halo {
+    animation: none;
+  }
+
+  .highways-faq-panel {
+    transition: none;
+  }
+
+  .highways-rig,
+  .highways-card-lights,
+  .highways-card::after,
+  .highways-card-line--2,
+  .highways-card:hover .highways-card-char,
+  .highways-serp-caret {
+    animation: none;
+  }
+}

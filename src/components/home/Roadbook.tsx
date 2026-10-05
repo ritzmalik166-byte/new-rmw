@@ -151,9 +151,9 @@ export function Roadbook() {
   }, [goNext, goPrev]);
 
   return (
-    <section ref={rootRef} className="roadbook" aria-label="Work">
+    <section ref={rootRef} className="roadbook" aria-label="Safarnama">
       <h2 data-roadbook-title className="roadbook-title">
-        Work
+        Safarnama
       </h2>
 
       <div className="roadbook-stage">

@@ -1,0 +1,81 @@
+.brand-mark {
+  display: flex;
+  align-items: center;
+}
+
+.brand-mark-logo {
+  display: block;
+  height: 56px;
+  width: auto;
+}
+
+@media (min-width: 768px) {
+  .brand-mark-logo {
+    height: 68px;
+  }
+}
+
+.site-header {
+  opacity: 0;
+}
+
+.site-nav {
+  display: none;
+  align-items: center;
+  gap: 32px;
+}
+
+.site-nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 16px;
+  padding-bottom: 4px;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  opacity: 1;
+  white-space: nowrap;
+}
+
+.site-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--truck-yellow) 0%,
+    var(--truck-orange) 48%,
+    var(--truck-pink) 100%
+  );
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.28s ease;
+}
+
+.site-nav-link:hover::after,
+.site-nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav-link::after {
+    transition: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-nav {
+    display: flex;
+  }
+}

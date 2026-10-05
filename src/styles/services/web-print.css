@@ -1,0 +1,229 @@
+.svc-webprint {
+  --wp-ink: #1b1446;
+  --wp-blue: #1457a8;
+  --wp-paper: #fffaf0;
+
+  position: relative;
+  z-index: 1;
+  border-block: 2px solid var(--wp-ink);
+  background: #f7efdf;
+  color: var(--wp-ink);
+}
+
+.svc-webprint-inner {
+  width: min(1440px, 100%);
+  margin-inline: auto;
+  padding: 64px clamp(32px, 6vw, 88px) 88px;
+  box-sizing: border-box;
+}
+
+/* Web design & development */
+
+.svc-web {
+  display: grid;
+  grid-template-columns: minmax(0, 720px) minmax(0, 460px);
+  align-items: center;
+  justify-content: space-between;
+  column-gap: clamp(40px, 5vw, 72px);
+}
+
+.svc-web-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.svc-web-kicker {
+  margin: 0;
+  color: var(--wp-blue);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.svc-web-title {
+  margin: 14px 0 0;
+  color: #0c1322;
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 52px;
+  letter-spacing: -0.5px;
+}
+
+.svc-web-lede {
+  max-width: 440px;
+  margin: 20px 0 0;
+  color: #00000099;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.svc-web-cta {
+  display: inline-flex;
+  gap: 6px;
+  margin-top: 24px;
+  color: var(--wp-blue);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+.svc-web-cta span {
+  transition: transform 0.25s ease;
+}
+
+.svc-web-cta:hover span,
+.svc-web-cta:focus-visible span {
+  transform: translateX(4px);
+}
+
+/* Print advertising */
+
+.svc-print {
+  margin-top: 72px;
+  padding: 26px 40px 44px;
+  border: 1.5px solid var(--wp-ink);
+  background: var(--wp-paper);
+  box-shadow: 12px 12px 0 var(--wp-ink);
+}
+
+.svc-print-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--wp-ink);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.svc-print-title {
+  margin: 14px 0 0;
+  padding-bottom: 14px;
+  border-bottom: 5px double var(--wp-ink);
+  font-family: var(--font-yeseva), "Yeseva One", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(40px, 4.6vw, 64px);
+  line-height: 1.15;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.svc-print-lede {
+  max-width: 640px;
+  margin: 20px auto 0;
+  color: #3d3a66;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  text-align: center;
+}
+
+.svc-print-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 36px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.svc-print-item {
+  padding: 4px 32px 28px;
+  border-left: 1px solid var(--wp-ink);
+}
+
+.svc-print-item:nth-child(3n + 1) {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.svc-print-item:nth-child(-n + 3) {
+  border-bottom: 1px solid var(--wp-ink);
+}
+
+.svc-print-item:nth-child(n + 4) {
+  padding-top: 28px;
+  padding-bottom: 12px;
+}
+
+.svc-print-item-title {
+  margin: 0;
+  font-family: var(--font-yeseva), "Yeseva One", Georgia, serif;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 26px;
+}
+
+.svc-print-item-copy {
+  margin: 12px 0 0;
+  color: #45416b;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 22px;
+}
+
+@media (max-width: 1100px) {
+  .svc-web {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 40px;
+  }
+
+  .svc-web-art {
+    justify-self: center;
+    width: min(100%, 720px);
+  }
+}
+
+@media (max-width: 760px) {
+  .svc-webprint-inner {
+    padding: 48px 20px 64px;
+  }
+
+  .svc-web-title {
+    font-size: 38px;
+    line-height: 42px;
+  }
+
+  .svc-print {
+    margin-top: 56px;
+    padding: 20px 20px 28px;
+    box-shadow: 8px 8px 0 var(--wp-ink);
+  }
+
+  .svc-print-meta span:nth-child(2) {
+    display: none;
+  }
+
+  .svc-print-grid {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 24px;
+  }
+
+  .svc-print-item,
+  .svc-print-item:nth-child(n) {
+    padding: 18px 0;
+    border-left: 0;
+    border-bottom: 1px solid var(--wp-ink);
+  }
+
+  .svc-print-item:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+}

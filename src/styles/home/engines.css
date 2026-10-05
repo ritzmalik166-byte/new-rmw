@@ -1,0 +1,392 @@
+/* ---------- One agency. Three engines. ---------- */
+.engines {
+  --road-h: 88px;
+  --lamp-h: 0px;
+  --engines-strip-tile: 1024px;
+  --engines-strip-h: 52px;
+  --engines-bg-strip-h: calc(70 * 100vw / 1024);
+  --engines-cream: #fff8ee;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+  max-height: 100svh;
+  box-sizing: border-box;
+  background-color: #f8ead5;
+  background-image: url("/s4/engines-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% auto;
+  color: #0b1120;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* .engines-strip {
+  flex: 0 0 var(--engines-strip-h);
+  width: 100%;
+  height: var(--engines-strip-h);
+  overflow: hidden;
+  border: 0;
+  outline: none;
+  box-shadow: none;
+  background-color: var(--engines-cream);
+  background-image: url("/s4/paisley-strip.png");
+  background-repeat: repeat-x;
+  background-position: left center;
+  background-size: var(--engines-strip-tile) 100%;
+}
+
+.engines-strip-bottom {
+  flex: 0 0 var(--engines-strip-h);
+  transform: scaleY(-1);
+} */
+
+.engines-strip-bottom {
+  display: none;
+}
+
+.engines-inner {
+  position: relative;
+  z-index: 4;
+  flex: 0 0 auto;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: calc(var(--engines-bg-strip-h) + 0.85rem) 80px 0;
+}
+
+.engines-title {
+  width: 826px;
+  max-width: 100%;
+  margin: 0 0 0.85rem;
+  font-family: var(--font-quattrocento), Georgia, serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: clamp(28px, 4.4vh, 48px);
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: #0b1120;
+  perspective: 900px;
+}
+
+.engines-title-line {
+  display: block;
+  overflow: hidden;
+  perspective: 900px;
+}
+
+.engines-char {
+  display: inline-block;
+  will-change: transform;
+}
+
+.engines-tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 0 0.65rem;
+  perspective: 900px;
+}
+
+.engines-tabs-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  max-width: 100%;
+}
+
+.engines-tab {
+  box-sizing: border-box;
+  appearance: none;
+  min-height: 44px;
+  background: #ffffff;
+  color: #0b1120;
+  border-radius: 4px;
+  padding: 14px 18px;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition:
+    background-color 0.38s ease,
+    color 0.38s ease,
+    box-shadow 0.38s ease;
+}
+
+.engines-tab-active {
+  background: #0b1120;
+  color: #ffffff;
+  border-color: #0b1120;
+  box-shadow: 0 10px 22px rgb(11 17 32 / 0.22);
+}
+
+.engines-split {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.25fr);
+  align-items: center;
+  gap: 1rem 2.5rem;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0.35rem 80px 0;
+}
+
+.engines-copy {
+  --engines-bar: 1;
+  position: relative;
+  align-self: center;
+  max-width: 34rem;
+  margin-bottom: 7vh;
+  padding: 0 0 0 1.15rem;
+}
+
+.engines-copy::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.15rem;
+  bottom: 0.15rem;
+  width: 3px;
+  border-radius: 999px;
+  background: #e59b20;
+  transform: scaleY(var(--engines-bar, 1));
+  transform-origin: center top;
+  will-change: transform;
+}
+
+.engines-kicker {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #c07a12;
+}
+
+.engines-heading {
+  width: auto;
+  max-width: 100%;
+  margin: 0 0 0.55rem;
+  font-family: var(--font-quattrocento), Georgia, serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: clamp(20px, 2.6vh, 28px);
+  line-height: 1.15;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: #0b1120;
+  overflow: hidden;
+}
+
+.engines-lede {
+  width: auto;
+  max-width: 100%;
+  margin: 0;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(14px, 1.7vh, 17px);
+  line-height: 1.45;
+  letter-spacing: 0;
+  color: rgb(0 0 0 / 0.72);
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.engines-stage {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.engines-rig {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  /* Plant the contact patch on the dashed lane, not above it. */
+  margin-bottom: calc(var(--road-h) * -0.5);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .engines-rig {
+    transform: translate3d(110vw, 0, 0);
+  }
+}
+
+.engines-vehicle {
+  --wheel-size: 16.6%;
+  --wheel-top: 65.1%;
+  --wheel-front: 8.35%;
+  --wheel-mid: 58.7%;
+  --wheel-rear: 73.93%;
+  position: relative;
+  width: min(92%, 980px);
+  height: auto;
+  max-width: 92%;
+  overflow: visible;
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+
+.engines-truck {
+  position: relative;
+  z-index: 3;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.engines-cargo {
+  position: absolute;
+  z-index: 5;
+  left: 44.3%;
+  top: 7.4%;
+  width: 50.5%;
+  height: 49.2%;
+  overflow: hidden;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.engines-cargo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.engines-horn {
+  position: absolute;
+  left: 5.6%;
+  top: 0.5%;
+  z-index: 6;
+  width: 29%;
+  height: auto;
+  pointer-events: none;
+  transform: rotate(-2deg);
+  transform-origin: 92% 70%;
+  will-change: transform;
+}
+
+@keyframes engines-tyre-spin {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.engines-wheel {
+  position: absolute;
+  z-index: 4;
+  top: var(--wheel-top);
+  width: var(--wheel-size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #1a1a1a;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 0.2);
+  pointer-events: none;
+  transform-origin: 50% 50%;
+  will-change: transform;
+  isolation: isolate;
+}
+
+.engines-wheel-tread {
+  position: absolute;
+  inset: -8%;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    #1a1a1a 0deg 11deg,
+    transparent 11deg 15deg
+  );
+  -webkit-mask: radial-gradient(circle, transparent 58%, #000 60%);
+  mask: radial-gradient(circle, transparent 58%, #000 60%);
+}
+
+.engines-wheel-hub {
+  position: absolute;
+  inset: 27%;
+  border-radius: 50%;
+  background: #ef3b86;
+  box-shadow:
+    0 0 0 3px #1a1a1a,
+    inset 0 1px 0 rgb(255 255 255 / 0.2);
+}
+
+.engines.is-driving .engines-wheel {
+  animation: engines-tyre-spin 1.25s linear infinite;
+}
+
+.engines.is-driving .engines-road .road-world {
+  animation-duration: 6.8s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .engines.is-driving .engines-wheel {
+    animation: none;
+  }
+}
+
+.engines-wheel-hub::after {
+  content: "";
+  position: absolute;
+  inset: 36%;
+  border-radius: 50%;
+  background: #f45a9a;
+}
+
+.engines-wheel--front {
+  left: var(--wheel-front);
+}
+
+.engines-wheel--mid {
+  left: var(--wheel-mid);
+}
+
+.engines-wheel--rear {
+  left: var(--wheel-rear);
+}
+
+.engines-road {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 var(--road-h);
+  width: 100%;
+  height: var(--road-h);
+  margin-top: 0;
+}
+
+.engines-road .road-bed {
+  mask-image: none;
+  -webkit-mask-image: none;
+}

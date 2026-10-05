@@ -1,0 +1,443 @@
+/* =====================================================================
+   Responsive — tablet & mobile only.
+   Every rule below is scoped to max-width queries (≤1024px) so the
+   desktop layout above stays exactly as designed.
+   ===================================================================== */
+
+/* ---------- Mobile nav (header) ---------- */
+.site-nav-toggle {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .site-header-bar {
+    position: relative;
+  }
+
+  .site-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .site-nav-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    background: #ffffff;
+    box-shadow: 0px 2px 4px -1px #0000001a;
+    cursor: pointer;
+  }
+
+  .site-nav-toggle span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    border-radius: 1px;
+    background: var(--ink);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .site-nav-toggle.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .site-nav-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .site-nav-toggle.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+}
+
+/* ---------- Full-screen mobile menu ---------- */
+.mnav {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .mnav {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    color: #ffffff;
+    background: var(--ink);
+    visibility: hidden;
+    clip-path: circle(0% at calc(100% - 42px) 42px);
+    transition:
+      clip-path 0.7s cubic-bezier(0.77, 0, 0.18, 1),
+      visibility 0s linear 0.7s;
+  }
+
+  .mnav.is-open {
+    visibility: visible;
+    clip-path: circle(150% at calc(100% - 42px) 42px);
+    transition:
+      clip-path 0.8s cubic-bezier(0.77, 0, 0.18, 1),
+      visibility 0s;
+  }
+
+  .mnav-glow {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(60% 40% at 100% 0%, rgb(220 40 100 / 0.38), transparent 70%),
+      radial-gradient(55% 35% at 0% 55%, rgb(240 120 40 / 0.22), transparent 70%),
+      radial-gradient(70% 40% at 80% 100%, rgb(26 77 184 / 0.35), transparent 70%);
+  }
+
+  .mnav-glow::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 6px;
+    background: linear-gradient(
+      90deg,
+      var(--truck-yellow),
+      var(--truck-orange) 35%,
+      var(--truck-pink) 65%,
+      var(--truck-blue)
+    );
+  }
+
+  .mnav-top,
+  .mnav-links,
+  .mnav-foot {
+    position: relative;
+    z-index: 1;
+  }
+
+  .mnav-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.25rem 0;
+  }
+
+  .mnav-top .brand-mark-logo {
+    filter: drop-shadow(0 0 12px rgb(255 255 255 / 0.18));
+  }
+
+  .mnav-close {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 1px solid rgb(255 255 255 / 0.22);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.06);
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.4s ease;
+  }
+
+  .mnav-close:hover,
+  .mnav-close:focus-visible {
+    background: rgb(255 255 255 / 0.14);
+    transform: rotate(90deg);
+  }
+
+  .mnav-close span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 2px;
+    border-radius: 2px;
+    background: #ffffff;
+  }
+
+  .mnav-close span:nth-child(1) {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  .mnav-close span:nth-child(2) {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  .mnav-links {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 1.25rem;
+  }
+
+  .mnav-link {
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: clamp(0.7rem, 2.2svh, 1.15rem) 0;
+    border-bottom: 1px solid rgb(255 255 255 / 0.12);
+    color: #ffffff;
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .mnav.is-open .mnav-link {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.6s ease calc(0.3s + var(--i) * 0.07s),
+      transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) calc(0.3s + var(--i) * 0.07s);
+  }
+
+  .mnav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      var(--truck-yellow),
+      var(--truck-orange) 48%,
+      var(--truck-pink)
+    );
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.45s ease;
+  }
+
+  .mnav-num {
+    min-width: 2ch;
+    font-family: var(--font-inter), Inter, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: rgb(255 255 255 / 0.45);
+  }
+
+  .mnav-label {
+    flex: 1;
+    font-family: var(--font-display), var(--font-outfit), sans-serif;
+    font-size: clamp(2.1rem, 9vw, 3.75rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    transition: transform 0.4s ease;
+  }
+
+  .mnav-arrow {
+    align-self: center;
+    font-size: clamp(1.25rem, 4.5vw, 1.75rem);
+    color: rgb(255 255 255 / 0.4);
+    transform: translateX(-6px);
+    transition: transform 0.4s ease, color 0.4s ease;
+  }
+
+  .mnav-link:hover::after,
+  .mnav-link:focus-visible::after,
+  .mnav-link.is-active::after {
+    transform: scaleX(1);
+  }
+
+  .mnav-link:hover .mnav-label,
+  .mnav-link:focus-visible .mnav-label {
+    transform: translateX(8px);
+  }
+
+  .mnav-link:hover .mnav-arrow,
+  .mnav-link:focus-visible .mnav-arrow {
+    color: var(--truck-yellow);
+    transform: translateX(0);
+  }
+
+  .mnav-link.is-active .mnav-label {
+    background: linear-gradient(90deg, var(--truck-yellow), var(--truck-orange) 50%, var(--truck-pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .mnav-link.is-active .mnav-num {
+    color: var(--truck-yellow);
+  }
+
+  .mnav-foot {
+    display: grid;
+    gap: 1.1rem;
+    padding: 0 1.25rem 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .mnav.is-open .mnav-foot {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.6s ease 0.7s,
+      transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.7s;
+  }
+
+  .mnav-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    padding: 0 22px;
+    border-radius: 999px;
+    font-family: var(--font-inter), Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #ffffff;
+    background: linear-gradient(90deg, var(--truck-orange), var(--truck-pink));
+    box-shadow: 0 14px 34px rgb(220 40 100 / 0.35);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .mnav-cta span {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  .mnav-cta:hover,
+  .mnav-cta:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px rgb(220 40 100 / 0.45);
+  }
+
+  .mnav-cta:hover span,
+  .mnav-cta:focus-visible span {
+    transform: translateX(4px);
+  }
+
+  .mnav-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    font-size: 14px;
+  }
+
+  .mnav-contact a {
+    color: rgb(255 255 255 / 0.72);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .mnav-contact a:hover,
+  .mnav-contact a:focus-visible {
+    color: #ffffff;
+  }
+
+  .mnav-tagline {
+    margin: 0;
+    font-family: var(--font-inter), Inter, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.35);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .mnav-top {
+    padding: 1.5rem 2.5rem 0;
+  }
+
+  .mnav-links {
+    padding: 2rem 2.5rem;
+  }
+
+  .mnav-link {
+    gap: 24px;
+  }
+
+  .mnav-num {
+    font-size: 14px;
+  }
+
+  .mnav-foot {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 1.25rem 2rem;
+    padding: 0 2.5rem 2.5rem;
+  }
+
+  .mnav-cta {
+    gap: 18px;
+    min-width: 260px;
+  }
+
+  .mnav-contact {
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .mnav-tagline {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 1023px) and (prefers-reduced-motion: reduce) {
+  .mnav,
+  .mnav.is-open,
+  .mnav-link,
+  .mnav.is-open .mnav-link,
+  .mnav-foot,
+  .mnav.is-open .mnav-foot {
+    transition: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header-bar {
+    gap: 8px;
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+  }
+
+  .brand-mark-logo {
+    height: 46px;
+  }
+
+  .site-header-actions .btn-ink {
+    height: 40px;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+
+  .audit-card-title {
+    white-space: normal;
+  }
+
+  .audit-copy {
+    padding: 18px 14px 16px;
+    box-shadow: 5px 5px 0 var(--audit-ink);
+  }
+}

@@ -29,7 +29,7 @@ const HEADLINE_LINE_STAGGER = 0.14;
 export function Hero() {
   const rootRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<HTMLParagraphElement>(null);
   const titleInnerRef = useRef<HTMLSpanElement>(null);
   const headlineIndexRef = useRef(0);
   const cyclingRef = useRef(false);
@@ -251,18 +251,10 @@ export function Hero() {
     <section ref={rootRef} className="hero">
       <div className="hero-grid">
         <div className="hero-copy">
-          <p data-hero-item className="hero-kicker">
-            <span>Independent creative</span>
-            <span className="hero-kicker-dot" aria-hidden>
-              •
-            </span>
-            <span>Media agency</span>
-            <span className="hero-kicker-dot" aria-hidden>
-              •
-            </span>
-            <span>India</span>
-          </p>
-          <h1
+          <h1 data-hero-item className="hero-kicker">
+            Creative Advertising, Branding &amp; Digital Marketing Agency in India
+          </h1>
+          <p
             ref={titleRef}
             data-hero-item
             className="hero-title"
@@ -280,10 +272,10 @@ export function Hero() {
                 ))}
               </span>
             </span>
-          </h1>
+          </p>
           <p data-hero-item className="hero-lede">
-            We turn business problems into ideas that travel—from brand and
-            campaign to media, digital, film, 3D and AI.
+            An independent advertising agency with 18 years of experience
+            transforming brands through creativity, strategy, and innovation.
           </p>
         </div>
 

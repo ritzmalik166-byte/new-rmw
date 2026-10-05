@@ -1,0 +1,133 @@
+.svc-engine-banner {
+  position: relative;
+  z-index: 1;
+  background: var(--banner-bg, #1c2438);
+  color: #fbf8f2;
+}
+
+.svc-engine-banner-scallop {
+  height: 10px;
+  background: url("/service/image%20804.png") repeat-x left top / auto 100%;
+}
+
+.svc-engine-banner-inner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 640px) 1fr;
+  align-items: center;
+  column-gap: clamp(32px, 7.5vw, 108px);
+  width: min(1440px, 100%);
+  margin-inline: auto;
+  padding: 72px clamp(84px, 7vw, 101px);
+  box-sizing: border-box;
+}
+
+.svc-engine-banner-index {
+  min-width: 210px;
+  margin: 0;
+  color: #ffb400;
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 104px;
+  line-height: 104px;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.svc-engine-banner-copy {
+  width: 100%;
+  max-width: 640px;
+}
+
+.svc-engine-banner-kicker {
+  margin: 0;
+  color: #fbf8f2;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 13px;
+  line-height: 13px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+}
+
+.svc-engine-banner-title {
+  margin: 12px 0 0;
+  color: #ffffff;
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: 0;
+}
+
+.svc-engine-banner-lede {
+  margin: 8px 0 0;
+  color: #fbf8f2;
+  opacity: 0.9;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.svc-engine-banner-km {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border: 2px solid #e59b20;
+  border-radius: 10px;
+  background: #c41426;
+  color: #fbf8f2;
+  font-family: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: 1px;
+  text-align: center;
+  white-space: nowrap;
+  transform: rotate(4deg);
+}
+
+@media (max-width: 1100px) {
+  .svc-engine-banner-inner {
+    grid-template-columns: auto minmax(0, 1fr);
+    row-gap: 28px;
+  }
+
+  .svc-engine-banner-km {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
+
+@media (max-width: 720px) {
+  .svc-engine-banner-inner {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 20px;
+    padding: 48px 20px;
+  }
+
+  .svc-engine-banner-index {
+    min-width: 0;
+    font-size: 72px;
+    line-height: 72px;
+  }
+
+  .svc-engine-banner-title {
+    font-size: 36px;
+    line-height: 42px;
+  }
+
+  .svc-engine-banner-km {
+    grid-column: 1;
+    margin-top: 4px;
+    font-size: 16px;
+  }
+}

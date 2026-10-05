@@ -1,0 +1,299 @@
+.about-proofs {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  padding-top: clamp(72px, 9vh, 108px);
+  overflow: hidden;
+  background: linear-gradient(322.29deg, #ffffff 0.31%, #f8ead5 88.31%);
+}
+
+.about-proofs-title {
+  position: relative;
+  z-index: 4;
+  flex: 0 0 auto;
+  margin: 0;
+  padding-top: 0;
+  color: #1c140c;
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+
+.about-proofs-wave {
+  position: absolute;
+  top: 96px;
+  z-index: 1;
+  width: min(460px, 36vw);
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+.about-proofs-wave.is-left {
+  left: -36px;
+}
+
+.about-proofs-wave.is-right {
+  right: -28px;
+}
+
+.about-proofs-stage {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  width: min(720px, 62vw);
+  min-height: 0;
+  margin: 18px auto 108px;
+  align-self: center;
+}
+
+.about-proofs-shadow {
+  position: absolute;
+  right: 8%;
+  bottom: 4%;
+  left: 14%;
+  z-index: 0;
+  height: 46px;
+  background: radial-gradient(ellipse at center, rgb(48 28 10 / 32%), transparent 70%);
+  filter: blur(4px);
+  transform: rotate(-8deg);
+}
+
+.about-proofs-faces {
+  position: absolute;
+  inset: 0;
+}
+
+.about-proofs-face {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  transform: perspective(1700px) rotateX(16deg) rotateY(-28deg) rotateZ(7deg);
+  transform-origin: 50% 58%;
+  pointer-events: none;
+}
+
+.about-proofs-face.is-active {
+  z-index: 3;
+  opacity: 1;
+  visibility: visible;
+}
+
+.about-proofs-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(18px 28px 24px rgb(36 20 8 / 28%));
+}
+
+.about-proofs-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 6;
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #141414;
+  color: #ffffff;
+  cursor: pointer;
+  transform: translateY(-10%);
+}
+
+.about-proofs-arrow svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.about-proofs-arrow.is-prev {
+  left: max(22px, calc(50% - 660px));
+}
+
+.about-proofs-arrow.is-next {
+  right: max(22px, calc(50% - 660px));
+}
+
+.about-proofs-arrow:hover {
+  background: #2a2a2a;
+}
+
+.about-proofs-road {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+  height: 64px;
+  background: #12141c;
+}
+
+.about-proofs-lane {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #e59b20;
+  opacity: 1;
+  transform: translateY(-50%);
+}
+
+.about-proofs-truck {
+  position: absolute;
+  bottom: 18px;
+  left: 28px;
+  z-index: 6;
+  width: 156px;
+  height: auto;
+  pointer-events: none;
+}
+
+.about-proofs-mark {
+  position: absolute;
+  right: 28px;
+  bottom: 52px;
+  z-index: 7;
+  width: 95px;
+  height: 125px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.about-proofs-mark img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 240%;
+  max-width: none;
+  height: auto;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: multiply;
+}
+
+.about-proofs-mark-label {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  width: 48%;
+  transform: translateX(-50%);
+  color: #000000;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 800;
+  font-size: 9px;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .about-proofs {
+    padding-top: 64px;
+  }
+
+  .about-proofs-title {
+    font-size: 36px;
+  }
+
+  .about-proofs-stage {
+    width: min(560px, 86vw);
+    margin-bottom: 96px;
+  }
+
+  .about-proofs-wave {
+    top: 150px;
+    width: 42vw;
+    opacity: 0.7;
+  }
+
+  .about-proofs-arrow {
+    width: 44px;
+    height: 44px;
+  }
+
+  .about-proofs-truck {
+    width: 112px;
+  }
+
+  .about-proofs-mark {
+    right: 16px;
+    bottom: 55px;
+    width: 72px;
+    height: 96px;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-proofs {
+    height: auto;
+    min-height: 0;
+    padding-top: 48px;
+  }
+
+  .about-proofs-title {
+    font-size: clamp(28px, 8vw, 36px);
+    padding-inline: 16px;
+  }
+
+  .about-proofs-wave {
+    display: none;
+  }
+
+  .about-proofs-stage {
+    flex: none;
+    width: calc(100% - 112px);
+    height: min(360px, 70vw);
+    margin: 8px auto 12px;
+  }
+
+  .about-proofs-arrow {
+    z-index: 8;
+    width: 40px;
+    height: 40px;
+    top: 46%;
+    bottom: auto;
+    transform: translateY(-50%);
+  }
+
+  .about-proofs-arrow.is-prev {
+    left: 8px;
+  }
+
+  .about-proofs-arrow.is-next {
+    right: 8px;
+  }
+
+  .about-proofs-road {
+    position: relative;
+    flex: none;
+    height: 56px;
+  }
+
+  .about-proofs-truck {
+    bottom: 10px;
+    left: 16px;
+    width: 96px;
+  }
+
+  .about-proofs-mark {
+    right: 12px;
+    bottom: 44px;
+    width: 64px;
+    height: 84px;
+  }
+}

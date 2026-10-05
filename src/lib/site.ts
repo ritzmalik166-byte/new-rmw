@@ -6,7 +6,7 @@ export const site = {
     "Independent creative media agency in India. We turn business problems into ideas that travel—from brand and campaign to media, digital, film, 3D and AI.",
   nav: [
     { href: "/work", label: "Work" },
-    { href: "/capabilities", label: "Capabilities" },
+    { href: "/services", label: "Services" },
     { href: "/industries", label: "Industries" },
     { href: "/insights", label: "Insights" },
     { href: "/about", label: "About" },
@@ -251,7 +251,7 @@ export const site = {
     ],
   },
   reviews: {
-    title: "Work",
+    title: "Testimonials",
     items: [
       {
         role: "Managing Director",
@@ -316,38 +316,44 @@ export const site = {
   },
   highways: {
     title: "Common Highways.",
-    lede: "Clear answers about our tactical engines, campaign distribution models, and how we drive high-yield performance for modern developers and global real estate brands.",
+    lede: "Clear answers about how we work, what we offer, and how we help brands grow across creative, media, digital, and technology.",
     card: {
-      title: "Need a Custom Highway?",
-      copy: "Get a tailored real estate marketing audit and projection strategy for your upcoming project pipeline.",
+      slogan: ["BURI NAZAR WALE,", "RANKING DEKH"],
+      search: {
+        keyword: "best creative agency for real estate in gurgaon",
+        url: "https://www.ritzmediaworld.com",
+        title: "Best Creative Agency for Real Estate in Gurgaon | Ritz Media World",
+        snippet:
+          "Real estate branding, launch campaigns, 3D walkthroughs, digital and media for developers across Gurgaon and NCR.",
+      },
       cta: "Request an Audit",
       href: "/#start-a-project",
     },
     truck: "/s10/highway-truck.png",
     faqs: [
       {
-        q: "How does Ritz Media World accelerate real estate lead generation?",
-        a: "We deploy hyper-targeted PPC campaigns combined with localized lead-capture funnels specifically designed for high-intent property buyers. By leveraging advanced demographic filters, behavior-based targeting, and customized CRM integrations, we ensure your sales team receives qualified, nurture-ready prospects rather than empty clicks.",
+        q: "What services does Ritz Media World offer?",
+        a: "Ritz Media World is a full-service advertising agency offering branding, creative campaigns, media planning and buying, digital marketing, SEO, social media, film production, 3D visualization, and AI-led creative solutions, all delivered by one integrated team.",
       },
       {
-        q: "What platforms do you prioritize for luxury property marketing?",
-        a: "We prioritize high-intent platforms where luxury buyers already research and decide — Meta, Google, YouTube, and selected premium publishers — then layer influence and owned channels so the brand stays present from first view to site visit.",
+        q: "Which industries do you work with?",
+        a: "We work with brands across real estate, education, healthcare, retail, hospitality, and consumer goods. Over 18 years, we have built deep experience in real estate marketing, and we apply the same strategic rigor to every industry we serve.",
       },
       {
-        q: "How do your three creative engines collaborate on a single campaign?",
-        a: "Digital, creative and print sit on one brief. Strategy, message and media are planned together so the film, landing system and outdoor all carry the same idea instead of three separate deliverables.",
+        q: "How do you decide which marketing channels are right for my brand?",
+        a: "We start by understanding your audience, goals, and budget, and then build a channel mix that fits. This can include Google Ads, Meta Ads, SEO, social media, print, outdoor and television, and we adjust the mix based on what performs best.",
       },
       {
-        q: "What is your approach to local SEO and reputation management for developers?",
-        a: "We build location-led search visibility, project pages and review systems that match how buyers actually search — then monitor sentiment so reputation stays as managed as the media plan.",
+        q: "Can you handle both creative and media under one roof?",
+        a: "Yes. Our strategy, creative, media, and digital teams work together on every campaign, so the idea, the design, and the media plan stay consistent, and you deal with one partner instead of several.",
       },
       {
-        q: "Do you handle architectural visualization and brand film production?",
-        a: "Yes. From 3D walks and stills to brand films and campaign craft, production stays inside the same team that wrote the brief so the world on screen matches the strategy.",
+        q: "Do you produce brand films, 3D visualization and AI-driven content?",
+        a: "Yes. Our in-house production team creates brand films, ad films, 3D walkthroughs, product visualizations, and AI-assisted content, which helps keep timelines shorter and quality consistent.",
       },
       {
-        q: "How do you measure and report the actual ROI of our digital campaigns?",
-        a: "We track lead quality, cost per enquiry, site visits and pipeline contribution — then report in language sales and marketing can both use, not vanity metrics alone.",
+        q: "How do you measure and report campaign ROI?",
+        a: "We track the metrics that matter to your business, such as lead quality, cost per lead, conversions, and revenue contribution. Our reports are written in language that both marketing and sales teams can use, rather than relying on vanity metrics alone.",
       },
     ],
   },
@@ -380,10 +386,10 @@ export const site = {
       {
         title: "Services",
         links: [
-          { label: "Brand & Creative", href: "/capabilities" },
-          { label: "Digital & Performance", href: "/capabilities" },
-          { label: "Film, 3D & AI", href: "/capabilities" },
-          { label: "Media", href: "/capabilities" },
+          { label: "Brand & Creative", href: "/services" },
+          { label: "Digital & Performance", href: "/services" },
+          { label: "Film, 3D & AI", href: "/services" },
+          { label: "Media", href: "/services" },
         ],
       },
       {

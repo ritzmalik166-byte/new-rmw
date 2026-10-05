@@ -1,0 +1,339 @@
+/* ---------- About drive ---------- */
+.about-drive {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  background: #faf6ee;
+}
+
+.about-drive-stripes {
+  flex: 0 0 auto;
+  height: 21px;
+  background: #faf6ee url("/about/diagonal-stripes.png") repeat-x left center / auto 100%;
+}
+
+.about-drive-bar {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 52px;
+  padding: 14px clamp(16px, 3vw, 48px);
+  background: #0f163f;
+}
+
+.about-drive-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  font-family: var(--font-inter), var(--font-yatra), Inter, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.96px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.about-drive-diamond {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  background: #f3d27a;
+  transform: rotate(45deg);
+}
+
+.about-drive-label {
+  display: inline-block;
+  height: 16px;
+  overflow: hidden;
+  line-height: 16px;
+  vertical-align: middle;
+}
+
+.about-drive-char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.about-drive-stage {
+  position: relative;
+  flex: 0 0 auto;
+  height: clamp(340px, 42vh, 460px);
+  min-height: 340px;
+  overflow: hidden;
+  background: #faf6ee;
+}
+
+.about-drive-rig {
+  position: absolute;
+  left: 0;
+  bottom: 34px;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  width: max-content;
+  transform: translate3d(110vw, 0, 0);
+  will-change: transform;
+  filter: drop-shadow(0 16px 14px rgb(15 22 63 / 18%));
+}
+
+.about-cab {
+  position: relative;
+  width: clamp(200px, 20vw, 280px);
+  flex: 0 0 auto;
+  transform: scaleX(-1);
+}
+
+.about-cab img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.about-tyre {
+  position: absolute;
+  width: 13%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #9ecbff 0 15%, #e1062c 16% 32%, #f4f4f4 33% 40%, #1a1a1a 41% 100%),
+    repeating-conic-gradient(#2a2a2a 0 8deg, #111 8deg 18deg);
+  box-shadow: inset 0 0 0 1.5px #111;
+  will-change: transform;
+}
+
+.about-tyre-rear {
+  left: 13.8%;
+  bottom: 7%;
+}
+
+.about-tyre-front {
+  left: 67.6%;
+  bottom: 7%;
+}
+
+.about-billboard {
+  position: relative;
+  width: clamp(280px, 34vw, 460px);
+  margin: 0 0 8% -6px;
+  flex: 0 0 auto;
+}
+
+.about-sign {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 220 / 108;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #0f163f;
+  border: 5px solid #d6166f;
+  container-type: inline-size;
+  opacity: 0;
+}
+
+.about-sign-bulb {
+  position: absolute;
+  z-index: 2;
+  width: 3.6%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #ffd516;
+}
+
+.about-sign-bulb-tl {
+  top: 1.5%;
+  left: 1.2%;
+}
+
+.about-sign-bulb-tr {
+  top: 1.5%;
+  right: 1.2%;
+}
+
+.about-sign-bulbs {
+  position: absolute;
+  top: 6.5%;
+  right: 8%;
+  left: 8%;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.about-sign-bulbs i {
+  width: 2.1%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #ffd516;
+}
+
+.about-sign-kicker,
+.about-sign-line,
+.about-sign-plate {
+  position: absolute;
+  left: 50%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  transform: translateX(-50%);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.about-sign-kicker {
+  top: 18%;
+  width: 38%;
+  height: 14%;
+  background: #0b7a78;
+  color: #ffffff;
+  font-size: 3.15cqw;
+  letter-spacing: 0.04em;
+}
+
+.about-sign-line {
+  top: 35%;
+  width: 62%;
+  height: 15%;
+  background: #ffc21a;
+  color: #0f163f;
+  font-size: 2.7cqw;
+  letter-spacing: 0.03em;
+}
+
+.about-sign-plate {
+  top: 58%;
+  width: 40%;
+  height: 17%;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0f163f;
+  font-size: 3cqw;
+  letter-spacing: 0.04em;
+}
+
+.about-sign-scallop {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  left: -5px;
+  height: 16%;
+  background:
+    radial-gradient(circle at 8px 100%, #ffd516 7px, transparent 7.5px) left bottom / 16px 100% repeat-x,
+    linear-gradient(#ffc21a, #ffc21a) left 18% / 100% 22% no-repeat,
+    #d6166f;
+}
+
+.about-drive-road {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  height: 72px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #2a2a2a 0%, #111111 28%, #0a0a0a 100%);
+}
+
+.about-drive-dashes {
+  position: absolute;
+  top: 42%;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #f5c518 0 52px,
+    transparent 52px 96px
+  );
+  background-repeat: repeat;
+  background-position: 0 0;
+  will-change: background-position;
+}
+
+.about-drive-scallop {
+  flex: 0 0 auto;
+  height: 10px;
+  background: #faf6ee url("/about/image%20804.png") repeat-x left center / auto 100%;
+}
+
+@media (max-width: 860px) {
+  .about-drive-bar {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 18px;
+    padding-block: 12px;
+  }
+
+  .about-drive-item {
+    letter-spacing: 0.5px;
+  }
+
+  .about-drive-rig {
+    bottom: 28px;
+  }
+
+  .about-drive-road {
+    bottom: 0;
+    height: 64px;
+  }
+
+  .about-billboard {
+    width: min(240px, 52vw);
+  }
+}
+
+@media (max-width: 640px) {
+  .about-drive-bar {
+    gap: 8px 12px;
+    padding-inline: 12px;
+  }
+
+  .about-drive-item {
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.4px;
+  }
+
+  .about-drive-stage {
+    height: 300px;
+    min-height: 280px;
+  }
+
+  .about-cab {
+    width: 168px;
+  }
+
+  .about-billboard {
+    width: min(240px, 58vw);
+    margin-bottom: 4%;
+  }
+
+  .about-sign {
+    border-width: 4px;
+  }
+
+  .about-drive-road {
+    height: 52px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-drive-rig {
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  .about-billboard-copy {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,276 @@
+/* ---------- About mileage ---------- */
+.about-mile {
+  background: #ffffff;
+  padding: 88px clamp(20px, 5.5vw, 80px) 104px;
+}
+
+.about-mile-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+  max-width: 1180px;
+}
+
+.about-mile-card {
+  width: min(280px, 100%);
+  margin-inline: auto;
+  padding-bottom: 36px;
+  border-radius: 160px 160px 18px 18px;
+  background: #fffdf8;
+  text-align: center;
+  box-shadow: 0 18px 40px rgb(40 28 16 / 14%);
+  opacity: 0;
+}
+
+.about-mile-arch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 188px;
+  border-radius: 160px 160px 0 0;
+  background: #f6c431;
+}
+
+.about-mile-brand {
+  margin: 0;
+  overflow: hidden;
+  color: #0f163f;
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+}
+
+.about-mile-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: -13px auto 22px;
+  padding: 6px 12px;
+  border-radius: 3px;
+  background: #1e4e9e;
+  color: #ffffff;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.about-mile-figure {
+  margin: 0;
+  color: #0f163f;
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-weight: 700;
+  font-size: 92px;
+  line-height: 0.9;
+}
+
+.about-mile-road {
+  margin: 12px 0 0;
+  color: #e23d32;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.about-mile-kicker,
+.about-mile-title,
+.about-mile-lede,
+.about-mile-label {
+  opacity: 0;
+}
+
+.about-mile-kicker {
+  margin: 0 0 12px;
+  overflow: hidden;
+  color: #e23d32;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+.about-mile-title {
+  margin: 0;
+  color: #0f163f;
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(32px, 3.5vw, 48px);
+  line-height: 1.12;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.about-mile-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.about-mile-char,
+.about-mile-word {
+  display: inline-block;
+}
+
+.about-mile-lede {
+  max-width: 640px;
+  margin: 18px 0 0;
+  color: #3a3a3a;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  text-transform: capitalize;
+}
+
+.about-mile-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 36px;
+}
+
+.about-mile-stat {
+  --rule: 0;
+  position: relative;
+  padding: 0 16px 0 20px;
+}
+
+.about-mile-stat::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  width: 1px;
+  background: rgb(15 22 63 / 16%);
+  transform: scaleY(var(--rule, 1));
+  transform-origin: top center;
+}
+
+.about-mile-stat:first-child {
+  padding-left: 0;
+}
+
+.about-mile-stat:first-child::before {
+  display: none;
+}
+
+.about-mile-value {
+  margin: 0;
+  overflow: hidden;
+  color: #e23d32;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: clamp(26px, 2.4vw, 34px);
+  line-height: 1;
+}
+
+.about-mile-label {
+  margin: 10px 0 0;
+  color: #8a8a8a;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+@media (max-width: 860px) {
+  .about-mile {
+    padding-top: 64px;
+  }
+
+  .about-mile-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .about-mile-copy {
+    width: 100%;
+  }
+
+  .about-mile-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 0;
+  }
+
+  .about-mile-figure {
+    font-size: 76px;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-mile {
+    padding: 48px 20px 56px;
+  }
+
+  .about-mile-arch {
+    height: 156px;
+  }
+
+  .about-mile-brand {
+    font-size: 34px;
+  }
+
+  .about-mile-figure {
+    font-size: 64px;
+  }
+
+  .about-mile-title {
+    font-size: clamp(18px, 5.6vw, 24px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  .about-mile-line {
+    overflow: visible;
+  }
+
+  .about-mile-lede {
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .about-mile-stat {
+    padding: 0 12px 0 14px;
+  }
+
+  .about-mile-value {
+    font-size: 26px;
+  }
+
+  .about-mile-label {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .about-mile-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-mile-card,
+  .about-mile-kicker,
+  .about-mile-title,
+  .about-mile-lede,
+  .about-mile-label {
+    opacity: 1;
+  }
+
+  .about-mile-stat::before {
+    transform: none;
+  }
+}

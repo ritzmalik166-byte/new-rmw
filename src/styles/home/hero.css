@@ -1,0 +1,594 @@
+.hero {
+  --road-h: 88px;
+  --lamp-h: 92px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 7.5rem 0 0;
+  overflow-x: hidden;
+  background: var(--hero-fill);
+}
+
+.hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem 0;
+  align-items: end;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.25rem 3.5rem;
+  width: 100%;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 4;
+  max-width: 640px;
+  padding-bottom: 2.75rem;
+}
+
+.hero-kicker {
+  max-width: 36rem;
+  margin: 0 0 1.25rem;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #db023d;
+  opacity: 1;
+}
+
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 100%;
+  min-height: 0;
+  height: auto;
+  margin: 0;
+  font-family: var(--font-quicksand), Quicksand, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 58px;
+  line-height: 1.08;
+  letter-spacing: 0;
+  vertical-align: middle;
+  text-transform: uppercase;
+  background: linear-gradient(
+    92deg,
+    var(--hero-title-c1) 0%,
+    var(--hero-title-c2) 48%,
+    var(--hero-title-c3) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 3px 10px rgb(240 120 40 / 22%));
+  opacity: 1;
+}
+
+.hero .hero-title {
+  font-family: var(--font-rye), var(--font-yatra), Rye, cursive;
+  font-weight: 400;
+}
+
+.hero-title-line {
+  display: block;
+  white-space: nowrap;
+  transform-origin: left center;
+  will-change: transform, opacity;
+}
+
+.hero-title-viewport {
+  display: block;
+  overflow: hidden;
+  height: auto;
+}
+
+.hero-title-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 0;
+  will-change: transform, opacity;
+}
+
+@media (max-width: 860px) {
+  .hero-title {
+    width: auto;
+    min-height: 0;
+    height: auto;
+    font-size: clamp(1.85rem, 8.5vw, 58px);
+    line-height: 1.1;
+  }
+
+  .hero-title-viewport,
+  .hero-title-inner {
+    min-height: 0;
+    height: auto;
+  }
+}
+
+.hero-lede {
+  display: flex;
+  align-items: center;
+  width: 576px;
+  max-width: 100%;
+  height: 56px;
+  margin: 1.5rem 0 0;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0;
+  vertical-align: middle;
+  color: #000000;
+  opacity: 1;
+}
+
+@media (max-width: 860px) {
+  .hero-lede {
+    height: auto;
+  }
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 2rem;
+}
+
+.hero-visual {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  overflow: visible;
+}
+
+.hero-scene {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  width: min(100%, 1100px);
+  transform: translate3d(100%, 0, 0);
+  will-change: transform;
+}
+
+.hero [data-hero-item] {
+  opacity: 0;
+}
+
+/* Truck drives in place; its wheels overlap the road strip below. */
+.hero-rig {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  aspect-ratio: 1280 / 720;
+  margin-bottom: calc(var(--road-h) * -0.42);
+  transform: translateY(96px);
+  filter: drop-shadow(0 16px 20px rgba(40, 20, 60, 0.18));
+}
+
+.hero-truck-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: visible;
+}
+
+.hero-truck {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  transform: scale(1.55);
+  transform-origin: center bottom;
+  background: transparent;
+}
+
+/* Spin overlays sit on the rims of the truck art (537x305 source). */
+.hero-wheel {
+  position: absolute;
+  top: 72.8%;
+  height: 14.4%;
+  width: 8.2%;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(255, 255, 255, 0.22) 0deg 5deg,
+    transparent 5deg 20deg,
+    rgba(0, 0, 0, 0.22) 20deg 25deg,
+    transparent 25deg 40deg
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.hero-wheel-front {
+  left: 11.9%;
+}
+
+.hero-wheel-rear {
+  left: 56.2%;
+}
+
+.ticker {
+  --ticker-strip-h: 86px;
+  position: relative;
+  z-index: 5;
+  flex: 0 0 auto;
+}
+
+.ticker-pattern {
+  height: 19px;
+  background-image: url("/hero-section/image 17.png");
+  background-repeat: repeat-x;
+  background-position: left center;
+  background-size: auto 100%;
+}
+
+.ticker-pattern-bottom {
+  background-image: url("/service/image 804.png");
+  background-size: 100% auto;
+}
+
+.road {
+  --road-src: url("/hero-section/Frame%20105326.png");
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: calc(var(--road-h) + var(--lamp-h));
+  margin-top: calc(var(--lamp-h) * -1);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.road-bed,
+.road-lamps {
+  position: absolute;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.road-bed {
+  bottom: 0;
+  height: var(--road-h);
+  background: #0b1020;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(0 0 0 / 0.16) 10%,
+    #000 24%,
+    #000 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(0 0 0 / 0.16) 10%,
+    #000 24%,
+    #000 100%
+  );
+}
+
+.road-lamps {
+  inset: 0;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(0 0 0 / 0.2) 18%,
+    #000 32%,
+    #000 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(0 0 0 / 0.2) 18%,
+    #000 32%,
+    #000 100%
+  );
+}
+
+@keyframes road-scroll {
+  from {
+    transform: translate3d(calc(-1 * var(--road-tile, 1440px)), 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.road-world {
+  height: 100%;
+}
+
+.road.is-active .road-world {
+  animation: road-scroll 9s linear infinite;
+}
+
+.road.is-fast .road-world {
+  animation-duration: 3.1s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .road.is-active .road-world,
+  .road.is-fast .road-world {
+    animation: none;
+  }
+}
+
+.road-surface {
+  position: relative;
+  width: 5760px;
+  background-color: #0b1020;
+  background-image: var(--road-src);
+  background-repeat: repeat-x;
+  background-position: left center;
+  background-size: 1440px 100%;
+}
+
+.road-lamp-track {
+  position: relative;
+  width: 5760px;
+}
+
+.road-bed .road-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--road-src);
+  background-repeat: repeat-x;
+  background-position: left center;
+  background-size: 1440px 100%;
+  filter: blur(2px) brightness(1.7);
+  opacity: 0.42;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.road-glow,
+.road-sheen {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+}
+
+.road-glow {
+  background:
+    radial-gradient(
+      120px 36px at 18% 42%,
+      rgb(255 214 140 / 0.16),
+      transparent 70%
+    ),
+    radial-gradient(
+      140px 40px at 52% 48%,
+      rgb(255 196 110 / 0.2),
+      transparent 72%
+    ),
+    radial-gradient(
+      130px 38px at 84% 40%,
+      rgb(255 220 160 / 0.18),
+      transparent 70%
+    );
+  mix-blend-mode: screen;
+}
+
+.road-sheen {
+  background:
+    linear-gradient(
+      180deg,
+      rgb(255 236 200 / 0.22) 0 3px,
+      rgb(255 210 140 / 0.1) 12px,
+      transparent 38%,
+      rgb(0 0 0 / 0.18) 82%,
+      rgb(0 0 0 / 0.32) 100%
+    );
+}
+
+.road-lamp {
+  position: absolute;
+  left: 0;
+  bottom: var(--road-h);
+  width: 86px;
+  height: var(--lamp-h);
+}
+
+.road-lamp-pole {
+  position: absolute;
+  left: 18px;
+  bottom: 0;
+  width: 6px;
+  height: 86%;
+  border-radius: 3px 3px 1px 1px;
+  background: linear-gradient(180deg, #6a7180 0%, #2c3038 42%, #12151b 100%);
+  box-shadow: 1px 0 0 rgb(255 255 255 / 0.18);
+}
+
+.road-lamp-pole::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  bottom: -2px;
+  width: 14px;
+  height: 7px;
+  border-radius: 1px;
+  background: #1a1d24;
+}
+
+.road-lamp-arm {
+  position: absolute;
+  left: 21px;
+  top: 10%;
+  width: 42px;
+  height: 5px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #5a616c 0%, #2a2e36 100%);
+  transform: rotate(-28deg);
+  transform-origin: left center;
+}
+
+.road-lamp-arm::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: 3px;
+  width: 3px;
+  height: 12px;
+  border-radius: 1px;
+  background: #2a2e36;
+}
+
+.road-lamp-head {
+  position: absolute;
+  left: 46px;
+  top: 2%;
+  width: 30px;
+  height: 14px;
+  border-radius: 4px 4px 8px 8px;
+  background: linear-gradient(180deg, #3a3f48 0%, #1c1f26 55%, #111318 100%);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.2);
+}
+
+.road-lamp-leds {
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  bottom: 2px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    #ffe9b0 0%,
+    #fff7e0 35%,
+    #ffd36a 70%,
+    #ffe9b0 100%
+  );
+  box-shadow:
+    0 0 6px 2px rgb(255 214 120 / 0.95),
+    0 0 16px 6px rgb(255 176 64 / 0.55);
+}
+
+.road-lamp-halo {
+  position: absolute;
+  left: 36px;
+  top: 2%;
+  width: 38px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgb(255 236 190 / 0.85) 0%,
+    rgb(255 196 90 / 0.28) 42%,
+    transparent 70%
+  );
+  animation: road-lamp-pulse 2.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.road-lamp-beam {
+  position: absolute;
+  left: 22px;
+  top: 16%;
+  width: 96px;
+  height: calc(var(--lamp-h) * 0.78 + var(--road-h));
+  background: linear-gradient(
+    180deg,
+    rgb(255 232 170 / 0.58) 0%,
+    rgb(255 206 120 / 0.22) 36%,
+    rgb(255 186 80 / 0.08) 64%,
+    transparent 100%
+  );
+  clip-path: polygon(36% 0, 64% 0, 118% 100%, -18% 100%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.road-lamp-pool {
+  position: absolute;
+  left: 8px;
+  top: calc(100% + var(--road-h) * 0.12);
+  width: 132px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgb(255 228 170 / 0.7) 0%,
+    rgb(255 196 90 / 0.28) 42%,
+    transparent 74%
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+@keyframes road-lamp-pulse {
+  0%,
+  100% {
+    opacity: 0.78;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+.ticker-track {
+  overflow: hidden;
+  background: var(--ink);
+  color: #f6efe4;
+}
+
+.ticker-row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 10px 28px;
+  padding: 14px 28px;
+}
+
+@media (min-width: 980px) {
+  .ticker-row {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 10px 20px;
+    padding-inline: 40px;
+  }
+
+  /* Peek the ticker into the first viewport on desktop (1440px included). */
+  .proof-route {
+    margin-top: calc(-1 * var(--ticker-strip-h));
+  }
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ticker-diamond {
+  width: 8px;
+  height: 8px;
+  background: #f3d27a;
+  transform: rotate(45deg);
+}

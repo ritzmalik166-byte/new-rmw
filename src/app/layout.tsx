@@ -4,12 +4,14 @@ import {
   Inter,
   Montserrat,
   Outfit,
+  Playfair_Display,
   Plus_Jakarta_Sans,
   Quattrocento,
   Quicksand,
   Rye,
   Space_Mono,
   Yatra_One,
+  Yeseva_One,
 } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -37,7 +39,13 @@ const montserrat = Montserrat({
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: "900",
 });
 
 const archivo = Archivo_Black({
@@ -77,6 +85,12 @@ const yatra = Yatra_One({
   variable: "--font-yatra",
 });
 
+const yeseva = Yeseva_One({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-yeseva",
+});
+
 export const metadata: Metadata = {
   title: {
     default: `${site.fullName} — ${site.tagline}`,
@@ -89,7 +103,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${archivo.variable} ${inter.variable} ${montserrat.variable} ${jakarta.variable} ${quicksand.variable} ${quattrocento.variable} ${spaceMono.variable} ${rye.variable} ${yatra.variable} antialiased`}
+      className={`${outfit.variable} ${archivo.variable} ${inter.variable} ${montserrat.variable} ${jakarta.variable} ${playfair.variable} ${quicksand.variable} ${quattrocento.variable} ${spaceMono.variable} ${rye.variable} ${yatra.variable} ${yeseva.variable} antialiased`}
       suppressHydrationWarning
     >
       <body

@@ -1,0 +1,424 @@
+/* ---------- About journey ---------- */
+.about-journey {
+  background: #faf6ee;
+  padding: 96px 88px 0;
+  border-bottom: 1px solid #e2ddd3;
+}
+
+.about-journey-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.about-journey-kicker {
+  margin: 0;
+  color: #e07a45;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.about-journey-title {
+  margin: 10px 0 0;
+  color: #12141c;
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(40px, 4vw, 56px);
+  line-height: 1.05;
+}
+
+.about-journey-intro {
+  flex: 0 0 auto;
+  max-width: 540px;
+  margin: 0;
+  color: #3c3c3c;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.45;
+  text-align: right;
+}
+
+.about-journey-map {
+  position: relative;
+  height: 640px;
+  margin-top: 36px;
+}
+
+.about-journey-stop {
+  position: absolute;
+  left: var(--at);
+  z-index: 3;
+  width: 220px;
+  padding: 18px 18px 20px;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  background: #fffdfb;
+  box-shadow: 0 12px 28px rgb(20 16 40 / 6%);
+  opacity: 0;
+  transform: translateX(-50%) translateY(48px);
+}
+
+.about-journey-stop.is-above {
+  bottom: calc(50% + 58px);
+}
+
+.about-journey-stop.is-below {
+  top: calc(50% + 58px);
+}
+
+.about-journey-stop::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 1px;
+  height: 58px;
+  background: var(--stem);
+}
+
+.about-journey-stop.is-above::after {
+  top: 100%;
+}
+
+.about-journey-stop.is-below::after {
+  bottom: 100%;
+}
+
+.about-journey-stop.is-rose {
+  --line: #f08a9a;
+  --stem: #f08a9a;
+  --year: #e23b4a;
+}
+
+.about-journey-stop.is-teal {
+  --line: #2ec4b6;
+  --stem: #2ec4b6;
+  --year: #14a394;
+}
+
+.about-journey-stop.is-navy {
+  --line: #1c2438;
+  --stem: #1c2438;
+  --year: #1c2438;
+}
+
+.about-journey-stop.is-red {
+  --line: #e23d32;
+  --stem: #e23d32;
+  --year: #e23d32;
+}
+
+.about-journey-stop.is-now {
+  --line: #d4a84b;
+  --stem: #d4a84b;
+  --year: #e0b44a;
+  background: #10182f;
+  box-shadow: none;
+}
+
+.about-journey-year {
+  margin: 0;
+  color: var(--year);
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.about-journey-stop-title {
+  margin: 10px 0 0;
+  color: #16181f;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.about-journey-stop-copy {
+  margin: 8px 0 0;
+  color: #6d6d6d;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.about-journey-stop.is-now .about-journey-stop-title,
+.about-journey-stop.is-now .about-journey-stop-copy {
+  color: #f6efe4;
+}
+
+.about-journey-stop.is-now .about-journey-stop-title {
+  color: #f3d27a;
+}
+
+.about-journey-road {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  height: 70px;
+  border-radius: 8px;
+  background: #12182b;
+  transform: translateY(-50%);
+}
+
+.about-journey-lane {
+  position: absolute;
+  top: 50%;
+  right: 28px;
+  left: 28px;
+  height: 0;
+  border-top: 3px dashed #f5c518;
+  transform: translateY(-50%);
+}
+
+.about-journey-dot {
+  position: absolute;
+  top: 50%;
+  left: var(--at);
+  z-index: 4;
+  width: 14px;
+  height: 14px;
+  border: 3px solid #fffdfb;
+  border-radius: 50%;
+  background: var(--dot);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 3px var(--dot);
+}
+
+.about-journey-dot.is-rose {
+  --dot: #e23b4a;
+}
+
+.about-journey-dot.is-teal {
+  --dot: #2ec4b6;
+}
+
+.about-journey-dot.is-navy {
+  --dot: #e0b44a;
+}
+
+.about-journey-dot.is-red {
+  --dot: #e23d32;
+}
+
+.about-journey-dot.is-now {
+  --dot: #e0b44a;
+}
+
+.about-journey-truck {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  z-index: 5;
+  width: 104px;
+  will-change: transform;
+}
+
+.about-journey-truck img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.about-journey-tyre {
+  position: absolute;
+  width: 13%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #9ecbff 0 15%, #e1062c 16% 32%, #f4f4f4 33% 40%, #1a1a1a 41% 100%);
+  box-shadow: inset 0 0 0 1.5px #111;
+}
+
+.about-journey-tyre-rear {
+  left: 13.8%;
+  bottom: 7%;
+}
+
+.about-journey-tyre-front {
+  left: 67.6%;
+  bottom: 7%;
+}
+
+.about-journey-stripes {
+  height: 21px;
+  margin: 72px -88px 0;
+  background: url("/about/diagonal-stripes.png") repeat-x left center / auto 100%;
+}
+
+@media (min-width: 901px) {
+  .about-journey {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    max-height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+    padding-top: 36px;
+    padding-bottom: 0;
+  }
+
+  .about-journey-head {
+    position: relative;
+    z-index: 6;
+    flex-shrink: 0;
+    background: #faf6ee;
+  }
+
+  .about-journey-map {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  .about-journey-road {
+    top: 50%;
+  }
+
+  .about-journey-stop {
+    width: 210px;
+    padding: 14px 16px 16px;
+  }
+
+  .about-journey-stop.is-above {
+    bottom: calc(50% + 42px);
+  }
+
+  .about-journey-stop.is-below {
+    top: calc(50% + 42px);
+  }
+
+  .about-journey-stop.is-above::after,
+  .about-journey-stop.is-below::after {
+    height: 42px;
+  }
+
+  .about-journey-stripes {
+    flex-shrink: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  .about-journey {
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+
+  .about-journey-stop {
+    width: 190px;
+  }
+
+  .about-journey-stripes {
+    margin-right: -32px;
+    margin-left: -32px;
+  }
+}
+
+@media (max-width: 900px) {
+  .about-journey {
+    padding: 64px 20px 0;
+  }
+
+  .about-journey-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .about-journey-intro {
+    max-width: none;
+    text-align: left;
+  }
+
+  .about-journey-map {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: auto;
+    margin-top: 32px;
+  }
+
+  .about-journey-road {
+    display: none;
+  }
+
+  .about-journey-stop,
+  .about-journey-stop.is-above,
+  .about-journey-stop.is-below {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    opacity: 1;
+    transform: none;
+  }
+
+  .about-journey-stop::after {
+    display: none;
+  }
+
+  .about-journey-stripes {
+    margin-top: 40px;
+    margin-right: -20px;
+    margin-left: -20px;
+  }
+
+  .about-journey-intro br {
+    display: none;
+  }
+
+  .about-journey-title {
+    font-size: clamp(32px, 8vw, 44px);
+  }
+
+  .about-journey-year {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1100px) {
+  .about-journey-stop {
+    width: 148px;
+    padding: 12px 12px 14px;
+  }
+
+  .about-journey-year {
+    font-size: 22px;
+  }
+
+  .about-journey-stop-title {
+    font-size: 14px;
+  }
+
+  .about-journey-stop-copy {
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-journey-stop {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 900px) {
+  .about-journey-stop,
+  .about-journey-stop.is-above,
+  .about-journey-stop.is-below {
+    transform: none;
+  }
+}

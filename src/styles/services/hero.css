@@ -1,0 +1,234 @@
+.services-hero {
+  --services-header: 108px;
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: #fff4e2;
+  overflow: hidden;
+}
+
+.services-hero-bg {
+  position: absolute;
+  top: var(--services-header);
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.services-hero-bg img {
+  object-fit: cover;
+  object-position: center top;
+}
+
+.services-hero-main {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  width: min(1360px, 100%);
+  min-height: 100svh;
+  margin-inline: auto;
+  padding: calc(var(--services-header) + 28px) clamp(300px, 28vw, 440px) 48px
+    clamp(20px, 5.5vw, 80px);
+  box-sizing: border-box;
+}
+
+.services-copy {
+  max-width: 820px;
+}
+
+.services-kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 28px;
+}
+
+.services-kicker-item {
+  opacity: 0;
+}
+
+.services-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  background: #e4532a;
+  color: #ffffff;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.services-kicker-agency,
+.services-kicker-engines {
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.services-kicker-agency {
+  color: #1c1c1c;
+}
+
+.services-kicker-engines {
+  color: #8d8882;
+}
+
+.services-kicker-diamond {
+  width: 5px;
+  height: 5px;
+  background: #1c1c1c;
+  transform: rotate(45deg);
+}
+
+.services-title-wrap {
+  position: relative;
+}
+
+.services-title,
+.services-sheen {
+  margin: 0;
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: clamp(34px, 4.1vw, 59px);
+  line-height: clamp(42px, 4.86vw, 70px);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.services-title {
+  color: #0b1120;
+  text-shadow: 0px 4px 4px #00000040;
+  opacity: 0;
+  perspective: 900px;
+}
+
+.services-line {
+  display: block;
+  perspective: 800px;
+}
+
+.services-line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 6px;
+  margin-bottom: -6px;
+}
+
+.services-line-inner {
+  display: block;
+  white-space: nowrap;
+}
+
+.services-char {
+  display: inline-block;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.services-sheen {
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+  pointer-events: none;
+  background-image: linear-gradient(
+    105deg,
+    transparent 32%,
+    rgba(255, 246, 214, 0.15) 42%,
+    #fff6d4 49%,
+    #ffc21a 52%,
+    transparent 62%
+  );
+  background-size: 220% 100%;
+  background-position: 130% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  opacity: 0;
+}
+
+.services-sheen .services-line {
+  overflow: visible;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.services-lede {
+  width: fit-content;
+  margin: 28px 0 0;
+  color: #00000099;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 29px;
+  letter-spacing: 0;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: capitalize;
+  opacity: 0;
+}
+
+.services-word {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+
+.services-sign {
+  position: absolute;
+  top: 270px;
+  /* 1065px from the left when the section is 1440px wide */
+  left: calc(100% - 375px);
+  z-index: 2;
+  width: 310px;
+  height: 440px;
+  transform: rotate(0deg);
+  opacity: 0;
+}
+
+.services-sign img {
+  display: block;
+  width: 310px;
+  height: 440px;
+}
+
+@media (max-width: 900px) {
+  .services-hero {
+    --services-header: 96px;
+  }
+
+  .services-hero-main {
+    align-items: flex-start;
+    min-height: 0;
+    padding: 120px 20px 300px;
+  }
+
+  .services-sign {
+    top: auto;
+    left: auto;
+    right: 8px;
+    bottom: 0;
+    width: min(230px, 62vw);
+    height: auto;
+  }
+
+  .services-sign img {
+    width: 100%;
+    height: auto;
+  }
+
+  .services-lede {
+    font-size: 18px;
+    line-height: 26px;
+  }
+}
