@@ -5,9 +5,10 @@
   color: #fbf8f2;
 }
 
-.svc-engine-banner-scallop {
+.svc-engine-banner-scallop,
+.svc-engine-banner .ticker-pattern-bottom {
   height: 10px;
-  background: url("/service/image%20804.png") repeat-x left top / auto 100%;
+  background: url("/service/image%20804.png") repeat-x left bottom / auto 100%;
 }
 
 .svc-engine-banner-inner {
