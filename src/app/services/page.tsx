@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
+import { StartProject } from "@/components/home/StartProject";
 import { ServicesContentMarketing } from "@/components/services/ServicesContentMarketing";
 import { ServicesCreative } from "@/components/services/ServicesCreative";
 import { ServicesDigitalMarketing } from "@/components/services/ServicesDigitalMarketing";
 import { ServicesEngineBanner } from "@/components/services/ServicesEngineBanner";
 import { ServicesEngines } from "@/components/services/ServicesEngines";
 import { ServicesHero } from "@/components/services/ServicesHero";
+import { ServicesIndustries } from "@/components/services/ServicesIndustries";
+import { ServicesRadio } from "@/components/services/ServicesRadio";
+import { ServicesRendering } from "@/components/services/ServicesRendering";
 import { ServicesStarPower } from "@/components/services/ServicesStarPower";
 import { ServicesWebPrint } from "@/components/services/ServicesWebPrint";
 
@@ -38,6 +42,19 @@ export default function ServicesPage() {
       />
       <ServicesDigitalMarketing />
       <ServicesWebPrint />
+      <ServicesRadio />
+      <ServicesEngineBanner
+        index="04"
+        kicker="Engine Three"
+        title="Film, 3D & AI"
+        copy="Show buyers the home, the township and the view before a single brick is laid."
+        km="KM 09"
+        tone="#167a7d"
+        border="scallop"
+      />
+      <ServicesRendering />
+      <ServicesIndustries />
+      <StartProject />
     </>
   );
 }

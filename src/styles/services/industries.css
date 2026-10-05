@@ -1,0 +1,595 @@
+.svc-ind {
+  --ind-ink: #1b1446;
+  --ind-red: #d0172f;
+  --ind-green: #138048;
+  --ind-plate: #f5c84c;
+  --ind-road-h: 110px;
+  --ind-ground-h: 40px;
+  --ind-pit-y: 132px;
+
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  overflow: hidden;
+  padding-top: 56px;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #ffffff 0%, #eef4fb 45%, #f6f4fa 100%);
+  color: var(--ind-ink);
+}
+
+.svc-ind-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+/* Header */
+
+.svc-ind-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px clamp(40px, 7vw, 96px);
+  width: min(1440px, 100%);
+  margin-inline: auto;
+  padding-inline: clamp(24px, 6vw, 88px);
+  box-sizing: border-box;
+}
+
+.svc-ind-kicker {
+  margin: 0;
+  color: var(--ind-red);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.svc-ind-title {
+  margin: 8px 0 0;
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(32px, 3.2vw, 44px);
+  line-height: 1.15;
+}
+
+.svc-ind-lede {
+  max-width: 420px;
+  margin: 0 0 8px;
+  color: #00000099;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+/* Stage: full-bleed road, signs laid out on a centred "world" that pans on narrow screens */
+
+/* Grows to fill the pinned viewport; the city skyline grows with it */
+.svc-ind-stage {
+  position: relative;
+  flex: 1 0 340px;
+  overflow: hidden;
+}
+
+.svc-ind-skyline {
+  position: absolute;
+  left: 0;
+  bottom: calc(var(--ind-ground-h) + var(--ind-road-h) - 2px);
+  width: calc(100% + 110px);
+  height: clamp(130px, calc(100% - var(--ind-ground-h) - var(--ind-road-h) - 40px), 440px);
+}
+
+.svc-ind-chimney-smoke circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: svc-ind-chimney 4.8s ease-out infinite;
+}
+
+.svc-ind-chimney-smoke circle:nth-child(2) {
+  animation-delay: -1.6s;
+}
+
+.svc-ind-chimney-smoke circle:nth-child(3) {
+  animation-delay: -3.2s;
+}
+
+@keyframes svc-ind-chimney {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.6);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-60px, -120px) scale(2.6);
+  }
+}
+
+.svc-ind-sun {
+  position: absolute;
+  top: 8%;
+  right: 12%;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff3c4 0 45%, rgb(255 236 170 / 0.5) 60%, rgb(255 236 170 / 0) 72%);
+}
+
+/* Sized in em so each cloud scales from its font-size alone */
+.svc-ind-cloud {
+  position: absolute;
+  width: 15em;
+  height: 4em;
+  border-radius: 4em;
+  font-size: 10px;
+  background: #ffffff;
+  box-shadow: 0 0.6em 1.8em -1em rgb(27 20 70 / 0.18);
+}
+
+.svc-ind-cloud::before,
+.svc-ind-cloud::after {
+  content: "";
+  position: absolute;
+  bottom: 1.4em;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.svc-ind-cloud::before {
+  left: 2.2em;
+  width: 5.6em;
+  height: 5.2em;
+}
+
+.svc-ind-cloud::after {
+  left: 6.6em;
+  width: 6.4em;
+  height: 6.4em;
+}
+
+.svc-ind-cloud.is-a {
+  top: 12%;
+  left: 14%;
+}
+
+.svc-ind-cloud.is-b {
+  top: 24%;
+  left: 52%;
+  font-size: 7px;
+}
+
+.svc-ind-cloud.is-c {
+  top: 8%;
+  left: 78%;
+  font-size: 5.5px;
+}
+
+.svc-ind-world {
+  position: absolute;
+  inset: 0;
+  width: max(min(100%, 1440px), 1080px);
+  margin-inline: auto;
+}
+
+.svc-ind-road {
+  position: absolute;
+  inset: auto 0 var(--ind-ground-h);
+  height: var(--ind-road-h);
+  background:
+    linear-gradient(#cfc9bd, #cfc9bd) top / 100% 4px no-repeat,
+    linear-gradient(#efebe2, #efebe2) 0 12px / 100% 2px no-repeat,
+    repeating-linear-gradient(90deg, #f5c84c 0 36px, transparent 36px 66px) 0 calc(50% + 2px) / 100% 3px
+      no-repeat,
+    linear-gradient(#efebe2, #efebe2) 0 calc(100% - 12px) / 100% 2px no-repeat,
+    linear-gradient(#bdb7ab, #bdb7ab) bottom / 100% 4px no-repeat,
+    linear-gradient(180deg, #303038, #26262d);
+}
+
+.svc-ind-road::after {
+  content: "";
+  position: absolute;
+  inset: 4px 0;
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Cut-away of what the road sits on: asphalt slab, gravel base, soil */
+.svc-ind-ground {
+  position: absolute;
+  inset: auto 0 0;
+  height: var(--ind-ground-h);
+  background:
+    radial-gradient(circle, #6a6357 1px, transparent 1.6px) 0 10px / 6px 4px repeat-x,
+    radial-gradient(circle, #6a6357 1px, transparent 1.6px) 3px 13px / 7px 4px repeat-x,
+    radial-gradient(circle, #3a2616 1.2px, transparent 1.8px) 2px 22px / 9px 6px repeat-x,
+    radial-gradient(circle, #3a2616 1px, transparent 1.6px) 6px 30px / 11px 6px repeat-x,
+    linear-gradient(
+      180deg,
+      #1f1f25 0 7px,
+      #8e877b 7px 9px,
+      #a39b8e 9px 17px,
+      #7a5536 17px 19px,
+      #6a4a2f 19px,
+      #4a3220 100%
+    );
+}
+
+.svc-ind-signs {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Zero-height anchor sitting on the pit centre in the far lane */
+.svc-ind-slot {
+  position: absolute;
+  left: calc(var(--x) * 1% - min(6.5%, 85px));
+  bottom: var(--ind-pit-y);
+  width: min(13%, 170px);
+  height: 0;
+}
+
+/* Utility paint sprayed before the dig */
+.svc-ind-mark {
+  position: absolute;
+  left: 12%;
+  bottom: -14px;
+  width: 76%;
+  height: 28px;
+  border: 2px dashed #ff7a1a;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.svc-ind-mark::before,
+.svc-ind-mark::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - 9px);
+  top: calc(50% - 1.5px);
+  width: 18px;
+  height: 3px;
+  border-radius: 2px;
+  background: #ff7a1a;
+  transform: rotate(35deg);
+}
+
+.svc-ind-mark::after {
+  transform: rotate(-35deg);
+}
+
+.svc-ind-cracks {
+  position: absolute;
+  left: -25%;
+  bottom: -28px;
+  width: 150%;
+  height: 56px;
+  overflow: visible;
+}
+
+.svc-ind-cracks path {
+  fill: none;
+  stroke: #141418;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+}
+
+.svc-ind-pit {
+  position: absolute;
+  left: 4%;
+  bottom: -19px;
+  z-index: 1;
+  width: 92%;
+  height: 38px;
+  overflow: visible;
+  filter: drop-shadow(0 1px 0 #55555e);
+}
+
+.svc-ind-pit-hole {
+  fill: url(#svc-ind-wall);
+  stroke: #121216;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.svc-ind-pit-lip {
+  fill: none;
+  stroke: #5b5b64;
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Masks the sign so it appears to come up out of the hole */
+.svc-ind-rise {
+  position: absolute;
+  inset: auto 0 -5px;
+  z-index: 2;
+  height: 250px;
+  overflow: hidden;
+}
+
+.svc-ind-sign {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  flex-direction: column;
+  transform-origin: 50% 100%;
+}
+
+.svc-ind-board {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 72px;
+  padding: 10px 8px;
+  border-radius: 9px;
+  background: var(--ind-green);
+  box-shadow:
+    inset 0 0 0 2px var(--ind-green),
+    inset 0 0 0 3.5px #ffffff,
+    0 12px 18px -12px rgb(0 0 0 / 0.55);
+  color: #ffffff;
+  text-align: center;
+}
+
+.svc-ind-arrow {
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.svc-ind-name {
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(13px, 1.1vw, 16px);
+  line-height: 1.2;
+}
+
+.svc-ind-posts {
+  position: relative;
+  height: 84px;
+}
+
+.svc-ind-post {
+  position: absolute;
+  top: -4px;
+  bottom: 0;
+  width: 6px;
+  background: linear-gradient(90deg, #55526d, #7c7996 50%, #55526d);
+}
+
+.svc-ind-post.is-left {
+  left: 28%;
+}
+
+.svc-ind-post.is-right {
+  right: 28%;
+}
+
+.svc-ind-plate {
+  position: absolute;
+  top: 14px;
+  left: 10%;
+  right: 10%;
+  z-index: 1;
+  padding: 4px 4px;
+  border: 1.5px solid var(--ind-ink);
+  border-radius: 4px;
+  background: var(--ind-plate);
+  color: var(--ind-ink);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 800;
+  font-size: 9px;
+  line-height: 12px;
+  letter-spacing: 0.4px;
+  text-align: center;
+  text-transform: uppercase;
+  transform-origin: 50% 0;
+}
+
+/* Excavated soil piled either side of the hole */
+.svc-ind-mound {
+  position: absolute;
+  z-index: 3;
+  border-radius: 50% 50% 18% 18% / 100% 100% 22% 22%;
+  background:
+    radial-gradient(circle, #3b2717 1px, transparent 1.6px) 0 0 / 7px 5px,
+    radial-gradient(circle, #a07a52 1px, transparent 1.6px) 3px 2px / 9px 6px,
+    linear-gradient(180deg, #8a6440, #5e4129 70%, #4a3220);
+  transform-origin: 50% 100%;
+}
+
+.svc-ind-mound.is-left {
+  left: -10%;
+  bottom: -9px;
+  width: 32%;
+  height: 18px;
+}
+
+.svc-ind-mound.is-right {
+  right: -12%;
+  bottom: -11px;
+  width: 36%;
+  height: 22px;
+}
+
+.svc-ind-chunk {
+  position: absolute;
+  left: calc(50% - var(--w) / 2);
+  bottom: -4px;
+  z-index: 4;
+  width: var(--w);
+  height: var(--h);
+  background: linear-gradient(180deg, #4a4a53 0 30%, #2a2a31 30%, #1f1f25);
+  clip-path: polygon(8% 18%, 46% 0, 92% 12%, 100% 70%, 70% 100%, 18% 92%, 0 56%);
+  opacity: 0;
+}
+
+.svc-ind-cone {
+  position: absolute;
+  bottom: -16px;
+  z-index: 4;
+  width: 14px;
+  height: 22px;
+  background: linear-gradient(180deg, #ff6a1a 0 34%, #ffffff 34% 52%, #ff6a1a 52% 86%, #2b2b31 86%);
+  clip-path: polygon(38% 0, 62% 0, 92% 86%, 100% 86%, 100% 100%, 0 100%, 0 86%, 8% 86%);
+}
+
+.svc-ind-cone.is-left {
+  left: -20%;
+}
+
+.svc-ind-cone.is-right {
+  right: -20%;
+}
+
+.svc-ind-dust {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.svc-ind-dust i {
+  position: absolute;
+  left: calc(50% - 22px + var(--dx));
+  bottom: -16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(196 168 132 / 0.85), rgb(196 168 132 / 0) 70%);
+  filter: blur(3px);
+  opacity: 0;
+}
+
+/* Truck in the near lane */
+
+.svc-ind-truck {
+  position: absolute;
+  left: 0;
+  bottom: calc(var(--ind-ground-h) + 2px);
+  z-index: 6;
+  width: clamp(116px, 10.5vw, 156px);
+  pointer-events: none;
+}
+
+.svc-ind-truck-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.svc-ind-truck-body {
+  animation: svc-ind-bob 0.3s ease-in-out infinite alternate;
+}
+
+.svc-ind-wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.svc-ind-truck-brand {
+  fill: #1b1446;
+  font-family: var(--font-display), "Archivo Black", sans-serif;
+  font-size: 15px;
+}
+
+.svc-ind-truck-tag {
+  fill: #4b4570;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 7px;
+}
+
+@keyframes svc-ind-bob {
+  to {
+    transform: translateY(-1.2px);
+  }
+}
+
+/* Exhaust leaves the stack top (x 163, y 20 of 240×120) and trails behind */
+.svc-ind-exhaust {
+  position: absolute;
+  left: 67.9%;
+  top: 16.7%;
+  width: 0;
+  height: 0;
+}
+
+.svc-ind-exhaust i {
+  position: absolute;
+  left: -7px;
+  top: -7px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(120 120 132 / 0.55), rgb(120 120 132 / 0) 70%);
+  animation: svc-ind-exhaust 1.4s ease-out infinite;
+}
+
+.svc-ind-exhaust i:nth-child(2) {
+  animation-delay: -0.47s;
+}
+
+.svc-ind-exhaust i:nth-child(3) {
+  animation-delay: -0.94s;
+}
+
+@keyframes svc-ind-exhaust {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.5);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-34px, -22px) scale(2.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svc-ind-truck-body,
+  .svc-ind-exhaust i,
+  .svc-ind-chimney-smoke circle {
+    animation: none;
+  }
+
+  .svc-ind-exhaust {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .svc-ind {
+    padding-top: 48px;
+  }
+
+  .svc-ind-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .svc-ind-lede {
+    margin: 0;
+  }
+}
