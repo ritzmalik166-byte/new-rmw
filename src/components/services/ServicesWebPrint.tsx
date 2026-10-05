@@ -1,28 +1,82 @@
-import Image from "next/image";
-import Link from "next/link";
+"use client";
 
-const PRINT_SERVICES = [
-  { title: "Advertisement Design", copy: "Layouts built to win the glance on a busy page." },
-  { title: "Ad Placement", copy: "The right paper, edition and page for your audience." },
-  { title: "Copywriting", copy: "Headlines that sell in five words or fewer." },
-  { title: "Cost Negotiation", copy: "Publisher relationships that bring the rate down." },
-  { title: "Ad Size Optimization", copy: "Maximum impact for every column centimetre paid for." },
-  { title: "Ad Scheduling", copy: "Release dates timed to launches, festivals and weekends." },
-] as const;
+import { useGSAP } from "@gsap/react";
+import Link from "next/link";
+import { useRef } from "react";
+import { useMotion } from "@/components/providers/MotionProvider";
+import { gsap, registerGsap } from "@/lib/gsap";
+import { ServicesPrintPaper } from "./ServicesPrintPaper";
+import { ServicesWebMockup } from "./ServicesWebMockup";
+
+registerGsap();
 
 export function ServicesWebPrint() {
+  const rootRef = useRef<HTMLElement>(null);
+  const { ready, reduced } = useMotion();
+
+  /* The section before this one holds still while this one slides up over
+     it, until this section fills the screen. */
+  useGSAP(
+    () => {
+      const root = rootRef.current;
+      const under = root?.previousElementSibling;
+      if (!root || !(under instanceof HTMLElement) || !ready || reduced) return;
+
+      const fitsScreen = () => under.offsetHeight <= window.innerHeight;
+      const visibleCenter = () =>
+        fitsScreen() ? "50% 50%" : `50% ${under.offsetHeight - window.innerHeight / 2}px`;
+      under.classList.add("svc-overlap-under");
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: under,
+          start: () => (fitsScreen() ? "top top" : "bottom bottom"),
+          end: () => `+=${Math.min(under.offsetHeight, window.innerHeight)}`,
+          pin: true,
+          pinSpacing: false,
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      tl.fromTo(
+        under,
+        { scale: 1, borderRadius: 0, "--overlap-shade": 0, transformOrigin: visibleCenter },
+        {
+          scale: 0.9,
+          borderRadius: 32,
+          "--overlap-shade": 0.55,
+          transformOrigin: visibleCenter,
+          ease: "none",
+        },
+        0,
+      ).fromTo(
+        root,
+        {
+          borderTopLeftRadius: 48,
+          borderTopRightRadius: 48,
+          boxShadow: "0 -36px 70px -24px rgb(0 0 0 / 0.6)",
+        },
+        {
+          borderTopLeftRadius: 0,
+          borderTopRightRadius: 0,
+          boxShadow: "0 -36px 70px -24px rgb(0 0 0 / 0)",
+          ease: "power1.in",
+        },
+        0,
+      );
+
+      return () => under.classList.remove("svc-overlap-under");
+    },
+    { scope: rootRef, dependencies: [ready, reduced] },
+  );
+
   return (
-    <section className="svc-webprint" aria-labelledby="svc-web-title">
+    <section ref={rootRef} className="svc-webprint" aria-labelledby="svc-web-title">
       <div className="svc-webprint-inner">
         <div className="svc-web">
           <div className="svc-web-art">
-            <Image
-              src="/service/image%20819.png"
-              alt="Browser mockup of an RMW-built website with tabs for UI/UX Design, Custom Development, E-Commerce, Landing Pages and WordPress"
-              width={723}
-              height={424}
-              sizes="(max-width: 1100px) 92vw, 720px"
-            />
+            <ServicesWebMockup />
           </div>
 
           <div className="svc-web-copy">
@@ -40,28 +94,7 @@ export function ServicesWebPrint() {
           </div>
         </div>
 
-        <article className="svc-print" aria-labelledby="svc-print-title">
-          <p className="svc-print-meta">
-            <span>KM 07 · Print edition</span>
-            <span>Noida · Delhi NCR</span>
-            <span>Since 2008</span>
-          </p>
-          <h2 id="svc-print-title" className="svc-print-title">
-            Print Advertising Services
-          </h2>
-          <p className="svc-print-lede">
-            From the front-page jacket to the classifieds: we design the ad, win the placement and
-            negotiate the rate.
-          </p>
-          <ul className="svc-print-grid">
-            {PRINT_SERVICES.map((service) => (
-              <li key={service.title} className="svc-print-item">
-                <h3 className="svc-print-item-title">{service.title}</h3>
-                <p className="svc-print-item-copy">{service.copy}</p>
-              </li>
-            ))}
-          </ul>
-        </article>
+        <ServicesPrintPaper />
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { ServicesRouteTruck } from "./ServicesRouteTruck";
 
 const ENGINES = [
   {
@@ -52,6 +53,12 @@ export function ServicesEngines() {
     <section className="svc-engines" aria-labelledby="svc-engines-title">
       <div className="svc-engines-inner">
         <span className="svc-engines-rail" aria-hidden />
+        <ServicesRouteTruck
+          className="svc-engines-truck"
+          parkedBehind=".svc-engines-mark"
+          start="top 55%"
+          end="bottom 50%"
+        />
         <div className="svc-engines-mark" aria-hidden>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/s2/distance.png" alt="" width={500} height={500} />

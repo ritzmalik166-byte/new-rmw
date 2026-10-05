@@ -124,7 +124,7 @@ export function Header() {
 
         <div className="site-header-actions">
           <Link href="/#start-a-project" className="btn btn-ink">
-            Contact us
+            Contact Us
           </Link>
 
           <button

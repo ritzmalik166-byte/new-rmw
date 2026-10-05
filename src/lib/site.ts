@@ -5,11 +5,9 @@ export const site = {
   description:
     "Independent creative media agency in India. We turn business problems into ideas that travel—from brand and campaign to media, digital, film, 3D and AI.",
   nav: [
-    { href: "/work", label: "Work" },
-    { href: "/services", label: "Services" },
-    { href: "/industries", label: "Industries" },
-    { href: "/insights", label: "Insights" },
     { href: "/about", label: "About" },
+    { href: "/services", label: "Services" },
+    { href: "/work", label: "Our Work" },
   ],
   ticker: [
     "Ideas on board",
