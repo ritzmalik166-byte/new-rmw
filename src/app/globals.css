@@ -6699,82 +6699,119 @@ body {
 
 .about-billboard {
   position: relative;
-  width: clamp(240px, 28vw, 390px);
-  margin: 0 0 6% -8px;
+  width: clamp(280px, 34vw, 460px);
+  margin: 0 0 8% -6px;
   flex: 0 0 auto;
 }
 
-.about-billboard-frame {
-  background: #10163a;
-  border: 7px solid #ff2f86;
-  outline: 3px solid #f5c518;
-  outline-offset: -10px;
-  padding: 12px 18px 14px;
-  text-align: center;
-}
-
-.about-billboard-bulbs {
-  display: flex;
-  justify-content: space-between;
-  gap: 6px;
-  margin: 0 4px 10px;
-}
-
-.about-billboard-bulbs i {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #ffe56a;
-  box-shadow: 0 0 6px #ffe56a;
-}
-
-.about-billboard-kicker,
-.about-billboard-line,
-.about-billboard-plate {
-  margin: 0;
-  font-family: var(--font-inter), Inter, sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
+.about-sign {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 220 / 108;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #0f163f;
+  border: 5px solid #d6166f;
+  container-type: inline-size;
   opacity: 0;
 }
 
-.about-billboard-kicker {
-  color: #f6d56a;
-  font-size: clamp(11px, 1.1vw, 14px);
-  letter-spacing: 0.16em;
-  line-height: 1.2;
+.about-sign-bulb {
+  position: absolute;
+  z-index: 2;
+  width: 3.6%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #ffd516;
 }
 
-.about-billboard-line {
-  margin-top: 6px;
-  color: #ffe7a3;
-  font-size: clamp(9px, 0.85vw, 11px);
-  letter-spacing: 0.12em;
-  line-height: 1.35;
+.about-sign-bulb-tl {
+  top: 1.5%;
+  left: 1.2%;
 }
 
-.about-billboard-plate {
-  margin-top: 10px;
+.about-sign-bulb-tr {
+  top: 1.5%;
+  right: 1.2%;
 }
 
-.about-billboard-plate span {
-  display: inline-flex;
+.about-sign-bulbs {
+  position: absolute;
+  top: 6.5%;
+  right: 8%;
+  left: 8%;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.about-sign-bulbs i {
+  width: 2.1%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #ffd516;
+}
+
+.about-sign-kicker,
+.about-sign-line,
+.about-sign-plate {
+  position: absolute;
+  left: 50%;
+  z-index: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 26px;
-  padding: 4px 14px;
-  border-radius: 999px;
-  background: #ffffff;
-  color: #10163a;
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  margin: 0;
+  transform: translateX(-50%);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
   line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
-.about-billboard-scallop {
-  display: block;
-  height: 12px;
-  background: radial-gradient(circle at 8px 0, transparent 8px, #ff2f86 8.5px) left top / 16px 12px repeat-x;
+.about-sign-kicker {
+  top: 18%;
+  width: 38%;
+  height: 14%;
+  background: #0b7a78;
+  color: #ffffff;
+  font-size: 3.15cqw;
+  letter-spacing: 0.04em;
+}
+
+.about-sign-line {
+  top: 35%;
+  width: 62%;
+  height: 15%;
+  background: #ffc21a;
+  color: #0f163f;
+  font-size: 2.7cqw;
+  letter-spacing: 0.03em;
+}
+
+.about-sign-plate {
+  top: 58%;
+  width: 40%;
+  height: 17%;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0f163f;
+  font-size: 3cqw;
+  letter-spacing: 0.04em;
+}
+
+.about-sign-scallop {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  left: -5px;
+  height: 16%;
+  background:
+    radial-gradient(circle at 8px 100%, #ffd516 7px, transparent 7.5px) left bottom / 16px 100% repeat-x,
+    linear-gradient(#ffc21a, #ffc21a) left 18% / 100% 22% no-repeat,
+    #d6166f;
 }
 
 .about-drive-road {
@@ -6858,13 +6895,12 @@ body {
   }
 
   .about-billboard {
-    width: min(196px, 50vw);
+    width: min(240px, 58vw);
     margin-bottom: 4%;
   }
 
-  .about-billboard-frame {
-    border-width: 5px;
-    padding: 10px 12px 12px;
+  .about-sign {
+    border-width: 4px;
   }
 
   .about-drive-road {

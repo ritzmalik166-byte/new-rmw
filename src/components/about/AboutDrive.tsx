@@ -15,8 +15,6 @@ const PHRASES = [
   "Ideas that travel",
 ] as const;
 
-const BULBS = Array.from({ length: 9 }, (_, index) => index);
-
 export function AboutDrive() {
   const rootRef = useRef<HTMLElement>(null);
   const { ready, reduced } = useMotion();
@@ -148,21 +146,19 @@ export function AboutDrive() {
           </div>
 
           <div className="about-billboard">
-            <div className="about-billboard-frame">
-              <span className="about-billboard-bulbs">
-                {BULBS.map((bulb) => (
-                  <i key={bulb} />
+            <div className="about-sign about-billboard-copy" role="img" aria-label="Use data at night. Keep distance from empty promises. UP16 · RMW 2008">
+              <span className="about-sign-bulb about-sign-bulb-tl" aria-hidden />
+              <span className="about-sign-bulb about-sign-bulb-tr" aria-hidden />
+              <span className="about-sign-bulbs" aria-hidden>
+                {Array.from({ length: 21 }, (_, index) => (
+                  <i key={index} />
                 ))}
               </span>
-              <p className="about-billboard-copy about-billboard-kicker">Use data at night</p>
-              <p className="about-billboard-copy about-billboard-line">
-                Keep distance from empty promises
-              </p>
-              <p className="about-billboard-copy about-billboard-plate">
-                <span>UP16 · RMW 2008</span>
-              </p>
+              <p className="about-sign-kicker">Use data at night</p>
+              <p className="about-sign-line">Keep distance from empty promises</p>
+              <p className="about-sign-plate">UP16 · RMW 2008</p>
+              <span className="about-sign-scallop" aria-hidden />
             </div>
-            <span className="about-billboard-scallop" />
           </div>
         </div>
 
