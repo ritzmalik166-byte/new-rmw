@@ -409,6 +409,9 @@ function SearchPopup() {
           <path d="m5 12 4.5 4.5L19 7" />
         </svg>
         Ranking dekh li?
+        <svg className="highways-serp-cta-arrow" viewBox="0 0 48 32" aria-hidden>
+          <path d="M44 28C36 10 21 4 7 8m0 0 10-5M7 8l9 8" />
+        </svg>
       </span>
     </div>
   );

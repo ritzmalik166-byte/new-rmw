@@ -197,10 +197,30 @@
   text-transform: uppercase;
   text-decoration: none;
   color: #1a1208;
+  animation: highways-cta-pulse 2.2s ease-out infinite;
 }
 
 .highways-card-btn:hover {
   filter: brightness(1.04);
+  animation-play-state: paused;
+}
+
+.highways-card-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+  animation-play-state: paused;
+}
+
+@keyframes highways-cta-pulse {
+  0%,
+  55%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(255 216 74 / 0);
+  }
+
+  72% {
+    box-shadow: 0 0 0 7px rgb(255 216 74 / 0.5);
+  }
 }
 
 /* Google search that pops out of the board on hover. */
@@ -493,6 +513,22 @@
   stroke-width: 3.4;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.highways-serp-badge .highways-serp-cta-arrow {
+  position: absolute;
+  right: calc(100% - 10px);
+  bottom: calc(100% - 2px);
+  width: 44px;
+  height: 30px;
+  padding: 0;
+  overflow: visible;
+  border-radius: 0;
+  background: none;
+  stroke: #6e1a35;
+  stroke-width: 3;
+  filter: drop-shadow(0 1px 0 #ffffff);
+  transform: none;
 }
 
 .highways-truck {
@@ -796,6 +832,10 @@
   .highways-card-line--2,
   .highways-card:hover .highways-card-char,
   .highways-serp-caret {
+    animation: none;
+  }
+
+  .highways-card-btn {
     animation: none;
   }
 }

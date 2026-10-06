@@ -458,7 +458,11 @@
 /* ---------- Roadbook ---------- */
 @media (max-width: 640px) {
   .roadbook {
-    padding: 2.75rem 1rem 3.25rem;
+    padding: 2.75rem 1rem;
+  }
+
+  .roadbook-title {
+    margin-bottom: 2.75rem;
   }
 
   .roadbook-stage {
@@ -559,7 +563,7 @@
 @media (max-width: 640px) {
   .reviews {
     min-height: 0;
-    padding: 5.5rem 0.75rem 2.75rem;
+    padding: 2rem 0.75rem;
   }
 
   .reviews::before {
@@ -567,8 +571,17 @@
   }
 
   .reviews-title {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    margin: 0 0 2rem;
     font-size: clamp(24px, 8vw, 32px);
     letter-spacing: 0.12em;
+  }
+
+  .reviews-stage {
+    margin-top: 0;
   }
 
   .reviews-card.is-center,
