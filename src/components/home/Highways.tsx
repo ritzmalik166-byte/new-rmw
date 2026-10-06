@@ -174,6 +174,7 @@ export function Highways() {
     if (!serpTl.current || !popup || !serpShown.current) return;
 
     serpShown.current = false;
+    rootRef.current?.classList.remove("has-serp-open");
     serpTl.current.pause();
     serpHide.current = gsap.to(popup, {
       autoAlpha: 0,
@@ -219,6 +220,7 @@ export function Highways() {
     if (!serpShown.current) {
       serpHide.current?.kill();
       serpShown.current = true;
+      rootRef.current?.classList.add("has-serp-open");
       placeSerp();
       tl.invalidate().restart();
     }

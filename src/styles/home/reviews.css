@@ -57,6 +57,50 @@
   perspective-origin: 50% 42%;
 }
 
+.reviews-controls {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.reviews-arrow {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgb(255 248 239 / 0.72);
+  border-radius: 50%;
+  background: transparent;
+  color: #fff8ef;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.reviews-arrow:hover {
+  border-color: #fff8ef;
+  background: #fff8ef;
+  color: #800709;
+}
+
+.reviews-arrow:focus-visible {
+  outline: 2px solid #fff8ef;
+  outline-offset: 3px;
+}
+
+.reviews-arrow svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .reviews-track {
   position: relative;
   width: 100%;
@@ -251,32 +295,53 @@
   }
 
   .reviews-stage {
-    height: auto;
+    height: 430px;
     transform: none;
     perspective: none;
   }
 
   .reviews-track {
+    height: 100%;
     transform: none;
-    height: auto;
+    transform-style: flat;
   }
 
+  .reviews-card,
+  .reviews-card.is-center,
   .reviews-card.is-left,
   .reviews-card.is-right,
-  .reviews-card.is-hidden {
-    display: none;
+  .reviews-card.is-hidden,
+  .reviews-card-featured {
+    left: 50%;
+    top: 50%;
+    width: min(340px, calc(100vw - 48px));
+    height: 400px;
+    margin: -200px 0 0 calc(min(340px, calc(100vw - 48px)) / -2);
+  }
+
+  .reviews-card.is-left {
+    z-index: 1;
+    opacity: 0.48;
+    transform: translate3d(calc(-100% + 72px), 18px, 0) scale(0.9);
+  }
+
+  .reviews-card.is-right {
+    z-index: 1;
+    opacity: 0.48;
+    transform: translate3d(calc(100% - 72px), 18px, 0) scale(0.9);
   }
 
   .reviews-card.is-center,
   .reviews-card-featured {
-    position: relative;
-    left: auto;
-    top: auto;
-    width: min(340px, 100%);
-    height: auto;
-    min-height: 400px;
-    margin: 0 auto;
-    transform: none;
+    z-index: 4;
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  .reviews-card.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate3d(0, 28px, -300px) scale(0.8);
   }
 
   .reviews-copy,
