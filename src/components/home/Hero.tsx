@@ -297,6 +297,7 @@ export function Hero() {
                   preload="metadata"
                   aria-label="RMW truck"
                 />
+                <div className="hero-truck-ios-fallback" aria-hidden="true" />
               </div>
             </div>
           </div>

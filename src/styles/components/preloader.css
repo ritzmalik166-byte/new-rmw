@@ -9,6 +9,8 @@
   z-index: 300;
   display: grid;
   place-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
   background: #fff6f0;
   color: var(--ink);
   pointer-events: auto;

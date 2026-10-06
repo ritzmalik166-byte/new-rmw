@@ -1,4 +1,16 @@
 /* ---------- Hero ---------- */
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 1099px) and (hover: none) and (pointer: coarse) {
+    .hero-truck-wrap video.hero-truck {
+      display: none;
+    }
+
+    .hero-truck-wrap .hero-truck-ios-fallback {
+      display: block;
+    }
+  }
+}
+
 @media (max-width: 1099px) {
   /* Stay a single column through tablet. The two-column truck layout
      starts at 1100px so copy and the truck don't collide. */
@@ -58,6 +70,11 @@
     object-position: 70% 78%;
     transform: none;
   }
+
+  .hero-truck-ios-fallback {
+    background-size: cover;
+    background-position: 70% 78%;
+  }
 }
 
 @media (max-width: 640px) {
@@ -114,6 +131,10 @@
   .hero-truck {
     object-position: 58% 70%;
     transform: none;
+  }
+
+  .hero-truck-ios-fallback {
+    background-position: 58% 70%;
   }
 }
 

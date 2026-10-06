@@ -9,9 +9,9 @@ import { SmoothScroll } from "@/components/providers/SmoothScroll";
 export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
     <MotionProvider>
+      <Preloader />
       <SmoothScroll>
         <PageTransition>
-          <Preloader />
           <Grain />
           {children}
         </PageTransition>

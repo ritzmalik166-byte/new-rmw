@@ -197,6 +197,13 @@
   background: transparent;
 }
 
+.hero-truck-ios-fallback {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: url("/hero-section/truck-drive.png") center bottom / contain no-repeat;
+}
+
 /* Spin overlays sit on the rims of the truck art (537x305 source). */
 .hero-wheel {
   position: absolute;
