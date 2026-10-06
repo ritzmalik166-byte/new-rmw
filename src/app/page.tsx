@@ -12,6 +12,8 @@ import { Roadbook } from "@/components/home/Roadbook";
 import { Route } from "@/components/home/Route";
 import { Ticker } from "@/components/home/Ticker";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <>

@@ -292,25 +292,9 @@ export const site = {
   },
   news: {
     title: "What's New? News & Blogs",
-    lede: "Strategy, creative and media built as one connected system—not a collection of loose deliverables.",
-    cta: "View all work",
-    href: "/work",
-    posts: [
-      {
-        slug: "seo-friendly-website-from-scratch",
-        title: "How to Design an SEO Friendly Website from Scratch",
-        tags: ["SEO", "Web Design", "Digital"],
-        image: "/blog-section/seo-friendly-website.jpg",
-        href: "/insights",
-      },
-      {
-        slug: "websites-fuel-business-growth",
-        title: "Beyond Design: How Powerful Websites Fuel Business Growth",
-        tags: ["Web Development", "Growth", "Digital"],
-        image: "/blog-section/websites-fuel-growth.jpg",
-        href: "/insights",
-      },
-    ],
+    lede: "Ideas, perspectives and practical guides from Ritz Media World.",
+    cta: "View all blogs",
+    href: "/blog",
   },
   highways: {
     title: "Common Highways.",
@@ -405,7 +389,7 @@ export const site = {
         title: "Company",
         links: [
           { label: "Work", href: "/work" },
-          { label: "Insights", href: "/insights" },
+          { label: "Blogs", href: "/blog" },
           { label: "About", href: "/about" },
           { label: "Careers", href: "/about" },
           { label: "Contact", href: "/#start-a-project" },
@@ -415,7 +399,7 @@ export const site = {
         title: "Resources",
         links: [
           { label: "Case Studies", href: "/work" },
-          { label: "Reports", href: "/insights" },
+          { label: "Reports", href: "/blog" },
           { label: "FAQs", href: "/#highways" },
         ],
       },

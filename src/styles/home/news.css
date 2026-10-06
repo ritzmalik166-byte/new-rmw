@@ -97,6 +97,21 @@
   object-position: center;
 }
 
+.news-card-image-fallback {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgb(62 75 97 / 52%), transparent 66%),
+    #0b1220;
+  color: #ffffff;
+  font-family: var(--font-space-mono), "Space Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .news-card-body {
   position: relative;
   display: flex;
@@ -128,6 +143,15 @@
   color: #0b1120;
 }
 
+.news-card-excerpt {
+  margin: 0;
+  padding-right: 12px;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #64748b;
+}
+
 .news-card-go {
   position: absolute;
   right: 22px;
@@ -143,6 +167,82 @@
 
 .news-card:hover .news-card-go {
   transform: translate(1px, -1px);
+}
+
+.news-empty {
+  margin: 0;
+  font-family: var(--font-inter), Inter, sans-serif;
+  color: #64748b;
+}
+
+.blogs-page {
+  min-height: 70vh;
+  padding-top: 5rem;
+}
+
+.blogs-page-head {
+  margin-bottom: 2.5rem;
+}
+
+.blogs-page-head .hero-kicker {
+  color: #64748b;
+}
+
+.blogs-page-head .news-title {
+  margin-top: 0.75rem;
+}
+
+.blogs-page-head .news-lede {
+  width: min(700px, 100%);
+}
+
+.blogs-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  font-family: var(--font-inter), Inter, sans-serif;
+}
+
+.blogs-pagination-link,
+.blogs-pagination-page {
+  display: inline-grid;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  place-items: center;
+  border: 1px solid rgb(15 23 42 / 18%);
+  color: #0b1120;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.blogs-pagination-link {
+  padding: 0 0.75rem;
+}
+
+.blogs-pagination-page[aria-current="page"] {
+  border-color: #0b1120;
+  background: #0b1120;
+  color: #ffffff;
+}
+
+.blogs-pagination-ellipsis {
+  display: inline-grid;
+  min-width: 1.5rem;
+  min-height: 2.5rem;
+  place-items: center;
+  color: #64748b;
+}
+
+.blogs-pagination-link:hover,
+.blogs-pagination-page:hover {
+  border-color: #0b1120;
+}
+
+.blogs-pagination-link.is-disabled {
+  cursor: default;
+  opacity: 0.45;
 }
 
 @media (max-width: 980px) {
@@ -170,5 +270,13 @@
   .news-card-title {
     font-size: 18px;
     max-width: none;
+  }
+
+  .blogs-pagination {
+    gap: 0.4rem;
+  }
+
+  .blogs-pagination-link {
+    padding: 0 0.5rem;
   }
 }
