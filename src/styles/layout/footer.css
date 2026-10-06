@@ -230,6 +230,35 @@
   }
 }
 
+@media (min-width: 761px) and (max-width: 1100px) {
+  .site-footer-intro {
+    justify-self: center;
+    text-align: center;
+  }
+
+  .site-footer-title {
+    align-items: center;
+    margin-inline: auto;
+  }
+
+  .site-footer-title-row {
+    justify-content: center;
+  }
+
+  .site-footer-blurb,
+  .site-footer-address {
+    margin-inline: auto;
+  }
+
+  .site-footer-nav {
+    text-align: center;
+  }
+
+  .site-footer-col-list {
+    align-items: center;
+  }
+}
+
 @media (max-width: 720px) {
   .site-footer-inner {
     width: min(1280px, calc(100% - 2rem));

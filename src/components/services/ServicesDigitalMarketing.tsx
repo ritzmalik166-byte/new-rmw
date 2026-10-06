@@ -50,7 +50,7 @@ const SERVICES: { id: string; title: string; copy: string; icon: IconName }[] = 
   },
 ];
 
-const TITLE = ["Digital", "Marketing", "Services"] as const;
+const TITLE = ["Digital Marketing", "Services"] as const;
 const MAX_TILT = 7;
 
 export function ServicesDigitalMarketing() {

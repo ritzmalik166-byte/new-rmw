@@ -1,9 +1,12 @@
 "use client";
 
+import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import { useRef, type PointerEvent } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
-import { gsap } from "@/lib/gsap";
+import { gsap, registerGsap, ScrollTrigger } from "@/lib/gsap";
+
+registerGsap();
 
 // Measured in source pixels of /service/image 817.png (771 x 402).
 const ART_W = 771;
@@ -22,8 +25,44 @@ const pctX = (px: number) => `${((px / ART_W) * 100).toFixed(3)}%`;
 const rodPct = `${((ROD_BOTTOM / ART_H) * 100).toFixed(3)}%`;
 
 export function ServicesCreative() {
-  const { reduced } = useMotion();
+  const rootRef = useRef<HTMLElement>(null);
+  const { ready, reduced } = useMotion();
   const swings = useRef(new WeakMap<HTMLElement, gsap.core.Timeline>());
+
+  const playSwing = (card: HTMLElement, dir: number, amp: number, delay = 0) => {
+    swings.current.get(card)?.kill();
+    const tl = gsap
+      .timeline({ delay })
+      .to(card, { rotation: dir * amp, duration: 0.35, ease: "sine.out" })
+      .to(card, { rotation: -dir * amp * 0.6, duration: 0.55, ease: "sine.inOut" })
+      .to(card, { rotation: dir * amp * 0.34, duration: 0.5, ease: "sine.inOut" })
+      .to(card, { rotation: -dir * amp * 0.16, duration: 0.45, ease: "sine.inOut" })
+      .to(card, { rotation: 0, duration: 0.5, ease: "sine.out" });
+    swings.current.set(card, tl);
+  };
+
+  useGSAP(
+    () => {
+      const root = rootRef.current;
+      const rack = root?.querySelector<HTMLElement>(".svc-creative-rack");
+      if (!root || !rack || !ready || reduced) return;
+
+      const trigger = ScrollTrigger.create({
+        trigger: rack,
+        start: "top 80%",
+        once: true,
+        onEnter: () => {
+          const cards = gsap.utils.toArray<HTMLElement>(".svc-creative-card", rack);
+          cards.forEach((card, index) => {
+            playSwing(card, index % 2 === 0 ? 1 : -1, 4.5, index * 0.12);
+          });
+        },
+      });
+
+      return () => trigger.kill();
+    },
+    { scope: rootRef, dependencies: [ready, reduced] },
+  );
 
   const swing = (event: PointerEvent<HTMLSpanElement>) => {
     if (reduced) return;
@@ -36,19 +75,11 @@ export function ServicesCreative() {
     const dir = -push;
     const amp = gsap.utils.clamp(3, 8, 3.5 + Math.abs(event.movementX) * 0.35);
 
-    swings.current.get(card)?.kill();
-    const tl = gsap
-      .timeline()
-      .to(card, { rotation: dir * amp, duration: 0.35, ease: "sine.out" })
-      .to(card, { rotation: -dir * amp * 0.6, duration: 0.55, ease: "sine.inOut" })
-      .to(card, { rotation: dir * amp * 0.34, duration: 0.5, ease: "sine.inOut" })
-      .to(card, { rotation: -dir * amp * 0.16, duration: 0.45, ease: "sine.inOut" })
-      .to(card, { rotation: 0, duration: 0.5, ease: "sine.out" });
-    swings.current.set(card, tl);
+    playSwing(card, dir, amp);
   };
 
   return (
-    <section className="svc-creative" aria-labelledby="svc-creative-title">
+    <section ref={rootRef} className="svc-creative" aria-labelledby="svc-creative-title">
       {/* <div className="svc-creative-border" aria-hidden /> */}
       <div className="svc-creative-inner">
         <div className="svc-creative-copy">

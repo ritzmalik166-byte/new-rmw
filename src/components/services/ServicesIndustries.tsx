@@ -274,7 +274,13 @@ export function ServicesIndustries() {
           scrollTrigger: {
             trigger: root,
             start: () => (root.offsetHeight > window.innerHeight ? "bottom bottom" : "top top"),
-            end: () => `+=${Math.round(Math.max(1300, world.offsetWidth * 1.1))}`,
+            end: () => {
+              const tablet = window.matchMedia("(min-width: 761px) and (max-width: 1100px)").matches;
+              const distance = tablet
+                ? Math.max(520, world.offsetWidth * 0.5)
+                : Math.max(1300, world.offsetWidth * 1.1);
+              return `+=${Math.round(distance)}`;
+            },
             pin: true,
             scrub: 0.8,
             anticipatePin: 1,
