@@ -91,44 +91,43 @@ export function AboutMileage() {
         counts.forEach((el) => paintCount(el, 0));
 
         const tl = gsap.timeline({
-          defaults: { ease: "none" },
+          defaults: { ease: "power3.out" },
           scrollTrigger: {
             trigger: root,
-            start: "top 90%",
-            end: "bottom 30%",
-            scrub: 1.6,
+            start: "top 80%",
+            once: true,
           },
         });
         animations.push(tl);
 
-        tl.to(card, { y: 0, autoAlpha: 1, duration: 0.7 }, 0);
+        tl.to(card, { y: 0, autoAlpha: 1, duration: 0.75, ease: "power2.out" }, 0);
         tl.to(
           brandSplit.chars,
-          { yPercent: 0, opacity: 1, duration: 0.7, stagger: 0.08 },
-          0.15,
-        );
-        tl.to(
-          kickerSplit.chars,
-          { yPercent: 0, opacity: 1, duration: 0.8, stagger: 0.045 },
+          { yPercent: 0, opacity: 1, duration: 0.6, stagger: 0.05, ease: "power2.out" },
           0.1,
         );
         tl.to(
+          kickerSplit.chars,
+          { yPercent: 0, opacity: 1, duration: 0.55, stagger: 0.03, ease: "power2.out" },
+          0.15,
+        );
+        tl.to(
           titleSplit.chars,
-          { yPercent: 0, opacity: 1, duration: 1.1, stagger: 0.035 },
-          0.35,
+          { yPercent: 0, opacity: 1, duration: 0.75, stagger: 0.02, ease: "power3.out" },
+          0.25,
         );
         tl.to(
           ledeSplit.words,
-          { y: 0, opacity: 1, duration: 1, stagger: 0.02 },
-          0.9,
+          { y: 0, opacity: 1, duration: 0.55, stagger: 0.01, ease: "power2.out" },
+          0.45,
         );
-        tl.to(rules, { "--rule": 1, duration: 0.6, stagger: 0.1 }, 1.35);
+        tl.to(rules, { "--rule": 1, duration: 0.5, stagger: 0.08, ease: "power2.out" }, 0.65);
         tl.to(
           literalChars,
-          { yPercent: 0, opacity: 1, duration: 0.7, stagger: 0.04 },
-          1.4,
+          { yPercent: 0, opacity: 1, duration: 0.5, stagger: 0.03, ease: "power2.out" },
+          0.7,
         );
-        tl.to(labels, { y: 0, autoAlpha: 1, duration: 0.6, stagger: 0.08 }, 1.55);
+        tl.to(labels, { y: 0, autoAlpha: 1, duration: 0.5, stagger: 0.05, ease: "power2.out" }, 0.75);
 
         counts.forEach((el, index) => {
           const proxy = { value: 0 };
@@ -137,11 +136,17 @@ export function AboutMileage() {
             proxy,
             {
               value: target,
-              duration: 0.9,
+              duration: 1.2,
+              ease: "power2.out",
               onUpdate: () => paintCount(el, Math.round(proxy.value)),
+              onComplete: () => paintCount(el, target),
             },
-            1.3 + index * 0.12,
+            0.65 + index * 0.08,
           );
+        });
+
+        tl.add(() => {
+          counts.forEach((el) => paintCount(el, Number(el.dataset.count)));
         });
       });
 
