@@ -9,8 +9,7 @@ import { gsap, registerGsap, SplitText } from "@/lib/gsap";
 registerGsap();
 
 const TITLE = [
-  "18 Years of Building Distinctive",
-  "Brands in a World Full of Sameness",
+  "18 Years of Building Distinctive Brands in a World Full of Sameness",
 ] as const;
 
 export function AboutHero() {
@@ -44,7 +43,13 @@ export function AboutHero() {
 
         const inners = titleRef.current.querySelectorAll<HTMLElement>(".about-line-inner");
         inners.forEach((el) => {
-          splits.push(new SplitText(el, { type: "chars", charsClass: "about-char" }));
+          splits.push(
+            new SplitText(el, {
+              type: "words,chars",
+              wordsClass: "about-title-word",
+              charsClass: "about-char",
+            })
+          );
         });
         const wordSplit = new SplitText(ledeRef.current, {
           type: "words",

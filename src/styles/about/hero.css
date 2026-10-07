@@ -83,6 +83,7 @@
   letter-spacing: 0;
   text-transform: uppercase;
   vertical-align: middle;
+  text-wrap: balance;
 }
 
 .about-title {
