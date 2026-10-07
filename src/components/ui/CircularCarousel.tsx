@@ -42,6 +42,7 @@ export default function CircularCarousel({
 }: CircularCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [modalItem, setModalItem] = useState<CircularCarouselItem | null>(null);
   const swayRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const angleRef = useRef(0);
@@ -185,7 +186,13 @@ export default function CircularCarousel({
                     transform: `translate(-50%, -50%) rotateY(${index * angleStep}deg) translateZ(var(--circular-ring-radius))`,
                     ...(reducedMotion ? { opacity: isActive ? 1 : 0.36 } : {}),
                   }}
-                  onClick={() => moveToItem(index)}
+                  onClick={() => {
+                    if (isActive) {
+                      setModalItem(item);
+                    } else {
+                      moveToItem(index);
+                    }
+                  }}
                   aria-pressed={isActive}
                   aria-label={`${item.year ? `${item.year}: ` : ""}${item.title ?? "Award"} — select award`}
                 >
@@ -219,6 +226,59 @@ export default function CircularCarousel({
         </div>
       </div>
 
+      <button
+        className="circular-carousel-arrow circular-carousel-arrow-left"
+        onClick={() => moveToItem((activeIndex - 1 + safeItems.length) % safeItems.length)}
+        aria-label="Previous item"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6" /></svg>
+      </button>
+      <button
+        className="circular-carousel-arrow circular-carousel-arrow-right"
+        onClick={() => moveToItem((activeIndex + 1) % safeItems.length)}
+        aria-label="Next item"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
+      </button>
+
+      {modalItem && (
+        <div className="carousel-modal-overlay" onClick={() => setModalItem(null)}>
+          <div className="carousel-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="carousel-modal-close" onClick={() => setModalItem(null)} aria-label="Close modal">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 5L5 15M5 5l10 10" /></svg>
+            </button>
+
+            <div className="carousel-modal-image">
+              <Image
+                src={modalItem.src}
+                alt={modalItem.alt ?? modalItem.title ?? "Company award"}
+                fill
+                sizes="(max-width: 640px) 90vw, 40vw"
+                quality={100}
+              />
+            </div>
+
+            <div className="carousel-modal-details">
+              {modalItem.year && (
+                <span className="carousel-modal-year">{modalItem.year}</span>
+              )}
+              {modalItem.subtitle && (
+                <span className="carousel-modal-subtitle">{modalItem.subtitle}</span>
+              )}
+              {modalItem.title && (
+                <h3 className="carousel-modal-title">{modalItem.title}</h3>
+              )}
+              {modalItem.description && (
+                <p className="carousel-modal-desc">{modalItem.description}</p>
+              )}
+              <div className="carousel-modal-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+                <span>Award Recognition</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -144,6 +144,5 @@ export async function getBlogs(): Promise<Blog[]> {
       const firstDate = first.createdAt ? Date.parse(first.createdAt) : 0;
       const secondDate = second.createdAt ? Date.parse(second.createdAt) : 0;
       return secondDate - firstDate;
-    })
-    .slice(0, BLOG_ARCHIVE_LIMIT);
+    });
 }

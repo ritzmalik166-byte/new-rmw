@@ -9,9 +9,10 @@
 
 .awards-inner {
   position: relative;
-  width: min(1180px, calc(100% - 4rem));
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
-  padding: clamp(4rem, 7vw, 6.2rem) 0;
+  padding: clamp(3rem, 5vw, 4.5rem) clamp(1.5rem, 4vw, 4rem);
 }
 
 .awards-header {
@@ -74,16 +75,18 @@
 }
 
 .awards-layout {
-  display: grid;
-  grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: clamp(1.25rem, 3vw, 3rem);
-  align-items: start;
+  align-items: stretch;
 }
 
 .awards-information {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1.1rem;
-  align-content: start;
+  align-items: stretch;
+  width: 100%;
 }
 
 .awards-copy-panel {
@@ -99,7 +102,6 @@
 .awards-detail {
   position: relative;
   overflow: hidden;
-  margin-left: 1rem;
   padding: 1.2rem 1.15rem 1.3rem;
   border: 1px solid rgba(135, 86, 42, 0.18);
   border-left: 3px solid #b67a3e;
@@ -217,7 +219,9 @@
 
 .awards-showcase {
   position: relative;
-  height: 600px;
+  height: 80vh;
+  max-height: 700px;
+  min-height: 500px;
   min-width: 0;
 }
 
@@ -319,6 +323,229 @@
 }
 
 
+
+.circular-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: #333;
+}
+.circular-carousel-arrow:hover {
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateY(-50%) scale(1.05);
+}
+.circular-carousel-arrow-left {
+  left: 20px;
+}
+.circular-carousel-arrow-right {
+  right: 20px;
+}
+
+/* ---------- Award Modal ---------- */
+.carousel-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 8, 6, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: modal-overlay-in 0.35s ease-out forwards;
+}
+
+.carousel-modal {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: min(920px, 92vw);
+  height: auto;
+  max-height: 88vh;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fffdf9 0%, #f5eee4 100%);
+  box-shadow:
+    0 40px 80px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+  animation: modal-card-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.carousel-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(20, 21, 28, 0.06);
+  border: 1px solid rgba(20, 21, 28, 0.08);
+  color: #5a504a;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.carousel-modal-close:hover {
+  background: rgba(20, 21, 28, 0.12);
+  color: #14151c;
+  transform: rotate(90deg);
+}
+
+.carousel-modal-image {
+  position: relative;
+  flex: 0 0 45%;
+  min-height: 480px;
+  background: #ebe4d8;
+  animation: modal-image-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.carousel-modal-image img {
+  object-fit: contain;
+  object-position: center;
+}
+
+.carousel-modal-details {
+  flex: 1 1 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 2.5rem 2.25rem;
+  animation: modal-details-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
+.carousel-modal-year {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(176, 93, 29, 0.1);
+  color: #8a4515;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.carousel-modal-subtitle {
+  display: block;
+  margin-top: 0.15rem;
+  color: rgba(90, 80, 74, 0.7);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.carousel-modal-title {
+  margin: 0.25rem 0 0;
+  font-family: var(--font-quattrocento), Georgia, serif;
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #1a1814;
+}
+
+.carousel-modal-desc {
+  margin: 0.35rem 0 0;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(135, 86, 42, 0.12);
+  color: rgba(35, 30, 25, 0.7);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.carousel-modal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+  padding: 0.55rem 0.85rem;
+  width: fit-content;
+  border-radius: 12px;
+  background: #14151c;
+  color: #f3d27a;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.carousel-modal-badge svg {
+  flex-shrink: 0;
+  stroke: #f3d27a;
+}
+
+@keyframes modal-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modal-card-in {
+  from {
+    opacity: 0;
+    transform: scale(0.88) translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes modal-image-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes modal-details-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .carousel-modal {
+    flex-direction: column;
+    max-height: 85vh;
+  }
+
+  .carousel-modal-image {
+    flex: 0 0 auto;
+    min-height: 220px;
+    max-height: 280px;
+  }
+
+  .carousel-modal-details {
+    padding: 1.5rem 1.25rem;
+  }
+}
 
 @media (max-width: 980px) {
   .awards-header {

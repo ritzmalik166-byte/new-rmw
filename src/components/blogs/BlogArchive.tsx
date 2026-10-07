@@ -196,6 +196,8 @@ export function BlogArchive({
         <a
           className="blog-featured"
           href={`https://www.ritzmediaworld.com/blog/${encodeURIComponent(featuredBlog.slug)}`}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <BlogImage src={featuredBlog.image} alt={featuredBlog.title} />
           <span className="blog-featured-scrim" aria-hidden="true" />

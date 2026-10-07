@@ -33,6 +33,17 @@ export function Awards() {
         </div>
 
         <div className="awards-layout">
+          <div className="awards-showcase">
+            <CircularCarousel
+              items={carouselItems}
+              cardWidth={220}
+              aspectRatio={0.68}
+              speed={8}
+              className="awards-carousel"
+              onChange={setActiveIndex}
+            />
+          </div>
+
           <div className="awards-information">
             <div className="awards-copy-panel">
               <p className="awards-pill">Recognition earned by our team</p>
@@ -58,17 +69,6 @@ export function Awards() {
                 <p className="awards-detail-copy">{activeAward.copy}</p>
               </article>
             )}
-          </div>
-
-          <div className="awards-showcase">
-            <CircularCarousel
-              items={carouselItems}
-              cardWidth={220}
-              aspectRatio={0.68}
-              speed={8}
-              className="awards-carousel"
-              onChange={setActiveIndex}
-            />
           </div>
         </div>
       </div>

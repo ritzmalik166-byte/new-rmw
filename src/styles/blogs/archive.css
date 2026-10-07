@@ -147,7 +147,6 @@
 .blog-featured {
   position: relative;
   display: flex;
-  aspect-ratio: 2 / 1;
   overflow: hidden;
   align-items: center;
   background: #171717;
@@ -173,11 +172,10 @@
 }
 
 .blog-archive .news-card-media img {
-  position: absolute;
-  inset: 0;
+  position: relative;
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   max-width: none;
   object-fit: contain;
   object-position: center;
@@ -364,7 +362,6 @@
 
 .blog-card-image-wrap .news-card-media {
   width: 100%;
-  aspect-ratio: 16 / 9;
   background: #eee9df;
 }
 
