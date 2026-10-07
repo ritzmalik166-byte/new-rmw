@@ -362,6 +362,38 @@ export const site = {
       },
     ],
   },
+  about: {
+    faqs: [
+      {
+        q: "When was Ritz Media World founded, and by whom?",
+        a: "Ritz Media World was founded in August 2008 by Mr. Ritesh Malik, who has led the agency ever since. He also founded Creative Thinks Media, a sister agency.",
+      },
+      {
+        q: "Where is Ritz Media World based?",
+        a: "Ritz Media World is headquartered in Noida, Delhi NCR, and works with brands across India.",
+      },
+      {
+        q: "How has Ritz Media World grown since 2008?",
+        a: "The agency began with a mission to reimagine brand communication for India's growth markets. In 2012, it pioneered centrespread storytelling in Hindustan Times, and in 2016 it expanded into 360° digital marketing. In 2026, it introduced AI-powered 3D rendering, continuing 18 years of adapting to every major shift in Indian marketing.",
+      },
+      {
+        q: "What awards and recognition has Ritz Media World received?",
+        a: "Ritz Media World was named Best Creative Agency (Real Estate) in Delhi NCR by Big FM in both 2024 and 2025.",
+      },
+      {
+        q: "What partnerships and accreditations does Ritz Media World hold?",
+        a: "Ritz Media World is a Google Partner, a Meta Business Partner, a member of the Indian Newspaper Society, and a registered MSME.",
+      },
+      {
+        q: "What makes Ritz Media World different from other agencies?",
+        a: "As an independent agency, Ritz Media World combines 18 years of experience across print, radio and digital with newer capabilities in AI and 3D. This means clients get the judgement of a long-established agency together with the speed and tools of a modern one, all from a single team.",
+      },
+      {
+        q: "How can I start working with Ritz Media World?",
+        a: "You can reach the team through the contact form on the website, by email at info@ritzmediaworld.com, or by phone at +91 9220516777. We usually begin with a conversation about your brand's goals, followed by a free audit and a tailored plan.",
+      },
+    ],
+  },
   startProject: {
     kicker: "Start a Project",
     title: "Get A Free SEO And Digital Audit For Your Brand",

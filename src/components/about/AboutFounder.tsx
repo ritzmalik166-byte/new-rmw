@@ -7,12 +7,12 @@ import { registerGsap, ScrollTrigger } from "@/lib/gsap";
 
 registerGsap();
 
-const STOPS = [
-  { when: "Aug 2008", detail: "Founds Ritz Media World in Delhi NCR" },
-  { when: "[YEAR]", detail: "Founds Creative Thinks Media" },
-  { when: "[YEAR]", detail: "[Key milestone: award, expansion or landmark client]" },
-  { when: "Today", detail: "Leads RMW across strategy, creative, media and AI" },
-] as const;
+// const STOPS = [
+//   { when: "Aug 2008", detail: "Founds Ritz Media World in Delhi NCR" },
+//   { when: "2008", detail: "Founds Creative Thinks Media" },
+//   { when: "2024 & 2025", detail: "Named Best Creative Agency (Real Estate) by Big FM" },
+//   { when: "Today", detail: "Leads RMW across strategy, creative, media and AI" },
+// ] as const;
 
 type Dot = {
   x: number;
@@ -193,10 +193,10 @@ export function AboutFounder() {
         };
       };
 
-      let stopLayout = () => {};
+      let stopLayout = () => { };
       const begin = () => {
         stopLayout();
-        stopLayout = play() ?? (() => {});
+        stopLayout = play() ?? (() => { });
       };
 
       if (img.complete && img.naturalWidth > 0) {
@@ -250,11 +250,9 @@ export function AboutFounder() {
             Ritesh Malik · Founder &amp; Promoter, Ritz Media World And Creative Thinks Media
           </p>
           <p className="about-founder-lede">
-            Ritesh founded Ritz Media World in August 2008 and has steered the agency ever
-            since, growing it into a full-service creative, digital and media partner. [Add
-            one or two lines on his background and philosophy.]
+            Mr. Ritesh Malik founded Ritz Media World in August 2008 with a simple belief: brands deserve ideas that are built on insight, not assumption. Over 18 years, he has steered the agency through every major shift in Indian marketing, growing it from a creative studio into a full-service creative, digital, and media partner for brands across industries. He also founded Creative Thinks Media. Even as data and AI reshape the industry, Mr. Malik remains convinced that brands win through clear, authentic, and well-crafted storytelling.
           </p>
-          <ol className="about-founder-list">
+          {/* <ol className="about-founder-list">
             {STOPS.map((stop) => (
               <li key={stop.detail}>
                 <span>
@@ -263,7 +261,7 @@ export function AboutFounder() {
                 </span>
               </li>
             ))}
-          </ol>
+          </ol> */}
         </div>
       </div>
     </section>

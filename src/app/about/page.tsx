@@ -7,6 +7,7 @@ import { AboutMileage } from "@/components/about/AboutMileage";
 import { AboutProofs } from "@/components/about/AboutProofs";
 import { Highways } from "@/components/home/Highways";
 import { StartProject } from "@/components/home/StartProject";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -21,7 +22,7 @@ export default function AboutPage() {
       <AboutJourney />
       <AboutProofs />
       <AboutFounder />
-      <Highways />
+      <Highways faqs={site.about.faqs} />
       <StartProject />
     </>
   );

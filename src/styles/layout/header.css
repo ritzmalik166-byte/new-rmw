@@ -45,6 +45,17 @@
   white-space: nowrap;
 }
 
+button.site-nav-link {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.services-nav-trigger-wrap {
+  display: inline-flex;
+  align-items: center;
+}
+
 .site-nav-link::after {
   content: "";
   position: absolute;

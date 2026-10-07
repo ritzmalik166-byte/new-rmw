@@ -21,7 +21,7 @@ const boardLines = (() => {
   }));
 })();
 
-export function Highways() {
+export function Highways({ faqs = site.highways.faqs }: { faqs?: { q: string; a: string }[] }) {
   const rootRef = useRef<HTMLElement>(null);
   const { ready, reduced } = useMotion();
   const [open, setOpen] = useState(0);
@@ -309,7 +309,7 @@ export function Highways() {
         </div>
 
         <div data-highways-item className="highways-faqs">
-          {data.faqs.map((item, index) => {
+          {faqs.map((item, index) => {
             const isOpen = open === index;
             const num = String(index + 1).padStart(2, "0");
 

@@ -13,6 +13,9 @@ import { cn } from "@/lib/cn";
 import { gsap, registerGsap } from "@/lib/gsap";
 import { site } from "@/lib/site";
 
+import { ServicesMegaMenu } from "@/components/layout/ServicesMegaMenu";
+import { SERVICES_LIST } from "@/lib/services-data";
+
 registerGsap();
 gsap.registerPlugin(useGSAP);
 
@@ -21,13 +24,26 @@ export function Header() {
   const rootRef = useRef<HTMLElement>(null);
   const { ready, reduced } = useMotion();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const servicesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const lenis = useLenis();
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const handleServicesEnter = () => {
+    if (servicesTimeoutRef.current) clearTimeout(servicesTimeoutRef.current);
+    setServicesOpen(true);
+  };
+
+  const handleServicesLeave = () => {
+    servicesTimeoutRef.current = setTimeout(() => {
+      setServicesOpen(false);
+    }, 240);
+  };
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -45,10 +61,11 @@ export function Header() {
     };
   }, [menuOpen, lenis]);
 
-  // Close the mobile menu on route change and when the viewport grows
+  // Close menus on route change and when the viewport grows
   // back into the desktop nav breakpoint.
   useEffect(() => {
     setMenuOpen(false);
+    setServicesOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -108,18 +125,55 @@ export function Header() {
         </TransitionLink>
 
         <nav className="site-nav">
-          {site.nav.map((item) => (
-            <TransitionLink
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "site-nav-link",
-                pathname === item.href && "is-active",
-              )}
-            >
-              {item.label}
-            </TransitionLink>
-          ))}
+          {site.nav.map((item) => {
+            if (item.href === "/services") {
+              const isServicesActive = pathname.startsWith("/services") || servicesOpen;
+              return (
+                <div
+                  key={item.href}
+                  className="services-nav-trigger-wrap relative"
+                  onMouseEnter={handleServicesEnter}
+                  onMouseLeave={handleServicesLeave}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setServicesOpen((prev) => !prev)}
+                    className={cn(
+                      "site-nav-link flex items-center gap-1.5 cursor-pointer",
+                      isServicesActive && "is-active",
+                    )}
+                    aria-expanded={servicesOpen}
+                    aria-haspopup="true"
+                    aria-label="Toggle Services menu"
+                  >
+                    <span>{item.label}</span>
+                    <span
+                      className={cn(
+                        "services-nav-chevron inline-block text-[9px] transition-transform duration-300",
+                        servicesOpen ? "rotate-180 text-amber-500" : "text-zinc-500",
+                      )}
+                      aria-hidden
+                    >
+                      ▼
+                    </span>
+                  </button>
+                </div>
+              );
+            }
+
+            return (
+              <TransitionLink
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "site-nav-link",
+                  pathname === item.href && "is-active",
+                )}
+              >
+                {item.label}
+              </TransitionLink>
+            );
+          })}
         </nav>
 
         <div className="site-header-actions">
@@ -141,16 +195,23 @@ export function Header() {
             <span />
           </button>
         </div>
-
       </div>
 
       {mounted
         ? createPortal(
-            <MobileMenu
-              open={menuOpen}
-              pathname={pathname}
-              onClose={() => setMenuOpen(false)}
-            />,
+            <>
+              <ServicesMegaMenu
+                isOpen={servicesOpen}
+                onClose={() => setServicesOpen(false)}
+                onMouseEnter={handleServicesEnter}
+                onMouseLeave={handleServicesLeave}
+              />
+              <MobileMenu
+                open={menuOpen}
+                pathname={pathname}
+                onClose={() => setMenuOpen(false)}
+              />
+            </>,
             document.body,
           )
         : null}
@@ -168,6 +229,7 @@ function MobileMenu({
   onClose: () => void;
 }) {
   const closeRef = useRef<HTMLButtonElement>(null);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
   useEffect(() => {
     if (open) closeRef.current?.focus({ preventScroll: true });
@@ -203,21 +265,78 @@ function MobileMenu({
       </div>
 
       <nav className="mnav-links" aria-label="Mobile">
-        {site.nav.map((item, index) => (
-          <TransitionLink
-            key={item.href}
-            href={item.href}
-            className={cn("mnav-link", pathname === item.href && "is-active")}
-            style={{ "--i": index } as React.CSSProperties}
-            onClick={onClose}
-          >
-            <span className="mnav-num">{String(index + 1).padStart(2, "0")}</span>
-            <span className="mnav-label">{item.label}</span>
-            <span className="mnav-arrow" aria-hidden>
-              →
-            </span>
-          </TransitionLink>
-        ))}
+        {site.nav.map((item, index) => {
+          if (item.href === "/services") {
+            return (
+              <div key={item.href} className="mnav-item-group">
+                <div className="flex items-center justify-between">
+                  <TransitionLink
+                    href={item.href}
+                    className={cn(
+                      "mnav-link flex-1",
+                      pathname.startsWith("/services") && "is-active",
+                    )}
+                    style={{ "--i": index } as React.CSSProperties}
+                    onClick={onClose}
+                  >
+                    <span className="mnav-num">{String(index + 1).padStart(2, "0")}</span>
+                    <span className="mnav-label">{item.label}</span>
+                  </TransitionLink>
+                  <button
+                    type="button"
+                    onClick={() => setMobileServicesOpen((prev) => !prev)}
+                    className="p-3 text-white/70 hover:text-amber-400 transition-colors"
+                    aria-label="Toggle sub services"
+                  >
+                    <span
+                      className={cn(
+                        "inline-block text-xs transition-transform duration-200",
+                        mobileServicesOpen ? "rotate-180 text-amber-400" : "",
+                      )}
+                    >
+                      ▼
+                    </span>
+                  </button>
+                </div>
+
+                {mobileServicesOpen && (
+                  <div className="pl-8 pr-2 py-2 flex flex-col gap-1.5 bg-white/[0.04] rounded-lg my-1">
+                    {SERVICES_LIST.map((svc) => (
+                      <Link
+                        key={svc.slug}
+                        href={`/services/${svc.slug}`}
+                        onClick={onClose}
+                        className={cn(
+                          "text-sm py-1.5 px-2 rounded text-white/75 hover:text-amber-400 transition-colors flex items-center justify-between",
+                          pathname === `/services/${svc.slug}` && "text-amber-400 font-semibold bg-white/5",
+                        )}
+                      >
+                        <span>{svc.name}</span>
+                        <span className="text-xs text-white/30">→</span>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          }
+
+          return (
+            <TransitionLink
+              key={item.href}
+              href={item.href}
+              className={cn("mnav-link", pathname === item.href && "is-active")}
+              style={{ "--i": index } as React.CSSProperties}
+              onClick={onClose}
+            >
+              <span className="mnav-num">{String(index + 1).padStart(2, "0")}</span>
+              <span className="mnav-label">{item.label}</span>
+              <span className="mnav-arrow" aria-hidden>
+                →
+              </span>
+            </TransitionLink>
+          );
+        })}
       </nav>
 
       <div className="mnav-foot">

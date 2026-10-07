@@ -9,8 +9,8 @@ import { gsap, registerGsap, SplitText } from "@/lib/gsap";
 registerGsap();
 
 const TITLE = [
-  "18 Years of Creating Distinction",
-  "in a World Full of Sameness",
+  "18 Years of Building Distinctive",
+  "Brands in a World Full of Sameness",
 ] as const;
 
 export function AboutHero() {
@@ -172,11 +172,8 @@ export function AboutHero() {
         </div>
 
         <p ref={ledeRef} className="about-lede">
-          Ritz Media World is an independent creative, branding, digital and media agency,
-          founded in 2008 and based in Noida, Delhi NCR. We turn business problems into
-          ideas that travel, from brand and campaign to media, digital, film, 3D and AI,
-          for brands in real estate, healthcare, education, e-commerce, manufacturing and
-          startups
+          Ritz Media World is an independent creative, branding, digital, and media agency founded in 2008 and based in Noida, Delhi NCR. We turn business problems into ideas that travel, delivering brand strategy, advertising campaigns, media planning, digital marketing, film production, 3D, and AI solutions. Our work spans brands in real estate, healthcare, education, e-commerce, manufacturing, and startups.
+
         </p>
 
         <div className="about-actions">

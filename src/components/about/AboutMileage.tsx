@@ -9,8 +9,8 @@ registerGsap();
 
 const STATS = [
   { count: 18, suffix: "+", label: "Years in brand building" },
-  { text: "[XX]+", label: "Professionals on the team" },
-  { text: "[XXX]+", label: "Brands served" },
+  { count: 100, suffix: "+", label: "Professionals on the team" },
+  { count: 500, suffix: "+", label: "Brands served" },
   { count: 6, pad: 2, label: "Industries we specialise in" },
 ] as const;
 
@@ -180,10 +180,8 @@ export function AboutMileage() {
           <p className="about-mile-kicker">Mile marker 18</p>
           <h2 className="about-mile-title">18+ Years of Experience</h2>
           <p className="about-mile-lede">
-            Since 2008 we have launched projects, built brands and planned media through
-            every shift in Indian marketing, from print and radio to search, social,
-            performance and now AI. That mileage shows up in the work as faster starts,
-            fewer detours and plans grounded in what has actually moved buyers.
+            Since 2008, Ritz Media World has launched projects, built brands, and planned media through every major shift in Indian marketing, from print and radio to search, social media, performance marketing, and now AI. This experience shows up in our work as faster launches, fewer detours, and strategies grounded in what has actually moved customers.
+
           </p>
 
           <div className="about-mile-stats">

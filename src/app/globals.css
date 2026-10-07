@@ -50,3 +50,5 @@
 @import "../styles/services/render.css";
 @import "../styles/services/industries.css";
 @import "../styles/services/responsive.css";
+@import "../styles/layout/services-megamenu.css";
+@import "../styles/services/subservice-detail.css";
