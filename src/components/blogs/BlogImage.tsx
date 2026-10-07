@@ -2,12 +2,20 @@
 
 import { useState } from "react";
 
-export function BlogImage({ src, alt }: { src: string | null; alt: string }) {
+export function BlogImage({
+  src,
+  alt,
+  className = "news-card-media",
+}: {
+  src: string | null;
+  alt: string;
+  className?: string;
+}) {
   const [failedSrc, setFailedSrc] = useState<string | null>(null);
   const hasImage = src !== null && src !== failedSrc;
 
   return (
-    <div className="news-card-media">
+    <div className={className}>
       {hasImage ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img

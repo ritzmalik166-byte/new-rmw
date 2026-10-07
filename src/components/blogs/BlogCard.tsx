@@ -40,7 +40,7 @@ export function BlogCard({
 }) {
   return (
     <a
-      href={`https://www.ritzmediaworld.com/blog/${encodeURIComponent(blog.slug)}`}
+      href={`/${encodeURIComponent(blog.slug)}`}
       target="_blank"
       rel="noopener noreferrer"
       className="news-card"

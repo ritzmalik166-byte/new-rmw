@@ -195,7 +195,7 @@ export function BlogArchive({
       {featuredBlog ? (
         <a
           className="blog-featured"
-          href={`https://www.ritzmediaworld.com/blog/${encodeURIComponent(featuredBlog.slug)}`}
+          href={`/${encodeURIComponent(featuredBlog.slug)}`}
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -7,6 +7,7 @@ export type Blog = {
   title: string;
   image: string | null;
   excerpt: string;
+  content: string;
   createdAt: string | null;
   keywords: string;
 };
@@ -73,11 +74,14 @@ function toBlog(record: Record<string, unknown>): Blog | null {
   const status = getString(record, "status").toLowerCase();
   if (status && status !== "active") return null;
 
+  const content = getString(record, "blogDescription", "content", "body");
+
   return {
     slug,
     title,
     image: image ? normalizeImage(image) : null,
     excerpt,
+    content,
     createdAt: createdAt && !Number.isNaN(Date.parse(createdAt)) ? createdAt : null,
     keywords,
   };
@@ -145,4 +149,9 @@ export async function getBlogs(): Promise<Blog[]> {
       const secondDate = second.createdAt ? Date.parse(second.createdAt) : 0;
       return secondDate - firstDate;
     });
+}
+
+export async function getBlogBySlug(slug: string): Promise<Blog | undefined> {
+  const blogs = await getBlogs();
+  return blogs.find((blog) => blog.slug === slug);
 }
