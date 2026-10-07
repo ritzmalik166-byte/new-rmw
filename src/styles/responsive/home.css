@@ -15,7 +15,7 @@
   /* Stay a single column through tablet. The two-column truck layout
      starts at 1100px so copy and the truck don't collide. */
   .hero-grid {
-    grid-template-columns: minmax(0, 1fr);
+    flex-direction: column;
     gap: 0.5rem 0;
     padding-bottom: 0;
   }
