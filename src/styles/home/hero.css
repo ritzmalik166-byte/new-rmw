@@ -192,8 +192,8 @@
   height: 100%;
   object-fit: contain;
   object-position: center bottom;
-  transform: scale(1.55);
-  transform-origin: center bottom;
+  transform: scale(1.4) translateX(-4%);
+  transform-origin: 80% bottom;
   background: transparent;
 }
 
