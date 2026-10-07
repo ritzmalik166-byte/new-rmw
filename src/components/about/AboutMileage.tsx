@@ -45,7 +45,6 @@ export function AboutMileage() {
         const counts = root.querySelectorAll<HTMLElement>("[data-count]");
         const labels = root.querySelectorAll<HTMLElement>(".about-mile-label");
         const rules = root.querySelectorAll<HTMLElement>(".about-mile-stat");
-        const literals = root.querySelectorAll<HTMLElement>(".about-mile-literal");
 
         if (!kicker || !title || !lede || !card || !brand) return;
 
@@ -59,15 +58,10 @@ export function AboutMileage() {
         const brandSplit = new SplitText(brand, { type: "chars", charsClass: "about-mile-char" });
         splits.push(kickerSplit, titleSplit, ledeSplit, brandSplit);
 
-        literals.forEach((el) => {
-          splits.push(new SplitText(el, { type: "chars", charsClass: "about-mile-char" }));
-        });
-        const literalChars = splits.slice(4).flatMap((split) => split.chars);
-
         const finals = () => {
           counts.forEach((el) => paintCount(el, Number(el.dataset.count)));
           gsap.set(
-            [card, kicker, title, lede, labels, ...kickerSplit.chars, ...titleSplit.chars, ...ledeSplit.words, ...brandSplit.chars, ...literalChars],
+            [card, kicker, title, lede, labels, ...kickerSplit.chars, ...titleSplit.chars, ...ledeSplit.words, ...brandSplit.chars],
             { clearProps: "all" },
           );
         };
@@ -86,7 +80,6 @@ export function AboutMileage() {
         gsap.set(lede, { autoAlpha: 1 });
         gsap.set(ledeSplit.words, { y: 22, opacity: 0 });
         gsap.set(labels, { y: 14, autoAlpha: 0 });
-        gsap.set(literalChars, { yPercent: 110, opacity: 0 });
         gsap.set(rules, { "--rule": 0 });
         counts.forEach((el) => paintCount(el, 0));
 
@@ -122,11 +115,6 @@ export function AboutMileage() {
           0.45,
         );
         tl.to(rules, { "--rule": 1, duration: 0.5, stagger: 0.08, ease: "power2.out" }, 0.65);
-        tl.to(
-          literalChars,
-          { yPercent: 0, opacity: 1, duration: 0.5, stagger: 0.03, ease: "power2.out" },
-          0.7,
-        );
         tl.to(labels, { y: 0, autoAlpha: 1, duration: 0.5, stagger: 0.05, ease: "power2.out" }, 0.75);
 
         counts.forEach((el, index) => {
@@ -187,18 +175,14 @@ export function AboutMileage() {
           <div className="about-mile-stats">
             {STATS.map((stat) => (
               <div key={stat.label} className="about-mile-stat">
-                {"text" in stat ? (
-                  <p className="about-mile-value about-mile-literal">{stat.text}</p>
-                ) : (
-                  <p
-                    className="about-mile-value"
-                    data-count={stat.count}
-                    data-suffix={"suffix" in stat ? stat.suffix : ""}
-                    data-pad={"pad" in stat ? stat.pad : undefined}
-                  >
-                    {"pad" in stat ? "00" : `0${"suffix" in stat ? stat.suffix : ""}`}
-                  </p>
-                )}
+                <p
+                  className="about-mile-value"
+                  data-count={stat.count}
+                  data-suffix={"suffix" in stat ? stat.suffix : ""}
+                  data-pad={"pad" in stat ? stat.pad : undefined}
+                >
+                  {"pad" in stat ? "00" : `0${"suffix" in stat ? stat.suffix : ""}`}
+                </p>
                 <p className="about-mile-label">{stat.label}</p>
               </div>
             ))}
