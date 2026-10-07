@@ -1,111 +1,75 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
-import { useEffect, useState, useRef } from "react";
-import { useMotion } from "@/components/providers/MotionProvider";
-import { gsap, registerGsap } from "@/lib/gsap";
+import { useState } from "react";
+import CircularCarousel, { type CircularCarouselItem } from "@/components/ui/CircularCarousel";
 import { site } from "@/lib/site";
 
-registerGsap();
-gsap.registerPlugin(useGSAP);
-
 export function Awards() {
-  const rootRef = useRef<HTMLElement>(null);
-  const { ready, reduced } = useMotion();
-  const items = site.awards.items;
-  const [index, setIndex] = useState(0);
-  const item = items[index];
-
-  useEffect(() => {
-    if (reduced || items.length < 2) return;
-
-    const timer = window.setTimeout(() => {
-      setIndex((current) => (current + 1) % items.length);
-    }, 4500);
-
-    return () => window.clearTimeout(timer);
-  }, [index, items.length, reduced]);
-
-  useGSAP(
-    () => {
-      const root = rootRef.current;
-      if (!root || !ready || reduced) return;
-
-      gsap.fromTo(
-        root.querySelectorAll("[data-awards-item]"),
-        { autoAlpha: 0, y: 18 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.1,
-          ease: "power2.out",
-          scrollTrigger: { trigger: root, start: "top 78%" },
-        },
-      );
-    },
-    { scope: rootRef, dependencies: [ready, reduced] },
-  );
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeAward = site.awards.items[activeIndex] ?? site.awards.items[0];
+  const carouselItems: CircularCarouselItem[] = site.awards.items.map((item) => ({
+    src: item.src,
+    alt: item.alt ?? `${item.heading} award`,
+    title: item.heading,
+    subtitle: item.year
+      ? `${item.year} · ${item.subtitle ?? "Recognition"}`
+      : item.subtitle,
+    description: item.copy,
+    year: item.year,
+  }));
 
   return (
-    <section ref={rootRef} className="awards" aria-label="Awards">
+    <section className="awards" aria-label="Awards">
       <div className="awards-inner">
-        <h2 data-awards-item className="awards-title">
-          {site.awards.title}
-        </h2>
-
-        <div className="awards-row">
-          <div data-awards-item className="awards-visual">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/hero-section/Truck_Art.png"
-              alt=""
-              width={900}
-              height={420}
-              className="awards-truck"
-            />
+        <div className="awards-header">
+          <div className="awards-header-copy">
+            <p className="awards-kicker">Recognition</p>
+            <h2 className="awards-title">{site.awards.title}</h2>
           </div>
+          <div className="awards-spot">
+            <span>18+</span>
+            <small>Years of creative impact</small>
+          </div>
+        </div>
 
-          <article data-awards-item className="awards-card">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/s9/image 16.png"
-              alt=""
-              width={673}
-              height={380}
-              className="awards-card-art"
-            />
-            <div className="awards-card-inner">
-              <div key={item.year} className="awards-slide">
-                <p className="awards-year">{item.year}</p>
-                <div className="awards-mark">
-                  <div className="awards-logo">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/logo.png" alt="Ritz Media World" width={96} height={96} />
-                  </div>
-                  <p className="awards-heading">{item.heading}</p>
-                  <p className="awards-copy">{item.copy}</p>
-                </div>
-              </div>
-              <div className="awards-steps" role="tablist" aria-label="Award milestones">
-                {items.map((entry, entryIndex) => (
-                  <button
-                    key={entry.year}
-                    type="button"
-                    role="tab"
-                    aria-label={`${entry.year} ${entry.heading}`}
-                    aria-selected={entryIndex === index}
-                    className={
-                      entryIndex === index
-                        ? "awards-step awards-step-active"
-                        : "awards-step"
-                    }
-                    onClick={() => setIndex(entryIndex)}
-                  />
-                ))}
+        <div className="awards-layout">
+          <div className="awards-information">
+            <div className="awards-copy-panel">
+              <p className="awards-pill">Recognition earned by our team</p>
+              <p className="awards-text">
+                A look at the awards and industry recognition earned by Ritz Media World and our
+                team for creative work, leadership, and real estate storytelling.
+              </p>
+              <div className="awards-meta">
+                <span>Brand impact</span>
+                <span>Creative leadership</span>
+                <span>Performance focus</span>
               </div>
             </div>
-          </article>
+            {activeAward && (
+              <article className="awards-detail" aria-live="polite" key={activeAward.heading}>
+                <p className="awards-detail-kicker">Award recognition</p>
+                <p className="awards-detail-meta">
+                  <span>{activeAward.year}</span>
+                  <span aria-hidden="true">/</span>
+                  <span>{activeAward.subtitle}</span>
+                </p>
+                <h3>{activeAward.heading}</h3>
+                <p className="awards-detail-copy">{activeAward.copy}</p>
+              </article>
+            )}
+          </div>
+
+          <div className="awards-showcase">
+            <CircularCarousel
+              items={carouselItems}
+              cardWidth={220}
+              aspectRatio={0.68}
+              speed={8}
+              className="awards-carousel"
+              onChange={setActiveIndex}
+            />
+          </div>
         </div>
       </div>
     </section>
