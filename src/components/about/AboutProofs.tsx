@@ -4,26 +4,17 @@ import { useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 
 const SLIDES = [
-  { src: "/about/proof-tablet.png", alt: "Expense dashboard proof on a tablet" },
-  { src: "/about/proof-tablet.png", alt: "Expense dashboard proof on a tablet" },
-  { src: "/about/proof-tablet.png", alt: "Expense dashboard proof on a tablet" },
-] as const;
-
-const REST = {
-  x: 0,
-  y: 0,
-  z: 0,
-  rotateX: 16,
-  rotateY: -28,
-  rotateZ: 7,
-  scale: 1,
-  autoAlpha: 1,
-};
+  { src: "/proof-meta-insights.png", mobileSrc: "/mobile-1.png", alt: "Meta Business Suite Insights" },
+  { src: "/proof-google-ads-new.png", mobileSrc: "/mobile-2.png", alt: "Google Ads Performance" },
+  { src: "/proof-search-console-new.png", mobileSrc: "/mobile-3.png", alt: "Google Search Console Performance" },
+];
 
 const TRUCK_STEP = 42;
 
 export function AboutProofs() {
-  const facesRef = useRef<Array<HTMLDivElement | null>>([]);
+  const laptopTrackRef = useRef<HTMLDivElement>(null);
+  const phoneTrackRef = useRef<HTMLDivElement>(null);
+
   const truckRef = useRef<HTMLImageElement>(null);
   const truckX = useRef(0);
   const activeRef = useRef(0);
@@ -51,14 +42,13 @@ export function AboutProofs() {
     const total = SLIDES.length;
     const from = activeRef.current;
     const to = (from + dir + total) % total;
-    const current = facesRef.current[from];
-    const next = facesRef.current[to];
-    if (!current || !next || busyRef.current) return;
+    if (busyRef.current) return;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) {
-      gsap.set(facesRef.current, { autoAlpha: 0 });
-      gsap.set(next, { ...REST, zIndex: 2 });
+      gsap.set([laptopTrackRef.current, phoneTrackRef.current], {
+        xPercent: to * -(100 / total)
+      });
       activeRef.current = to;
       setActive(to);
       return;
@@ -66,127 +56,104 @@ export function AboutProofs() {
 
     busyRef.current = true;
 
-    gsap.set([current, next], {
-      transformPerspective: 1700,
-      transformOrigin: "50% 58%",
-    });
-    gsap.set(next, {
-      zIndex: 4,
-      x: dir * 64,
-      y: dir * -128,
-      z: -210,
-      rotateX: dir > 0 ? -34 : 40,
-      rotateY: dir > 0 ? 86 : -86,
-      rotateZ: dir > 0 ? -18 : 18,
-      scale: 0.9,
-      autoAlpha: 0,
-    });
-    gsap.set(current, { zIndex: 5 });
-
-    const tl = gsap.timeline({
+    gsap.to([laptopTrackRef.current, phoneTrackRef.current], {
+      xPercent: to * -(100 / total),
+      duration: 0.8,
+      ease: "power3.inOut",
       onComplete: () => {
-        gsap.set(current, { autoAlpha: 0, zIndex: 1 });
-        gsap.set(next, { ...REST, zIndex: 3, transformPerspective: 1700 });
         activeRef.current = to;
         setActive(to);
         busyRef.current = false;
       },
     });
-
-    tl.to(
-      current,
-      {
-        keyframes: [
-          {
-            x: dir * -22,
-            y: dir * 48,
-            z: -50,
-            rotateX: dir > 0 ? 4 : 30,
-            rotateY: dir > 0 ? -108 : 52,
-            rotateZ: dir > 0 ? 24 : -10,
-            scale: 0.96,
-            autoAlpha: 1,
-            duration: 0.34,
-            ease: "power2.in",
-          },
-          {
-            x: dir * -38,
-            y: dir * 132,
-            z: -140,
-            rotateX: dir > 0 ? 38 : -6,
-            rotateY: dir > 0 ? -172 : 158,
-            rotateZ: dir > 0 ? 32 : -26,
-            scale: 0.86,
-            autoAlpha: 0,
-            duration: 0.36,
-            ease: "power2.in",
-          },
-        ],
-      },
-      0,
-    );
-
-    tl.to(
-      next,
-      {
-        ...REST,
-        zIndex: 4,
-        duration: 0.74,
-        ease: "power3.out",
-      },
-      0.2,
-    );
   };
 
   return (
-    <section className="about-proofs" aria-roledescription="carousel" aria-label="Real proofs">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="about-proofs-wave is-left" src="/about/proof-wave-left.png" alt="" />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="about-proofs-wave is-right" src="/about/proof-wave-right.png" alt="" />
-
+    <section className="about-proofs" aria-label="Our Success Proofs">
       <h2 className="about-proofs-title">REAL PROOFS</h2>
+      
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/about/wave-left.png"
+        className="about-proofs-wave is-left"
+        alt=""
+      />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/about/wave-right.png"
+        className="about-proofs-wave is-right"
+        alt=""
+      />
 
-      <button
-        type="button"
-        className="about-proofs-arrow is-prev"
-        aria-label="Previous proof"
-        onClick={() => turn(-1)}
-      >
-        <svg viewBox="0 0 24 24" aria-hidden>
-          <path d="M14.5 5.5 L8 12 l6.5 6.5" />
-        </svg>
-      </button>
+      <div className="about-proofs-mockup-stage">
+        <div className="devices-group">
+          
+          <button
+            type="button"
+            className="about-proofs-arrow is-prev"
+            aria-label="Previous proof"
+            onClick={() => turn(-1)}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden>
+              <path d="M14.5 5.5 L8 12 l6.5 6.5" />
+            </svg>
+          </button>
 
-      <div className="about-proofs-stage">
-        <div className="about-proofs-shadow" aria-hidden />
-        <div className="about-proofs-faces">
-          {SLIDES.map((slide, index) => (
-            <div
-              key={index}
-              ref={(node) => {
-                facesRef.current[index] = node;
-              }}
-              className={index === active ? "about-proofs-face is-active" : "about-proofs-face"}
-              aria-hidden={index !== active}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={slide.src} alt={index === active ? slide.alt : ""} />
+          <div className="macbook-mockup">
+            <div className="macbook-screen">
+              <div 
+                className="mockup-track" 
+                ref={laptopTrackRef}
+                style={{ width: `${SLIDES.length * 100}%` }}
+              >
+                {SLIDES.map((slide, index) => (
+                  <div className="mockup-slide" key={index}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={slide.src} alt={slide.alt} />
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/device-laptop-png.png" className="device-overlay" alt="" />
+          </div>
+
+          <div className="phone-mockup">
+            {/* Hidden spacer to define intrinsic height since the track is absolute */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/mobile-1.png" style={{ visibility: 'hidden', display: 'block', width: '100%', height: 'auto' }} alt="" />
+            <div 
+              className="mockup-track" 
+              ref={phoneTrackRef}
+              style={{ width: `${SLIDES.length * 100}%` }}
+            >
+              {SLIDES.map((slide, index) => {
+                const nextIndex = (index + 1) % SLIDES.length;
+                const phoneSlide = SLIDES[nextIndex];
+                const imgSrc = phoneSlide.mobileSrc || phoneSlide.src;
+                return (
+                  <div className="mockup-slide" key={index}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={imgSrc} alt={phoneSlide.alt} style={{ objectFit: 'contain' }} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          
+          <button
+            type="button"
+            className="about-proofs-arrow is-next"
+            aria-label="Next proof"
+            onClick={() => turn(1)}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden>
+              <path d="M9.5 5.5 L16 12 l-6.5 6.5" />
+            </svg>
+          </button>
+
         </div>
       </div>
-
-      <button
-        type="button"
-        className="about-proofs-arrow is-next"
-        aria-label="Next proof"
-        onClick={() => turn(1)}
-      >
-        <svg viewBox="0 0 24 24" aria-hidden>
-          <path d="M9.5 5.5 L16 12 l-6.5 6.5" />
-        </svg>
-      </button>
 
       <div className="about-proofs-road" aria-hidden>
         <span className="about-proofs-lane" />

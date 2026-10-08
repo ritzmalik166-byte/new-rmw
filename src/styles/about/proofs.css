@@ -4,9 +4,9 @@
   flex-direction: column;
   box-sizing: border-box;
   width: 100%;
-  height: 100vh;
-  height: 100dvh;
+  min-height: 100vh;
   padding-top: clamp(72px, 9vh, 108px);
+  padding-bottom: 90px;
   overflow: hidden;
   background: linear-gradient(322.29deg, #ffffff 0.31%, #f8ead5 88.31%);
 }
@@ -44,93 +44,124 @@
   right: -28px;
 }
 
-.about-proofs-stage {
+.about-proofs-mockup-stage {
   position: relative;
   z-index: 2;
   flex: 1 1 auto;
-  width: min(720px, 62vw);
-  min-height: 0;
+  width: min(1000px, 90vw);
   margin: 18px auto 108px;
   align-self: center;
 }
 
-.about-proofs-shadow {
-  position: absolute;
-  right: 8%;
-  bottom: 4%;
-  left: 14%;
-  z-index: 0;
-  height: 46px;
-  background: radial-gradient(ellipse at center, rgb(48 28 10 / 32%), transparent 70%);
-  filter: blur(4px);
-  transform: rotate(-8deg);
+.devices-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
-.about-proofs-faces {
-  position: absolute;
-  inset: 0;
+.macbook-mockup {
+  position: relative;
+  width: 65%;
 }
 
-.about-proofs-face {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  opacity: 0;
-  visibility: hidden;
-  transform: perspective(1700px) rotateX(16deg) rotateY(-28deg) rotateZ(7deg);
-  transform-origin: 50% 58%;
+.device-overlay {
+  display: block;
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
   pointer-events: none;
+  position: relative;
+  z-index: 2;
 }
 
-.about-proofs-face.is-active {
+.device-overlay.is-phone {
+  /* No filter needed since it's a transparent PNG */
+}
+
+.macbook-screen {
+  position: absolute;
+  top: 6.5%;
+  left: 11%;
+  width: 78%;
+  height: 71%;
+  background: #fff;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.phone-mockup {
+  position: relative;
+  width: 20%;
+  margin-left: -4%;
+  margin-bottom: -1%;
   z-index: 3;
-  opacity: 1;
-  visibility: visible;
+  overflow: hidden;
 }
 
-.about-proofs-face img {
+.phone-mockup .mockup-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mockup-track {
+  display: flex;
+  height: 100%;
+}
+
+.mockup-slide {
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+}
+
+.mockup-slide img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(18px 28px 24px rgb(36 20 8 / 28%));
+  object-position: center;
+}
+
+.phone-screen .mockup-slide img {
+  object-fit: cover;
+  object-position: left top;
 }
 
 .about-proofs-arrow {
-  position: absolute;
-  top: 50%;
-  z-index: 6;
+  position: relative;
+  z-index: 10;
   display: grid;
   width: 54px;
   height: 54px;
   place-items: center;
+  padding: 0;
   border: 0;
   border-radius: 50%;
-  background: #141414;
-  color: #ffffff;
+  background: #1c140c;
+  color: #fff;
   cursor: pointer;
-  transform: translateY(-10%);
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin: 0 24px;
+  flex-shrink: 0;
 }
 
 .about-proofs-arrow svg {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 2.2;
+  stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.about-proofs-arrow.is-prev {
-  left: max(22px, calc(50% - 660px));
-}
-
-.about-proofs-arrow.is-next {
-  right: max(22px, calc(50% - 660px));
-}
-
 .about-proofs-arrow:hover {
-  background: #2a2a2a;
+  background: #2a2016;
+  transform: scale(1.05);
 }
 
 .about-proofs-road {
@@ -191,109 +222,56 @@
   top: 46%;
   left: 50%;
   width: 48%;
-  transform: translateX(-50%);
-  color: #000000;
-  font-family: var(--font-inter), Inter, sans-serif;
-  font-weight: 800;
-  font-size: 9px;
+  color: #e59b20;
+  font-weight: 700;
+  font-size: 11px;
   line-height: 1.1;
-  letter-spacing: 0.01em;
   text-align: center;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .about-proofs {
-    padding-top: 64px;
+    padding-top: 56px;
   }
-
   .about-proofs-title {
-    font-size: 36px;
+    margin-bottom: 32px;
   }
-
-  .about-proofs-stage {
-    width: min(560px, 86vw);
-    margin-bottom: 96px;
-  }
-
   .about-proofs-wave {
-    top: 150px;
-    width: 42vw;
-    opacity: 0.7;
+    width: 220px;
+    top: 64px;
   }
-
+  .about-proofs-wave.is-left {
+    left: -24px;
+  }
+  .about-proofs-wave.is-right {
+    right: -24px;
+  }
   .about-proofs-arrow {
     width: 44px;
     height: 44px;
+    margin: 0 8px;
   }
-
+  .macbook-mockup {
+    width: 75%;
+  }
+  .tablet-mockup {
+    width: 32%;
+    margin-left: -8%;
+  }
   .about-proofs-truck {
     width: 112px;
+    bottom: 14px;
+    left: 16px;
   }
-
   .about-proofs-mark {
     right: 16px;
-    bottom: 55px;
+    bottom: 42px;
     width: 72px;
     height: 96px;
   }
-}
-
-@media (max-width: 640px) {
-  .about-proofs {
-    height: auto;
-    min-height: 0;
-    padding-top: 48px;
-  }
-
-  .about-proofs-title {
-    font-size: clamp(28px, 8vw, 36px);
-    padding-inline: 16px;
-  }
-
-  .about-proofs-wave {
-    display: none;
-  }
-
-  .about-proofs-stage {
-    flex: none;
-    width: calc(100% - 112px);
-    height: min(360px, 70vw);
-    margin: 8px auto 12px;
-  }
-
-  .about-proofs-arrow {
-    z-index: 8;
-    width: 40px;
-    height: 40px;
-    top: 46%;
-    bottom: auto;
-    transform: translateY(-50%);
-  }
-
-  .about-proofs-arrow.is-prev {
-    left: 8px;
-  }
-
-  .about-proofs-arrow.is-next {
-    right: 8px;
-  }
-
-  .about-proofs-road {
-    position: relative;
-    flex: none;
-    height: 56px;
-  }
-
-  .about-proofs-truck {
-    bottom: 10px;
-    left: 16px;
-    width: 96px;
-  }
-
-  .about-proofs-mark {
-    right: 12px;
-    bottom: 44px;
-    width: 64px;
-    height: 84px;
+  .about-proofs-mark-label {
+    font-size: 9px;
   }
 }

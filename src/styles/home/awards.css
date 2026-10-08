@@ -1,436 +1,28 @@
-/* ---------- Awards ---------- */
+/* ---------- Awards Section ---------- */
 .awards {
   position: relative;
   z-index: 1;
   overflow: hidden;
-  background: radial-gradient(ellipse at 50% 0%, #fbf5eb 0%, #faf1e5 40%, #f6e8d6 100%);
-  color: #14151c;
-  padding: clamp(2.5rem, 5vw, 4rem) 0;
+  background-image: url('/awards-bg-mosaic.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #fff;
 }
 
-.awards-bg-glow {
+.awards-bg-overlay {
   position: absolute;
-  top: 15%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80vw;
-  height: 60vh;
-  background: radial-gradient(ellipse, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%);
-  pointer-events: none;
-  z-index: -1;
-}
-
-.awards-bg-swoosh {
-  position: absolute;
-  top: 55%;
-  left: 0;
-  width: 100%;
-  height: 300px;
-  transform: translateY(-50%);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
   z-index: 0;
-  pointer-events: none;
-  opacity: 0.8;
-}
-
-.awards-inner {
-  position: relative;
-  width: 100%;
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 clamp(1.5rem, 4vw, 3rem);
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-}
-
-.awards-header-center {
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.awards-kicker-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-  margin: 0 0 1rem;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #a47e4b;
-}
-
-.awards-kicker-line {
-  width: 40px;
-  height: 1px;
-  background-color: #d1b48b;
-}
-
-.awards-title-center {
-  margin: 0 0 0.8rem;
-  font-family: var(--font-quattrocento), Georgia, serif;
-  font-weight: 700;
-  font-size: clamp(36px, 4.5vw, 64px);
-  line-height: 1.1;
-  color: #fffaf0;
-  -webkit-text-stroke: 1.5px #4a331c;
-  text-shadow: 
-    0 8px 24px rgba(0,0,0,0.5),
-    -1px -1px 0 #4a331c,
-    1px -1px 0 #4a331c,
-    -1px 1px 0 #4a331c,
-    1px 1px 0 #4a331c;
-}
-
-.awards-subtitle-center {
-  margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: #554f48;
 }
 
 .awards-showcase-full {
   position: relative;
-  height: clamp(380px, 48vh, 500px);
+  height: 100vh;
+  min-height: 800px;
   width: 100%;
-  margin: 2rem auto 0;
-}
-
-.awards-bottom-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
-  z-index: 2;
-  margin-top: -1.5rem;
-}
-
-.awards-card-light {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  border: 2px solid #deb86d;
-  border-radius: 12px;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.03);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.awards-pill {
-  display: inline-block;
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #a47e4b;
-  margin: 0 0 1rem;
-}
-
-.awards-card-light-title {
-  margin: 0 0 0.8rem;
-  font-family: var(--font-quattrocento), Georgia, serif;
-  font-size: clamp(24px, 2.5vw, 36px);
-  font-weight: 700;
-  color: #1a1715;
-  line-height: 1.15;
-}
-
-.awards-card-light-text {
-  margin: 0 0 2rem;
-  font-size: 0.95rem;
-  line-height: 1.65;
-  color: #554f48;
-}
-
-.awards-features {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid rgba(0,0,0,0.06);
-  padding-top: 1.5rem;
-  margin-top: auto;
-}
-
-.awards-feature {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-}
-
-.awards-feature-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #faefe2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #a47e4b;
-  flex-shrink: 0;
-}
-
-.awards-feature span {
-  font-size: 0.85rem;
-  font-weight: 600;
-  line-height: 1.2;
-  color: #1a1715;
-}
-
-.awards-feature-divider {
-  width: 1px;
-  height: 35px;
-  background: rgba(0,0,0,0.06);
-}
-
-.awards-card-gold {
-  position: relative;
-  background: linear-gradient(135deg, #1c1813 0%, #0a0806 100%);
-  border: 2px solid #deb86d;
-  border-radius: 12px;
-  padding: clamp(1.5rem, 3vw, 2rem);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  overflow: hidden;
-  color: #fffdf9;
-}
-
-.awards-card-gold-content {
-  position: relative;
-  z-index: 2;
-  flex: 1;
-  max-width: 65%;
-}
-
-.awards-card-gold::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.15) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.awards-laurel {
-  position: absolute;
-  right: -30px;
-  bottom: -30px;
-  width: 250px;
-  height: 250px;
-  pointer-events: none;
-  z-index: 0;
-  color: #fcebc4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.awards-laurel > svg:first-child {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  inset: 0;
-}
-
-.awards-trophy-image-container {
-  position: relative;
   z-index: 1;
-  width: 130px;
-  height: 170px;
-  border-radius: 8px;
-  border: 2px solid #deb86d;
-  overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-  background: #1c1813;
-}
-
-.awards-trophy-image {
-  object-fit: contain;
-  object-position: center;
-}
-
-.awards-card-gold-kicker {
-  position: relative;
-  z-index: 1;
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #e6c898;
-  margin: 0 0 1rem;
-}
-
-.awards-card-gold-meta {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #f4dfbe;
-  margin: 0 0 0.8rem;
-}
-
-.awards-card-gold h3 {
-  position: relative;
-  z-index: 1;
-  margin: 0 0 1rem;
-  font-family: var(--font-quattrocento), Georgia, serif;
-  font-size: clamp(24px, 2.5vw, 36px);
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1.15;
-}
-
-.awards-card-gold-copy {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.65;
-  color: #f4dfbe;
-  max-width: 85%;
-}
-
-.circular-carousel {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.circular-carousel-shell {
-  position: absolute;
-  inset: 0;
-  perspective: 1500px;
-  transform-style: preserve-3d;
-}
-
-.circular-carousel-sway {
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
-.circular-carousel-track {
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-  transition: transform 1.25s cubic-bezier(0.2, 0.72, 0.18, 1);
-  will-change: transform;
-}
-
-.circular-carousel-card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: block;
-  width: var(--circular-card-width);
-  height: calc(var(--circular-card-width) / var(--circular-aspect-ratio));
-  padding: 0;
-  border: 0;
-  border-radius: 20px;
-  background: transparent;
-  cursor: pointer;
-  transform-style: preserve-3d;
-  backface-visibility: visible;
-  -webkit-backface-visibility: visible;
-  transition: filter 0.25s ease;
-}
-
-.circular-carousel-card:hover,
-.circular-carousel-card:focus-visible {
-  filter: brightness(1.06);
-}
-
-.circular-carousel-card:focus-visible {
-  outline: 3px solid #b05d1d;
-  outline-offset: 5px;
-}
-
-.circular-carousel-card-inner {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border: 3px solid #deb86d;
-  border-radius: inherit;
-  background: #f4eee4;
-  box-shadow: 0 24px 50px rgba(0,0,0,0.25);
-}
-
-.circular-carousel-card-face {
-  position: absolute;
-  inset: 0;
-  display: block;
-  border-radius: inherit;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.circular-carousel-card-front {
-  transform: rotateY(0deg);
-}
-
-.circular-carousel-card-back {
-  transform: rotateY(180deg);
-}
-
-.circular-carousel-card-back .circular-carousel-card-inner::after {
-  position: absolute;
-  inset: 0;
-  content: "";
-  background: rgba(0, 0, 0, 0.38);
-}
-
-.circular-carousel-card-inner img {
-  object-fit: cover;
-  object-position: center;
-}
-
-
-
-.circular-carousel-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 2px solid #deb86d;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(4px);
-  cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  color: #1a1715;
-}
-
-.circular-carousel-arrow:hover {
-  background: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transform: translateY(-50%) scale(1.05);
-}
-
-.circular-carousel-arrow-left {
-  left: 20px;
-}
-
-.circular-carousel-arrow-right {
-  right: 20px;
 }
 
 /* ---------- Award Modal ---------- */
@@ -444,55 +36,54 @@
   background: rgba(10, 8, 6, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  animation: modal-overlay-in 0.35s ease-out forwards;
 }
 
 .carousel-modal {
   position: relative;
   display: flex;
-  align-items: stretch;
-  width: min(920px, 92vw);
-  height: auto;
-  max-height: 88vh;
+  flex-direction: column;
+  width: 90vw;
+  max-width: 520px;
+  max-height: 90vh;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 24px;
-  overflow: hidden;
-  background: linear-gradient(135deg, #fffdf9 0%, #f5eee4 100%);
-  box-shadow:
-    0 40px 80px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(255, 255, 255, 0.15) inset;
-  animation: modal-card-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  background: #14151c;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+  overflow-y: auto;
 }
 
 .carousel-modal-close {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: rgba(20, 21, 28, 0.06);
-  border: 1px solid rgba(20, 21, 28, 0.08);
-  color: #5a504a;
-  cursor: pointer;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
-  transition: all 0.2s ease;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 .carousel-modal-close:hover {
-  background: rgba(20, 21, 28, 0.12);
-  color: #14151c;
-  transform: rotate(90deg);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .carousel-modal-image {
   position: relative;
-  flex: 0 0 45%;
-  min-height: 480px;
-  background: #ebe4d8;
-  animation: modal-image-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  margin-bottom: 1.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
 }
 
 .carousel-modal-image img {
@@ -501,176 +92,43 @@
 }
 
 .carousel-modal-details {
-  flex: 1 1 55%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 2.5rem 2.25rem;
-  animation: modal-details-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+  align-items: flex-start;
 }
 
 .carousel-modal-year {
-  display: inline-block;
-  width: fit-content;
-  padding: 0.3rem 0.7rem;
-  border-radius: 999px;
-  background: rgba(176, 93, 29, 0.1);
-  color: #8a4515;
-  font-size: 0.72rem;
+  margin: 0 0 0.5rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  background: rgba(176, 93, 29, 0.15);
+  color: #e38d4f;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.1em;
 }
 
 .carousel-modal-subtitle {
-  display: block;
-  margin-top: 0.15rem;
-  color: rgba(90, 80, 74, 0.7);
-  font-size: 0.72rem;
+  margin: 0 0 0.4rem;
+  color: #8c8f99;
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
   text-transform: uppercase;
-}
-
-.carousel-modal-title {
-  margin: 0.25rem 0 0;
-  font-family: var(--font-quattrocento), Georgia, serif;
-  font-size: clamp(1.4rem, 2.2vw, 2rem);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  color: #1a1814;
-}
-
-.carousel-modal-desc {
-  margin: 0.35rem 0 0;
-  padding-top: 0.65rem;
-  border-top: 1px solid rgba(135, 86, 42, 0.12);
-  color: rgba(35, 30, 25, 0.7);
-  font-size: 0.88rem;
-  line-height: 1.65;
-}
-
-.carousel-modal-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.4rem;
-  padding: 0.55rem 0.85rem;
-  width: fit-content;
-  border-radius: 12px;
-  background: #14151c;
-  color: #f3d27a;
-  font-size: 0.72rem;
-  font-weight: 700;
   letter-spacing: 0.08em;
 }
 
-.carousel-modal-badge svg {
-  flex-shrink: 0;
-  stroke: #f3d27a;
+.carousel-modal-title {
+  margin: 0 0 0.75rem;
+  color: #fff;
+  font-family: var(--font-quattrocento), Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.1;
 }
 
-@keyframes modal-overlay-in {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes modal-card-in {
-  from {
-    opacity: 0;
-    transform: scale(0.88) translateY(24px);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-@keyframes modal-image-in {
-  from {
-    opacity: 0;
-    transform: translateX(-20px) scale(0.96);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
-}
-
-@keyframes modal-details-in {
-  from {
-    opacity: 0;
-    transform: translateX(16px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@media (max-width: 640px) {
-  .carousel-modal {
-    flex-direction: column;
-    max-height: 85vh;
-  }
-
-  .carousel-modal-image {
-    flex: 0 0 auto;
-    min-height: 220px;
-    max-height: 280px;
-  }
-
-  .carousel-modal-details {
-    padding: 1.5rem 1.25rem;
-  }
-}
-
-@media (max-width: 980px) {
-  .awards-bottom-cards {
-    grid-template-columns: 1fr;
-  }
-  
-  .awards-showcase-full {
-    height: 500px;
-  }
-
-  .awards-features {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
-  }
-  
-  .awards-feature-divider {
-    width: 100%;
-    height: 1px;
-  }
-}
-
-@media (max-width: 640px) {
-  .awards-inner {
-    padding: 0 1rem;
-  }
-  
-  .awards-showcase-full {
-    height: 420px;
-  }
-  
-  .awards-title-center {
-    font-size: clamp(32px, 8vw, 40px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .circular-carousel-track {
-    transition-duration: 0.01ms;
-  }
+.carousel-modal-desc {
+  margin: 0 0 1.25rem;
+  color: #b0b4c4;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
