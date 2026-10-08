@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { StartProject } from "@/components/home/StartProject";
+import { SeoRouteSection } from "@/components/services/SeoRouteSection";
+import { SeoLowerSections } from "@/components/services/SeoLowerSections";
 import {
   getAllServices,
   getRelatedServices,
@@ -60,84 +62,187 @@ export default async function SubServicePage({
 
   return (
     <article className="subsvc-page">
-      {/* 1. Breadcrumb navigation */}
-      <nav className="subsvc-breadcrumb-bar" aria-label="Breadcrumbs">
-        <ol className="subsvc-breadcrumbs">
-          <li>
-            <Link href="/" className="subsvc-breadcrumb-link">
-              Home
-            </Link>
-          </li>
-          <li className="subsvc-breadcrumb-sep" aria-hidden>
-            /
-          </li>
-          <li>
-            <Link href="/services" className="subsvc-breadcrumb-link">
-              Services
-            </Link>
-          </li>
-          <li className="subsvc-breadcrumb-sep" aria-hidden>
-            /
-          </li>
-          <li className="subsvc-breadcrumb-current" aria-current="page">
-            {service.name}
-          </li>
-        </ol>
-      </nav>
-
-      {/* 2. Hero Section */}
+      {/* 1. Hero Section */}
       <section className="subsvc-hero">
-        <div className="subsvc-hero-grid">
+        <div className="subsvc-hero-tape top" aria-hidden="true"></div>
+        <div className="subsvc-hero-dots" aria-hidden="true"></div>
+
+        <div className="subsvc-hero-content">
+          {/* Left Column: Breadcrumbs & Value Proposition */}
           <div className="subsvc-hero-info">
-            <div className="subsvc-hero-header">
-              <span className="subsvc-engine-pill">{service.engine}</span>
-              <span className="subsvc-kicker-tag">{service.kicker}</span>
-            </div>
+            <nav className="subsvc-breadcrumb-bar" aria-label="Breadcrumbs">
+              <ol className="subsvc-breadcrumbs">
+                <li>
+                  <Link href="/" className="subsvc-breadcrumb-link">
+                    Home
+                  </Link>
+                </li>
+                <li className="subsvc-breadcrumb-sep" aria-hidden="true">
+                  &gt;
+                </li>
+                <li>
+                  <Link href="/services" className="subsvc-breadcrumb-link">
+                    Services
+                  </Link>
+                </li>
+                <li className="subsvc-breadcrumb-sep" aria-hidden="true">
+                  &gt;
+                </li>
+                <li>
+                  <Link href="/services" className="subsvc-breadcrumb-link">
+                    {service.engineCategory || "Digital & Media"}
+                  </Link>
+                </li>
+                <li className="subsvc-breadcrumb-sep" aria-hidden="true">
+                  &gt;
+                </li>
+                <li className="subsvc-breadcrumb-current" aria-current="page">
+                  {service.name}
+                </li>
+              </ol>
+            </nav>
 
-            <h1 className="subsvc-hero-title">{service.name}</h1>
-            <h2 className="subsvc-hero-heading">{service.heading}</h2>
-            <p className="subsvc-hero-copy">{service.fullOverview}</p>
-
-            <div className="subsvc-pills">
-              {service.tags.map((tag) => (
-                <span key={tag} className="subsvc-pill-item">
-                  {tag}
-                </span>
-              ))}
-            </div>
+            <h1 className="subsvc-hero-title">
+              {service.uppercaseName || `${service.name} SERVICES`}
+            </h1>
+            <p className="subsvc-hero-copy">
+              {service.fullOverview || service.shortDescription}
+            </p>
 
             <div className="subsvc-hero-ctas">
-              <Link href="#start-a-project" className="subsvc-btn-primary">
-                <span>Start A Project</span>
-                <span aria-hidden>→</span>
+              <Link href="#the-problem" className="subsvc-btn-primary">
+                <span>SEE THE WORK</span>
+                <span aria-hidden="true">→</span>
               </Link>
               <Link href="#capabilities" className="subsvc-btn-secondary">
-                <span>Explore Deliverables</span>
-                <span aria-hidden>↓</span>
+                <span>SEE {service.name} WORK</span>
               </Link>
             </div>
           </div>
 
-          <div className="subsvc-hero-visual">
-            <div className="subsvc-visual-card">
-              <Image
-                src={service.image}
-                alt={service.name}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 45vw"
-                className="subsvc-visual-img"
-              />
-              <div className="subsvc-visual-badge">
-                <p className="subsvc-badge-tagline">{service.tagline}</p>
+          {/* Right Column: File Card & Engine Header */}
+          <div className="subsvc-hero-card-wrapper">
+            <div className="subsvc-card-tab">
+              <span className="tab-yellow">
+                {service.engine || "ENGINE 02 - DIGITAL & MEDIA"}
+              </span>
+              <span className="tab-red">
+                {service.badgeDate || `SEP-05 · ${service.name} · 2026`}
+              </span>
+            </div>
+
+            <div className="subsvc-file-card">
+              <div className="card-tape top" aria-hidden="true"></div>
+              <div className="card-inner">
+                <div className="card-definition">
+                  <svg
+                    className="def-icon"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                  </svg>
+                  <span className="def-label">
+                    DEFINITION · WHAT IS {service.name}?
+                  </span>
+                </div>
+                <p className="card-desc">
+                  {service.definitionText || service.shortDescription}
+                </p>
+                <hr className="card-divider" />
+                <div className="card-tags">
+                  {(service.cardTags || ["GOOGLE", "AI OVERVIEWS", "CHATGPT", "GEMINI"]).join(" · ")}
+                </div>
               </div>
+              <div className="card-footer">
+                <span className="card-footer-latin">
+                  {service.truckArt?.before || "SEARCH"}
+                </span>
+                <span className="hindi-text">
+                  {service.truckArt?.hindi || "ओके"}
+                </span>
+                <span className="card-footer-latin">
+                  {service.truckArt?.after || "PLEASE"}
+                </span>
+              </div>
+              <div className="card-tape bottom" aria-hidden="true"></div>
             </div>
           </div>
         </div>
+
+        <div className="subsvc-hero-tape bottom" aria-hidden="true"></div>
       </section>
 
+      {/* 2. The Business Problem & Route Navigator */}
+      {service.slug === "seo" ? (
+        <SeoRouteSection service={service} />
+      ) : (
+        <section id="the-problem" className="subsvc-problem-section">
+        <div className="subsvc-problem-container">
+          <div className="subsvc-problem-content">
+            <div className="subsvc-problem-line" aria-hidden="true"></div>
+            <div className="subsvc-problem-text">
+              <p className="subsvc-problem-kicker">
+                {service.problemKicker || service.kicker || "KM 01 · THE BUSINESS PROBLEM"}
+              </p>
+              <h2 className="subsvc-problem-title">
+                {service.problemHeading || service.heading}
+              </h2>
+              <p className="subsvc-problem-desc">
+                {service.problemCopy || "When high-intent buyers search for your solutions, every ranking drop converts directly into lost business. We engineer comprehensive organic dominance across conventional search algorithms and next-generation AI answer engines."}
+              </p>
+            </div>
+          </div>
+
+          <aside className="subsvc-route-box" aria-label="Route Navigator">
+            <div className="subsvc-route-header">
+              <span className="subsvc-route-title">ON THIS ROUTE</span>
+              <span className="subsvc-route-arrow" aria-hidden="true">↗</span>
+            </div>
+            <div className="subsvc-route-body">
+              <nav className="subsvc-route-nav">
+                <a href="#the-problem" className="subsvc-route-link active">
+                  <span className="route-num">01</span>
+                  <span className="route-name">The problem</span>
+                  <span className="route-bullet" aria-hidden="true">▶</span>
+                </a>
+                <a href="#capabilities" className="subsvc-route-link">
+                  <span className="route-num">02</span>
+                  <span className="route-name">Capabilities</span>
+                  <span className="route-bullet" aria-hidden="true">▶</span>
+                </a>
+                <a href="#roadmap" className="subsvc-route-link">
+                  <span className="route-num">03</span>
+                  <span className="route-name">The roadmap</span>
+                  <span className="route-bullet" aria-hidden="true">▶</span>
+                </a>
+                <a href="#why-rmw" className="subsvc-route-link">
+                  <span className="route-num">04</span>
+                  <span className="route-name">Why RMW</span>
+                  <span className="route-bullet" aria-hidden="true">▶</span>
+                </a>
+                <a href="#start-a-project" className="subsvc-route-link">
+                  <span className="route-num">05</span>
+                  <span className="route-name">Get in touch</span>
+                  <span className="route-bullet" aria-hidden="true">▶</span>
+                </a>
+              </nav>
+            </div>
+          </aside>
+        </div>
+        </section>
+      )}
+
       {/* 3. Performance Metrics Strip */}
-      <section className="subsvc-stats-section" aria-label="Key Performance Indicators">
+      {service.slug !== "seo" && <section id="stats" className="subsvc-stats-section" aria-label="Key Performance Indicators">
         <div className="subsvc-stats-grid">
           {service.stats.map((stat) => (
             <div key={stat.label} className="subsvc-stat-item">
@@ -146,10 +251,10 @@ export default async function SubServicePage({
             </div>
           ))}
         </div>
-      </section>
+      </section>}
 
       {/* 4. Core Capabilities Grid */}
-      <section id="capabilities" className="subsvc-capabilities-section">
+      {service.slug !== "seo" && <section id="capabilities" className="subsvc-capabilities-section">
         <div className="subsvc-section-header">
           <p className="subsvc-section-kicker">Core Capabilities</p>
           <h2 className="subsvc-section-title">
@@ -173,10 +278,14 @@ export default async function SubServicePage({
             </div>
           ))}
         </div>
-      </section>
+      </section>}
+
+      {service.slug === "seo" && (
+        <SeoLowerSections service={service} relatedServices={relatedServices} />
+      )}
 
       {/* 5. Process Roadmap (KM Steps) */}
-      <section className="subsvc-process-section" aria-label="Strategic roadmap">
+      {service.slug !== "seo" && <section id="roadmap" className="subsvc-process-section" aria-label="Strategic roadmap">
         <div className="subsvc-process-container">
           <div className="subsvc-section-header">
             <p className="subsvc-section-kicker">The Roadmap</p>
@@ -201,10 +310,10 @@ export default async function SubServicePage({
             ))}
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* 6. Why Ritz Media World Advantage */}
-      <section className="subsvc-why-section">
+      {service.slug !== "seo" && <section id="why-rmw" className="subsvc-why-section">
         <div className="subsvc-section-header">
           <p className="subsvc-section-kicker">The RMW Difference</p>
           <h2 className="subsvc-section-title">Why Brands Ride With Us</h2>
@@ -221,10 +330,10 @@ export default async function SubServicePage({
             </div>
           ))}
         </div>
-      </section>
+      </section>}
 
       {/* 7. Related Services Explorer */}
-      <section className="subsvc-related-section">
+      {service.slug !== "seo" && <section className="subsvc-related-section">
         <div className="subsvc-related-container">
           <div className="subsvc-related-header">
             <div>
@@ -267,7 +376,7 @@ export default async function SubServicePage({
             ))}
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* 8. Conversion Audit / Lead Section */}
       <div id="start-a-project">

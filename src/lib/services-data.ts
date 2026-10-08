@@ -1,6 +1,7 @@
 export interface ServiceCapability {
   title: string;
   copy: string;
+  details?: string[];
   icon?: string;
 }
 
@@ -17,11 +18,19 @@ export interface ServiceDetail {
   name: string;
   uppercaseName: string;
   engine: string;
+  engineCategory?: string;
+  badgeDate?: string;
   kicker: string;
   tagline: string;
   heading: string;
   shortDescription: string;
   fullOverview: string;
+  definitionText?: string;
+  cardTags?: string[];
+  truckArt?: { before: string; hindi: string; after: string };
+  problemKicker?: string;
+  problemHeading?: string;
+  problemCopy?: string;
   image: string;
   accentColor: string;
   tags: string[];
@@ -39,6 +48,143 @@ export interface ServiceDetail {
 }
 
 export const SERVICES_LIST: ServiceDetail[] = [
+  {
+    id: "seo",
+    slug: "seo",
+    name: "SEO",
+    uppercaseName: "SEO SERVICES",
+    engine: "ENGINE 02 · DIGITAL & MEDIA",
+    engineCategory: "Digital & Media",
+    badgeDate: "SEP-05 · SEO · 2026",
+    kicker: "KM 01 · THE BUSINESS PROBLEM",
+    tagline: "Search engine optimisation from Ritz Media World, built to make your brand easy to find, easy to understand and easy to choose.",
+    heading: "Your Buyers Are Already Searching. Are They Finding You?",
+    shortDescription: "SEO (search engine optimisation) is the work of improving a website's technical health, content and authority so it appears for the searches its customers make, on Google and in AI-generated answers, without paying for each click.",
+    fullOverview: "Search engine optimisation from Ritz Media World, built to make your brand easy to find, easy to understand and easy to choose.",
+    definitionText: "SEO (search engine optimisation) is the work of improving a website's technical health, content and authority so it appears for the searches its customers make, on Google and in AI-generated answers, without paying for each click.",
+    cardTags: ["GOOGLE", "AI OVERVIEWS", "CHATGPT", "GEMINI"],
+    truckArt: { before: "SEARCH", hindi: "ओके", after: "PLEASE" },
+    problemKicker: "KM 01 · THE BUSINESS PROBLEM",
+    problemHeading: "Your Buyers Are Already Searching. Are They Finding You?",
+    problemCopy: "Over 85% of high-intent purchase journeys start with a search query. If your website is buried beneath competitors, trapped behind technical errors, or invisible to AI answer engines like ChatGPT and Gemini, you are forfeiting revenue every single hour. We rebuild your technical foundation, author rank-winning content, and establish authoritative backlinks that turn search queries into sustainable market dominance.",
+    image: "https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?auto=format&fit=crop&w=1400&q=80",
+    accentColor: "#184ebb",
+    tags: ["SEO", "AEO", "AI Overviews", "Technical SEO", "Local SEO", "High-Intent Search"],
+    stats: [
+      { value: "+320%", label: "Average Organic Traffic Growth" },
+      { value: "Top 3", label: "Rankings On High-Intent Commercial Queries" },
+      { value: "4.8x", label: "Increase In Organic Lead Conversion" },
+      { value: "18+", label: "Years Dominating Indian Search Ecosystems" },
+    ],
+    capabilities: [
+      {
+        title: "Technical SEO & Core Web Vitals",
+        copy: "Comprehensive site architecture audits, crawl budget optimization, mobile responsiveness, schema markup, and speed fixes that Google algorithms reward.",
+        details: [
+          "Crawlability, indexation, Core Web Vitals, redirects and structured data.",
+          "Page performance and site health across mobile and desktop.",
+          "Structured data markup, validation rules and implementation gaps.",
+        ],
+      },
+      {
+        title: "Answer Engine Optimization (AEO & AI Search)",
+        copy: "Structured citation engineering and entity authority modeling that ensure your brand is cited and recommended inside Google AI Overviews, ChatGPT, and Gemini.",
+        details: [
+          "Clear, authoritative answers that generative search can understand.",
+          "Entity signals and source citations across answer engines.",
+          "Visibility tracking for Google AI Overviews, ChatGPT and Gemini.",
+        ],
+      },
+      {
+        title: "Commercial Keyword & Intent Strategy",
+        copy: "Deep keyword analysis targeting bottom-of-the-funnel buyer searches that drive real purchase inquiries rather than vanity traffic.",
+        details: [
+          "Commercial search demand and high-intent keyword research.",
+          "Search intent mapping across the buyer journey.",
+          "Priority landing pages built around qualified enquiries.",
+        ],
+      },
+      {
+        title: "Authority Content & Topic Clusters",
+        copy: "In-depth, journalistic industry content and comprehensive pillar-cluster architectures that establish undeniable domain topical authority.",
+        details: [
+          "Pillar pages and supporting topic clusters.",
+          "Editorial briefs shaped around customer questions.",
+          "Internal linking that makes expertise easy to navigate.",
+        ],
+      },
+      {
+        title: "High-Authority Digital PR & Backlinks",
+        copy: "Editorial brand placements, genuine editorial outreach, and media backlinks earned through news, industry research, and thought leadership.",
+        details: [
+          "Relevant publisher and media outreach.",
+          "News, research and thought leadership opportunities.",
+          "Quality checks on authority, relevance and link placement.",
+        ],
+      },
+      {
+        title: "Local SEO & Multi-Location Dominance",
+        copy: "Google Business Profile optimization, local citation sync, map-pack rankings, and hyper-targeted geo-landing pages across Indian cities.",
+        details: [
+          "Google Business Profile and local listing optimisation.",
+          "Consistent citations and location information.",
+          "Local landing pages and map-pack visibility tracking.",
+        ],
+      },
+    ],
+    deliverables: [
+      "Full 120-Point Technical SEO & Site Architecture Audit",
+      "Comprehensive High-Intent Commercial Keyword Blueprint",
+      "Quarterly Content Roadmap & On-Page Optimization Guides",
+      "High-Authority Editorial Backlink Acquisition Roster",
+      "AI Search & LLM Knowledge Graph Citation Monitoring",
+      "Monthly Organic Revenue, Traffic & Conversion Reporting",
+    ],
+    process: [
+      {
+        step: "01",
+        km: "KM 01",
+        title: "Technical Diagnostic & Search Footprint Audit",
+        copy: "We crawl every URL, indexation barrier, code bottleneck, schema deficiency, and competitor footprint to uncover why you're missing top spots.",
+      },
+      {
+        step: "02",
+        km: "KM 03",
+        title: "Topical Authority & Architecture Blueprint",
+        copy: "We re-architect your site's information hierarchy, mapping high-value commercial searches into topic clusters and intent hubs.",
+      },
+      {
+        step: "03",
+        km: "KM 06",
+        title: "On-Page Optimization & Content Production",
+        copy: "Our writers and technical leads polish page speed, craft expert content, inject JSON-LD schemas, and optimize meta entities.",
+      },
+      {
+        step: "04",
+        km: "KM 09",
+        title: "Digital PR, Authority Link Building & AI Tracking",
+        copy: "We execute PR outreach for white-hat editorial citations while actively tracking your rankings in Google SERPs and AI answer engines.",
+      },
+    ],
+    whyUs: [
+      {
+        title: "Zero Black-Hat Hacks. 100% Sustainable Equity",
+        copy: "We don't buy toxic PBN links that get penalized in the next Google Core update. Every link and piece of content builds lasting brand value.",
+      },
+      {
+        title: "Pioneers in AI Search & Overviews Optimization",
+        copy: "While other agencies only optimize for blue links, we ensure your brand is the default recommendation in generative search engines.",
+      },
+      {
+        title: "Commercial Revenue Focus Over Vanity Keywords",
+        copy: "Traffic means nothing if it doesn't convert. We prioritize queries with explicit buying intent that bring phone calls and leads.",
+      },
+      {
+        title: "Full Transparency & Real-Time Analytics",
+        copy: "No opaque PDF reports with inflated stats. You get live dashboards tracking search visibility, keyword rank velocity, and conversions.",
+      },
+    ],
+  },
   {
     id: "digital",
     slug: "digital-marketing",

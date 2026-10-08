@@ -62,7 +62,8 @@
 
 .macbook-mockup {
   position: relative;
-  width: 65%;
+  width: 85%;
+  margin: 0 auto;
 }
 
 .device-overlay {
@@ -75,37 +76,16 @@
   z-index: 2;
 }
 
-.device-overlay.is-phone {
-  /* No filter needed since it's a transparent PNG */
-}
-
 .macbook-screen {
   position: absolute;
-  top: 6.5%;
-  left: 11%;
-  width: 78%;
-  height: 71%;
+  top: 7.5%;
+  left: 12.5%;
+  width: 75%;
+  height: 66%;
   background: #fff;
   z-index: 1;
   overflow: hidden;
   border-radius: 4px;
-}
-
-.phone-mockup {
-  position: relative;
-  width: 20%;
-  margin-left: -4%;
-  margin-bottom: -1%;
-  z-index: 3;
-  overflow: hidden;
-}
-
-.phone-mockup .mockup-track {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 }
 
 .mockup-track {
@@ -122,8 +102,8 @@
 .mockup-slide img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: center;
+  object-fit: cover;
+  object-position: top center;
 }
 
 .phone-screen .mockup-slide img {

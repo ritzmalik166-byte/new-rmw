@@ -4,16 +4,15 @@ import { useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 
 const SLIDES = [
-  { src: "/proof-meta-insights.png", mobileSrc: "/mobile-1.png", alt: "Meta Business Suite Insights" },
-  { src: "/proof-google-ads-new.png", mobileSrc: "/mobile-2.png", alt: "Google Ads Performance" },
-  { src: "/proof-search-console-new.png", mobileSrc: "/mobile-3.png", alt: "Google Search Console Performance" },
+  { src: "/final-screenshot.png", alt: "Google Search Console Performance" },
+  { src: "/proof-meta-insights.png", alt: "Meta Business Suite Insights" },
+  { src: "/proof-google-ads-new.png", alt: "Google Ads Performance" },
 ];
 
 const TRUCK_STEP = 42;
 
 export function AboutProofs() {
   const laptopTrackRef = useRef<HTMLDivElement>(null);
-  const phoneTrackRef = useRef<HTMLDivElement>(null);
 
   const truckRef = useRef<HTMLImageElement>(null);
   const truckX = useRef(0);
@@ -46,7 +45,7 @@ export function AboutProofs() {
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) {
-      gsap.set([laptopTrackRef.current, phoneTrackRef.current], {
+      gsap.set(laptopTrackRef.current, {
         xPercent: to * -(100 / total)
       });
       activeRef.current = to;
@@ -56,7 +55,7 @@ export function AboutProofs() {
 
     busyRef.current = true;
 
-    gsap.to([laptopTrackRef.current, phoneTrackRef.current], {
+    gsap.to(laptopTrackRef.current, {
       xPercent: to * -(100 / total),
       duration: 0.8,
       ease: "power3.inOut",
@@ -86,7 +85,7 @@ export function AboutProofs() {
       />
 
       <div className="about-proofs-mockup-stage">
-        <div className="devices-group">
+        <div className="devices-group is-single">
           
           <button
             type="button"
@@ -118,29 +117,6 @@ export function AboutProofs() {
             <img src="/device-laptop-png.png" className="device-overlay" alt="" />
           </div>
 
-          <div className="phone-mockup">
-            {/* Hidden spacer to define intrinsic height since the track is absolute */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/mobile-1.png" style={{ visibility: 'hidden', display: 'block', width: '100%', height: 'auto' }} alt="" />
-            <div 
-              className="mockup-track" 
-              ref={phoneTrackRef}
-              style={{ width: `${SLIDES.length * 100}%` }}
-            >
-              {SLIDES.map((slide, index) => {
-                const nextIndex = (index + 1) % SLIDES.length;
-                const phoneSlide = SLIDES[nextIndex];
-                const imgSrc = phoneSlide.mobileSrc || phoneSlide.src;
-                return (
-                  <div className="mockup-slide" key={index}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={imgSrc} alt={phoneSlide.alt} style={{ objectFit: 'contain' }} />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          
           <button
             type="button"
             className="about-proofs-arrow is-next"
@@ -151,7 +127,6 @@ export function AboutProofs() {
               <path d="M9.5 5.5 L16 12 l-6.5 6.5" />
             </svg>
           </button>
-
         </div>
       </div>
 
