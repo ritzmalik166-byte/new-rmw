@@ -139,7 +139,7 @@ export function Header() {
                     type="button"
                     onClick={() => setServicesOpen((prev) => !prev)}
                     className={cn(
-                      "site-nav-link flex items-center gap-1.5 cursor-pointer",
+                      "site-nav-link group flex items-center gap-1.5 cursor-pointer",
                       isServicesActive && "is-active",
                     )}
                     aria-expanded={servicesOpen}
@@ -147,15 +147,17 @@ export function Header() {
                     aria-label="Toggle Services menu"
                   >
                     <span>{item.label}</span>
-                    <span
+                    <svg 
+                      width="12" height="12" viewBox="0 0 24 24" 
+                      fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" 
                       className={cn(
-                        "services-nav-chevron inline-block text-[9px] transition-transform duration-300",
-                        servicesOpen ? "rotate-180 text-amber-500" : "text-zinc-500",
+                        "transition-all duration-500 ease-out", 
+                        servicesOpen ? "-rotate-180 text-amber-500" : "text-zinc-400 group-hover:text-amber-500 group-hover:translate-y-0.5"
                       )}
                       aria-hidden
                     >
-                      ▼
-                    </span>
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
                   </button>
                 </div>
               );
