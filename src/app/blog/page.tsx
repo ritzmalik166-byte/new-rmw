@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { BlogArchive } from "@/components/blogs/BlogArchive";
-import { getBlogs } from "@/lib/blogs";
+import { getBlogsOrEmpty } from "@/lib/blogs";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +16,7 @@ type BlogPageProps = {
 export default async function BlogPage({
   searchParams,
 }: BlogPageProps) {
-  const blogs = await getBlogs();
+  const blogs = await getBlogsOrEmpty();
   const { page: pageParam, q } = await searchParams;
   const requestedPage = Number(pageParam);
   const initialPage = Number.isInteger(requestedPage) && requestedPage > 0

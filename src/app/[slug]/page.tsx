@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getBlogBySlug, getBlogs } from "@/lib/blogs";
+import { getBlogsOrEmpty, type Blog } from "@/lib/blogs";
 import { BlogImage } from "@/components/blogs/BlogImage";
 import { BlogShare } from "@/components/blogs/BlogShare";
 import { BlogEnquiryForm } from "@/components/blogs/BlogEnquiryForm";
@@ -10,10 +10,14 @@ import "@/styles/blogs/detail.css";
 export const revalidate = 300;
 
 export async function generateStaticParams() {
-  const blogs = await getBlogs();
-  return blogs.map((blog) => ({
-    slug: blog.slug,
-  }));
+  const blogs = await getBlogsOrEmpty();
+  // Slugs with filename-reserved characters (e.g. ":") break prerendering on
+  // Windows; they are rendered on first request instead.
+  return blogs
+    .filter((blog) => !/[<>:"\\|?*]/.test(blog.slug))
+    .map((blog) => ({
+      slug: blog.slug,
+    }));
 }
 
 export async function generateMetadata({
@@ -22,7 +26,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const blog = await getBlogBySlug(slug);
+  const blog = findBlog(await getBlogsOrEmpty(), slug);
   if (!blog) return { title: "Blog Not Found | Ritz Media World" };
 
   return {
@@ -35,6 +39,11 @@ export async function generateMetadata({
       images: blog.image ? [blog.image] : [],
     },
   };
+}
+
+function findBlog(blogs: Blog[], slug: string) {
+  const wanted = slug.toLowerCase();
+  return blogs.find((blog) => blog.slug.toLowerCase() === wanted);
 }
 
 function formatDate(date: string | null) {
@@ -59,10 +68,8 @@ export default async function BlogDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const allBlogs = await getBlogs();
-  const blog = allBlogs.find(
-    (b) => b.slug.toLowerCase() === slug.toLowerCase() || b.slug === slug
-  );
+  const allBlogs = await getBlogsOrEmpty();
+  const blog = findBlog(allBlogs, slug);
 
   if (!blog) {
     notFound();

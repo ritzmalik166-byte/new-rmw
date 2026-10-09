@@ -87,15 +87,76 @@ function toBlog(record: Record<string, unknown>): Blog | null {
   };
 }
 
-async function fetchBlogRecords(url: string) {
-  const response = await fetch(url, { next: { revalidate: 300 } });
-  if (!response.ok) {
-    throw new Error(`Blog API request failed (${response.status}): ${url}`);
-  }
-  return getRecords(await response.json());
+const RETRY_DELAYS_MS = [500, 1500, 3000];
+const SHARED_REQUEST_TTL_MS = 60_000;
+
+function wait(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export async function getBlogs(): Promise<Blog[]> {
+function isRetryableStatus(status: number) {
+  return status === 408 || status === 429 || status >= 500;
+}
+
+async function fetchBlogRecords(url: string) {
+  let lastError: unknown;
+
+  for (let attempt = 0; attempt <= RETRY_DELAYS_MS.length; attempt++) {
+    if (attempt > 0) {
+      await wait(RETRY_DELAYS_MS[attempt - 1] + Math.random() * 250);
+    }
+
+    let response: Response;
+    try {
+      response = await fetch(url, { next: { revalidate: 300 } });
+    } catch (error) {
+      lastError = error;
+      continue;
+    }
+
+    if (response.ok) return getRecords(await response.json());
+
+    lastError = new Error(`Blog API request failed (${response.status}): ${url}`);
+    if (!isRetryableStatus(response.status)) break;
+  }
+
+  throw lastError;
+}
+
+// Static generation renders dozens of blog pages at once; sharing one request
+// per process keeps the upstream API from rate-limiting the build with 503s.
+let sharedRequest: { startedAt: number; promise: Promise<Blog[]> } | null = null;
+let lastLoadedBlogs: Blog[] | null = null;
+
+export function getBlogs(): Promise<Blog[]> {
+  if (sharedRequest && Date.now() - sharedRequest.startedAt < SHARED_REQUEST_TTL_MS) {
+    return sharedRequest.promise;
+  }
+
+  const promise: Promise<Blog[]> = loadBlogs().then(
+    (blogs) => {
+      lastLoadedBlogs = blogs;
+      return blogs;
+    },
+    (error) => {
+      if (sharedRequest?.promise === promise) sharedRequest = null;
+      if (lastLoadedBlogs) return lastLoadedBlogs;
+      throw error;
+    },
+  );
+  sharedRequest = { startedAt: Date.now(), promise };
+  return promise;
+}
+
+export async function getBlogsOrEmpty(): Promise<Blog[]> {
+  try {
+    return await getBlogs();
+  } catch {
+    return [];
+  }
+}
+
+async function loadBlogs(): Promise<Blog[]> {
   const results = await Promise.allSettled([
     fetchBlogRecords(LATEST_BLOGS_URL),
     fetchBlogRecords(ALL_BLOGS_URL),

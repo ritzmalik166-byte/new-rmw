@@ -1,7 +1,7 @@
-import { getBlogs } from "@/lib/blogs";
+import { getBlogsOrEmpty } from "@/lib/blogs";
 import { HomeNewsContent } from "./HomeNewsContent";
 
 export async function HomeNews() {
-  const blogs = await getBlogs();
+  const blogs = await getBlogsOrEmpty();
   return <HomeNewsContent blogs={blogs.slice(0, 3)} />;
 }
