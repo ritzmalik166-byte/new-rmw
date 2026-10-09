@@ -12,6 +12,34 @@ export interface ServiceProcessStep {
   copy: string;
 }
 
+export interface ServicePoint {
+  title: string;
+  copy: string;
+}
+
+export interface ServiceFaq {
+  question: string;
+  answer: string;
+}
+
+/**
+ * Copy for the shared sub-service page layout. Every field is optional;
+ * `getServiceLayout` fills anything missing with service-aware defaults.
+ */
+export interface ServiceLayoutCopy {
+  problemSummary?: string;
+  problemFlags?: ServicePoint[];
+  planKicker?: string;
+  planLede?: string;
+  planCta?: string;
+  intentTitle?: { lead: string; accent: string };
+  intentPoints?: ServicePoint[];
+  intentTape?: [string, string];
+  /** Optional illustrated sign; an HTML sign is rendered when omitted. */
+  requirementsSign?: { src: string; alt: string };
+  faqs?: ServiceFaq[];
+}
+
 export interface ServiceDetail {
   id: string;
   slug: string;
@@ -28,6 +56,7 @@ export interface ServiceDetail {
   definitionText?: string;
   cardTags?: string[];
   truckArt?: { before: string; hindi: string; after: string };
+  layout?: ServiceLayoutCopy;
   problemKicker?: string;
   problemHeading?: string;
   problemCopy?: string;
@@ -64,6 +93,70 @@ export const SERVICES_LIST: ServiceDetail[] = [
     definitionText: "SEO (search engine optimisation) is the work of improving a website's technical health, content and authority so it appears for the searches its customers make, on Google and in AI-generated answers, without paying for each click.",
     cardTags: ["GOOGLE", "AI OVERVIEWS", "CHATGPT", "GEMINI"],
     truckArt: { before: "SEARCH", hindi: "ओके", after: "PLEASE" },
+    layout: {
+      problemSummary:
+        "Most buying journeys start with a search. If your site is slow, unclear or invisible to AI answers, the enquiry goes to whoever shows up first.",
+      problemFlags: [
+        {
+          title: "Page two is a dead end",
+          copy: "Buyers rarely scroll past the first results. If you are not there, you are not on the shortlist.",
+        },
+        {
+          title: "AI answers skip you",
+          copy: "ChatGPT, Gemini and Google AI Overviews cite brands they can understand and trust. Unknown sites get left out.",
+        },
+        {
+          title: "Every visit is rented",
+          copy: "When all traffic comes from ads, growth stops as soon as the budget does.",
+        },
+      ],
+      planKicker: "Website SEO services",
+      planLede: "Explore the work behind a complete website SEO programme.",
+      planCta: "Let's discuss your SEO scope",
+      intentTitle: { lead: "Search is where intent", accent: "shows up first." },
+      intentPoints: [
+        { title: "Compounding traffic", copy: "Rankings can keep working after the campaign budget stops." },
+        { title: "Lower acquisition cost", copy: "Organic leads add another route to qualified enquiries." },
+        { title: "Credibility", copy: "Being the clear answer builds trust before the first call." },
+      ],
+      intentTape: ["Ranking, not rented", "Drive slow · rank fast"],
+      requirementsSign: {
+        src: "/seo-requirements-sign.png",
+        alt: "Discuss your SEO requirements. Share your site and goals; we will route you to the right person. Start a project.",
+      },
+      faqs: [
+        {
+          question: "What does an SEO service from RMW include?",
+          answer:
+            "A technical audit, keyword and intent mapping, on-page and content work, local SEO, authority building and reporting. The final scope is confirmed once we have looked at your site and goals.",
+        },
+        {
+          question: "How long before SEO shows results?",
+          answer:
+            "SEO is ongoing work, not an instant switch. Timing depends on your site, competition, starting point and the work required; we review progress against the agreed scope.",
+        },
+        {
+          question: "Do you optimise for AI answers like ChatGPT and Google AI Overviews?",
+          answer:
+            "Yes. The programme includes answer-engine visibility work alongside technical SEO, useful content and clear entity signals.",
+        },
+        {
+          question: "How is SEO different from Google Ads?",
+          answer:
+            "Google Ads can buy immediate placement while a campaign is funded. SEO builds organic visibility through technical health, relevant content and authority over time.",
+        },
+        {
+          question: "Can you handle local SEO for several locations or projects?",
+          answer:
+            "Yes. Local SEO can cover Google Business Profiles, consistent local listings and location-specific landing pages, with the scope tailored to your locations.",
+        },
+        {
+          question: "What will I see in your reports?",
+          answer:
+            "Reporting can cover organic visibility, traffic, rankings and conversions, together with work completed and next steps for the agreed programme.",
+        },
+      ],
+    },
     problemKicker: "KM 01 · THE BUSINESS PROBLEM",
     problemHeading: "Your Buyers Are Already Searching. Are They Finding You?",
     problemCopy: "Over 85% of high-intent purchase journeys start with a search query. If your website is buried beneath competitors, trapped behind technical errors, or invisible to AI answer engines like ChatGPT and Gemini, you are forfeiting revenue every single hour. We rebuild your technical foundation, author rank-winning content, and establish authoritative backlinks that turn search queries into sustainable market dominance.",

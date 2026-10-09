@@ -3,28 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { getServiceLayout } from "@/lib/service-layout";
 import type { ServiceDetail } from "@/lib/services-data";
 
-type SeoRouteSectionProps = {
+type ServiceRouteSectionProps = {
   service: ServiceDetail;
 };
 
-const PROBLEM_FLAGS = [
-  {
-    title: "Page two is a dead end",
-    copy: "Buyers rarely scroll past the first results. If you are not there, you are not on the shortlist.",
-  },
-  {
-    title: "AI answers skip you",
-    copy: "ChatGPT, Gemini and Google AI Overviews cite brands they can understand and trust. Unknown sites get left out.",
-  },
-  {
-    title: "Every visit is rented",
-    copy: "When all traffic comes from ads, growth stops as soon as the budget does.",
-  },
-];
-
-export function SeoRouteSection({ service }: SeoRouteSectionProps) {
+export function ServiceRouteSection({ service }: ServiceRouteSectionProps) {
+  const layout = getServiceLayout(service);
   const [activeCapability, setActiveCapability] = useState(0);
   const capability = service.capabilities[activeCapability];
 
@@ -44,13 +31,9 @@ export function SeoRouteSection({ service }: SeoRouteSectionProps) {
               <h2 className="subsvc-problem-title">
                 {service.problemHeading || service.heading}
               </h2>
-              <p className="subsvc-problem-desc">
-                Most buying journeys start with a search. If your site is slow,
-                unclear or invisible to AI answers, the enquiry goes to whoever
-                shows up first.
-              </p>
+              <p className="subsvc-problem-desc">{layout.problemSummary}</p>
               <div className="subsvc-problem-flags">
-                {PROBLEM_FLAGS.map((flag) => (
+                {layout.problemFlags.map((flag) => (
                   <article className="subsvc-problem-flag" key={flag.title}>
                     <span className="subsvc-flag-icon" aria-hidden="true" />
                     <div>
@@ -66,11 +49,11 @@ export function SeoRouteSection({ service }: SeoRouteSectionProps) {
           <section id="capabilities" className="subsvc-plan">
             <header className="subsvc-plan-header">
               <div>
-                <p className="subsvc-plan-kicker">Website SEO services</p>
+                <p className="subsvc-plan-kicker">{layout.planKicker}</p>
                 <h2>
-                  Six parts. <span>One engine.</span>
+                  {layout.planTitle} <span>One engine.</span>
                 </h2>
-                <p>Explore the work behind a complete website SEO programme.</p>
+                <p>{layout.planLede}</p>
               </div>
               <span className="subsvc-plan-stamp">Built around your business</span>
             </header>
@@ -100,7 +83,7 @@ export function SeoRouteSection({ service }: SeoRouteSectionProps) {
               <div className="subsvc-plan-card-tape" aria-hidden="true" />
             </div>
 
-            <div className="subsvc-plan-controls" aria-label="Choose an SEO service">
+            <div className="subsvc-plan-controls" aria-label={`Choose a ${service.name} service`}>
               <div className="subsvc-plan-count">
                 <strong>{String(activeCapability + 1).padStart(2, "0")}</strong>
                 <span>/ {String(service.capabilities.length).padStart(2, "0")}</span>
@@ -139,7 +122,7 @@ export function SeoRouteSection({ service }: SeoRouteSectionProps) {
             </div>
             <footer className="subsvc-plan-footer">
               <span>One connected programme. A clear scope for every service.</span>
-              <Link href="#start-a-project">Let&apos;s discuss your SEO scope ↗</Link>
+              <Link href="#start-a-project">{layout.planCta} ↗</Link>
             </footer>
           </section>
         </div>
@@ -166,25 +149,46 @@ export function SeoRouteSection({ service }: SeoRouteSectionProps) {
               <a href="#stats" className="subsvc-route-link">
                 <span className="route-num">05</span><span className="route-name">Work &amp; results</span><span className="route-bullet">↑</span>
               </a>
-              <a href="#seo-faq" className="subsvc-route-link">
+              <a href="#service-faq" className="subsvc-route-link">
                 <span className="route-num">06</span><span className="route-name">FAQs &amp; next steps</span><span className="route-bullet">↑</span>
               </a>
             </nav>
           </div>
 
-          <Link
-            href="#start-a-project"
-            className="subsvc-seo-sign"
-            aria-label="Discuss your SEO requirements and start a project"
-          >
-            <Image
-              src="/seo-requirements-sign.png"
-              alt="Discuss your SEO requirements. Share your site and goals; we will route you to the right person. Start a project."
-              width={400}
-              height={300}
-              sizes="(max-width: 767px) 80vw, 360px"
-            />
-          </Link>
+          {layout.requirementsSign ? (
+            <Link
+              href="#start-a-project"
+              className="subsvc-seo-sign"
+              aria-label={`Discuss your ${service.name} requirements and start a project`}
+            >
+              <Image
+                src={layout.requirementsSign.src}
+                alt={layout.requirementsSign.alt}
+                width={400}
+                height={300}
+                sizes="(max-width: 767px) 80vw, 360px"
+              />
+            </Link>
+          ) : (
+            <Link
+              href="#start-a-project"
+              className="subsvc-req-sign"
+              aria-label={`Discuss your ${service.name} requirements and start a project`}
+            >
+              <span className="subsvc-req-sign-board">
+                <span className="subsvc-req-sign-lead">Discuss your</span>
+                <span className="subsvc-req-sign-name">{service.name}</span>
+                <span className="subsvc-req-sign-lead">requirements</span>
+                <span className="subsvc-req-sign-copy">
+                  Share your brand and goals; we will route you to the right person.
+                </span>
+                <span className="subsvc-req-sign-btn">Start a project →</span>
+              </span>
+              <span className="subsvc-req-sign-plate">
+                Horn <span lang="hi">ओके</span> Please
+              </span>
+            </Link>
+          )}
         </aside>
       </div>
     </section>

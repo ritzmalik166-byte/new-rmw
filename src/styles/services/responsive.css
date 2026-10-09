@@ -1,8 +1,4 @@
 @media (min-width: 1600px) {
-  .services-hero-main {
-    width: min(1600px, 100%);
-  }
-
   .svc-engines-inner,
   .svc-engine-banner-inner,
   .svc-creative-inner,
@@ -39,54 +35,6 @@
   .svc-ind-stage {
     flex: 1 1 auto;
     min-height: 0;
-  }
-
-  .services-hero {
-    --services-header: 96px;
-    min-height: min(740px, 100svh);
-  }
-
-  .services-hero-main {
-    align-items: flex-start;
-    justify-content: center;
-    min-height: min(740px, 100svh);
-    padding: 132px 28px 280px;
-  }
-
-  .services-copy {
-    width: 100%;
-    max-width: 720px;
-    text-align: center;
-  }
-
-  .services-hero .services-kicker {
-    justify-content: center;
-    margin-top: 52px;
-    text-align: center;
-  }
-
-  .services-hero .services-title,
-  .services-hero .services-sheen,
-  .services-hero .services-lede {
-    text-align: center;
-  }
-
-  .services-hero .services-lede {
-    margin-inline: auto;
-  }
-
-  .services-sign {
-    top: auto;
-    bottom: 0;
-    left: calc(50% - min(100px, 14vw));
-    right: auto;
-    width: min(200px, 28vw);
-    height: auto;
-  }
-
-  .services-sign img {
-    width: 100%;
-    height: auto;
   }
 
   .svc-dm-grid {
@@ -139,7 +87,6 @@
 
 @media (max-width: 1100px) {
   :is(
-      .services-hero,
       .svc-engines,
       .svc-engine-banner,
       .svc-creative,
@@ -163,57 +110,6 @@
 @media (max-width: 760px) {
   .svc-render {
     overflow-x: clip;
-  }
-
-  .services-hero-main {
-    justify-content: center;
-  }
-
-  .services-copy {
-    width: 100%;
-    min-width: 0;
-    text-align: center;
-  }
-
-  .services-hero .services-kicker {
-    justify-content: center;
-    margin-top: 52px;
-    text-align: center;
-  }
-
-  .services-title-wrap,
-  .services-title,
-  .services-sheen {
-    width: 100%;
-  }
-
-  .services-hero .services-title,
-  .services-hero .services-sheen {
-    font-size: clamp(22px, 7vw, 32px);
-    line-height: 1.16;
-    text-align: center;
-  }
-
-  .services-hero .services-line:nth-child(2) .services-line-inner {
-    font-size: clamp(20px, 6.4vw, 24px);
-    white-space: nowrap;
-  }
-
-  .services-line-inner {
-    white-space: normal;
-    overflow-wrap: normal;
-    word-break: keep-all;
-  }
-
-  .services-hero .services-lede {
-    margin-inline: auto;
-    text-align: center;
-  }
-
-  .services-sign {
-    left: calc(50% - min(95px, 27vw));
-    right: auto;
-    width: min(190px, 54vw);
   }
 
   .svc-star-head {
@@ -251,15 +147,6 @@
 }
 
 @media (max-width: 360px) {
-  .services-hero-main {
-    padding-inline: 16px;
-  }
-
-  .services-title,
-  .services-sheen {
-    font-size: 20px;
-  }
-
   .svc-engines-inner {
     padding-right: 16px;
     padding-left: 64px;

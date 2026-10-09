@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { BlogCard } from "@/components/blogs/BlogCard";
+import { BlogHero } from "@/components/blogs/BlogHero";
 import { BlogImage } from "@/components/blogs/BlogImage";
 import type { Blog } from "@/lib/blogs";
 
@@ -126,71 +127,7 @@ export function BlogArchive({
 
   return (
     <div className="blog-archive-inner">
-      <header className="blog-intro">
-        <div className="blog-intro-copy">
-          <p className="blog-intro-kicker">
-            <span>BLOGS</span>
-            <i aria-hidden="true" />
-          </p>
-          <h1>
-            Ideas. Stories.
-            <br />
-            <em>Creative Thinking.</em>
-          </h1>
-          <p className="blog-intro-lede">
-            Insights, strategies and inspiration from Ritz Media World to help
-            brands grow, stand out and create real impact.
-          </p>
-        </div>
-        <div className="blog-intro-art">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/blogs/blog-hero.webp"
-            alt=""
-            width={1800}
-            height={656}
-            fetchPriority="high"
-          />
-        </div>
-      </header>
-
-      <section className="blog-tools" aria-label="Find blog articles">
-        <label className="blog-search">
-          <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
-            <circle
-              cx="8.7"
-              cy="8.7"
-              r="5.7"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-            />
-            <path
-              d="m13 13 4 4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-          </svg>
-          <input
-            type="search"
-            placeholder="Search blogs..."
-            value={query}
-            onChange={(event) => updateSearch(event.target.value)}
-          />
-          {query ? (
-            <button
-              type="button"
-              className="blog-search-clear"
-              aria-label="Clear search"
-              onClick={() => updateSearch("")}
-            >
-              ×
-            </button>
-          ) : null}
-        </label>
-      </section>
+      <BlogHero blogs={blogs} query={query} onQueryChange={updateSearch} />
 
       {featuredBlog ? (
         <a

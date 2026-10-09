@@ -1447,6 +1447,115 @@
   height: auto;
 }
 
+.subsvc-req-sign {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(100%, 360px);
+  color: #14213d;
+  text-align: center;
+  text-decoration: none;
+  transition: transform 180ms ease;
+}
+
+.subsvc-req-sign:hover {
+  transform: translateY(-3px);
+}
+
+.subsvc-req-sign-board {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 22px 22px 20px;
+  border: 5px solid #167a68;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle, rgb(214 22 111 / 10%) 1.2px, transparent 1.8px) 0 0 / 14px 14px,
+    #fff6e0;
+  box-shadow:
+    0 0 0 4px #f6c431,
+    0 0 0 9px #d6166f,
+    0 18px 30px -12px rgb(20 33 61 / 35%);
+}
+
+.subsvc-req-sign-board::before {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  border-radius: 37px;
+  background: radial-gradient(circle, #ffd23f 2px, transparent 2.6px) center / 12px 12px;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  padding: 4px;
+  pointer-events: none;
+}
+
+.subsvc-req-sign-lead {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+.subsvc-req-sign-name {
+  max-width: 100%;
+  margin: 4px 0;
+  color: #e0262f;
+  font-family: var(--font-rye), serif;
+  font-size: clamp(26px, 2.6vw, 38px);
+  line-height: 1.05;
+  text-shadow:
+    2px 2px 0 #f6c431,
+    -1px -1px 0 #14213d,
+    1px -1px 0 #14213d,
+    -1px 1px 0 #14213d,
+    3px 3px 0 #14213d;
+  overflow-wrap: anywhere;
+}
+
+.subsvc-req-sign-copy {
+  margin: 8px 0 14px;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.subsvc-req-sign-btn {
+  padding: 10px 20px;
+  border: 3px solid #f6c431;
+  border-radius: 10px;
+  background: #e0262f;
+  color: #fff;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 18px;
+  font-weight: 900;
+  box-shadow: 0 0 0 2px #14213d;
+}
+
+.subsvc-req-sign-plate {
+  margin-top: 14px;
+  padding: 6px 16px;
+  border: 2px solid #14213d;
+  border-radius: 6px;
+  background: #f6c431;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.subsvc-req-sign-plate span {
+  color: #e0262f;
+  font-family: var(--font-yatra), sans-serif;
+  font-weight: 400;
+}
+
 @media (min-width: 900px) {
   .subsvc-route-section {
     padding: 42px 40px 64px;

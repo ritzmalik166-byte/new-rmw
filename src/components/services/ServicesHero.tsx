@@ -1,195 +1,195 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
-import Image from "next/image";
 import { useRef } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
-import { gsap, registerGsap, SplitText } from "@/lib/gsap";
+import { gsap, registerGsap } from "@/lib/gsap";
 
 registerGsap();
 
-const BANNER = "/service/services-banner-bg%201.png";
-const SIGNPOST = "/service/Services%20Signpost@1x%20(1)%201.png";
+const TITLE = [
+  { text: "We deliver", accent: false },
+  { text: "brands from", accent: false },
+  { text: "present to", accent: true },
+  { text: "prominent.", accent: true },
+] as const;
 
-const TITLE = ["Services tailored to", "transform your brand"] as const;
+const CONSIGNMENT = [
+  { engine: "E-01", goods: "Brand & Creative", contents: "Branding, websites, print" },
+  { engine: "E-02", goods: "Digital & Media", contents: "Performance, SEO, social, media buying" },
+  { engine: "E-03", goods: "Film, 3D & AI", contents: "Brand films, 3D renders, AI creative" },
+] as const;
 
 export function ServicesHero() {
   const rootRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const ledeRef = useRef<HTMLParagraphElement>(null);
   const { ready, reduced } = useMotion();
 
   useGSAP(
     () => {
       const root = rootRef.current;
-      const title = titleRef.current;
-      const lede = ledeRef.current;
-      if (!root || !title || !lede || !ready) return;
+      if (!root || !ready) return;
 
-      const kickerBits = root.querySelectorAll(".services-kicker-item");
-      const sign = root.querySelector(".services-sign");
-      const sheen = root.querySelector(".services-sheen");
+      const q = gsap.utils.selector(root);
+      const lines = q(".svch-line-inner");
+      const fades = q(".svch-kicker, .svch-lede, .svch-cta");
+      const note = q(".svch-note-wrap");
+      const stamp = q(".svch-stamp");
+      const rows = q(".svch-note-table tbody tr");
 
       if (reduced) {
-        gsap.set([title, lede, kickerBits, sign], { autoAlpha: 1, y: 0, clearProps: "opacity" });
-        if (sheen) gsap.set(sheen, { autoAlpha: 0 });
+        gsap.set([lines, fades, note, stamp, rows], { autoAlpha: 1, clearProps: "transform" });
         return;
       }
 
-      const splits: SplitText[] = [];
-      let cancelled = false;
-
-      document.fonts.ready.then(() => {
-        if (cancelled || !titleRef.current || !ledeRef.current) return;
-
-        const inners = titleRef.current.querySelectorAll<HTMLElement>(".services-line-inner");
-        inners.forEach((el) => {
-          splits.push(new SplitText(el, { type: "chars", charsClass: "services-char" }));
-        });
-        const wordSplit = new SplitText(ledeRef.current, {
-          type: "words",
-          wordsClass: "services-word",
-        });
-        splits.push(wordSplit);
-
-        const chars = splits.flatMap((split) => split.chars);
-
-        gsap.set(titleRef.current, { autoAlpha: 1 });
-        gsap.set(ledeRef.current, { autoAlpha: 1 });
-        gsap.set(chars, {
-          yPercent: 125,
-          rotateX: -72,
-          opacity: 0,
-          transformOrigin: "50% 110%",
-        });
-        gsap.set(wordSplit.words, { y: 22, opacity: 0, filter: "blur(6px)" });
-        gsap.set(kickerBits, { y: 16, autoAlpha: 0 });
-        gsap.set(sign, { y: 28, autoAlpha: 0 });
-        if (sheen) gsap.set(sheen, { backgroundPosition: "130% 0", autoAlpha: 1 });
-
-        const tl = gsap.timeline();
-
-        tl.to(kickerBits, {
-          y: 0,
-          autoAlpha: 1,
-          duration: 0.7,
-          stagger: 0.07,
-          ease: "power3.out",
-        });
-
-        tl.to(
-          chars,
-          {
-            yPercent: 0,
-            rotateX: 0,
-            opacity: 1,
-            duration: 1.2,
-            ease: "expo.out",
-            stagger: { each: 0.026, from: "start" },
-          },
-          0.08,
-        );
-
-        if (sheen) {
-          tl.to(
-            sheen,
-            {
-              backgroundPosition: "-40% 0",
-              duration: 1.15,
-              ease: "power2.inOut",
-            },
-            0.62,
-          );
-          tl.to(sheen, { autoAlpha: 0, duration: 0.35, ease: "power1.out" }, ">-0.2");
-        }
-
-        tl.to(
-          wordSplit.words,
-          {
-            y: 0,
-            opacity: 1,
-            filter: "blur(0px)",
-            duration: 0.75,
-            ease: "power3.out",
-            stagger: 0.04,
-          },
-          0.48,
-        );
-
-        tl.to(
-          sign,
-          {
-            y: 0,
-            autoAlpha: 1,
-            duration: 0.9,
-            ease: "power3.out",
-          },
-          0.2,
-        );
-
-        tl.add(() => {
-          gsap.set(wordSplit.words, { clearProps: "filter" });
-        });
-      });
-
-      return () => {
-        cancelled = true;
-        splits.forEach((split) => split.revert());
-      };
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      tl.fromTo(fades[0], { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6 })
+        .fromTo(
+          lines,
+          { yPercent: 110, autoAlpha: 1 },
+          { yPercent: 0, duration: 1, ease: "expo.out", stagger: 0.09 },
+          0.1,
+        )
+        .fromTo(
+          fades.slice(1),
+          { y: 18, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.7, stagger: 0.1 },
+          0.55,
+        )
+        .fromTo(
+          note,
+          { y: 60, rotate: 9, autoAlpha: 0 },
+          { y: 0, rotate: 0, autoAlpha: 1, duration: 1.1, ease: "expo.out" },
+          0.25,
+        )
+        .fromTo(
+          rows,
+          { x: -12, autoAlpha: 0 },
+          { x: 0, autoAlpha: 1, duration: 0.5, stagger: 0.1 },
+          0.85,
+        )
+        .fromTo(
+          stamp,
+          { scale: 2.4, autoAlpha: 0 },
+          { scale: 1, autoAlpha: 0.9, duration: 0.45, ease: "power4.in" },
+          1.35,
+        )
+        .to(note, { y: 3, duration: 0.08, yoyo: true, repeat: 1, ease: "power1.inOut" });
     },
     { dependencies: [ready, reduced], scope: rootRef },
   );
 
   return (
-    <section ref={rootRef} className="services-hero">
-      <div className="services-hero-bg" aria-hidden>
-        <Image src={BANNER} alt="" fill priority sizes="100vw" />
-      </div>
-
-      <div className="services-hero-main">
-        <div className="services-copy">
-          <p className="services-kicker">
-            <span className="services-kicker-item services-pill">Services</span>
-            <span className="services-kicker-item services-kicker-agency">One Agency</span>
-            <span className="services-kicker-item">
-              <span className="services-kicker-diamond" aria-hidden />
-            </span>
-            <span className="services-kicker-item services-kicker-engines">Three Engines</span>
+    <section ref={rootRef} className="svch" aria-labelledby="svch-title">
+      <div className="svch-inner">
+        <div className="svch-copy">
+          <p className="svch-kicker">
+            <span className="svch-pill">Services</span>
+            <span>One agency · Three engines</span>
           </p>
 
-          <div className="services-title-wrap">
-            <h1 ref={titleRef} className="services-title">
-              {TITLE.map((line) => (
-                <span key={line} className="services-line">
-                  <span className="services-line-mask">
-                    <span className="services-line-inner">{line}</span>
-                  </span>
-                </span>
-              ))}
-            </h1>
-            <span className="services-sheen" aria-hidden>
-              {TITLE.map((line) => (
-                <span key={line} className="services-line">
-                  {line}
-                </span>
-              ))}
-            </span>
-          </div>
+          <h1 id="svch-title" className="svch-title">
+            {TITLE.map((line) => (
+              <span key={line.text} className={line.accent ? "svch-line is-accent" : "svch-line"}>
+                <span className="svch-line-inner">{line.text}</span>
+              </span>
+            ))}
+          </h1>
 
-          <p ref={ledeRef} className="services-lede">
-            From Present to Prominent.
+          <p className="svch-lede">
+            Services tailored to transform your brand, packed, loaded and delivered by three
+            engines.
           </p>
+
+          <a href="#start-a-project" className="svch-cta">
+            Book your consignment <span aria-hidden>→</span>
+          </a>
         </div>
-      </div>
 
-      <div className="services-sign">
-        <Image
-          src={SIGNPOST}
-          alt="Our Services: Brand and Creative, Digital and Media, Film, 3D and AI"
-          width={310}
-          height={440}
-          priority
-        />
+        <div className="svch-note-wrap">
+          <article className="svch-note" aria-label="RMW Roadways consignment note">
+            <header className="svch-note-head">
+              <div>
+                <p className="svch-note-brand">RMW Roadways</p>
+                <p className="svch-note-sub">Consignment note · Bilty</p>
+              </div>
+              <p className="svch-note-gr">
+                <span>G.R. No.</span>
+                <strong>UP16-2008</strong>
+              </p>
+            </header>
+
+            <dl className="svch-note-parties">
+              <div>
+                <dt>Consignor</dt>
+                <dd>Your Brand</dd>
+              </div>
+              <div>
+                <dt>Consignee</dt>
+                <dd>Your Audience</dd>
+              </div>
+              <div>
+                <dt>From</dt>
+                <dd>Present</dd>
+              </div>
+              <div>
+                <dt>To</dt>
+                <dd>Prominent</dd>
+              </div>
+            </dl>
+
+            <table className="svch-note-table">
+              <thead>
+                <tr>
+                  <th scope="col">Engine</th>
+                  <th scope="col">Goods</th>
+                  <th scope="col">Contents</th>
+                </tr>
+              </thead>
+              <tbody>
+                {CONSIGNMENT.map((row, index) => (
+                  <tr key={row.engine} className={`is-e${index + 1}`}>
+                    <td className="svch-note-engine">{row.engine}</td>
+                    <th scope="row">{row.goods}</th>
+                    <td>{row.contents}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <footer className="svch-note-foot">
+              <div>
+                <span className="svch-note-label">Handle with</span>
+                <p className="svch-note-hand">Data, care &amp; creativity</p>
+              </div>
+              <div className="svch-note-sign">
+                <p className="svch-note-hand">RMW</p>
+                <span className="svch-note-label">Authorised signatory</span>
+              </div>
+            </footer>
+
+            <svg className="svch-stamp" viewBox="0 0 120 120" role="img" aria-label="Delivered, since 2008, Noida UP16">
+              <defs>
+                <path id="svch-arc-top" d="M 22 60 A 38 38 0 0 1 98 60" />
+                <path id="svch-arc-bottom" d="M 16 60 A 44 44 0 0 0 104 60" />
+              </defs>
+              <circle cx="60" cy="60" r="56" />
+              <circle cx="60" cy="60" r="48" className="is-thin" />
+              <text className="svch-stamp-ring">
+                <textPath href="#svch-arc-top" startOffset="50%" textAnchor="middle">
+                  SINCE 2008
+                </textPath>
+              </text>
+              <text className="svch-stamp-ring">
+                <textPath href="#svch-arc-bottom" startOffset="50%" textAnchor="middle">
+                  NOIDA · UP16
+                </textPath>
+              </text>
+              <text className="svch-stamp-word" x="60" y="67" textAnchor="middle" transform="rotate(-12 60 60)">
+                Delivered
+              </text>
+            </svg>
+          </article>
+        </div>
       </div>
     </section>
   );

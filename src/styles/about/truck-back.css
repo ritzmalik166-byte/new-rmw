@@ -1,0 +1,428 @@
+/* ---------- About: read the back of our truck ---------- */
+.about-tb {
+  --tb-navy: #1b1f4b;
+  --tb-teal: #2e7a6b;
+  --tb-teal-deep: #1f6f5c;
+  --tb-yellow: #f3c33c;
+  --tb-red: #d9333f;
+  --tb-amber: #f39c1f;
+
+  position: relative;
+  padding: calc(clamp(64px, 8vw, 104px) + 21px) clamp(20px, 5.5vw, 80px) clamp(64px, 8vw, 104px);
+  background: #f6f1ea;
+}
+
+.about-tb::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 21px;
+  background: url("/about/diagonal-stripes.png") repeat-x left center / auto 100%;
+}
+
+.about-tb-inner {
+  display: grid;
+  grid-template-areas:
+    "head stage"
+    "list stage";
+  grid-template-columns: minmax(280px, 330px) minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  column-gap: clamp(40px, 7vw, 110px);
+  row-gap: 28px;
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+.about-tb-head {
+  grid-area: head;
+}
+
+.about-tb-list-wrap {
+  grid-area: list;
+}
+
+.about-tb-stage {
+  position: relative;
+  grid-area: stage;
+  align-self: center;
+}
+
+.about-tb-kicker {
+  margin: 0 0 12px;
+  color: var(--tb-teal);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+}
+
+.about-tb-title {
+  margin: 0;
+  color: var(--tb-navy);
+  font-family: var(--font-yatra), "Yatra One", serif;
+  font-size: clamp(34px, 3.6vw, 48px);
+  font-weight: 400;
+  line-height: 1.08;
+}
+
+/* ---------- Slogan list ---------- */
+.about-tb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-tb-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 40px;
+  overflow: hidden;
+  padding: 9px 14px;
+  border: 2px solid #e4dccd;
+  border-radius: 4px;
+  background: #fff;
+  color: var(--tb-navy);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease;
+}
+
+.about-tb-item:hover {
+  border-color: #c9bda5;
+  transform: translateX(4px);
+}
+
+.about-tb-item:focus-visible {
+  outline: 2px solid var(--tb-teal);
+  outline-offset: 2px;
+}
+
+.about-tb-item.is-active {
+  border-color: #161616;
+  background: var(--tb-yellow);
+  transform: none;
+}
+
+.about-tb-num {
+  flex: 0 0 auto;
+  color: #8d8a84;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.about-tb-item.is-active .about-tb-num {
+  color: #3a3220;
+}
+
+.about-tb-label {
+  font-family: var(--font-inter), var(--font-yatra), Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.about-tb-timer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: #161616;
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: about-tb-timer linear forwards;
+}
+
+/* ---------- Truck back ---------- */
+.about-tb-truck {
+  position: relative;
+  z-index: 1;
+  width: min(640px, 100%);
+  margin-inline: auto;
+  container-type: inline-size;
+  animation: about-tb-idle 2.6s ease-in-out infinite;
+}
+
+.about-tb-shadow {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  width: min(600px, 92%);
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(27 31 75 / 22%), transparent);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.about-tb-frame {
+  padding: 9px;
+  border: 4px solid var(--tb-red);
+  border-bottom: 0;
+  border-radius: 12px 12px 0 0;
+  background:
+    radial-gradient(circle, #ffd23f 2px, transparent 2.6px) center / 12px 12px,
+    var(--tb-teal-deep);
+}
+
+.about-tb-field {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  aspect-ratio: 2 / 1;
+  padding: 6.5% 13%;
+  background: var(--tb-yellow);
+}
+
+.about-tb-rosette {
+  position: absolute;
+  width: 17%;
+  height: auto;
+  aspect-ratio: 1;
+  overflow: visible;
+}
+
+.about-tb-rosette.is-tl {
+  top: 0;
+  left: 0;
+}
+
+.about-tb-rosette.is-tr {
+  top: 0;
+  right: 0;
+  transform: scaleX(-1);
+}
+
+.about-tb-rosette.is-bl {
+  bottom: 0;
+  left: 0;
+  transform: scaleY(-1);
+}
+
+.about-tb-rosette.is-br {
+  right: 0;
+  bottom: 0;
+  transform: scale(-1, -1);
+}
+
+.about-tb-plaque {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 7px;
+  border-radius: 20px;
+  background: radial-gradient(circle, var(--tb-red) 3.2px, transparent 3.8px) center / 10px 10px;
+}
+
+.about-tb-plaque-inner {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 4% 7%;
+  border: 3px solid var(--tb-yellow);
+  border-radius: 14px;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgb(255 255 255 / 10%), transparent 60%),
+    var(--tb-teal);
+  box-shadow:
+    0 0 0 2px #7a2a1b,
+    inset 0 0 0 2px rgb(0 0 0 / 12%);
+  text-align: center;
+}
+
+.about-tb-paint {
+  animation: about-tb-paint 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.about-tb-painted {
+  margin: 0;
+  color: var(--tb-yellow);
+  font-family: var(--font-yatra), "Yatra One", serif;
+  font-size: clamp(24px, 6.4cqw, 40px);
+  line-height: 1.15;
+  text-shadow: 2px 2px 0 #174f44;
+  text-wrap: balance;
+}
+
+.about-tb-copy {
+  max-width: 36ch;
+  margin: 10px auto 0;
+  color: #fff;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: clamp(12px, 2.6cqw, 15px);
+  font-weight: 500;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.about-tb-bumper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: clamp(48px, 10.5cqw, 58px);
+  padding-inline: 4.5%;
+  background: #141414;
+  box-shadow: inset 0 3px 0 rgb(255 255 255 / 6%);
+}
+
+.about-tb-light {
+  width: clamp(24px, 5.6cqw, 32px);
+  aspect-ratio: 1;
+  border: 3px solid #fff;
+  border-radius: 50%;
+}
+
+.about-tb-light.is-red {
+  color: rgb(217 51 63 / 70%);
+  background: var(--tb-red);
+  animation: about-tb-blink 0.7s ease-out;
+}
+
+.about-tb-light.is-amber {
+  color: rgb(243 156 31 / 80%);
+  background: var(--tb-amber);
+  animation: about-tb-blink 0.7s ease-out 2;
+}
+
+.about-tb-plate {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border: 2px solid var(--tb-yellow);
+  border-radius: 3px;
+  background: #fff;
+  color: #141414;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  perspective: 200px;
+}
+
+.about-tb-plate-num {
+  display: inline-block;
+  animation: about-tb-flip 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.about-tb-plate-sep {
+  color: #8d8a84;
+}
+
+.about-tb-hazard {
+  height: 14px;
+  background: repeating-linear-gradient(
+    135deg,
+    var(--tb-red) 0 10px,
+    #fff 10px 20px
+  );
+}
+
+@keyframes about-tb-timer {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes about-tb-paint {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(14px) scale(0.97);
+  }
+}
+
+@keyframes about-tb-flip {
+  from {
+    opacity: 0;
+    transform: rotateX(90deg);
+  }
+}
+
+@keyframes about-tb-blink {
+  0%,
+  100% {
+    filter: none;
+    box-shadow: none;
+  }
+  40% {
+    filter: brightness(1.35);
+    box-shadow: 0 0 18px 4px currentColor;
+  }
+}
+
+@keyframes about-tb-idle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .about-tb-inner {
+    grid-template-areas:
+      "head"
+      "stage"
+      "list";
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    row-gap: 32px;
+  }
+
+  .about-tb-stage {
+    padding-bottom: 12px;
+  }
+}
+
+@media (max-width: 520px) {
+  .about-tb-field {
+    aspect-ratio: auto;
+    min-height: 210px;
+    padding: 9% 12%;
+  }
+
+  .about-tb-rosette {
+    width: 22%;
+  }
+
+  .about-tb-plate {
+    padding: 5px 12px;
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-tb-truck,
+  .about-tb-paint,
+  .about-tb-plate-num,
+  .about-tb-light {
+    animation: none;
+  }
+
+  .about-tb-item {
+    transition: none;
+  }
+}

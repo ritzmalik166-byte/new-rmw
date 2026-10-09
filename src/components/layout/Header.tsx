@@ -14,10 +14,14 @@ import { gsap, registerGsap } from "@/lib/gsap";
 import { site } from "@/lib/site";
 
 import { ServicesMegaMenu } from "@/components/layout/ServicesMegaMenu";
+import { SERVICE_ICONS } from "@/lib/service-icons";
 import { SERVICES_LIST } from "@/lib/services-data";
 
 registerGsap();
 gsap.registerPlugin(useGSAP);
+
+const HEADER_STICK_AFTER = 160;
+const HEADER_IDLE_MS = 1100;
 
 export function Header() {
   const pathname = usePathname();
@@ -67,6 +71,47 @@ export function Header() {
     setMenuOpen(false);
     setServicesOpen(false);
   }, [pathname]);
+
+  const servicesOpenRef = useRef(servicesOpen);
+  useEffect(() => {
+    servicesOpenRef.current = servicesOpen;
+    if (servicesOpen) rootRef.current?.classList.remove("is-hidden");
+  }, [servicesOpen]);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    let idleTimer: number | undefined;
+    const hideWhenIdle = () => {
+      window.clearTimeout(idleTimer);
+      idleTimer = window.setTimeout(() => {
+        if (servicesOpenRef.current || root.matches(":hover, :focus-within")) {
+          hideWhenIdle();
+          return;
+        }
+        root.classList.add("is-hidden");
+      }, HEADER_IDLE_MS);
+    };
+
+    const onScroll = () => {
+      if (window.scrollY < HEADER_STICK_AFTER) {
+        window.clearTimeout(idleTimer);
+        root.classList.remove("is-stuck", "is-hidden");
+        return;
+      }
+      root.classList.add("is-stuck");
+      root.classList.remove("is-hidden");
+      hideWhenIdle();
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.clearTimeout(idleTimer);
+    };
+  }, []);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -309,11 +354,24 @@ function MobileMenu({
                         href={`/services/${svc.slug}`}
                         onClick={onClose}
                         className={cn(
-                          "text-sm py-1.5 px-2 rounded text-white/75 hover:text-amber-400 transition-colors flex items-center justify-between",
+                          "text-sm py-1.5 px-2 rounded text-white/75 hover:text-amber-400 transition-colors flex items-center justify-between gap-3",
                           pathname === `/services/${svc.slug}` && "text-amber-400 font-semibold bg-white/5",
                         )}
                       >
-                        <span>{svc.name}</span>
+                        <span className="flex items-center gap-3">
+                          {SERVICE_ICONS[svc.slug] ? (
+                            <Image
+                              src={SERVICE_ICONS[svc.slug]!}
+                              alt=""
+                              width={32}
+                              height={32}
+                              className="h-8 w-8 shrink-0 object-contain"
+                            />
+                          ) : (
+                            <span className="h-8 w-8 shrink-0" aria-hidden />
+                          )}
+                          {svc.name}
+                        </span>
                         <span className="text-xs text-white/30">→</span>
                       </Link>
                     ))}

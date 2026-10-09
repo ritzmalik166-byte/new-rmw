@@ -1,55 +1,25 @@
 import Link from "next/link";
+import { getServiceLayout } from "@/lib/service-layout";
 import type { ServiceDetail } from "@/lib/services-data";
 
-type SeoLowerSectionsProps = {
+type ServiceLowerSectionsProps = {
   service: ServiceDetail;
   relatedServices: ServiceDetail[];
 };
 
-const FAQS = [
-  {
-    question: "What does an SEO service from RMW include?",
-    answer:
-      "A technical audit, keyword and intent mapping, on-page and content work, local SEO, authority building and reporting. The final scope is confirmed once we have looked at your site and goals.",
-  },
-  {
-    question: "How long before SEO shows results?",
-    answer:
-      "SEO is ongoing work, not an instant switch. Timing depends on your site, competition, starting point and the work required; we review progress against the agreed scope.",
-  },
-  {
-    question: "Do you optimise for AI answers like ChatGPT and Google AI Overviews?",
-    answer:
-      "Yes. The programme includes answer-engine visibility work alongside technical SEO, useful content and clear entity signals.",
-  },
-  {
-    question: "How is SEO different from Google Ads?",
-    answer:
-      "Google Ads can buy immediate placement while a campaign is funded. SEO builds organic visibility through technical health, relevant content and authority over time.",
-  },
-  {
-    question: "Can you handle local SEO for several locations or projects?",
-    answer:
-      "Yes. Local SEO can cover Google Business Profiles, consistent local listings and location-specific landing pages, with the scope tailored to your locations.",
-  },
-  {
-    question: "What will I see in your reports?",
-    answer:
-      "Reporting can cover organic visibility, traffic, rankings and conversions, together with work completed and next steps for the agreed programme.",
-  },
-];
-
 const PROCESS_LABELS = ["Inspect", "Plan the route", "Drive in sprints", "Service stop"];
 
-export function SeoLowerSections({
+export function ServiceLowerSections({
   service,
   relatedServices,
-}: SeoLowerSectionsProps) {
+}: ServiceLowerSectionsProps) {
+  const layout = getServiceLayout(service);
+
   return (
     <div className="subsvc-seo-lower">
-      <section id="roadmap" className="subsvc-seo-process" aria-labelledby="seo-process-title">
+      <section id="roadmap" className="subsvc-seo-process" aria-labelledby="service-process-title">
         <p className="subsvc-seo-kicker">KM 03 · The RMW process</p>
-        <h2 id="seo-process-title">
+        <h2 id="service-process-title">
           Four stops on <span>the route.</span>
         </h2>
         <div className="subsvc-seo-timeline">
@@ -66,33 +36,28 @@ export function SeoLowerSections({
         </div>
       </section>
 
-      <section id="why-rmw" className="subsvc-seo-intent" aria-labelledby="seo-intent-title">
-        <p className="subsvc-seo-kicker">KM 04 · The SEO engine</p>
-        <h2 id="seo-intent-title">
-          Search is where intent <span>shows up first.</span>
+      <section id="why-rmw" className="subsvc-seo-intent" aria-labelledby="service-intent-title">
+        <p className="subsvc-seo-kicker">KM 04 · The {service.name} engine</p>
+        <h2 id="service-intent-title">
+          {layout.intentTitle.lead} <span>{layout.intentTitle.accent}</span>
         </h2>
         <div className="subsvc-seo-intent-points">
-          <div>
-            <h3>Compounding traffic</h3>
-            <p>Rankings can keep working after the campaign budget stops.</p>
-          </div>
-          <div>
-            <h3>Lower acquisition cost</h3>
-            <p>Organic leads add another route to qualified enquiries.</p>
-          </div>
-          <div>
-            <h3>Credibility</h3>
-            <p>Being the clear answer builds trust before the first call.</p>
-          </div>
+          {layout.intentPoints.map((point) => (
+            <div key={point.title}>
+              <h3>{point.title}</h3>
+              <p>{point.copy}</p>
+            </div>
+          ))}
         </div>
         <div className="subsvc-seo-intent-tape" aria-hidden="true">
-          <span>Ranking, not rented</span><span>Drive slow · rank fast</span>
+          <span>{layout.intentTape[0]}</span>
+          <span>{layout.intentTape[1]}</span>
         </div>
       </section>
 
-      <section id="stats" className="subsvc-seo-proof" aria-labelledby="seo-proof-title">
+      <section id="stats" className="subsvc-seo-proof" aria-labelledby="service-proof-title">
         <p className="subsvc-seo-kicker">KM 05 · Work &amp; results</p>
-        <h2 id="seo-proof-title">
+        <h2 id="service-proof-title">
           Proof on the <span>tailgate.</span>
         </h2>
         <div className="subsvc-seo-proof-grid">
@@ -118,17 +83,17 @@ export function SeoLowerSections({
         </p>
         <p className="subsvc-seo-disclaimer">
           <span aria-hidden="true">✳</span>
-          Results vary by site, competition, scope and implementation; past performance does not guarantee future results.
+          Results vary by brand, market, scope and implementation; past performance does not guarantee future results.
         </p>
       </section>
 
-      <section id="seo-faq" className="subsvc-seo-faq" aria-labelledby="seo-faq-title">
+      <section id="service-faq" className="subsvc-seo-faq" aria-labelledby="service-faq-title">
         <p className="subsvc-seo-kicker">KM 06 · FAQs</p>
-        <h2 id="seo-faq-title">
+        <h2 id="service-faq-title">
           Questions at the <span>dhaba.</span>
         </h2>
         <div className="subsvc-seo-faq-list">
-          {FAQS.map((faq, index) => (
+          {layout.faqs.map((faq, index) => (
             <details className="subsvc-seo-faq-item" key={faq.question} open={index === 0}>
               <summary>
                 <span className="subsvc-seo-faq-num">{String(index + 1).padStart(2, "0")}</span>

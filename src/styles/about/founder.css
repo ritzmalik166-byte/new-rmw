@@ -1,36 +1,44 @@
 .about-founder {
+  --fd-pad-y: clamp(28px, 8vh, 96px);
+  --fd-pad-l: clamp(28px, 4.5vw, 61px);
+  --fd-size: min(541px, calc(100svh - 2 * var(--fd-pad-y)), 40vw);
+
   position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 100svh;
   overflow: hidden;
   background: #a71b10;
   color: #ffffff;
-  min-height: 755px;
-  padding: 107px clamp(28px, 4vw, 72px) 107px 662px;
+  padding: var(--fd-pad-y) clamp(28px, 4vw, 72px) var(--fd-pad-y) var(--fd-pad-l);
 }
 
 .about-founder-layout {
   display: flex;
+  align-items: center;
+  gap: clamp(36px, 4.5vw, 61px);
+  width: 100%;
   max-width: none;
   margin: 0;
 }
 
 .about-founder-visual {
-  position: absolute;
-  top: 107px;
-  left: 61px;
   z-index: 1;
-  width: 541px;
-  height: 541px;
+  flex: 0 0 var(--fd-size);
+  width: var(--fd-size);
+  height: var(--fd-size);
 }
 
+/* The visual is unpositioned so the stripes span the full section height. */
 .about-founder-stripes {
   position: absolute;
   z-index: 0;
-  top: -107px;
-  bottom: -107px;
-  left: 50%;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--fd-pad-l) + var(--fd-size) / 2);
   width: 92px;
-  height: auto;
-  min-height: calc(100% + 214px);
+  height: 100%;
   object-fit: cover;
   object-position: center;
   pointer-events: none;
@@ -40,8 +48,8 @@
 .about-founder-card {
   position: relative;
   z-index: 1;
-  width: 541px;
-  height: 541px;
+  width: 100%;
+  height: 100%;
   margin: 0;
   overflow: hidden;
   opacity: 1;
@@ -49,8 +57,8 @@
 
 .about-founder-portrait {
   display: block;
-  width: 541px;
-  height: 541px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   opacity: 0;
 }
@@ -72,17 +80,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 32px;
-  width: 805px;
-  max-width: 100%;
-  min-height: 541px;
+  flex: 1 1 auto;
+  gap: clamp(12px, 3vh, 32px);
+  min-width: 0;
+  max-width: 805px;
   padding: 0;
 }
 
 .about-founder-kicker {
-  width: 805px;
-  max-width: 100%;
-  height: 16px;
   margin: 0;
   color: #e59b20;
   font-family: var(--font-inter), Inter, sans-serif;
@@ -98,36 +103,31 @@
   color: #ffffff;
   font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
   font-weight: 700;
-  font-size: 56px;
-  line-height: 56px;
+  font-size: clamp(32px, min(6.6vh, 4.2vw), 56px);
+  line-height: 1;
   letter-spacing: 0;
   text-transform: uppercase;
 }
 
 .about-founder-role {
-  width: 805px;
-  max-width: 100%;
-  height: 20px;
   margin: 0;
   color: #e59b20;
   font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 100%;
+  font-size: clamp(15px, 2.2vh, 18px);
+  line-height: 1.3;
   letter-spacing: 0;
   text-transform: capitalize;
 }
 
 .about-founder-lede {
-  width: 705px;
-  max-width: 100%;
-  height: 81px;
+  max-width: 705px;
   margin: 0;
   color: #ffffffcc;
   font-family: var(--font-inter), Inter, sans-serif;
   font-weight: 400;
-  font-size: 18px;
-  line-height: 27px;
+  font-size: clamp(14px, 2.1vh, 17px);
+  line-height: 1.55;
   letter-spacing: 0;
   text-transform: capitalize;
 }

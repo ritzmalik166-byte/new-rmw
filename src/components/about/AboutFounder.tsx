@@ -158,11 +158,12 @@ export function AboutFounder() {
         };
 
         trigger?.kill();
+        const pin = root.offsetHeight <= window.innerHeight + 2;
         trigger = ScrollTrigger.create({
           trigger: root,
-          start: "top top",
-          end: () => `+=${Math.round(window.innerHeight * 1.45)}`,
-          pin: true,
+          start: pin ? "top top" : "top 75%",
+          end: () => `+=${Math.round(window.innerHeight * (pin ? 1.45 : 0.9))}`,
+          pin,
           pinSpacing: true,
           scrub: true,
           anticipatePin: 1,
