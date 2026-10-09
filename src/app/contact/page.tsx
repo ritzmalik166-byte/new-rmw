@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { AddressMap } from "@/components/contact/AddressMap";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { RealTruck } from "@/components/ui/RealTruck";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -125,14 +125,9 @@ export default function ContactPage() {
 
       <div className="ct-road" aria-hidden>
         <span className="ct-road-lane" />
-        <Image
-          className="ct-road-truck"
-          src="/loader/textures/truck-side.webp"
-          alt=""
-          width={521}
-          height={287}
-          sizes="120px"
-        />
+        <span className="ct-road-truck">
+          <RealTruck rolling small />
+        </span>
       </div>
     </section>
   );

@@ -1,0 +1,326 @@
+/* ---------- Homepage awards: trophy shelf ---------- */
+.hm-awards {
+  overflow: hidden;
+  padding-block: var(--hm-pad-y);
+  background:
+    radial-gradient(50% 50% at 100% 0%, rgb(243 195 60 / 14%), transparent 70%),
+    radial-gradient(40% 50% at 0% 100%, rgb(201 53 110 / 18%), transparent 70%),
+    var(--hm-navy);
+  color: #fff;
+}
+
+.hm-awards .hm-title {
+  color: #fff;
+}
+
+.hm-awards .hm-line.is-accent {
+  color: var(--hm-yellow);
+}
+
+.hm-awards-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px 48px;
+}
+
+.hm-awards-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.hm-awards-controls button {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s var(--hm-ease);
+}
+
+.hm-awards-controls button:hover {
+  background: var(--hm-yellow);
+  border-color: var(--hm-yellow);
+  color: var(--hm-ink);
+  transform: translateY(-2px);
+}
+
+.hm-awards-controls svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hm-awards-cabinet {
+  position: relative;
+  margin-top: clamp(32px, 5vh, 48px);
+}
+
+.hm-awards-shelf {
+  --shelf-inset: max(var(--hm-gutter), calc((100% - 1280px) / 2 + var(--hm-gutter)));
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 24px;
+  padding: 26px var(--shelf-inset) 0;
+  overflow-x: auto;
+  scroll-padding-inline: var(--shelf-inset);
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.hm-awards-shelf::-webkit-scrollbar {
+  display: none;
+}
+
+.hm-awards-shelf::after {
+  content: "";
+  flex: 0 0 1px;
+}
+
+.hm-award {
+  position: relative;
+  display: flex;
+  flex: 0 0 clamp(236px, 22vw, 290px);
+  flex-direction: column;
+  padding: 10px 10px 18px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--hm-paper);
+  color: var(--hm-navy);
+  text-align: left;
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition:
+    transform 0.3s var(--hm-ease),
+    box-shadow 0.3s var(--hm-ease);
+}
+
+.hm-award:hover,
+.hm-award:focus-visible {
+  transform: translate(-4px, -6px);
+  box-shadow: 8px 8px 0 var(--hm-yellow);
+}
+
+.hm-award-year {
+  position: absolute;
+  top: -12px;
+  left: 18px;
+  z-index: 2;
+  padding: 4px 10px;
+  border: 2px solid var(--hm-ink);
+  border-radius: 6px;
+  background: var(--hm-yellow);
+  color: var(--hm-ink);
+  font-family: var(--hm-mono);
+  font-size: 12px;
+  font-weight: 700;
+  rotate: -5deg;
+}
+
+.hm-award-media {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #e9e4d6;
+}
+
+.hm-award-media img {
+  object-fit: cover;
+  transition: transform 0.8s var(--hm-ease);
+}
+
+.hm-award:hover .hm-award-media img {
+  transform: scale(1.05);
+}
+
+.hm-award-sub {
+  margin-top: 14px;
+  color: var(--hm-pink);
+  font-family: var(--hm-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hm-award-title {
+  margin-top: 6px;
+  font-family: var(--hm-serif);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+/* The shelf the trophies stand on. */
+.hm-awards-plank {
+  position: relative;
+  display: block;
+  height: 18px;
+  margin-top: -6px;
+  background: linear-gradient(#8a5a2b, #5a3616 60%, #3e2611);
+  box-shadow: 0 16px 24px -8px rgb(0 0 0 / 45%);
+}
+
+.hm-awards-plank::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: #b07a3f;
+}
+
+/* ---------- Award detail modal ---------- */
+.hm-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  overflow-y: auto;
+  background: rgb(14 13 40 / 72%);
+  backdrop-filter: blur(4px);
+}
+
+.hm-modal {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  width: min(880px, 100%);
+  overflow: hidden;
+  border: 2px solid #161616;
+  border-radius: 16px;
+  background: #fffcf3;
+  box-shadow: 8px 8px 0 #f3c33c;
+}
+
+.hm-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #161616;
+  border-radius: 50%;
+  background: #fff;
+  color: #161616;
+  cursor: pointer;
+}
+
+.hm-modal-close:hover {
+  background: #f3c33c;
+}
+
+.hm-modal-close svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+.hm-modal-media {
+  position: relative;
+  min-height: 420px;
+  background: #e9e4d6;
+}
+
+.hm-modal-media img {
+  object-fit: cover;
+}
+
+.hm-modal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 36px;
+}
+
+.hm-modal-body p {
+  margin: 0;
+}
+
+.hm-modal-year {
+  align-self: flex-start;
+  padding: 4px 10px;
+  border: 2px solid #161616;
+  border-radius: 6px;
+  background: #f3c33c;
+  font-family: var(--font-space-mono), "Space Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  rotate: -4deg;
+}
+
+.hm-modal-sub {
+  margin-top: 18px !important;
+  color: #c9356e;
+  font-family: var(--font-space-mono), "Space Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hm-modal-title {
+  margin: 8px 0 0;
+  color: #1b1a4a;
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.hm-modal-copy {
+  margin-top: 14px !important;
+  color: #5f5a6e;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  .hm-modal {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hm-modal-media {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .hm-modal-body {
+    padding: 24px 22px 28px;
+  }
+
+  .hm-award {
+    flex-basis: min(70vw, 260px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hm-award,
+  .hm-award-media img {
+    transition: none;
+  }
+}

@@ -27,14 +27,14 @@
 /* Shared by every section that carries the dashed route. The image faces
    right, so it is turned to drive down the rail. */
 .svc-route-truck {
-  --truck-w: 58px;
+  --truck-w: 84px;
   position: absolute;
   top: 0;
   left: 37px;
   z-index: 1;
-  width: calc(var(--truck-w) * 0.64);
+  width: calc(var(--truck-w) * 0.365);
   height: var(--truck-w);
-  margin-left: calc(var(--truck-w) * -0.32);
+  margin-left: calc(var(--truck-w) * -0.1825);
   pointer-events: none;
   will-change: transform;
   visibility: hidden;
@@ -47,8 +47,8 @@
   width: var(--truck-w);
   max-width: none;
   height: auto;
-  transform: translate(-50%, -50%) rotate(90deg);
-  filter: drop-shadow(-3px 0 3px rgb(0 0 0 / 0.22));
+  transform: translate(-50%, -50%) rotate(-90deg);
+  filter: drop-shadow(3px 0 3px rgb(0 0 0 / 0.28));
   animation: svc-route-truck-idle 0.38s linear infinite;
 }
 
@@ -425,7 +425,7 @@
   }
 
   .svc-engines-truck {
-    --truck-w: 48px;
+    --truck-w: 68px;
   }
 
   .svc-engines-mark {

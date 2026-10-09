@@ -1,0 +1,74 @@
+/* ---------- Photo truck with spinning wheel layers ---------- */
+.real-truck {
+  --wheel-rev: 1.1s;
+  position: relative;
+  display: block;
+  aspect-ratio: 1101 / 402;
+  pointer-events: none;
+  user-select: none;
+}
+
+.real-truck.is-flipped {
+  scale: -1 1;
+}
+
+.real-truck img.real-truck-body {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+}
+
+.real-truck-wheel {
+  position: absolute;
+  width: 12.716%;
+  height: 34.826%;
+  rotate: calc(var(--wheel-turn, 0deg) * -1);
+}
+
+.real-truck-wheel.is-front {
+  top: 63.43%;
+  left: 7.175%;
+}
+
+.real-truck-wheel.is-rear {
+  top: 64.93%;
+  left: 69.48%;
+}
+
+.real-truck .real-truck-wheel img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+}
+
+.real-truck.is-rolling .real-truck-wheel img {
+  animation: real-truck-spin var(--wheel-rev) linear infinite;
+}
+
+.real-truck.is-rolling img.real-truck-body {
+  animation: real-truck-ride 0.42s ease-in-out infinite alternate;
+}
+
+@keyframes real-truck-spin {
+  to {
+    rotate: -360deg;
+  }
+}
+
+@keyframes real-truck-ride {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 0 -0.35%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .real-truck.is-rolling .real-truck-wheel img,
+  .real-truck.is-rolling img.real-truck-body {
+    animation: none;
+  }
+}

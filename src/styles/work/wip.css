@@ -487,12 +487,27 @@
   right: 0;
   bottom: 9%;
   z-index: 2;
-  width: 40cqw;
-  height: auto;
+  display: block;
+  width: 48cqw;
   filter: drop-shadow(0 1.2cqw 1cqw rgb(0 0 0 / 35%));
   animation:
     wip-drive 2.2s var(--wip-ease) 0.2s both,
     wip-idle 0.24s ease-in-out 2.4s infinite alternate;
+}
+
+.work-wip-truck .real-truck {
+  width: 100%;
+}
+
+/* About 3.2 wheel turns over the 130% drive-in, eased the same way. */
+.work-wip-truck .real-truck-wheel img {
+  animation: wip-wheels 2.2s var(--wip-ease) 0.2s both;
+}
+
+@keyframes wip-wheels {
+  from {
+    rotate: 1170deg;
+  }
 }
 
 /* ---------- Keyframes ---------- */
@@ -582,7 +597,8 @@
   .work-wip-sign,
   .work-wip-lamp,
   .work-wip-bubble,
-  .work-wip-truck {
+  .work-wip-truck,
+  .work-wip-truck .real-truck-wheel img {
     animation: none;
   }
 }

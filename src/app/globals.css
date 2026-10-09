@@ -6,6 +6,7 @@
 @import "../styles/base/base.css";
 
 @import "../styles/components/buttons.css";
+@import "../styles/components/real-truck.css";
 
 @import "../styles/layout/header.css";
 
@@ -26,6 +27,18 @@
 @import "../styles/blogs/hero.css";
 @import "../styles/home/faq.css";
 @import "../styles/home/audit.css";
+
+@import "../styles/homepage/base.css";
+@import "../styles/homepage/hero.css";
+@import "../styles/homepage/intro.css";
+@import "../styles/homepage/route.css";
+@import "../styles/homepage/engines.css";
+@import "../styles/homepage/proof.css";
+@import "../styles/homepage/work.css";
+@import "../styles/homepage/voice.css";
+@import "../styles/homepage/awards.css";
+@import "../styles/homepage/news.css";
+@import "../styles/homepage/faq.css";
 
 @import "../styles/layout/footer.css";
 

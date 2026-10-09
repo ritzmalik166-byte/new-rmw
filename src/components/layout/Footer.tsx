@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { TransitionLink } from "@/components/motion/TransitionLink";
 import { useMotion } from "@/components/providers/MotionProvider";
+import { RealTruck, setWheelTurn } from "@/components/ui/RealTruck";
 import { gsap, registerGsap } from "@/lib/gsap";
 import { site } from "@/lib/site";
 
@@ -48,6 +49,7 @@ export function Footer() {
         {
           x: destinationX,
           ease: "none",
+          onUpdate: () => setWheelTurn(truck, Number(gsap.getProperty(truck, "x"))),
           scrollTrigger: {
             trigger: root,
             start: "top 85%",
@@ -122,8 +124,7 @@ export function Footer() {
       <div className="site-footer-road" aria-hidden>
         <div className="site-footer-rule" />
         <div className="site-footer-truck">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/footer/truck.png" alt="" width={120} height={56} />
+          <RealTruck flip small />
         </div>
         <div className="site-footer-milestone">
           {/* eslint-disable-next-line @next/next/no-img-element */}

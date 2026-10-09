@@ -166,7 +166,7 @@
   left: max(1.25rem, calc((100% - 1280px) / 2));
   bottom: 26px;
   z-index: 2;
-  width: 120px;
+  width: 170px;
   will-change: transform;
   filter: drop-shadow(0 6px 10px rgb(0 0 0 / 0.35));
 }
@@ -272,7 +272,7 @@
 
   .site-footer-truck {
     left: 1rem;
-    width: 92px;
+    width: 130px;
   }
 
   .site-footer-milestone {

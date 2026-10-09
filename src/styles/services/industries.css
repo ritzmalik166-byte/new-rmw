@@ -486,50 +486,20 @@
   left: 0;
   bottom: calc(var(--ind-ground-h) + 2px);
   z-index: 6;
-  width: clamp(116px, 10.5vw, 156px);
+  width: clamp(170px, 15vw, 230px);
   pointer-events: none;
 }
 
-.svc-ind-truck-art {
-  display: block;
+.svc-ind-truck .real-truck {
   width: 100%;
-  height: auto;
-  overflow: visible;
+  filter: drop-shadow(0 4px 4px rgb(0 0 0 / 30%));
 }
 
-.svc-ind-truck-body {
-  animation: svc-ind-bob 0.3s ease-in-out infinite alternate;
-}
-
-.svc-ind-wheel {
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-.svc-ind-truck-brand {
-  fill: #1b1446;
-  font-family: var(--font-display), "Archivo Black", sans-serif;
-  font-size: 15px;
-}
-
-.svc-ind-truck-tag {
-  fill: #4b4570;
-  font-family: var(--font-inter), Inter, sans-serif;
-  font-weight: 700;
-  font-size: 7px;
-}
-
-@keyframes svc-ind-bob {
-  to {
-    transform: translateY(-1.2px);
-  }
-}
-
-/* Exhaust leaves the stack top (x 163, y 20 of 240×120) and trails behind */
+/* Exhaust leaves from behind the cab roof and trails behind */
 .svc-ind-exhaust {
   position: absolute;
-  left: 67.9%;
-  top: 16.7%;
+  left: 64%;
+  top: 6%;
   width: 0;
   height: 0;
 }
@@ -568,7 +538,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .svc-ind-truck-body,
   .svc-ind-exhaust i,
   .svc-ind-chimney-smoke circle {
     animation: none;

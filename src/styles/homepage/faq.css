@@ -1,0 +1,322 @@
+/* ---------- Homepage FAQ: common highways ---------- */
+.hm-faq {
+  padding-block: var(--hm-pad-y);
+  background: #fff;
+  scroll-margin-top: 80px;
+}
+
+.hm-faq-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: start;
+  gap: clamp(40px, 6vw, 96px);
+}
+
+.hm-faq-side {
+  position: sticky;
+  top: 110px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* ---------- Help card (contact dispatch card) ---------- */
+.hm-faq-help {
+  position: relative;
+  padding: clamp(22px, 2.4vw, 30px) clamp(20px, 2.2vw, 28px);
+  border-radius: 16px;
+  background:
+    radial-gradient(120% 70% at 0% 0%, rgb(243 195 60 / 16%), transparent 60%),
+    var(--hm-navy);
+  color: #fff;
+  box-shadow: 0 30px 50px -28px rgb(27 26 74 / 60%);
+}
+
+.hm-faq-help p {
+  margin: 0;
+}
+
+.hm-faq-plate {
+  position: absolute;
+  top: 22px;
+  right: 16px;
+}
+
+.hm-faq-help-kicker {
+  color: var(--hm-yellow);
+  font-family: var(--hm-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hm-faq-help-title {
+  margin-top: 4px !important;
+  font-family: var(--hm-serif);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.hm-faq-help-copy {
+  max-width: 40ch;
+  margin-top: 8px !important;
+  color: rgb(255 255 255 / 72%);
+  font-family: var(--hm-sans);
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.hm-faq-help-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 16px 0 0;
+  border-top: 1px dashed rgb(255 255 255 / 18%);
+  list-style: none;
+}
+
+.hm-faq-help-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.hm-faq-help-list span {
+  color: rgb(255 255 255 / 55%);
+  font-family: var(--hm-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hm-faq-help-list a {
+  color: #fff;
+  font-family: var(--hm-sans);
+  font-size: 14px;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 0.2s ease;
+}
+
+.hm-faq-help-list a:hover {
+  color: var(--hm-yellow);
+}
+
+.hm-faq-help-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 11px 20px;
+  border: 2px solid var(--hm-ink);
+  border-radius: 999px;
+  background: var(--hm-yellow);
+  color: var(--hm-ink);
+  font-family: var(--hm-sans);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 3px 3px 0 var(--hm-ink);
+  transition:
+    transform 0.2s var(--hm-ease),
+    box-shadow 0.2s var(--hm-ease);
+}
+
+.hm-faq-help-cta:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--hm-ink);
+}
+
+/* ---------- Accordion ---------- */
+.hm-faq-list {
+  margin: 0;
+  padding: 0;
+  border-top: 3px double var(--hm-navy);
+  list-style: none;
+}
+
+.hm-faq-item {
+  border-bottom: 1.5px dashed var(--hm-rule);
+  transition: background-color 0.3s ease;
+}
+
+.hm-faq-item.is-open {
+  background: linear-gradient(90deg, rgb(255 243 226 / 90%), rgb(255 243 226 / 0%));
+}
+
+.hm-faq-q {
+  margin: 0;
+}
+
+.hm-faq-q button {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) 38px;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 22px 12px 22px 14px;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.hm-faq-km {
+  color: var(--hm-pink);
+  font-family: var(--hm-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.hm-faq-text {
+  color: var(--hm-navy);
+  font-family: var(--hm-serif);
+  font-size: clamp(17px, 1.5vw, 20px);
+  font-weight: 700;
+  line-height: 1.3;
+  transition: color 0.2s ease;
+}
+
+.hm-faq-q button:hover .hm-faq-text {
+  color: var(--hm-pink);
+}
+
+.hm-faq-toggle {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  box-sizing: border-box;
+  border: 2px solid var(--hm-navy);
+  border-radius: 50%;
+  transition:
+    background-color 0.3s ease,
+    rotate 0.4s var(--hm-ease);
+}
+
+.hm-faq-toggle::before,
+.hm-faq-toggle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--hm-navy);
+  translate: -50% -50%;
+  transition:
+    background-color 0.3s ease,
+    scale 0.3s var(--hm-ease);
+}
+
+.hm-faq-toggle::after {
+  rotate: 90deg;
+}
+
+.hm-faq-item.is-open .hm-faq-toggle {
+  background: var(--hm-navy);
+  rotate: 180deg;
+}
+
+.hm-faq-item.is-open .hm-faq-toggle::before,
+.hm-faq-item.is-open .hm-faq-toggle::after {
+  background: #fff;
+}
+
+.hm-faq-item.is-open .hm-faq-toggle::after {
+  scale: 0 1;
+}
+
+.hm-faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s var(--hm-ease);
+}
+
+.hm-faq-item.is-open .hm-faq-panel {
+  grid-template-rows: 1fr;
+}
+
+.hm-faq-panel > div {
+  overflow: hidden;
+}
+
+.hm-faq-a {
+  margin: 0;
+  padding: 0 66px 24px 94px;
+  color: var(--hm-muted);
+  font-family: var(--hm-sans);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+@media (max-width: 980px) {
+  .hm-faq-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .hm-faq-side {
+    display: contents;
+  }
+
+  .hm-faq-head {
+    order: 1;
+  }
+
+  .hm-faq-list {
+    order: 2;
+    width: 100%;
+  }
+
+  .hm-faq-help {
+    order: 3;
+    width: min(100%, 520px);
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 640px) {
+  .hm-faq-q button {
+    grid-template-columns: minmax(0, 1fr) 34px;
+    gap: 6px 12px;
+    padding: 18px 4px;
+  }
+
+  .hm-faq-km {
+    grid-column: 1 / -1;
+  }
+
+  .hm-faq-toggle {
+    grid-row: 2;
+    grid-column: 2;
+    width: 34px;
+    height: 34px;
+  }
+
+  .hm-faq-a {
+    padding: 0 4px 20px;
+    font-size: 14.5px;
+  }
+
+  .hm-faq-plate {
+    position: static;
+    display: inline-block;
+    margin-bottom: 12px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hm-faq-panel,
+  .hm-faq-toggle,
+  .hm-faq-toggle::before,
+  .hm-faq-toggle::after {
+    transition: none;
+  }
+}

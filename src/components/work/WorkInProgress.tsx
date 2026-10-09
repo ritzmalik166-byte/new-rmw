@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { TransitionLink } from "@/components/motion/TransitionLink";
+import { RealTruck } from "@/components/ui/RealTruck";
 import { site } from "@/lib/site";
 
 const COMING_UP = ["Brand campaigns", "SEO case studies", "Websites we've built", "Print & outdoor"];
@@ -108,15 +108,9 @@ export function WorkInProgress() {
             <span className="work-wip-lane" />
           </div>
 
-          <Image
-            className="work-wip-truck"
-            src="/loader/textures/truck-side.webp"
-            alt=""
-            width={521}
-            height={287}
-            sizes="(max-width: 900px) 40vw, 240px"
-            priority
-          />
+          <span className="work-wip-truck">
+            <RealTruck small priority />
+          </span>
         </div>
       </div>
     </section>

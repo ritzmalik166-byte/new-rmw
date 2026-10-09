@@ -83,37 +83,12 @@
 
 .about-cab {
   position: relative;
-  width: clamp(200px, 20vw, 280px);
+  width: clamp(300px, 30vw, 420px);
   flex: 0 0 auto;
-  transform: scaleX(-1);
 }
 
-.about-cab img {
-  display: block;
+.about-cab .real-truck {
   width: 100%;
-  height: auto;
-}
-
-.about-tyre {
-  position: absolute;
-  width: 13%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 50%, #9ecbff 0 15%, #e1062c 16% 32%, #f4f4f4 33% 40%, #1a1a1a 41% 100%),
-    repeating-conic-gradient(#2a2a2a 0 8deg, #111 8deg 18deg);
-  box-shadow: inset 0 0 0 1.5px #111;
-  will-change: transform;
-}
-
-.about-tyre-rear {
-  left: 13.8%;
-  bottom: 7%;
-}
-
-.about-tyre-front {
-  left: 67.6%;
-  bottom: 7%;
 }
 
 .about-billboard {
@@ -310,7 +285,7 @@
   }
 
   .about-cab {
-    width: 168px;
+    width: 230px;
   }
 
   .about-billboard {

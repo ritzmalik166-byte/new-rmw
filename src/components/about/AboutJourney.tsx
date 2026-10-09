@@ -3,6 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
+import { RealTruck, setWheelTurn } from "@/components/ui/RealTruck";
 import { gsap, registerGsap } from "@/lib/gsap";
 
 registerGsap();
@@ -94,7 +95,6 @@ export function AboutJourney() {
         match.add("(min-width: 901px)", () => {
           const road = root.querySelector<HTMLElement>(".about-journey-road");
           const truck = root.querySelector<HTMLElement>(".about-journey-truck");
-          const tyres = root.querySelectorAll<HTMLElement>(".about-journey-tyre");
           const cards = root.querySelectorAll<HTMLElement>(".about-journey-stop");
           if (!road || !truck) return;
 
@@ -125,12 +125,8 @@ export function AboutJourney() {
               immediateRender: true,
               onUpdate: () => {
                 const x = truckEnd(road, truck) * state.p;
-                const radius = Math.max(6, (tyres[0]?.offsetWidth ?? 14) / 2);
                 gsap.set(truck, { x });
-                gsap.set(tyres, {
-                  rotation: (x / (Math.PI * 2 * radius)) * 360,
-                  transformOrigin: "50% 50%",
-                });
+                setWheelTurn(truck, x);
               },
             },
           );
@@ -192,10 +188,7 @@ export function AboutJourney() {
             />
           ))}
           <div className="about-journey-truck">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/footer/truck.png" alt="" width={116} height={74} />
-            <span className="about-journey-tyre about-journey-tyre-rear" aria-hidden />
-            <span className="about-journey-tyre about-journey-tyre-front" aria-hidden />
+            <RealTruck flip small />
           </div>
         </div>
       </div>

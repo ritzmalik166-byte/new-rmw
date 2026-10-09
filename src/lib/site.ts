@@ -334,7 +334,7 @@ export const site = {
       cta: "Request an Audit",
       href: "/#start-a-project",
     },
-    truck: "/s10/highway-truck.png",
+    truck: "/trucks/rmw-billboard-truck.webp",
     faqs: [
       {
         q: "What services does Ritz Media World offer?",

@@ -3,6 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
+import { RealTruck, setWheelTurn } from "@/components/ui/RealTruck";
 import { gsap, registerGsap, SplitText } from "@/lib/gsap";
 
 registerGsap();
@@ -27,7 +28,6 @@ export function AboutDrive() {
       const stage = root.querySelector<HTMLElement>(".about-drive-stage");
       const rig = root.querySelector<HTMLElement>(".about-drive-rig");
       const dashes = root.querySelector<HTMLElement>(".about-drive-dashes");
-      const tyres = root.querySelectorAll<HTMLElement>(".about-tyre");
       const copy = root.querySelectorAll<HTMLElement>(".about-billboard-copy");
       if (!stage || !rig) return;
 
@@ -94,11 +94,9 @@ export function AboutDrive() {
             const to = -rig.offsetWidth - 32;
             const x = from + (to - from) * state.p;
             const traveled = from - x;
-            const radius = Math.max(8, (tyres[0]?.offsetWidth ?? 28) / 2);
-            const rotation = (traveled / (Math.PI * 2 * radius)) * 360;
 
             gsap.set(rig, { x });
-            gsap.set(tyres, { rotation, transformOrigin: "50% 50%" });
+            setWheelTurn(rig, traveled);
             if (dashes) gsap.set(dashes, { backgroundPositionX: traveled });
           },
           },
@@ -139,10 +137,7 @@ export function AboutDrive() {
       <div className="about-drive-stage">
         <div className="about-drive-rig">
           <div className="about-cab">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/footer/truck.png" alt="" width={116} height={74} />
-            <span className="about-tyre about-tyre-rear" aria-hidden />
-            <span className="about-tyre about-tyre-front" aria-hidden />
+            <RealTruck small />
           </div>
 
           <div className="about-billboard">

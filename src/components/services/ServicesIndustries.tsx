@@ -3,6 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import { useRef, type CSSProperties } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
+import { RealTruck, setWheelTurn } from "@/components/ui/RealTruck";
 import { gsap, registerGsap } from "@/lib/gsap";
 
 registerGsap();
@@ -69,95 +70,6 @@ const buildSkyline = (seed: number, minH: number, spread: number) => {
 };
 const SKYLINE_FAR = buildSkyline(2, 170, 30);
 const SKYLINE_NEAR = buildSkyline(5, 80, 24);
-
-const WHEELS = [42, 72, 204];
-const WHEEL_BOLTS = [0, 72, 144, 216, 288].map((deg) => {
-  const a = (deg * Math.PI) / 180;
-  return [Math.cos(a) * 4.6, Math.sin(a) * 4.6] as const;
-});
-
-function RmwTruck() {
-  return (
-    <svg className="svc-ind-truck-art" viewBox="0 0 240 120" aria-hidden focusable="false">
-      <defs>
-        <linearGradient id="svc-ind-box" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#ffffff" />
-          <stop offset="0.75" stopColor="#eef0f5" />
-          <stop offset="1" stopColor="#d3d7e1" />
-        </linearGradient>
-        <linearGradient id="svc-ind-cab" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#f7bd45" />
-          <stop offset="0.6" stopColor="#e8a21e" />
-          <stop offset="1" stopColor="#b5770b" />
-        </linearGradient>
-        <linearGradient id="svc-ind-glass" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#cbe7f7" />
-          <stop offset="1" stopColor="#557f9f" />
-        </linearGradient>
-        <radialGradient id="svc-ind-lamp">
-          <stop offset="0" stopColor="#fff6c8" />
-          <stop offset="1" stopColor="#fff6c8" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-
-      <ellipse cx="122" cy="110" rx="112" ry="5" fill="#000" opacity="0.28" />
-
-      <g className="svc-ind-truck-body">
-        <rect x="6" y="12" width="154" height="74" rx="4" fill="url(#svc-ind-box)" stroke="#1b1446" strokeWidth="1.5" />
-        {[30, 54, 78, 102, 126].map((x) => (
-          <line key={x} x1={x} y1="14" x2={x} y2="84" stroke="#e1e4ec" strokeWidth="1" />
-        ))}
-        <path d="M7 64 C50 52 100 76 159 58 V71 C100 88 50 66 7 78 Z" fill="#d0172f" />
-        <text x="14" y="36" className="svc-ind-truck-brand" textLength="138" lengthAdjust="spacingAndGlyphs">
-          RITZ MEDIA WORLD
-        </text>
-        <text x="14" y="49" className="svc-ind-truck-tag" textLength="138" lengthAdjust="spacingAndGlyphs">
-          Next destination: your industry →
-        </text>
-        <rect x="9" y="8" width="7" height="3" rx="1" fill="#ff8a1a" />
-        <rect x="150" y="8" width="7" height="3" rx="1" fill="#ff8a1a" />
-
-        <rect x="6" y="85" width="228" height="8" rx="2" fill="#26262c" />
-        <rect x="161" y="22" width="4" height="64" rx="1.5" fill="#aeb2bc" />
-        <rect x="160" y="20" width="6" height="4" rx="1" fill="#7d818b" />
-
-        <path
-          d="M166 38 H204 Q212 38 216 45 L228 64 Q232 69 232 76 V90 H166 Z"
-          fill="url(#svc-ind-cab)"
-          stroke="#1b1446"
-          strokeWidth="1.5"
-        />
-        <path d="M188 44 H204 Q209 44 212 49 L221 64 H188 Z" fill="url(#svc-ind-glass)" stroke="#1b1446" strokeWidth="1.2" />
-        <circle cx="199" cy="53" r="4" fill="#2c2440" />
-        <path d="M191 64 Q199 55 207 64 Z" fill="#2c2440" />
-        <path d="M207 45 L211 45 L201 63 L197 63 Z" fill="#ffffff" opacity="0.4" />
-        <path d="M184 42 V88" stroke="#a86f0b" strokeWidth="1" />
-        <rect x="188" y="68" width="7" height="2" rx="1" fill="#7a5208" />
-        <rect x="181" y="45" width="3" height="11" rx="1" fill="#26262c" />
-        <rect x="166" y="74" width="66" height="3" fill="#d0172f" />
-        <circle cx="231" cy="79" r="10" fill="url(#svc-ind-lamp)" />
-        <rect x="227" y="76" width="5" height="6" rx="1.5" fill="#fff3b0" stroke="#1b1446" strokeWidth="0.8" />
-        <rect x="160" y="88" width="76" height="7" rx="2" fill="#3a3a42" />
-        <rect x="88" y="88" width="5" height="15" rx="1" fill="#1b1b20" />
-        {WHEELS.map((cx) => (
-          <circle key={cx} cx={cx} cy="96" r="16" fill="#18181d" />
-        ))}
-      </g>
-
-      {WHEELS.map((cx) => (
-        <g key={cx} className="svc-ind-wheel">
-          <circle cx={cx} cy="96" r="13" fill="#1d1d22" />
-          <circle cx={cx} cy="96" r="12" fill="none" stroke="#34343b" strokeWidth="1.5" strokeDasharray="2 2.4" />
-          <circle cx={cx} cy="96" r="7.5" fill="#c9ccd4" />
-          <circle cx={cx} cy="96" r="2.6" fill="#6b6f7a" />
-          {WHEEL_BOLTS.map(([bx, by]) => (
-            <circle key={`${bx}${by}`} cx={cx + bx} cy={96 + by} r="1.1" fill="#585c66" />
-          ))}
-        </g>
-      ))}
-    </svg>
-  );
-}
 
 export function ServicesIndustries() {
   const rootRef = useRef<HTMLElement>(null);
@@ -251,16 +163,10 @@ export function ServicesIndustries() {
 
       let worldW = world.offsetWidth;
       let truckW = truck.offsetWidth;
-      const wheels = gsap.utils.toArray<SVGGElement>(".svc-ind-wheel", truck);
-
       const sync = () => {
         const x = gsap.getProperty(truck, "x") as number;
         const nose = x + truckW;
-        /* Roll without slipping: wheel diameter is 26 of the drawing's 240 units. */
-        const spin = (x / (Math.PI * truckW * (26 / 240))) * 360;
-        wheels.forEach((wheel) => {
-          wheel.style.transform = `rotate(${spin.toFixed(1)}deg)`;
-        });
+        setWheelTurn(truck, x);
         digs.forEach((dig, i) => {
           const start = worldW * (SLOT_X[i] / 100 - DIG_LEAD);
           dig.progress(gsap.utils.clamp(0, 1, (nose - start) / (worldW * DIG_SPAN)));
@@ -458,7 +364,7 @@ export function ServicesIndustries() {
               <i />
               <i />
             </span>
-            <RmwTruck />
+            <RealTruck flip small />
           </span>
         </div>
       </div>

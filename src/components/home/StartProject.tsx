@@ -177,7 +177,7 @@ export function StartProject() {
 
           <div className="audit-truck">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={site.highways.truck} alt="" />
+            <img src={site.highways.truck} alt="" width={961} height={615} />
             <p className="audit-billboard">
               <strong>Free SEO Audit</strong>
               <span>Ritz Media World</span>
