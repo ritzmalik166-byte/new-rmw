@@ -61,9 +61,9 @@
 .about-tb-title {
   margin: 0;
   color: var(--tb-navy);
-  font-family: var(--font-yatra), "Yatra One", serif;
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
   font-size: clamp(34px, 3.6vw, 48px);
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.08;
 }
 
@@ -85,8 +85,8 @@
   width: 100%;
   min-height: 40px;
   overflow: hidden;
-  padding: 9px 14px;
-  border: 2px solid #e4dccd;
+  padding: 11px 16px;
+  border: 0;
   border-radius: 4px;
   background: #fff;
   color: var(--tb-navy);
@@ -94,13 +94,12 @@
   cursor: pointer;
   transition:
     background-color 0.25s ease,
-    border-color 0.25s ease,
     transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.25s ease;
 }
 
 .about-tb-item:hover {
-  border-color: #c9bda5;
+  background: #fbf6ec;
   transform: translateX(4px);
 }
 
@@ -110,7 +109,6 @@
 }
 
 .about-tb-item.is-active {
-  border-color: #161616;
   background: var(--tb-yellow);
   transform: none;
 }

@@ -21,7 +21,7 @@ registerGsap();
 gsap.registerPlugin(useGSAP);
 
 const HEADER_STICK_AFTER = 160;
-const HEADER_IDLE_MS = 1100;
+const HEADER_IDLE_MS = 700;
 
 export function Header() {
   const pathname = usePathname();
@@ -75,12 +75,41 @@ export function Header() {
   const servicesOpenRef = useRef(servicesOpen);
   useEffect(() => {
     servicesOpenRef.current = servicesOpen;
-    if (servicesOpen) rootRef.current?.classList.remove("is-hidden");
+    const root = rootRef.current;
+    if (servicesOpen && root?.classList.contains("is-hidden")) {
+      root.classList.remove("is-hidden");
+      gsap.to(root, { yPercent: 0, duration: 0.3, ease: "power3.out", overwrite: "auto" });
+    }
   }, [servicesOpen]);
 
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
+
+    const instant = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // GSAP owns the header transform (it inlines `translate: none`), so slide it with yPercent.
+    const setHidden = (hidden: boolean) => {
+      if (root.classList.contains("is-hidden") === hidden) return;
+      root.classList.toggle("is-hidden", hidden);
+      gsap.to(root, {
+        yPercent: hidden ? -110 : 0,
+        duration: instant() ? 0 : hidden ? 0.4 : 0.45,
+        ease: hidden ? "power2.in" : "power3.out",
+        overwrite: "auto",
+      });
+    };
+
+    const setStuck = (stuck: boolean) => {
+      if (root.classList.contains("is-stuck") === stuck) return;
+      root.classList.toggle("is-stuck", stuck);
+      root.classList.remove("is-hidden");
+      if (stuck && !instant()) {
+        gsap.fromTo(root, { yPercent: -100 }, { yPercent: 0, duration: 0.45, ease: "power3.out", overwrite: "auto" });
+      } else {
+        gsap.set(root, { yPercent: 0 });
+      }
+    };
 
     let idleTimer: number | undefined;
     const hideWhenIdle = () => {
@@ -90,18 +119,18 @@ export function Header() {
           hideWhenIdle();
           return;
         }
-        root.classList.add("is-hidden");
+        setHidden(true);
       }, HEADER_IDLE_MS);
     };
 
     const onScroll = () => {
       if (window.scrollY < HEADER_STICK_AFTER) {
         window.clearTimeout(idleTimer);
-        root.classList.remove("is-stuck", "is-hidden");
+        setStuck(false);
         return;
       }
-      root.classList.add("is-stuck");
-      root.classList.remove("is-hidden");
+      setStuck(true);
+      setHidden(false);
       hideWhenIdle();
     };
 
@@ -224,9 +253,9 @@ export function Header() {
         </nav>
 
         <div className="site-header-actions">
-          <Link href="/#start-a-project" className="btn btn-ink">
+          <TransitionLink href="/contact" className="btn btn-ink">
             Contact Us
-          </Link>
+          </TransitionLink>
 
           <button
             ref={toggleRef}

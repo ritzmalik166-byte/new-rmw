@@ -17,7 +17,6 @@
 
 .site-header {
   opacity: 0;
-  transition: translate 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .site-header.is-stuck {
@@ -26,7 +25,6 @@
   box-shadow: 0 10px 30px -18px rgb(20 20 40 / 45%);
   backdrop-filter: blur(12px) saturate(1.2);
   -webkit-backdrop-filter: blur(12px) saturate(1.2);
-  animation: site-header-drop 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .site-header.is-stuck .site-header-bar {
@@ -38,26 +36,8 @@
   height: 52px;
 }
 
-.site-header.is-stuck.is-hidden {
-  translate: 0 -110%;
-}
-
 body:has(.site-header.is-stuck) .smm {
   --smm-top: 88px;
-}
-
-@keyframes site-header-drop {
-  from {
-    translate: 0 -100%;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .site-header,
-  .site-header.is-stuck {
-    transition: none;
-    animation: none;
-  }
 }
 
 .site-nav {

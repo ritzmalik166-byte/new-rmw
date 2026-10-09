@@ -447,7 +447,7 @@ export const site = {
           { label: "Blogs", href: "/blog" },
           { label: "About", href: "/about" },
           { label: "Careers", href: "/about" },
-          { label: "Contact", href: "/#start-a-project" },
+          { label: "Contact", href: "/contact" },
         ],
       },
       {
