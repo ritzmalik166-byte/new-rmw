@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { BlogCard } from "@/components/blogs/BlogCard";
 import { BlogHero } from "@/components/blogs/BlogHero";
 import { BlogImage } from "@/components/blogs/BlogImage";
+import { HmArrow, HmStamp } from "@/components/homepage/shared";
 import type { Blog } from "@/lib/blogs";
 
 const BLOGS_PER_PAGE = 7;
@@ -136,15 +137,20 @@ export function BlogArchive({
           target="_blank"
           rel="noopener noreferrer"
         >
-          <BlogImage src={featuredBlog.image} alt={featuredBlog.title} />
-          <span className="blog-featured-scrim" aria-hidden="true" />
+          <span className="blog-featured-media">
+            <BlogImage src={featuredBlog.image} alt={featuredBlog.title} />
+          </span>
           <div className="blog-featured-copy">
-            <p className="blog-featured-label">
-              <span>FEATURED ARTICLE</span>
-              <i aria-hidden="true" />
+            <p className="hm-kicker">
+              <span className="hm-pill">Featured</span>
+              <span className="hm-hindi" lang="hi">
+                आज की ख़ास ख़बर
+              </span>
             </p>
             <p className="blog-featured-meta">
-              {formatDate(featuredBlog.createdAt)} <span>·</span> RITZ MEDIA WORLD
+              <span>{formatDate(featuredBlog.createdAt)}</span>
+              <span>{getReadingTime(featuredBlog)} min read</span>
+              <span>{getCategories(featuredBlog).slice(0, 2).join(" · ")}</span>
             </p>
             <h2>{featuredBlog.title}</h2>
             <p className="blog-featured-excerpt">
@@ -152,27 +158,41 @@ export function BlogArchive({
                 "Read the latest ideas and perspectives from Ritz Media World."}
             </p>
             <span className="blog-featured-link">
-              READ ARTICLE <span aria-hidden="true">→</span>
-            </span>
-            <span className="blog-featured-categories">
-              {getCategories(featuredBlog).slice(0, 3).join("  |  ").toUpperCase()}
+              Read article
+              <span className="blog-go" aria-hidden="true">
+                <HmArrow />
+              </span>
             </span>
           </div>
+          <HmStamp
+            id="blog-featured-stamp"
+            className="blog-featured-stamp"
+            top="EDITOR'S PICK"
+            bottom="RMW · NOIDA"
+            word="Must Read"
+          />
         </a>
       ) : (
         <p className="blog-empty">
-          No articles match your search. Try a different keyword or category.
+          No articles match your search. Try a different keyword or topic.
         </p>
       )}
 
       {latestBlogs.length > 0 ? (
         <section className="blog-latest" aria-labelledby="blog-latest-heading">
           <div className="blog-latest-heading">
-            <h2 id="blog-latest-heading">
-              Latest <em>Articles</em>
-            </h2>
-            <span>
-              {filteredBlogs.length} ARTICLES <span aria-hidden="true">·</span>{" "}
+            <div>
+              <p className="hm-kicker">
+                <span className="hm-pill">Latest</span>
+                <span>Fresh off the press</span>
+              </p>
+              <h2 id="blog-latest-heading" className="hm-title">
+                <span className="hm-line">Notes from</span>
+                <span className="hm-line is-accent">the road.</span>
+              </h2>
+            </div>
+            <span className="blog-latest-count">
+              <b>{filteredBlogs.length}</b> articles <span aria-hidden="true">·</span> page{" "}
               {safePage} / {totalPages}
             </span>
           </div>

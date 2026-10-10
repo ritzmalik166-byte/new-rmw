@@ -41,7 +41,7 @@ export function HomeNewsContent({ blogs }: { blogs: Blog[] }) {
 
         {blogs.length > 0 ? (
           <div className="hm-news-grid">
-            {blogs.map((blog, index) => (
+            {blogs.map((blog) => (
               <a
                 key={blog.slug}
                 data-hm-fade
@@ -50,9 +50,6 @@ export function HomeNewsContent({ blogs }: { blogs: Blog[] }) {
                 rel="noopener noreferrer"
                 className="hm-post"
               >
-                <span className="hm-post-ticket" aria-hidden>
-                  Dispatch {String(index + 1).padStart(2, "0")}
-                </span>
                 <BlogImage src={blog.image} alt={blog.title} className="hm-post-media" />
                 <span className="hm-post-body">
                   <span className="hm-post-meta">

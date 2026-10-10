@@ -24,31 +24,28 @@
   background-repeat: repeat-y;
 }
 
-/* Shared by every section that carries the dashed route. The image faces
-   right, so it is turned to drive down the rail. */
+/* Shared by every section that carries the dashed route: a bird's-eye truck
+   with its cab facing down the rail. --truck-w is the truck's length. */
 .svc-route-truck {
-  --truck-w: 84px;
+  --truck-w: 92px;
   position: absolute;
   top: 0;
   left: 37px;
   z-index: 1;
-  width: calc(var(--truck-w) * 0.365);
+  width: calc(var(--truck-w) * 0.3083);
   height: var(--truck-w);
-  margin-left: calc(var(--truck-w) * -0.1825);
+  margin-left: calc(var(--truck-w) * -0.1542);
   pointer-events: none;
   will-change: transform;
   visibility: hidden;
 }
 
 .svc-route-truck img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: var(--truck-w);
+  display: block;
+  width: 100%;
   max-width: none;
-  height: auto;
-  transform: translate(-50%, -50%) rotate(-90deg);
-  filter: drop-shadow(3px 0 3px rgb(0 0 0 / 0.28));
+  height: 100%;
+  filter: drop-shadow(4px 6px 5px rgb(0 0 0 / 0.3));
   animation: svc-route-truck-idle 0.38s linear infinite;
 }
 
@@ -425,7 +422,7 @@
   }
 
   .svc-engines-truck {
-    --truck-w: 68px;
+    --truck-w: 80px;
   }
 
   .svc-engines-mark {

@@ -1,3 +1,11 @@
+export type Testimonial = {
+  role: string;
+  company: string;
+  industry: string;
+  photo?: string;
+  quote: string;
+};
+
 export const site = {
   name: "RMW",
   fullName: "Ritz Media World",
@@ -254,11 +262,55 @@ export const site = {
       {
         role: "Managing Director",
         company: "Eldeco Group",
+        industry: "Real Estate",
         photo: "/s8/51e3ade5d235d3158f1e504c1ea3497f09c9d0c9.jpg",
         quote:
           "They not only make sure that they deliver on their promises, but also educate you on what exactly is needed to be done for your brand, thereby preventing you from under or over spending your precious money.",
       },
-    ],
+      // SAMPLE COPY: replace the entries below with real, approved client testimonials.
+      {
+        role: "Head of Marketing",
+        company: "Real Estate Developer, Noida",
+        industry: "Real Estate",
+        quote:
+          "From the launch film to the hoardings and the lead campaigns, one team owned the whole project. Site visits picked up within the first month, and every rupee was accounted for in the weekly review.",
+      },
+      {
+        role: "Director",
+        company: "Multi-speciality Hospital, Delhi NCR",
+        industry: "Healthcare",
+        quote:
+          "They understood that healthcare communication has to be careful before it can be creative. Our appointment enquiries grew steadily, and the brand finally looks as trustworthy as our doctors are.",
+      },
+      {
+        role: "Admissions Head",
+        company: "K-12 School Group",
+        industry: "Education",
+        quote:
+          "Radio, print and digital all told the same story during admission season. The team planned the media around our counselling calendar and the enquiries came in exactly when we could handle them.",
+      },
+      {
+        role: "Founder",
+        company: "D2C Lifestyle Brand",
+        industry: "E-commerce",
+        quote:
+          "Sharp creatives, honest numbers and no jargon. They cut the campaigns that were not working within days and doubled down on the ones that were, which is rare for an agency.",
+      },
+      {
+        role: "Business Head",
+        company: "Industrial Manufacturer",
+        industry: "Manufacturing",
+        quote:
+          "We came in with a dated catalogue and left with a brand our dealers are proud to show. The new website and trade-show material started conversations we were never able to start before.",
+      },
+      {
+        role: "Co-founder",
+        company: "Early-stage Fintech Startup",
+        industry: "Startups",
+        quote:
+          "They treated our small launch budget like it was their own. The identity, the launch video and the first performance campaigns were delivered on time and felt bigger than what we paid for.",
+      },
+    ] as Testimonial[],
   },
   awards: {
     title: "Awards",

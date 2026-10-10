@@ -15,8 +15,10 @@ import {
 } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { ThemeSurfaces } from "@/components/layout/ThemeSurfaces";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { site } from "@/lib/site";
+import { THEME_BOOT_SCRIPT } from "@/lib/theme";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -106,6 +108,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${outfit.variable} ${archivo.variable} ${inter.variable} ${montserrat.variable} ${jakarta.variable} ${playfair.variable} ${quicksand.variable} ${quattrocento.variable} ${spaceMono.variable} ${rye.variable} ${yatra.variable} ${yeseva.variable} antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
+      </head>
       <body
         className="bg-background font-sans text-foreground"
         suppressHydrationWarning
@@ -114,6 +119,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Header />
           <main>{children}</main>
           <Footer />
+          <ThemeSurfaces />
         </AppProviders>
       </body>
     </html>

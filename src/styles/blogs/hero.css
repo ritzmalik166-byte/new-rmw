@@ -12,19 +12,6 @@
   margin: 0 0 clamp(36px, 5vw, 56px);
 }
 
-.bh-pill {
-  display: inline-block;
-  margin: 0 0 16px;
-  padding: 7px 12px 6px;
-  background: var(--bh-teal);
-  color: #fff;
-  font-family: var(--font-space-mono), "Space Mono", monospace;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
 .bh-title {
   margin: 0;
   color: var(--bh-navy);
@@ -58,26 +45,29 @@
 
 .bh-chip {
   padding: 8px 16px 7px;
-  border: 2px solid var(--bh-navy);
+  border: 2px solid #161616;
   border-radius: 999px;
   background: #fff;
-  color: var(--bh-navy);
+  color: #161616;
   font-family: var(--font-inter), Inter, sans-serif;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
+  box-shadow: 3px 3px 0 #161616;
   transition:
     background-color 0.25s ease,
     color 0.25s ease,
+    box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .bh-chip:hover {
-  transform: translateY(-2px);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 #161616;
 }
 
 .bh-chip.is-active {
-  background: var(--bh-teal);
+  background: var(--bh-navy);
   color: #fff;
 }
 
@@ -95,14 +85,17 @@
   height: 46px;
   margin-top: 16px;
   padding: 0 16px;
-  border: 2px solid var(--bh-navy);
+  border: 2px solid #161616;
   border-radius: 999px;
   background: #fff;
   color: var(--bh-navy);
+  box-shadow: 4px 4px 0 #161616;
 }
 
 .bh-search:focus-within {
-  box-shadow: 0 0 0 3px rgb(201 53 110 / 22%);
+  box-shadow:
+    4px 4px 0 #161616,
+    0 0 0 4px rgb(201 53 110 / 22%);
 }
 
 .bh-search input {

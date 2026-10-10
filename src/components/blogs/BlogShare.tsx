@@ -1,9 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
+
+const noSubscribe = () => () => {};
 
 export function BlogShare({ title }: { title: string }) {
   const [copied, setCopied] = useState(false);
+  const pageUrl = useSyncExternalStore(
+    noSubscribe,
+    () => window.location.href,
+    () => "",
+  );
 
   const handleCopy = async () => {
     try {
@@ -18,8 +25,8 @@ export function BlogShare({ title }: { title: string }) {
   };
 
   const getShareUrl = (platform: "twitter" | "linkedin" | "whatsapp") => {
-    if (typeof window === "undefined") return "#";
-    const url = encodeURIComponent(window.location.href);
+    if (!pageUrl) return "#";
+    const url = encodeURIComponent(pageUrl);
     const text = encodeURIComponent(title);
 
     switch (platform) {

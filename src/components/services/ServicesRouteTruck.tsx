@@ -63,7 +63,7 @@ export function ServicesRouteTruck({
   return (
     <span ref={truckRef} className={cn("svc-route-truck", className)} aria-hidden>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/trucks/rmw-truck-sm.webp" alt="" width={480} height={175} />
+      <img src="/trucks/rmw-truck-top.webp" alt="" width={111} height={360} />
     </span>
   );
 }

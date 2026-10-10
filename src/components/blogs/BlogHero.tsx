@@ -94,7 +94,12 @@ export function BlogHero({ blogs, query, onQueryChange }: BlogHeroProps) {
   return (
     <header className="bh">
       <div className="bh-copy">
-        <p className="bh-pill">Blogs</p>
+        <p className="hm-kicker">
+          <span className="hm-pill">Blogs</span>
+          <span className="hm-hindi" lang="hi">
+            आज का अख़बार
+          </span>
+        </p>
         <h1 className="bh-title">
           Aaj kya <em>padhna</em> hai?
         </h1>

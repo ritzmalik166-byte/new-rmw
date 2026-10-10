@@ -86,7 +86,7 @@ export default async function BlogDetailPage({
   const relatedBlogs = allBlogs.filter((b) => b.slug !== blog.slug).slice(0, 3);
 
   return (
-    <div className="blog-post-page">
+    <div className="hm blog-post-page">
       <div className="blog-layout-container">
         
         {/* Left Sticky Sidebar: Navigation, Share, Tags */}
@@ -125,9 +125,14 @@ export default async function BlogDetailPage({
           <div className="blog-post-card">
             {/* Article Header */}
             <header className="blog-post-header">
+              <p className="hm-kicker blog-post-kicker">
+                <span className="hm-pill">Blog</span>
+                <span className="hm-hindi" lang="hi">
+                  आज का अख़बार
+                </span>
+              </p>
               <div className="blog-post-meta">
                 <span className="blog-category-badge">{primaryCategory}</span>
-                <span className="blog-meta-dot" aria-hidden="true">·</span>
                 <time className="blog-post-date">{formatDate(blog.createdAt)}</time>
                 <span className="blog-meta-dot" aria-hidden="true">·</span>
                 <span className="blog-post-reading-time">{readingTime} min read</span>

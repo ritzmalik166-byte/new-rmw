@@ -14,6 +14,7 @@ import { gsap, registerGsap } from "@/lib/gsap";
 import { site } from "@/lib/site";
 
 import { ServicesMegaMenu } from "@/components/layout/ServicesMegaMenu";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { SERVICE_ICONS } from "@/lib/service-icons";
 import { SERVICES_LIST } from "@/lib/services-data";
 
@@ -253,6 +254,7 @@ export function Header() {
         </nav>
 
         <div className="site-header-actions">
+          <ThemeToggle />
           <TransitionLink href="/contact" className="btn btn-ink">
             Contact Us
           </TransitionLink>

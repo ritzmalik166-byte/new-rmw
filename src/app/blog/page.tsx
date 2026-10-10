@@ -24,7 +24,7 @@ export default async function BlogPage({
     : 1;
 
   return (
-    <main className="blog-archive" aria-label="Blogs">
+    <main className="hm blog-archive" aria-label="Blogs">
       <BlogArchive
         blogs={blogs}
         initialPage={initialPage}

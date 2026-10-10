@@ -1,13 +1,16 @@
 /* ---------- Homepage hero: rotating headline + photo truck on the road ---------- */
+/* The whole hero, road included, fits one screen: type and spacing scale with
+   the viewport height as well as its width. */
 .hm-hero {
-  --road-h: clamp(72px, 7vw, 100px);
-  --verge-h: 34px;
-  --truck-w: clamp(400px, 44vw, 660px);
+  --road-h: clamp(62px, 9vh, 96px);
+  --verge-h: 30px;
+  --truck-w: clamp(360px, min(42vw, 74vh), 640px);
 
   display: flex;
   flex-direction: column;
-  min-height: max(660px, calc(100svh - 84px));
-  padding-top: clamp(112px, 15vh, 150px);
+  height: 100svh;
+  min-height: 580px;
+  padding-top: clamp(92px, 14vh, 140px);
   overflow: hidden;
   background:
     radial-gradient(42% 52% at 80% 58%, rgb(243 195 60 / 30%), transparent 70%),
@@ -24,9 +27,10 @@
 
 .hm-hero-inner {
   display: flex;
-  flex: 1 0 auto;
+  flex: 1 1 auto;
   align-items: center;
-  padding-bottom: clamp(24px, 5vh, 56px);
+  min-height: 0;
+  padding-bottom: clamp(12px, 3vh, 40px);
 }
 
 .hm-hero-copy {
@@ -35,9 +39,13 @@
   width: min(100%, 680px);
 }
 
+.hm-hero .hm-kicker {
+  margin-bottom: clamp(10px, 2vh, 18px);
+}
+
 .hm-hero-seo {
   max-width: 44rem;
-  margin: 0 0 14px;
+  margin: 0 0 clamp(8px, 1.4vh, 14px);
   color: var(--hm-navy);
   font-family: var(--hm-mono);
   font-size: 12px;
@@ -52,7 +60,7 @@
   margin: 0;
   color: var(--hm-navy);
   font-family: var(--hm-serif);
-  font-size: clamp(44px, 5.1vw, 74px);
+  font-size: clamp(40px, min(5.1vw, 7.4vh), 74px);
   font-weight: 700;
   line-height: 1.02;
   letter-spacing: 0.002em;
@@ -92,14 +100,18 @@
 
 .hm-hero-lede {
   max-width: 44ch;
-  margin-top: 22px;
+  margin-top: clamp(12px, 2.4vh, 22px);
+}
+
+.hm-hero .hm-actions {
+  margin-top: clamp(16px, 3vh, 28px);
 }
 
 /* ---------- Headline odometer ---------- */
 .hm-hero-meter {
   display: flex;
   gap: 14px;
-  margin-top: 34px;
+  margin-top: clamp(16px, 3.4vh, 34px);
 }
 
 .hm-hero-tick {
@@ -200,36 +212,64 @@
   background: radial-gradient(closest-side, rgb(0 0 0 / 55%), transparent);
 }
 
-/* ---------- Stickers riding on top of the cargo ---------- */
+/* ---------- Service stickers riding on top of the cargo ---------- */
 .hm-hero-sticker {
   position: absolute;
-  bottom: calc(100% + 6px);
+  bottom: calc(100% + var(--lift, 6px));
+  left: 50%;
+  z-index: 3;
+  visibility: hidden;
+}
+
+.hm-hero-sticker-face {
+  display: block;
   padding: 8px 14px 7px;
   border: 2px solid var(--hm-ink);
   border-radius: 999px;
+  background: var(--tone, var(--hm-orange));
   box-shadow: 3px 3px 0 var(--hm-ink);
   color: #fff;
   font-family: var(--hm-jakarta);
   font-size: clamp(11px, 0.9vw, 13px);
   font-weight: 800;
+  line-height: 1.2;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   white-space: nowrap;
   animation: hm-hero-bob 2.8s ease-in-out infinite;
 }
 
-.hm-hero-sticker.is-a {
-  left: 36%;
-  background: var(--hm-pink);
-  rotate: -6deg;
+.hm-hero-sticker:nth-child(odd) .hm-hero-sticker-face {
+  animation-delay: -1.4s;
 }
 
-.hm-hero-sticker.is-b {
-  left: 62%;
-  bottom: calc(100% + 34px);
-  background: var(--hm-orange);
-  rotate: 5deg;
-  animation-delay: -1.4s;
+.hm-hero-sticker[data-tone="pink"] {
+  --tone: var(--hm-pink);
+}
+
+.hm-hero-sticker[data-tone="orange"] {
+  --tone: var(--hm-orange);
+}
+
+.hm-hero-sticker[data-tone="teal"] {
+  --tone: var(--hm-teal);
+}
+
+.hm-hero-sticker[data-tone="navy"] {
+  --tone: var(--hm-navy);
+}
+
+.hm-hero-sticker[data-tone="red"] {
+  --tone: var(--hm-red);
+}
+
+.hm-hero-sticker[data-tone="blue"] {
+  --tone: #1457a8;
+}
+
+.hm-hero-sticker[data-tone="yellow"] .hm-hero-sticker-face {
+  background: var(--hm-yellow);
+  color: var(--hm-ink);
 }
 
 @keyframes hm-hero-bob {
@@ -242,19 +282,135 @@
   }
 }
 
+/* Load counter, painted like a number plate above the cab. */
+.hm-hero-manifest {
+  position: absolute;
+  bottom: calc(100% + 52px);
+  left: 2%;
+  z-index: 3;
+  padding: 4px 10px;
+  border: 2px solid var(--hm-ink);
+  border-radius: 6px;
+  background: var(--hm-yellow);
+  color: var(--hm-ink);
+  font-family: var(--hm-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  rotate: -3deg;
+}
+
+.hm-hero-manifest b {
+  color: var(--hm-red);
+}
+
+/* ---------- Headlight: lamp glow, beam and the pool of light on the road ---------- */
+.hm-hero-light {
+  position: absolute;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.hm-hero-light.is-lamp {
+  top: 58%;
+  left: 2.4%;
+  z-index: 2;
+  width: 9%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    #fff 0 18%,
+    rgb(255 240 190 / 85%) 34%,
+    rgb(255 214 120 / 30%) 62%,
+    transparent
+  );
+  translate: -50% -50%;
+  mix-blend-mode: screen;
+}
+
+.hm-hero-light.is-beam {
+  top: 53%;
+  right: 97%;
+  bottom: -14%;
+  z-index: 0;
+  width: 78%;
+  filter: blur(5px);
+}
+
+.hm-hero-light.is-beam::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to left,
+    rgb(255 246 205 / 95%),
+    rgb(255 228 140 / 52%) 45%,
+    rgb(255 220 130 / 0%) 100%
+  );
+  clip-path: polygon(100% 4%, 100% 18%, 0% 100%, 0% 46%);
+}
+
+.hm-hero-light.is-pool {
+  right: 84%;
+  bottom: calc(var(--road-h) * -0.16);
+  z-index: 0;
+  width: 82%;
+  height: calc(var(--road-h) * 0.62);
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgb(255 242 196 / 85%),
+    rgb(255 222 130 / 42%) 55%,
+    transparent
+  );
+  mix-blend-mode: screen;
+}
+
+.hm-hero.is-lit .hm-hero-light.is-pool {
+  animation: hm-hero-pool 3.2s ease-in-out infinite;
+}
+
+.hm-hero.is-lit .hm-hero-light.is-beam::before {
+  animation: hm-hero-beam 3.2s ease-in-out infinite;
+}
+
+@keyframes hm-hero-pool {
+  0%,
+  100% {
+    transform: translateX(0) scaleX(1);
+  }
+  50% {
+    transform: translateX(-3%) scaleX(1.05);
+  }
+}
+
+@keyframes hm-hero-beam {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.15);
+  }
+}
+
 /* ---------- Tablet & mobile: copy first, truck rolls in underneath ---------- */
 @media (max-width: 1099px) {
   .hm-hero {
-    --truck-w: min(86vw, 600px);
-    min-height: 0;
+    --truck-w: min(90vw, 700px, 50svh);
+    height: auto;
+    min-height: 100svh;
   }
 
   .hm-hero-inner {
-    flex: 0 0 auto;
+    flex: 1 0 auto;
   }
 
   .hm-hero-stage {
-    height: calc(var(--road-h) * 0.3 + var(--truck-w) * 0.365 + 72px);
+    height: calc(var(--road-h) * 0.3 + var(--truck-w) * 0.365 + 84px);
   }
 
   .hm-hero-rig {
@@ -266,35 +422,31 @@
 
 @media (max-width: 640px) {
   .hm-hero {
-    --road-h: 64px;
-    --verge-h: 28px;
-    --truck-w: 92vw;
-    padding-top: 100px;
+    --road-h: 56px;
+    --verge-h: 24px;
+    --truck-w: min(90vw, 44svh);
+    padding-top: 92px;
   }
 
   .hm-hero-title {
-    font-size: clamp(36px, 10.6vw, 48px);
+    font-size: clamp(34px, 10vw, 46px);
   }
 
   .hm-hero-seo {
-    font-size: 11px;
-  }
-
-  .hm-hero-meter {
-    margin-top: 26px;
+    font-size: 10.5px;
   }
 
   .hm-hero-tick {
-    width: 72px;
+    width: 64px;
   }
 
-  .hm-hero-sticker.is-a {
-    left: 26%;
+  .hm-hero-sticker-face {
+    padding: 6px 10px 5px;
+    font-size: 10px;
   }
 
-  .hm-hero-sticker.is-b {
-    left: 56%;
-    bottom: calc(100% + 30px);
+  .hm-hero-manifest {
+    font-size: 9px;
   }
 }
 
@@ -310,7 +462,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hm-hero-sticker {
+  .hm-hero-sticker-face,
+  .hm-hero.is-lit .hm-hero-light.is-pool,
+  .hm-hero.is-lit .hm-hero-light.is-beam::before {
     animation: none;
   }
 }
