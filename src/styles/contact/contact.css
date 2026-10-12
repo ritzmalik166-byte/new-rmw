@@ -37,17 +37,6 @@
     var(--ct-cream);
 }
 
-.ct::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 21px;
-  background: url("/about/diagonal-stripes.png") repeat-x left center / auto 100%;
-  opacity: 0.9;
-}
-
 .ct-inner {
   position: relative;
   z-index: 1;

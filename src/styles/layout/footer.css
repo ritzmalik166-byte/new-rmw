@@ -21,12 +21,6 @@
   container-type: inline-size;
 }
 
-.site-footer-stripes {
-  display: block;
-  height: 14px;
-  background: url("/about/diagonal-stripes.png") repeat-x left center / auto 100%;
-}
-
 /* ---------- Services ticker: painted truck lettering ---------- */
 .site-footer-ticker {
   display: flex;
@@ -564,6 +558,13 @@
   pointer-events: auto;
 }
 
+/* The map card sits in the last column, so its popover opens leftwards. */
+.fc-pop.is-map {
+  right: -6px;
+  left: auto;
+  transform-origin: calc(100% - 24px) 100%;
+}
+
 .fc-caret {
   display: inline-block;
   width: 2px;
@@ -719,7 +720,7 @@
 .fc-mail {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: min(300px, 100cqi - 2.5rem);
   overflow: hidden;
   border: 2px solid var(--footer-ink);
   border-radius: 14px;
@@ -858,7 +859,7 @@
 .fc-map {
   display: flex;
   flex-direction: column;
-  width: 320px;
+  width: min(320px, 100cqi - 2.5rem);
   overflow: hidden;
   border: 2px solid var(--footer-ink);
   border-radius: 14px;
@@ -1105,11 +1106,8 @@
   }
 
   .site-footer-top {
-    grid-template-columns: 1fr;
-  }
-
-  .site-footer-sign {
-    width: min(100%, 620px);
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    gap: 2.5rem;
   }
 
   .site-footer-wordmark {
@@ -1117,9 +1115,57 @@
   }
 }
 
-@media (max-width: 860px) {
+/* The signboard needs ~480px for its two columns, so it drops below the intro here. */
+@media (max-width: 999px) {
+  .site-footer-top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .site-footer-blurb {
+    max-width: 56ch;
+  }
+}
+
+@media (max-width: 960px) {
+  .site-footer-desk {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .site-footer-desk > :last-child {
+    grid-column: 1 / -1;
+  }
+
+  .fc-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-content: start;
+    align-items: center;
+    gap: 14px 16px;
+  }
+
+  .fc-card-values {
+    grid-column: 1 / -1;
+  }
+
+  .fc-value.is-address {
+    max-width: none;
+  }
+
+  .fc-pop.is-map {
+    right: auto;
+    left: -6px;
+    transform-origin: 24px 100%;
+  }
+}
+
+@media (max-width: 640px) {
   .site-footer-desk {
     grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .fc-card {
+    padding: 20px 18px;
   }
 }
 
@@ -1169,6 +1215,10 @@
 }
 
 @media (max-width: 560px) {
+  .site-footer-sign {
+    padding-bottom: 36px;
+  }
+
   .site-footer-sign-board {
     padding-inline: 18px;
     rotate: 0deg;
@@ -1188,6 +1238,30 @@
     padding-left: 0;
     border-top: 2px solid rgb(255 255 255 / 85%);
     border-left: 0;
+  }
+
+  .site-footer-trust {
+    gap: 0.85rem;
+  }
+
+  .site-footer-bottom {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-footer-actions > * {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .site-footer-partners {
+    gap: 8px;
+  }
+
+  .site-footer-partners li {
+    padding: 0 10px;
   }
 }
 

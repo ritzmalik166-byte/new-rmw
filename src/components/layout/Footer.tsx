@@ -76,8 +76,6 @@ export function Footer() {
 
   return (
     <footer ref={rootRef} className="site-footer">
-      <span className="site-footer-stripes" aria-hidden />
-
       <nav className="site-footer-ticker" aria-label="Services">
         {[0, 1].map((copy) => (
           <ul key={copy} className="site-footer-ticker-track" aria-hidden={copy === 1 || undefined}>
