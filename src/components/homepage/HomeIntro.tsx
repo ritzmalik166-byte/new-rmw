@@ -7,7 +7,7 @@ import { site } from "@/lib/site";
 import { HmArrow, HmPlate, HmTitle, useHomeReveal } from "./shared";
 
 const TITLE = [
-  { text: "Independent agency." },
+  { text: "Creative Agency." },
   { text: "Indian at heart." },
   { text: "Ideas that travel.", accent: true },
 ] as const;

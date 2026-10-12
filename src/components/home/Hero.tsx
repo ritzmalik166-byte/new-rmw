@@ -274,11 +274,8 @@ export function Hero() {
             </span>
           </p>
           <p data-hero-item className="hero-lede">
-            Independent creative agency.
-            Indian at heart.
-            Ideas that travel.
-
-          </p>
+            An independent creative advertising agency headquartered in Noida, Delhi NCR, serving brands across India.
+            </p>
         </div>
 
         <div className="hero-visual">

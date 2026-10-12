@@ -290,9 +290,7 @@ export function HomeHero() {
           </p>
 
           <p data-hero-fade className="hm-lede hm-hero-lede">
-            Independent creative agency.
-            Indian at heart.
-            Ideas that travel.
+            An independent creative advertising agency with 18 years of experience transforming brands through creativity, strategy, and innovation.
 
           </p>
 

@@ -717,26 +717,3 @@
     font-size: 30px;
   }
 }
-
-/* ---------- Footer ---------- */
-@media (max-width: 720px) {
-  .site-footer-intro,
-  .site-footer-title {
-    width: 100%;
-  }
-
-  .site-footer-title {
-    font-size: clamp(28px, 8vw, 40px);
-  }
-
-  .site-footer-title-row {
-    flex-wrap: wrap;
-    white-space: normal;
-  }
-}
-
-@media (max-width: 480px) {
-  .site-footer-nav {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}

@@ -472,55 +472,27 @@ export const site = {
     address: "402–404, 4th Floor, Corporate Park, Tower A1, Sector 142, Noida 201305",
     email: "info@ritzmediaworld.com",
     phones: ["+91 9220516777", "+91 7290002168"],
-    columns: [
-      {
-        title: "Services",
-        links: [
-          { label: "Brand & Creative", href: "/services" },
-          { label: "Digital & Performance", href: "/services" },
-          { label: "Film, 3D & AI", href: "/services" },
-          { label: "Media", href: "/services" },
-        ],
-      },
-      {
-        title: "Industries",
-        links: [
-          { label: "Real Estate", href: "/industries" },
-          { label: "Healthcare", href: "/industries" },
-          { label: "Education", href: "/industries" },
-          { label: "E-commerce", href: "/industries" },
-          { label: "Manufacturing", href: "/industries" },
-          { label: "Startups", href: "/industries" },
-        ],
-      },
-      {
-        title: "Company",
-        links: [
-          { label: "Work", href: "/work" },
-          { label: "Blogs", href: "/blog" },
-          { label: "About", href: "/about" },
-          { label: "Careers", href: "/about" },
-          { label: "Contact", href: "/contact" },
-        ],
-      },
-      {
-        title: "Resources",
-        links: [
-          { label: "Case Studies", href: "/work" },
-          { label: "Reports", href: "/blog" },
-          { label: "FAQs", href: "/#highways" },
-        ],
-      },
-      {
-        title: "Digital",
-        links: [
-          { label: "LinkedIn", href: "https://www.linkedin.com/", external: true },
-          { label: "Instagram", href: "https://www.instagram.com/", external: true },
-          { label: "YouTube", href: "https://www.youtube.com/", external: true },
-          { label: "Facebook", href: "https://www.facebook.com/", external: true },
-        ],
-      },
+    company: [
+      { label: "Home", href: "/" },
+      { label: "Work", href: "/work" },
+      { label: "About", href: "/about" },
+      { label: "Blogs", href: "/blog" },
+      { label: "Career", href: "/about" },
     ],
+    socials: [
+      { label: "Facebook", href: "https://www.facebook.com/ritzmediaworld/" },
+      { label: "Instagram", href: "https://www.instagram.com/ritzmediaworld/" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/company/ritzmediaworld/" },
+      { label: "Twitter", href: "https://twitter.com/ritzmediaworld" },
+      { label: "YouTube", href: "https://www.youtube.com/@ritzmediaworld" },
+    ],
+    partners: [
+      { src: "/footer/partners/ins.png", alt: "Indian Newspaper Society", width: 63, height: 36 },
+      { src: "/footer/partners/meta.png", alt: "Meta Business Partner", width: 78, height: 27 },
+      { src: "/footer/partners/google.png", alt: "Google Partner", width: 35, height: 35 },
+      { src: "/footer/partners/msme.png", alt: "MSME", width: 60, height: 28 },
+    ],
+    googleSource: "https://www.google.com/preferences/source?q=ritzmediaworld.com",
   },
 };
 
