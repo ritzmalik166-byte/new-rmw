@@ -2,10 +2,11 @@
 
 import { useGSAP } from "@gsap/react";
 import dynamic from "next/dynamic";
-import { useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { cn } from "@/lib/cn";
 import { gsap, registerGsap } from "@/lib/gsap";
+import { RENDER_ICONS } from "@/lib/service-icons";
 import type { RenderKind } from "./ServicesRenderStage";
 
 registerGsap();
@@ -205,7 +206,8 @@ export function ServicesRendering() {
                 onKeyDown={(event) => onTabKey(event, i)}
               >
                 <span className="svc-render-thumb" aria-hidden>
-                  {THUMBS[item.id]}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={RENDER_ICONS[item.id]} alt="" width={64} height={64} loading="lazy" />
                 </span>
                 <span className="svc-render-tab-text">
                   <span className="svc-render-tab-title">{item.title}</span>
@@ -220,36 +222,3 @@ export function ServicesRendering() {
     </section>
   );
 }
-
-const THUMBS: Record<RenderKind, ReactNode> = {
-  exterior: (
-    <svg viewBox="0 0 32 32">
-      <path d="M6 28V10l8-4v22M14 28V12h12v16M4 28h24" />
-      <path d="M9 13h2M9 17h2M9 21h2M18 16h2M22 16h2M18 20h2M22 20h2" />
-    </svg>
-  ),
-  interior: (
-    <svg viewBox="0 0 32 32">
-      <path d="M5 21v-5a2 2 0 0 1 4 0v2h14v-2a2 2 0 0 1 4 0v5z" />
-      <path d="M9 18v-4a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v4M7 21v3M25 21v3" />
-    </svg>
-  ),
-  aerial: (
-    <svg viewBox="0 0 32 32">
-      <path d="M4 10l12-6 12 6-12 6z" />
-      <path d="M4 16l12 6 12-6M4 22l12 6 12-6" />
-    </svg>
-  ),
-  plan: (
-    <svg viewBox="0 0 32 32">
-      <path d="M5 5h22v22H5z" />
-      <path d="M16 5v9M16 18v9M5 16h7M15 16h1M20 18h7" />
-    </svg>
-  ),
-  amenity: (
-    <svg viewBox="0 0 32 32">
-      <path d="M4 24c2 1.5 4 1.5 6 0s4-1.5 6 0 4 1.5 6 0 4-1.5 6 0" />
-      <path d="M10 21V7a3 3 0 0 1 6 0M10 12h6M10 17h6" />
-    </svg>
-  ),
-};

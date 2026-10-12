@@ -218,10 +218,10 @@
   display: grid;
   flex: none;
   place-items: center;
-  width: 40px;
-  height: 36px;
-  border-radius: 5px;
-  background: #e6dcc8;
+  width: 46px;
+  height: 46px;
+  border-radius: 6px;
+  background: #fffaf0;
   transition: background 0.3s ease;
 }
 
@@ -229,18 +229,16 @@
   background: #2a2650;
 }
 
-.svc-render-thumb svg {
-  width: 22px;
-  height: 22px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.svc-render-thumb img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.svc-render-tab.is-active .svc-render-thumb svg {
-  stroke: var(--rn-gold);
+.svc-render-tab:hover .svc-render-thumb img,
+.svc-render-tab.is-active .svc-render-thumb img {
+  transform: rotate(-5deg) scale(1.08);
 }
 
 .svc-render-tab-text {
@@ -332,7 +330,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .svc-render-tab,
-  .svc-render-thumb {
+  .svc-render-thumb,
+  .svc-render-thumb img {
     transition: none;
   }
 

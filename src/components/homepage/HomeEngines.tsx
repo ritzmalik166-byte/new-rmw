@@ -3,7 +3,7 @@
   import { useRef, type CSSProperties } from "react";
   import { TransitionLink } from "@/components/motion/TransitionLink";
   import { ServicesRouteTruck } from "@/components/services/ServicesRouteTruck";
-  import { SERVICE_ICONS } from "@/lib/service-icons";
+  import { RENDER_ICONS, SERVICE_ICONS } from "@/lib/service-icons";
   import { HmArrow, HmTitle, useHomeReveal } from "./shared";
 
   const TITLE = [{ text: "One agency." }, { text: "Three engines.", accent: true }] as const;
@@ -15,9 +15,18 @@
     title: string;
     copy: string;
     tone: string;
-    cargo: { slug: string; name: string }[];
+    cargo: { slug: string; name: string; icon?: string; href?: string }[];
     extras: string[];
   };
+
+  const RENDER_HREF = "/services/3d-rendering-services";
+  const RENDER_TYPES = [
+    { slug: "3d-exterior", name: "3D Exterior Rendering", icon: RENDER_ICONS.exterior },
+    { slug: "3d-interior", name: "3D Interior Rendering", icon: RENDER_ICONS.interior },
+    { slug: "3d-aerial", name: "Aerial & Township", icon: RENDER_ICONS.aerial },
+    { slug: "3d-floor-plan", name: "3D Floor Plans", icon: RENDER_ICONS.plan },
+    { slug: "3d-amenity", name: "Amenity Rendering", icon: RENDER_ICONS.amenity },
+  ];
 
   const ENGINES: Engine[] = [
     {
@@ -58,8 +67,8 @@
       title: "Film, 3D & AI",
       copy: "Brand films, photorealistic 3D rendering, and AI-assisted production that let audiences see your product, project, or space before it is even built.",
       tone: "#167a7d",
-      cargo: [{ slug: "3d-rendering-services", name: "3D Rendering Services" }],
-      extras: ["Brand films & AVs", "3D walkthroughs", "AI-assisted production"],
+      cargo: RENDER_TYPES.map((type) => ({ ...type, href: RENDER_HREF })),
+      extras: [],
     },
   ];
 
@@ -124,10 +133,10 @@
 
                 <ul className="hm-engine-cargo" aria-label={`${engine.title} services`}>
                   {engine.cargo.map((service) => {
-                    const icon = SERVICE_ICONS[service.slug];
+                    const icon = service.icon ?? SERVICE_ICONS[service.slug];
                     return (
                       <li key={service.slug}>
-                        <TransitionLink href={`/services/${service.slug}`} className="hm-chip">
+                        <TransitionLink href={service.href ?? `/services/${service.slug}`} className="hm-chip">
                           <span className="hm-chip-icon" aria-hidden>
                             {icon ? (
                               // eslint-disable-next-line @next/next/no-img-element
