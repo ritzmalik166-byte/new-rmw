@@ -279,8 +279,8 @@
 /* ---------- Service cards (right) ---------- */
 .smm-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -305,10 +305,10 @@
   position: relative;
   display: flex;
   flex: 1;
-  flex-direction: column;
-  align-items: flex-start;
+  gap: 12px;
+  align-items: center;
   overflow: hidden;
-  padding: 14px 16px 16px;
+  padding: 12px 14px;
   border: 1.5px solid rgb(15 22 63 / 9%);
   border-radius: 16px;
   background: #fff;
@@ -384,10 +384,16 @@
 
 .smm-card-icon {
   display: grid;
+  flex: 0 0 auto;
   place-items: center;
-  width: 76px;
-  height: 76px;
-  margin: 0 0 10px -4px;
+  width: 64px;
+  height: 64px;
+}
+
+.smm-card-text {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
 }
 
 .smm-card-icon img {
@@ -404,10 +410,10 @@
 }
 
 .smm-card-name {
-  margin-bottom: 4px;
-  padding-right: 28px;
+  margin-bottom: 3px;
+  padding-right: 22px;
   font-family: var(--font-outfit), sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -485,25 +491,6 @@
   text-transform: uppercase;
 }
 
-.smm-chip {
-  padding: 6px 12px;
-  border: 1.5px solid rgb(15 22 63 / 14%);
-  border-radius: 999px;
-  background: #fff;
-  color: var(--smm-navy);
-  font-family: var(--font-inter), Inter, sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  transition:
-    border-color 0.2s ease,
-    background-color 0.2s ease;
-}
-
-.smm-chip:hover {
-  border-color: var(--smm-navy);
-  background: var(--smm-yellow);
-}
-
 .smm-foot-call {
   display: inline-flex;
   align-items: center;
@@ -551,13 +538,18 @@
     letter-spacing: 0.05em;
   }
 
+  .smm-card {
+    gap: 10px;
+    padding-inline: 12px;
+  }
+
   .smm-card-icon {
-    width: 62px;
-    height: 62px;
+    width: 52px;
+    height: 52px;
   }
 
   .smm-card-name {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
@@ -567,16 +559,42 @@
   }
 
   .smm-card-icon {
-    width: 58px;
-    height: 58px;
-    margin-bottom: 6px;
+    width: 54px;
+    height: 54px;
   }
 
   .smm-card {
-    padding-block: 12px 14px;
+    padding-block: 10px;
   }
 }
 
+@media (max-height: 620px) and (min-width: 1024px) {
+  .smm-intro {
+    padding-block: 18px 16px;
+  }
+
+  .smm-kicker {
+    margin-bottom: 10px;
+  }
+
+  .smm-title {
+    margin-bottom: 8px;
+  }
+
+  .smm-stats {
+    margin-bottom: 14px;
+    padding-block: 8px;
+  }
+
+  .smm-foot {
+    padding-block: 8px 10px;
+  }
+
+  .smm-card-desc {
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .smm,
   .smm-panel,

@@ -7,6 +7,7 @@ import { readStoredTheme, storeTheme, themeForTime, type Theme } from "@/lib/the
 /* Smallest share of the spill mask's width that is solid in every direction. */
 const SPILL_CORE = 0.28;
 const SPILL_MS = 1500;
+const SPILL_MASK = "/fx/spill.svg";
 
 function subscribe(onChange: () => void) {
   const observer = new MutationObserver(onChange);
@@ -51,6 +52,8 @@ function spillTo(theme: Theme, x: number, y: number) {
         {
           duration: SPILL_MS,
           easing: "cubic-bezier(0.4, 0.7, 0.3, 1)",
+          // Without holding the last frame, the resting 0x0 mask hides the new theme for a frame before the transition ends.
+          fill: "forwards",
           pseudoElement: "::view-transition-new(root)",
         },
       );
@@ -62,6 +65,11 @@ function spillTo(theme: Theme, x: number, y: number) {
 export function ThemeToggle({ className }: { className?: string }) {
   const theme = useSyncExternalStore(subscribe, readTheme, () => "light" as Theme);
   const dark = theme === "dark";
+
+  // An unloaded mask image hides the new theme entirely, so fetch it before the first toggle.
+  useEffect(() => {
+    new Image().src = SPILL_MASK;
+  }, []);
 
   // Follow the clock while the page stays open, unless the visitor picked a theme.
   useEffect(() => {

@@ -142,7 +142,7 @@ export function Hero() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          void video.play().catch(() => {});
+          void video.play().catch(() => { });
         } else {
           video.pause();
         }
@@ -274,8 +274,10 @@ export function Hero() {
             </span>
           </p>
           <p data-hero-item className="hero-lede">
-            An independent advertising agency with 18 years of experience
-            transforming brands through creativity, strategy, and innovation.
+            Independent creative agency.
+            Indian at heart.
+            Ideas that travel.
+
           </p>
         </div>
 

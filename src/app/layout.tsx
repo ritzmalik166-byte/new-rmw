@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {
   Archivo_Black,
+  Caveat,
   Inter,
   Montserrat,
   Outfit,
@@ -93,6 +94,12 @@ const yeseva = Yeseva_One({
   variable: "--font-yeseva",
 });
 
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["500", "700"],
+  variable: "--font-caveat",
+});
+
 export const metadata: Metadata = {
   title: {
     default: `${site.fullName} — ${site.tagline}`,
@@ -105,7 +112,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${archivo.variable} ${inter.variable} ${montserrat.variable} ${jakarta.variable} ${playfair.variable} ${quicksand.variable} ${quattrocento.variable} ${spaceMono.variable} ${rye.variable} ${yatra.variable} ${yeseva.variable} antialiased`}
+      className={`${outfit.variable} ${archivo.variable} ${inter.variable} ${montserrat.variable} ${jakarta.variable} ${playfair.variable} ${quicksand.variable} ${quattrocento.variable} ${spaceMono.variable} ${rye.variable} ${yatra.variable} ${yeseva.variable} ${caveat.variable} antialiased`}
       suppressHydrationWarning
     >
       <head>

@@ -71,8 +71,7 @@ export function HomeVoice() {
           </p>
           <HmTitle id="hm-voice-title" lines={TITLE} />
           <p data-hm-fade className="hm-lede">
-            Every consignment ends with a signature. Here is what clients write on the slip once the
-            work has landed.
+          Awards and numbers tell part of the story, but our clients tell the rest. Here is what the brands we have partnered with say about us.
           </p>
           {total > 1 ? (
             <div data-hm-fade className="hm-voice-controls">
@@ -161,7 +160,7 @@ export function HomeVoice() {
         </div>
       </div>
 
-      {total > 1 ? (
+      {/* {total > 1 ? (
         <div className="hm-voice-belt" aria-label="All client testimonials">
           <div className="hm-voice-belt-track">
             {[0, 1].map((copy) => (
@@ -196,7 +195,7 @@ export function HomeVoice() {
             ))}
           </div>
         </div>
-      ) : null}
+      ) : null} */}
     </section>
   );
 }

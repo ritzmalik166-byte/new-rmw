@@ -87,25 +87,6 @@ export function ServiceLowerSections({
         </p>
       </section>
 
-      <section id="service-faq" className="subsvc-seo-faq" aria-labelledby="service-faq-title">
-        <p className="subsvc-seo-kicker">KM 06 · FAQs</p>
-        <h2 id="service-faq-title">
-          Questions at the <span>dhaba.</span>
-        </h2>
-        <div className="subsvc-seo-faq-list">
-          {layout.faqs.map((faq, index) => (
-            <details className="subsvc-seo-faq-item" key={faq.question} open={index === 0}>
-              <summary>
-                <span className="subsvc-seo-faq-num">{String(index + 1).padStart(2, "0")}</span>
-                <span>{faq.question}</span>
-                <span className="subsvc-seo-faq-toggle" aria-hidden="true" />
-              </summary>
-              <p>{faq.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
-
       <nav className="subsvc-seo-related" aria-label="Related services">
         <p className="subsvc-seo-kicker">Related services · Next exits</p>
         <div className="subsvc-seo-related-links">

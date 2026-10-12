@@ -5,8 +5,8 @@ import { AboutJourney } from "@/components/about/AboutJourney";
 import { AboutMileage } from "@/components/about/AboutMileage";
 import { AboutProofs } from "@/components/about/AboutProofs";
 import { AboutTruckBack } from "@/components/about/AboutTruckBack";
-import { Highways } from "@/components/home/Highways";
 import { StartProject } from "@/components/home/StartProject";
+import { HomeFaq } from "@/components/homepage/HomeFaq";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default function AboutPage() {
       <AboutJourney />
       <AboutProofs />
       <AboutFounder />
-      <Highways faqs={site.about.faqs} />
+      <HomeFaq kicker="Before you set off" faqs={site.about.faqs} />
       <StartProject />
     </>
   );

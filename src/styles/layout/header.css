@@ -107,7 +107,27 @@ button.site-nav-link {
 }
 
 @media (min-width: 1024px) {
+  /* Equal outer columns keep the links centred on the page, whatever the logo and actions measure. */
+  .site-header-bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  }
+
   .site-nav {
     display: flex;
+  }
+
+  .site-header-brand {
+    justify-self: start;
+  }
+
+  .site-header-actions {
+    justify-self: end;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1180px) {
+  .site-nav {
+    gap: 24px;
   }
 }

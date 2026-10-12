@@ -16,13 +16,16 @@ import { site } from "@/lib/site";
 import { ServicesMegaMenu } from "@/components/layout/ServicesMegaMenu";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { SERVICE_ICONS } from "@/lib/service-icons";
-import { SERVICES_LIST } from "@/lib/services-data";
+import { MENU_SERVICES } from "@/lib/services-data";
 
 registerGsap();
 gsap.registerPlugin(useGSAP);
 
 const HEADER_STICK_AFTER = 160;
 const HEADER_IDLE_MS = 700;
+
+const isCurrent = (pathname: string, href: string) =>
+  pathname === href || pathname.startsWith(`${href}/`);
 
 export function Header() {
   const pathname = usePathname();
@@ -195,7 +198,7 @@ export function Header() {
   return (
     <header ref={rootRef} className="site-header absolute top-0 right-0 left-0 z-50">
       <div className="site-header-bar flex items-center justify-between gap-4 px-5 py-5 md:px-10 md:py-6">
-        <TransitionLink href="/" className="flex items-center gap-2" aria-label={site.fullName}>
+        <TransitionLink href="/" className="site-header-brand flex items-center gap-2" aria-label={site.fullName}>
           <BrandMark />
         </TransitionLink>
 
@@ -244,7 +247,7 @@ export function Header() {
                 href={item.href}
                 className={cn(
                   "site-nav-link",
-                  pathname === item.href && "is-active",
+                  isCurrent(pathname, item.href) && "is-active",
                 )}
               >
                 {item.label}
@@ -379,7 +382,7 @@ function MobileMenu({
 
                 {mobileServicesOpen && (
                   <div className="pl-8 pr-2 py-2 flex flex-col gap-1.5 bg-white/[0.04] rounded-lg my-1">
-                    {SERVICES_LIST.map((svc) => (
+                    {MENU_SERVICES.map((svc) => (
                       <Link
                         key={svc.slug}
                         href={`/services/${svc.slug}`}
@@ -416,7 +419,7 @@ function MobileMenu({
             <TransitionLink
               key={item.href}
               href={item.href}
-              className={cn("mnav-link", pathname === item.href && "is-active")}
+              className={cn("mnav-link", isCurrent(pathname, item.href) && "is-active")}
               style={{ "--i": index } as React.CSSProperties}
               onClick={onClose}
             >

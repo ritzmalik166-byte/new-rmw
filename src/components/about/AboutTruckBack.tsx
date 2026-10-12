@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { useMotion } from "@/components/providers/MotionProvider";
@@ -123,77 +124,43 @@ export function AboutTruckBack() {
 
         <FadeIn className="about-tb-stage" delay={0.15} y={60}>
           <div className="about-tb-truck">
-            <div className="about-tb-frame">
-              <div className="about-tb-field">
-                <Rosette className="about-tb-rosette is-tl" />
-                <Rosette className="about-tb-rosette is-tr" />
-                <Rosette className="about-tb-rosette is-bl" />
-                <Rosette className="about-tb-rosette is-br" />
+            <Image
+              src="/about/truck-back.png"
+              alt=""
+              width={810}
+              height={668}
+              sizes="(max-width: 900px) 92vw, 620px"
+              className="about-tb-truck-img"
+            />
 
-                <div className="about-tb-plaque">
-                  <div
-                    id="about-tb-panel"
-                    className="about-tb-plaque-inner"
-                    aria-live="polite"
-                    aria-atomic="true"
-                  >
-                    <div key={active} className="about-tb-paint">
-                      <p className="about-tb-painted" lang="hi">
-                        {slogan.painted}
-                      </p>
-                      <p className="about-tb-copy">{slogan.copy}</p>
-                    </div>
-                  </div>
-                </div>
+            <div
+              id="about-tb-panel"
+              className="about-tb-panel"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              <div key={active} className="about-tb-paint">
+                <p className="about-tb-painted" lang="hi">
+                  {slogan.painted}
+                </p>
+                <p className="about-tb-copy">{slogan.copy}</p>
               </div>
             </div>
 
-            <div className="about-tb-bumper">
-              <span key={`l-${active}`} className="about-tb-light is-red" aria-hidden />
-              <span className="about-tb-plate">
-                <span key={active} className="about-tb-plate-num">
-                  {pad(active + 1)}
-                </span>
-                <span className="about-tb-plate-sep">/</span>
-                {pad(SLOGANS.length)}
+            <span key={`l-${active}`} className="about-tb-light is-left" aria-hidden />
+            <span key={`r-${active}`} className="about-tb-light is-right" aria-hidden />
+
+            <span className="about-tb-plate">
+              <span key={active} className="about-tb-plate-num">
+                {pad(active + 1)}
               </span>
-              <span key={`r-${active}`} className="about-tb-light is-amber" aria-hidden />
-            </div>
-            <div className="about-tb-hazard" aria-hidden />
+              <span className="about-tb-plate-sep">/</span>
+              {pad(SLOGANS.length)}
+            </span>
           </div>
           <span className="about-tb-shadow" aria-hidden />
         </FadeIn>
       </div>
     </section>
-  );
-}
-
-const ROSETTE_PETALS = Array.from({ length: 9 }, (_, i) => {
-  const angle = ((i + 0.5) * (90 / 9) * Math.PI) / 180;
-  return { cx: (94 * Math.cos(angle)).toFixed(2), cy: (94 * Math.sin(angle)).toFixed(2) };
-});
-
-const ROSETTE_DOTS = Array.from({ length: 7 }, (_, i) => {
-  const angle = ((i + 0.5) * (90 / 7) * Math.PI) / 180;
-  return { cx: (60 * Math.cos(angle)).toFixed(2), cy: (60 * Math.sin(angle)).toFixed(2) };
-});
-
-function Rosette({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 110 110" aria-hidden>
-      {ROSETTE_PETALS.map((p) => (
-        <circle key={`p${p.cx}`} cx={p.cx} cy={p.cy} r="9" fill="#e5322d" />
-      ))}
-      <circle r="92" fill="#e5322d" />
-      <circle r="82" fill="#f39c1f" />
-      <circle r="70" fill="#1f6f5c" />
-      {ROSETTE_DOTS.map((d) => (
-        <circle key={`d${d.cx}`} cx={d.cx} cy={d.cy} r="3.4" fill="#ffd23f" />
-      ))}
-      <circle r="50" fill="#f6c431" />
-      <circle r="38" fill="#e5322d" />
-      <circle r="26" fill="#1f6f5c" />
-      <circle r="14" fill="#f6c431" />
-    </svg>
   );
 }

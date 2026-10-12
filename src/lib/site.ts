@@ -16,6 +16,7 @@ export const site = {
     { href: "/about", label: "About" },
     { href: "/services", label: "Services" },
     { href: "/work", label: "Our Work" },
+    { href: "/blog", label: "Blog" },
   ],
   ticker: [
     "Ideas on board",
@@ -72,12 +73,12 @@ export const site = {
   route: {
     kicker: "Route 02 • How we think",
     title: ["Insight", "Idea", "Impact"],
-    lede: "Every project runs the same road. We don't skip the vital starting steps to reach a meaningful destination.",
+    lede: "Every project at Ritz Media World follows the same proven road, whether it is a brand launch, an advertising campaign, or a real estate project. ",
     stops: [
       {
         name: "Insight",
         km: "KM 0",
-        copy: "Understand the business, target audiences, and the core opportunity before anything is built.",
+        copy: "Every project starts with your business, audience, and market, so we find the real opportunity first.",
       },
       {
         name: "Idea",
@@ -87,7 +88,7 @@ export const site = {
       {
         name: "Impact",
         km: "Destination",
-        copy: "Take the idea through production, digital and media, and measure what it actually moved.",
+        copy: "Production, digital marketing and media bring the idea to life, with every result measured.",
       },
     ],
   },

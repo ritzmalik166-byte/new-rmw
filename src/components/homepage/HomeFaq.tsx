@@ -4,31 +4,49 @@ import { useId, useRef, useState } from "react";
 import { TransitionLink } from "@/components/motion/TransitionLink";
 import { cn } from "@/lib/cn";
 import { site } from "@/lib/site";
-import { HmPlate, HmTitle, useHomeReveal } from "./shared";
+import { HmPlate, HmTitle, type HmLine, useHomeReveal } from "./shared";
 
 const TITLE = [{ text: "Common" }, { text: "highways.", accent: true }] as const;
 
-export function HomeFaq() {
+export type FaqItem = { q: string; a: string };
+
+type HomeFaqProps = {
+  id?: string;
+  kicker?: string;
+  title?: readonly HmLine[];
+  lede?: string | null;
+  faqs?: readonly FaqItem[];
+};
+
+export function HomeFaq({
+  id = "highways",
+  kicker = "KM 07 · Before you set off",
+  title = TITLE,
+  lede = site.highways.lede,
+  faqs = site.highways.faqs,
+}: HomeFaqProps) {
   const rootRef = useRef<HTMLElement>(null);
   const baseId = useId();
   const [open, setOpen] = useState<number | null>(0);
-  const { faqs, lede } = site.highways;
   const { email, phones } = site.footer;
+  const titleId = `${id}-title`;
   useHomeReveal(rootRef);
 
   return (
-    <section ref={rootRef} id="highways" className="hm hm-faq" aria-labelledby="hm-faq-title">
+    <section ref={rootRef} id={id} className="hm hm-faq" aria-labelledby={titleId}>
       <div className="hm-wrap hm-faq-inner">
         <div className="hm-faq-side">
           <header className="hm-faq-head">
             <p data-hm-fade className="hm-kicker">
               <span className="hm-pill">FAQs</span>
-              <span>KM 07 · Before you set off</span>
+              <span>{kicker}</span>
             </p>
-            <HmTitle id="hm-faq-title" lines={TITLE} />
-            <p data-hm-fade className="hm-lede">
-              {lede}
-            </p>
+            <HmTitle id={titleId} lines={title} />
+            {lede ? (
+              <p data-hm-fade className="hm-lede">
+                {lede}
+              </p>
+            ) : null}
           </header>
 
           <aside data-hm-fade className="hm-faq-help" aria-label="Ask us directly">

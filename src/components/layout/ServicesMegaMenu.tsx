@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { cn } from "@/lib/cn";
 import { SERVICE_ACCENTS, SERVICE_ICONS } from "@/lib/service-icons";
-import { SERVICES_LIST } from "@/lib/services-data";
+import { MENU_SERVICES } from "@/lib/services-data";
 import { site } from "@/lib/site";
 
 interface ServicesMegaMenuProps {
@@ -15,9 +15,6 @@ interface ServicesMegaMenuProps {
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
 }
-
-const FEATURED = SERVICES_LIST.filter((service) => SERVICE_ICONS[service.slug]);
-const MORE = SERVICES_LIST.filter((service) => !SERVICE_ICONS[service.slug]);
 
 const STATS = [
   { value: "18+", label: "Years" },
@@ -98,8 +95,9 @@ export function ServicesMegaMenu({
           </aside>
 
           <ul className="smm-grid">
-            {FEATURED.map((service, index) => {
+            {MENU_SERVICES.map((service, index) => {
               const href = `/services/${service.slug}`;
+              const icon = SERVICE_ICONS[service.slug];
               return (
                 <li
                   key={service.slug}
@@ -117,15 +115,12 @@ export function ServicesMegaMenu({
                   >
                     <span className="smm-card-num">{String(index + 1).padStart(2, "0")}</span>
                     <span className="smm-card-icon">
-                      <Image
-                        src={SERVICE_ICONS[service.slug]!}
-                        alt=""
-                        width={160}
-                        height={160}
-                      />
+                      {icon ? <Image src={icon} alt="" width={160} height={160} /> : null}
                     </span>
-                    <span className="smm-card-name">{service.name}</span>
-                    <span className="smm-card-desc">{service.shortDescription}</span>
+                    <span className="smm-card-text">
+                      <span className="smm-card-name">{service.name}</span>
+                      <span className="smm-card-desc">{service.shortDescription}</span>
+                    </span>
                     <span className="smm-card-go" aria-hidden>
                       <ArrowIcon />
                     </span>
@@ -138,17 +133,7 @@ export function ServicesMegaMenu({
 
         <div className="smm-foot">
           <p className="smm-foot-route">
-            <span className="smm-foot-label">Also on the route</span>
-            {MORE.map((service) => (
-              <Link
-                key={service.slug}
-                href={`/services/${service.slug}`}
-                onClick={onClose}
-                className="smm-chip"
-              >
-                {service.name}
-              </Link>
-            ))}
+            <span className="smm-foot-label">{MENU_SERVICES.length} services · one route</span>
           </p>
           {phone ? (
             <a href={`tel:${phone.replace(/\s/g, "")}`} className="smm-foot-call">

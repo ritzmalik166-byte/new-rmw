@@ -148,102 +148,44 @@
 }
 
 /* ---------- Truck back ---------- */
+/* Overlay positions are percentages of the 810x668 truck-back.png artwork. */
 .about-tb-truck {
   position: relative;
   z-index: 1;
-  width: min(640px, 100%);
+  width: min(620px, 100%);
   margin-inline: auto;
   container-type: inline-size;
-  animation: about-tb-idle 2.6s ease-in-out infinite;
+}
+
+.about-tb-truck-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  pointer-events: none;
 }
 
 .about-tb-shadow {
   position: absolute;
-  bottom: -18px;
+  bottom: -10px;
   left: 50%;
-  width: min(600px, 92%);
-  height: 30px;
+  width: min(520px, 84%);
+  height: 28px;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgb(27 31 75 / 22%), transparent);
+  background: radial-gradient(closest-side, rgb(27 31 75 / 26%), transparent);
   transform: translateX(-50%);
   pointer-events: none;
 }
 
-.about-tb-frame {
-  padding: 9px;
-  border: 4px solid var(--tb-red);
-  border-bottom: 0;
-  border-radius: 12px 12px 0 0;
-  background:
-    radial-gradient(circle, #ffd23f 2px, transparent 2.6px) center / 12px 12px,
-    var(--tb-teal-deep);
-}
-
-.about-tb-field {
-  position: relative;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  aspect-ratio: 2 / 1;
-  padding: 6.5% 13%;
-  background: var(--tb-yellow);
-}
-
-.about-tb-rosette {
+.about-tb-panel {
   position: absolute;
-  width: 17%;
-  height: auto;
-  aspect-ratio: 1;
-  overflow: visible;
-}
-
-.about-tb-rosette.is-tl {
-  top: 0;
-  left: 0;
-}
-
-.about-tb-rosette.is-tr {
-  top: 0;
-  right: 0;
-  transform: scaleX(-1);
-}
-
-.about-tb-rosette.is-bl {
-  bottom: 0;
-  left: 0;
-  transform: scaleY(-1);
-}
-
-.about-tb-rosette.is-br {
-  right: 0;
-  bottom: 0;
-  transform: scale(-1, -1);
-}
-
-.about-tb-plaque {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  padding: 7px;
-  border-radius: 20px;
-  background: radial-gradient(circle, var(--tb-red) 3.2px, transparent 3.8px) center / 10px 10px;
-}
-
-.about-tb-plaque-inner {
+  top: 21.9%;
+  left: 21.4%;
   display: grid;
   place-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 4% 7%;
-  border: 3px solid var(--tb-yellow);
-  border-radius: 14px;
-  background:
-    radial-gradient(120% 90% at 50% 0%, rgb(255 255 255 / 10%), transparent 60%),
-    var(--tb-teal);
-  box-shadow:
-    0 0 0 2px #7a2a1b,
-    inset 0 0 0 2px rgb(0 0 0 / 12%);
+  width: 57.9%;
+  height: 36.5%;
+  padding: 3% 6%;
   text-align: center;
 }
 
@@ -255,63 +197,57 @@
   margin: 0;
   color: var(--tb-yellow);
   font-family: var(--font-yatra), "Yatra One", serif;
-  font-size: clamp(24px, 6.4cqw, 40px);
+  font-size: clamp(16px, 5.8cqw, 38px);
   line-height: 1.15;
-  text-shadow: 2px 2px 0 #174f44;
+  text-shadow: 2px 2px 0 #06302e;
   text-wrap: balance;
 }
 
 .about-tb-copy {
-  max-width: 36ch;
-  margin: 10px auto 0;
+  max-width: 34ch;
+  margin: 1.4cqw auto 0;
   color: #fff;
   font-family: var(--font-inter), Inter, sans-serif;
-  font-size: clamp(12px, 2.6cqw, 15px);
+  font-size: clamp(10px, 2.3cqw, 14px);
   font-weight: 500;
-  line-height: 1.6;
+  line-height: 1.5;
   text-wrap: pretty;
 }
 
-.about-tb-bumper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: clamp(48px, 10.5cqw, 58px);
-  padding-inline: 4.5%;
-  background: #141414;
-  box-shadow: inset 0 3px 0 rgb(255 255 255 / 6%);
-}
-
 .about-tb-light {
-  width: clamp(24px, 5.6cqw, 32px);
+  position: absolute;
+  top: 74.25%;
+  width: 5%;
   aspect-ratio: 1;
-  border: 3px solid #fff;
   border-radius: 50%;
+  color: rgb(255 70 50 / 85%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
-.about-tb-light.is-red {
-  color: rgb(217 51 63 / 70%);
-  background: var(--tb-red);
+.about-tb-light.is-left {
+  left: 11%;
   animation: about-tb-blink 0.7s ease-out;
 }
 
-.about-tb-light.is-amber {
-  color: rgb(243 156 31 / 80%);
-  background: var(--tb-amber);
+.about-tb-light.is-right {
+  left: 89.4%;
   animation: about-tb-blink 0.7s ease-out 2;
 }
 
 .about-tb-plate {
-  display: inline-flex;
+  position: absolute;
+  top: 71%;
+  left: 40.5%;
+  display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 16px;
-  border: 2px solid var(--tb-yellow);
-  border-radius: 3px;
-  background: #fff;
+  justify-content: center;
+  gap: 0.8cqw;
+  width: 18.6%;
+  height: 7%;
   color: #141414;
   font-family: var(--font-inter), Inter, sans-serif;
-  font-size: 15px;
+  font-size: clamp(11px, 2.6cqw, 16px);
   font-weight: 800;
   letter-spacing: 0.08em;
   perspective: 200px;
@@ -324,15 +260,6 @@
 
 .about-tb-plate-sep {
   color: #8d8a84;
-}
-
-.about-tb-hazard {
-  height: 14px;
-  background: repeating-linear-gradient(
-    135deg,
-    var(--tb-red) 0 10px,
-    #fff 10px 20px
-  );
 }
 
 @keyframes about-tb-timer {
@@ -359,22 +286,12 @@
 @keyframes about-tb-blink {
   0%,
   100% {
-    filter: none;
+    background: transparent;
     box-shadow: none;
   }
   40% {
-    filter: brightness(1.35);
-    box-shadow: 0 0 18px 4px currentColor;
-  }
-}
-
-@keyframes about-tb-idle {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-2px);
+    background: rgb(255 236 210 / 55%);
+    box-shadow: 0 0 22px 8px currentColor;
   }
 }
 
@@ -396,24 +313,16 @@
 }
 
 @media (max-width: 520px) {
-  .about-tb-field {
-    aspect-ratio: auto;
-    min-height: 210px;
-    padding: 9% 12%;
+  .about-tb-panel {
+    padding: 2% 4%;
   }
 
-  .about-tb-rosette {
-    width: 22%;
-  }
-
-  .about-tb-plate {
-    padding: 5px 12px;
-    font-size: 13px;
+  .about-tb-copy {
+    line-height: 1.35;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about-tb-truck,
   .about-tb-paint,
   .about-tb-plate-num,
   .about-tb-light {

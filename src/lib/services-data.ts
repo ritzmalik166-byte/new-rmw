@@ -1198,6 +1198,9 @@ export const SERVICES_LIST: ServiceDetail[] = [
   },
 ];
 
+/* Services offered in the site menus. SEO is sold as part of Digital Marketing. */
+export const MENU_SERVICES = SERVICES_LIST.filter((service) => service.slug !== "seo");
+
 export function getServiceBySlug(slug: string): ServiceDetail | undefined {
   return SERVICES_LIST.find((s) => s.slug === slug || s.id === slug);
 }

@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { StartProject } from "@/components/home/StartProject";
+import { HomeFaq } from "@/components/homepage/HomeFaq";
 import { ServiceLowerSections } from "@/components/services/ServiceLowerSections";
 import { ServiceRouteSection } from "@/components/services/ServiceRouteSection";
+import { getServiceLayout } from "@/lib/service-layout";
 import {
   getAllServices,
   getRelatedServices,
@@ -11,6 +13,8 @@ import {
 } from "@/lib/services-data";
 
 export const revalidate = 3600;
+
+const SERVICE_FAQ_TITLE = [{ text: "Questions" }, { text: "at the" }, { text: "dhaba.", accent: true }];
 
 export async function generateStaticParams() {
   const services = getAllServices();
@@ -182,6 +186,13 @@ export default async function SubServicePage({
 
       <ServiceRouteSection service={service} />
       <ServiceLowerSections service={service} relatedServices={relatedServices} />
+      <HomeFaq
+        id="service-faq"
+        kicker="KM 06"
+        title={SERVICE_FAQ_TITLE}
+        lede={null}
+        faqs={getServiceLayout(service).faqs.map((faq) => ({ q: faq.question, a: faq.answer }))}
+      />
 
       <StartProject />
     </article>

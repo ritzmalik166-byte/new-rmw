@@ -14,28 +14,28 @@ const TITLE = [{ text: "Consignments" }, { text: "delivered.", accent: true }] a
 
 const WORK = [
   {
-    src: "/s6/renox-legacy.jpg",
+    src: "/s6/renox-thrive.jpg",
     medium: "Print",
     title: "A legacy",
     copy: "Real estate, told as a place people can already imagine living in.",
     tilt: -2,
   },
   {
-    src: "/s6/forestwalk.jpg",
+    src: "/s6/VVIP-1.jpg",
     medium: "Social",
     title: "Bring home nature",
     copy: "A world built for the campaign, then used again across sales and digital.",
     tilt: 1.5,
   },
   {
-    src: "/s6/navrang-square.jpg",
+    src: "/s6/risland-edm.jpg",
     medium: "Digital",
     title: "Where style finds its address",
     copy: "A place, a name, and a picture that can hold both.",
     tilt: -1,
   },
   {
-    src: "/s6/belonging.png",
+    src: "/s6/VVIP-2.jpg",
     medium: "Key visual",
     title: "A bloom of belonging",
     copy: "A brand idea made visible: something people can feel, not only read.",
@@ -116,8 +116,8 @@ export function HomeWork() {
             </p>
             <HmTitle id="hm-work-title" lines={TITLE} />
             <p data-hm-fade className="hm-lede">
-              The work does not stay in the studio. A few campaigns that left the depot and went
-              out to meet people.
+            Every claim on this page is backed by work that went live. These campaigns were created for brands that trusted us with their name, and they remain the best evidence of what Ritz Media World delivers.
+
             </p>
           </div>
           <TransitionLink data-hm-fade href="/work" className="hm-btn is-ink">

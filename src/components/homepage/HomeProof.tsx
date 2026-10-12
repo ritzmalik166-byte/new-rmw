@@ -26,9 +26,9 @@ export function HomeProof() {
           </p>
           <HmTitle id="hm-proof-title" lines={TITLE} />
         </div>
-        <span data-hm-stamp className="hm-proof-badge">
+        {/* <span data-hm-stamp className="hm-proof-badge">
           Client case study
-        </span>
+        </span> */}
 
         <dl className="hm-proof-stats">
           {site.moved.stats.map((stat) => (

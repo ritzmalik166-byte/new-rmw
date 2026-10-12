@@ -7,6 +7,8 @@ export const SERVICE_ICONS: Partial<Record<string, string>> = {
   "content-marketing": "/services/icons/content-marketing.png",
   "web-development": "/services/icons/web-development.png",
   "celebrity-endorsements": "/services/icons/celebrity-endorsements.png",
+  "influencer-marketing": "/services/icons/influencer-marketing.png",
+  "3d-rendering-services": "/services/icons/3d-rendering-services.png",
 };
 
 /** Truck-art palette sampled from the service icons. */

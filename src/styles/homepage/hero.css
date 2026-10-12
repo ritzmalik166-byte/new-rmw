@@ -398,6 +398,39 @@
   }
 }
 
+/* Headlights only burn at night. */
+html:not([data-theme="dark"]) .hm-hero-light {
+  display: none;
+}
+
+/* Dark mode inverts the page, so the glow is pre-inverted to land as pale yellow.
+   Inside an inverted page, multiply comes out as screen. */
+html[data-theme="dark"] .hm-hero-light {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html[data-theme="dark"] .hm-hero-light.is-beam {
+  filter: blur(5px) invert(1) hue-rotate(180deg);
+}
+
+html[data-theme="dark"] :is(.hm-hero-light.is-lamp, .hm-hero-light.is-pool) {
+  mix-blend-mode: multiply;
+}
+
+html[data-theme="dark"] .hm-hero.is-lit .hm-hero-light.is-beam::before {
+  animation-name: hm-hero-beam-night;
+}
+
+@keyframes hm-hero-beam-night {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(0.87);
+  }
+}
+
 /* ---------- Tablet & mobile: copy first, truck rolls in underneath ---------- */
 @media (max-width: 1099px) {
   .hm-hero {

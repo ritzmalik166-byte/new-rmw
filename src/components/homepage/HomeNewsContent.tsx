@@ -7,7 +7,7 @@ import type { Blog } from "@/lib/blogs";
 import { site } from "@/lib/site";
 import { HmArrow, HmTitle, useHomeReveal } from "./shared";
 
-const TITLE = [{ text: "Dispatches from" }, { text: "the road.", accent: true }] as const;
+const TITLE = [{ text: "News & blogs" }, { text: "from the road.", accent: true }] as const;
 
 function formatDate(date: string | null) {
   if (!date) return site.fullName;
