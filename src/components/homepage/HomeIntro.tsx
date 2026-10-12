@@ -35,9 +35,7 @@ export function HomeIntro() {
           </p>
           <HmTitle id="hm-intro-title" lines={TITLE} />
           <p data-hm-fade className="hm-lede">
-            {site.fullName} is a creative, branding, digital and media agency. Strategy, creative,
-            media and production sit in one room, so your brand moves as one consignment, not a
-            pile of hand-offs.
+          Founded in 2008, Ritz Media World is an independent creative advertising agency headquartered in Noida, Delhi NCR, serving brands across India. With strategy, creative, media and production under one roof, we deliver branding, digital marketing and real estate lead generation. Big FM named us Best Creative Agency (Real Estate) in Delhi NCR in 2024 and 2025.
           </p>
           <div data-hm-fade className="hm-actions">
             <a href="#start-a-project" className="hm-btn">
