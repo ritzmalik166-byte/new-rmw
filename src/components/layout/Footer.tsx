@@ -114,7 +114,7 @@ export function Footer() {
             </h2>
             <p className="site-footer-blurb">{data.blurb}</p>
             <div className="site-footer-actions">
-              <TransitionLink href="/#start-a-project" className="site-footer-cta">
+              <TransitionLink href="/contact" target="_blank" rel="noopener noreferrer" className="site-footer-cta">
                 Start a project
                 <span aria-hidden>→</span>
               </TransitionLink>

@@ -292,6 +292,8 @@ export function Highways({ faqs = site.highways.faqs }: { faqs?: { q: string; a:
                   <a
                     data-board-cta
                     href={data.card.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="highways-card-btn"
                   >
                     {data.card.cta}

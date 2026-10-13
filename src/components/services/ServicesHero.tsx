@@ -100,7 +100,7 @@ export function ServicesHero() {
             engines.
           </p>
 
-          <a href="#start-a-project" className="svch-cta">
+          <a href="/contact" target="_blank" rel="noopener noreferrer" className="svch-cta">
             Book your consignment <span aria-hidden>→</span>
           </a>
         </div>

@@ -54,7 +54,7 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
           </p>
 
           <div data-hm-fade className="hm-actions">
-            <a href="#start-a-project" className="hm-btn">
+            <a href="/contact" target="_blank" rel="noopener noreferrer" className="hm-btn">
               Start your project <span aria-hidden>→</span>
             </a>
             <a href="#creatives" className="hm-link">

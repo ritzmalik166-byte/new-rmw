@@ -170,7 +170,7 @@ export function ServicesDigitalMarketing() {
           </p>
           <Link
             className="svc-dm-cta"
-            href="/#start-a-project"
+            href="/contact" target="_blank" rel="noopener noreferrer"
             onPointerMove={onCtaMove}
             onPointerLeave={onCtaLeave}
           >

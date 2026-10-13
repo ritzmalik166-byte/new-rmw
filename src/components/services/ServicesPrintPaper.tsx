@@ -217,7 +217,7 @@ export function ServicesPrintPaper() {
               </li>
             ))}
           </ul>
-          <Link className="svc-paper-cta" href="/#start-a-project">
+          <Link className="svc-paper-cta" href="/contact" target="_blank" rel="noopener noreferrer">
             Book your print ad <span aria-hidden>→</span>
           </Link>
         </footer>

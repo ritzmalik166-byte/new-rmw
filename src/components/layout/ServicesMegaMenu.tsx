@@ -80,7 +80,7 @@ export function ServicesMegaMenu({
             </ul>
 
             <div className="smm-intro-actions">
-              <Link href="/#start-a-project" onClick={onClose} className="smm-cta">
+              <Link href="/contact" target="_blank" rel="noopener noreferrer" onClick={onClose} className="smm-cta">
                 Get a free consultation
                 <ArrowIcon />
               </Link>

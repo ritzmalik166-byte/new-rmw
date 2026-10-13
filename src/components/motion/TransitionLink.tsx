@@ -25,6 +25,7 @@ export function TransitionLink({
         if (event.defaultPrevented) return;
         if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         if (event.button !== 0) return;
+        if (props.target && props.target !== "_self") return;
 
         const nextHref = typeof href === "string" ? href : href.pathname;
         if (!nextHref || nextHref.startsWith("mailto:") || nextHref.startsWith("tel:")) {

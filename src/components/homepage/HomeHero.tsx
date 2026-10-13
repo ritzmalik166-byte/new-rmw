@@ -297,7 +297,7 @@ export function HomeHero() {
           </p>
 
           <div data-hero-fade className="hm-actions">
-            <a href="#start-a-project" className="hm-btn">
+            <a href="/contact" target="_blank" rel="noopener noreferrer" className="hm-btn">
               Start a project <span aria-hidden>→</span>
             </a>
             <TransitionLink href="/portfolio" className="hm-btn is-ink">

@@ -386,7 +386,7 @@ export const site = {
           "Real estate branding, launch campaigns, 3D walkthroughs, digital and media for developers across Gurgaon and NCR.",
       },
       cta: "Request an Audit",
-      href: "/#start-a-project",
+      href: "/contact",
     },
     truck: "/trucks/rmw-billboard-truck.webp",
     faqs: [

@@ -91,7 +91,7 @@ export function ServicesCreative() {
             From evocative visual identities to bespoke packaging and brand systems. We combine
             traditional Indian visual vernacular with contemporary design precision.
           </p>
-          <Link className="svc-creative-cta" href="/#start-a-project">
+          <Link className="svc-creative-cta" href="/contact" target="_blank" rel="noopener noreferrer">
             Get a Free Marketing Consultation <span aria-hidden>→</span>
           </Link>
         </div>

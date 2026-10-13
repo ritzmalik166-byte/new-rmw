@@ -433,7 +433,7 @@ function MobileMenu({
       </nav>
 
       <div className="mnav-foot">
-        <Link href="/#start-a-project" className="mnav-cta" onClick={onClose}>
+        <Link href="/contact" target="_blank" rel="noopener noreferrer" className="mnav-cta" onClick={onClose}>
           Start a project
           <span aria-hidden>→</span>
         </Link>
