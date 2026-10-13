@@ -1,5 +1,6 @@
 const LATEST_BLOGS_URL = "https://www.ritzmediaworld.com/api/get_all_blogs";
 const ALL_BLOGS_URL = "https://www.ritzmediaworld.com/api/all_blogs";
+const BLOG_POST_URL = "https://www.ritzmediaworld.com/api/blog";
 const BLOG_ARCHIVE_LIMIT = 59;
 
 export type Blog = {
@@ -38,10 +39,10 @@ function getRecords(payload: unknown): Record<string, unknown>[] {
   return records;
 }
 
-function normalizeImage(image: string) {
+export function normalizeImage(image: string) {
   const path = image.startsWith("/") || /^https?:\/\//i.test(image)
     ? image
-    : `/blogs/${encodeURIComponent(image)}`;
+    : `/blogs/${image.split("/").map(encodeURIComponent).join("/")}`;
 
   try {
     const url = new URL(path, "https://www.ritzmediaworld.com");
@@ -74,7 +75,7 @@ function toBlog(record: Record<string, unknown>): Blog | null {
   const status = getString(record, "status").toLowerCase();
   if (status && status !== "active") return null;
 
-  const content = getString(record, "blogDescription", "content", "body");
+  const content = getString(record, "blogDescription", "content", "body", "description");
 
   return {
     slug,
@@ -98,7 +99,7 @@ function isRetryableStatus(status: number) {
   return status === 408 || status === 429 || status >= 500;
 }
 
-async function fetchBlogRecords(url: string) {
+export async function fetchJson(url: string): Promise<unknown> {
   let lastError: unknown;
 
   for (let attempt = 0; attempt <= RETRY_DELAYS_MS.length; attempt++) {
@@ -114,13 +115,17 @@ async function fetchBlogRecords(url: string) {
       continue;
     }
 
-    if (response.ok) return getRecords(await response.json());
+    if (response.ok) return response.json();
 
     lastError = new Error(`Blog API request failed (${response.status}): ${url}`);
     if (!isRetryableStatus(response.status)) break;
   }
 
   throw lastError;
+}
+
+async function fetchBlogRecords(url: string) {
+  return getRecords(await fetchJson(url));
 }
 
 // Static generation renders dozens of blog pages at once; sharing one request
@@ -215,4 +220,14 @@ async function loadBlogs(): Promise<Blog[]> {
 export async function getBlogBySlug(slug: string): Promise<Blog | undefined> {
   const blogs = await getBlogs();
   return blogs.find((blog) => blog.slug === slug);
+}
+
+/* Posts outside the archive feeds (e.g. case studies) are only served by this endpoint. */
+export async function getBlogPost(slug: string): Promise<Blog | null> {
+  try {
+    const payload = await fetchJson(`${BLOG_POST_URL}/${encodeURIComponent(slug)}`);
+    return isRecord(payload) && isRecord(payload.blog) ? toBlog(payload.blog) : null;
+  } catch {
+    return null;
+  }
 }

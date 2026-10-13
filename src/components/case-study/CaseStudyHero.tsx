@@ -1,0 +1,101 @@
+"use client";
+
+import { useRef } from "react";
+import { BlogImage } from "@/components/blogs/BlogImage";
+import { HmArrow, HmStamp, HmTitle, useHomeReveal } from "@/components/homepage/shared";
+import { TransitionLink } from "@/components/motion/TransitionLink";
+import { CASE_STUDY_REPORTS, type CaseStudy } from "@/lib/case-studies";
+
+const FILE_TILTS = ["is-back", "is-mid", "is-front"] as const;
+
+export function CaseStudyHero({ caseStudies }: { caseStudies: CaseStudy[] }) {
+  const rootRef = useRef<HTMLElement>(null);
+  useHomeReveal(rootRef, "top 90%");
+
+  const files = caseStudies.filter((item) => item.image).slice(0, FILE_TILTS.length);
+  const years = caseStudies.flatMap((item) => (item.year ? [Number(item.year)] : []));
+  const yearSpan = years.length
+    ? Math.min(...years) === Math.max(...years)
+      ? String(years[0])
+      : `${Math.min(...years)}–${String(Math.max(...years)).slice(-2)}`
+    : "—";
+
+  return (
+    <section ref={rootRef} className="cs-hero" aria-labelledby="cs-hero-title">
+      <div className="hm-wrap cs-hero-inner">
+        <div className="cs-hero-copy">
+          <nav data-hm-fade className="sd-crumbs" aria-label="Breadcrumb">
+            <ol>
+              <li>
+                <TransitionLink href="/">Home</TransitionLink>
+              </li>
+              <li aria-current="page">Case Studies</li>
+            </ol>
+          </nav>
+
+          <p data-hm-fade className="hm-kicker">
+            <span className="hm-pill">Case Studies</span>
+            <span className="hm-hindi" lang="hi">
+              जिज्ञासु मन का घर
+            </span>
+          </p>
+
+          <HmTitle
+            as="h1"
+            id="cs-hero-title"
+            lines={[{ text: "A home for" }, { text: "curious minds.", accent: true }]}
+          />
+
+          <p data-hm-fade className="hm-lede">
+            Thought-provoking ideas, industry insights and fresh perspectives from the world of
+            creativity and communication, unpacked by the Ritz Media World team.
+          </p>
+
+          <div data-hm-fade className="hm-actions">
+            <a href="#case-studies" className="hm-btn">
+              Browse case studies <span aria-hidden>→</span>
+            </a>
+            <a href="#reports" className="hm-link">
+              Download reports
+              <HmArrow />
+            </a>
+          </div>
+
+          <dl data-hm-fade className="cs-hero-stats">
+            <div>
+              <dt>Case files</dt>
+              <dd>{String(caseStudies.length).padStart(2, "0")}</dd>
+            </div>
+            <div>
+              <dt>Years</dt>
+              <dd>{yearSpan}</dd>
+            </div>
+            <div>
+              <dt>Market reports</dt>
+              <dd>{String(CASE_STUDY_REPORTS.length).padStart(2, "0")}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div className="cs-hero-stage" aria-hidden>
+          {files.map((file, index) => (
+            <figure key={file.slug} className={`cs-hero-file ${FILE_TILTS[index]}`}>
+              <BlogImage src={file.image} alt="" className="cs-hero-file-media" />
+              <figcaption>
+                <span>Case {String(index + 1).padStart(2, "0")}</span>
+                {file.title}
+              </figcaption>
+            </figure>
+          ))}
+          <HmStamp
+            id="cs-hero-stamp"
+            top="RMW · CASE FILES"
+            bottom="NOIDA · UP16"
+            word="Decoded"
+            className="cs-hero-stamp"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}

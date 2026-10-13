@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getBlogsOrEmpty, type Blog } from "@/lib/blogs";
+import { getBlogPost, getBlogsOrEmpty, type Blog } from "@/lib/blogs";
+import { getCaseStudies, getCaseStudySlugs } from "@/lib/case-studies";
 import { BlogImage } from "@/components/blogs/BlogImage";
 import { BlogShare } from "@/components/blogs/BlogShare";
 import { BlogEnquiryForm } from "@/components/blogs/BlogEnquiryForm";
@@ -25,7 +26,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const blog = findBlog(await getBlogsOrEmpty(), slug);
+  const blog = findBlog(await getBlogsOrEmpty(), slug) ?? (await getBlogPost(slug));
   if (!blog) return { title: "Blog Not Found | Ritz Media World" };
 
   return {
@@ -68,11 +69,16 @@ export default async function BlogDetailPage({
 }) {
   const { slug } = await params;
   const allBlogs = await getBlogsOrEmpty();
-  const blog = findBlog(allBlogs, slug);
+  const blog = findBlog(allBlogs, slug) ?? (await getBlogPost(slug));
 
   if (!blog) {
     notFound();
   }
+
+  const isCaseStudy = (await getCaseStudySlugs()).has(blog.slug.toLowerCase());
+  const section = isCaseStudy
+    ? { href: "/case-study", label: "Case Studies", back: "Back to all case studies", related: "More Case Studies" }
+    : { href: "/blog", label: "Blogs", back: "Back to all blogs", related: "Related Blogs" };
 
   const readingTime = calculateReadingTime(blog.content);
   const tags = [
@@ -83,7 +89,9 @@ export default async function BlogDetailPage({
         .filter(Boolean),
     ),
   ];
-  const relatedBlogs = allBlogs.filter((b) => b.slug !== blog.slug).slice(0, 3);
+  const relatedPool: { slug: string; title: string; image: string | null; createdAt: string | null }[] =
+    isCaseStudy ? await getCaseStudies() : allBlogs;
+  const relatedBlogs = relatedPool.filter((b) => b.slug !== blog.slug).slice(0, 3);
 
   return (
     <div className="hm blog-post-page">
@@ -95,7 +103,7 @@ export default async function BlogDetailPage({
                 <Link href="/">Home</Link>
               </li>
               <li>
-                <Link href="/blog">Blogs</Link>
+                <Link href={section.href}>{section.label}</Link>
               </li>
               <li aria-current="page">{blog.title}</li>
             </ol>
@@ -147,8 +155,8 @@ export default async function BlogDetailPage({
         <aside className="blog-post-aside">
           <div className="blog-post-aside-sticky">
             <BlogEnquiryForm />
-            <Link href="/blog" className="blog-back-link">
-              <span aria-hidden="true">←</span> Back to all blogs
+            <Link href={section.href} className="blog-back-link">
+              <span aria-hidden="true">←</span> {section.back}
             </Link>
           </div>
         </aside>
@@ -156,7 +164,7 @@ export default async function BlogDetailPage({
         {relatedBlogs.length > 0 && (
           <section className="blog-related" aria-labelledby="blog-related-heading">
             <h2 id="blog-related-heading" className="blog-related-heading">
-              Related Blogs
+              {section.related}
             </h2>
             <div className="blog-related-grid">
               {relatedBlogs.map((rb) => (
