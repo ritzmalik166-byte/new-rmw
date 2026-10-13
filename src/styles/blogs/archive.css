@@ -268,20 +268,14 @@
 }
 
 .blog-card-category {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  z-index: 1;
-  padding: 5px 10px;
+  margin-right: 4px;
+  padding: 3px 9px;
   border: 1.5px solid var(--hm-ink);
   border-radius: 999px;
   background: var(--hm-yellow);
   color: var(--hm-ink);
-  font-family: var(--hm-mono);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 9.5px;
+  line-height: 1.2;
 }
 
 .blog-archive .news-card-body {
@@ -295,7 +289,8 @@
 .blog-archive .news-card-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 10px;
+  align-items: center;
+  gap: 6px 10px;
   margin: 0;
   color: #6c6553;
   font-family: var(--hm-mono);
@@ -338,7 +333,7 @@
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
-  padding-top: 14px;
+  padding-top: 20px;
   border-top: 1.5px dashed var(--hm-rule);
   color: var(--hm-navy);
   font-family: var(--hm-sans);

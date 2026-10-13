@@ -213,16 +213,15 @@ export function Header() {
                   onMouseEnter={handleServicesEnter}
                   onMouseLeave={handleServicesLeave}
                 >
-                  <button
-                    type="button"
-                    onClick={() => setServicesOpen((prev) => !prev)}
+                  <TransitionLink
+                    href={item.href}
+                    onClick={() => setServicesOpen(false)}
                     className={cn(
-                      "site-nav-link group flex items-center gap-1.5 cursor-pointer",
+                      "site-nav-link group flex items-center gap-1.5",
                       isServicesActive && "is-active",
                     )}
                     aria-expanded={servicesOpen}
                     aria-haspopup="true"
-                    aria-label="Toggle Services menu"
                   >
                     <span>{item.label}</span>
                     <svg 
@@ -236,7 +235,7 @@ export function Header() {
                     >
                       <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
-                  </button>
+                  </TransitionLink>
                 </div>
               );
             }

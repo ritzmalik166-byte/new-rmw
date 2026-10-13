@@ -7,11 +7,27 @@ import { AboutProofs } from "@/components/about/AboutProofs";
 import { AboutTruckBack } from "@/components/about/AboutTruckBack";
 import { StartProject } from "@/components/home/StartProject";
 import { HomeFaq } from "@/components/homepage/HomeFaq";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "About",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "About Ritz Media World | Award-Winning Delhi NCR Advertising Agency",
+  description:
+    "Learn how Ritz Media World crafts data-driven brand stories and digital campaigns. Over 18 years of experience turning brands into household names in Delhi NCR.",
+  keywords: [
+    "Ritz Media World",
+    "advertising agency Delhi NCR",
+    "creative agency Delhi",
+    "full service ad agency Noida",
+    "digital marketing agency Delhi NCR",
+    "brand storytelling agency India",
+    "print radio advertising Delhi NCR",
+    "award winning ad agency Delhi",
+    "client-centric marketing agency India",
+    "advertising & media services Delhi India",
+  ],
+  path: "/about.html",
+});
 
 export default function AboutPage() {
   return (

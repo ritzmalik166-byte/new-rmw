@@ -13,7 +13,7 @@ export const site = {
   description:
     "Independent creative media agency in India. We turn business problems into ideas that travel—from brand and campaign to media, digital, film, 3D and AI.",
   nav: [
-    { href: "/about", label: "About" },
+    { href: "/about.html", label: "About" },
     { href: "/services", label: "Services" },
     { href: "/work", label: "Our Work" },
     { href: "/blog", label: "Blog" },
@@ -475,9 +475,9 @@ export const site = {
     company: [
       { label: "Home", href: "/" },
       { label: "Work", href: "/work" },
-      { label: "About", href: "/about" },
+      { label: "About", href: "/about.html" },
       { label: "Blogs", href: "/blog" },
-      { label: "Career", href: "/about" },
+      { label: "Career", href: "/about.html" },
     ],
     socials: [
       { label: "Facebook", href: "https://www.facebook.com/ritzmediaworld/" },

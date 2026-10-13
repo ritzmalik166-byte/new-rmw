@@ -243,9 +243,9 @@ export function AboutFounder() {
         <div className="about-founder-copy">
           <p className="about-founder-kicker">Founder details &amp; journey</p>
           <h2 className="about-founder-title">
-            The driver
+            The visionary 
             <br />
-            behind the route
+            behind the wheel
           </h2>
           <p className="about-founder-role">
             Ritesh Malik · Founder &amp; Promoter, Ritz Media World And Creative Thinks Media

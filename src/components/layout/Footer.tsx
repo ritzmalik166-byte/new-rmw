@@ -227,10 +227,6 @@ export function Footer() {
         </div>
       </div>
 
-      <p className="site-footer-wordmark" aria-hidden>
-        Ritz <span>Media</span> World
-      </p>
-
       <div className="site-footer-road" aria-hidden>
         <div className="site-footer-rule" />
         <div className="site-footer-truck">

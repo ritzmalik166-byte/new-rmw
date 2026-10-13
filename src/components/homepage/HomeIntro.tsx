@@ -41,7 +41,7 @@ export function HomeIntro() {
             <a href="#start-a-project" className="hm-btn">
               Book your consignment <span aria-hidden>→</span>
             </a>
-            <TransitionLink href="/about" className="hm-link">
+            <TransitionLink href="/about.html" className="hm-link">
               Read our story
               <HmArrow />
             </TransitionLink>

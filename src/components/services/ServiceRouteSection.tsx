@@ -2,163 +2,200 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
+import { HmArrow, HmPlate, HmTitle, useHomeReveal } from "@/components/homepage/shared";
 import { getServiceLayout } from "@/lib/service-layout";
 import type { ServiceDetail } from "@/lib/services-data";
 
-type ServiceRouteSectionProps = {
-  service: ServiceDetail;
-};
+const ROUTE = [
+  { id: "the-problem", label: "The problem" },
+  { id: "capabilities", label: "What we deliver" },
+  { id: "creatives", label: "Creatives" },
+  { id: "roadmap", label: "Process" },
+  { id: "why-rmw", label: "Why it matters" },
+  { id: "stats", label: "Results" },
+  { id: "service-faq", label: "FAQs & next steps" },
+] as const;
 
-export function ServiceRouteSection({ service }: ServiceRouteSectionProps) {
+const pad = (value: number) => String(value).padStart(2, "0");
+
+export function ServiceRouteSection({ service }: { service: ServiceDetail }) {
+  const rootRef = useRef<HTMLElement>(null);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const [active, setActive] = useState(0);
+  useHomeReveal(rootRef);
+
   const layout = getServiceLayout(service);
-  const [activeCapability, setActiveCapability] = useState(0);
-  const capability = service.capabilities[activeCapability];
+  const capabilities = service.capabilities;
+  const capability = capabilities[active];
 
-  const selectCapability = (index: number) => {
-    setActiveCapability((index + service.capabilities.length) % service.capabilities.length);
+  const select = (index: number, focus = false) => {
+    const next = (index + capabilities.length) % capabilities.length;
+    setActive(next);
+    if (focus) tabRefs.current[next]?.focus();
+  };
+
+  const onTabKey = (event: KeyboardEvent<HTMLDivElement>) => {
+    const moves: Record<string, number> = {
+      ArrowDown: active + 1,
+      ArrowRight: active + 1,
+      ArrowUp: active - 1,
+      ArrowLeft: active - 1,
+      Home: 0,
+      End: capabilities.length - 1,
+    };
+    if (!(event.key in moves)) return;
+    event.preventDefault();
+    select(moves[event.key], true);
   };
 
   return (
-    <section id="the-problem" className="subsvc-route-section">
-      <div className="subsvc-route-layout">
-        <div className="subsvc-route-main">
-          <div className="subsvc-problem-content">
-            <div className="subsvc-problem-text">
-              <p className="subsvc-problem-kicker">
-                {service.problemKicker || service.kicker}
-              </p>
-              <h2 className="subsvc-problem-title">
-                {service.problemHeading || service.heading}
-              </h2>
-              <p className="subsvc-problem-desc">{layout.problemSummary}</p>
-              <div className="subsvc-problem-flags">
-                {layout.problemFlags.map((flag) => (
-                  <article className="subsvc-problem-flag" key={flag.title}>
-                    <span className="subsvc-flag-icon" aria-hidden="true" />
-                    <div>
-                      <h3>{flag.title}</h3>
-                      <p>{flag.copy}</p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
+    <section ref={rootRef} id="the-problem" className="hm sd-brief" aria-labelledby="sd-problem-title">
+      <div className="hm-wrap sd-brief-inner">
+        <div className="sd-brief-main">
+          <blockquote data-hm-fade className="sd-define">
+            <p className="sd-define-label">What is {service.name}?</p>
+            <p className="sd-define-text">{service.definitionText ?? service.shortDescription}</p>
+          </blockquote>
 
-          <section id="capabilities" className="subsvc-plan">
-            <header className="subsvc-plan-header">
-              <div>
-                <p className="subsvc-plan-kicker">{layout.planKicker}</p>
-                <h2>
-                  {layout.planTitle} <span>One engine.</span>
-                </h2>
-                <p>{layout.planLede}</p>
-              </div>
-              <span className="subsvc-plan-stamp">Built around your business</span>
-            </header>
+          <header>
+            <p data-hm-fade className="hm-kicker">
+              <span className="hm-pill">KM 01</span>
+              <span>The business problem</span>
+            </p>
+            <HmTitle
+              id="sd-problem-title"
+              className="sd-h2"
+              lines={[{ text: service.problemHeading ?? service.heading }]}
+            />
+            <p data-hm-fade className="hm-lede">
+              {layout.problemSummary}
+            </p>
+          </header>
 
-            <div className="subsvc-plan-card" aria-live="polite">
-              <div className="subsvc-plan-card-top">
-                <span className="subsvc-plan-index">
-                  {String(activeCapability + 1).padStart(2, "0")}
-                </span>
-                <span className="subsvc-plan-card-kicker">
-                  {capability.title}
-                </span>
-                <span className="subsvc-plan-search" aria-hidden="true">⌕</span>
-              </div>
-              <div className="subsvc-plan-card-content">
-                <h3>{capability.title}</h3>
-                <p>{capability.copy}</p>
-                <div className="subsvc-plan-detail">
-                  <h4>What we work on</h4>
-                  <ul>
-                    {(capability.details || [capability.copy]).map((detail) => (
-                      <li key={detail}>{detail}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <div className="subsvc-plan-card-tape" aria-hidden="true" />
-            </div>
+          <ol className="sd-flags">
+            {layout.problemFlags.map((flag, index) => (
+              <li data-hm-fade key={flag.title} className="sd-flag">
+                <span className="sd-flag-no">Pothole {pad(index + 1)}</span>
+                <h3>{flag.title}</h3>
+                <p>{flag.copy}</p>
+              </li>
+            ))}
+          </ol>
 
-            <div className="subsvc-plan-controls" aria-label={`Choose a ${service.name} service`}>
-              <div className="subsvc-plan-count">
-                <strong>{String(activeCapability + 1).padStart(2, "0")}</strong>
-                <span>/ {String(service.capabilities.length).padStart(2, "0")}</span>
-                <small>Service guide</small>
-              </div>
-              <div className="subsvc-plan-steps">
-                {service.capabilities.map((item, index) => (
+          <section id="capabilities" className="sd-plan" aria-labelledby="sd-plan-title">
+            <p data-hm-fade className="hm-kicker">
+              <span className="hm-pill">KM 02</span>
+              <span>{layout.planKicker}</span>
+            </p>
+            <HmTitle
+              id="sd-plan-title"
+              className="sd-h2"
+              lines={[{ text: `${layout.planTitle} One engine.` }]}
+            />
+            <p data-hm-fade className="hm-lede">
+              {layout.planLede}
+            </p>
+
+            <div data-hm-fade className="sd-plan-board">
+              <div
+                className="sd-plan-tabs"
+                role="tablist"
+                aria-label={`${service.name} services`}
+                aria-orientation="vertical"
+                onKeyDown={onTabKey}
+              >
+                {capabilities.map((item, index) => (
                   <button
                     key={item.title}
+                    ref={(node) => {
+                      tabRefs.current[index] = node;
+                    }}
+                    id={`sd-plan-tab-${index}`}
                     type="button"
-                    className={index === activeCapability ? "is-active" : ""}
-                    aria-label={`Show part ${index + 1}: ${item.title}`}
-                    aria-pressed={index === activeCapability}
-                    onClick={() => selectCapability(index)}
+                    role="tab"
+                    className="sd-plan-tab"
+                    aria-selected={index === active}
+                    aria-controls="sd-plan-panel"
+                    tabIndex={index === active ? 0 : -1}
+                    onClick={() => select(index)}
                   >
-                    {String(index + 1).padStart(2, "0")}
+                    <span className="sd-plan-tab-no">{pad(index + 1)}</span>
+                    <span className="sd-plan-tab-name">{item.title}</span>
+                    <HmArrow />
                   </button>
                 ))}
               </div>
-              <div className="subsvc-plan-arrows">
-                <button
-                  type="button"
-                  aria-label="Previous service"
-                  onClick={() => selectCapability(activeCapability - 1)}
-                >
-                  ←
-                </button>
-                <button
-                  type="button"
-                  aria-label="Next service"
-                  onClick={() => selectCapability(activeCapability + 1)}
-                >
-                  →
-                </button>
+
+              <div
+                id="sd-plan-panel"
+                role="tabpanel"
+                aria-labelledby={`sd-plan-tab-${active}`}
+                aria-live="polite"
+                className="sd-plan-panel"
+              >
+                <p className="sd-plan-panel-top">
+                  <span>
+                    Stop {pad(active + 1)} / {pad(capabilities.length)}
+                  </span>
+                  <span>{service.name}</span>
+                </p>
+                <h3>{capability.title}</h3>
+                <p className="sd-plan-panel-copy">{capability.copy}</p>
+                {capability.details?.length ? (
+                  <>
+                    <p className="sd-plan-panel-label">What we work on</p>
+                    <ul>
+                      {capability.details.map((detail) => (
+                        <li key={detail}>{detail}</li>
+                      ))}
+                    </ul>
+                  </>
+                ) : null}
+                <div className="sd-plan-panel-nav">
+                  <button type="button" aria-label="Previous service" onClick={() => select(active - 1)}>
+                    ←
+                  </button>
+                  <button type="button" aria-label="Next service" onClick={() => select(active + 1)}>
+                    →
+                  </button>
+                </div>
               </div>
             </div>
-            <footer className="subsvc-plan-footer">
+
+            <footer data-hm-fade className="sd-plan-foot">
               <span>One connected programme. A clear scope for every service.</span>
-              <Link href="#start-a-project">{layout.planCta} ↗</Link>
+              <a href="#start-a-project" className="hm-link">
+                {layout.planCta}
+                <HmArrow />
+              </a>
             </footer>
           </section>
         </div>
 
-        <aside className="subsvc-route-aside">
-          <div className="subsvc-route-box" aria-label="On this route">
-            <div className="subsvc-route-header">
-              <span className="subsvc-route-title">ON THIS ROUTE</span>
-              <span className="subsvc-route-arrow" aria-hidden="true">↗</span>
-            </div>
-            <nav className="subsvc-route-body subsvc-route-nav">
-              <a href="#the-problem" className="subsvc-route-link active">
-                <span className="route-num">01</span><span className="route-name">The problem</span><span className="route-bullet">▸</span>
-              </a>
-              <a href="#capabilities" className="subsvc-route-link">
-                <span className="route-num">02</span><span className="route-name">What we deliver</span><span className="route-bullet">↑</span>
-              </a>
-              <a href="#roadmap" className="subsvc-route-link">
-                <span className="route-num">03</span><span className="route-name">Process</span><span className="route-bullet">↑</span>
-              </a>
-              <a href="#why-rmw" className="subsvc-route-link">
-                <span className="route-num">04</span><span className="route-name">Why it matters</span><span className="route-bullet">↑</span>
-              </a>
-              <a href="#stats" className="subsvc-route-link">
-                <span className="route-num">05</span><span className="route-name">Work &amp; results</span><span className="route-bullet">↑</span>
-              </a>
-              <a href="#service-faq" className="subsvc-route-link">
-                <span className="route-num">06</span><span className="route-name">FAQs &amp; next steps</span><span className="route-bullet">↑</span>
-              </a>
-            </nav>
-          </div>
+        <aside className="sd-brief-aside">
+          <nav data-hm-fade className="sd-routebox" aria-label="On this page">
+            <p className="sd-routebox-head">
+              On this route <span aria-hidden>↗</span>
+            </p>
+            <ol>
+              {ROUTE.map((stop, index) => (
+                <li key={stop.id}>
+                  <a href={`#${stop.id}`}>
+                    <span>KM {pad(index + 1)}</span>
+                    {stop.label}
+                    <HmArrow />
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
 
           {layout.requirementsSign ? (
             <Link
+              data-hm-fade
               href="#start-a-project"
-              className="subsvc-seo-sign"
+              className="sd-sign"
               aria-label={`Discuss your ${service.name} requirements and start a project`}
             >
               <Image
@@ -166,27 +203,20 @@ export function ServiceRouteSection({ service }: ServiceRouteSectionProps) {
                 alt={layout.requirementsSign.alt}
                 width={400}
                 height={300}
-                sizes="(max-width: 767px) 80vw, 360px"
+                sizes="(max-width: 1024px) 50vw, 300px"
               />
             </Link>
           ) : (
-            <Link
-              href="#start-a-project"
-              className="subsvc-req-sign"
-              aria-label={`Discuss your ${service.name} requirements and start a project`}
-            >
-              <span className="subsvc-req-sign-board">
-                <span className="subsvc-req-sign-lead">Discuss your</span>
-                <span className="subsvc-req-sign-name">{service.name}</span>
-                <span className="subsvc-req-sign-lead">requirements</span>
-                <span className="subsvc-req-sign-copy">
-                  Share your brand and goals; we will route you to the right person.
-                </span>
-                <span className="subsvc-req-sign-btn">Start a project →</span>
+            <Link data-hm-fade href="#start-a-project" className="sd-req">
+              <span className="sd-req-kicker">Dispatch office</span>
+              <span className="sd-req-title">Discuss your {service.name} requirements</span>
+              <span className="sd-req-copy">
+                Share your brand and goals; we will route you to the right person.
               </span>
-              <span className="subsvc-req-sign-plate">
-                Horn <span lang="hi">ओके</span> Please
+              <span className="sd-req-cta">
+                Start a project <span aria-hidden>→</span>
               </span>
+              <HmPlate className="sd-req-plate" />
             </Link>
           )}
         </aside>

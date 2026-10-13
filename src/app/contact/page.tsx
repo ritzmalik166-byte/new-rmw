@@ -2,13 +2,16 @@ import type { Metadata } from "next";
 import { AddressMap } from "@/components/contact/AddressMap";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { RealTruck } from "@/components/ui/RealTruck";
+import { AGENCY_KEYWORDS, pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Contact Us",
+export const metadata: Metadata = pageMetadata({
+  title: "Contact Ritz Media World | Let's Grow Your Business",
   description:
-    "Talk to Ritz Media World. Share your brand goals, verify your number and the right person from our Noida team will call you within one working day.",
-};
+    "Have a project in mind? Get in touch with Ritz Media World to discuss your digital marketing, SEO, branding or performance marketing needs.",
+  keywords: AGENCY_KEYWORDS,
+  path: "/contact",
+});
 
 const ROUTE = [
   { km: "KM 01", title: "Fill the slip", copy: "A few details about you and your brand." },

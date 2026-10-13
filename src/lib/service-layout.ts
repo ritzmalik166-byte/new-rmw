@@ -56,7 +56,7 @@ export function getServiceLayout(service: ServiceDetail) {
   const parts = service.capabilities.length;
 
   return {
-    problemSummary: layout.problemSummary ?? service.problemCopy ?? service.shortDescription,
+    problemSummary: layout.problemSummary ?? service.problemCopy ?? service.fullOverview,
     problemFlags: layout.problemFlags ?? DEFAULT_FLAGS,
     planKicker: layout.planKicker ?? `${service.name} services`,
     planTitle: `${NUMBER_WORDS[parts] ?? parts} parts.`,

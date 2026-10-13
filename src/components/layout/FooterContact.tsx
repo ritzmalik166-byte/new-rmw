@@ -5,6 +5,17 @@ import { useMotion } from "@/components/providers/MotionProvider";
 import { cn } from "@/lib/cn";
 
 const KEYS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "0", "#"] as const;
+const KEY_LETTERS: Partial<Record<(typeof KEYS)[number], string>> = {
+  "2": "ABC",
+  "3": "DEF",
+  "4": "GHI",
+  "5": "JKL",
+  "6": "MNO",
+  "7": "PQRS",
+  "8": "TUV",
+  "9": "WXYZ",
+  "0": "+",
+};
 const DIAL_TICK_MS = 75;
 const TYPE_TICK_MS = 45;
 const MAIL_SUBJECT = "Namaste! Let's build something.";
@@ -73,25 +84,39 @@ export function DialNumber({ phone }: { phone: string }) {
         {phone}
       </a>
       <span className="fc-pop is-phone" aria-hidden>
-        <span className="fc-phone">
-          <span className="fc-phone-notch" />
+        <span className={cn("fc-phone", calling && "is-calling")}>
           <span className="fc-phone-screen">
-            <span className="fc-phone-state">{calling ? "Calling…" : "Dialling"}</span>
-            <span className="fc-phone-number">
-              {revealDigits(phone, typedCount)}
-              {!calling ? <i className="fc-caret" /> : null}
-            </span>
-            <span className="fc-phone-who">Ritz Media World · Noida</span>
-          </span>
-          <span className="fc-phone-keys">
-            {KEYS.map((key) => (
-              <span key={key} className={cn("fc-key", pressedKey === key && "is-pressed")}>
-                {key}
+            <span className="fc-phone-status">
+              <span>9:41</span>
+              <span className="fc-phone-island" />
+              <span className="fc-phone-signal">
+                <i />
+                <i />
+                <i />
+                <i />
               </span>
-            ))}
-          </span>
-          <span className={cn("fc-phone-call", calling && "is-ringing")}>
-            <PhoneGlyph />
+            </span>
+            <span className="fc-phone-caller">
+              <span className="fc-phone-avatar">RMW</span>
+              <span className="fc-phone-state">{calling ? "Calling…" : "Dialling"}</span>
+              <span className="fc-phone-number">
+                {revealDigits(phone, typedCount)}
+                {!calling ? <i className="fc-caret" /> : null}
+              </span>
+              <span className="fc-phone-who">Ritz Media World · Noida</span>
+            </span>
+            <span className="fc-phone-keys">
+              {KEYS.map((key) => (
+                <span key={key} className={cn("fc-key", pressedKey === key && "is-pressed")}>
+                  {key}
+                  {KEY_LETTERS[key] ? <small>{KEY_LETTERS[key]}</small> : null}
+                </span>
+              ))}
+            </span>
+            <span className={cn("fc-phone-call", calling && "is-ringing")}>
+              <PhoneGlyph />
+            </span>
+            <span className="fc-phone-home" />
           </span>
         </span>
       </span>

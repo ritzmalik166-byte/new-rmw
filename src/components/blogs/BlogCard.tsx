@@ -47,10 +47,10 @@ export function BlogCard({
     >
       <div className="blog-card-image-wrap">
         <BlogImage src={blog.image} alt={blog.title} />
-        {category ? <span className="blog-card-category">{category}</span> : null}
       </div>
       <div className="news-card-body">
         <p className="news-card-tags">
+          {category ? <span className="blog-card-category">{category}</span> : null}
           <span>{formatDate(blog.createdAt)}</span>
           <span aria-hidden="true">·</span>
           <span>{readingTime} MIN READ</span>

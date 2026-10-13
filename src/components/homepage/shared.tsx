@@ -19,7 +19,7 @@ export function HmTitle({
   id?: string;
   lines: readonly HmLine[];
   className?: string;
-  as?: "h2" | "h3";
+  as?: "h1" | "h2" | "h3";
 }) {
   return (
     <Tag id={id} className={cn("hm-title", className)}>
