@@ -65,7 +65,7 @@ export function ServiceRouteSection({ service }: { service: ServiceDetail }) {
             </p>
             <HmTitle
               id="sd-problem-title"
-              className="sd-h2"
+             
               lines={[{ text: service.problemHeading ?? service.heading }]}
             />
             <p data-hm-fade className="hm-lede">
@@ -90,7 +90,7 @@ export function ServiceRouteSection({ service }: { service: ServiceDetail }) {
             </p>
             <HmTitle
               id="sd-plan-title"
-              className="sd-h2"
+             
               lines={[{ text: `${layout.planTitle} One engine.` }]}
             />
             <p data-hm-fade className="hm-lede">

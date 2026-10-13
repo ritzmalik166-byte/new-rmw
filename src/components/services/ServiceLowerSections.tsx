@@ -52,7 +52,7 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
               <span className="hm-pill">KM 03</span>
               <span>Off the {service.name} desk</span>
             </p>
-            <HmTitle id="sd-wall-title" className="sd-h2" lines={[{ text: "Work that went live." }]} />
+            <HmTitle id="sd-wall-title" lines={[{ text: "Work that went live." }]} />
             <p data-hm-fade className="hm-lede">
               Campaigns, creatives and live dashboards from brands that trusted us with their name.
             </p>
@@ -107,7 +107,7 @@ function ServiceProcess({ service }: { service: ServiceDetail }) {
             <span className="hm-pill">KM 04</span>
             <span>The RMW process</span>
           </p>
-          <HmTitle id="sd-process-title" className="sd-h2" lines={[{ text: "Four stops on the route." }]} />
+          <HmTitle id="sd-process-title" lines={[{ text: "Four stops on the route." }]} />
         </header>
 
         <ol className="sd-stops">
@@ -153,7 +153,7 @@ function ServiceWhy({
           </p>
           <HmTitle
             id="sd-why-title"
-            className="sd-h2"
+           
             lines={[{ text: title.lead }, { text: title.accent, accent: true }]}
           />
         </header>
@@ -197,7 +197,7 @@ function ServiceProof({ service, relatedServices }: ServiceLowerSectionsProps) {
               <span className="hm-pill">KM 06</span>
               <span>Results</span>
             </p>
-            <HmTitle id="sd-proof-title" className="sd-h2" lines={[{ text: "Proof on the tailgate." }]} />
+            <HmTitle id="sd-proof-title" lines={[{ text: "Proof on the tailgate." }]} />
           </div>
           <a data-hm-fade href="#start-a-project" className="hm-btn is-ink">
             Discuss your numbers <span aria-hidden>→</span>
