@@ -14,7 +14,7 @@
   --ct-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ct-serif: var(--font-quattrocento), Quattrocento, Georgia, serif;
   --ct-sans: var(--font-inter), Inter, sans-serif;
-  --ct-mono: var(--font-space-mono), "Space Mono", monospace;
+  --ct-mono: var(--font-inter), Inter, sans-serif;
 
   /* Sized against the viewport height so the whole page fits one screen. */
   --ct-top: 122px;

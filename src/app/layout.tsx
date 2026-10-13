@@ -10,7 +10,6 @@ import {
   Quattrocento,
   Quicksand,
   Rye,
-  Space_Mono,
   Yatra_One,
   Yeseva_One,
 } from "next/font/google";
@@ -69,12 +68,6 @@ const quattrocento = Quattrocento({
   variable: "--font-quattrocento",
 });
 
-const spaceMono = Space_Mono({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-space-mono",
-});
-
 const rye = Rye({
   subsets: ["latin"],
   weight: "400",
@@ -112,7 +105,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${archivo.variable} ${inter.variable} ${montserrat.variable} ${jakarta.variable} ${playfair.variable} ${quicksand.variable} ${quattrocento.variable} ${spaceMono.variable} ${rye.variable} ${yatra.variable} ${yeseva.variable} ${caveat.variable} antialiased`}
+      className={`${outfit.variable} ${archivo.variable} ${inter.variable} ${montserrat.variable} ${jakarta.variable} ${playfair.variable} ${quicksand.variable} ${quattrocento.variable} ${rye.variable} ${yatra.variable} ${yeseva.variable} ${caveat.variable} antialiased`}
       suppressHydrationWarning
     >
       <head>

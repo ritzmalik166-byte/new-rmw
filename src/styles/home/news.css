@@ -54,7 +54,7 @@
   flex: 0 0 auto;
   padding-bottom: 2px;
   border-bottom: 1px solid #0b1120;
-  font-family: var(--font-space-mono), "Space Mono", monospace;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-weight: 700;
   font-size: 12px;
   line-height: 16px;
@@ -105,7 +105,7 @@
     radial-gradient(ellipse at 50% 0%, rgb(62 75 97 / 52%), transparent 66%),
     #0b1220;
   color: #ffffff;
-  font-family: var(--font-space-mono), "Space Mono", monospace;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;

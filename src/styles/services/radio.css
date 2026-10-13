@@ -92,7 +92,7 @@
   top: 0;
   translate: -50% 0;
   color: rgb(255 255 255 / 0.55);
-  font-family: var(--font-space-mono), ui-monospace, monospace;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-size: 11px;
   line-height: 14px;
   white-space: nowrap;
@@ -217,7 +217,7 @@
 
 .svc-radio-card-freq {
   color: var(--rd-orange);
-  font-family: var(--font-space-mono), ui-monospace, monospace;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-weight: 700;
   font-size: 15px;
   line-height: 18px;
@@ -348,7 +348,7 @@
   min-width: 108px;
   margin: 0;
   color: var(--rd-orange);
-  font-family: var(--font-space-mono), ui-monospace, monospace;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-weight: 700;
   font-size: 30px;
   line-height: 1;

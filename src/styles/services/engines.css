@@ -107,7 +107,7 @@
 .svc-engines-kicker {
   margin: 0 0 10px;
   color: #c8231b;
-  font-family: var(--font-space-mono), "Space Mono", monospace;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-weight: 700;
   font-size: 11px;
   line-height: 15px;
@@ -173,7 +173,7 @@
 
 .svc-engine-index {
   color: #1c1e27;
-  font-family: var(--font-space-mono), "Space Mono", monospace;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-weight: 700;
   font-size: 11px;
   line-height: 15px;
@@ -192,7 +192,7 @@
   min-height: 15px;
   margin: 28px 0 0;
   color: var(--tone);
-  font-family: var(--font-space-mono), "Space Mono", monospace;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-weight: 700;
   font-style: normal;
   font-size: 10px;

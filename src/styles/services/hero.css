@@ -37,7 +37,7 @@
   gap: 10px;
   margin: 0 0 18px;
   color: var(--svch-navy);
-  font-family: var(--font-space-mono), "Space Mono", monospace;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -175,7 +175,7 @@
 .svch-note-parties dt,
 .svch-note-table thead th {
   color: #6c6553;
-  font-family: var(--font-space-mono), "Space Mono", monospace;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -196,7 +196,7 @@
 
 .svch-note-gr strong {
   color: var(--svch-navy);
-  font-family: var(--font-space-mono), "Space Mono", monospace;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-size: clamp(14px, 1.3vw, 17px);
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -270,7 +270,7 @@
 
 .svch-note-table tbody td.svch-note-engine {
   width: 15%;
-  font-family: var(--font-space-mono), "Space Mono", monospace;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-weight: 700;
   letter-spacing: 0.04em;
 }
@@ -342,7 +342,7 @@
 }
 
 .svch-stamp-ring {
-  font-family: var(--font-space-mono), "Space Mono", monospace;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 1px;

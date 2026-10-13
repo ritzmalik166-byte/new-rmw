@@ -456,7 +456,7 @@
 
 .about-proofs-tab-num {
   color: rgb(28 20 12 / 45%);
-  font-family: var(--font-space-mono), monospace;
+  font-family: var(--font-inter), Inter, sans-serif;
   font-size: 11px;
 }
 
