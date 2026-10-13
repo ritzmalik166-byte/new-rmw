@@ -57,7 +57,7 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
               Campaigns, creatives and live dashboards from brands that trusted us with their name.
             </p>
           </div>
-          <TransitionLink data-hm-fade href="/work" className="hm-link">
+          <TransitionLink data-hm-fade href="/portfolio" className="hm-link">
             See all work
             <HmArrow />
           </TransitionLink>

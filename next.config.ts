@@ -12,7 +12,10 @@ const nextConfig: NextConfig = {
     ],
   },
   async redirects() {
-    return [{ source: "/about", destination: "/about.html", permanent: true }];
+    return [
+      { source: "/about", destination: "/about.html", permanent: true },
+      { source: "/work", destination: "/portfolio", permanent: true },
+    ];
   },
   async rewrites() {
     return [{ source: "/about.html", destination: "/about" }];

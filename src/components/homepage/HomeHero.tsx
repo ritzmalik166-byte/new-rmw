@@ -298,7 +298,7 @@ export function HomeHero() {
             <a href="#start-a-project" className="hm-btn">
               Start a project <span aria-hidden>→</span>
             </a>
-            <TransitionLink href="/work" className="hm-btn is-ink">
+            <TransitionLink href="/portfolio" className="hm-btn is-ink">
               See our work <span aria-hidden>→</span>
             </TransitionLink>
           </div>

@@ -120,7 +120,7 @@ export function HomeWork() {
 
             </p>
           </div>
-          <TransitionLink data-hm-fade href="/work" className="hm-btn is-ink">
+          <TransitionLink data-hm-fade href="/portfolio" className="hm-btn is-ink">
             See all work <span aria-hidden>→</span>
           </TransitionLink>
         </header>

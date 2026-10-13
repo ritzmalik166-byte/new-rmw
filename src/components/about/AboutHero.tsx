@@ -182,7 +182,7 @@ export function AboutHero() {
         </p>
 
         <div className="about-actions">
-          <TransitionLink href="/work" className="about-btn about-btn-hot">
+          <TransitionLink href="/portfolio" className="about-btn about-btn-hot">
             <DashFrame />
             <span>See our work</span>
           </TransitionLink>

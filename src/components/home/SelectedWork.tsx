@@ -13,7 +13,7 @@ export function SelectedWork() {
         </RevealText>
         <FadeIn>
           <TransitionLink
-            href="/work"
+            href="/portfolio"
             className="text-[11px] uppercase tracking-[0.24em] text-muted transition-colors hover:text-foreground"
           >
             All projects
@@ -23,7 +23,7 @@ export function SelectedWork() {
       <div className="grid gap-8 md:grid-cols-2">
         {projects.map((project, index) => (
           <FadeIn key={project.slug} delay={index * 0.08} className="group">
-            <TransitionLink href="/work" className="block">
+            <TransitionLink href="/portfolio" className="block">
               <div className="relative mb-5 aspect-[4/5] overflow-hidden bg-paper/10">
                 <ParallaxMedia
                   src={project.image}

@@ -88,7 +88,7 @@ export function ServicesWebPrint() {
               Fast, search-ready websites and landing pages designed for one job: turning visitors
               into enquiries.
             </p>
-            <Link className="svc-web-cta" href="/work">
+            <Link className="svc-web-cta" href="/portfolio">
               See sites we&rsquo;ve built <span aria-hidden>→</span>
             </Link>
           </div>

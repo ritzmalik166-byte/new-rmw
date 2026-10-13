@@ -15,7 +15,7 @@ export const site = {
   nav: [
     { href: "/about.html", label: "About" },
     { href: "/services", label: "Services" },
-    { href: "/work", label: "Our Work" },
+    { href: "/portfolio", label: "Portfolio" },
     { href: "/blog", label: "Blog" },
   ],
   ticker: [
@@ -474,7 +474,7 @@ export const site = {
     phones: ["+91 9220516777", "+91 7290002168"],
     company: [
       { label: "Home", href: "/" },
-      { label: "Work", href: "/work" },
+      { label: "Portfolio", href: "/portfolio" },
       { label: "About", href: "/about.html" },
       { label: "Blogs", href: "/blog" },
       { label: "Career", href: "/about.html" },
