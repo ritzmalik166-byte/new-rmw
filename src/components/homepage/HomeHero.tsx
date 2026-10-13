@@ -56,6 +56,8 @@ const SLOTS_SMALL: Slot[] = [
   { x: 76, lift: 38, rot: 4 },
 ];
 
+/* Far enough to clear the line mask, which has extra headroom for Devanagari matras. */
+const LINE_OFF = 145;
 const HOLD = 4.2;
 const SWAP = 1.7;
 const LIGHTS_ON = 3.5;
@@ -98,7 +100,7 @@ export function HomeHero() {
 
       if (reduced) {
         gsap.set(fades, { autoAlpha: 1, y: 0 });
-        heads.forEach((_, i) => gsap.set(linesOf(i), { yPercent: i === 0 ? 0 : 110 }));
+        heads.forEach((_, i) => gsap.set(linesOf(i), { yPercent: i === 0 ? 0 : LINE_OFF }));
         gsap.set(rig, { x: 0 });
         slots.forEach((slot, i) => {
           seat(stickers[i], slot, i);
@@ -112,7 +114,7 @@ export function HomeHero() {
       }
 
       gsap.set(fades, { autoAlpha: 0, y: 22 });
-      heads.forEach((_, i) => gsap.set(linesOf(i), { yPercent: 110 }));
+      heads.forEach((_, i) => gsap.set(linesOf(i), { yPercent: LINE_OFF }));
       gsap.set(lights, { autoAlpha: 0 });
       gsap.set(bars, { scaleX: 0 });
       const startX = offX();
@@ -215,14 +217,14 @@ export function HomeHero() {
         const from = index;
         index = (index + 1) % heads.length;
         gsap.to(linesOf(from), {
-          yPercent: -110,
+          yPercent: -LINE_OFF,
           duration: 0.6,
           ease: "power2.in",
           stagger: 0.06,
         });
         gsap.fromTo(
           linesOf(index),
-          { yPercent: 110 },
+          { yPercent: LINE_OFF },
           { yPercent: 0, duration: 1, ease: "expo.out", stagger: 0.09, delay: 0.45 },
         );
         fillBars(index);

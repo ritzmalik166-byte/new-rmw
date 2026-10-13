@@ -81,6 +81,12 @@
   grid-area: 1 / 1;
 }
 
+/* Devanagari matras rise above the tight line box; give the reveal mask headroom. */
+.hm-hero-head .hm-line {
+  padding-top: 0.28em;
+  margin-top: -0.28em;
+}
+
 .hm-hero-head [lang="hi"] {
   font-family: var(--font-yatra), "Yatra One", serif;
   font-weight: 400;
