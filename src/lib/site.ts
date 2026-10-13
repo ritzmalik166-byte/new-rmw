@@ -444,7 +444,7 @@ export const site = {
       },
       {
         q: "How can I start working with Ritz Media World?",
-        a: "You can reach the team through the contact form on the website, by email at info@ritzmediaworld.com, or by phone at +91 9220516777. We usually begin with a conversation about your brand's goals, followed by a free audit and a tailored plan.",
+        a: "You can reach the team through the contact form on the website, by email at info@ritzmediaworld.com, or by phone at +91 7290002168. We usually begin with a conversation about your brand's goals, followed by a free audit and a tailored plan.",
       },
     ],
   },
@@ -472,7 +472,7 @@ export const site = {
       "Ritz Media World is an independent creative, branding, digital and media agency, founded in 2008 and based in Noida, Delhi NCR.",
     address: "402–404, 4th Floor, Corporate Park, Tower A1, Sector 142, Noida 201305",
     email: "info@ritzmediaworld.com",
-    phones: ["+91 9220516777", "+91 7290002168"],
+    phones: ["+91 7290002168"],
     company: [
       { label: "Home", href: "/" },
       { label: "Portfolio", href: "/portfolio" },
