@@ -1,0 +1,225 @@
+/* ---------- Career: reuses the contact (.ct) layout and slip ---------- */
+.cr-board {
+  padding-bottom: clamp(18px, 2.8vh, 28px);
+}
+
+/* Clears the "Horn OK Please" plate pinned to the board's corner. */
+.cr-board .ct-dispatch-name {
+  padding-right: 150px;
+}
+
+@media (min-width: 961px) and (max-width: 1239px) {
+  .cr-board .ct-dispatch-name {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 960px) {
+  .cr-board .ct-dispatch-name {
+    padding-right: 0;
+  }
+
+  .cr-board .ct-plate {
+    position: static;
+    display: inline-block;
+    margin-top: 14px;
+  }
+}
+
+@media (max-width: 720px) {
+  .cr-teams {
+    justify-content: center;
+  }
+}
+
+.cr-teams {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: clamp(12px, 2.2vh, 20px) 0 0;
+  padding: clamp(12px, 2vh, 18px) 0 0;
+  border-top: 1px dashed rgb(255 255 255 / 18%);
+  list-style: none;
+}
+
+.cr-teams li {
+  padding: 6px 11px;
+  border: 1.5px solid rgb(255 255 255 / 30%);
+  border-radius: 999px;
+  color: #fff;
+  font-family: var(--ct-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.cr-teams li:nth-child(odd) {
+  border-color: var(--ct-yellow);
+  color: var(--ct-yellow);
+}
+
+.cr-teams li:hover {
+  border-color: var(--ct-yellow);
+  background: var(--ct-yellow);
+  color: var(--ct-navy);
+}
+
+/* India-only: the OTP gateway only verifies +91 mobiles. */
+.cr-dial {
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  height: var(--ct-h);
+  padding: 0 12px;
+  border: 2px solid #e2d8c2;
+  border-radius: 10px;
+  background: var(--ct-cream);
+  color: var(--ct-navy);
+  font-family: var(--ct-sans);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ---------- Resume drop zone ---------- */
+.cr-drop {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: calc(var(--ct-h) + 22px);
+  padding: 10px 46px 10px 12px;
+  border: 2px dashed #cdbf9c;
+  border-radius: 12px;
+  background:
+    repeating-linear-gradient(-45deg, rgb(243 195 60 / 10%) 0 10px, transparent 10px 20px),
+    #fff;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cr-drop:hover,
+.cr-drop.is-over {
+  border-color: var(--ct-navy);
+}
+
+.cr-drop.is-over {
+  box-shadow: 0 0 0 4px rgb(243 195 60 / 45%);
+}
+
+.cr-drop:has(.cr-drop-input:focus-visible) {
+  border-color: var(--ct-navy);
+  box-shadow: 0 0 0 4px rgb(243 195 60 / 45%);
+}
+
+.cr-drop.has-file {
+  border-style: solid;
+  border-color: #b9d6cb;
+  background: #f3f8f5;
+}
+
+.ct-field.has-error .cr-drop {
+  border-color: var(--ct-red);
+  background: #fff7f7;
+}
+
+.cr-drop-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cr-drop-icon {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--ct-ink);
+  border-radius: 10px;
+  background: var(--ct-yellow);
+  color: var(--ct-ink);
+  box-shadow: 2px 2px 0 var(--ct-ink);
+  transition: transform 0.25s var(--ct-ease);
+}
+
+.cr-drop:hover .cr-drop-icon {
+  transform: translateY(-2px) rotate(-4deg);
+}
+
+.cr-drop.has-file .cr-drop-icon {
+  background: var(--ct-teal);
+  color: #fff;
+}
+
+.cr-drop-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cr-drop-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cr-drop-text strong {
+  overflow: hidden;
+  color: var(--ct-navy);
+  font-family: var(--ct-sans);
+  font-size: 14px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cr-drop-text span {
+  color: var(--ct-muted);
+  font-family: var(--ct-sans);
+  font-size: 12px;
+}
+
+.cr-drop-clear {
+  position: absolute;
+  top: calc(50% + 8px);
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--ct-ink);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--ct-ink);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cr-drop-clear:hover {
+  background: var(--ct-yellow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cr-teams li,
+  .cr-drop,
+  .cr-drop-icon {
+    transition: none;
+  }
+}

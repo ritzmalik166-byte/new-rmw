@@ -55,6 +55,7 @@
 @import "../styles/about/founder.css";
 
 @import "../styles/contact/contact.css";
+@import "../styles/career/career.css";
 @import "../styles/portfolio/portfolio.css";
 @import "../styles/portfolio/detail.css";
 
@@ -73,3 +74,5 @@
 @import "../styles/services/responsive.css";
 @import "../styles/layout/services-megamenu.css";
 @import "../styles/services/subservice.css";
+
+@import "../styles/responsive/mobile-center.css";

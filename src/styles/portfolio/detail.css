@@ -674,8 +674,36 @@
     font-size: 12px;
   }
 
-  .pfd-more-card {
-    flex-basis: 64vw;
+  .pfd-more-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 14px;
+    margin-inline: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .pfd-more-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 7px);
+  }
+
+  .pfd-more-media {
+    aspect-ratio: 1;
+    border-radius: 12px;
+  }
+
+  .pfd-more-title {
+    justify-content: center;
+    padding-top: 10px;
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .pfd-more-title svg {
+    width: 12px;
+    height: 12px;
   }
 }
 

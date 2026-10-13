@@ -1,0 +1,213 @@
+/* ---------- Mobile: centred copy across every page ----------
+   Forms, tables, accordions, long-form article prose and the mock-UI
+   illustrations (consignment note, search result, web mockup, newspaper)
+   keep their own alignment. `!important` is needed because many sections
+   pin `text-align: left` with their own class selectors. */
+@media (max-width: 720px) {
+  main {
+    text-align: center;
+  }
+
+  main
+    :is(
+      form,
+      table,
+      .blog-prose,
+      .hm-faq-list,
+      .hm-chip,
+      .svch-note,
+      .svc-dm-search,
+      .wm-frame,
+      [class*="svc-paper"]
+    ) {
+    text-align: start;
+  }
+
+  main :is(.hm-btn, .hm-link, a[class*="-more"], a[class*="-cta"]):not(form *) {
+    align-self: center;
+    justify-self: center;
+  }
+
+  main
+    :is(h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd):not(
+      :is(
+          form,
+          table,
+          .blog-prose,
+          .hm-faq-list,
+          .svch-note,
+          .svc-dm-search,
+          .wm-frame,
+          [class*="svc-paper"]
+        )
+        *
+    ) {
+    text-align: center !important;
+  }
+
+  /* Centres width-capped ledes; list rows keep their flex spacing. */
+  main :is(h1, h2, h3, h4, h5, h6, p, blockquote):not(form *, table *, .blog-prose *, li > *) {
+    margin-inline: auto;
+  }
+
+  main
+    :is(
+      [class*="kicker"],
+      [class*="-meta"],
+      [class*="actions"],
+      [class*="chips"],
+      [class*="tags"],
+      [class*="pills"],
+      [class$="-head"],
+      [class*="-head "],
+      [class*="-heading"],
+      .hm-actions,
+      .sd-crumbs ol,
+      .blog-breadcrumb ol,
+      .blog-post-tag-list
+    ):not(:is(form, .svch-note, .svc-dm-search, .wm-frame) *) {
+    justify-content: center;
+  }
+
+  /* Section headers that sit title-left / link-right on desktop. */
+  main :is(.hm-awards-head, .pf-head.is-row, .blog-latest-heading) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ---------- Homepage ---------- */
+  .hm-hero-meter,
+  .hm-stop-km,
+  .hm-voice-controls,
+  .hm-receipt-foot {
+    justify-content: center;
+  }
+
+  .hm-award-sub,
+  .hm-award-title,
+  .hm-faq-help {
+    text-align: center;
+  }
+
+  .hm-post-body,
+  .hm-faq-help-list li {
+    align-items: center;
+    text-align: center;
+  }
+
+  /* ---------- About ---------- */
+  .about-tb-item {
+    justify-content: center;
+  }
+
+  .about-mile-stat {
+    align-items: center;
+    text-align: center;
+  }
+
+  /* ---------- Contact ---------- */
+  .ct-dispatch-list li {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .ct-dispatch-list li > span:last-child,
+  .ct-route li {
+    align-items: center;
+  }
+
+  .ct-route li {
+    text-align: center;
+  }
+
+  .ct-route li::before {
+    left: 50%;
+    translate: -50% 0;
+  }
+
+  /* ---------- Services ---------- */
+  .svc-content-card-inner {
+    align-items: center;
+    text-align: center;
+  }
+
+  .sd-flag,
+  .sd-plan-foot {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .svc-star-list li,
+  .svc-engine-list li,
+  .sd-plan-panel-nav,
+  .sd-proof ul {
+    justify-content: center;
+  }
+
+  .sd-why-point {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+  }
+
+  /* ---------- Blogs ---------- */
+  .bh-card,
+  .blog-related-card,
+  .blog-post-tags,
+  .blog-post-share,
+  .blog-post-aside {
+    text-align: center;
+  }
+
+  /* ---------- Portfolio ---------- */
+  .pf-shot {
+    text-align: center;
+  }
+
+  .pf-shot-meta {
+    align-items: center;
+  }
+
+  .pf-card-items li {
+    justify-content: center;
+  }
+
+  /* ---------- Footer ---------- */
+  .site-footer-intro,
+  .site-footer-blurb,
+  .site-footer-sign-title,
+  .site-footer-band-label {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .site-footer-title {
+    align-items: center;
+    text-align: center;
+  }
+
+  .site-footer-kicker,
+  .site-footer-title-row,
+  .site-footer-actions,
+  .site-footer-sign-head,
+  .site-footer-trust {
+    justify-content: center;
+  }
+
+  .fc-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .fc-card::before {
+    left: 50%;
+    translate: -50% 0;
+  }
+
+  .fc-card-kicker,
+  .fc-card-values {
+    align-items: center;
+  }
+}

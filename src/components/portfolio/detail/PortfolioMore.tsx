@@ -69,7 +69,7 @@ export function PortfolioMore({ slug, km }: { slug: string; km: string }) {
                     src={category.image}
                     alt={`${category.title} work by Ritz Media World`}
                     fill
-                    sizes="(max-width: 640px) 70vw, (max-width: 1100px) 33vw, 20vw"
+                    sizes="(max-width: 640px) 45vw, (max-width: 1100px) 33vw, 20vw"
                   />
                 </span>
                 <span className="pfd-more-title">

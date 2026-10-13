@@ -477,7 +477,7 @@ export const site = {
       { label: "Portfolio", href: "/portfolio" },
       { label: "About", href: "/about.html" },
       { label: "Blogs", href: "/blog" },
-      { label: "Career", href: "/about.html" },
+      { label: "Career", href: "/career" },
     ],
     socials: [
       { label: "Facebook", href: "https://www.facebook.com/ritzmediaworld/" },
