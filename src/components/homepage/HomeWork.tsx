@@ -2,7 +2,7 @@
 
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
-import { useRef, type CSSProperties, type PointerEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type PointerEvent } from "react";
 import { TransitionLink } from "@/components/motion/TransitionLink";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap, ScrollTrigger } from "@/lib/gsap";
@@ -45,9 +45,51 @@ const WORK = [
 
 export function HomeWork() {
   const rootRef = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLUListElement>(null);
   const swings = useRef(new WeakMap<HTMLElement, gsap.core.Timeline>());
+  const [slide, setSlide] = useState({ index: 0, atStart: true, atEnd: false });
   const { ready, reduced } = useMotion();
   useHomeReveal(rootRef);
+
+  const syncSlide = useCallback(() => {
+    const grid = gridRef.current;
+    const cards = grid?.children;
+    if (!grid || !cards || cards.length < 2) return;
+    const step = (cards[1] as HTMLElement).offsetLeft - (cards[0] as HTMLElement).offsetLeft;
+    const maxScroll = grid.scrollWidth - grid.clientWidth;
+    const atStart = grid.scrollLeft <= 2;
+    const atEnd = grid.scrollLeft >= maxScroll - 2;
+    const index = atEnd
+      ? cards.length - 1
+      : Math.min(cards.length - 1, Math.round(grid.scrollLeft / step));
+    setSlide((prev) =>
+      prev.index === index && prev.atStart === atStart && prev.atEnd === atEnd
+        ? prev
+        : { index, atStart, atEnd },
+    );
+  }, []);
+
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    syncSlide();
+    grid.addEventListener("scroll", syncSlide, { passive: true });
+    window.addEventListener("resize", syncSlide);
+    return () => {
+      grid.removeEventListener("scroll", syncSlide);
+      window.removeEventListener("resize", syncSlide);
+    };
+  }, [syncSlide]);
+
+  const goTo = (index: number) => {
+    const grid = gridRef.current;
+    const card = grid?.children[index] as HTMLElement | undefined;
+    if (!grid || !card) return;
+    grid.scrollTo({
+      left: card.offsetLeft - parseFloat(getComputedStyle(grid).paddingLeft),
+      behavior: reduced ? "auto" : "smooth",
+    });
+  };
 
   const playSwing = (tag: HTMLElement, dir: number, amp: number, delay = 0) => {
     swings.current.get(tag)?.kill();
@@ -125,9 +167,40 @@ export function HomeWork() {
           </TransitionLink>
         </header>
 
+        <div className="hm-work-nav">
+          <button
+            type="button"
+            className="hm-work-arrow"
+            aria-label="Previous consignment"
+            disabled={slide.atStart}
+            onClick={() => goTo(slide.index - 1)}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden>
+              <path d="M15 5l-7 7 7 7" />
+            </svg>
+          </button>
+          <p className="hm-work-count" aria-live="polite">
+            <b>{String(slide.index + 1).padStart(2, "0")}</b>
+            <span aria-hidden> / </span>
+            <span className="sr-only"> of </span>
+            {String(WORK.length).padStart(2, "0")}
+          </p>
+          <button
+            type="button"
+            className="hm-work-arrow"
+            aria-label="Next consignment"
+            disabled={slide.atEnd}
+            onClick={() => goTo(slide.index + 1)}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden>
+              <path d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+
         <div className="hm-work-line">
           <span className="hm-work-rope" aria-hidden />
-          <ul className="hm-work-grid">
+          <ul ref={gridRef} className="hm-work-grid">
             {WORK.map((item, index) => (
               <li
                 key={item.src}

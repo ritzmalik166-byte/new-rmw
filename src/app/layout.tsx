@@ -13,6 +13,7 @@ import {
   Yatra_One,
   Yeseva_One,
 } from "next/font/google";
+import { FloatingContact } from "@/components/layout/FloatingContact";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ThemeSurfaces } from "@/components/layout/ThemeSurfaces";
@@ -119,6 +120,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Header />
           <main>{children}</main>
           <Footer />
+          <FloatingContact />
           <ThemeSurfaces />
         </AppProviders>
       </body>

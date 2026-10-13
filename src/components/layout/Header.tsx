@@ -257,8 +257,11 @@ export function Header() {
 
         <div className="site-header-actions">
           <ThemeToggle />
-          <TransitionLink href="/contact" className="btn btn-ink">
-            Contact Us
+          <TransitionLink href="/contact" className="site-header-cta">
+            <span className="site-header-cta-label">Contact Us</span>
+            <span className="site-header-cta-arrow" aria-hidden>
+              →
+            </span>
           </TransitionLink>
 
           <button

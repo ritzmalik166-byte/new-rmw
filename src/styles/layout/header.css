@@ -125,3 +125,106 @@ body:has(.site-header.is-stuck) .smm {
     gap: 24px;
   }
 }
+
+/* ---------- Header "Contact Us" CTA ---------- */
+.site-header-cta {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 20px 0 22px;
+  overflow: hidden;
+  border: 2px solid #161616;
+  border-radius: 999px;
+  background: #161616;
+  box-shadow: 3px 3px 0 #c9356e;
+  color: #fff;
+  font-family: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    color 0.3s ease,
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Truck-art stripes sweep in from the left, then keep rolling like a road while hovered.
+   Shared by the header CTA, the hamburger and the mobile menu. */
+:is(.site-header-cta, .site-nav-toggle, .mnav-close, .mnav-cta, .mnav-link)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: repeating-linear-gradient(
+    -45deg,
+    #f3c33c 0 9px,
+    #ffd75e 9px 18px
+  );
+  background-size: 25.46px 25.46px;
+  transform: translateX(-101%);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:is(.site-header-cta, .site-nav-toggle, .mnav-close, .mnav-cta, .mnav-link):is(:hover, :focus-visible)::before {
+  transform: translateX(0);
+  animation: rmw-stripes-roll 0.9s linear infinite;
+}
+
+@keyframes rmw-stripes-roll {
+  to {
+    background-position: 25.46px 0;
+  }
+}
+
+.site-header-cta-arrow {
+  display: inline-block;
+  font-size: 15px;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.site-header-cta:hover,
+.site-header-cta:focus-visible {
+  color: #161616;
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 #c9356e;
+}
+
+.site-header-cta:hover .site-header-cta-arrow,
+.site-header-cta:focus-visible .site-header-cta-arrow {
+  transform: translateX(4px);
+}
+
+.site-header-cta:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #c9356e;
+}
+
+.site-header-cta:focus-visible {
+  outline: 2px solid #c9356e;
+  outline-offset: 4px;
+}
+
+html[data-theme="dark"] .site-header-cta {
+  border-color: #fff3e2;
+  background: #fff3e2;
+  color: #161616;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header-cta,
+  .site-header-cta-arrow,
+  :is(.site-header-cta, .site-nav-toggle, .mnav-close, .mnav-cta, .mnav-link)::before {
+    transition: none;
+  }
+
+  :is(.site-header-cta, .site-nav-toggle, .mnav-close, .mnav-cta, .mnav-link):is(:hover, :focus-visible)::before {
+    animation: none;
+  }
+}
