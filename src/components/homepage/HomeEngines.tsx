@@ -53,7 +53,6 @@
       tone: "#1457a8",
       cargo: [
         { slug: "digital-marketing", name: "Digital Marketing" },
-        { slug: "seo", name: "SEO" },
         { slug: "web-development", name: "Web Development" },
         { slug: "print-advertising", name: "Print Advertising" },
         { slug: "radio-advertising", name: "Radio Advertising" },
@@ -64,7 +63,7 @@
       id: "film",
       index: "03",
       kicker: "See it before it exists.",
-      title: "Film, 3D & AI",
+      title: "3D Rendering Services",
       copy: "Brand films, photorealistic 3D rendering, and AI-assisted production that let audiences see your product, project, or space before it is even built.",
       tone: "#167a7d",
       cargo: RENDER_TYPES.map((type) => ({ ...type, href: RENDER_HREF })),

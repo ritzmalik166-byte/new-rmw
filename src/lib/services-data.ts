@@ -78,207 +78,6 @@ export interface ServiceDetail {
 
 export const SERVICES_LIST: ServiceDetail[] = [
   {
-    id: "seo",
-    slug: "seo",
-    name: "SEO",
-    uppercaseName: "SEO SERVICES",
-    engine: "ENGINE 02 · DIGITAL & MEDIA",
-    engineCategory: "Digital & Media",
-    badgeDate: "SEP-05 · SEO · 2026",
-    kicker: "KM 01 · THE BUSINESS PROBLEM",
-    tagline: "Search engine optimisation from Ritz Media World, built to make your brand easy to find, easy to understand and easy to choose.",
-    heading: "Your Buyers Are Already Searching. Are They Finding You?",
-    shortDescription: "SEO (search engine optimisation) is the work of improving a website's technical health, content and authority so it appears for the searches its customers make, on Google and in AI-generated answers, without paying for each click.",
-    fullOverview: "Search engine optimisation from Ritz Media World, built to make your brand easy to find, easy to understand and easy to choose.",
-    definitionText: "SEO (search engine optimisation) is the work of improving a website's technical health, content and authority so it appears for the searches its customers make, on Google and in AI-generated answers, without paying for each click.",
-    cardTags: ["GOOGLE", "AI OVERVIEWS", "CHATGPT", "GEMINI"],
-    truckArt: { before: "SEARCH", hindi: "ओके", after: "PLEASE" },
-    layout: {
-      problemSummary:
-        "Most buying journeys start with a search. If your site is slow, unclear or invisible to AI answers, the enquiry goes to whoever shows up first.",
-      problemFlags: [
-        {
-          title: "Page two is a dead end",
-          copy: "Buyers rarely scroll past the first results. If you are not there, you are not on the shortlist.",
-        },
-        {
-          title: "AI answers skip you",
-          copy: "ChatGPT, Gemini and Google AI Overviews cite brands they can understand and trust. Unknown sites get left out.",
-        },
-        {
-          title: "Every visit is rented",
-          copy: "When all traffic comes from ads, growth stops as soon as the budget does.",
-        },
-      ],
-      planKicker: "Website SEO services",
-      planLede: "Explore the work behind a complete website SEO programme.",
-      planCta: "Let's discuss your SEO scope",
-      intentTitle: { lead: "Search is where intent", accent: "shows up first." },
-      intentPoints: [
-        { title: "Compounding traffic", copy: "Rankings can keep working after the campaign budget stops." },
-        { title: "Lower acquisition cost", copy: "Organic leads add another route to qualified enquiries." },
-        { title: "Credibility", copy: "Being the clear answer builds trust before the first call." },
-      ],
-      intentTape: ["Ranking, not rented", "Drive slow · rank fast"],
-      requirementsSign: {
-        src: "/seo-requirements-sign.png",
-        alt: "Discuss your SEO requirements. Share your site and goals; we will route you to the right person. Start a project.",
-      },
-      faqs: [
-        {
-          question: "What does an SEO service from RMW include?",
-          answer:
-            "A technical audit, keyword and intent mapping, on-page and content work, local SEO, authority building and reporting. The final scope is confirmed once we have looked at your site and goals.",
-        },
-        {
-          question: "How long before SEO shows results?",
-          answer:
-            "SEO is ongoing work, not an instant switch. Timing depends on your site, competition, starting point and the work required; we review progress against the agreed scope.",
-        },
-        {
-          question: "Do you optimise for AI answers like ChatGPT and Google AI Overviews?",
-          answer:
-            "Yes. The programme includes answer-engine visibility work alongside technical SEO, useful content and clear entity signals.",
-        },
-        {
-          question: "How is SEO different from Google Ads?",
-          answer:
-            "Google Ads can buy immediate placement while a campaign is funded. SEO builds organic visibility through technical health, relevant content and authority over time.",
-        },
-        {
-          question: "Can you handle local SEO for several locations or projects?",
-          answer:
-            "Yes. Local SEO can cover Google Business Profiles, consistent local listings and location-specific landing pages, with the scope tailored to your locations.",
-        },
-        {
-          question: "What will I see in your reports?",
-          answer:
-            "Reporting can cover organic visibility, traffic, rankings and conversions, together with work completed and next steps for the agreed programme.",
-        },
-      ],
-    },
-    problemKicker: "KM 01 · THE BUSINESS PROBLEM",
-    problemHeading: "Your Buyers Are Already Searching. Are They Finding You?",
-    problemCopy: "Over 85% of high-intent purchase journeys start with a search query. If your website is buried beneath competitors, trapped behind technical errors, or invisible to AI answer engines like ChatGPT and Gemini, you are forfeiting revenue every single hour. We rebuild your technical foundation, author rank-winning content, and establish authoritative backlinks that turn search queries into sustainable market dominance.",
-    image: "https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?auto=format&fit=crop&w=1400&q=80",
-    accentColor: "#184ebb",
-    tags: ["SEO", "AEO", "AI Overviews", "Technical SEO", "Local SEO", "High-Intent Search"],
-    stats: [
-      { value: "+320%", label: "Average Organic Traffic Growth" },
-      { value: "Top 3", label: "Rankings On High-Intent Commercial Queries" },
-      { value: "4.8x", label: "Increase In Organic Lead Conversion" },
-      { value: "18+", label: "Years Dominating Indian Search Ecosystems" },
-    ],
-    capabilities: [
-      {
-        title: "Technical SEO & Core Web Vitals",
-        copy: "Comprehensive site architecture audits, crawl budget optimization, mobile responsiveness, schema markup, and speed fixes that Google algorithms reward.",
-        details: [
-          "Crawlability, indexation, Core Web Vitals, redirects and structured data.",
-          "Page performance and site health across mobile and desktop.",
-          "Structured data markup, validation rules and implementation gaps.",
-        ],
-      },
-      {
-        title: "Answer Engine Optimization (AEO & AI Search)",
-        copy: "Structured citation engineering and entity authority modeling that ensure your brand is cited and recommended inside Google AI Overviews, ChatGPT, and Gemini.",
-        details: [
-          "Clear, authoritative answers that generative search can understand.",
-          "Entity signals and source citations across answer engines.",
-          "Visibility tracking for Google AI Overviews, ChatGPT and Gemini.",
-        ],
-      },
-      {
-        title: "Commercial Keyword & Intent Strategy",
-        copy: "Deep keyword analysis targeting bottom-of-the-funnel buyer searches that drive real purchase inquiries rather than vanity traffic.",
-        details: [
-          "Commercial search demand and high-intent keyword research.",
-          "Search intent mapping across the buyer journey.",
-          "Priority landing pages built around qualified enquiries.",
-        ],
-      },
-      {
-        title: "Authority Content & Topic Clusters",
-        copy: "In-depth, journalistic industry content and comprehensive pillar-cluster architectures that establish undeniable domain topical authority.",
-        details: [
-          "Pillar pages and supporting topic clusters.",
-          "Editorial briefs shaped around customer questions.",
-          "Internal linking that makes expertise easy to navigate.",
-        ],
-      },
-      {
-        title: "High-Authority Digital PR & Backlinks",
-        copy: "Editorial brand placements, genuine editorial outreach, and media backlinks earned through news, industry research, and thought leadership.",
-        details: [
-          "Relevant publisher and media outreach.",
-          "News, research and thought leadership opportunities.",
-          "Quality checks on authority, relevance and link placement.",
-        ],
-      },
-      {
-        title: "Local SEO & Multi-Location Dominance",
-        copy: "Google Business Profile optimization, local citation sync, map-pack rankings, and hyper-targeted geo-landing pages across Indian cities.",
-        details: [
-          "Google Business Profile and local listing optimisation.",
-          "Consistent citations and location information.",
-          "Local landing pages and map-pack visibility tracking.",
-        ],
-      },
-    ],
-    deliverables: [
-      "Full 120-Point Technical SEO & Site Architecture Audit",
-      "Comprehensive High-Intent Commercial Keyword Blueprint",
-      "Quarterly Content Roadmap & On-Page Optimization Guides",
-      "High-Authority Editorial Backlink Acquisition Roster",
-      "AI Search & LLM Knowledge Graph Citation Monitoring",
-      "Monthly Organic Revenue, Traffic & Conversion Reporting",
-    ],
-    process: [
-      {
-        step: "01",
-        km: "KM 01",
-        title: "Technical Diagnostic & Search Footprint Audit",
-        copy: "We crawl every URL, indexation barrier, code bottleneck, schema deficiency, and competitor footprint to uncover why you're missing top spots.",
-      },
-      {
-        step: "02",
-        km: "KM 03",
-        title: "Topical Authority & Architecture Blueprint",
-        copy: "We re-architect your site's information hierarchy, mapping high-value commercial searches into topic clusters and intent hubs.",
-      },
-      {
-        step: "03",
-        km: "KM 06",
-        title: "On-Page Optimization & Content Production",
-        copy: "Our writers and technical leads polish page speed, craft expert content, inject JSON-LD schemas, and optimize meta entities.",
-      },
-      {
-        step: "04",
-        km: "KM 09",
-        title: "Digital PR, Authority Link Building & AI Tracking",
-        copy: "We execute PR outreach for white-hat editorial citations while actively tracking your rankings in Google SERPs and AI answer engines.",
-      },
-    ],
-    whyUs: [
-      {
-        title: "Zero Black-Hat Hacks. 100% Sustainable Equity",
-        copy: "We don't buy toxic PBN links that get penalized in the next Google Core update. Every link and piece of content builds lasting brand value.",
-      },
-      {
-        title: "Pioneers in AI Search & Overviews Optimization",
-        copy: "While other agencies only optimize for blue links, we ensure your brand is the default recommendation in generative search engines.",
-      },
-      {
-        title: "Commercial Revenue Focus Over Vanity Keywords",
-        copy: "Traffic means nothing if it doesn't convert. We prioritize queries with explicit buying intent that bring phone calls and leads.",
-      },
-      {
-        title: "Full Transparency & Real-Time Analytics",
-        copy: "No opaque PDF reports with inflated stats. You get live dashboards tracking search visibility, keyword rank velocity, and conversions.",
-      },
-    ],
-  },
-  {
     id: "digital",
     slug: "digital-marketing",
     name: "Digital Marketing",
@@ -1099,7 +898,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     slug: "3d-rendering-services",
     name: "3D Rendering Services",
     uppercaseName: "3D RENDERING SERVICES",
-    engine: "Engine Three · Film, 3D & AI",
+    engine: "Engine Three · 3D Rendering Services",
     kicker: "KM 09 · Worlds you can walk through",
     tagline: "Cinema-grade 3D architectural visualization, interior renderings, and CGI.",
     heading: "Show buyers the home, the township, and the view before a single brick is laid",
@@ -1198,8 +997,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
   },
 ];
 
-/* Services offered in the site menus. SEO is sold as part of Digital Marketing. */
-export const MENU_SERVICES = SERVICES_LIST.filter((service) => service.slug !== "seo");
+export const MENU_SERVICES = SERVICES_LIST;
 
 export function getServiceBySlug(slug: string): ServiceDetail | undefined {
   return SERVICES_LIST.find((s) => s.slug === slug || s.id === slug);

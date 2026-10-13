@@ -70,7 +70,7 @@ export default function ServicesPage() {
       <ServicesEngineBanner
         index="04"
         kicker="Engine Three"
-        title="Film, 3D & AI"
+        title="3D Rendering Services"
         copy="Show buyers the home, the township and the view before a single brick is laid."
         km="KM 09"
         tone="#167a7d"

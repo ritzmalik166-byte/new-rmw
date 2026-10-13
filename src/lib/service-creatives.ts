@@ -165,12 +165,6 @@ const scene = (key: keyof typeof SCENES, medium: string, caption: string): Servi
 });
 
 export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
-  seo: {
-    badge: ["Top", "result"],
-    scene: scene("search", "Search", "Where every buying journey starts."),
-    poster: WORK.searchPhone,
-    wall: [WORK.searchConsole, WORK.aiMode, WORK.aiOverview, WORK.searchPhone],
-  },
   "digital-marketing": {
     badge: ["Live", "campaign"],
     scene: scene("performance", "Performance", "Spend you can trace to enquiries."),
