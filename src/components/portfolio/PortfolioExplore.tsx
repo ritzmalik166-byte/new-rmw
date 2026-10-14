@@ -121,7 +121,7 @@ export function PortfolioExplore() {
                   </ul>
                   <div className="pf-card-actions">
                     <TransitionLink href={category.href} className="hm-btn">
-                      View {category.title} work <span aria-hidden>→</span>
+                      View {category.cta ?? category.title} work <span aria-hidden>→</span>
                     </TransitionLink>
                     <a href="/contact" target="_blank" rel="noopener noreferrer" className="hm-link">
                       Start a project

@@ -3,6 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { type HmLine, HmTitle, useHomeReveal } from "@/components/homepage/shared";
+import { WHATSAPP_HREF } from "@/components/layout/FloatingContact";
 import { TransitionLink } from "@/components/motion/TransitionLink";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { RealTruck, setWheelTurn } from "@/components/ui/RealTruck";
@@ -20,11 +21,14 @@ export function PortfolioCta({
   kicker = "Explore our full portfolio",
   title = DEFAULT_TITLE,
   lede = DEFAULT_LEDE,
+  whatsapp = false,
 }: {
   km?: string;
   kicker?: string;
   title?: readonly HmLine[];
   lede?: string;
+  /** Swap the button pair for "Start a project" + "Chat on WhatsApp". */
+  whatsapp?: boolean;
 }) {
   const rootRef = useRef<HTMLElement>(null);
   const { ready, reduced } = useMotion();
@@ -78,12 +82,25 @@ export function PortfolioCta({
           {lede}
         </p>
         <div data-hm-fade className="hm-actions">
-          <TransitionLink href="/contact" className="hm-btn is-ink">
-            Contact us <span aria-hidden>→</span>
-          </TransitionLink>
-          <a href="/contact" target="_blank" rel="noopener noreferrer" className="hm-btn pf-cta-btn">
-            Start a project <span aria-hidden>→</span>
-          </a>
+          {whatsapp ? (
+            <>
+              <TransitionLink href="/contact" className="hm-btn is-ink">
+                Start a project <span aria-hidden>→</span>
+              </TransitionLink>
+              <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer" className="hm-btn pf-cta-btn">
+                Chat on WhatsApp <span aria-hidden>→</span>
+              </a>
+            </>
+          ) : (
+            <>
+              <TransitionLink href="/contact" className="hm-btn is-ink">
+                Contact us <span aria-hidden>→</span>
+              </TransitionLink>
+              <a href="/contact" target="_blank" rel="noopener noreferrer" className="hm-btn pf-cta-btn">
+                Start a project <span aria-hidden>→</span>
+              </a>
+            </>
+          )}
         </div>
         <ul data-hm-fade className="pf-cta-lines" aria-label="Reach us">
           <li>

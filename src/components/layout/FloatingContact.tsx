@@ -9,6 +9,7 @@ import { site } from "@/lib/site";
 const PHONE = site.footer.phones[0];
 const DIGITS = PHONE.replace(/\D/g, "");
 const WA_TEXT = "Hi Ritz Media World, I'd like to discuss a project.";
+export const WHATSAPP_HREF = `https://wa.me/${DIGITS}?text=${encodeURIComponent(WA_TEXT)}`;
 
 /* Hidden until the page's first section (the hero) has scrolled past the header. */
 function usePastHero() {
@@ -104,7 +105,7 @@ export function FloatingContact() {
       inert={!visible}
     >
       <a
-        href={`https://wa.me/${DIGITS}?text=${encodeURIComponent(WA_TEXT)}`}
+        href={WHATSAPP_HREF}
         target="_blank"
         rel="noopener noreferrer"
         className="fab-btn is-wa"

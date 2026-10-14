@@ -69,8 +69,8 @@ export function PortfolioHero() {
           />
 
           <p data-hm-fade className="hm-lede">
-            Brand identities, campaign creatives, websites, brand films, 3D walk-throughs and influencer
-            campaigns, created by Ritz Media World for brands across India.
+            Explore the creative portfolio of Ritz Media World, from brand identities, packaging, and print
+            advertising to websites, 3D renders, and influencer campaigns, created for brands across India.
           </p>
 
           <div data-hm-fade className="hm-actions">

@@ -9,7 +9,7 @@ import { AGENCY_KEYWORDS, pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Portfolio | Creative Work & Case Studies | Ritz Media World",
   description:
-    "Explore Ritz Media World's portfolio of brand identity, creative design, website design, brand films, walk-through videos, and influencer marketing campaigns.",
+    "Explore Ritz Media World's portfolio of brand identity, creative design, website design, brand films, 3D rendering and walkthroughs, and influencer marketing campaigns.",
   keywords: AGENCY_KEYWORDS,
   path: "/portfolio",
 });
@@ -21,7 +21,12 @@ export default function PortfolioPage() {
       <PortfolioGallery />
       <PortfolioExplore />
       <PortfolioWhy />
-      <PortfolioCta />
+      <PortfolioCta
+        kicker="Your brand, next"
+        title={[{ text: "Seen enough?" }, { text: "Let's build yours.", accent: true }]}
+        lede="Tell us where your brand needs to go next, whether that's a new identity, a website, a campaign, or a 3D launch, and we'll map the route to get there."
+        whatsapp
+      />
       <StartProject />
     </article>
   );
