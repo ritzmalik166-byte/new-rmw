@@ -67,7 +67,7 @@
 }
 
 .svc-web-lede {
-  max-width: 440px;
+  max-width: 460px;
   margin: 20px 0 0;
   color: #00000099;
   font-family: var(--font-inter), Inter, sans-serif;
@@ -76,10 +76,51 @@
   line-height: 24px;
 }
 
+.svc-web-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 24px;
+  margin-top: 24px;
+}
+
+.svc-web-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 22px;
+  border-radius: 999px;
+  background: var(--wp-blue);
+  color: #ffffff;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+  box-shadow: 0 10px 22px -12px rgb(20 87 168 / 0.8);
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.svc-web-btn span {
+  transition: transform 0.25s ease;
+}
+
+.svc-web-btn:hover,
+.svc-web-btn:focus-visible {
+  background: #0f4385;
+  transform: translateY(-2px);
+}
+
+.svc-web-btn:hover span,
+.svc-web-btn:focus-visible span {
+  transform: translateX(4px);
+}
+
 .svc-web-cta {
   display: inline-flex;
   gap: 6px;
-  margin-top: 24px;
   color: var(--wp-blue);
   font-family: var(--font-inter), Inter, sans-serif;
   font-weight: 700;
@@ -801,6 +842,10 @@
   .svc-web-art {
     justify-self: center;
     width: min(100%, 720px);
+  }
+
+  .svc-web-actions {
+    justify-content: center;
   }
 
   .svc-paper-body {

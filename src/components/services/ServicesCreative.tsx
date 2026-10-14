@@ -83,16 +83,18 @@ export function ServicesCreative() {
       {/* <div className="svc-creative-border" aria-hidden /> */}
       <div className="svc-creative-inner">
         <div className="svc-creative-copy">
-          <p className="svc-creative-kicker">KM 02 · Distinct by design</p>
+          <p className="svc-creative-kicker">KM 01 · Distinct by design</p>
           <h2 id="svc-creative-title" className="svc-creative-title">
             Creative Services
           </h2>
           <p className="svc-creative-lede">
-            From evocative visual identities to bespoke packaging and brand systems. We combine
-            traditional Indian visual vernacular with contemporary design precision.
+            Ritz Media World is a creative agency in India that builds brand identities people
+            remember. From branding and logo design to graphic, print advertising, and packaging
+            design, every piece is shaped around your business and built to stay consistent wherever
+            customers see it, whether you are launching, rebranding, or entering a new market.
           </p>
           <Link className="svc-creative-cta" href="/contact" target="_blank" rel="noopener noreferrer">
-            Get a Free Marketing Consultation <span aria-hidden>→</span>
+            Get a Free Creative Consultation <span aria-hidden>→</span>
           </Link>
         </div>
 

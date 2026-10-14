@@ -97,7 +97,7 @@ export function SubServiceRoute({ sub }: { sub: SubService }) {
                       src={section.image}
                       alt={section.alt}
                       fill
-                      sizes="(max-width: 860px) 90vw, 46vw"
+                      sizes="(max-width: 860px) 90vw, (max-width: 1600px) 46vw, 720px"
                       unoptimized={section.image.endsWith(".gif")}
                     />
                     <span className="ssd-stop-tag">KM {pad(index + 1)}</span>

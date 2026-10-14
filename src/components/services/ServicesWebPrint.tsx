@@ -6,7 +6,7 @@ import { useRef } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap } from "@/lib/gsap";
 import { ServicesPrintPaper } from "./ServicesPrintPaper";
-import { ServicesWebMockup } from "./ServicesWebMockup";
+import { ServicesWebMockup, WEB_SERVICE_HREF } from "./ServicesWebMockup";
 
 registerGsap();
 
@@ -80,17 +80,24 @@ export function ServicesWebPrint() {
           </div>
 
           <div className="svc-web-copy">
-            <p className="svc-web-kicker">KM 02 · Distinct by design</p>
+            <p className="svc-web-kicker">KM 06 · Digital experiences elevated</p>
             <h2 id="svc-web-title" className="svc-web-title">
               Web Design &amp; Development Services
             </h2>
             <p className="svc-web-lede">
-              Fast, search-ready websites and landing pages designed for one job: turning visitors
-              into enquiries.
+              Fast, search-ready websites designed for one job: turning visitors into enquiries.
+              From UI/UX design and custom builds to WordPress, e-commerce and landing pages, we
+              design, develop and maintain websites that look sharp, load quickly and keep working
+              long after launch.
             </p>
-            <Link className="svc-web-cta" href="/portfolio">
-              See sites we&rsquo;ve built <span aria-hidden>→</span>
-            </Link>
+            <div className="svc-web-actions">
+              <Link className="svc-web-btn" href={WEB_SERVICE_HREF}>
+                Explore Web Development <span aria-hidden>→</span>
+              </Link>
+              <Link className="svc-web-cta" href="/portfolio">
+                See sites we&rsquo;ve built <span aria-hidden>→</span>
+              </Link>
+            </div>
           </div>
         </div>
 

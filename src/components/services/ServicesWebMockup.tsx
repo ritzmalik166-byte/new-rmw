@@ -1,7 +1,9 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
+import Link from "next/link";
 import {
+  useEffect,
   useId,
   useRef,
   useState,
@@ -14,34 +16,25 @@ import { gsap, registerGsap, ScrollTrigger } from "@/lib/gsap";
 
 registerGsap();
 
-type TabId = "uiux" | "custom" | "ecom" | "landing" | "wp";
+type TabId = "uiux" | "custom" | "wp" | "ecom" | "landing" | "maint";
 
-const TABS: { id: TabId; label: string; url: string; summary: string }[] = [
+export const WEB_SERVICE_HREF = "/services/web-designing-and-development";
+
+const TABS: { id: TabId; label: string; url: string; summary: string; href: string }[] = [
   {
     id: "uiux",
     label: "UI/UX Design",
     url: "figma.com/design/yourbrand-home",
     summary:
       "A designer lays out a homepage in a design tool: navigation, headline, image and a call-to-action button.",
+    href: `${WEB_SERVICE_HREF}/ui-ux-design`,
   },
   {
     id: "custom",
     label: "Custom Development",
     url: "yourbrand.com",
     summary: "A finished custom website template, scrolling from the hero to services and a testimonial.",
-  },
-  {
-    id: "ecom",
-    label: "E-Commerce",
-    url: "shop.yourbrand.com",
-    summary: "An online store where products are added to the cart and the cart count updates.",
-  },
-  {
-    id: "landing",
-    label: "Landing Pages",
-    url: "localhost:3000/vedvan",
-    summary:
-      "Code is written on the left while the Vedvan real estate landing page builds live on the right.",
+    href: `${WEB_SERVICE_HREF}/custom-design-development`,
   },
   {
     id: "wp",
@@ -49,28 +42,93 @@ const TABS: { id: TabId; label: string; url: string; summary: string }[] = [
     url: "yourbrand.com/wp-admin/post.php",
     summary:
       "A WordPress page is edited in the block editor while the live page updates alongside it.",
+    href: `${WEB_SERVICE_HREF}/wordpress-web-designing`,
+  },
+  {
+    id: "ecom",
+    label: "E-Commerce",
+    url: "shop.yourbrand.com",
+    summary: "An online store where products are added to the cart and the cart count updates.",
+    href: `${WEB_SERVICE_HREF}/e-commerce-web-designing`,
+  },
+  {
+    id: "landing",
+    label: "Landing Pages",
+    url: "localhost:3000/vedvan",
+    summary:
+      "Code is written on the left while the Vedvan real estate landing page builds live on the right.",
+    href: `${WEB_SERVICE_HREF}/landing-page-development-services`,
+  },
+  {
+    id: "maint",
+    label: "Maintenance & Support",
+    url: "status.yourbrand.com",
+    summary:
+      "A site-health dashboard runs updates, renews the SSL certificate, scans for threats and completes a backup while page speed and uptime stay high.",
+    href: WEB_SERVICE_HREF,
   },
 ];
 
+/* Tabs advance on their own until the visitor picks one, so it is obvious
+   that each tab shows something different. */
+const AUTOPLAY_MS = 9000;
+
 export function ServicesWebMockup() {
   const [active, setActive] = useState<TabId>("uiux");
+  const [autoplay, setAutoplay] = useState(true);
+  const [inView, setInView] = useState(false);
+  const [hovering, setHovering] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
   const tabsRef = useRef<HTMLDivElement>(null);
   const baseId = useId();
-  const tab = TABS.find((t) => t.id === active) ?? TABS[0];
+  const { reduced } = useMotion();
+  const activeIndex = Math.max(0, TABS.findIndex((t) => t.id === active));
+  const tab = TABS[activeIndex];
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), {
+      threshold: 0.5,
+    });
+    observer.observe(root);
+    return () => observer.disconnect();
+  }, []);
+
+  /* Keep the active tab visible when the strip scrolls sideways on small screens. */
+  useEffect(() => {
+    const strip = tabsRef.current;
+    const button = strip?.querySelector<HTMLElement>(`[data-tab="${active}"]`);
+    if (!strip || !button || strip.scrollWidth <= strip.clientWidth) return;
+    strip.scrollTo({
+      left: button.offsetLeft - (strip.clientWidth - button.offsetWidth) / 2,
+      behavior: reduced ? "auto" : "smooth",
+    });
+  }, [active, reduced]);
+
+  const select = (id: TabId) => {
+    setAutoplay(false);
+    setActive(id);
+  };
+
+  const advance = () => setActive(TABS[(activeIndex + 1) % TABS.length].id);
 
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     const step = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
     if (!step) return;
     event.preventDefault();
-    const index = TABS.findIndex((t) => t.id === active);
-    const next = TABS[(index + step + TABS.length) % TABS.length];
-    setActive(next.id);
+    const next = TABS[(activeIndex + step + TABS.length) % TABS.length];
+    select(next.id);
     tabsRef.current?.querySelector<HTMLElement>(`[data-tab="${next.id}"]`)?.focus();
   };
 
   return (
-    <div className="wm">
-      <div className="wm-frame">
+    <div ref={rootRef} className="wm">
+      <div
+        className="wm-frame"
+        onPointerEnter={(event) => event.pointerType === "mouse" && setHovering(true)}
+        onPointerLeave={() => setHovering(false)}
+      >
         <div className="wm-window">
           <div className="wm-bar" aria-hidden>
             <span className="wm-dots">
@@ -107,9 +165,18 @@ export function ServicesWebMockup() {
                 aria-controls={`${baseId}-panel`}
                 tabIndex={t.id === active ? 0 : -1}
                 className="wm-tab"
-                onClick={() => setActive(t.id)}
+                onClick={() => select(t.id)}
               >
                 {t.label}
+                {autoplay && !reduced && t.id === active && (
+                  <span
+                    className="wm-tab-progress"
+                    style={{ animationDuration: `${AUTOPLAY_MS}ms` }}
+                    data-paused={!inView || hovering}
+                    onAnimationEnd={advance}
+                    aria-hidden
+                  />
+                )}
               </button>
             ))}
           </div>
@@ -126,8 +193,28 @@ export function ServicesWebMockup() {
             {active === "ecom" && <EcomScene />}
             {active === "landing" && <LandingScene />}
             {active === "wp" && <WpScene />}
+            {active === "maint" && <MaintScene />}
           </div>
         </div>
+      </div>
+
+      <div className="wm-foot">
+        <p className="wm-hint">
+          <svg viewBox="0 0 24 24" aria-hidden>
+            <path d="M9 11V5a2 2 0 0 1 4 0v5" />
+            <path d="M13 10a2 2 0 0 1 4 0v1a2 2 0 0 1 4 0v4a7 7 0 0 1-7 7h-1a6 6 0 0 1-5-2.7L4.5 15a2 2 0 0 1 3.2-2.4L9 14" />
+          </svg>
+          <span>
+            <span className="wm-hint-fine">Click</span>
+            <span className="wm-hint-touch">Tap</span> a tab to see each service in action
+          </span>
+          <span className="wm-hint-count">
+            {activeIndex + 1}/{TABS.length}
+          </span>
+        </p>
+        <Link className="wm-explore" href={tab.href}>
+          Explore {tab.label} <span aria-hidden>→</span>
+        </Link>
       </div>
     </div>
   );
@@ -167,7 +254,7 @@ function useScene(build: (ctx: SceneContext) => void) {
       });
 
       if (reduced) {
-        tl.pause("hold");
+        tl.pause("hold", false);
         return;
       }
 
@@ -1068,6 +1155,155 @@ function WpScene() {
       </div>
 
       <Cursor style={{ left: "40%", top: "62%" }} />
+    </div>
+  );
+}
+
+/* ---------- Maintenance & support: a site-health dashboard ---------- */
+
+const MAINT_TASKS = [
+  { label: "WordPress core", meta: "6.6 → 6.7" },
+  { label: "Plugins", meta: "3 updates" },
+  { label: "SSL certificate", meta: "Renewed · 365 days" },
+  { label: "Security scan", meta: "0 threats" },
+] as const;
+
+const MAINT_SCORE = 98;
+const UPTIME_BARS = Array.from({ length: 30 }, (_, i) => (i === 11 ? 55 : 72 + ((i * 37) % 28)));
+
+function MaintScene() {
+  const ref = useScene(({ tl, q, one }) => {
+    const score = one(".wm-mt-score");
+    const pct = one(".wm-mt-backup-pct");
+    const gauge = { v: 0 };
+    const backup = { v: 0 };
+    const resetCounters = () => {
+      score.textContent = "0";
+      pct.textContent = "0%";
+    };
+    resetCounters();
+    tl.eventCallback("onRepeat", resetCounters);
+
+    tl.fromTo(
+      q(".wm-mt-card"),
+      { autoAlpha: 0, y: 12 },
+      { autoAlpha: 1, y: 0, duration: 0.45, stagger: 0.1 },
+      0.2,
+    ).fromTo(
+      q(".wm-mt-bar"),
+      { scaleY: 0 },
+      { scaleY: 1, duration: 0.5, stagger: 0.015 },
+      "-=0.2",
+    );
+
+    q(".wm-mt-task").forEach((row) => {
+      const spin = row.querySelector(".wm-mt-spin");
+      tl.to(row.querySelector(".wm-mt-pending"), { autoAlpha: 0, duration: 0.1 }, "+=0.1")
+        .fromTo(spin, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.1 }, "<")
+        .fromTo(spin, { rotation: 0 }, { rotation: 360, duration: 0.6, ease: "none" }, "<")
+        .to(spin, { autoAlpha: 0, duration: 0.1 })
+        .fromTo(
+          row.querySelector(".wm-mt-check"),
+          { autoAlpha: 0, scale: 0 },
+          { autoAlpha: 1, scale: 1, duration: 0.3, ease: "back.out(3)" },
+          "<",
+        );
+    });
+
+    tl.fromTo(one(".wm-mt-fill"), { scaleX: 0 }, { scaleX: 1, duration: 1.1, ease: "power1.inOut" }, "+=0.1")
+      .fromTo(
+        backup,
+        { v: 0 },
+        {
+          v: 100,
+          duration: 1.1,
+          ease: "power1.inOut",
+          onUpdate: () => {
+            pct.textContent = `${Math.round(backup.v)}%`;
+          },
+        },
+        "<",
+      )
+      .fromTo(
+        one(".wm-mt-gauge-arc"),
+        { strokeDashoffset: 1 },
+        { strokeDashoffset: 1 - MAINT_SCORE / 100, duration: 1.2, ease: "power2.out" },
+        "<",
+      )
+      .fromTo(
+        gauge,
+        { v: 0 },
+        {
+          v: MAINT_SCORE,
+          duration: 1.2,
+          ease: "power2.out",
+          onUpdate: () => {
+            score.textContent = String(Math.round(gauge.v));
+          },
+        },
+        "<",
+      )
+      .fromTo(one(".wm-mt-status-busy"), { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.2 })
+      .fromTo(one(".wm-mt-status-ok"), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.25 }, "<")
+      .addLabel("hold")
+      .to({}, { duration: 2.4 })
+      .to(q(".wm-mt-card"), { autoAlpha: 0, duration: 0.3 });
+  });
+
+  return (
+    <div ref={ref} className="wm-scene wm-mt" aria-hidden>
+      <div className="wm-mt-head">
+        <span className="wm-mt-title">Site health · yourbrand.com</span>
+        <span className="wm-mt-status">
+          <span className="wm-mt-status-busy">● Running maintenance…</span>
+          <span className="wm-mt-status-ok">● All systems healthy</span>
+        </span>
+      </div>
+
+      <div className="wm-mt-grid">
+        <div className="wm-mt-card wm-mt-tasks">
+          <p className="wm-panel-title">Updates &amp; checks</p>
+          {MAINT_TASKS.map((task) => (
+            <div key={task.label} className="wm-mt-task">
+              <span className="wm-mt-task-label">{task.label}</span>
+              <span className="wm-mt-task-meta">{task.meta}</span>
+              <span className="wm-mt-state">
+                <i className="wm-mt-pending" />
+                <i className="wm-mt-spin" />
+                <i className="wm-mt-check">✓</i>
+              </span>
+            </div>
+          ))}
+          <div className="wm-mt-backup">
+            <span>Daily backup</span>
+            <span className="wm-mt-backup-pct">100%</span>
+            <span className="wm-mt-track">
+              <i className="wm-mt-fill" />
+            </span>
+          </div>
+        </div>
+
+        <div className="wm-mt-side">
+          <div className="wm-mt-card wm-mt-speed">
+            <p className="wm-panel-title">Page speed</p>
+            <svg className="wm-mt-gauge" viewBox="0 0 100 56">
+              <path className="wm-mt-gauge-track" d="M10 50a40 40 0 0 1 80 0" />
+              <path className="wm-mt-gauge-arc" d="M10 50a40 40 0 0 1 80 0" pathLength={1} />
+            </svg>
+            <span className="wm-mt-score">{MAINT_SCORE}</span>
+          </div>
+
+          <div className="wm-mt-card wm-mt-uptime">
+            <p className="wm-panel-title">Uptime · 30 days</p>
+            <span className="wm-mt-uptime-num">99.98%</span>
+            <span className="wm-mt-bars">
+              {UPTIME_BARS.map((height, i) => (
+                <i key={i} className="wm-mt-bar" style={{ height: `${height}%` }} />
+              ))}
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

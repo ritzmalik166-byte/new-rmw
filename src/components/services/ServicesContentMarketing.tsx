@@ -4,30 +4,58 @@ const SERVICES = [
   {
     numeral: "१",
     index: "01",
-    title: "Content Strategy",
-    copy: "Topics, formats and a calendar mapped to real search demand.",
+    title: "SEO Content Writing",
+    copy: "Content built around real search intent, so it ranks because it answers the question.",
     tone: "#c83256",
   },
   {
     numeral: "२",
     index: "02",
-    title: "Email & Newsletters",
-    copy: "Nurture sequences that keep your brand in the inbox, not the spam folder.",
+    title: "Website Content Writing",
+    copy: "Homepage, service and about-page copy that explains what you do and why it matters.",
     tone: "#2a7bbf",
   },
   {
     numeral: "३",
     index: "03",
-    title: "Assets & Infographics",
-    copy: "Guides, reports and visuals that turn complex facts into shareable ones.",
+    title: "Blog Writing",
+    copy: "Research-backed posts that build authority and bring in organic traffic over time.",
     tone: "#2f8a4e",
   },
   {
     numeral: "४",
     index: "04",
-    title: "Promotion & optimization",
-    copy: "Distribution, updates and SEO fixes so good content keeps working.",
+    title: "Copywriting",
+    copy: "Landing page, ad and campaign copy written to turn readers into enquiries.",
+    tone: "#d97a1e",
+  },
+  {
+    numeral: "५",
+    index: "05",
+    title: "Social Media Content",
+    copy: "Platform-specific content that keeps your brand present, consistent and worth engaging with.",
+    tone: "#2a7bbf",
+  },
+  {
+    numeral: "६",
+    index: "06",
+    title: "Email Marketing & Newsletters",
+    copy: "Welcome sequences, newsletters and campaigns that earn the open, not just the send.",
     tone: "#c83256",
+  },
+  {
+    numeral: "७",
+    index: "07",
+    title: "Visual Assets & Infographics",
+    copy: "Infographics, presentations and eBooks that make complex information easy to follow.",
+    tone: "#d97a1e",
+  },
+  {
+    numeral: "८",
+    index: "08",
+    title: "Content Promotion & Optimization",
+    copy: "Distribution, refreshes, and SEO improvements that keep good content working long after publishing.",
+    tone: "#2f8a4e",
   },
 ] as const;
 
@@ -45,8 +73,8 @@ export function ServicesContentMarketing() {
             </h2>
           </div>
           <p className="svc-content-lede">
-            Stories people choose to read, save and forward, planned around what your buyers search
-            for and built to rank on Google and in AI answers.
+            Content people choose to read, save, and share, planned around what your audience
+            searches for and written to rank on Google and in AI answers.
           </p>
         </div>
 

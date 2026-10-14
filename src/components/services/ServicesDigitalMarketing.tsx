@@ -9,43 +9,49 @@ import { ServicesSearchGlimpse } from "./ServicesSearchGlimpse";
 
 registerGsap();
 
-type IconName = "search" | "share" | "shield" | "pointer" | "magnet" | "megaphone";
+type IconName = "search" | "sparkle" | "share" | "shield" | "pointer" | "magnet" | "megaphone";
 
 const SERVICES: { id: string; title: string; copy: string; icon: IconName }[] = [
   {
     id: "seo",
     title: "Search Engine Optimization (SEO)",
-    copy: "Rank for the searches your buyers type, and get cited in AI answers.",
+    copy: "Strategies built around search intent and customer behaviour, so the right customers find your business and take the next step.",
     icon: "search",
+  },
+  {
+    id: "aio-geo",
+    title: "AIO & GEO Optimization",
+    copy: "Get your brand cited and recommended by ChatGPT, Google AI Overviews, Gemini and Perplexity when customers ask about your category.",
+    icon: "sparkle",
   },
   {
     id: "smm",
     title: "Social Media Marketing (SMM)",
-    copy: "Feeds, reels and community management that build a following.",
+    copy: "Content, creative, and community management that keep your brand visible, relevant, and connected with the right audience.",
     icon: "share",
   },
   {
     id: "orm",
     title: "Online Reputation Management (ORM)",
-    copy: "Reviews, mentions and search results that tell your side of the story.",
+    copy: "Monitoring reviews and feedback and responding thoughtfully, so customers have more reasons to trust your brand.",
     icon: "shield",
   },
   {
     id: "ppc",
     title: "Pay Per Click (PPC) Advertising",
-    copy: "Google and Meta campaigns tuned daily for cost per lead.",
+    copy: "Google and Meta campaigns built around your audience, budget, and goals, tracked from first click to conversion.",
     icon: "pointer",
   },
   {
     id: "leads",
     title: "Lead Generation",
-    copy: "Landing pages, forms and follow-ups that turn clicks into site visits.",
+    copy: "Targeted campaigns, landing pages, and clear calls to action that turn attention into qualified, high-intent leads.",
     icon: "magnet",
   },
   {
     id: "awareness",
     title: "Brand Awareness",
-    copy: "Reach and frequency planning that makes your name familiar first.",
+    copy: "Content, social media, advertising, and search visibility working together so your brand is recognised and remembered.",
     icon: "megaphone",
   },
 ];
@@ -89,14 +95,14 @@ export function ServicesDigitalMarketing() {
             rotationX: 0,
             autoAlpha: 1,
             duration: 0.9,
-            stagger: { grid: [2, 3], from: "start", amount: 0.45 },
+            stagger: { grid: "auto", from: "start", amount: 0.45 },
             onComplete: () => gsap.set(cards, { transformOrigin: "50% 50%" }),
           },
           "-=0.7",
         )
         .to(
           stripes,
-          { scaleX: 1, duration: 0.7, ease: "power2.inOut", stagger: { grid: [2, 3], amount: 0.45 } },
+          { scaleX: 1, duration: 0.7, ease: "power2.inOut", stagger: { grid: "auto", amount: 0.45 } },
           "-=0.75",
         )
         .to(strokes, { strokeDashoffset: 0, duration: 0.9, ease: "power2.inOut", stagger: 0.03 }, "-=0.6");
@@ -165,8 +171,9 @@ export function ServicesDigitalMarketing() {
             ))}
           </h2>
           <p className="svc-dm-lede">
-            Six levers, one dashboard. We run SEO, social and paid media together, so every rupee is
-            tracked from the first click to the site visit.
+            Seven services, one connected strategy. As a digital marketing agency working with brands
+            across India, we run SEO, social media, and paid campaigns together, so every rupee is
+            tracked from the first click to the final enquiry.
           </p>
           <Link
             className="svc-dm-cta"
@@ -201,6 +208,13 @@ const ICONS: Record<IconName, ReactNode> = {
     <>
       <circle cx="11" cy="11" r="7" pathLength={1} />
       <path d="M20.5 20.5 16 16" pathLength={1} />
+    </>
+  ),
+  sparkle: (
+    <>
+      <path d="M10 3.5 11.9 8.1 16.5 10l-4.6 1.9L10 16.5l-1.9-4.6L3.5 10l4.6-1.9z" pathLength={1} />
+      <path d="M18 14.5v6" pathLength={1} />
+      <path d="M15 17.5h6" pathLength={1} />
     </>
   ),
   share: (

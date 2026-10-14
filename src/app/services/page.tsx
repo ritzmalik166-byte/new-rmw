@@ -31,7 +31,7 @@ export default function ServicesPage() {
         index="01"
         kicker="Engine One"
         title="Brand & Creative"
-        copy="The look, the words and the famous faces that make people stop, remember and trust."
+        copy="Branding, design, content, and celebrity and influencer partnerships that help people notice, remember, and trust your brand."
         km="KM 01 – 04"
       />
       <ServicesCreative />
@@ -42,7 +42,7 @@ export default function ServicesPage() {
         index="02"
         kicker="Engine Two"
         title="Digital & Media"
-        copy="Search, social, web, newspapers and FM: the channels that carry your message to the buyer and bring the lead back."
+        copy="Digital marketing, web development, and print and radio advertising, planned together so every channel reaches the right audience and turns attention into enquiries."
         km="KM 05 – 08"
         tone="#1457a8"
         border="scallop"
@@ -52,10 +52,10 @@ export default function ServicesPage() {
       <ServicesRadio />
       <ServicesEngineBanner
         id="film"
-        index="04"
+        index="03"
         kicker="Engine Three"
         title="3D Rendering Services"
-        copy="Show buyers the home, the township and the view before a single brick is laid."
+        copy="Photorealistic exteriors, interiors, townships, floor plans, and landscapes that let buyers and investors see a project before a single brick is laid."
         km="KM 09"
         tone="#167a7d"
         border="scallop"

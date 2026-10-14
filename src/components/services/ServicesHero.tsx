@@ -96,8 +96,9 @@ export function ServicesHero() {
           </h1>
 
           <p className="svch-lede">
-            Services tailored to transform your brand, packed, loaded and delivered by three
-            engines.
+            From branding and creative services to digital marketing, media, and 3D rendering,
+            every service is packed, loaded, and delivered by three integrated engines working as
+            one team.
           </p>
 
           <a href="/contact" target="_blank" rel="noopener noreferrer" className="svch-cta">

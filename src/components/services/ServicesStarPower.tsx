@@ -11,10 +11,10 @@ registerGsap();
 const CARDS = [
   {
     id: "celebrity",
-    kicker: "KM 07 · Borrow the spotlight",
+    kicker: "KM 03 · Borrow the spotlight",
     title: "Celebrity Endorsement Services",
     items: [
-      "Celebrity Identification",
+      "Celebrity Identification & Selection",
       "Contract Negotiations",
       "Creative Collaboration",
       "Campaign Integration",
@@ -25,7 +25,7 @@ const CARDS = [
   },
   {
     id: "influencer",
-    kicker: "KM 08 · Make people listen",
+    kicker: "KM 04 · Make people listen",
     title: "Influencer Marketing Services",
     items: [
       "Influencer Identification",
@@ -147,7 +147,7 @@ export function ServicesStarPower() {
             Star power
           </h2>
           <span className="svc-star-rule" aria-hidden />
-          <p className="svc-star-km">03 · KM 04</p>
+          <p className="svc-star-km">KM 03 · 04</p>
         </div>
 
         <div className="svc-star-grid">

@@ -153,8 +153,9 @@ export function ServicesRendering() {
             </h2>
           </div>
           <p className="svc-render-lede">
-            Photoreal renders and walkthrough stills for real estate launches, used across
-            hoardings, brochures, ads and sales galleries.
+            Photorealistic renders for real estate developers, architects, interior designers, and
+            builders, ready for hoardings, brochures, digital ads, sales galleries, and investor
+            presentations.
           </p>
         </div>
       </header>

@@ -119,7 +119,7 @@ export function SubServiceHero({ service, sub, stop, total }: Props) {
                 fill
                 loading="eager"
                 fetchPriority="high"
-                sizes="(max-width: 980px) 90vw, 560px"
+                sizes="(max-width: 980px) 90vw, 760px"
                 unoptimized={sub.cover.endsWith(".gif")}
               />
             </div>

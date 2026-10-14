@@ -192,8 +192,8 @@ export function ServicesRadio() {
             </h2>
           </div>
           <p className="svc-radio-lede">
-            Jingles and spots written, voiced, recorded and bought in-house, so your brand plays in
-            every car and kitchen across the city.
+            FM radio campaigns conceptualised, scripted, voiced, produced, and bought in-house, so
+            your brand is heard in the right cities, on the right stations, at the right time.
           </p>
         </header>
 

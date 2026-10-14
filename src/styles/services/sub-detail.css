@@ -61,7 +61,7 @@
 .ssd-hero-art {
   position: relative;
   justify-self: end;
-  width: min(100%, 600px);
+  width: min(100%, 760px);
   padding: 18px 0 64px;
 }
 
@@ -305,7 +305,7 @@
 .ssd-stop-media {
   position: relative;
   grid-row: 1;
-  width: 100%;
+  width: min(100%, 720px);
   aspect-ratio: 653 / 470;
   margin: 0;
   overflow: hidden;
@@ -363,8 +363,10 @@
   max-width: 480px;
 }
 
+/* On wide screens the photos stop growing and hug the road. */
 .ssd-stop.is-left .ssd-stop-media {
   grid-column: 1;
+  justify-self: end;
 }
 
 .ssd-stop.is-left .ssd-stop-copy {
@@ -373,6 +375,7 @@
 
 .ssd-stop.is-right .ssd-stop-media {
   grid-column: 3;
+  justify-self: start;
 }
 
 .ssd-stop.is-right .ssd-stop-copy {
@@ -631,18 +634,28 @@
     grid-column: 1;
   }
 
+  .ssd-stop.is-left .ssd-stop-media,
+  .ssd-stop.is-right .ssd-stop-media {
+    width: 100%;
+    justify-self: stretch;
+  }
+
   .ssd-stop.is-right .ssd-stop-copy {
     justify-self: start;
     text-align: left;
   }
 
+  /* An absolutely placed grid item keeps its column lines as its containing
+     block, so the desktop column-2 placement would push the pin off-screen. */
   .ssd-stop-pin {
     position: absolute;
     top: 0;
     left: 22px;
+    grid-row: auto;
+    grid-column: auto;
     width: 42px;
+    margin-left: -21px;
     font-size: 15px;
-    transform: translateX(-50%);
   }
 
   .ssd-stop-media {
@@ -655,17 +668,36 @@
   }
 }
 
+@media (max-width: 720px) {
+  .ssd-hero-facts {
+    justify-content: center;
+  }
+}
+
+/* The print is too narrow to share with the ticket, so the ticket drops below it. */
 @media (max-width: 640px) {
   .ssd-more-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ssd-hero-art {
+    padding-bottom: 12px;
   }
 
   .ssd-hero-stamp {
     right: 0;
   }
 
+  .ssd-print figcaption {
+    padding-left: 4px;
+  }
+
   .ssd-ticket {
-    width: 66%;
+    position: relative;
+    bottom: auto;
+    left: auto;
+    width: min(260px, 80%);
+    margin: 14px 0 0 6px;
   }
 }
 
