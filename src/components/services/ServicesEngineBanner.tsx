@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 
 type ServicesEngineBannerProps = {
+  id?: string;
   index: string;
   kicker: string;
   title: string;
@@ -11,6 +12,7 @@ type ServicesEngineBannerProps = {
 };
 
 export function ServicesEngineBanner({
+  id,
   index,
   kicker,
   title,
@@ -23,6 +25,7 @@ export function ServicesEngineBanner({
 
   return (
     <section
+      id={id}
       className="svc-engine-banner"
       aria-labelledby={titleId}
       style={tone ? ({ "--banner-bg": tone } as CSSProperties) : undefined}

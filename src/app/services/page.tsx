@@ -4,7 +4,6 @@ import { ServicesContentMarketing } from "@/components/services/ServicesContentM
 import { ServicesCreative } from "@/components/services/ServicesCreative";
 import { ServicesDigitalMarketing } from "@/components/services/ServicesDigitalMarketing";
 import { ServicesEngineBanner } from "@/components/services/ServicesEngineBanner";
-import { ServicesEngines } from "@/components/services/ServicesEngines";
 import { ServicesHero } from "@/components/services/ServicesHero";
 import { ServicesIndustries } from "@/components/services/ServicesIndustries";
 import { ServicesRadio } from "@/components/services/ServicesRadio";
@@ -44,8 +43,8 @@ export default function ServicesPage() {
   return (
     <>
       <ServicesHero />
-      <ServicesEngines />
       <ServicesEngineBanner
+        id="brand"
         index="01"
         kicker="Engine One"
         title="Brand & Creative"
@@ -56,6 +55,7 @@ export default function ServicesPage() {
       <ServicesContentMarketing />
       <ServicesStarPower />
       <ServicesEngineBanner
+        id="digital"
         index="02"
         kicker="Engine Two"
         title="Digital & Media"
@@ -68,6 +68,7 @@ export default function ServicesPage() {
       <ServicesWebPrint />
       <ServicesRadio />
       <ServicesEngineBanner
+        id="film"
         index="04"
         kicker="Engine Three"
         title="3D Rendering Services"
