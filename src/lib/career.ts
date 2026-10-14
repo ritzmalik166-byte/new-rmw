@@ -30,7 +30,6 @@ export const RESUME_ACCEPT = RESUME_EXTENSIONS.join(",");
 export const RESUME_MAX_BYTES = 5 * 1024 * 1024;
 
 export const CAREER_UPLOAD_URL = "https://ritzmediaworld.com/api/upload-resume";
-export const CAREER_ENQUIRY_URL = "https://ritzmediaworld.com/api/system-settings/contact-enquiry";
 
 export function isCareerRole(value: string) {
   return CAREER_ROLES.includes(value as (typeof CAREER_ROLES)[number]);

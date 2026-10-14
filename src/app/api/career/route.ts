@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
-import { CAREER_ENQUIRY_URL, CAREER_UPLOAD_URL, isCareerRole, resumeError } from "@/lib/career";
+import { CAREER_UPLOAD_URL, isCareerRole, resumeError } from "@/lib/career";
 import { digitsOnly, isIndianMobile, isValidEmail, isValidName } from "@/lib/contact";
 import { isPhoneVerified } from "@/lib/contact-otp";
+import { ENQUIRY_URL, postRemote, remoteMessage } from "@/lib/enquiry";
 
 function text(form: FormData, key: string, max = 120) {
   const value = form.get(key);
@@ -50,7 +51,7 @@ export async function POST(request: Request) {
 
   const upload = new FormData();
   upload.append("resume", resume as File, (resume as File).name);
-  const uploaded = await send(CAREER_UPLOAD_URL, upload);
+  const uploaded = await postRemote(CAREER_UPLOAD_URL, upload, "career");
   const filePath = typeof uploaded.body?.filePath === "string" ? uploaded.body.filePath : "";
   if (!uploaded.ok || !filePath) {
     console.error("[career] upload-resume failed", uploaded.status, uploaded.body);
@@ -68,7 +69,7 @@ export async function POST(request: Request) {
   enquiry.append("message", message);
   enquiry.append("resumePath", filePath);
   enquiry.append("etype", "career");
-  const submitted = await send(CAREER_ENQUIRY_URL, enquiry);
+  const submitted = await postRemote(ENQUIRY_URL, enquiry, "career");
   if (!submitted.ok) {
     console.error("[career] contact-enquiry failed", submitted.status, submitted.body);
     return NextResponse.json(
@@ -78,27 +79,4 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.json({ ok: true });
-}
-
-type RemoteBody = Record<string, unknown> | null;
-
-async function send(url: string, body: FormData) {
-  try {
-    const response = await fetch(url, { method: "POST", body, cache: "no-store", signal: AbortSignal.timeout(30_000) });
-    const json = (await response.json().catch(() => null)) as RemoteBody;
-    const ok =
-      json?.success !== false &&
-      json?.ok !== false &&
-      (response.ok || json?.success === true || json?.ok === true || json?.status === "success");
-    return { ok, status: response.status, body: json };
-  } catch (error) {
-    console.error("[career] request failed", url, error);
-    return { ok: false, status: 0, body: null as RemoteBody };
-  }
-}
-
-function remoteMessage(body: RemoteBody) {
-  if (typeof body?.message === "string") return body.message;
-  if (typeof body?.error === "string") return body.error;
-  return "";
 }

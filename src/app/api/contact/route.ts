@@ -11,6 +11,7 @@ import {
   isValidPhone,
 } from "@/lib/contact";
 import { isPhoneVerified } from "@/lib/contact-otp";
+import { ENQUIRY_URL, postRemote, remoteMessage } from "@/lib/enquiry";
 
 type ContactBody = Record<string, unknown>;
 
@@ -64,16 +65,30 @@ export async function POST(request: Request) {
     );
   }
 
-  console.info("[contact] new enquiry", {
-    name: `${firstName} ${lastName}`,
-    email,
-    phone: `${dial} ${phone}`,
-    phoneVerified: needsOtp,
-    reason,
-    country,
-    heardFrom: heardFrom || "Not given",
-    message: message.slice(0, 500),
-  });
+  const submitted = await postRemote(
+    ENQUIRY_URL,
+    {
+      etype: "ContactUs",
+      name: `${firstName} ${lastName}`,
+      phone,
+      email,
+      message: [
+        `Reason for Inquiry: ${reason}`,
+        `Country: ${country}`,
+        `How did you hear about us: ${heardFrom || "N/A"}`,
+        "",
+        `Message: ${message || "N/A"}`,
+      ].join("\n"),
+    },
+    "contact",
+  );
+  if (!submitted.ok) {
+    console.error("[contact] contact-enquiry failed", submitted.status, submitted.body);
+    return NextResponse.json(
+      { ok: false, error: remoteMessage(submitted.body) || "We couldn't send your enquiry. Please try again." },
+      { status: 502 },
+    );
+  }
 
   return NextResponse.json({ ok: true });
 }
