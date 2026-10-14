@@ -85,7 +85,13 @@ export function SubServiceRoute({ sub }: { sub: SubService }) {
 
         <div className="ssd-road">
           <span className="ssd-road-line" aria-hidden />
-          <ServicesRouteTruck className="ssd-road-truck" start="top 65%" end="bottom 75%" />
+          <ServicesRouteTruck
+            className="ssd-road-truck"
+            fromRailStart
+            stopBefore=".ssd-road-end"
+            start="top 65%"
+            end="bottom 75%"
+          />
 
           <ol className="ssd-stops">
             {sub.sections.map((section, index) => {

@@ -12,6 +12,10 @@ type Props = {
   className?: string;
   /** Element in the same parent the truck starts hidden behind; without it the truck drives in from the top. */
   parkedBehind?: string;
+  /** Park the truck, visible, at the very top of the rail instead of driving in from above it. */
+  fromRailStart?: boolean;
+  /** Element in the same parent the truck pulls up just above; without it the truck runs to the bottom. */
+  stopBefore?: string;
   start?: string;
   end?: string;
 };
@@ -21,6 +25,8 @@ type Props = {
 export function ServicesRouteTruck({
   className,
   parkedBehind,
+  fromRailStart = false,
+  stopBefore,
   start = "top 70%",
   end = "bottom 60%",
 }: Props) {
@@ -39,25 +45,29 @@ export function ServicesRouteTruck({
       }
 
       const startY = () => {
+        if (fromRailStart) return 0;
         const anchor = parkedBehind ? track.querySelector<HTMLElement>(parkedBehind) : null;
         return anchor
           ? anchor.offsetTop + (anchor.offsetHeight - truck.offsetHeight) / 2
           : -truck.offsetHeight;
       };
-      const endY = () => track.offsetHeight - truck.offsetHeight;
+      const endY = () => {
+        const stop = stopBefore ? track.querySelector<HTMLElement>(stopBefore) : null;
+        return (stop ? stop.offsetTop : track.offsetHeight) - truck.offsetHeight;
+      };
 
       const tl = gsap.timeline({
         scrollTrigger: { trigger: track, start, end, scrub: true, invalidateOnRefresh: true },
       });
 
       tl.fromTo(truck, { y: startY }, { y: endY, ease: "none", duration: 1 }, 0);
-      if (parkedBehind) {
+      if (parkedBehind || fromRailStart) {
         gsap.set(truck, { autoAlpha: 1 });
       } else {
         tl.fromTo(truck, { autoAlpha: 0 }, { autoAlpha: 1, ease: "none", duration: 0.06 }, 0);
       }
     },
-    { dependencies: [ready, reduced, parkedBehind, start, end] },
+    { dependencies: [ready, reduced, parkedBehind, fromRailStart, stopBefore, start, end] },
   );
 
   return (
