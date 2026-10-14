@@ -1,7 +1,7 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
-import { useRef, type CSSProperties, type ReactNode } from "react";
+import { useRef } from "react";
 import { TransitionLink } from "@/components/motion/TransitionLink";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { RealTruck, setWheelTurn } from "@/components/ui/RealTruck";
@@ -9,6 +9,7 @@ import { gsap, registerGsap } from "@/lib/gsap";
 import { MENU_SERVICES } from "@/lib/services-data";
 import { site } from "@/lib/site";
 import {
+  ContactCard,
   DialNumber,
   MailGlyph,
   MapPeek,
@@ -16,7 +17,6 @@ import {
   PhoneGlyph,
   TypeEmail,
 } from "./FooterContact";
-import { FooterSocials } from "./FooterSocials";
 
 registerGsap();
 gsap.registerPlugin(useGSAP);
@@ -36,7 +36,9 @@ export function Footer() {
 
       const road = root.querySelector(".site-footer-road") as HTMLElement | null;
       const truck = root.querySelector(".site-footer-truck") as HTMLElement | null;
-      const milestone = root.querySelector(".site-footer-milestone") as HTMLElement | null;
+      const milestone = root.querySelector(
+        ".site-footer-milestone",
+      ) as HTMLElement | null;
       if (!road || !truck || !milestone) return;
 
       const destinationX = () =>
@@ -50,19 +52,20 @@ export function Footer() {
         return;
       }
 
-      /* Plays on its own once the road is in view, so the truck arrives without extra scrolling. */
+      gsap.set(truck, { x: 0 });
+
       gsap.fromTo(
         truck,
         { x: 0 },
         {
           x: destinationX,
-          duration: 3.4,
-          ease: "power2.inOut",
+          ease: "none",
           onUpdate: () => setWheelTurn(truck, Number(gsap.getProperty(truck, "x"))),
           scrollTrigger: {
-            trigger: road,
-            start: "top bottom",
-            toggleActions: "restart none none reset",
+            trigger: root,
+            start: "top 85%",
+            end: "bottom bottom",
+            scrub: 2.2,
             invalidateOnRefresh: true,
           },
         },
@@ -73,119 +76,140 @@ export function Footer() {
 
   return (
     <footer ref={rootRef} className="site-footer">
-      <div className="site-footer-ticket">
-        <div className="site-footer-pass">
+      <nav className="site-footer-ticker" aria-label="Services">
+        {[0, 1].map((copy) => (
+          <ul key={copy} className="site-footer-ticker-track" aria-hidden={copy === 1 || undefined}>
+            {MENU_SERVICES.map((service) => (
+              <li key={service.slug}>
+                <TransitionLink
+                  href={`/services/${service.slug}`}
+                  className="site-footer-ticker-item"
+                  tabIndex={copy === 1 ? -1 : undefined}
+                >
+                  {service.name}
+                </TransitionLink>
+                <span className="site-footer-ticker-flower" aria-hidden>
+                  ✿
+                </span>
+              </li>
+            ))}
+          </ul>
+        ))}
+      </nav>
+
+      <div className="site-footer-inner">
+        <div className="site-footer-top">
           <div className="site-footer-intro">
-            <div className="site-footer-heading">
-              <p className="site-footer-kicker">
-                <span className="site-footer-pill">Last stop</span>
-                <span className="site-footer-hindi">मंज़िल यहीं है</span>
-              </p>
-              <h2 className="site-footer-title">
-                {data.title[0]} <em>{data.title[1]}</em> {data.title[2]} {data.title[3]}
-              </h2>
-            </div>
+            <p className="site-footer-kicker">
+              <span className="site-footer-pill">Last stop</span>
+              <span className="site-footer-hindi">मंज़िल यहीं है</span>
+            </p>
+            <h2 className="site-footer-title">
+              <span>{data.title[0]}</span>
+              <span className="site-footer-title-row">
+                <span className="site-footer-title-accent">{data.title[1]}</span>
+                <span>{data.title[2]}</span>
+              </span>
+              <span>{data.title[3]}</span>
+            </h2>
             <p className="site-footer-blurb">{data.blurb}</p>
-            <TransitionLink
-              href="/contact"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="site-footer-cta"
-            >
-              Start a project
-              <span aria-hidden>→</span>
-            </TransitionLink>
+            <div className="site-footer-actions">
+              <TransitionLink href="/contact" target="_blank" rel="noopener noreferrer" className="site-footer-cta">
+                Start a project
+                <span aria-hidden>→</span>
+              </TransitionLink>
+              <a
+                href={data.googleSource}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="site-footer-google"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/footer/partners/google-g.png" alt="" width={20} height={20} />
+                <span>
+                  Add as a preferred
+                  <br />
+                  source on Google
+                </span>
+              </a>
+            </div>
           </div>
 
-          <nav className="site-footer-routes" aria-label="Footer">
-            <div className="site-footer-route">
-              <h3 className="site-footer-route-title">
-                <span>01</span>Company
-              </h3>
-              <ul className="site-footer-links">
-                {data.company.map((link) => (
-                  <li key={link.label}>
-                    <TransitionLink href={link.href} className="site-footer-link">
-                      {link.label}
-                    </TransitionLink>
-                  </li>
-                ))}
-                <li>
-                  <TransitionLink href="/contact" className="site-footer-link">
-                    Contact Us
-                  </TransitionLink>
-                </li>
-              </ul>
+          <nav className="site-footer-sign" aria-label="Footer">
+            <div className="site-footer-sign-board">
+              <p className="site-footer-sign-head">
+                <span className="site-footer-sign-shield">NH 08</span>
+               Quick routes · RMW
+              </p>
+              <div className="site-footer-sign-cols">
+                <div>
+                  <h3 className="site-footer-sign-title">Company</h3>
+                  <ul className="site-footer-sign-list">
+                    {data.company.map((link, index) => (
+                      <li key={link.label}>
+                        <TransitionLink href={link.href} className="site-footer-sign-link">
+                          <span className="site-footer-sign-arrow" aria-hidden>
+                            ↑
+                          </span>
+                          <span className="site-footer-sign-label">{link.label}</span>
+                          <span className="site-footer-sign-km">{index * 3} km</span>
+                        </TransitionLink>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="site-footer-sign-title">Connect</h3>
+                  <ul className="site-footer-sign-list">
+                    <li>
+                      <TransitionLink href="/contact" className="site-footer-sign-link">
+                        <span className="site-footer-sign-arrow" aria-hidden>
+                          ↑
+                        </span>
+                        <span className="site-footer-sign-label">Contact Us</span>
+                        <span className="site-footer-sign-km">0 km</span>
+                      </TransitionLink>
+                    </li>
+                    {data.socials.map((link) => (
+                      <li key={link.label}>
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="site-footer-sign-link"
+                        >
+                          <span className="site-footer-sign-arrow" aria-hidden>
+                            ↗
+                          </span>
+                          <span className="site-footer-sign-label">{link.label}</span>
+                          <span className="site-footer-sign-km">Online</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
-
-            <div className="site-footer-route is-services">
-              <h3 className="site-footer-route-title">
-                <span>02</span>Services
-              </h3>
-              <ul className="site-footer-links">
-                {MENU_SERVICES.map((service) => (
-                  <li key={service.slug}>
-                    <TransitionLink href={`/services/${service.slug}`} className="site-footer-link">
-                      {service.name}
-                    </TransitionLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="site-footer-route">
-              <h3 className="site-footer-route-title">
-                <span>03</span>Reach us
-              </h3>
-              <ul className="site-footer-reach">
-                <ReachItem tone="#f3c33c" icon={<PhoneGlyph />} hint="Horn karo">
-                  {data.phones.map((phone) => (
-                    <DialNumber key={phone} phone={phone} />
-                  ))}
-                </ReachItem>
-                <ReachItem tone="#e0457e" icon={<MailGlyph />} hint="Chitthi bhejo">
-                  <TypeEmail email={data.email} />
-                </ReachItem>
-                <ReachItem tone="#4ec3ea" icon={<MapPinGlyph />} hint="Chai pe aao">
-                  <MapPeek address={data.address} query={MAP_QUERY} />
-                </ReachItem>
-              </ul>
-            </div>
+            <span className="site-footer-sign-poles" aria-hidden />
           </nav>
         </div>
 
-        <aside className="site-footer-stub" aria-label="Social media">
-          <p className="site-footer-stub-kicker">
-            <span>Saath chalo</span>
-            @ritzmediaworld
-          </p>
-          <FooterSocials links={data.socials} />
-          <div className="site-footer-stub-foot">
-            <span className="site-footer-barcode" aria-hidden />
-            <span className="site-footer-horn">Horn OK Please</span>
-          </div>
-        </aside>
-      </div>
-
-      <div className="site-footer-road" aria-hidden>
-        <div className="site-footer-lane" />
-        <div className="site-footer-truck">
-          <RealTruck flip small />
+        <div className="site-footer-desk">
+          <ContactCard tone="#f3c33c" icon={<PhoneGlyph />} hindi="Horn karo" label="Call us">
+            {data.phones.map((phone) => (
+              <DialNumber key={phone} phone={phone} />
+            ))}
+          </ContactCard>
+          <ContactCard tone="#e0457e" icon={<MailGlyph />} hindi="Chitthi bhejo" label="Write to us">
+            <TypeEmail email={data.email} />
+          </ContactCard>
+          <ContactCard tone="#4ec3ea" icon={<MapPinGlyph />} hindi="Chai pe aao" label="Visit us">
+            <MapPeek address={data.address} query={MAP_QUERY} />
+          </ContactCard>
         </div>
-        <div className="site-footer-milestone">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/footer/milestone.png" alt="" width={256} height={256} />
-          <span className="site-footer-milestone-text">
-            Ritz
-            <br />
-            Media
-          </span>
-        </div>
-      </div>
 
-      <div className="site-footer-bottom">
         <div className="site-footer-trust">
-          <span className="site-footer-trust-label">Trusted by</span>
+          <p className="site-footer-band-label">Certified &amp; trusted by</p>
           <ul className="site-footer-partners">
             {data.partners.map((partner) => (
               <li key={partner.alt} title={partner.alt}>
@@ -201,51 +225,28 @@ export function Footer() {
             ))}
           </ul>
         </div>
+      </div>
 
-        <span className="site-footer-dock" aria-hidden>
-          <span className="site-footer-dock-sign">P</span>
-        </span>
-
-        <div className="site-footer-meta">
-          <a
-            href={data.googleSource}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="site-footer-google"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/footer/partners/google-g.png" alt="" width={16} height={16} />
-            Preferred source on Google
-          </a>
-          <p className="site-footer-copy">
-            © {new Date().getFullYear()} {site.fullName}. All rights reserved.
-          </p>
+      <div className="site-footer-road" aria-hidden>
+        <div className="site-footer-rule" />
+        <div className="site-footer-truck">
+          <RealTruck flip small />
+        </div>
+        <div className="site-footer-milestone">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/footer/milestone.png" alt="" width={256} height={256} />
+          <span className="site-footer-milestone-text">
+            Ritz
+            <br />
+            Media
+          </span>
         </div>
       </div>
-    </footer>
-  );
-}
 
-function ReachItem({
-  tone,
-  icon,
-  hint,
-  children,
-}: {
-  tone: string;
-  icon: ReactNode;
-  hint: string;
-  children: ReactNode;
-}) {
-  return (
-    <li className="site-footer-reach-item" style={{ "--fc-tone": tone } as CSSProperties}>
-      <span className="site-footer-reach-icon" aria-hidden>
-        {icon}
-      </span>
-      <span className="site-footer-reach-body">
-        <span className="site-footer-reach-hint">{hint}</span>
-        {children}
-      </span>
-    </li>
+      <div className="site-footer-bottom">
+        <p>© {new Date().getFullYear()} {site.fullName}. All rights reserved.</p>
+        <p className="site-footer-horn">Horn OK Please</p>
+      </div>
+    </footer>
   );
 }
