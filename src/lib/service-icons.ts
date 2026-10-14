@@ -5,10 +5,10 @@ export const SERVICE_ICONS: Partial<Record<string, string>> = {
   "print-advertising": "/services/icons/print-advertising.png",
   "radio-advertising": "/services/icons/radio-advertising.png",
   "content-marketing": "/services/icons/content-marketing.png",
-  "web-development": "/services/icons/web-development.png",
+  "web-designing-and-development": "/services/icons/web-development.png",
   "celebrity-endorsements": "/services/icons/celebrity-endorsements.png",
-  "influencer-marketing": "/services/icons/influencer-marketing.png",
-  "3d-rendering-services": "/services/icons/3d-rendering-services.png",
+  "influencer-marketing-agency-in-india": "/services/icons/influencer-marketing.png",
+  "3d-rendering": "/services/icons/3d-rendering-services.png",
 };
 
 /** The kinds of render offered under 3D Rendering Services. */

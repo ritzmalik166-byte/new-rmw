@@ -1200,7 +1200,7 @@ export const SUB_SERVICES: SubService[] = [
     ],
   },
   {
-    service: "web-development",
+    service: "web-designing-and-development",
     slug: "ui-ux-design",
     name: "UI/UX Design",
     metaTitle:
@@ -1609,7 +1609,7 @@ export const SUB_SERVICES: SubService[] = [
     ],
   },
   {
-    service: "influencer-marketing",
+    service: "influencer-marketing-agency-in-india",
     slug: "identification-influence-marketing-agency",
     name: "Influencer Identification",
     metaTitle:
@@ -1666,7 +1666,7 @@ export const SUB_SERVICES: SubService[] = [
     ],
   },
   {
-    service: "influencer-marketing",
+    service: "influencer-marketing-agency-in-india",
     slug: "cost-benefit-analysis",
     name: "Cost-Benefit Analysis",
     metaTitle:
@@ -1722,7 +1722,7 @@ export const SUB_SERVICES: SubService[] = [
     ],
   },
   {
-    service: "influencer-marketing",
+    service: "influencer-marketing-agency-in-india",
     slug: "terms-negotiations",
     name: "Terms Negotiation",
     metaTitle:
@@ -1774,7 +1774,7 @@ export const SUB_SERVICES: SubService[] = [
     ],
   },
   {
-    service: "influencer-marketing",
+    service: "influencer-marketing-agency-in-india",
     slug: "creative-collaboration",
     name: "Creative Collaboration",
     metaTitle:
@@ -1837,7 +1837,7 @@ export const SUB_SERVICES: SubService[] = [
     ],
   },
   {
-    service: "influencer-marketing",
+    service: "influencer-marketing-agency-in-india",
     slug: "campaign-integration",
     name: "Campaign Integration",
     metaTitle:
@@ -1907,7 +1907,7 @@ export const SUB_SERVICES: SubService[] = [
     ],
   },
   {
-    service: "influencer-marketing",
+    service: "influencer-marketing-agency-in-india",
     slug: "messaging-optimization",
     name: "Messaging Optimization",
     metaTitle: "Influencer Messaging Optimization | Sharpen Your Brand Voice",

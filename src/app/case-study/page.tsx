@@ -7,9 +7,9 @@ import { AGENCY_KEYWORDS, pageMetadata } from "@/lib/seo";
 export const revalidate = 300;
 
 export const metadata = pageMetadata({
-  title: "Case Studies | Ritz Media World",
+  title: "Case Studies in Advertising & Marketing | Ritz Media World",
   description:
-    "Branding, advertising and marketing case studies from Ritz Media World, plus Mid-Year 2026 market intelligence reports for Noida, Gurgaon, Ghaziabad and North India.",
+    "Explore Ritz Media World case studies - bold design, brand films, and campaigns that defy convention.",
   keywords: AGENCY_KEYWORDS,
   path: "/case-study",
 });

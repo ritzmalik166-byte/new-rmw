@@ -5,7 +5,9 @@ import { HomeFaq } from "@/components/homepage/HomeFaq";
 import { ServiceHero } from "@/components/services/ServiceHero";
 import { ServiceLowerSections } from "@/components/services/ServiceLowerSections";
 import { ServiceRouteSection } from "@/components/services/ServiceRouteSection";
+import { pageMetadata, SERVICE_KEYWORDS } from "@/lib/seo";
 import { getServiceLayout } from "@/lib/service-layout";
+import { SERVICE_SEO } from "@/lib/service-seo";
 import {
   getAllServices,
   getRelatedServices,
@@ -38,13 +40,21 @@ export async function generateMetadata({
     };
   }
 
-  return {
-    title: { absolute: `${service.name} | Ritz Media World` },
+  const seo = SERVICE_SEO[service.slug] ?? {
+    title: `${service.name} | Ritz Media World`,
     description: service.shortDescription,
-    keywords: [service.name, ...service.tags, "Ritz Media World"],
+  };
+
+  return {
+    ...pageMetadata({
+      title: seo.title,
+      description: seo.description,
+      keywords: SERVICE_KEYWORDS,
+      path: `/services/${service.slug}`,
+    }),
     openGraph: {
-      title: `${service.name} | Ritz Media World`,
-      description: service.shortDescription,
+      title: seo.title,
+      description: seo.description,
       images: [service.image],
     },
   };

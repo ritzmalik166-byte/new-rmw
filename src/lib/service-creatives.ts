@@ -195,7 +195,7 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
     poster: WORK.forestwalk,
     wall: [WORK.metaInsights, WORK.forestwalk, WORK.navrang, WORK.aiOverview],
   },
-  "web-development": {
+  "web-designing-and-development": {
     badge: ["Live", "site"],
     scene: { ...WORK.devices, medium: "Web" },
     poster: WORK.searchPhone,
@@ -207,13 +207,13 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
     poster: WORK.vvipTradition,
     wall: [WORK.stage, WORK.renoxThrive, WORK.vvipDistinctive, WORK.vvipTradition],
   },
-  "influencer-marketing": {
+  "influencer-marketing-agency-in-india": {
     badge: ["Now", "trending"],
     scene: scene("social", "Creators", "Voices people already follow."),
     poster: WORK.navrang,
     wall: [WORK.forestwalk, WORK.navrang, WORK.metaInsights, WORK.vvipTradition],
   },
-  "3d-rendering-services": {
+  "3d-rendering": {
     badge: ["Freshly", "rendered"],
     scene: render("Aerial", "/services/icons/3d/aerial.png"),
     poster: render("Interior", "/services/icons/3d/interior.png"),

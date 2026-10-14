@@ -19,7 +19,7 @@
     extras: string[];
   };
 
-  const RENDER_HREF = "/services/3d-rendering-services";
+  const RENDER_HREF = "/services/3d-rendering";
   const RENDER_TYPES = [
     { slug: "3d-exterior", name: "3D Exterior Rendering", icon: RENDER_ICONS.exterior },
     { slug: "3d-interior", name: "3D Interior Rendering", icon: RENDER_ICONS.interior },
@@ -40,7 +40,7 @@
         { slug: "creative-services", name: "Creative Services" },
         { slug: "content-marketing", name: "Content Marketing" },
         { slug: "celebrity-endorsements", name: "Celebrity Endorsements" },
-        { slug: "influencer-marketing", name: "Influencer Marketing" },
+        { slug: "influencer-marketing-agency-in-india", name: "Influencer Marketing" },
       ],
       extras: [],
     },
@@ -53,7 +53,7 @@
       tone: "#1457a8",
       cargo: [
         { slug: "digital-marketing", name: "Digital Marketing" },
-        { slug: "web-development", name: "Web Development" },
+        { slug: "web-designing-and-development", name: "Web Development" },
         { slug: "print-advertising", name: "Print Advertising" },
         { slug: "radio-advertising", name: "Radio Advertising" },
       ],

@@ -7,7 +7,7 @@ import { AGENCY_KEYWORDS, pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Ritz Media World Careers & Jobs in Noida | Join Our Team",
   description:
-    "Build your career with Ritz Media World. Explore openings in media, content, marketing, design, video production and sales at our Noida office, and apply online.",
+    "Explore career opportunities at Ritz Media World in Noida. Join our creative team in media, marketing, content, design, strategy and more. Apply now.",
   keywords: AGENCY_KEYWORDS,
   path: "/career",
 });

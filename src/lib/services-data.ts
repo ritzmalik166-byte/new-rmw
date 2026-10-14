@@ -589,7 +589,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
   },
   {
     id: "web",
-    slug: "web-development",
+    slug: "web-designing-and-development",
     name: "Web Development",
     uppercaseName: "WEB DEVELOPMENT",
     engine: "Engine Two · Digital & Media",
@@ -793,7 +793,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
   },
   {
     id: "influencer",
-    slug: "influencer-marketing",
+    slug: "influencer-marketing-agency-in-india",
     name: "Influencer Marketing",
     uppercaseName: "INFLUENCER MARKETING",
     engine: "Engine One · Brand & Creative",
@@ -895,7 +895,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
   },
   {
     id: "render",
-    slug: "3d-rendering-services",
+    slug: "3d-rendering",
     name: "3D Rendering Services",
     uppercaseName: "3D RENDERING SERVICES",
     engine: "Engine Three · 3D Rendering Services",
