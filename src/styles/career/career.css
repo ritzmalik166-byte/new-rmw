@@ -69,6 +69,43 @@
   color: var(--ct-navy);
 }
 
+/* ---------- Application steps ---------- */
+.cr-steps {
+  margin-top: auto;
+}
+
+.cr-steps .ct-route {
+  margin: 0;
+}
+
+.cr-steps-title {
+  margin: 0 0 14px;
+  color: var(--ct-navy);
+  font-family: var(--ct-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 961px) and (max-height: 740px), (min-width: 961px) and (max-width: 1239px) and (max-height: 800px) {
+  .cr-steps {
+    display: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .cr-steps {
+    order: 3;
+  }
+}
+
+@media (max-width: 720px) {
+  .cr-steps-title {
+    text-align: center;
+  }
+}
+
 /* India-only: the OTP gateway only verifies +91 mobiles. */
 .cr-dial {
   display: inline-grid;

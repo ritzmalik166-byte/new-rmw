@@ -13,9 +13,13 @@ export const metadata: Metadata = pageMetadata({
 });
 
 const ROUTE = [
-  { km: "KM 01", title: "Fill the job card", copy: "Your details, the role and your resume." },
+  { km: "KM 01", title: "Fill the job card", copy: "Share your details, the role you want, and your resume." },
   { km: "KM 02", title: "Verify OTP", copy: "A quick code confirms it's really you." },
-  { km: "KM 03", title: "HR calls you", copy: "If your profile fits the role." },
+  {
+    km: "KM 03",
+    title: "Hear from HR",
+    copy: "Our HR team reviews every application and contacts shortlisted candidates.",
+  },
 ] as const;
 
 export default function CareerPage() {
@@ -55,15 +59,20 @@ export default function CareerPage() {
             </ul>
           </div>
 
-          <ol className="ct-route" aria-label="How applying works">
-            {ROUTE.map((stop) => (
-              <li key={stop.km}>
-                <span className="ct-route-km">{stop.km}</span>
-                <span className="ct-route-title">{stop.title}</span>
-                <span className="ct-route-copy">{stop.copy}</span>
-              </li>
-            ))}
-          </ol>
+          <div className="cr-steps">
+            <h2 id="cr-steps-title" className="cr-steps-title">
+              Application steps
+            </h2>
+            <ol className="ct-route" aria-labelledby="cr-steps-title">
+              {ROUTE.map((stop) => (
+                <li key={stop.km}>
+                  <span className="ct-route-km">{stop.km}</span>
+                  <span className="ct-route-title">{stop.title}</span>
+                  <span className="ct-route-copy">{stop.copy}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
 
         <div className="ct-form-wrap">

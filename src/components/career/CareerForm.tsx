@@ -531,7 +531,7 @@ export function CareerForm() {
               {submitError}
             </p>
           ) : (
-            <p className="ct-help">Your details stay with our HR team. No spam, ever.</p>
+            <p className="ct-help">Your details are shared only with our HR team and used only for hiring.</p>
           )}
         </footer>
       </div>
