@@ -6,6 +6,7 @@ import { useRef, useState, type KeyboardEvent } from "react";
 import { HmArrow, HmPlate, HmTitle, useHomeReveal } from "@/components/homepage/shared";
 import { getServiceLayout } from "@/lib/service-layout";
 import type { ServiceDetail } from "@/lib/services-data";
+import type { SubService } from "@/lib/sub-services-data";
 
 const ROUTE = [
   { id: "the-problem", label: "The problem" },
@@ -18,15 +19,31 @@ const ROUTE = [
 ] as const;
 
 const pad = (value: number) => String(value).padStart(2, "0");
+const subHref = (sub: SubService) => `/services/${sub.service}/${sub.slug}`;
 
-export function ServiceRouteSection({ service }: { service: ServiceDetail }) {
+/* The board lists the dedicated sub-service pages once a service has enough
+   of them to fill it; otherwise it falls back to the capability summary. */
+const MIN_SUB_SERVICES_FOR_BOARD = 3;
+
+type Props = { service: ServiceDetail; subServices?: SubService[] };
+
+export function ServiceRouteSection({ service, subServices = [] }: Props) {
   const rootRef = useRef<HTMLElement>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [active, setActive] = useState(0);
   useHomeReveal(rootRef);
 
-  const layout = getServiceLayout(service);
-  const capabilities = service.capabilities;
+  const boardFromSubs = subServices.length >= MIN_SUB_SERVICES_FOR_BOARD;
+  const capabilities = boardFromSubs
+    ? subServices.map((sub) => ({
+        title: sub.name,
+        copy: sub.intro,
+        details: sub.sections.map((section) => section.title),
+        href: subHref(sub),
+      }))
+    : service.capabilities.map((cap) => ({ ...cap, href: undefined as string | undefined }));
+  const extraSubs = boardFromSubs ? [] : subServices;
+  const layout = getServiceLayout(service, capabilities.length);
   const capability = capabilities[active];
 
   const select = (index: number, focus = false) => {
@@ -152,6 +169,12 @@ export function ServiceRouteSection({ service }: { service: ServiceDetail }) {
                     </ul>
                   </>
                 ) : null}
+                {capability.href ? (
+                  <a href={capability.href} target="_blank" rel="noopener noreferrer" className="sd-plan-panel-link">
+                    Explore {capability.title}
+                    <HmArrow />
+                  </a>
+                ) : null}
                 <div className="sd-plan-panel-nav">
                   <button type="button" aria-label="Previous service" onClick={() => select(active - 1)}>
                     ←
@@ -165,6 +188,12 @@ export function ServiceRouteSection({ service }: { service: ServiceDetail }) {
 
             <footer data-hm-fade className="sd-plan-foot">
               <span>One connected programme. A clear scope for every service.</span>
+              {extraSubs.map((sub) => (
+                <a key={sub.slug} href={subHref(sub)} target="_blank" rel="noopener noreferrer" className="hm-link">
+                  Deep dive: {sub.name}
+                  <HmArrow />
+                </a>
+              ))}
               <a href="/contact" target="_blank" rel="noopener noreferrer" className="hm-link">
                 {layout.planCta}
                 <HmArrow />

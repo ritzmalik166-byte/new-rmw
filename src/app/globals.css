@@ -74,5 +74,6 @@
 @import "../styles/services/responsive.css";
 @import "../styles/layout/services-megamenu.css";
 @import "../styles/services/subservice.css";
+@import "../styles/services/sub-detail.css";
 
 @import "../styles/responsive/mobile-center.css";

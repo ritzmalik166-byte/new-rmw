@@ -40,8 +40,10 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function ServicesPage() {
+  /* A single root element: ServicesWebPrint pins its previous sibling into a
+     GSAP pin-spacer, so React must not remove the sections one by one. */
   return (
-    <>
+    <div className="svc-page">
       <ServicesHero />
       <ServicesEngineBanner
         id="brand"
@@ -80,6 +82,6 @@ export default function ServicesPage() {
       <ServicesRendering />
       <ServicesIndustries />
       <StartProject />
-    </>
+    </div>
   );
 }

@@ -51,9 +51,8 @@ function defaultFaqs(service: ServiceDetail): ServiceFaq[] {
   ];
 }
 
-export function getServiceLayout(service: ServiceDetail) {
+export function getServiceLayout(service: ServiceDetail, parts = service.capabilities.length) {
   const layout = service.layout ?? {};
-  const parts = service.capabilities.length;
 
   return {
     problemSummary: layout.problemSummary ?? service.problemCopy ?? service.fullOverview,

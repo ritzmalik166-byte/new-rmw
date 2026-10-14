@@ -11,6 +11,7 @@ import {
   getRelatedServices,
   getServiceBySlug,
 } from "@/lib/services-data";
+import { getSubServices } from "@/lib/sub-services-data";
 
 export const revalidate = 3600;
 
@@ -66,7 +67,7 @@ export default async function SubServicePage({
   return (
     <article className="sd-page">
       <ServiceHero service={service} />
-      <ServiceRouteSection service={service} />
+      <ServiceRouteSection service={service} subServices={getSubServices(service.slug)} />
       <ServiceLowerSections service={service} relatedServices={relatedServices} />
       <HomeFaq
         id="service-faq"
