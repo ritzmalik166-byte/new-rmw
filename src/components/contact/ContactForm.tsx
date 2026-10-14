@@ -522,7 +522,7 @@ export function ContactForm() {
               {submitError}
             </p>
           ) : (
-            <p className="ct-help">We reply within one working day. No spam, ever.</p>
+            <p className="ct-help">We reply within one working day.</p>
           )}
         </footer>
       </div>

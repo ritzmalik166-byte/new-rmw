@@ -1,4 +1,8 @@
 /* ---------- Career: reuses the contact (.ct) layout and slip ---------- */
+.cr .ct-title span {
+  display: inline;
+}
+
 .cr-board {
   padding-bottom: clamp(18px, 2.8vh, 28px);
 }

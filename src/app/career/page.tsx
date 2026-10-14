@@ -35,7 +35,7 @@ export default function CareerPage() {
               </span>
             </p>
             <h1 id="cr-title" className="ct-title">
-              Your next big idea <span>starts here.</span>
+              Careers at Ritz Media World, <span>Noida</span>
             </h1>
             <p className="ct-lede">
               Passionate about media, storytelling or strategy? We&rsquo;d love to hear from you.
