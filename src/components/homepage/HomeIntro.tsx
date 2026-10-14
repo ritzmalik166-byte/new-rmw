@@ -79,7 +79,7 @@ export function HomeIntro() {
       <div data-hm-fade className="hm-cargo">
         <p className="hm-wrap hm-cargo-label">
           <span>Cargo we&rsquo;ve carried</span>
-          <span className="hm-cargo-count">{partners.length}+ brands on board</span>
+          <span className="hm-cargo-count">100+ brands on board</span>
         </p>
         <div className="hm-cargo-lane">
           <div className="hm-cargo-track" aria-hidden>
