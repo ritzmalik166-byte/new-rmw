@@ -484,7 +484,7 @@ export const site = {
       { label: "Facebook", href: "https://www.facebook.com/ritzmediaworld/" },
       { label: "Instagram", href: "https://www.instagram.com/ritzmediaworld/" },
       { label: "LinkedIn", href: "https://www.linkedin.com/company/ritzmediaworld/" },
-      { label: "Twitter", href: "https://twitter.com/ritzmediaworld" },
+      { label: "X", href: "https://x.com/ritzmediaworld" },
       { label: "YouTube", href: "https://www.youtube.com/@ritzmediaworld" },
     ],
     partners: [
