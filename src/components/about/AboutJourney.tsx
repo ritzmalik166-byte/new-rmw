@@ -28,15 +28,15 @@ const STOPS = [
   {
     year: "2016",
     title: "Digital Expansion",
-    copy: "Scaled into 360° digital marketing, unifying performance, content, and automation for premium brands.",
+    copy: "Grew into a 360° agency, bringing performance marketing, content, and automation together under one roof.",
     place: "below",
     at: "50%",
     tone: "navy",
   },
   {
     year: "2020",
-    title: "Premium Positioning",
-    copy: "Strengthened premium brand partnerships and elevated positioning across high-impact campaigns.",
+    title: "Premium Partnerships",
+    copy: "Took on larger, high-impact campaigns and deepened long-term partnerships with premium brands.",
     place: "above",
     at: "68%",
     tone: "red",
@@ -44,7 +44,7 @@ const STOPS = [
   {
     year: "2026",
     title: "AI-Powered 3D Rendering at 5X",
-    copy: "Delivering next-gen AI-powered 3D rendering at 5X speed - transforming vision into photoreal reality faster than ever.",
+    copy: "Launched AI-powered 3D rendering that produces photorealistic visuals five times faster than before.",
     place: "below",
     at: "86%",
     tone: "now",
@@ -159,8 +159,8 @@ export function AboutJourney() {
           <h2 className="about-journey-title">Our Journey</h2>
         </div>
         <p className="about-journey-intro">
-          Every kilometre added a new engine to the truck.<br />
-          Here are the stops that shaped the agency we are today.
+          Each stop along the way added something new to how we work.<br />
+          These are the milestones that turned a young agency into the full-service partner it is today.
         </p>
       </div>
 

@@ -70,6 +70,7 @@
 .about-title-wrap {
   position: relative;
   width: min(1084px, 100%);
+  container-type: inline-size;
 }
 
 .about-title,
@@ -78,8 +79,8 @@
   font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
   font-weight: 700;
   font-style: normal;
-  font-size: clamp(32px, 4.1vw, 59px);
-  line-height: clamp(40px, 4.86vw, 70px);
+  font-size: clamp(26px, 4.2cqi, 50px);
+  line-height: 1.18;
   letter-spacing: 0;
   text-transform: uppercase;
   vertical-align: middle;
@@ -256,11 +257,6 @@
     padding-bottom: 56px;
   }
 
-  .about-title,
-  .about-sheen {
-    font-size: clamp(40px, 5vw, 52px);
-    line-height: 1.16;
-  }
 }
 
 @media (max-width: 720px) {

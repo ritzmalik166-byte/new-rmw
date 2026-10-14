@@ -88,7 +88,7 @@ export function AboutProofs() {
           </span>
         </p>
         <h2 id="about-proofs-title" className="about-proofs-title">
-          Real Proofs
+          Numbers Don&apos;t Lie
         </h2>
         <p className="about-proofs-lede">
           Unedited dashboards from the accounts we run. Desktop or mobile, the numbers read

@@ -8,39 +8,39 @@ import { cn } from "@/lib/cn";
 
 const SLOGANS = [
   {
-    label: "Use data at night",
+    label: "Drive on data",
     painted: "डेटा से चलो",
-    copy: "Search, social and sales data light the road before we spend a single rupee of your budget.",
+    copy: "Search, social, and sales insights guide every plan, so your budget is spent on evidence rather than guesswork.",
   },
   {
-    label: "Creative ओके please",
-    painted: "क्रिएटिव ओके",
-    copy: "An idea gets the green signal only when it is clear, distinctive and built to be remembered.",
+    label: "Ideas with power",
+    painted: "आइडिया दमदार",
+    copy: "Every brief is answered with an idea strong enough to stand out and simple enough to remember.",
   },
   {
-    label: "Keep distance from empty promises",
-    painted: "खोखले वादों से दूरी",
-    copy: "We commit to what we can measure, report it honestly and let the results do the talking.",
+    label: "One team, one journey",
+    painted: "एक टीम, एक सफ़र",
+    copy: "Strategy, creative, media, and production work side by side, so nothing gets lost in hand-offs.",
   },
   {
-    label: "Dekho magar pyaar se",
-    painted: "देखो मगर प्यार से",
-    copy: "Design that earns attention without shouting, crafted for the people who will actually see it.",
+    label: "Always on time",
+    painted: "समय की पाबंदी",
+    copy: "Launch dates are commitments, so every campaign is planned, produced and delivered on schedule.",
   },
   {
-    label: "Blow horn, not budget",
-    painted: "हॉर्न बजाओ, बजट नहीं",
-    copy: "Big noise, sensible spends. Media is planned so every rupee works as hard as the message.",
+    label: "No empty promises",
+    painted: "खाली वादे नहीं",
+    copy: "We commit only to what we can deliver, and we report results honestly, whether they are good or not.",
   },
   {
-    label: "Horn OK please",
-    painted: "हॉर्न ओके प्लीज़",
-    copy: "Signal early, communicate often. You always know where your campaign is on the road.",
+    label: "Results will speak",
+    painted: "नतीजे बोलेंगे",
+    copy: "Success is measured in leads, sales, and brand growth, not in vanity metrics.",
   },
   {
-    label: "शुभ यात्रा",
-    painted: "शुभ यात्रा",
-    copy: "On the road from Noida since 2008, with every brand we ride with.",
+    label: "The journey continues",
+    painted: "सफ़र जारी है",
+    copy: "Eighteen years in, we keep evolving, from print and radio to digital marketing and AI.",
   },
 ] as const;
 

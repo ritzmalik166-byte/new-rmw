@@ -392,15 +392,13 @@ export function AboutMileage() {
         <div className="about-mile-copy">
           <p className="about-mile-kicker">Mile marker 18</p>
           <h2 id="about-mile-title" className="about-mile-title">
-            18+ Years of Experience<span className="about-mile-dot">.</span>
+            What 18 Years on the Road Have Taught Us<span className="about-mile-dot">.</span>
           </h2>
           <p className="about-mile-lede">
-            Since 2008, Ritz Media World has launched projects, built brands, and planned media through every major
-            shift in Indian marketing, from print and radio to search, social media, performance marketing, and now AI.
-          </p>
-          <p className="about-mile-lede">
-            This experience shows up in our work as faster launches, fewer detours, and strategies grounded in what has
-            actually moved customers.
+            Over the years, we have worked through launches, market slowdowns, new platforms, and changing customer
+            habits. That range of experience helps us anticipate challenges early, plan budgets realistically, and
+            recommend what is right for a brand rather than what is simply new. Clients benefit from a team that has
+            been tested by the market and continues to learn from it.
           </p>
 
           <ul className="about-mile-stats">
