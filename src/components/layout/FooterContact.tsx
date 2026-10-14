@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { cn } from "@/lib/cn";
 
@@ -206,33 +206,6 @@ export function MapPeek({ address, query }: { address: string; query: string }) 
         </span>
       </span>
     </span>
-  );
-}
-
-export function ContactCard({
-  tone,
-  icon,
-  hindi,
-  label,
-  children,
-}: {
-  tone: string;
-  icon: ReactNode;
-  hindi: string;
-  label: string;
-  children: ReactNode;
-}) {
-  return (
-    <div className="fc-card" style={{ "--fc-tone": tone } as React.CSSProperties}>
-      <span className="fc-card-icon" aria-hidden>
-        {icon}
-      </span>
-      <p className="fc-card-kicker">
-        <span>{hindi}</span>
-        {label}
-      </p>
-      <div className="fc-card-values">{children}</div>
-    </div>
   );
 }
 

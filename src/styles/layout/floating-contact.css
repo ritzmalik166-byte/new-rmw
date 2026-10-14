@@ -25,7 +25,9 @@
   transition:
     transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
     opacity 0.3s ease,
-    visibility 0s;
+    visibility 0s,
+    right 0.75s cubic-bezier(0.65, 0, 0.35, 1) 0.25s,
+    bottom 0.75s cubic-bezier(0.65, 0, 0.35, 1) 0.25s;
 }
 
 .fab-btn {
@@ -41,7 +43,8 @@
   -webkit-tap-highlight-color: transparent;
   transition:
     transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    translate 0.45s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .fab-btn.is-wa {
@@ -146,6 +149,115 @@
   outline-offset: 4px;
 }
 
+.fab-text {
+  display: none;
+}
+
+/* Wide screens: once the footer's bottom bar is in view the rail glides to the
+   centre and the buttons split side by side into the bar's parking bay, then
+   (with `.is-expanded`) widen into labelled pills. Leaving runs it in reverse. */
+@media (min-width: 1024px) {
+  /* Fixed width so widening buttons overflow rightwards instead of moving the rail. */
+  .fab {
+    width: 54px;
+  }
+
+  /* Icon pinned left (still centred at 54px) so it never jumps while the pill grows. */
+  .fab-btn {
+    place-items: center start;
+    padding-left: 13px;
+    transition:
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      translate 0.45s cubic-bezier(0.65, 0, 0.35, 1),
+      width 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .fab-btn.is-call {
+    padding-left: 14px;
+  }
+
+  .fab-text {
+    position: absolute;
+    top: 50%;
+    left: 46px;
+    display: block;
+    color: #fff;
+    font-family: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-8px, -50%);
+    transition:
+      opacity 0.15s ease,
+      transform 0.2s ease;
+  }
+
+  .fab.is-visible.is-docked {
+    right: calc(50% - 27px);
+    bottom: 12px;
+    transition:
+      transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 0.3s ease,
+      visibility 0s,
+      right 0.75s cubic-bezier(0.65, 0, 0.35, 1),
+      bottom 0.75s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .fab.is-docked .fab-btn {
+    transition:
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      translate 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+      width 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .fab.is-docked .fab-btn.is-wa {
+    translate: -34px 68px;
+  }
+
+  .fab.is-docked .fab-btn.is-call {
+    translate: 34px 0;
+  }
+
+  /* Expanded pills: 144px + 12px gap + 124px, centred on the rail's centre line. */
+  .fab.is-expanded .fab-btn {
+    transition:
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      translate 0.55s cubic-bezier(0.34, 1.3, 0.64, 1),
+      width 0.55s cubic-bezier(0.34, 1.3, 0.64, 1);
+  }
+
+  .fab.is-expanded .fab-btn.is-wa {
+    width: 144px;
+    translate: -113px 68px;
+  }
+
+  .fab.is-expanded .fab-btn.is-call {
+    width: 124px;
+    translate: 43px 0;
+  }
+
+  .fab.is-expanded .fab-text {
+    opacity: 1;
+    transform: translate(0, -50%);
+    transition:
+      opacity 0.3s ease 0.25s,
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.25s;
+  }
+
+  /* The pills already say what they are, so the hover tooltips stay hidden. */
+  .fab.is-docked .fab-label {
+    display: none;
+  }
+}
+
 /* Phones: a two-button bar pinned to the bottom edge. */
 @media (max-width: 767px) {
   body {
@@ -209,8 +321,13 @@
 @media (prefers-reduced-motion: reduce) {
   .fab,
   .fab.is-visible,
+  .fab.is-visible.is-docked,
   .fab-btn,
-  .fab-label {
+  .fab.is-docked .fab-btn,
+  .fab.is-expanded .fab-btn,
+  .fab-label,
+  .fab-text,
+  .fab.is-expanded .fab-text {
     transition: none;
   }
 

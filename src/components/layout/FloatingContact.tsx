@@ -33,12 +33,72 @@ function usePastHero() {
   return past;
 }
 
+/* Parking runs in two steps so the CSS can choreograph them: glide + split first,
+   then widen into labelled pills. Leaving collapses the pills before gliding back. */
+const EXPAND_AFTER_MS = 800;
+const COLLAPSE_MS = 350;
+
+/* On wide screens the buttons park in the footer's bottom bar once it is in view. */
+function useFooterDock() {
+  const pathname = usePathname();
+  const [parked, setParked] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    const wide = window.matchMedia("(min-width: 1024px)");
+    let docked = false;
+    let timer = 0;
+
+    const check = () => {
+      const bar = document.querySelector(".site-footer-bottom");
+      const next =
+        !!bar && wide.matches && bar.getBoundingClientRect().bottom - window.innerHeight < 24;
+      if (next === docked) return;
+      docked = next;
+      window.clearTimeout(timer);
+      if (next) {
+        setParked(true);
+        timer = window.setTimeout(() => setExpanded(true), EXPAND_AFTER_MS);
+      } else {
+        setExpanded(false);
+        timer = window.setTimeout(() => setParked(false), COLLAPSE_MS);
+      }
+    };
+
+    check();
+    window.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("resize", check);
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+      setParked(false);
+      setExpanded(false);
+    };
+  }, [pathname]);
+
+  useEffect(() => {
+    const footer = document.querySelector(".site-footer");
+    footer?.classList.toggle("is-fab-docked", parked);
+    footer?.classList.toggle("is-fab-expanded", expanded);
+    return () => footer?.classList.remove("is-fab-docked", "is-fab-expanded");
+  }, [parked, expanded, pathname]);
+
+  return { parked, expanded };
+}
+
 export function FloatingContact() {
   const visible = usePastHero();
+  const { parked, expanded } = useFooterDock();
 
   return (
     <div
-      className={cn("fab theme-keep", visible && "is-visible")}
+      className={cn(
+        "fab theme-keep",
+        visible && "is-visible",
+        parked && "is-docked",
+        expanded && "is-expanded",
+      )}
       role="complementary"
       aria-label="Quick contact"
       inert={!visible}
@@ -56,12 +116,18 @@ export function FloatingContact() {
           </svg>
         </span>
         <span className="fab-label">WhatsApp</span>
+        <span className="fab-text" aria-hidden>
+          WhatsApp
+        </span>
       </a>
       <a href={`tel:+${DIGITS}`} className="fab-btn is-call" aria-label={`Call us on ${PHONE}`}>
         <span className="fab-icon">
           <PhoneGlyph />
         </span>
         <span className="fab-label">Call us</span>
+        <span className="fab-text" aria-hidden>
+          Call us
+        </span>
       </a>
     </div>
   );
