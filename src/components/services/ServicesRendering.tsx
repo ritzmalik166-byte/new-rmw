@@ -19,36 +19,26 @@ const RenderStage = dynamic(
   },
 );
 
-const RENDERS: { id: RenderKind; title: string; spec: string; copy: string }[] = [
+const RENDERS: { id: RenderKind; title: string }[] = [
   {
     id: "exterior",
     title: "3D Exterior Rendering",
-    spec: "Golden hour · 4K",
-    copy: "Towers, facades and entrances lit at golden hour, ready for hoardings and launch ads.",
   },
   {
     id: "interior",
     title: "3D Interior Rendering",
-    spec: "Sample flat · Warm light",
-    copy: "Sample flats styled down to the cushions, so buyers can picture living there.",
   },
   {
     id: "aerial",
     title: "Aerial & Township 3D Visualization",
-    spec: "Master plan · Bird's eye",
-    copy: "Master plans turned into a bird's-eye view of towers, roads, greens and amenities.",
   },
   {
     id: "plan",
     title: "3D Floor Plan Rendering",
-    spec: "2D to 3D · Furnished",
-    copy: "Flat drawings extruded into furnished 3D layouts buyers understand at a glance.",
   },
   {
     id: "amenity",
     title: "Amenity & Landscape Rendering",
-    spec: "Pool deck · Clubhouse",
-    copy: "Pools, clubhouses and gardens rendered for brochures and sales galleries.",
   },
 ];
 
@@ -185,7 +175,6 @@ export function ServicesRendering() {
           <p className="svc-render-now">
             <span>Now showing:</span> {render.title}
           </p>
-          <p className="sr-only">{render.copy}</p>
         </div>
 
         <div className="svc-render-side">
@@ -212,12 +201,10 @@ export function ServicesRendering() {
                 </span>
                 <span className="svc-render-tab-text">
                   <span className="svc-render-tab-title">{item.title}</span>
-                  <span className="svc-render-tab-spec">{item.spec}</span>
                 </span>
               </button>
             ))}
           </div>
-          <p className="svc-render-copy">{render.copy}</p>
         </div>
       </div>
     </section>
