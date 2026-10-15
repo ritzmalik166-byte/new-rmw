@@ -12,8 +12,13 @@ export interface PortfolioWorkGroup {
   items: PortfolioWorkItem[];
 }
 
+/** A single string is split in half automatically; a pair sets the two lines explicitly. */
+export type PortfolioTitle = string | [string, string];
+
 export interface PortfolioBlock {
-  title: string;
+  title: PortfolioTitle;
+  /** Eyebrow label; defaults to one based on `kind`. */
+  kicker?: string;
   kind: "cards" | "steps" | "chips";
   lede?: string;
   items: { title: string; copy?: string }[];
@@ -29,7 +34,7 @@ export interface PortfolioDetail {
   tagline: string;
   workTitle: string;
   groups: PortfolioWorkGroup[];
-  intro: { title: string; copy: string[] };
+  intro: { title: PortfolioTitle; copy: string[] };
   blocks: PortfolioBlock[];
   faqTitle: [string, string];
   faqs: { q: string; a: string }[];
@@ -540,7 +545,8 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
         "Explore Ritz Media World's influencer marketing videos, blending creative storytelling, real voices and engaging content to make brands stand out.",
     },
     h1: ["Influencer Marketing", "Videos"],
-    tagline: "Authentic content that naturally integrates your brand into the creator's voice.",
+    tagline:
+      "Creator videos made with Ritz Media World, where your brand's message is told in the creator's own style and reaches the followers who listen to them.",
     workTitle: "Our Influencer Marketing Work",
     groups: [
       {
@@ -554,51 +560,80 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
       },
     ],
     intro: {
-      title: "Influencer Marketing That Feels Authentic",
+      title: ["Influencer Campaigns", "That Went Live on Real Feeds"],
       copy: [
-        "People trust people. We partner your brand with creators whose audiences already listen to them, and make content that feels like their own, not like an ad.",
-        "From concept and creator selection to scripting, shooting and amplification, we run influencer campaigns that build reach, trust and real results.",
+        "This is the influencer marketing portfolio of Ritz Media World: a collection of short-form creator videos made for brands across India. Each video was created for a real campaign and published on social media, where it reached the audience it was made for.",
+        "Scroll through launch campaigns, local promotions and real estate stories to see how we pair each brand with the right creator, fit the script to how that creator speaks, and turn a brand message into a video people actually watch.",
       ],
     },
     blocks: [
       {
-        title: "Creative Videos That Connect With Audiences",
+        title: ["Influencer Videos", "Built to Be Watched"],
+        kicker: "What goes into every video",
         kind: "cards",
         items: [
-          { title: "Creator-led storytelling", copy: "Your message told in the creator's own style and voice." },
-          { title: "Right creators, right audience", copy: "Creators picked for audience fit, not just follower count." },
-          { title: "Made for every platform", copy: "Reels, Shorts and stories designed for how people watch." },
-          { title: "Amplified for reach", copy: "Paid boosting and repurposing to get more from every video." },
+          {
+            title: "Creator Matching",
+            copy: "Influencers chosen by niche, region, and language, so each video reaches viewers who matter to the brand.",
+          },
+          {
+            title: "Script and Concept",
+            copy: "Every video is built around one clear brand message and an opening that stops the scroll.",
+          },
+          {
+            title: "Shot for Reels and Shorts",
+            copy: "Vertical videos planned for Instagram Reels, YouTube Shorts, and Stories from the very first frame.",
+          },
+          {
+            title: "Paid Promotion",
+            copy: "The best-performing creator videos are boosted with paid ads and reused across the brand's own channels.",
+          },
         ],
       },
       {
-        title: "Why Choose Influencer Marketing?",
+        title: ["Why Brands Choose", "Influencer Marketing?"],
         kind: "cards",
         items: [
-          { title: "Trust", copy: "Recommendations from creators feel personal and believable." },
-          { title: "Reach", copy: "Instant access to engaged, niche audiences across India." },
-          { title: "Engagement", copy: "Creator content earns more likes, comments and shares than ads." },
-          { title: "Results", copy: "Trackable links and codes connect content to enquiries and sales." },
+          {
+            title: "Borrowed trust",
+            copy: "Viewers already trust the creator, so a recommendation from them feels like advice, not advertising.",
+          },
+          {
+            title: "Niche and regional reach",
+            copy: "Regional and niche creators reach specific cities, languages, and interests that broad ads often miss.",
+          },
+          {
+            title: "Content people choose to watch",
+            copy: "Creator videos appear in feeds people choose to follow, so they are more likely to be watched than skipped.",
+          },
+          {
+            title: "Measurable results",
+            copy: "Tracked links, promo codes and lead forms show which creators brought in enquiries and sales.",
+          },
         ],
       },
     ],
     faqTitle: ["Questions about", "influencer marketing."],
     faqs: [
       {
-        q: "How do you choose influencers for a brand?",
-        a: "We look at audience demographics, engagement quality, content style and brand fit, then shortlist creators who genuinely match your brand.",
+        q: "Is Ritz Media World an influencer marketing agency?",
+        a: "Yes. Ritz Media World is a full-service advertising agency headquartered in Noida, Delhi NCR, offering influencer marketing services to brands across India since 2008. Our influencer work is planned alongside creative, social media and digital marketing, so every campaign stays connected.",
       },
       {
-        q: "Which platforms do you run influencer campaigns on?",
-        a: "Mainly Instagram and YouTube, along with other platforms where your audience spends time.",
+        q: "Do you handle scripting and video production?",
+        a: "Yes. We manage the full campaign, from concept and scripting to the shoot, approvals and paid promotion of the best-performing videos, so the creator can focus on delivering the content.",
       },
       {
-        q: "Do you handle scripting and shooting?",
-        a: "Yes. We brief creators, help with scripts and concepts, and can produce the content with our own team when needed.",
+        q: "Does influencer marketing work for real estate projects?",
+        a: "Yes. Creator videos help developers show a project, its location and its lifestyle in a format buyers already watch. Several videos in this portfolio were made for real estate campaigns.",
+      },
+      {
+        q: "How much does influencer marketing cost?",
+        a: "The cost depends on the number of creators, their reach, the content needed and any paid promotion. We share a clear proposal after understanding your goals, so you know exactly what's included.",
       },
       {
         q: "How do you measure influencer campaign results?",
-        a: "We track reach, views, engagement, link clicks, promo code use and enquiries, and share a clear report at the end of the campaign.",
+        a: "We report reach, views, engagement and audience response for every creator video. Where tracked links, promo codes or lead forms are used, we also report the enquiries and sales each creator brought in.",
       },
     ],
     closing: "Let's Create Something People Remember",
@@ -608,7 +643,12 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
 export const getPortfolioDetail = (slug: string) => PORTFOLIO_DETAILS.find((detail) => detail.slug === slug);
 
 /** Two-line section title in the homepage style: second half in the accent colour, ending in punctuation. */
-export function splitTitle(text: string) {
+export function splitTitle(title: PortfolioTitle) {
+  if (Array.isArray(title)) {
+    const [lead, accent] = title;
+    return [{ text: lead }, { text: /[.?!]$/.test(accent) ? accent : `${accent}.`, accent: true }];
+  }
+  const text = title;
   const sentence = /[.?!]$/.test(text) ? text : `${text}.`;
   const words = sentence.split(" ");
   if (words.length < 2) return [{ text: sentence, accent: true }];

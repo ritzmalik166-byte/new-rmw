@@ -8,8 +8,24 @@
   padding-bottom: clamp(64px, 9vh, 104px);
 }
 
+@media (min-width: 981px) {
+  .pfd-hero .pf-hero-inner {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+}
+
+/* --title-chars (longest line) gives a first-paint size that roughly fits the column;
+   useFitTitle then trims it to fit exactly. */
+.pfd-hero-copy {
+  container-type: inline-size;
+}
+
+.pfd-hero .hm-title.is-line-locked {
+  font-size: min(clamp(40px, 4.4vw, 64px), calc(100cqi / (var(--title-chars, 24) * 0.5)));
+}
+
 .pfd-tagline {
-  max-width: 34ch;
+  max-width: 52ch;
   margin: 20px 0 0;
   color: var(--hm-muted);
   font-family: var(--hm-sans);

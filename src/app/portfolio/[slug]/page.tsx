@@ -46,7 +46,7 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
       <PortfolioMore slug={detail.slug} km={km(2)} />
       <PortfolioIntro detail={detail} km={km(3)} />
       {detail.blocks.map((block, index) => (
-        <PortfolioBlockSection key={block.title} block={block} km={km(blocksStart + index)} index={index} />
+        <PortfolioBlockSection key={String(block.title)} block={block} km={km(blocksStart + index)} index={index} />
       ))}
       <HomeFaq
         id="portfolio-faq"

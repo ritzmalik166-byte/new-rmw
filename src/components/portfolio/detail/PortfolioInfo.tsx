@@ -109,7 +109,10 @@ export function PortfolioBlockSection({
         <header className="pf-head">
           <p data-hm-fade className="hm-kicker">
             <span className="hm-pill">{km}</span>
-            <span>{block.kind === "steps" ? "How we work" : block.kind === "chips" ? "Who we work with" : "What you get"}</span>
+            <span>
+              {block.kicker ??
+                (block.kind === "steps" ? "How we work" : block.kind === "chips" ? "Who we work with" : "What you get")}
+            </span>
           </p>
           <HmTitle id={id} lines={splitTitle(block.title)} />
           {block.lede ? (

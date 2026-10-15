@@ -97,7 +97,7 @@ function yearFromImage(image: string) {
   return image.match(/^(20\d{2})\//)?.[1] ?? null;
 }
 
-async function loadCaseStudyList() {
+export async function loadCaseStudyList() {
   const payload = await fetchJson(CASE_STUDY_LIST_URL);
   if (!Array.isArray(payload)) {
     throw new TypeError("The case study API returned an unexpected response format.");
