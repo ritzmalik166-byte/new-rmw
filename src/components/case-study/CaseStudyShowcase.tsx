@@ -195,7 +195,7 @@ export function CaseStudyShowcase({ caseStudies }: { caseStudies: CaseStudy[] })
               </p>
               <ol ref={listRef} className="cs-index-list" onKeyDown={onListKey} data-lenis-prevent>
                 {visible.map((item, index) => (
-                  <li key={item.slug}>
+                  <li key={item.slug} className="cs-index-item">
                     <button
                       type="button"
                       className={cn("cs-index-row", index === safeIndex && "is-active")}
@@ -210,10 +210,17 @@ export function CaseStudyShowcase({ caseStudies }: { caseStudies: CaseStudy[] })
                       <span className="cs-index-num">{pad(index + 1)}</span>
                       <span className="cs-index-title">{item.title}</span>
                       {item.year ? <span className="cs-index-year">{item.year}</span> : null}
-                      <span className="cs-index-go" aria-hidden>
-                        <HmArrow />
-                      </span>
+                      <span className="cs-index-go-slot" aria-hidden />
                     </button>
+                    <a
+                      className="cs-index-go"
+                      href={`/${encodeURIComponent(item.slug)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Open “${item.title}” in a new tab`}
+                    >
+                      <HmArrow />
+                    </a>
                   </li>
                 ))}
               </ol>

@@ -603,11 +603,11 @@
   transition: transform 0.35s var(--hm-ease);
 }
 
-.cs-index-row:hover {
+.cs-index-item:hover .cs-index-row:not(.is-active) {
   background: var(--hm-sand);
 }
 
-.cs-index-row:hover::before,
+.cs-index-item:hover .cs-index-row::before,
 .cs-index-row.is-active::before {
   transform: scaleY(1);
 }
@@ -654,19 +654,33 @@
   color: rgb(255 255 255 / 70%);
 }
 
+.cs-index-item {
+  position: relative;
+}
+
+.cs-index-go-slot {
+  width: 28px;
+}
+
 .cs-index-go {
+  position: absolute;
+  top: 50%;
+  right: 18px;
   display: grid;
   place-items: center;
   width: 28px;
   height: 28px;
   border: 1.5px solid currentColor;
   border-radius: 50%;
+  color: var(--hm-navy);
   opacity: 0;
-  transform: translateX(-6px);
+  pointer-events: none;
+  transform: translate(-6px, -50%);
   transition:
     opacity 0.25s ease,
     transform 0.25s var(--hm-ease),
-    background-color 0.25s ease;
+    background-color 0.25s ease,
+    color 0.25s ease;
 }
 
 .cs-index-go svg {
@@ -674,16 +688,24 @@
   height: 11px;
 }
 
-.cs-index-row:hover .cs-index-go,
-.cs-index-row.is-active .cs-index-go {
+.cs-index-item:hover .cs-index-go,
+.cs-index-row.is-active + .cs-index-go,
+.cs-index-go:focus-visible {
   opacity: 1;
-  transform: none;
+  pointer-events: auto;
+  transform: translateY(-50%);
 }
 
-.cs-index-row.is-active .cs-index-go {
+.cs-index-go:hover,
+.cs-index-row.is-active + .cs-index-go {
   border-color: var(--hm-yellow);
   background: var(--hm-yellow);
   color: var(--hm-ink);
+}
+
+.cs-index-go:focus-visible {
+  outline: 2px solid var(--hm-pink);
+  outline-offset: 2px;
 }
 
 .cs-index-row:focus-visible {
@@ -971,7 +993,8 @@
     padding: 14px 16px 14px 20px;
   }
 
-  .cs-index-go {
+  .cs-index-go,
+  .cs-index-go-slot {
     display: none;
   }
 
