@@ -20,8 +20,8 @@ const TOPICS = [
   },
   {
     id: "real-estate",
-    chip: "Real Estate",
-    gauge: "Real Estate",
+    chip: "Real Estate Marketing",
+    gauge: "Real Estate Marketing",
     color: "#c9356e",
     test: /\breal estate\b|\bproperty\b|\bproperties\b|\bresidential\b|\bbuilder\b|\bapartment\b/i,
   },

@@ -128,6 +128,35 @@ async function fetchBlogRecords(url: string) {
   return getRecords(await fetchJson(url));
 }
 
+/* get_all_blogs only returns 10 posts per request, so every ?page= is fetched until an
+   empty page comes back. */
+const LATEST_PAGE_BATCH = 5;
+const LATEST_MAX_PAGES = 200;
+
+async function fetchLatestBlogRecords() {
+  const records: Record<string, unknown>[] = [];
+
+  for (let start = 1; start <= LATEST_MAX_PAGES; start += LATEST_PAGE_BATCH) {
+    const pages = await Promise.allSettled(
+      Array.from({ length: LATEST_PAGE_BATCH }, (_, offset) =>
+        fetchBlogRecords(`${LATEST_BLOGS_URL}?page=${start + offset}`),
+      ),
+    );
+
+    for (const result of pages) {
+      if (result.status === "rejected") {
+        if (records.length === 0) throw result.reason;
+        console.error("Stopped paging get_all_blogs early:", result.reason);
+        return records;
+      }
+      if (result.value.length === 0) return records;
+      records.push(...result.value);
+    }
+  }
+
+  return records;
+}
+
 // Static generation renders dozens of blog pages at once; sharing one request
 // per process keeps the upstream API from rate-limiting the build with 503s.
 let sharedRequest: { startedAt: number; promise: Promise<Blog[]> } | null = null;
@@ -163,7 +192,7 @@ export async function getBlogsOrEmpty(): Promise<Blog[]> {
 
 async function loadBlogs(): Promise<Blog[]> {
   const results = await Promise.allSettled([
-    fetchBlogRecords(LATEST_BLOGS_URL),
+    fetchLatestBlogRecords(),
     fetchBlogRecords(ALL_BLOGS_URL),
   ]);
   const [latestResult, allResult] = results;

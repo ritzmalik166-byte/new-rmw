@@ -145,7 +145,10 @@ export function CaseStudyShowcase({ caseStudies }: { caseStudies: CaseStudy[] })
             <div ref={stageRef} data-hm-fade className="cs-stage" aria-live="polite">
               <article key={active.slug} className="cs-stage-card">
                 <div className="cs-stage-media">
-                  <BlogImage src={active.image} alt={active.title} className="cs-stage-img" />
+                                    <BlogImage src={active.image} alt={active.title} className="cs-stage-img" />
+                </div>
+
+                <div className="cs-stage-tags">
                   <span className="cs-stage-plate">
                     Case {pad(safeIndex + 1)} / {pad(visible.length)}
                   </span>
