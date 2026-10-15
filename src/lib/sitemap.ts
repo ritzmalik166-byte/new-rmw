@@ -3,7 +3,9 @@ import { loadCaseStudyList } from "@/lib/case-studies";
 import { PORTFOLIO_DETAILS } from "@/lib/portfolio-pages";
 import { SEO_ORIGIN } from "@/lib/seo";
 import { getAllServices } from "@/lib/services-data";
+import { SITEMAP_EXCLUDED_CATEGORIES, SITEMAP_EXCLUDED_TAGS } from "@/lib/sitemap-exclusions";
 import { SUB_SERVICES, subServiceHref } from "@/lib/sub-services-data";
+import { getCategories, getCategoryPosts, getTagIndex } from "@/lib/taxonomy";
 
 export const SITEMAP_INDEX_FILES = [
   "sitemap-0.xml",
@@ -47,8 +49,25 @@ export function getStaticPagePaths() {
     "/case-study",
     "/services",
     "/portfolio",
+    "/tags",
     ...PORTFOLIO_DETAILS.map((detail) => `/portfolio/${detail.slug}`),
   ];
+}
+
+/* Only listings that render (i.e. have posts) are published; the exclusion lists
+   carry over the thin or off-topic tags the previous sitemap left out. */
+export async function getTaxonomyPaths() {
+  const [categories, tagIndex] = await Promise.all([getCategories(), getTagIndex()]);
+  const populated = await Promise.all(
+    categories
+      .filter((category) => !SITEMAP_EXCLUDED_CATEGORIES.has(category.slug))
+      .map(async (category) => ((await getCategoryPosts(category.slug)).length > 0 ? category.slug : null)),
+  );
+
+  return [
+    ...populated.flatMap((slug) => (slug ? [`/category/${slug}`] : [])),
+    ...[...tagIndex.keys()].filter((slug) => !SITEMAP_EXCLUDED_TAGS.has(slug)).map((slug) => `/tags/${slug}`),
+  ].sort();
 }
 
 export function getServicePaths() {

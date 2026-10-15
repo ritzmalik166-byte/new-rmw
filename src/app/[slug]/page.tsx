@@ -5,6 +5,7 @@ import { getCaseStudies, getCaseStudySlugs } from "@/lib/case-studies";
 import { BlogImage } from "@/components/blogs/BlogImage";
 import { BlogShare } from "@/components/blogs/BlogShare";
 import { BlogEnquiryForm } from "@/components/blogs/BlogEnquiryForm";
+import { tagHref } from "@/lib/taxonomy";
 import "@/styles/blogs/detail.css";
 
 export const revalidate = 300;
@@ -139,11 +140,18 @@ export default async function BlogDetailPage({
               <div className="blog-post-tags">
                 <span className="blog-post-footer-label">Tags</span>
                 <div className="blog-post-tag-list">
-                  {tags.map((tag) => (
-                    <span key={tag} className="blog-tag-chip">
-                      #{tag}
-                    </span>
-                  ))}
+                  {tags.map((tag) => {
+                    const href = tagHref(tag);
+                    return href ? (
+                      <Link key={tag} href={href} className="blog-tag-chip">
+                        #{tag}
+                      </Link>
+                    ) : (
+                      <span key={tag} className="blog-tag-chip">
+                        #{tag}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
             )}

@@ -126,6 +126,18 @@ function toBlog(record: Record<string, unknown>): Blog | null {
   };
 }
 
+/* Posts edited in the admin panel keep their original keywords in the archive API;
+   both sets feed the /tags pages the previous site published. */
+function mergeKeywords(...lists: string[]) {
+  const keywords = new Map<string, string>();
+  for (const keyword of lists.flatMap((list) => list.split(","))) {
+    const trimmed = keyword.trim();
+    const key = trimmed.toLowerCase();
+    if (trimmed && !keywords.has(key)) keywords.set(key, trimmed);
+  }
+  return [...keywords.values()].join(", ");
+}
+
 function validDate(value: string) {
   return value && !Number.isNaN(Date.parse(value)) ? value : null;
 }
@@ -316,7 +328,7 @@ async function loadBlogs(): Promise<{ blogs: Blog[]; complete: boolean }> {
         excerpt: blog.excerpt || existing?.excerpt || "",
         createdAt: blog.createdAt ?? existing?.createdAt ?? null,
         updatedAt: blog.updatedAt ?? existing?.updatedAt ?? null,
-        keywords: blog.keywords || existing?.keywords || "",
+        keywords: mergeKeywords(blog.keywords, existing?.keywords ?? ""),
       });
     }
   }

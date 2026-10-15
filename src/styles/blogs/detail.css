@@ -362,6 +362,12 @@
   font-size: 13px;
   font-weight: 600;
   line-height: 1.35;
+  transition: background-color 0.2s ease;
+}
+
+a.blog-tag-chip:hover,
+a.blog-tag-chip:focus-visible {
+  background: var(--hm-yellow);
 }
 
 .blog-share-bar {
