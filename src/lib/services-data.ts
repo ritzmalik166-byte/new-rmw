@@ -456,12 +456,16 @@ export const SERVICES_LIST: ServiceDetail[] = [
     uppercaseName: "PRINT ADVERTISING",
     engine: "Engine Two · Digital & Media",
     kicker: "KM 06 · Ink that stops a reader",
-    tagline: "Newspaper, OOH, and transit advertising that commands undivided respect.",
-    heading: "Print and outdoor advertising that still stops a reader in their tracks",
+    heroTitle: { lead: "Print Advertising", accent: "that gets read." },
+    tagline:
+      "Newspaper and magazine advertising, designed to be noticed, placed where your audience reads, and booked at the right rate.",
+    heading: "Print advertising that still stops a reader in their tracks",
     shortDescription:
       "National daily front-pages, high-visibility highway hoardings, airport media, and prestige magazine spreads.",
+    definitionText:
+      "Print advertising means placing ads in newspapers, magazines, and other printed publications to reach readers in specific cities, languages, and audience groups.",
     fullOverview:
-      "In a digital world overflowing with transient scrolls, physical print and outdoor media carry an undeniable weight of authority, permanence, and prestige. Ritz Media World plans, designs, and negotiates print advertising across leading national publications (Times of India, Hindustan Times, Economic Times, Dainik Jagran) and prominent outdoor locations across the country.",
+      "In a world of endless scrolling, a newspaper ad still carries trust and staying power. As a member of the Indian Newspaper Society, Ritz Media World plans, designs, and books print advertising across leading publications such as The Times of India, Hindustan Times, and Dainik Jagran, as well as regional newspapers and magazines across India.",
     image:
       "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1400&q=80",
     accentColor: "#1e3a8a",
@@ -474,28 +478,81 @@ export const SERVICES_LIST: ServiceDetail[] = [
     ],
     capabilities: [
       {
-        title: "National & Regional Daily Placements",
-        copy: "Prime front-page jackets, solus positions, and contextual page-3 spreads across India's largest news publications.",
+        title: "Advertisement Design",
+        copy: "A print ad has about two seconds to earn a second look. We design creatives around your brand and campaign goal, with layouts built for attention and clarity.",
+        details: [
+          "Newspaper Ad Design",
+          "Magazine Ad Design",
+          "Brochure & Flyer Design",
+          "Front Page Jacket Design",
+          "Multi-Publication Adaptations",
+          "Consistent Brand Layouts",
+        ],
+        subService: "advertisement-designing",
       },
       {
-        title: "Highway & Urban OOH Hoardings",
-        copy: "High-traffic expressway hoardings, lit gantries, and iconic urban unipoles engineered for rapid 3-second readability.",
+        title: "Ad Placement",
+        copy: "Good creative in the wrong publication is wasted spend. We use readership data to place your ad where the right audience will actually see it.",
+        details: [
+          "Newspaper Selection",
+          "Edition & City Targeting",
+          "Page & Position Selection",
+          "Magazine Placement",
+          "Regional & Language Editions",
+          "Pan-India Campaigns",
+        ],
+        subService: "ad-placements",
       },
       {
-        title: "Airport & Metro Transit Media",
-        copy: "Premium departures lounges, digital airport screens, and transit train wraps targeting high-net-worth travelers.",
+        title: "Copywriting",
+        copy: "Nobody reads an ad; they scan it. We write headlines and copy that earn the rest of the read and give people a reason to respond.",
+        details: [
+          "Headlines & Taglines",
+          "Ad Body Copy",
+          "Calls to Action",
+          "Brochure Copy",
+          "Brand-Consistent Messaging",
+        ],
+        subService: "copywriting",
       },
       {
-        title: "Magazine & Trade Periodical Spreads",
-        copy: "Luxury lifestyle, architectural, and business magazine inserts with bespoke tactile finishes.",
+        title: "Cost Negotiation",
+        copy: "We negotiate directly with publishers, using established relationships to secure better rates and placements, so every rupee buys real visibility.",
+        details: [
+          "Publisher Rate Negotiation",
+          "Package & Combo Deals",
+          "Premium Position Booking",
+          "Transparent Cost Breakdowns",
+          "Budget Planning",
+          "Media Buying",
+        ],
+        subService: "negotiating-rates",
       },
       {
-        title: "Print Media Planning & Cost Negotiation",
-        copy: "Unmatched rate negotiations and prime placement locking backed by decades of direct media agency relationships.",
+        title: "Ad Size Optimization",
+        copy: "Bigger isn’t always better. We recommend the size and format your ad actually needs, so it gets noticed without wasting budget.",
+        details: [
+          "Front Page Jackets",
+          "Full & Half Page Ads",
+          "Quarter Page Ads",
+          "Strip & Ear Panels",
+          "Classified Display Ads",
+          "Size-to-Budget Planning",
+        ],
+        subService: "ad-size-optimization",
       },
       {
-        title: "Pre-Press Craft & Color Management",
-        copy: "Rigorous newsprint color profiling so ad artwork reproduces crisply without ink bleeding or murky tones.",
+        title: "Ad Scheduling",
+        copy: "The same ad, run on the wrong day, barely registers. We time your releases around launches, festivals, and weekends, when your audience is paying attention.",
+        details: [
+          "Launch Timing",
+          "Festive & Seasonal Planning",
+          "Weekend & Supplement Releases",
+          "Frequency Planning",
+          "Multi-Edition Scheduling",
+          "Release Verification",
+        ],
+        subService: "advertisement-scheduling",
       },
     ],
     deliverables: [
@@ -510,46 +567,87 @@ export const SERVICES_LIST: ServiceDetail[] = [
       {
         step: "01",
         km: "KM 01",
-        title: "Target Geographic & Reader Audit",
-        copy: "We identify exactly which publications, regional editions, and commuter corridors match your buyer persona.",
+        title: "Requirement & Audience Analysis",
+        copy: "We understand your goal, budget, and audience, and identify the publications, editions, and cities that reach them.",
       },
       {
         step: "02",
         km: "KM 02",
-        title: "Bulk Media Buying & Rate Optimization",
-        copy: "Leveraging our 18-year volume buying power, we secure prime inventory at fraction of standard rate-card costs.",
+        title: "Media Planning & Rate Negotiation",
+        copy: "We build a media plan and negotiate rates and positions with publishers on your behalf.",
       },
       {
         step: "03",
         km: "KM 03",
-        title: "High-Impact Visual & Copy Craft",
-        copy: "Headlines and key visuals are designed specifically for print distance, paper texture, and immediate visual pause.",
+        title: "Ad Design & Approval",
+        copy: "Headlines and layouts are designed for print, sized to the paper’s column grid and shared with you for approval.",
       },
       {
         step: "04",
         km: "KM 04",
-        title: "Release, Verification & Tear-Sheet Audit",
-        copy: "Ads are released seamlessly with physical and digital tear-sheet verification provided on day of publication.",
+        title: "Booking, Release & Reporting",
+        copy: "We book the ad, check each insertion once the paper is out, and share proof of publication with you.",
       },
     ],
     whyUs: [
       {
-        title: "Unmatched Buying Muscle & Prime Inventory",
-        copy: "Decades of direct relationships with India's top publication houses guarantee you get front-page inventory at optimal rates.",
+        title: "Member of the Indian Newspaper Society",
+        copy: "Our INS accreditation and established publisher relationships help us secure better rates and strong positions for your ads.",
       },
       {
-        title: "In-House Creative Craft Tuned For Newsprint",
-        copy: "We know how ink behaves on 45 GSM newsprint vs gloss magazine paper. Your artwork always prints razor-sharp.",
+        title: "Print design that works on paper",
+        copy: "Our in-house team designs for real newsprint and magazine paper, so your ad looks as good printed as it does on screen.",
       },
       {
-        title: "Pan-India Reach Across Multiple Languages",
-        copy: "From English national dailies to Hindi, Tamil, Telugu, and Marathi vernacular publications across tier-1, 2, and 3 cities.",
-      },
-      {
-        title: "End-to-End Release Management",
-        copy: "From booking deadlines and artwork pre-flight to verified tear-sheet proofing, our ops team manages every single step.",
+        title: "A print innovator since 2012",
+        copy: "We pioneered centrespread storytelling in Hindustan Times, and we’ve been helping brands make print memorable ever since.",
       },
     ],
+    layout: {
+      problemFlags: [
+        {
+          title: "Right ad, wrong paper",
+          copy: "A great ad in the wrong edition reaches readers who will never buy.",
+        },
+        {
+          title: "Paying the rate card",
+          copy: "Without publisher relationships, brands often pay more for the same space.",
+        },
+        {
+          title: "Seen but skipped",
+          copy: "A crowded page gives an ad about two seconds. Weak design and copy lose that moment.",
+        },
+      ],
+      wallLede: "Print campaigns from brands that trusted us with their name.",
+      intentTitle: { lead: "Ads that earn", accent: "The second look." },
+      faqs: [
+        {
+          question: "What print advertising services does Ritz Media World offer?",
+          answer:
+            "Ritz Media World offers newspaper and magazine advertising, including ad design, placement, copywriting, rate negotiation, size optimisation, and scheduling. As a print advertising agency in Noida, we book ads in leading national and regional publications across India.",
+        },
+        {
+          question: "How much does newspaper advertising cost?",
+          answer:
+            "The cost of a newspaper ad depends on the publication, edition, city, ad size, page position, and release date. Share your requirements, and we’ll send a media plan with negotiated rates.",
+        },
+        {
+          question: "How do I book a matrimonial ad in Hindustan Times?",
+          answer:
+            "Share your ad text, preferred editions, and release date with us, and we’ll suggest the right format, confirm the cost, and book your Hindustan Times matrimonial ad.",
+        },
+        {
+          question: "Can I advertise in multiple newspapers at once?",
+          answer:
+            "Yes. We plan and book multi-publication campaigns across national and regional newspapers, so your ad runs in all the right editions at the same time.",
+        },
+        {
+          question: "How long does newspaper ad booking take?",
+          answer:
+            "Many newspaper ads can be booked within a few days, depending on the publication’s deadlines and the ad type. Front-page and premium positions usually need more notice, so we recommend planning ahead.",
+        },
+      ],
+    },
   },
   {
     id: "radio",

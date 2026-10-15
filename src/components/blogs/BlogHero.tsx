@@ -63,7 +63,7 @@ function formatDate(date: string | null) {
     day: "2-digit",
     month: "short",
     year: "numeric",
-    timeZone: "UTC",
+    timeZone: "Asia/Kolkata",
   })
     .format(new Date(date))
     .toUpperCase();

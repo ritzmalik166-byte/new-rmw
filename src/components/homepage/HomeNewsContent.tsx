@@ -11,7 +11,7 @@ const TITLE = [{ text: "News & blogs" }, { text: "from the road.", accent: true 
 
 function formatDate(date: string | null) {
   if (!date) return site.fullName;
-  return new Intl.DateTimeFormat("en-IN", { dateStyle: "medium", timeZone: "UTC" }).format(
+  return new Intl.DateTimeFormat("en-IN", { dateStyle: "medium", timeZone: "Asia/Kolkata" }).format(
     new Date(date),
   );
 }

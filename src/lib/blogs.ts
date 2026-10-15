@@ -1,15 +1,18 @@
 const LATEST_BLOGS_URL = "https://www.ritzmediaworld.com/api/get_all_blogs";
 const ALL_BLOGS_URL = "https://www.ritzmediaworld.com/api/all_blogs";
 const BLOG_POST_URL = "https://www.ritzmediaworld.com/api/blog";
+const ADMIN_BLOG_POST_URL = "https://www.ritzmediaworld.com/api/ritz_blogs/get-single-blog";
 const BLOG_ARCHIVE_LIMIT = 59;
 
 export type Blog = {
   slug: string;
   title: string;
+  metaTitle: string;
   image: string | null;
   excerpt: string;
   content: string;
   createdAt: string | null;
+  updatedAt: string | null;
   keywords: string;
 };
 
@@ -52,6 +55,36 @@ export function normalizeImage(image: string) {
   }
 }
 
+function escapeHtml(text: string) {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function getBlogBody(record: Record<string, unknown>) {
+  return Array.isArray(record.blogBody) ? record.blogBody.filter(isRecord) : [];
+}
+
+/* Admin edits are saved only to `blogBody[].metaDescription`; the top-level
+   `blogDescription` keeps the text from when the post was first published. */
+function getContent(record: Record<string, unknown>, title: string) {
+  const pages = getBlogBody(record);
+  if (pages.length === 0) {
+    return getString(record, "blogDescription", "content", "body", "description");
+  }
+
+  return pages
+    .map((page) => {
+      const heading = getString(page, "metaTitle");
+      const showHeading = heading && !title.includes(heading);
+      const html = typeof page.metaDescription === "string" ? page.metaDescription : "";
+      return (showHeading ? `<h2>${escapeHtml(heading)}</h2>` : "") + html;
+    })
+    .join("");
+}
+
 function toBlog(record: Record<string, unknown>): Blog | null {
   const slug = getString(record, "blogSlug", "slug");
   const title = getString(record, "blogTitle", "title");
@@ -71,21 +104,30 @@ function toBlog(record: Record<string, unknown>): Blog | null {
     .replace(/\s+/g, " ")
     .trim();
   const createdAt = getString(record, "createdAt", "created_at");
+  const updatedAt = getString(record, "updatedAt", "updated_at");
   const keywords = getString(record, "metaKeywords", "meta_keywords");
   const status = getString(record, "status").toLowerCase();
   if (status && status !== "active") return null;
 
-  const content = getString(record, "blogDescription", "content", "body", "description");
+  const [firstPage] = getBlogBody(record);
 
   return {
     slug,
     title,
+    metaTitle:
+      getString(record, "metaTitle", "meta_title", "mtTitle") ||
+      (firstPage ? getString(firstPage, "metaTitle") : ""),
     image: image ? normalizeImage(image) : null,
     excerpt,
-    content,
-    createdAt: createdAt && !Number.isNaN(Date.parse(createdAt)) ? createdAt : null,
+    content: getContent(record, title),
+    createdAt: validDate(createdAt),
+    updatedAt: validDate(updatedAt),
     keywords,
   };
+}
+
+function validDate(value: string) {
+  return value && !Number.isNaN(Date.parse(value)) ? value : null;
 }
 
 const RETRY_DELAYS_MS = [500, 1500, 3000];
@@ -270,8 +312,10 @@ async function loadBlogs(): Promise<{ blogs: Blog[]; complete: boolean }> {
         ...existing,
         ...blog,
         image: blog.image ?? existing?.image ?? null,
+        metaTitle: blog.metaTitle || existing?.metaTitle || "",
         excerpt: blog.excerpt || existing?.excerpt || "",
         createdAt: blog.createdAt ?? existing?.createdAt ?? null,
+        updatedAt: blog.updatedAt ?? existing?.updatedAt ?? null,
         keywords: blog.keywords || existing?.keywords || "",
       });
     }
@@ -288,12 +332,30 @@ export async function getBlogBySlug(slug: string): Promise<Blog | undefined> {
   return blogs.find((blog) => blog.slug === slug);
 }
 
-/* Posts outside the archive feeds (e.g. case studies) are only served by this endpoint. */
-export async function getBlogPost(slug: string): Promise<Blog | null> {
+async function fetchBlogPost(url: string): Promise<Blog | null> {
   try {
-    const payload = await fetchJson(`${BLOG_POST_URL}/${encodeURIComponent(slug)}`);
+    const payload = await fetchJson(url);
     return isRecord(payload) && isRecord(payload.blog) ? toBlog(payload.blog) : null;
   } catch {
     return null;
   }
+}
+
+function lastChanged(blog: Blog) {
+  const date = blog.updatedAt ?? blog.createdAt;
+  return date ? Date.parse(date) : 0;
+}
+
+/* The full, current copy of a post. Older posts live behind /api/blog and
+   admin-managed posts behind /api/ritz_blogs; a slug can exist in both, so the
+   most recently changed record wins, matching ritzmediaworld.com. */
+export async function getBlogPost(slug: string): Promise<Blog | null> {
+  const path = encodeURIComponent(slug);
+  const [legacy, admin] = await Promise.all([
+    fetchBlogPost(`${BLOG_POST_URL}/${path}`),
+    fetchBlogPost(`${ADMIN_BLOG_POST_URL}/${path}`),
+  ]);
+
+  if (legacy && admin) return lastChanged(admin) >= lastChanged(legacy) ? admin : legacy;
+  return admin ?? legacy;
 }

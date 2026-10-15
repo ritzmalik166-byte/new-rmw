@@ -26,15 +26,17 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const blog = findBlog(await getBlogsOrEmpty(), slug) ?? (await getBlogPost(slug));
+  const blog = (await getBlogPost(slug)) ?? findBlog(await getBlogsOrEmpty(), slug);
   if (!blog) return { title: "Blog Not Found | Ritz Media World" };
 
+  const title = blog.metaTitle || blog.title;
+
   return {
-    title: `${blog.title} | Ritz Media World`,
+    title: { absolute: title },
     description: blog.excerpt,
     keywords: blog.keywords,
     openGraph: {
-      title: blog.title,
+      title,
       description: blog.excerpt,
       images: blog.image ? [blog.image] : [],
     },
@@ -48,11 +50,11 @@ function findBlog(blogs: Blog[], slug: string) {
 
 function formatDate(date: string | null) {
   if (!date) return "Ritz Media World";
-  return new Intl.DateTimeFormat("en-US", {
-    month: "short",
+  return new Intl.DateTimeFormat("en-IN", {
     day: "numeric",
+    month: "short",
     year: "numeric",
-    timeZone: "UTC",
+    timeZone: "Asia/Kolkata",
   }).format(new Date(date));
 }
 
@@ -69,7 +71,7 @@ export default async function BlogDetailPage({
 }) {
   const { slug } = await params;
   const allBlogs = await getBlogsOrEmpty();
-  const blog = findBlog(allBlogs, slug) ?? (await getBlogPost(slug));
+  const blog = (await getBlogPost(slug)) ?? findBlog(allBlogs, slug);
 
   if (!blog) {
     notFound();
