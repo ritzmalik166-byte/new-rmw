@@ -9,6 +9,13 @@ import { StartProject } from "@/components/home/StartProject";
 import { HomeFaq } from "@/components/homepage/HomeFaq";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
+import "@/styles/about/hero.css";
+import "@/styles/about/drive.css";
+import "@/styles/about/truck-back.css";
+import "@/styles/about/mileage.css";
+import "@/styles/about/journey.css";
+import "@/styles/about/proofs.css";
+import "@/styles/about/founder.css";
 
 export const metadata: Metadata = pageMetadata({
   title: "About Ritz Media World | Award-Winning Delhi NCR Advertising Agency",

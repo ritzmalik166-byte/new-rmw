@@ -294,7 +294,7 @@ export function Hero() {
                   loop
                   playsInline
                   preload="metadata"
-                  aria-label="RMW truck"
+                  aria-label="Ritz Media World truck"
                 />
                 <div className="hero-truck-ios-fallback" aria-hidden="true" />
               </div>

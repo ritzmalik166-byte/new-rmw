@@ -708,9 +708,12 @@
   box-shadow: 0 0 0 3px rgb(255 255 255 / 10%);
   color: var(--footer-ink);
   font-family: var(--font-jakarta), var(--font-inter), sans-serif;
-  font-size: 12px;
+  font-size: 7px;
   font-weight: 800;
   letter-spacing: 0.02em;
+  line-height: 1.05;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .fc-phone.is-calling .fc-phone-avatar {
@@ -1293,12 +1296,23 @@
   }
 
   .site-footer-title {
+    align-items: center;
     font-size: clamp(30px, 8.5vw, 42px);
+    text-align: center;
   }
 
   .site-footer-title-row {
     flex-wrap: wrap;
+    justify-content: center;
     white-space: normal;
+  }
+
+  .site-footer-blurb {
+    margin-inline: auto;
+  }
+
+  .site-footer-actions {
+    justify-content: center;
   }
 
   .site-footer-partners li {

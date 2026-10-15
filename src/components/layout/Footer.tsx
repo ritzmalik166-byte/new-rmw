@@ -139,7 +139,7 @@ export function Footer() {
             <div className="site-footer-sign-board">
               <p className="site-footer-sign-head">
                 <span className="site-footer-sign-shield">NH 08</span>
-               Quick routes · RMW
+               Quick routes · Ritz Media World
               </p>
               <div className="site-footer-sign-cols">
                 <div>

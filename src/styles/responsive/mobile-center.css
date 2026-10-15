@@ -95,49 +95,16 @@
     text-align: center;
   }
 
-  /* ---------- About ---------- */
-  .about-tb-item {
-    justify-content: center;
-  }
-
-  .about-mile-stat {
-    align-items: center;
-    text-align: center;
-  }
-
-  /* ---------- Contact ---------- */
-  .ct-dispatch-list li {
-    justify-content: center;
-    text-align: center;
-  }
-
-  .ct-dispatch-list li > span:last-child,
-  .ct-route li {
-    align-items: center;
-  }
-
-  .ct-route li {
-    text-align: center;
-  }
-
-  .ct-route li::before {
-    left: 50%;
-    translate: -50% 0;
-  }
+  /* About, contact, services showcase and blog hero rules live at the end of
+     their route stylesheets, which load after this file. */
 
   /* ---------- Services ---------- */
-  .svc-content-card-inner {
-    align-items: center;
-    text-align: center;
-  }
-
   .sd-flag,
   .sd-plan-foot {
     justify-content: center;
     text-align: center;
   }
 
-  .svc-star-list li,
   .sd-plan-panel-nav,
   .sd-proof ul {
     justify-content: center;
@@ -150,7 +117,6 @@
   }
 
   /* ---------- Blogs ---------- */
-  .bh-card,
   .blog-related-card,
   .blog-post-tags,
   .blog-post-share,

@@ -1,6 +1,8 @@
 /* Shared by every section that carries the dashed route: a bird's-eye truck
-   with its cab facing down the rail. --truck-w is the truck's length. */
-.svc-route-truck {
+   with its cab facing down the rail. --truck-w is the truck's length.
+   Zero specificity so each section's left / --truck-w overrides win regardless
+   of which route stylesheet loads last. */
+:where(.svc-route-truck) {
   --truck-w: 92px;
   position: absolute;
   top: 0;

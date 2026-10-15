@@ -116,8 +116,8 @@ export function PortfolioHero() {
           </figure>
           <HmStamp
             id="pf-hero-stamp"
-            top="RMW · SINCE 2008"
-            bottom="NOIDA · UP16"
+            top="RITZ MEDIA WORLD"
+            bottom="SINCE 2008 · NOIDA"
             word="Delivered"
             className="pf-hero-stamp"
           />

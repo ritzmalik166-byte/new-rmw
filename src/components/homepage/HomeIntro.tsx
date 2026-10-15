@@ -51,7 +51,7 @@ export function HomeIntro() {
         <aside data-hm-fade className="hm-log" aria-label="Trip log">
           <header className="hm-log-head">
             <p className="hm-log-kicker">Trip log</p>
-            <p className="hm-log-name">RMW Roadways</p>
+            <p className="hm-log-name">Ritz Media World Roadways</p>
           </header>
           <HmPlate className="hm-log-plate" />
 

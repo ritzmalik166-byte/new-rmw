@@ -161,6 +161,7 @@ async function fetchLatestBlogRecords() {
 // per process keeps the upstream API from rate-limiting the build with 503s.
 let sharedRequest: { startedAt: number; promise: Promise<Blog[]> } | null = null;
 let lastLoadedBlogs: Blog[] | null = null;
+let lastLoadedComplete = false;
 
 export function getBlogs(): Promise<Blog[]> {
   if (sharedRequest && Date.now() - sharedRequest.startedAt < SHARED_REQUEST_TTL_MS) {
@@ -168,8 +169,15 @@ export function getBlogs(): Promise<Blog[]> {
   }
 
   const promise: Promise<Blog[]> = loadBlogs().then(
-    (blogs) => {
+    ({ blogs, complete }) => {
+      // The archive alone stops in mid-2025, so a run where get_all_blogs failed must
+      // not replace a complete result, and should be retried on the next request.
+      if (!complete) {
+        if (sharedRequest?.promise === promise) sharedRequest = null;
+        if (lastLoadedBlogs && lastLoadedComplete) return lastLoadedBlogs;
+      }
       lastLoadedBlogs = blogs;
+      lastLoadedComplete = complete;
       return blogs;
     },
     (error) => {
@@ -182,6 +190,37 @@ export function getBlogs(): Promise<Blog[]> {
   return promise;
 }
 
+let lastLatestBlogs: Blog[] | null = null;
+
+/* Only the first get_all_blogs page is needed for the newest posts, which avoids
+   paging through the whole feed (and its failure modes) just to show a few cards. */
+export async function getLatestBlogs(limit: number): Promise<Blog[]> {
+  try {
+    const blogs = sortByNewest(
+      (await fetchBlogRecords(`${LATEST_BLOGS_URL}?page=1`))
+        .map(toBlog)
+        .filter((blog): blog is Blog => blog !== null),
+    );
+    if (blogs.length >= limit) {
+      lastLatestBlogs = blogs;
+      return blogs.slice(0, limit);
+    }
+  } catch (error) {
+    console.error("Unable to load the newest blogs:", error);
+    if (lastLatestBlogs) return lastLatestBlogs.slice(0, limit);
+  }
+
+  return (await getBlogsOrEmpty()).slice(0, limit);
+}
+
+function sortByNewest(blogs: Blog[]) {
+  return blogs.sort((first, second) => {
+    const firstDate = first.createdAt ? Date.parse(first.createdAt) : 0;
+    const secondDate = second.createdAt ? Date.parse(second.createdAt) : 0;
+    return secondDate - firstDate;
+  });
+}
+
 export async function getBlogsOrEmpty(): Promise<Blog[]> {
   try {
     return await getBlogs();
@@ -190,7 +229,7 @@ export async function getBlogsOrEmpty(): Promise<Blog[]> {
   }
 }
 
-async function loadBlogs(): Promise<Blog[]> {
+async function loadBlogs(): Promise<{ blogs: Blog[]; complete: boolean }> {
   const results = await Promise.allSettled([
     fetchLatestBlogRecords(),
     fetchBlogRecords(ALL_BLOGS_URL),
@@ -238,12 +277,10 @@ async function loadBlogs(): Promise<Blog[]> {
     }
   }
 
-  return [...blogsBySlug.values()]
-    .sort((first, second) => {
-      const firstDate = first.createdAt ? Date.parse(first.createdAt) : 0;
-      const secondDate = second.createdAt ? Date.parse(second.createdAt) : 0;
-      return secondDate - firstDate;
-    });
+  return {
+    blogs: sortByNewest([...blogsBySlug.values()]),
+    complete: latestResult.status === "fulfilled",
+  };
 }
 
 export async function getBlogBySlug(slug: string): Promise<Blog | undefined> {

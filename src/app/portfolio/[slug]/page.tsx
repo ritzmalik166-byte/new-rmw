@@ -9,6 +9,7 @@ import { PortfolioWork } from "@/components/portfolio/detail/PortfolioWork";
 import { PortfolioCta } from "@/components/portfolio/PortfolioCta";
 import { getPortfolioDetail, PORTFOLIO_DETAILS, splitTitle } from "@/lib/portfolio-pages";
 import { AGENCY_KEYWORDS, pageMetadata } from "@/lib/seo";
+import "@/styles/portfolio/detail.css";
 
 export const dynamicParams = false;
 

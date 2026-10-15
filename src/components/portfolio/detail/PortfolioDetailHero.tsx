@@ -104,8 +104,8 @@ export function PortfolioDetailHero({ detail }: { detail: PortfolioDetail }) {
           ))}
           <HmStamp
             id="pfd-hero-stamp"
-            top="RMW · SINCE 2008"
-            bottom="NOIDA · UP16"
+            top="RITZ MEDIA WORLD"
+            bottom="SINCE 2008 · NOIDA"
             word="Delivered"
             className="pf-hero-stamp pfd-hero-stamp"
           />

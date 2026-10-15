@@ -3,6 +3,7 @@ import { CaseStudyShowcase } from "@/components/case-study/CaseStudyShowcase";
 import { CaseStudyReports } from "@/components/case-study/CaseStudyReports";
 import { getCaseStudies } from "@/lib/case-studies";
 import { AGENCY_KEYWORDS, pageMetadata } from "@/lib/seo";
+import "@/styles/case-study/case-study.css";
 
 export const revalidate = 300;
 

@@ -25,7 +25,7 @@ function defaultFaqs(service: ServiceDetail): ServiceFaq[] {
 
   return [
     {
-      question: `What does ${service.name} from RMW include?`,
+      question: `What does ${service.name} from Ritz Media World include?`,
       answer: `Depending on your goals, the scope can cover ${scope} and more. The final scope is confirmed once we understand your brand, audience and objectives.`,
     },
     {

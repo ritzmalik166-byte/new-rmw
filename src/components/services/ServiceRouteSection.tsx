@@ -4,19 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState, type KeyboardEvent } from "react";
 import { HmArrow, HmPlate, HmTitle, useHomeReveal } from "@/components/homepage/shared";
+import { ServiceQueryCta } from "@/components/services/ServiceQueryCta";
+import { ServiceQueryForm } from "@/components/services/ServiceQueryForm";
 import { getServiceLayout } from "@/lib/service-layout";
 import type { ServiceDetail } from "@/lib/services-data";
 import type { SubService } from "@/lib/sub-services-data";
-
-const ROUTE = [
-  { id: "the-problem", label: "The problem" },
-  { id: "capabilities", label: "What we deliver" },
-  { id: "creatives", label: "Creatives" },
-  { id: "roadmap", label: "Process" },
-  { id: "why-rmw", label: "Why it matters" },
-  { id: "stats", label: "Results" },
-  { id: "service-faq", label: "FAQs & next steps" },
-] as const;
 
 const pad = (value: number) => String(value).padStart(2, "0");
 const subHref = (sub: SubService) => `/services/${sub.service}/${sub.slug}`;
@@ -203,22 +195,11 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
         </div>
 
         <aside className="sd-brief-aside">
-          <nav data-hm-fade className="sd-routebox" aria-label="On this page">
-            <p className="sd-routebox-head">
-              On this route <span aria-hidden>↗</span>
-            </p>
-            <ol>
-              {ROUTE.map((stop, index) => (
-                <li key={stop.id}>
-                  <a href={`#${stop.id}`}>
-                    <span>KM {pad(index + 1)}</span>
-                    {stop.label}
-                    <HmArrow />
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </nav>
+          <div data-hm-fade className="sd-brief-desk">
+            <ServiceQueryForm service={service.name} />
+          </div>
+
+          <ServiceQueryCta service={service.name} />
 
           {layout.requirementsSign ? (
             <Link

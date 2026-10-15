@@ -147,8 +147,8 @@ export function SubServiceHero({ service, sub, stop, total }: Props) {
 
           <HmStamp
             id={`ssd-stamp-${sub.service}-${sub.slug}`}
-            top="RMW · SINCE 2008"
-            bottom="NOIDA · UP16"
+            top="RITZ MEDIA WORLD"
+            bottom="SINCE 2008 · NOIDA"
             word="Approved"
             className="ssd-hero-stamp"
           />

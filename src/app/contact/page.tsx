@@ -4,6 +4,8 @@ import { ContactForm } from "@/components/contact/ContactForm";
 import { RealTruck } from "@/components/ui/RealTruck";
 import { AGENCY_KEYWORDS, pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
+import "@/styles/contact/contact.css";
+import "@/styles/career/career.css";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact Ritz Media World | Let's Grow Your Business",

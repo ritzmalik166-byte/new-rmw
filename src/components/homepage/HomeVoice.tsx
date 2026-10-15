@@ -115,7 +115,7 @@ export function HomeVoice() {
                   <div>
                     <p className="hm-receipt-brand">Proof of delivery</p>
                     <p className="hm-receipt-sub">
-                      RMW Roadways · Consignment {String(i + 1).padStart(3, "0")}
+                      Ritz Media World Roadways · Consignment {String(i + 1).padStart(3, "0")}
                     </p>
                     <span className="hm-receipt-meta">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -154,7 +154,7 @@ export function HomeVoice() {
             id="hm-voice-stamp"
             className="hm-receipt-stamp"
             top="RECEIVED"
-            bottom="RMW · NOIDA"
+            bottom="RITZ MEDIA WORLD"
             word="5 Stars"
           />
         </div>

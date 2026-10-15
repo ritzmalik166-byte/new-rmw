@@ -188,6 +188,12 @@
     letter-spacing: 0.1em;
     gap: 0.55rem;
   }
+
+  /* The border art is sized to 100% width, so on narrow screens it shrinks to a
+     sliver and leaves the body gradient showing in the rest of its box. */
+  .hm-ticker .ticker-pattern-bottom {
+    display: none;
+  }
 }
 
 @media (max-width: 640px) {
@@ -711,6 +717,10 @@
   .audit-captcha,
   .audit-submit {
     width: 100%;
+  }
+
+  .audit-captcha {
+    justify-content: center;
   }
 
   .audit-title {

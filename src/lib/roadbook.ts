@@ -24,7 +24,7 @@ export type RoadbookPage = RoadbookCover | RoadbookStory | RoadbookPlate;
 /* First and last pages are the hard covers. Interior pages pair as spreads:
    story on the left, the creative that belongs to that mile on the right. */
 export const roadbookPages: readonly RoadbookPage[] = [
-  { kind: "cover", src: "/s6/cover.png", title: "RMW Roadbook" },
+  { kind: "cover", src: "/s6/cover.png", title: "Ritz Media World Roadbook" },
   {
     kind: "story",
     kicker: "The journey",

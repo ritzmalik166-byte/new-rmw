@@ -81,6 +81,7 @@
           <span className="hm-rail" aria-hidden />
           <ServicesRouteTruck
             className="hm-engines-truck"
+            rail=".hm-rail"
             parkedBehind=".hm-mark"
             start="top 55%"
             end="bottom 50%"

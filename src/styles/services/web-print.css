@@ -1,4 +1,4 @@
-﻿.svc-webprint {
+.svc-webprint {
   --wp-ink: #1b1446;
   --wp-blue: #1457a8;
   --wp-paper: #fffaf0;
@@ -299,7 +299,7 @@
   margin: 0;
   font-family: var(--font-playfair), "Playfair Display", Georgia, serif;
   font-weight: 900;
-  font-size: clamp(32px, 3.8vw, 54px);
+  font-size: clamp(26px, 2.9vw, 44px);
   line-height: 1;
   letter-spacing: -1px;
   white-space: nowrap;
@@ -610,8 +610,9 @@
 .svc-ad-stamp b {
   font-family: var(--font-display), "Archivo Black", sans-serif;
   font-weight: 400;
-  font-size: 17px;
-  letter-spacing: 2px;
+  font-size: 8px;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
 }
 
 /* Ad desk */
@@ -924,8 +925,11 @@
     display: none;
   }
 
-  .svc-paper-name {
-    font-size: clamp(28px, 9vw, 40px);
+  .svc-paper-mast .svc-paper-name {
+    font-size: clamp(24px, 7.4vw, 34px);
+    line-height: 1.05;
+    text-align: center;
+    white-space: normal;
   }
 
   .svc-print-meta {

@@ -1003,7 +1003,7 @@
 .ct-stamp-ring {
   fill: currentColor;
   font-family: var(--ct-mono);
-  font-size: 13.5px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
 }
@@ -1382,5 +1382,27 @@
 
   .ct-map-pop {
     transition: none;
+  }
+}
+
+/* Mobile centring (pairs with responsive/mobile-center.css). */
+@media (max-width: 720px) {
+  .ct-dispatch-list li {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .ct-dispatch-list li > span:last-child,
+  .ct-route li {
+    align-items: center;
+  }
+
+  .ct-route li {
+    text-align: center;
+  }
+
+  .ct-route li::before {
+    left: 50%;
+    translate: -50% 0;
   }
 }

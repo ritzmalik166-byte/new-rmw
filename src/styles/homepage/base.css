@@ -263,6 +263,11 @@
   letter-spacing: 1px;
 }
 
+.hm-stamp-ring.is-long {
+  font-size: 8.6px;
+  letter-spacing: 0.5px;
+}
+
 .hm-stamp-word {
   font-family: var(--hm-serif);
   font-size: 21px;

@@ -3,6 +3,8 @@ import { CareerForm } from "@/components/career/CareerForm";
 import { RealTruck } from "@/components/ui/RealTruck";
 import { CAREER_ROLES, CAREER_TEAMS } from "@/lib/career";
 import { AGENCY_KEYWORDS, pageMetadata } from "@/lib/seo";
+import "@/styles/contact/contact.css";
+import "@/styles/career/career.css";
 
 export const metadata: Metadata = pageMetadata({
   title: "Ritz Media World Careers & Jobs in Noida | Join Our Team",

@@ -73,7 +73,7 @@ export const CASE_STUDY_REPORTS: CaseStudyReport[] = [
     id: "north-india",
     region: "North India",
     title: "North India Market Trends",
-    label: "RMW Market Intelligence Report",
+    label: "Ritz Media World Market Intelligence Report",
     summary:
       "The defining feature of North India's 2026 cycle is that outside capital and outside developers are reshaping the market.",
     period: "Mid-Year 2026",

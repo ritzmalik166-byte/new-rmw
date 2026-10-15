@@ -11,6 +11,18 @@ import { ServicesRendering } from "@/components/services/ServicesRendering";
 import { ServicesStarPower } from "@/components/services/ServicesStarPower";
 import { ServicesWebPrint } from "@/components/services/ServicesWebPrint";
 import { pageMetadata, SERVICE_KEYWORDS } from "@/lib/seo";
+import "@/styles/services/hero.css";
+import "@/styles/services/engine-banner.css";
+import "@/styles/services/creative.css";
+import "@/styles/services/content.css";
+import "@/styles/services/star-power.css";
+import "@/styles/services/digital-marketing.css";
+import "@/styles/services/web-print.css";
+import "@/styles/services/web-mockup.css";
+import "@/styles/services/radio.css";
+import "@/styles/services/render.css";
+import "@/styles/services/industries.css";
+import "@/styles/services/responsive.css";
 
 export const metadata: Metadata = pageMetadata({
   title: "Advertising & Digital Services | Ritz Media World Delhi-NCR",

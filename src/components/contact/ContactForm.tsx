@@ -282,7 +282,7 @@ export function ContactForm() {
       <div className="ct-slip-body" inert={Boolean(sentName)}>
         <header className="ct-slip-head">
           <div>
-            <p className="ct-slip-brand">RMW Roadways</p>
+            <p className="ct-slip-brand">Ritz Media World Roadways</p>
             <p className="ct-slip-sub">Booking slip · Enquiry</p>
           </div>
           <p className="ct-slip-note">
@@ -538,7 +538,7 @@ export function ContactForm() {
             <circle cx="100" cy="100" r="56" className="ct-stamp-line" />
             <text className="ct-stamp-ring">
               <textPath href="#ct-stamp-ring" startOffset="0">
-                RMW ROADWAYS ★ CONSIGNMENT BOOKED ★ NOIDA ★
+                RITZ MEDIA WORLD ★ CONSIGNMENT BOOKED ★ NOIDA ★
               </textPath>
             </text>
             <path className="ct-stamp-tick" d="M76 96l17 17 32-36" />

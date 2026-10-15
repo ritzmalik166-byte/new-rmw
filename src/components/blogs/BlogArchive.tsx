@@ -168,7 +168,7 @@ export function BlogArchive({
             id="blog-featured-stamp"
             className="blog-featured-stamp"
             top="EDITOR'S PICK"
-            bottom="RMW · NOIDA"
+            bottom="RITZ MEDIA WORLD"
             word="Must Read"
           />
         </a>

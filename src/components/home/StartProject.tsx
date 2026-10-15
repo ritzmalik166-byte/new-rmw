@@ -1,10 +1,15 @@
 "use client";
 
-import HCaptcha from "@hcaptcha/react-hcaptcha";
-import { useRef, useState } from "react";
+import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
+import { SelectMenu } from "@/components/ui/SelectMenu";
 import { site } from "@/lib/site";
 
 const sitekey = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY ?? "";
+
+/* hCaptcha's api.js and its checksiteconfig call are heavy, so the widget is
+   only mounted once the form is near the viewport or a field is focused. */
+const HCaptcha = dynamic(() => import("@hcaptcha/react-hcaptcha"), { ssr: false });
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -101,18 +106,48 @@ function FieldIcon({ name }: { name: "user" | "mail" | "phone" | "tag" | "doc" |
 
 export function StartProject() {
   const data = site.startProject;
-  const captchaRef = useRef<HCaptcha>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const [captchaArmed, setCaptchaArmed] = useState(false);
+  const [captchaKey, setCaptchaKey] = useState(0);
   const [token, setToken] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
+  const [service, setService] = useState("");
+  const [serviceMissing, setServiceMissing] = useState(false);
   const accentAt = data.title.indexOf("Free");
   const titleBefore = accentAt >= 0 ? data.title.slice(0, accentAt) : data.title;
   const titleAfter = accentAt >= 0 ? data.title.slice(accentAt + "Free".length) : "";
+
+  useEffect(() => {
+    const form = formRef.current;
+    if (!sitekey || captchaArmed || !form) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) setCaptchaArmed(true);
+      },
+      { rootMargin: "400px 0px" },
+    );
+    observer.observe(form);
+    return () => observer.disconnect();
+  }, [captchaArmed]);
+
+  function resetCaptcha() {
+    setToken("");
+    setCaptchaKey((key) => key + 1);
+  }
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const payload = Object.fromEntries(new FormData(form).entries());
+
+    if (!service) {
+      setServiceMissing(true);
+      setStatus("error");
+      setMessage("Please select a service.");
+      return;
+    }
 
     if (!token) {
       setStatus("error");
@@ -136,13 +171,12 @@ export function StartProject() {
       }
 
       form.reset();
-      setToken("");
-      captchaRef.current?.resetCaptcha();
+      setService("");
+      resetCaptcha();
       setStatus("success");
       setMessage("Thanks — we’ll get back to you with your audit shortly.");
     } catch (error) {
-      captchaRef.current?.resetCaptcha();
-      setToken("");
+      resetCaptcha();
       setStatus("error");
       setMessage(
         error instanceof Error ? error.message : "Something went wrong. Please try again.",
@@ -185,7 +219,13 @@ export function StartProject() {
           </div>
         </div>
 
-        <form className="audit-card" onSubmit={onSubmit} noValidate>
+        <form
+          ref={formRef}
+          className="audit-card"
+          onSubmit={onSubmit}
+          onFocus={() => setCaptchaArmed(true)}
+          noValidate
+        >
           <div className="audit-notch" aria-hidden>
             <svg viewBox="0 0 24 24">
               <path
@@ -232,22 +272,25 @@ export function StartProject() {
               <input name="phone" type="tel" placeholder="+91 ..." autoComplete="tel" required />
             </label>
 
-            <label className="audit-field">
-              <span className="audit-label">
+            <div className="audit-field">
+              <span id="audit-service-label" className="audit-label">
                 <FieldIcon name="tag" />
                 Service Interested In<span aria-hidden>*</span>
               </span>
-              <select name="service" defaultValue="" required>
-                <option value="" disabled>
-                  — Select a service —
-                </option>
-                {data.services.map((service) => (
-                  <option key={service} value={service}>
-                    {service}
-                  </option>
-                ))}
-              </select>
-            </label>
+              <SelectMenu
+                className="audit-select"
+                name="service"
+                labelledBy="audit-service-label"
+                placeholder="Select a service"
+                value={service}
+                options={data.services}
+                invalid={serviceMissing}
+                onChange={(value) => {
+                  setService(value);
+                  setServiceMissing(false);
+                }}
+              />
+            </div>
 
             <label className="audit-field">
               <span className="audit-label">
@@ -274,9 +317,14 @@ export function StartProject() {
 
           <div className="audit-actions">
             <div className="audit-captcha">
-              {sitekey ? (
+              {!sitekey ? (
+                <p className="audit-human">
+                  <span className="audit-human-box" aria-hidden />
+                  I am human · hCaptcha
+                </p>
+              ) : captchaArmed ? (
                 <HCaptcha
-                  ref={captchaRef}
+                  key={captchaKey}
                   sitekey={sitekey}
                   size="compact"
                   onVerify={setToken}
@@ -284,12 +332,7 @@ export function StartProject() {
                   onError={() => setToken("")}
                   theme="dark"
                 />
-              ) : (
-                <p className="audit-human">
-                  <span className="audit-human-box" aria-hidden />
-                  I am human · hCaptcha
-                </p>
-              )}
+              ) : null}
             </div>
 
             <button className="audit-submit" type="submit" disabled={status === "submitting"}>

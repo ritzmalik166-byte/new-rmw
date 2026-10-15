@@ -107,10 +107,10 @@ export function ServicesHero() {
         </div>
 
         <div className="svch-note-wrap">
-          <article className="svch-note" aria-label="RMW Roadways consignment note">
+          <article className="svch-note" aria-label="Ritz Media World Roadways consignment note">
             <header className="svch-note-head">
               <div>
-                <p className="svch-note-brand">RMW Roadways</p>
+                <p className="svch-note-brand">Ritz Media World Roadways</p>
                 <p className="svch-note-sub">Consignment note · Bilty</p>
               </div>
               <p className="svch-note-gr">
@@ -163,7 +163,7 @@ export function ServicesHero() {
                 <p className="svch-note-hand">Data, care &amp; creativity</p>
               </div>
               <div className="svch-note-sign">
-                <p className="svch-note-hand">RMW</p>
+                <p className="svch-note-hand">Ritz Media World</p>
                 <span className="svch-note-label">Authorised signatory</span>
               </div>
             </footer>

@@ -310,3 +310,15 @@
     display: none;
   }
 }
+
+/* Mobile centring (pairs with responsive/mobile-center.css). */
+@media (max-width: 720px) {
+  .about-tb-item {
+    justify-content: center;
+  }
+
+  .about-mile-stat {
+    align-items: center;
+    text-align: center;
+  }
+}

@@ -6,24 +6,16 @@
 @import "../styles/base/base.css";
 
 @import "../styles/components/buttons.css";
+@import "../styles/components/select-menu.css";
 @import "../styles/components/real-truck.css";
 
 @import "../styles/layout/header.css";
 @import "../styles/base/dark.css";
 
 @import "../styles/home/hero.css";
-@import "../styles/home/proof.css";
-
-@import "../styles/home/route.css";
-@import "../styles/home/engines.css";
-@import "../styles/home/growth.css";
-@import "../styles/home/roadbook.css";
-@import "../styles/home/moved.css";
-@import "../styles/home/reviews.css";
 @import "../styles/home/awards.css";
 @import "../styles/home/news.css";
 @import "../styles/blogs/archive.css";
-@import "../styles/blogs/hero.css";
 @import "../styles/home/faq.css";
 @import "../styles/home/audit.css";
 
@@ -45,33 +37,12 @@
 @import "../styles/responsive/mobile-nav.css";
 @import "../styles/responsive/home.css";
 
-@import "../styles/about/hero.css";
-@import "../styles/about/drive.css";
-@import "../styles/about/truck-back.css";
-@import "../styles/about/mileage.css";
-@import "../styles/about/journey.css";
-@import "../styles/about/proofs.css";
-@import "../styles/about/founder.css";
-
-@import "../styles/contact/contact.css";
-@import "../styles/career/career.css";
+/* Page-only stylesheets (about, contact/career, case study, portfolio detail,
+   services showcase, blog hero) are imported by their route's page.tsx so
+   they don't block rendering on every other page. */
 @import "../styles/portfolio/portfolio.css";
-@import "../styles/portfolio/detail.css";
-@import "../styles/case-study/case-study.css";
 
-@import "../styles/services/hero.css";
 @import "../styles/services/route-truck.css";
-@import "../styles/services/engine-banner.css";
-@import "../styles/services/creative.css";
-@import "../styles/services/content.css";
-@import "../styles/services/star-power.css";
-@import "../styles/services/digital-marketing.css";
-@import "../styles/services/web-print.css";
-@import "../styles/services/web-mockup.css";
-@import "../styles/services/radio.css";
-@import "../styles/services/render.css";
-@import "../styles/services/industries.css";
-@import "../styles/services/responsive.css";
 @import "../styles/layout/services-megamenu.css";
 @import "../styles/services/subservice.css";
 @import "../styles/services/sub-detail.css";

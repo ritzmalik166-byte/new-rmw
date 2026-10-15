@@ -161,7 +161,6 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
         title: "Industries We Serve",
         kind: "chips",
         items: [
-          { title: "Healthcare & Medical" },
           { title: "Hospitality & Restaurants" },
           { title: "Beauty & Wellness" },
           { title: "Real Estate" },
@@ -416,7 +415,6 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
         kind: "chips",
         items: [
           { title: "Corporate & Professional Brands" },
-          { title: "Healthcare & Medical" },
           { title: "Hospitality & Tourism" },
           { title: "Real Estate" },
           { title: "Retail & E-commerce" },

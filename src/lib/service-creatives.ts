@@ -61,7 +61,7 @@ const WORK = {
   },
   billboard: {
     src: "/s5/digital-marketing.jpg",
-    alt: "See It Differently billboard with an RMW truck and a woman holding a magnifying glass",
+    alt: "See It Differently billboard with a Ritz Media World truck and a woman holding a magnifying glass",
     medium: "Brand campaign",
     caption: "See It Differently: same roads, new perspectives.",
   },

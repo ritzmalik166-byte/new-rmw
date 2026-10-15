@@ -46,7 +46,7 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
           <HmTitle
             as="h1"
             id="sd-hero-title"
-            lines={[{ text: heading }, { text: "loaded & delivered.", accent: true }]}
+            lines={[{ text: heading }]}
           />
 
           <p data-hm-fade className="hm-lede">
@@ -104,8 +104,8 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
 
           <HmStamp
             id={`sd-stamp-${service.slug}`}
-            top="RMW · SINCE 2008"
-            bottom="NOIDA · UP16"
+            top="RITZ MEDIA WORLD"
+            bottom="SINCE 2008 · NOIDA"
             word="Approved"
             className="sd-collage-stamp"
           />

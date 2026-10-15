@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, type CSSProperties } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { HmArrow, HmTitle, useHomeReveal } from "@/components/homepage/shared";
 import { TransitionLink } from "@/components/motion/TransitionLink";
+import { useMotion } from "@/components/providers/MotionProvider";
 import { cn } from "@/lib/cn";
 import { getServiceCreatives } from "@/lib/service-creatives";
 import { SERVICE_ICONS } from "@/lib/service-icons";
@@ -40,8 +41,47 @@ export function ServiceLowerSections({ service, relatedServices }: ServiceLowerS
 
 function ServiceCreatives({ service }: { service: ServiceDetail }) {
   const rootRef = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLUListElement>(null);
+  const [slide, setSlide] = useState({ index: 0, atStart: true, atEnd: false });
+  const { reduced } = useMotion();
   useHomeReveal(rootRef);
   const { wall } = getServiceCreatives(service.slug);
+
+  const syncSlide = useCallback(() => {
+    const grid = gridRef.current;
+    const cards = grid?.children;
+    if (!grid || !cards || cards.length < 2) return;
+    const step = (cards[1] as HTMLElement).offsetLeft - (cards[0] as HTMLElement).offsetLeft;
+    const maxScroll = grid.scrollWidth - grid.clientWidth;
+    const atStart = grid.scrollLeft <= 2;
+    const atEnd = grid.scrollLeft >= maxScroll - 2;
+    const index = atEnd ? cards.length - 1 : Math.min(cards.length - 1, Math.round(grid.scrollLeft / step));
+    setSlide((prev) =>
+      prev.index === index && prev.atStart === atStart && prev.atEnd === atEnd ? prev : { index, atStart, atEnd },
+    );
+  }, []);
+
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    syncSlide();
+    grid.addEventListener("scroll", syncSlide, { passive: true });
+    window.addEventListener("resize", syncSlide);
+    return () => {
+      grid.removeEventListener("scroll", syncSlide);
+      window.removeEventListener("resize", syncSlide);
+    };
+  }, [syncSlide]);
+
+  const goTo = (index: number) => {
+    const grid = gridRef.current;
+    const card = grid?.children[index] as HTMLElement | undefined;
+    if (!grid || !card) return;
+    grid.scrollTo({
+      left: card.offsetLeft - parseFloat(getComputedStyle(grid).paddingLeft),
+      behavior: reduced ? "auto" : "smooth",
+    });
+  };
 
   return (
     <section ref={rootRef} id="creatives" className="hm sd-wall" aria-labelledby="sd-wall-title">
@@ -63,9 +103,40 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
           </TransitionLink>
         </header>
 
+        <div className="hm-work-nav sd-wall-nav">
+          <button
+            type="button"
+            className="hm-work-arrow"
+            aria-label="Previous creative"
+            disabled={slide.atStart}
+            onClick={() => goTo(slide.index - 1)}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden>
+              <path d="M15 5l-7 7 7 7" />
+            </svg>
+          </button>
+          <p className="hm-work-count" aria-live="polite">
+            <b>{pad(slide.index + 1)}</b>
+            <span aria-hidden> / </span>
+            <span className="sr-only"> of </span>
+            {pad(wall.length)}
+          </p>
+          <button
+            type="button"
+            className="hm-work-arrow"
+            aria-label="Next creative"
+            disabled={slide.atEnd}
+            onClick={() => goTo(slide.index + 1)}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden>
+              <path d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+
         <div className="sd-wall-line">
           <span className="sd-wall-rope" aria-hidden />
-          <ul className="sd-wall-grid">
+          <ul ref={gridRef} className="sd-wall-grid">
             {wall.map((item, index) => (
               <li
                 data-hm-fade
@@ -105,7 +176,7 @@ function ServiceProcess({ service }: { service: ServiceDetail }) {
         <header className="sd-head">
           <p data-hm-fade className="hm-kicker">
             <span className="hm-pill">KM 04</span>
-            <span>The RMW process</span>
+            <span>The Ritz Media World process</span>
           </p>
           <HmTitle id="sd-process-title" lines={[{ text: "Four stops on the route." }]} />
         </header>

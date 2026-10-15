@@ -7,7 +7,7 @@ export type Testimonial = {
 };
 
 export const site = {
-  name: "RMW",
+  name: "Ritz Media World",
   fullName: "Ritz Media World",
   tagline: "Creative OK Please",
   description:
@@ -278,13 +278,6 @@ export const site = {
           "From the launch film to the hoardings and the lead campaigns, one team owned the whole project. Site visits picked up within the first month, and every rupee was accounted for in the weekly review.",
       },
       {
-        role: "Director",
-        company: "Multi-speciality Hospital, Delhi NCR",
-        industry: "Healthcare",
-        quote:
-          "They understood that healthcare communication has to be careful before it can be creative. Our appointment enquiries grew steadily, and the brand finally looks as trustworthy as our doctors are.",
-      },
-      {
         role: "Admissions Head",
         company: "K-12 School Group",
         industry: "Education",
@@ -396,7 +389,7 @@ export const site = {
       },
       {
         q: "Which industries do you work with?",
-        a: "We work with brands across real estate, education, healthcare, retail, hospitality, and consumer goods. Over 18 years, we have built deep experience in real estate marketing, and we apply the same strategic rigor to every industry we serve.",
+        a: "We work with brands across real estate, education, retail, hospitality, and consumer goods. Over 18 years, we have built deep experience in real estate marketing, and we apply the same strategic rigor to every industry we serve.",
       },
       {
         q: "How do you decide which marketing channels are right for my brand?",

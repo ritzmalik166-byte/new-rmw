@@ -316,6 +316,32 @@
   background: #ffffff;
 }
 
+.audit-select {
+  --sx-h: 40px;
+  --sx-radius: 8px;
+  --sx-border: var(--audit-gold);
+  --sx-bg: transparent;
+  --sx-fg: #ffffff;
+  --sx-muted: rgb(255 255 255 / 0.62);
+  --sx-focus: #ffe7a3;
+  --sx-ring: rgb(230 193 90 / 0.3);
+  --sx-list-bg: #101a40;
+  --sx-list-border: var(--audit-gold);
+  --sx-list-shadow: rgb(0 0 0 / 0.35);
+  --sx-hover: rgb(230 193 90 / 0.18);
+  --sx-dot: var(--audit-gold);
+  --sx-error: #fca5a5;
+}
+
+.audit-select .sx-select-button {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.audit-select .sx-select-button svg {
+  color: var(--audit-gold);
+}
+
 .audit-note {
   margin: 0;
   font-family: var(--font-inter), Inter, sans-serif;
@@ -341,13 +367,13 @@
 .audit-captcha {
   flex: 1;
   min-width: 0;
-  min-height: 48px;
   display: flex;
   align-items: center;
-  padding: 6px 12px;
-  border: 1.5px dashed rgb(230 193 90 / 0.75);
-  border-radius: 10px;
   overflow: hidden;
+}
+
+.audit-captcha:empty {
+  display: none;
 }
 
 .audit-captcha iframe {

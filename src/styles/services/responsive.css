@@ -227,3 +227,15 @@
     text-align: center;
   }
 }
+
+/* Mobile centring (pairs with responsive/mobile-center.css). */
+@media (max-width: 720px) {
+  .svc-content-card-inner {
+    align-items: center;
+    text-align: center;
+  }
+
+  .svc-star-list li {
+    justify-content: center;
+  }
+}

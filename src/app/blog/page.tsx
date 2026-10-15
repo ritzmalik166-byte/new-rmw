@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BlogArchive } from "@/components/blogs/BlogArchive";
 import { getBlogsOrEmpty } from "@/lib/blogs";
 import { BLOG_KEYWORDS, pageMetadata } from "@/lib/seo";
+import "@/styles/blogs/hero.css";
 
 export const dynamic = "force-dynamic";
 

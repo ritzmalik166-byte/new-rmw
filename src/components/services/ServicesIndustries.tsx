@@ -10,14 +10,14 @@ registerGsap();
 
 const INDUSTRIES = [
   { name: "Real Estate", scenario: "Launch to site visits" },
-  { name: "Healthcare", scenario: "OPD & IPD footfall" },
   { name: "Education", scenario: "Admission season" },
   { name: "E-commerce", scenario: "Cart to checkout" },
   { name: "Manufacturing", scenario: "Dealer & B2B leads" },
   { name: "Startups", scenario: "Zero to launch" },
 ];
 
-const SLOT_X = INDUSTRIES.map((_, i) => 12 + i * 15.2);
+/* Signs spread evenly between 12% and 88% of the road. */
+const SLOT_X = INDUSTRIES.map((_, i) => 12 + (i * 76) / (INDUSTRIES.length - 1));
 
 /* Each dig starts when the truck's nose is this far (share of road width) short of the sign,
    and is fully out by the time it has covered DIG_SPAN more. */

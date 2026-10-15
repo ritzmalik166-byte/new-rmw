@@ -140,7 +140,7 @@ export function ServicesStarPower() {
     <section ref={rootRef} className="svc-star" aria-labelledby="svc-star-title">
       <div className="svc-star-inner">
         <span className="svc-star-rail" aria-hidden />
-        <ServicesRouteTruck className="svc-star-truck" start={RAIL_START} end={RAIL_END} />
+        <ServicesRouteTruck className="svc-star-truck" rail=".svc-star-rail" start={RAIL_START} end={RAIL_END} />
 
         <div className="svc-star-head">
           <h2 id="svc-star-title" className="svc-star-title">

@@ -98,7 +98,7 @@ export function ServicesPrintPaper() {
             Clear skies for brands that advertise
           </p>
           <p className="svc-paper-name" aria-hidden>
-            The RMW Times
+            The Ritz Media World Times
           </p>
           <p className="svc-paper-ear svc-paper-ear--right">
             <b>Late City Edition</b>
@@ -124,7 +124,7 @@ export function ServicesPrintPaper() {
 
         <div className="svc-paper-body">
           <div className="svc-paper-story">
-            <p className="svc-paper-byline">By the RMW Media Desk · Noida</p>
+            <p className="svc-paper-byline">By the Ritz Media World Media Desk · Noida</p>
             <div className="svc-paper-cols">
               <p className="svc-paper-drop">
                 <b>NOIDA —</b> A newspaper ad gets about two seconds on a crowded page. For eighteen
@@ -164,7 +164,7 @@ export function ServicesPrintPaper() {
               <p className="svc-ad-fine">Sample ad · Artistic impression · T&amp;C apply</p>
               <span className="svc-ad-stamp" aria-hidden>
                 Placed by
-                <b>RMW</b>
+                <b>Ritz Media World</b>
               </span>
             </div>
           </figure>

@@ -75,8 +75,8 @@ export function CaseStudyReports() {
           <li data-hm-fade className="cs-report is-brief">
             <HmStamp
               id="cs-brief-stamp"
-              top="RMW · STRATEGY"
-              bottom="ON REQUEST"
+              top="RITZ MEDIA WORLD"
+              bottom="STRATEGY · ON REQUEST"
               word="Custom"
               className="cs-brief-stamp"
             />

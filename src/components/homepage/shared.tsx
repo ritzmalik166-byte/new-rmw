@@ -132,12 +132,12 @@ export function HmStamp({
       </defs>
       <circle cx="60" cy="60" r="56" />
       <circle cx="60" cy="60" r="48" className="is-thin" />
-      <text className="hm-stamp-ring">
+      <text className={cn("hm-stamp-ring", top.length > 14 && "is-long")}>
         <textPath href={`#${id}-top`} startOffset="50%" textAnchor="middle">
           {top}
         </textPath>
       </text>
-      <text className="hm-stamp-ring">
+      <text className={cn("hm-stamp-ring", bottom.length > 16 && "is-long")}>
         <textPath href={`#${id}-bottom`} startOffset="50%" textAnchor="middle">
           {bottom}
         </textPath>

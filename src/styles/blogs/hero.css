@@ -283,3 +283,10 @@
     animation: none;
   }
 }
+
+/* Mobile centring (pairs with responsive/mobile-center.css). */
+@media (max-width: 720px) {
+  .bh-card {
+    text-align: center;
+  }
+}

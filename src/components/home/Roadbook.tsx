@@ -19,7 +19,7 @@ const RoadbookFlip = dynamic(
     loading: () => (
       <div className="roadbook-loading">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/s6/cover.png" alt="RMW Roadbook" width={440} height={580} />
+        <img src="/s6/cover.png" alt="Ritz Media World Roadbook" width={440} height={580} />
       </div>
     ),
   },

@@ -1,7 +1,7 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { cn } from "@/lib/cn";
 import { gsap, registerGsap } from "@/lib/gsap";
@@ -10,6 +10,8 @@ registerGsap();
 
 type Props = {
   className?: string;
+  /** Rail element in the same parent; the truck keeps its centre on the rail's centre line. */
+  rail?: string;
   /** Element in the same parent the truck starts hidden behind; without it the truck drives in from the top. */
   parkedBehind?: string;
   /** Park the truck, visible, at the very top of the rail instead of driving in from above it. */
@@ -24,6 +26,7 @@ type Props = {
    Must sit inside the positioned element that holds the rail. */
 export function ServicesRouteTruck({
   className,
+  rail,
   parkedBehind,
   fromRailStart = false,
   stopBefore,
@@ -32,6 +35,30 @@ export function ServicesRouteTruck({
 }: Props) {
   const truckRef = useRef<HTMLSpanElement>(null);
   const { ready, reduced } = useMotion();
+
+  useEffect(() => {
+    const truck = truckRef.current;
+    const track = truck?.parentElement;
+    const line = rail && track ? track.querySelector<HTMLElement>(rail) : null;
+    if (!truck || !track || !line) return;
+
+    // The CSS margin-left already pulls the truck back by half its width.
+    const align = () => {
+      if (line.offsetParent !== truck.offsetParent) return;
+      truck.style.left = `${line.offsetLeft + line.offsetWidth / 2}px`;
+    };
+
+    align();
+    const observer = new ResizeObserver(align);
+    observer.observe(track);
+    observer.observe(line);
+    window.addEventListener("resize", align);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", align);
+      truck.style.removeProperty("left");
+    };
+  }, [rail]);
 
   useGSAP(
     () => {

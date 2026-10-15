@@ -97,7 +97,13 @@ export function DialNumber({ phone }: { phone: string }) {
               </span>
             </span>
             <span className="fc-phone-caller">
-              <span className="fc-phone-avatar">RMW</span>
+              <span className="fc-phone-avatar" aria-hidden>
+                Ritz
+                <br />
+                Media
+                <br />
+                World
+              </span>
               <span className="fc-phone-state">{calling ? "Calling…" : "Dialling"}</span>
               <span className="fc-phone-number">
                 {revealDigits(phone, typedCount)}

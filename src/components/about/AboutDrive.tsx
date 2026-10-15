@@ -141,7 +141,7 @@ export function AboutDrive() {
           </div>
 
           <div className="about-billboard">
-            <div className="about-sign about-billboard-copy" role="img" aria-label="Use data at night. Keep distance from empty promises. UP16 · RMW 2008">
+            <div className="about-sign about-billboard-copy" role="img" aria-label="Use data at night. Keep distance from empty promises. UP16 · Ritz Media World 2008">
               <span className="about-sign-bulb about-sign-bulb-tl" aria-hidden />
               <span className="about-sign-bulb about-sign-bulb-tr" aria-hidden />
               <span className="about-sign-bulbs" aria-hidden>
@@ -151,7 +151,7 @@ export function AboutDrive() {
               </span>
               <p className="about-sign-kicker">Use data at night</p>
               <p className="about-sign-line">Keep distance from empty promises</p>
-              <p className="about-sign-plate">UP16 · RMW 2008</p>
+              <p className="about-sign-plate">UP16 · Ritz Media World 2008</p>
               <span className="about-sign-scallop" aria-hidden />
             </div>
           </div>

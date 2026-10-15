@@ -87,6 +87,7 @@ export function SubServiceRoute({ sub }: { sub: SubService }) {
           <span className="ssd-road-line" aria-hidden />
           <ServicesRouteTruck
             className="ssd-road-truck"
+            rail=".ssd-road-line"
             fromRailStart
             stopBefore=".ssd-road-end"
             start="top 65%"

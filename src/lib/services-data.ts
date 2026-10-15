@@ -171,7 +171,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
       },
       {
         title: "Deep Domain Mastery In High-Stakes Sectors",
-        copy: "From premium real estate and healthcare to retail and technology, we understand the exact consumer psyche that moves Indian buyers.",
+        copy: "From premium real estate to retail and technology, we understand the exact consumer psyche that moves Indian buyers.",
       },
       {
         title: "Speed, Agility & Transparent Real-Time Data",
@@ -571,7 +571,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     whyUs: [
       {
         title: "Subject Matter Depth Over Fluff",
-        copy: "Our writers have genuine domain understanding across real estate, finance, healthcare, and retail—ensuring authentic depth.",
+        copy: "Our writers have genuine domain understanding across real estate, finance, and retail—ensuring authentic depth.",
       },
       {
         title: "Engineered For Search Engines & AI Models",

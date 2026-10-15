@@ -90,8 +90,8 @@ export function CaseStudyHero({ caseStudies }: { caseStudies: CaseStudy[] }) {
           ))}
           <HmStamp
             id="cs-hero-stamp"
-            top="RMW · CASE FILES"
-            bottom="NOIDA · UP16"
+            top="RITZ MEDIA WORLD"
+            bottom="CASE FILES · NOIDA"
             word="Decoded"
             className="cs-hero-stamp"
           />
