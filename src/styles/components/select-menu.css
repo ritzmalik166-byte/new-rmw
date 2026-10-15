@@ -1,0 +1,196 @@
+/* ---------- Custom dropdown (SelectMenu) ----------
+   Themes override the --sx-* tokens on the wrapper. */
+.sx-select {
+  --sx-h: 42px;
+  --sx-radius: 10px;
+  --sx-border: #161616;
+  --sx-border-w: 1.5px;
+  --sx-bg: #fff;
+  --sx-fg: #1b1a4a;
+  --sx-muted: #8f889c;
+  --sx-focus: #1b1a4a;
+  --sx-ring: rgb(243 195 60 / 55%);
+  --sx-list-bg: #fff;
+  --sx-list-border: #1b1a4a;
+  --sx-list-shadow: #f3c33c;
+  --sx-hover: #fff3d6;
+  --sx-dot: #c9356e;
+  --sx-error: #d9333f;
+
+  position: relative;
+  min-width: 0;
+}
+
+.sx-select-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: var(--sx-h);
+  padding: 0 12px;
+  border: var(--sx-border-w) solid var(--sx-border);
+  border-radius: var(--sx-radius);
+  background: var(--sx-bg);
+  color: var(--sx-fg);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.sx-select-button span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sx-select-button.is-placeholder {
+  color: var(--sx-muted);
+  font-weight: 400;
+}
+
+.sx-select-button svg {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sx-select-button.is-placeholder svg {
+  color: var(--sx-fg);
+}
+
+.sx-select-button:focus-visible,
+.sx-select.is-open .sx-select-button {
+  border-color: var(--sx-focus);
+  outline: 0;
+  box-shadow: 0 0 0 3px var(--sx-ring);
+}
+
+.sx-select.is-open .sx-select-button svg {
+  transform: rotate(180deg);
+}
+
+.sx-select-button:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.sx-select.has-error .sx-select-button {
+  border-color: var(--sx-error);
+}
+
+.sx-select-list {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  left: 0;
+  z-index: 30;
+  box-sizing: border-box;
+  min-width: 100%;
+  max-height: 264px;
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 2px solid var(--sx-list-border);
+  border-radius: 12px;
+  background: var(--sx-list-bg);
+  list-style: none;
+  text-align: left;
+  box-shadow:
+    5px 5px 0 var(--sx-list-shadow),
+    0 18px 30px -14px rgb(27 26 74 / 40%);
+  animation: sx-pop 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sx-select-list.is-up {
+  top: auto;
+  bottom: calc(100% + 6px);
+  box-shadow:
+    5px -5px 0 var(--sx-list-shadow),
+    0 -18px 30px -14px rgb(27 26 74 / 40%);
+}
+
+.sx-select-list[hidden] {
+  display: none;
+}
+
+.sx-select-list:focus {
+  outline: 0;
+}
+
+.sx-select-list li {
+  position: relative;
+  padding: 10px 12px 10px 30px;
+  border-radius: 8px;
+  color: var(--sx-fg);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.sx-select-list li.is-active {
+  background: var(--sx-hover);
+}
+
+.sx-select-list li[aria-selected="true"] {
+  font-weight: 700;
+}
+
+.sx-select-list li[aria-selected="true"]::before {
+  position: absolute;
+  top: 50%;
+  left: 11px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sx-dot);
+  transform: translateY(-50%);
+  content: "";
+}
+
+@keyframes sx-pop {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+/* Touch screens: bigger targets. */
+@media (max-width: 720px), (pointer: coarse) {
+  .sx-select {
+    --sx-h: 46px;
+  }
+
+  .sx-select-list li {
+    padding-block: 13px;
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sx-select-list {
+    animation: none;
+  }
+
+  .sx-select-button svg {
+    transition: none;
+  }
+}

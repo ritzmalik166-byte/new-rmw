@@ -1,0 +1,625 @@
+/* ---------- About mileage ---------- */
+.about-mile {
+  --mile-navy: #0f163f;
+  --mile-red: #e23d32;
+  --mile-gold: #d9952b;
+  --mile-paper: #fbf7f0;
+
+  position: relative;
+  overflow-x: clip;
+  padding: 96px clamp(20px, 5.5vw, 80px) 104px;
+  background:
+    radial-gradient(60% 50% at 85% 40%, rgb(246 196 49 / 12%), transparent 70%),
+    var(--mile-paper);
+}
+
+.about-mile.is-reel {
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  padding-block: 104px 40px;
+}
+
+.about-mile-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(40px, 5vw, 72px);
+  align-items: center;
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+/* ---------- Copy ---------- */
+.about-mile-copy {
+  container-type: inline-size;
+}
+
+.about-mile-kicker,
+.about-mile-title,
+.about-mile-lede,
+.about-mile-stat {
+  opacity: 0;
+}
+
+.about-mile-kicker {
+  margin: 0 0 14px;
+  overflow: hidden;
+  color: var(--mile-red);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+.about-mile-kicker::after {
+  content: "";
+  display: inline-block;
+  width: 96px;
+  height: 7px;
+  margin-left: 14px;
+  vertical-align: middle;
+  background:
+    radial-gradient(circle at calc(100% - 3.5px) 50%, var(--mile-gold) 3px, transparent 3.5px),
+    linear-gradient(var(--mile-gold), var(--mile-gold)) left center / calc(100% - 6px) 1px no-repeat;
+}
+
+.about-mile-title {
+  margin: 0;
+  color: var(--mile-navy);
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(22px, 7.2cqi, 44px);
+  line-height: 1.08;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.about-mile-dot {
+  color: var(--mile-gold);
+}
+
+.about-mile-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.about-mile-char,
+.about-mile-word {
+  display: inline-block;
+}
+
+.about-mile-lede {
+  max-width: 520px;
+  margin: 20px 0 0;
+  color: #3a3a3a;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.about-mile-lede + .about-mile-lede {
+  margin-top: 12px;
+}
+
+.about-mile-stats {
+  display: flex;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-mile-stat {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 0 22px;
+  border-left: 1px solid rgb(15 22 63 / 14%);
+}
+
+.about-mile-stat:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.about-mile-icon {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: var(--mile-gold);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.about-mile-value {
+  margin: 0;
+  color: var(--mile-navy);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.about-mile-label {
+  margin: 6px 0 0;
+  color: #6b6b6b;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 1.35;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------- Stage: odometer, photo deck, era track ---------- */
+.about-mile-stage {
+  --deck-h: max(280px, calc(100svh - 210px));
+
+  display: grid;
+  justify-items: center;
+  gap: 22px;
+  min-width: 0;
+  container: mile-stage / inline-size;
+}
+
+.about-mile.is-reel .about-mile-stage {
+  --deck-h: calc(100svh - 290px);
+}
+
+.about-mile-deck-row,
+.about-mile-track {
+  --deck: min(400px, 100%, var(--deck-h));
+}
+
+.about-mile-deck-row {
+  width: 100%;
+}
+
+.about-mile-deck-row > .about-mile-deck-wrap {
+  margin-inline: auto;
+}
+
+.about-mile-dash {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.about-mile-odo {
+  display: inline-flex;
+  gap: 3px;
+  padding: 6px;
+  border-radius: 10px;
+  background: linear-gradient(#26262c, #0c0c0f);
+  box-shadow:
+    inset 0 2px 6px rgb(0 0 0 / 60%),
+    0 12px 26px rgb(15 22 63 / 20%);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.about-mile-reel {
+  --h: 1.3em;
+
+  position: relative;
+  display: block;
+  width: 0.92em;
+  height: var(--h);
+  overflow: hidden;
+  border-radius: 3px;
+  background: #18181c;
+  color: #6f6f78;
+  line-height: var(--h);
+  text-align: center;
+}
+
+.about-mile-reel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgb(0 0 0 / 55%), transparent 32%, transparent 68%, rgb(0 0 0 / 55%));
+  pointer-events: none;
+}
+
+.about-mile-reel > span {
+  display: block;
+}
+
+.about-mile-reel.is-tens,
+.about-mile-reel.is-ones {
+  background: #fdfaf2;
+  color: var(--mile-navy);
+}
+
+.about-mile-reel.is-ones {
+  background: var(--mile-red);
+  color: #fff;
+}
+
+.about-mile-reel.is-tens::after,
+.about-mile-reel.is-ones::after {
+  background: linear-gradient(rgb(0 0 0 / 35%), transparent 30%, transparent 70%, rgb(0 0 0 / 35%));
+}
+
+.about-mile-strip {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(calc(var(--pos, 0) * -1 * var(--h)));
+}
+
+.about-mile-strip > span {
+  display: block;
+  height: var(--h);
+}
+
+.about-mile-dash-label {
+  margin: 0;
+  color: #8a8a8a;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.about-mile-era {
+  margin: 4px 0 0;
+  color: var(--mile-red);
+  font-family: var(--font-caveat), Caveat, cursive;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.about-mile-deck-wrap {
+  position: relative;
+  width: var(--deck);
+  padding-top: 18px;
+}
+
+.about-mile-deck {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-mile-card {
+  position: relative;
+  grid-area: 1 / 1;
+  padding: 8px 8px 14px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow:
+    0 18px 40px rgb(40 28 16 / 16%),
+    0 2px 6px rgb(40 28 16 / 8%);
+  will-change: transform;
+}
+
+.about-mile-card:not(:first-child) {
+  visibility: hidden;
+}
+
+.about-mile-photo-wrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #1c1c20;
+}
+
+.about-mile-photo {
+  object-fit: cover;
+}
+
+.about-mile-shade {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--mile-paper);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.about-mile-caption {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: 12px;
+  padding: 12px 6px 0;
+}
+
+.about-mile-card-title {
+  margin: 0;
+  color: var(--mile-navy);
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+.about-mile-stop {
+  grid-column: 2;
+  grid-row: 1;
+  color: #9a9a9a;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.about-mile-card-line {
+  grid-column: 1 / -1;
+  margin: 4px 0 0;
+  color: #555;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+/* Hand-written margin notes, shown only when the stage has room beside the deck. */
+.about-mile-note {
+  position: relative;
+  z-index: 20;
+  display: none;
+  max-width: 150px;
+  margin: 0;
+  color: #3a3a3a;
+  font-family: var(--font-caveat), Caveat, cursive;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.15;
+  pointer-events: none;
+}
+
+.about-mile-note.is-now {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.about-mile-note-year {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--mile-navy);
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.about-mile-note-arrow {
+  display: block;
+  width: 64px;
+  margin-top: 6px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.about-mile-note.is-then {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+  justify-self: end;
+  margin-top: 14%;
+  text-align: right;
+  rotate: -4deg;
+}
+
+.about-mile-note.is-then .about-mile-note-arrow {
+  margin-left: auto;
+}
+
+.about-mile-note.is-now {
+  grid-column: 3;
+  grid-row: 1;
+  align-self: end;
+  justify-self: start;
+  margin-bottom: 18%;
+  rotate: 3deg;
+}
+
+@container mile-stage (min-width: 600px) {
+  .about-mile-deck-row,
+  .about-mile-track {
+    --deck: min(370px, var(--deck-h));
+  }
+
+  .about-mile-deck-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--deck) minmax(0, 1fr);
+    column-gap: 14px;
+  }
+
+  .about-mile-deck-row > .about-mile-deck-wrap {
+    grid-column: 2;
+    grid-row: 1;
+    width: auto;
+  }
+
+  .about-mile-note {
+    display: block;
+  }
+}
+
+.about-mile-note.is-now .about-mile-note-arrow {
+  transform: scaleX(-1);
+}
+
+.about-mile-track {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: min(100%, max(var(--deck), 340px));
+  margin-top: 6px;
+}
+
+.about-mile-track::before,
+.about-mile-track-fill {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: #e2d9c8;
+}
+
+.about-mile-track-fill {
+  background: var(--mile-red);
+  transform: scaleX(var(--fill, 0));
+  transform-origin: left center;
+}
+
+.about-mile-tick {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  width: 12px;
+  padding: 0 0 24px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.about-mile-tick:focus-visible {
+  outline: none;
+}
+
+.about-mile-tick:focus-visible::before {
+  outline: 2px solid var(--mile-navy);
+  outline-offset: 3px;
+}
+
+.about-mile-tick:hover .about-mile-tick-label {
+  color: var(--mile-red);
+}
+
+.about-mile-tick::before {
+  content: "";
+  position: relative;
+  z-index: 1;
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+  border: 2px solid #d3c8b3;
+  border-radius: 50%;
+  background: var(--mile-paper);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.about-mile-tick.is-active::before {
+  border-color: var(--mile-red);
+  background: var(--mile-red);
+  transform: scale(1.15);
+}
+
+.about-mile-tick-label {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  color: #a39d92;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  transition: color 0.3s ease;
+}
+
+.about-mile-tick:first-of-type .about-mile-tick-label {
+  left: 0;
+  transform: none;
+}
+
+.about-mile-tick:last-of-type .about-mile-tick-label {
+  right: 0;
+  left: auto;
+  transform: none;
+}
+
+.about-mile-tick.is-active .about-mile-tick-label {
+  color: var(--mile-navy);
+}
+
+@media (min-width: 901px) {
+  .about-mile-stage {
+    margin-right: calc(16px - clamp(20px, 5.5vw, 80px));
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .about-mile {
+    padding-top: 64px;
+  }
+
+  .about-mile-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-mile-stage {
+    justify-items: start;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-mile {
+    padding: 48px 20px 56px;
+  }
+
+  .about-mile-lede {
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .about-mile-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .about-mile-stat {
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 12px;
+  }
+
+  .about-mile-value {
+    font-size: 22px;
+  }
+
+  .about-mile-label {
+    font-size: 10px;
+  }
+
+  .about-mile-odo {
+    font-size: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-mile-kicker,
+  .about-mile-title,
+  .about-mile-lede,
+  .about-mile-stat {
+    opacity: 1;
+  }
+
+  .about-mile-tick::before,
+  .about-mile-tick-label {
+    transition: none;
+  }
+}

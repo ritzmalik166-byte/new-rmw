@@ -1,0 +1,324 @@
+.about-founder {
+  --fd-pad-y: clamp(28px, 8vh, 96px);
+  --fd-pad-l: clamp(28px, 4.5vw, 61px);
+  --fd-size: min(541px, calc(100svh - 2 * var(--fd-pad-y)), 40vw);
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #a71b10;
+  color: #ffffff;
+  padding: var(--fd-pad-y) clamp(28px, 4vw, 72px) var(--fd-pad-y) var(--fd-pad-l);
+}
+
+.about-founder-layout {
+  display: flex;
+  align-items: center;
+  gap: clamp(36px, 4.5vw, 61px);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.about-founder-visual {
+  z-index: 1;
+  flex: 0 0 var(--fd-size);
+  width: var(--fd-size);
+  height: var(--fd-size);
+}
+
+/* The visual is unpositioned so the stripes span the full section height. */
+.about-founder-stripes {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--fd-pad-l) + var(--fd-size) / 2);
+  width: 92px;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.about-founder-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  opacity: 1;
+}
+
+.about-founder-portrait {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+}
+
+.about-founder-card.is-settled .about-founder-portrait {
+  opacity: 1;
+}
+
+.about-founder-assemble {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.about-founder-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1 auto;
+  gap: clamp(12px, 3vh, 32px);
+  min-width: 0;
+  max-width: 805px;
+  padding: 0;
+}
+
+.about-founder-kicker {
+  margin: 0;
+  color: #e59b20;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.96px;
+  text-transform: uppercase;
+}
+
+.about-founder-title {
+  margin: 0;
+  color: #ffffff;
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(32px, min(6.6vh, 4.2vw), 56px);
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.about-founder-role {
+  margin: 0;
+  color: #e59b20;
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(15px, 2.2vh, 18px);
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-transform: capitalize;
+}
+
+.about-founder-lede {
+  max-width: 705px;
+  margin: 0;
+  color: #ffffffcc;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-size: clamp(14px, 2.1vh, 17px);
+  line-height: 1.55;
+  letter-spacing: 0;
+  text-transform: capitalize;
+}
+
+.about-founder-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-founder-list::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 11px;
+  width: 3px;
+  background: url("/about/image.png") repeat-y center top / 100% auto;
+  pointer-events: none;
+}
+
+.about-founder-list li {
+  position: relative;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  color: #ffffff;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0;
+}
+
+.about-founder-when {
+  color: #ffffff;
+}
+
+.about-founder-detail {
+  color: #ffffffcc;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0;
+}
+
+.about-founder-list li::before {
+  content: "";
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  box-sizing: content-box;
+  width: 18px;
+  height: 18px;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  background: #f1a311;
+}
+
+
+@media (max-width: 860px) {
+  .about-founder {
+    min-height: 0;
+    padding: 48px 20px 56px;
+  }
+
+  .about-founder-layout {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .about-founder-visual {
+    position: relative;
+    top: auto;
+    left: auto;
+    flex: 0 0 auto;
+    width: min(420px, 100%);
+    max-width: 100%;
+    min-width: 0;
+    height: auto;
+    margin: 0 auto 32px;
+  }
+
+  .about-founder-card,
+  .about-founder-portrait {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .about-founder-visual {
+    overflow: hidden;
+  }
+
+  .about-founder-stripes {
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 56px;
+    height: 100%;
+    min-height: 0;
+    max-height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: translateX(-50%);
+  }
+
+  .about-founder-copy,
+  .about-founder-kicker,
+  .about-founder-role,
+  .about-founder-lede {
+    width: 100%;
+    height: auto;
+  }
+
+  .about-founder-copy {
+    min-height: 0;
+  }
+
+  .about-founder-title {
+    font-size: clamp(32px, 6vw, 48px);
+    line-height: 1.05;
+  }
+
+  .about-founder-role,
+  .about-founder-lede,
+  .about-founder-detail {
+    line-height: 1.45;
+  }
+
+  .about-founder-list li {
+    align-items: flex-start;
+    line-height: 1.45;
+  }
+
+  .about-founder-list li > span {
+    min-width: 0;
+  }
+
+  .about-founder-list li::before {
+    margin-top: 1px;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-founder {
+    padding: 40px 16px 48px;
+  }
+
+  .about-founder-visual {
+    margin-bottom: 24px;
+  }
+
+  .about-founder-copy {
+    gap: 18px;
+  }
+
+  .about-founder-list {
+    gap: 18px;
+    margin-top: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-proofs-face {
+    transition: none;
+  }
+
+  .about-founder-portrait {
+    opacity: 1;
+  }
+
+  .about-founder-assemble {
+    display: none;
+  }
+}
+
+/* Mobile centring (pairs with responsive/mobile-center.css). */
+@media (max-width: 720px) {
+  .about-tb-item {
+    justify-content: center;
+  }
+
+  .about-mile-stat {
+    align-items: center;
+    text-align: center;
+  }
+}

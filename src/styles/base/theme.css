@@ -1,0 +1,42 @@
+:root {
+  --background: #f7eef6;
+  --foreground: #14151c;
+  --muted: #5b5d68;
+  --accent: #db023d;
+  --ink: #111318;
+  --line: rgba(20, 21, 28, 0.12);
+  /* Sampled from hero truck art */
+  --truck-yellow: #f0b450;
+  --truck-orange: #f07828;
+  --truck-pink: #dc2864;
+  --truck-blue: #1a4db8;
+  --truck-cyan: #48c8e8;
+  --truck-green: #289848;
+  --hero-title-c1: var(--truck-yellow);
+  --hero-title-c2: var(--truck-orange);
+  --hero-title-c3: var(--truck-pink);
+  --hero-fill: linear-gradient(
+    135deg,
+    #ceb9ec 0%,
+    #f2d3e4 12.73%,
+    #f0d9d2 25.46%,
+    #f0e8d0 36.77%,
+    #d2f3f1 49.5%,
+    #e2e9f7 60.81%,
+    #e0cfef 70.71%
+  );
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-ink: var(--ink);
+  --color-line: var(--line);
+  --color-paper: var(--paper);
+  --font-sans: var(--font-outfit);
+  --font-display: var(--font-display);
+  --font-serif: var(--font-display);
+  --font-nav: var(--font-inter);
+}

@@ -1,15 +1,23 @@
+export type Testimonial = {
+  role: string;
+  company: string;
+  industry: string;
+  photo?: string;
+  quote: string;
+};
+
 export const site = {
-  name: "RMW",
+  name: "Ritz Media World",
   fullName: "Ritz Media World",
   tagline: "Creative OK Please",
   description:
     "Independent creative media agency in India. We turn business problems into ideas that travel—from brand and campaign to media, digital, film, 3D and AI.",
   nav: [
-    { href: "/work", label: "Work" },
-    { href: "/capabilities", label: "Capabilities" },
-    { href: "/industries", label: "Industries" },
-    { href: "/insights", label: "Insights" },
-    { href: "/about", label: "About" },
+    { href: "/about.html", label: "About" },
+    { href: "/services", label: "Services" },
+    { href: "/case-study", label: "Case Studies" },
+    { href: "/portfolio", label: "Portfolio" },
+    { href: "/blog", label: "Blog" },
   ],
   ticker: [
     "Ideas on board",
@@ -24,21 +32,54 @@ export const site = {
       { value: 90, suffix: "+", label: "Professionals" },
     ],
     partners: [
-      { name: "Meta Business Partner", src: "/s2/Mask group.png" },
-      { name: "Google Partner", src: "/s2/Mask group.png" },
-      { name: "Indian Newspaper Society", src: "/s2/Mask group.png" },
-      { name: "MSME Registered", src: "/s2/Mask group.png" },
+      "/s2/clients/prm-9.webp",
+      "/s2/clients/prm-22.webp",
+      "/s2/clients/mpf-bl.webp",
+      "/s2/clients/rdx-lg.avif",
+      "/s2/clients/prm-2.webp",
+      "/s2/clients/prm-3.webp",
+      "/s2/clients/prm-4.webp",
+      "/s2/clients/prm-5.webp",
+      "/s2/clients/prm-6.webp",
+      "/s2/clients/prm-7.webp",
+      "/s2/clients/prm-8.webp",
+      "/s2/clients/prm-10.webp",
+      "/s2/clients/prm-11.webp",
+      "/s2/clients/prm-12.webp",
+      "/s2/clients/exotica-logo.webp",
+      "/s2/clients/prm-14.webp",
+      "/s2/clients/prm-16.webp",
+      "/s2/clients/prm-17.webp",
+      "/s2/clients/prm-18.webp",
+      "/s2/clients/prm-19.webp",
+      "/s2/clients/prm-20.webp",
+      "/s2/clients/scnd-3.webp",
+      "/s2/clients/scnd-4.webp",
+      "/s2/clients/scnd-5.webp",
+      "/s2/clients/scnd-6.webp",
+      "/s2/clients/scnd-7.webp",
+      "/s2/clients/scnd-8.webp",
+      "/s2/clients/scnd-9.webp",
+      "/s2/clients/scnd-10.webp",
+      "/s2/clients/scnd-11.webp",
+      "/s2/clients/scnd-12.webp",
+      "/s2/clients/scnd-13.webp",
+      "/s2/clients/scnd-14.webp",
+      "/s2/clients/scnd-15.webp",
+      "/s2/clients/scnd-16.webp",
+      "/s2/clients/scnd-17.webp",
+      "/s2/clients/scnd-18.webp",
     ],
   },
   route: {
     kicker: "Route 02 • How we think",
     title: ["Insight", "Idea", "Impact"],
-    lede: "Every project runs the same road. We don't skip the vital starting steps to reach a meaningful destination.",
+    lede: "Every project at Ritz Media World follows the same proven road, whether it is a brand launch, an advertising campaign, or a real estate project. ",
     stops: [
       {
         name: "Insight",
         km: "KM 0",
-        copy: "Understand the business, target audiences, and the core opportunity before anything is built.",
+        copy: "Every project starts with your business, audience, and market, so we find the real opportunity first.",
       },
       {
         name: "Idea",
@@ -48,7 +89,7 @@ export const site = {
       {
         name: "Impact",
         km: "Destination",
-        copy: "Take the idea through production, digital and media, and measure what it actually moved.",
+        copy: "Production, digital marketing and media bring the idea to life, with every result measured.",
       },
     ],
   },
@@ -135,7 +176,8 @@ export const site = {
     slides: [
       {
         id: "digital",
-        title: "Digital marketing strategies that\ndrive growth",
+        title: "Digital marketing strategies\nthat drive growth",
+        image: "/s5/banner-hoarding.png",
         items: [
           "SEO (Search Engine Optimization)",
           "Social Media Services",
@@ -145,7 +187,7 @@ export const site = {
       },
       {
         id: "creative",
-        title: "Creative campaigns people actually remember",
+        title: "Creative campaigns people\nactually remember",
         items: [
           "Brand platforms and campaigns",
           "Films and motion design",
@@ -155,7 +197,7 @@ export const site = {
       },
       {
         id: "print",
-        title: "Print and OOH that still stops a reader",
+        title: "Print and OOH that still\nstops a reader",
         items: [
           "Newspapers and magazines",
           "Outdoor and transit media",
@@ -165,7 +207,7 @@ export const site = {
       },
       {
         id: "content",
-        title: "Content and web built to convert",
+        title: "Content and web built\nto convert",
         items: [
           "Always-on content engines",
           "Websites and landing systems",
@@ -175,7 +217,7 @@ export const site = {
       },
       {
         id: "voices",
-        title: "Voices that can carry the idea",
+        title: "Voices that can carry\nthe idea",
         items: [
           "Celebrity endorsements",
           "Influencer partnerships",
@@ -217,92 +259,194 @@ export const site = {
     ],
   },
   reviews: {
-    title: "Work",
+    title: "Testimonials",
     items: [
       {
         role: "Managing Director",
         company: "Eldeco Group",
+        industry: "Real Estate",
         photo: "/s8/51e3ade5d235d3158f1e504c1ea3497f09c9d0c9.jpg",
         quote:
           "They not only make sure that they deliver on their promises, but also educate you on what exactly is needed to be done for your brand, thereby preventing you from under or over spending your precious money.",
       },
-    ],
+      // SAMPLE COPY: replace the entries below with real, approved client testimonials.
+      {
+        role: "Head of Marketing",
+        company: "Real Estate Developer, Noida",
+        industry: "Real Estate",
+        quote:
+          "From the launch film to the hoardings and the lead campaigns, one team owned the whole project. Site visits picked up within the first month, and every rupee was accounted for in the weekly review.",
+      },
+      {
+        role: "Admissions Head",
+        company: "K-12 School Group",
+        industry: "Education",
+        quote:
+          "Radio, print and digital all told the same story during admission season. The team planned the media around our counselling calendar and the enquiries came in exactly when we could handle them.",
+      },
+      {
+        role: "Founder",
+        company: "D2C Lifestyle Brand",
+        industry: "E-commerce",
+        quote:
+          "Sharp creatives, honest numbers and no jargon. They cut the campaigns that were not working within days and doubled down on the ones that were, which is rare for an agency.",
+      },
+      {
+        role: "Business Head",
+        company: "Industrial Manufacturer",
+        industry: "Manufacturing",
+        quote:
+          "We came in with a dated catalogue and left with a brand our dealers are proud to show. The new website and trade-show material started conversations we were never able to start before.",
+      },
+      {
+        role: "Co-founder",
+        company: "Early-stage Fintech Startup",
+        industry: "Startups",
+        quote:
+          "They treated our small launch budget like it was their own. The identity, the launch video and the first performance campaigns were delivered on time and felt bigger than what we paid for.",
+      },
+    ] as Testimonial[],
   },
   awards: {
     title: "Awards",
     items: [
       {
-        year: "2008",
-        heading: "Foundation",
-        copy: "Ritz Media World launched with a mission to reimagine brand communication for India's growth markets.",
+        year: "2025",
+        heading: "ET Young Industry Leaders",
+        subtitle: "Integrated advertising solutions",
+        alt: "ET Young Industry Leaders 2025 award presented to Ritesh Malik",
+        src: "/awards/et-young-industry-leaders-2025.png",
+        copy: "Recognition for excellence in integrated advertising solutions.",
+      },
+      {
+        year: "2025",
+        heading: "BIG Dream Makers",
+        subtitle: "Creative services — real estate",
+        alt: "BIG Dream Makers Conclave Awards 2025 award and trophy",
+        src: "/awards/big-dream-makers-trophy-2025.jpg",
+        copy: "Awarded to Ritz Media World for excellence in creative services in real estate.",
+      },
+      {
+        year: "2024",
+        heading: "ET Business Leaders",
+        subtitle: "Business leadership",
+        alt: "ET Business Leaders 2024 trophy",
+        src: "/awards/et-business-leaders-2024.jpg",
+        copy: "Ritz Media World founder Ritesh Malik was recognised among the ET Business Leaders.",
+      },
+      {
+        year: "2025",
+        heading: "Best Real Estate Podcast",
+        subtitle: "Podmasters",
+        alt: "Podmasters award for Best Real Estate Podcast",
+        src: "/awards/podmasters-real-estate-podcast-2024.jpg",
+        copy: "Recognition for Ritesh Malik and the real estate podcast, Beyond the Blueprint.",
+      },
+      {
+        year: "2011",
+        heading: "Special Achievement Award",
+        subtitle: "RED FM 93.5 · Retail category",
+        alt: "RED FM 93.5 Special Achievement Award in the retail category",
+        src: "/awards/red-fm-special-achievement-2011.jpg",
+        copy: "Creative Thinks Media received the Special Achievement Award at the National Sales Meet in Goa.",
+      },
+      {
+        year: "2025",
+        heading: "BIG Dream Makers Award",
+        subtitle: "Award presentation",
+        alt: "Ritz Media World team receiving a BIG Dream Makers award",
+        src: "/awards/my-property-face-stage.jpg",
+        copy: "The team celebrates its recognition at the BIG Dream Makers Conclave Awards.",
       },
     ],
   },
   news: {
     title: "What's New? News & Blogs",
-    lede: "Strategy, creative and media built as one connected system—not a collection of loose deliverables.",
-    cta: "View all work",
-    href: "/work",
-    posts: [
-      {
-        slug: "best-real-estate-creative-agency-india-2026",
-        title:
-          "Best Real Estate Creative Agency in India: Who Actually Delivers Results in 2026",
-        tags: ["Real Estate", "Brand Campaign", "Integrated Media"],
-        image: "/blog-section/image.png",
-        href: "/insights",
-      },
-      {
-        slug: "best-real-estate-creative-agency-india-2026-2",
-        title:
-          "Best Real Estate Creative Agency in India: Who Actually Delivers Results in 2026",
-        tags: ["Real Estate", "Brand Campaign", "Integrated Media"],
-        image: "/blog-section/image.png",
-        href: "/insights",
-      },
-    ],
+    lede: "Ideas, perspectives and practical guides from Ritz Media World.",
+    cta: "View all blogs",
+    href: "/blog",
   },
   highways: {
     title: "Common Highways.",
-    lede: "Clear answers about our tactical engines, campaign distribution models, and how we drive high-yield performance for modern developers and global real estate brands.",
+    lede: "Clear answers about how we work, what we offer, and how we help brands grow across creative, media, digital, and technology.",
     card: {
-      title: "Need a Custom Highway?",
-      copy: "Get a tailored real estate marketing audit and projection strategy for your upcoming project pipeline.",
+      slogan: ["BURI NAZAR WALE,", "RANKING DEKH"],
+      search: {
+        keyword: "best creative agency for real estate in gurgaon",
+        url: "https://www.ritzmediaworld.com",
+        title: "Best Creative Agency for Real Estate in Gurgaon | Ritz Media World",
+        snippet:
+          "Real estate branding, launch campaigns, 3D walkthroughs, digital and media for developers across Gurgaon and NCR.",
+      },
       cta: "Request an Audit",
-      href: "/#start-a-project",
+      href: "/contact",
     },
-    truck: "/s10/highway-truck.png",
+    truck: "/trucks/rmw-billboard-truck.webp",
     faqs: [
       {
-        q: "How does Ritz Media World accelerate real estate lead generation?",
-        a: "We deploy hyper-targeted PPC campaigns combined with localized lead-capture funnels specifically designed for high-intent property buyers. By leveraging advanced demographic filters, behavior-based targeting, and customized CRM integrations, we ensure your sales team receives qualified, nurture-ready prospects rather than empty clicks.",
+        q: "What services does Ritz Media World offer?",
+        a: "Ritz Media World is a full-service advertising agency offering branding, creative campaigns, media planning and buying, digital marketing, SEO, social media, film production, 3D visualization, and AI-led creative solutions, all delivered by one integrated team.",
       },
       {
-        q: "What platforms do you prioritize for luxury property marketing?",
-        a: "We prioritize high-intent platforms where luxury buyers already research and decide — Meta, Google, YouTube, and selected premium publishers — then layer influence and owned channels so the brand stays present from first view to site visit.",
+        q: "Which industries do you work with?",
+        a: "We work with brands across real estate, education, retail, hospitality, and consumer goods. Over 18 years, we have built deep experience in real estate marketing, and we apply the same strategic rigor to every industry we serve.",
       },
       {
-        q: "How do your three creative engines collaborate on a single campaign?",
-        a: "Digital, creative and print sit on one brief. Strategy, message and media are planned together so the film, landing system and outdoor all carry the same idea instead of three separate deliverables.",
+        q: "How do you decide which marketing channels are right for my brand?",
+        a: "We start by understanding your audience, goals, and budget, and then build a channel mix that fits. This can include Google Ads, Meta Ads, SEO, social media, print, outdoor and television, and we adjust the mix based on what performs best.",
       },
       {
-        q: "What is your approach to local SEO and reputation management for developers?",
-        a: "We build location-led search visibility, project pages and review systems that match how buyers actually search — then monitor sentiment so reputation stays as managed as the media plan.",
+        q: "Can you handle both creative and media under one roof?",
+        a: "Yes. Our strategy, creative, media, and digital teams work together on every campaign, so the idea, the design, and the media plan stay consistent, and you deal with one partner instead of several.",
       },
       {
-        q: "Do you handle architectural visualization and brand film production?",
-        a: "Yes. From 3D walks and stills to brand films and campaign craft, production stays inside the same team that wrote the brief so the world on screen matches the strategy.",
+        q: "Do you produce brand films, 3D visualization and AI-driven content?",
+        a: "Yes. Our in-house production team creates brand films, ad films, 3D walkthroughs, product visualizations, and AI-assisted content, which helps keep timelines shorter and quality consistent.",
       },
       {
-        q: "How do you measure and report the actual ROI of our digital campaigns?",
-        a: "We track lead quality, cost per enquiry, site visits and pipeline contribution — then report in language sales and marketing can both use, not vanity metrics alone.",
+        q: "How do you measure and report campaign ROI?",
+        a: "We track the metrics that matter to your business, such as lead quality, cost per lead, conversions, and revenue contribution. Our reports are written in language that both marketing and sales teams can use, rather than relying on vanity metrics alone.",
+      },
+    ],
+  },
+  about: {
+    faqs: [
+      {
+        q: "When was Ritz Media World founded, and by whom?",
+        a: "Ritz Media World was founded in August 2008 by Mr. Ritesh Malik, who has led the agency ever since. He also founded Creative Thinks Media, a sister agency.",
+      },
+      {
+        q: "Where is Ritz Media World based?",
+        a: "Ritz Media World is headquartered in Noida, Delhi NCR, and works with brands across India.",
+      },
+      {
+        q: "How has Ritz Media World grown since 2008?",
+        a: "The agency began with a mission to reimagine brand communication for India's growth markets. In 2012, it pioneered centrespread storytelling in Hindustan Times, and in 2016 it expanded into 360° digital marketing. In 2026, it introduced AI-powered 3D rendering, continuing 18 years of adapting to every major shift in Indian marketing.",
+      },
+      {
+        q: "What awards and recognition has Ritz Media World received?",
+        a: "Ritz Media World was named Best Creative Agency (Real Estate) in Delhi NCR by Big FM in both 2024 and 2025.",
+      },
+      {
+        q: "What partnerships and accreditations does Ritz Media World hold?",
+        a: "Ritz Media World is a Google Partner, a Meta Business Partner, a member of the Indian Newspaper Society, and a registered MSME.",
+      },
+      {
+        q: "What makes Ritz Media World different from other agencies?",
+        a: "As an independent agency, Ritz Media World combines 18 years of experience across print, radio and digital with newer capabilities in AI and 3D. This means clients get the judgement of a long-established agency together with the speed and tools of a modern one, all from a single team.",
+      },
+      {
+        q: "How can I start working with Ritz Media World?",
+        a: "You can reach the team through the contact form on the website, by email at info@ritzmediaworld.com, or by phone at +91 7290002168. We usually begin with a conversation about your brand's goals, followed by a free audit and a tailored plan.",
       },
     ],
   },
   startProject: {
     kicker: "Start a Project",
     title: "Get A Free SEO And Digital Audit For Your Brand",
+    formTitle: "Shuru Karein – It's Free",
     cta: "Get My Free Audit",
+    pills: ["Branding", "SEO", "Social Media", "Performance"],
     services: [
       "Digital Marketing",
       "Creative Services",
@@ -321,56 +465,28 @@ export const site = {
       "Ritz Media World is an independent creative, branding, digital and media agency, founded in 2008 and based in Noida, Delhi NCR.",
     address: "402–404, 4th Floor, Corporate Park, Tower A1, Sector 142, Noida 201305",
     email: "info@ritzmediaworld.com",
-    phones: ["+91 9220516777", "+91 7290002168"],
-    columns: [
-      {
-        title: "Services",
-        links: [
-          { label: "Brand & Creative", href: "/capabilities" },
-          { label: "Digital & Performance", href: "/capabilities" },
-          { label: "Film, 3D & AI", href: "/capabilities" },
-          { label: "Media", href: "/capabilities" },
-        ],
-      },
-      {
-        title: "Industries",
-        links: [
-          { label: "Real Estate", href: "/industries" },
-          { label: "Healthcare", href: "/industries" },
-          { label: "Education", href: "/industries" },
-          { label: "E-commerce", href: "/industries" },
-          { label: "Manufacturing", href: "/industries" },
-          { label: "Startups", href: "/industries" },
-        ],
-      },
-      {
-        title: "Company",
-        links: [
-          { label: "Work", href: "/work" },
-          { label: "Insights", href: "/insights" },
-          { label: "About", href: "/about" },
-          { label: "Careers", href: "/about" },
-          { label: "Contact", href: "/#start-a-project" },
-        ],
-      },
-      {
-        title: "Resources",
-        links: [
-          { label: "Case Studies", href: "/work" },
-          { label: "Reports", href: "/insights" },
-          { label: "FAQs", href: "/#highways" },
-        ],
-      },
-      {
-        title: "Digital",
-        links: [
-          { label: "LinkedIn", href: "https://www.linkedin.com/", external: true },
-          { label: "Instagram", href: "https://www.instagram.com/", external: true },
-          { label: "YouTube", href: "https://www.youtube.com/", external: true },
-          { label: "Facebook", href: "https://www.facebook.com/", external: true },
-        ],
-      },
+    phones: ["+91 7290002168"],
+    company: [
+      { label: "Home", href: "/" },
+      { label: "Portfolio", href: "/portfolio" },
+      { label: "About", href: "/about.html" },
+      { label: "Blogs", href: "/blog" },
+      { label: "Career", href: "/career" },
     ],
+    socials: [
+      { label: "Facebook", href: "https://www.facebook.com/ritzmediaworld/" },
+      { label: "Instagram", href: "https://www.instagram.com/ritzmediaworld/" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/company/ritzmediaworld/" },
+      { label: "X (Twitter)", href: "https://x.com/ritzmediaworld" },
+      { label: "YouTube", href: "https://www.youtube.com/@ritzmediaworld" },
+    ],
+    partners: [
+      { src: "/footer/partners/ins.png", alt: "Indian Newspaper Society", width: 63, height: 36 },
+      { src: "/footer/partners/meta.png", alt: "Meta Business Partner", width: 78, height: 27 },
+      { src: "/footer/partners/google.png", alt: "Google Partner", width: 35, height: 35 },
+      { src: "/footer/partners/msme.png", alt: "MSME", width: 60, height: 28 },
+    ],
+    googleSource: "https://www.google.com/preferences/source?q=ritzmediaworld.com",
   },
 };
 

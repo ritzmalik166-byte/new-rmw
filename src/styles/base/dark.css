@@ -1,0 +1,164 @@
+/* ---------- Light / dark toggle (header) ---------- */
+.site-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.theme-toggle {
+  flex: 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.theme-toggle-track {
+  position: relative;
+  display: block;
+  width: 66px;
+  height: 34px;
+  border: 2px solid #161616;
+  border-radius: 999px;
+  background: #fff3e2;
+  box-shadow: 3px 3px 0 #161616;
+  transition:
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-toggle:hover .theme-toggle-track {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 #161616;
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid #c9356e;
+  outline-offset: 4px;
+  border-radius: 999px;
+}
+
+.theme-toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #161616;
+  border-radius: 50%;
+  background: #f3c33c;
+  transition:
+    translate 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 0.3s ease;
+}
+
+.theme-toggle-sun,
+.theme-toggle-moon {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  width: 16px;
+  height: 16px;
+  translate: 0 -50%;
+  fill: none;
+  stroke: #161616;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition:
+    opacity 0.3s ease,
+    rotate 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.theme-toggle-sun {
+  left: 7px;
+}
+
+.theme-toggle-sun circle {
+  fill: #161616;
+}
+
+.theme-toggle-moon {
+  right: 7px;
+  opacity: 0.45;
+}
+
+.theme-toggle.is-dark .theme-toggle-knob {
+  translate: 32px 0;
+  background: #1b1a4a;
+}
+
+.theme-toggle.is-dark .theme-toggle-sun {
+  opacity: 0.45;
+  rotate: 90deg;
+}
+
+.theme-toggle.is-dark .theme-toggle-moon {
+  opacity: 1;
+  stroke: #f3c33c;
+  fill: #f3c33c;
+  rotate: -20deg;
+}
+
+@media (max-width: 640px) {
+  .site-header-actions {
+    gap: 10px;
+  }
+
+  .theme-toggle-track {
+    width: 58px;
+    height: 32px;
+  }
+
+  .theme-toggle-knob {
+    width: 22px;
+    height: 22px;
+  }
+
+  .theme-toggle.is-dark .theme-toggle-knob {
+    translate: 26px 0;
+  }
+
+  .theme-toggle-sun {
+    left: 6px;
+  }
+
+  .theme-toggle-moon {
+    right: 6px;
+  }
+}
+
+/* ---------- Dark mode ----------
+   The whole page is inverted with its hues turned back, so every section in
+   every stylesheet goes dark together. Media, and the surfaces ThemeSurfaces
+   tags as already dark or brand-coloured, are flipped back to their real paint. */
+html[data-theme="dark"] {
+  background: #fff;
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html[data-theme="dark"] :is([data-theme-keep], .theme-keep),
+html[data-theme="dark"] :is(img, video, canvas, iframe):not(:is([data-theme-keep], .theme-keep) *) {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* ---------- Theme change: the new theme spreads like spilled liquid ---------- */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  -webkit-mask: url("/fx/spill.svg") 0 0 / 0 0 no-repeat;
+  mask: url("/fx/spill.svg") 0 0 / 0 0 no-repeat;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle-track,
+  .theme-toggle-knob,
+  .theme-toggle-sun,
+  .theme-toggle-moon {
+    transition: none;
+  }
+}

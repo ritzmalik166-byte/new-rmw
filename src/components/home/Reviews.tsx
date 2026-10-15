@@ -155,6 +155,29 @@ export function Reviews() {
           })}
         </div>
       </div>
+
+      <div className="reviews-controls" aria-label="Testimonial controls">
+        <button
+          className="reviews-arrow"
+          type="button"
+          aria-label="Previous testimonial"
+          onClick={() => go(active - 1)}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden>
+            <path d="m14.5 5-7 7 7 7" />
+          </svg>
+        </button>
+        <button
+          className="reviews-arrow"
+          type="button"
+          aria-label="Next testimonial"
+          onClick={() => go(active + 1)}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden>
+            <path d="m9.5 5 7 7-7 7" />
+          </svg>
+        </button>
+      </div>
     </section>
   );
 }

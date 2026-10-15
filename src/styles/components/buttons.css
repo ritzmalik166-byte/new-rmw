@@ -1,0 +1,60 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 44px;
+  padding: 14px 28px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  color: #ffffff;
+  opacity: 1;
+  box-shadow:
+    0px 4px 12px 0px #e53e2a33,
+    0px 2px 4px -1px #0000001a;
+}
+
+.btn-hot {
+  width: 195px;
+  background: #e53e2a;
+}
+
+.btn-ink {
+  background: #000000;
+  box-shadow: 0px 2px 4px -1px #0000001a;
+}
+
+.btn-icon {
+  display: inline-block;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-mode: luminance;
+  mask-mode: luminance;
+}
+
+.btn-icon-arrow {
+  -webkit-mask-image: url("/icons/arrow.png");
+  mask-image: url("/icons/arrow.png");
+}
+
+.btn-icon-plus {
+  -webkit-mask-image: url("/icons/plus.png");
+  mask-image: url("/icons/plus.png");
+}

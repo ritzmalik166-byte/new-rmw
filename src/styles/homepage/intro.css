@@ -1,0 +1,254 @@
+/* ---------- Homepage intro: who's driving + trip log + cargo logos ---------- */
+.hm-intro {
+  overflow: hidden;
+  padding-top: var(--hm-pad-y);
+  background:
+    radial-gradient(55% 50% at 90% 8%, rgb(243 195 60 / 22%), transparent 70%),
+    radial-gradient(45% 40% at 0% 70%, rgb(201 53 110 / 10%), transparent 70%),
+    var(--hm-cream);
+}
+
+.hm-intro-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: clamp(40px, 6vw, 96px);
+}
+
+/* ---------- Trip log (navy dispatch card) ---------- */
+.hm-log {
+  position: relative;
+  padding: clamp(24px, 2.6vw, 34px) clamp(22px, 2.4vw, 32px);
+  border-radius: 18px;
+  background:
+    radial-gradient(120% 70% at 0% 0%, rgb(243 195 60 / 16%), transparent 60%),
+    var(--hm-navy);
+  color: #fff;
+  box-shadow: 0 34px 60px -30px rgb(27 26 74 / 65%);
+}
+
+.hm-log-head p {
+  margin: 0;
+}
+
+.hm-log-kicker {
+  color: var(--hm-yellow);
+  font-family: var(--hm-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hm-log-name {
+  margin-top: 4px !important;
+  font-family: var(--hm-serif);
+  font-size: clamp(22px, 2vw, 26px);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.hm-log-plate {
+  position: absolute;
+  top: clamp(26px, 2.8vw, 36px);
+  right: 20px;
+}
+
+.hm-log-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: clamp(20px, 2.4vw, 28px) 0 0;
+  border-top: 1px dashed rgb(255 255 255 / 22%);
+}
+
+.hm-log-stat {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 22px 0 20px;
+  border-bottom: 1px dashed rgb(255 255 255 / 22%);
+}
+
+.hm-log-stat:nth-child(even) {
+  padding-left: 24px;
+  border-left: 1px dashed rgb(255 255 255 / 22%);
+}
+
+.hm-log-stat dd {
+  margin: 0;
+  color: var(--hm-yellow);
+  font-family: var(--hm-serif);
+  font-size: clamp(44px, 4.4vw, 60px);
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.hm-log-stat dt {
+  color: rgb(255 255 255 / 62%);
+  font-family: var(--hm-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hm-log-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 12px;
+  margin: 18px 0 0;
+  font-family: var(--hm-sans);
+  font-size: 14px;
+}
+
+.hm-log-foot-label {
+  color: rgb(255 255 255 / 55%);
+  font-family: var(--hm-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hm-log-foot-dest {
+  font-family: var(--hm-serif);
+  font-size: 17px;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.hm-log-foot a {
+  margin-left: auto;
+  color: var(--hm-yellow);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.hm-log-foot a span {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.hm-log-foot a:hover span {
+  transform: translateX(4px);
+}
+
+/* ---------- Cargo: client logos ---------- */
+.hm-cargo {
+  margin-top: clamp(56px, 8vh, 88px);
+  padding: 22px 0 26px;
+  border-top: 1.5px dashed var(--hm-rule);
+  background: rgb(255 252 243 / 70%);
+}
+
+.hm-cargo-label {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 20px;
+  margin: 0 auto 18px;
+  color: var(--hm-navy);
+  font-family: var(--hm-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hm-cargo-count {
+  color: var(--hm-pink);
+}
+
+.hm-cargo-lane {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.hm-cargo-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(36px, 4vw, 64px);
+  width: max-content;
+  animation: hm-cargo 70s linear infinite;
+}
+
+.hm-cargo-lane:hover .hm-cargo-track {
+  animation-play-state: paused;
+}
+
+.hm-cargo-logo {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  height: 52px;
+}
+
+.hm-cargo-logo img {
+  width: auto;
+  max-width: 130px;
+  height: 100%;
+  max-height: 52px;
+  object-fit: contain;
+  transition: transform 0.3s var(--hm-ease);
+}
+
+.hm-cargo-logo:hover img {
+  transform: scale(1.06);
+}
+
+@keyframes hm-cargo {
+  to {
+    transform: translateX(calc(-50% - clamp(36px, 4vw, 64px) / 2));
+  }
+}
+
+@media (max-width: 980px) {
+  .hm-intro-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hm-log {
+    width: min(100%, 560px);
+  }
+}
+
+@media (max-width: 480px) {
+  .hm-log-plate {
+    position: static;
+    display: inline-block;
+    margin-top: 12px;
+  }
+
+  .hm-log-stat:nth-child(even) {
+    padding-left: 16px;
+  }
+
+  .hm-log-stat dd {
+    font-size: 40px;
+  }
+
+  .hm-log-stat dt {
+    font-size: 9.5px;
+  }
+
+  .hm-cargo-logo {
+    height: 40px;
+  }
+
+  .hm-cargo-logo img {
+    max-width: 100px;
+    max-height: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hm-cargo-track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+  }
+}

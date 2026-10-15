@@ -1,38 +1,52 @@
 import type { Metadata } from "next";
-import { FadeIn } from "@/components/motion/FadeIn";
-import { RevealText } from "@/components/motion/RevealText";
+import { AboutFounder } from "@/components/about/AboutFounder";
+import { AboutHero } from "@/components/about/AboutHero";
+import { AboutJourney } from "@/components/about/AboutJourney";
+import { AboutMileage } from "@/components/about/AboutMileage";
+import { AboutProofs } from "@/components/about/AboutProofs";
+import { AboutTruckBack } from "@/components/about/AboutTruckBack";
+import { StartProject } from "@/components/home/StartProject";
+import { HomeFaq } from "@/components/homepage/HomeFaq";
+import { pageMetadata } from "@/lib/seo";
+import { site } from "@/lib/site";
+import "@/styles/about/hero.css";
+import "@/styles/about/drive.css";
+import "@/styles/about/truck-back.css";
+import "@/styles/about/mileage.css";
+import "@/styles/about/journey.css";
+import "@/styles/about/proofs.css";
+import "@/styles/about/founder.css";
 
-export const metadata: Metadata = {
-  title: "About",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "About Ritz Media World | Award-Winning Delhi NCR Advertising Agency",
+  description:
+    "Learn how Ritz Media World crafts data-driven brand stories and digital campaigns. Over 18 years of experience turning brands into household names in Delhi NCR.",
+  keywords: [
+    "Ritz Media World",
+    "advertising agency Delhi NCR",
+    "creative agency Delhi",
+    "full service ad agency Noida",
+    "digital marketing agency Delhi NCR",
+    "brand storytelling agency India",
+    "print radio advertising Delhi NCR",
+    "award winning ad agency Delhi",
+    "client-centric marketing agency India",
+    "advertising & media services Delhi India",
+  ],
+  path: "/about.html",
+});
 
 export default function AboutPage() {
   return (
-    <section className="px-6 pt-32 pb-24 md:px-10 md:pt-40 md:pb-32">
-      <p className="mb-8 text-[11px] uppercase tracking-[0.28em] text-muted">
-        The studio
-      </p>
-      <RevealText className="max-w-[18ch] font-serif text-5xl leading-[0.95] tracking-tight md:text-7xl">
-        Built for websites that should feel like a film, not a brochure.
-      </RevealText>
-      <div className="mt-16 grid gap-12 md:grid-cols-2">
-        <FadeIn>
-          <p className="max-w-md text-sm leading-7 text-muted">
-            This codebase is the foundation: Next.js App Router, Tailwind CSS,
-            Lenis smooth scrolling, and GSAP for scroll-linked animation. Page
-            changes use a Barba-inspired leave/enter curtain so routing stays
-            native to Next.js without fighting the App Router.
-          </p>
-        </FadeIn>
-        <FadeIn delay={0.1}>
-          <ul className="space-y-4 text-sm text-foreground">
-            <li className="border-b border-line pb-4">Lenis + GSAP ticker, one RAF loop</li>
-            <li className="border-b border-line pb-4">SplitText reveals and parallax media</li>
-            <li className="border-b border-line pb-4">Magnetic links and a custom cursor</li>
-            <li className="border-b border-line pb-4">Reduced-motion fallbacks throughout</li>
-          </ul>
-        </FadeIn>
-      </div>
-    </section>
+    <>
+      <AboutHero />
+      <AboutTruckBack />
+      <AboutMileage />
+      <AboutJourney />
+      <AboutProofs />
+      <AboutFounder />
+      <HomeFaq kicker="Before you set off" faqs={site.about.faqs} />
+      <StartProject />
+    </>
   );
 }

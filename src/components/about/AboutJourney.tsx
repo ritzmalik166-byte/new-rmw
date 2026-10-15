@@ -1,0 +1,199 @@
+"use client";
+
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
+import { useMotion } from "@/components/providers/MotionProvider";
+import { RealTruck, setWheelTurn } from "@/components/ui/RealTruck";
+import { gsap, registerGsap } from "@/lib/gsap";
+
+registerGsap();
+
+const STOPS = [
+  {
+    year: "2008",
+    title: "Foundation",
+    copy: "Ritz Media World launched with a mission to reimagine brand communication for India's growth markets.",
+    place: "below",
+    at: "14%",
+    tone: "rose",
+  },
+  {
+    year: "2012",
+    title: "Innovation Leadership",
+    copy: "Pioneered centrespread storytelling in Hindustan Times, setting new creative benchmarks for print.",
+    place: "above",
+    at: "32%",
+    tone: "teal",
+  },
+  {
+    year: "2016",
+    title: "Digital Expansion",
+    copy: "Grew into a 360° agency, bringing performance marketing, content, and automation together under one roof.",
+    place: "below",
+    at: "50%",
+    tone: "navy",
+  },
+  {
+    year: "2020",
+    title: "Premium Partnerships",
+    copy: "Took on larger, high-impact campaigns and deepened long-term partnerships with premium brands.",
+    place: "above",
+    at: "68%",
+    tone: "red",
+  },
+  {
+    year: "2026",
+    title: "AI-Powered 3D Rendering at 5X",
+    copy: "Launched AI-powered 3D rendering that produces photorealistic visuals five times faster than before.",
+    place: "below",
+    at: "86%",
+    tone: "now",
+  },
+] as const;
+
+const TRUCK_GAP = 20;
+
+const truckEnd = (road: HTMLElement, truck: HTMLElement) =>
+  Math.max(0, road.clientWidth * 0.86 - truck.offsetWidth - TRUCK_GAP);
+
+export function AboutJourney() {
+  const rootRef = useRef<HTMLElement>(null);
+  const { ready, reduced } = useMotion();
+
+  useGSAP(
+    () => {
+      const root = rootRef.current;
+      if (!root || !ready) return;
+
+      let match: gsap.MatchMedia | null = null;
+      let cancelled = false;
+
+      const park = () => {
+        const road = root.querySelector<HTMLElement>(".about-journey-road");
+        const truck = root.querySelector<HTMLElement>(".about-journey-truck");
+        const cards = root.querySelectorAll<HTMLElement>(".about-journey-stop");
+        gsap.set(cards, { y: 0, autoAlpha: 1, xPercent: -50 });
+        if (!road || !truck) return;
+        gsap.set(truck, { x: truckEnd(road, truck) });
+      };
+
+      document.fonts.ready.then(() => {
+        if (cancelled) return;
+
+        if (reduced) {
+          park();
+          return;
+        }
+
+        match = gsap.matchMedia();
+
+        match.add("(max-width: 900px)", () => {
+          const cards = root.querySelectorAll<HTMLElement>(".about-journey-stop");
+          gsap.set(cards, { clearProps: "transform", autoAlpha: 1 });
+        });
+
+        match.add("(min-width: 901px)", () => {
+          const road = root.querySelector<HTMLElement>(".about-journey-road");
+          const truck = root.querySelector<HTMLElement>(".about-journey-truck");
+          const cards = root.querySelectorAll<HTMLElement>(".about-journey-stop");
+          if (!road || !truck) return;
+
+          gsap.set(cards, { y: 56, autoAlpha: 0, xPercent: -50 });
+          gsap.set(truck, { x: 0 });
+
+          const state = { p: 0 };
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: root,
+              start: "top top",
+              end: () => `+=${Math.round(window.innerHeight * 1.7)}`,
+              pin: true,
+              pinSpacing: true,
+              scrub: true,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          tl.fromTo(
+            state,
+            { p: 0 },
+            {
+              p: 1,
+              duration: 1,
+              ease: "none",
+              immediateRender: true,
+              onUpdate: () => {
+                const x = truckEnd(road, truck) * state.p;
+                gsap.set(truck, { x });
+                setWheelTurn(truck, x);
+              },
+            },
+          );
+
+          cards.forEach((card) => {
+            const at = Number.parseFloat(card.dataset.at ?? "0") / 100;
+            const when = Math.min(0.82, Math.max(0, (at - 0.14) / 0.72) * 0.82);
+            tl.to(
+              card,
+              { y: 0, autoAlpha: 1, xPercent: -50, duration: 0.18, ease: "power2.out" },
+              when,
+            );
+          });
+        });
+      });
+
+      return () => {
+        cancelled = true;
+        match?.revert();
+      };
+    },
+    { dependencies: [ready, reduced], scope: rootRef },
+  );
+
+  return (
+    <section ref={rootRef} className="about-journey">
+      <div className="about-journey-head">
+        <div>
+          <p className="about-journey-kicker">Route map · 2008 → today</p>
+          <h2 className="about-journey-title">Our Journey</h2>
+        </div>
+        <p className="about-journey-intro">
+          Each stop along the way added something new to how we work.<br />
+          These are the milestones that turned a young agency into the full-service partner it is today.
+        </p>
+      </div>
+
+      <div className="about-journey-map">
+        {STOPS.map((stop) => (
+          <article
+            key={stop.title}
+            className={`about-journey-stop is-${stop.place} is-${stop.tone}`}
+            style={{ "--at": stop.at } as React.CSSProperties}
+            data-at={stop.at}
+          >
+            <p className="about-journey-year">{stop.year}</p>
+            <h3 className="about-journey-stop-title">{stop.title}</h3>
+            <p className="about-journey-stop-copy">{stop.copy}</p>
+          </article>
+        ))}
+
+        <div className="about-journey-road">
+          <span className="about-journey-lane" aria-hidden />
+          {STOPS.map((stop) => (
+            <span
+              key={stop.title}
+              className={`about-journey-dot is-${stop.tone}`}
+              style={{ "--at": stop.at } as React.CSSProperties}
+            />
+          ))}
+          <div className="about-journey-truck">
+            <RealTruck flip small />
+          </div>
+        </div>
+      </div>
+
+      <div className="about-journey-stripes" aria-hidden />
+    </section>
+  );
+}

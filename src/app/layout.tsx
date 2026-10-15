@@ -1,9 +1,25 @@
 import type { Metadata } from "next";
-import { Archivo_Black, Inter, Montserrat, Outfit, Plus_Jakarta_Sans, Quattrocento, Quicksand, Space_Mono } from "next/font/google";
+import {
+  Archivo_Black,
+  Caveat,
+  Inter,
+  Montserrat,
+  Outfit,
+  Playfair_Display,
+  Plus_Jakarta_Sans,
+  Quattrocento,
+  Quicksand,
+  Rye,
+  Yatra_One,
+  Yeseva_One,
+} from "next/font/google";
+import { FloatingContact } from "@/components/layout/FloatingContact";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { ThemeSurfaces } from "@/components/layout/ThemeSurfaces";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { site } from "@/lib/site";
+import { THEME_BOOT_SCRIPT } from "@/lib/theme";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -26,7 +42,13 @@ const montserrat = Montserrat({
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: "900",
 });
 
 const archivo = Archivo_Black({
@@ -47,10 +69,29 @@ const quattrocento = Quattrocento({
   variable: "--font-quattrocento",
 });
 
-const spaceMono = Space_Mono({
+const rye = Rye({
   subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-space-mono",
+  weight: "400",
+  variable: "--font-rye",
+});
+
+/* Rye is Latin-only; Yatra One covers Devanagari for the Hindi "OK" swap. */
+const yatra = Yatra_One({
+  subsets: ["latin", "devanagari"],
+  weight: "400",
+  variable: "--font-yatra",
+});
+
+const yeseva = Yeseva_One({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-yeseva",
+});
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["500", "700"],
+  variable: "--font-caveat",
 });
 
 export const metadata: Metadata = {
@@ -65,9 +106,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${archivo.variable} ${inter.variable} ${montserrat.variable} ${jakarta.variable} ${quicksand.variable} ${quattrocento.variable} ${spaceMono.variable} antialiased`}
+      className={`${outfit.variable} ${archivo.variable} ${inter.variable} ${montserrat.variable} ${jakarta.variable} ${playfair.variable} ${quicksand.variable} ${quattrocento.variable} ${rye.variable} ${yatra.variable} ${yeseva.variable} ${caveat.variable} antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
+      </head>
       <body
         className="bg-background font-sans text-foreground"
         suppressHydrationWarning
@@ -76,6 +120,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Header />
           <main>{children}</main>
           <Footer />
+          <FloatingContact />
+          <ThemeSurfaces />
         </AppProviders>
       </body>
     </html>

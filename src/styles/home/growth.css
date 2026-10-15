@@ -1,0 +1,527 @@
+/* ---------- Digital marketing / growth ---------- */
+.growth {
+  --growth-blue: #0d63b3;
+  --growth-edge: 19px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  overflow: hidden;
+  background: var(--growth-blue);
+  color: #ffffff;
+}
+
+.growth-body {
+  position: relative;
+  aspect-ratio: 1024 / 576;
+  overflow: hidden;
+}
+
+.growth-art {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.growth-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.growth-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 46%,
+    rgb(6 24 52 / 0.42) 58%,
+    rgb(6 24 52 / 0.72) 100%
+  );
+}
+
+.growth-road {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+  clip-path: inset(100% 46% 0 0);
+}
+
+.growth-road img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.growth-inner {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 4% clamp(40px, 3.2vw, 72px) 5% 56%;
+}
+
+.growth-portrait {
+  position: absolute;
+  z-index: 2;
+  left: 0.6%;
+  bottom: 16.5%;
+  width: 48%;
+  max-width: none;
+  aspect-ratio: 1024 / 682;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.growth-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.growth-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: none;
+  align-self: center;
+  text-align: center;
+  container-type: inline-size;
+}
+
+.growth-kicker {
+  display: none;
+}
+
+.growth-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  margin: 0;
+  font-family: var(--font-quattrocento), Georgia, serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: clamp(26px, 4.8cqi, 40px);
+  line-height: 1.05;
+  letter-spacing: 0;
+  color: #ffe56a;
+  text-align: center;
+  white-space: normal;
+}
+
+.growth-title-line {
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+  max-width: 100%;
+  padding: 0.08em 0.7em 0.14em;
+}
+
+.growth-title-line:nth-child(2) {
+  margin-top: -0.15em;
+}
+
+.growth-brush {
+  position: absolute;
+  z-index: -1;
+  inset: -18% -2% -10%;
+  width: 104%;
+  height: 140%;
+  pointer-events: none;
+}
+
+.growth-list {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  min-height: 0;
+  margin: clamp(18px, 2vw, 28px) 0 0;
+  padding: 0;
+  gap: 16px 18px;
+  list-style: none;
+  text-align: left;
+}
+
+.growth-list li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-height: 0;
+  padding: 0;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: clamp(13px, 1.7cqi, 16px);
+  line-height: 1.15;
+  letter-spacing: 0;
+  color: #ffffff;
+}
+
+.growth-list li::before {
+  content: none;
+}
+
+.growth-badge {
+  display: grid;
+  flex: 0 0 auto;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border: 3px solid #f0c14a;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #14315f 0 58%, transparent 59%),
+    repeating-conic-gradient(from 8deg, #1f8a42 0 12deg, #f0c14a 12deg 18deg, #e23a2f 18deg 24deg);
+  box-shadow: 0 6px 14px rgb(0 0 0 / 0.28);
+  color: #ffffff;
+}
+
+.growth-badge svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.growth-label {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.growth-name {
+  font-weight: 700;
+}
+
+.growth-detail {
+  margin-top: 2px;
+  font-weight: 500;
+  font-size: 0.78em;
+  line-height: 1.2;
+  color: rgb(255 255 255 / 0.82);
+}
+
+.growth-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: auto;
+  min-width: 210px;
+  height: 52px;
+  margin-top: clamp(22px, 2.4vw, 32px);
+  padding: 0 28px;
+  overflow: visible;
+  border: 2px solid #f3c14a;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ef4a3c 0%, #c4251c 100%);
+  box-shadow: 0 10px 22px rgb(20 8 8 / 0.28);
+  text-decoration: none;
+  color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.growth-btn:hover,
+.growth-btn:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 26px rgb(20 8 8 / 0.34);
+}
+
+.growth-btn span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+  height: auto;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #ffffff;
+}
+
+.growth-arrow {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.growth-flourish {
+  position: absolute;
+  top: 50%;
+  width: 58px;
+  height: 58px;
+  pointer-events: none;
+}
+
+.growth-flourish.is-left {
+  left: -18px;
+  transform: translateY(-50%);
+}
+
+.growth-flourish.is-right {
+  right: -18px;
+  transform: translateY(-50%);
+}
+
+.growth-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: clamp(16px, 1.8vw, 24px);
+  padding-bottom: 4px;
+}
+
+.growth-dot {
+  appearance: none;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.45);
+  cursor: pointer;
+}
+
+.growth-dot-active {
+  width: 28px;
+  border-radius: 999px;
+  background: #ffffff;
+}
+
+.growth-pattern {
+  position: relative;
+  z-index: 3;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1180px) {
+  .growth-portrait {
+    left: 0;
+    width: 50%;
+    bottom: 15%;
+  }
+
+  .growth-title {
+    font-size: clamp(22px, 2.6vw, 32px);
+  }
+
+  .growth-badge {
+    width: 46px;
+    height: 46px;
+  }
+
+  .growth-inner {
+    align-items: center;
+    padding: 4% clamp(24px, 2.4vw, 40px) 5% 52%;
+  }
+
+  .growth-copy {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .growth {
+    background: #1a3f78;
+    color: #ffffff;
+  }
+
+  .growth-body {
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: auto;
+    min-height: 0;
+  }
+
+  /* Highway stays a scene. Copy leaves the flat blue slab and sits
+     in a paper card that overlaps the roadside. */
+  .growth-art {
+    position: relative;
+    inset: auto;
+    flex: none;
+    aspect-ratio: 16 / 9;
+  }
+
+  .growth-art img {
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    object-position: 0% 100%;
+  }
+
+  .growth-art::after {
+    background: linear-gradient(
+      180deg,
+      transparent 58%,
+      rgb(26 63 120 / 0.35) 82%,
+      #1a3f78 100%
+    );
+  }
+
+  .growth-body > .growth-portrait {
+    position: absolute;
+    top: 0;
+    left: 4%;
+    bottom: auto;
+    width: 52%;
+    margin: 13.6% 0 0;
+    align-self: auto;
+  }
+
+  .growth-inner {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    height: auto;
+    gap: 0;
+    margin-top: -2rem;
+    padding: 0 1.5rem 2rem;
+    background: linear-gradient(180deg, #1a3f78 0%, #c56a28 100%);
+  }
+
+  .growth-road {
+    display: none;
+  }
+
+  .growth-copy {
+    position: relative;
+    justify-self: stretch;
+    max-width: 36rem;
+    margin-inline: auto;
+    padding: 0.4rem 0 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .growth-copy::before {
+    content: none;
+  }
+
+  .growth-kicker {
+    display: none;
+  }
+
+  .growth-title {
+    font-size: clamp(24px, 4vw, 32px);
+    color: #ffe56a;
+  }
+
+  .growth-list {
+    max-width: 520px;
+    padding-top: 0;
+  }
+
+  .growth-list li {
+    padding: 0;
+    border-bottom: 0;
+    color: #ffffff;
+  }
+
+  .growth-list li::before {
+    content: none;
+  }
+
+  .growth-btn {
+    height: 48px;
+    margin-top: 1.2rem;
+  }
+
+  .growth-btn span {
+    font-size: 14px;
+  }
+
+  .growth-dots {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Taller scene on phones so the hoarding reads large; the roadside is at
+     68% of width for a 5:4 crop. */
+  .growth-art {
+    aspect-ratio: 5 / 4;
+  }
+
+  .growth-body > .growth-portrait {
+    left: 9%;
+    width: 82%;
+    margin-top: 13.9%;
+  }
+
+  .growth-inner {
+    margin-top: -2.75rem;
+    padding: 0 1rem 1.65rem;
+  }
+
+  .growth-title {
+    font-size: clamp(22px, 6.2vw, 28px);
+  }
+
+  .growth-list {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+  }
+
+  .growth-badge {
+    width: 46px;
+    height: 46px;
+  }
+
+  .growth-btn {
+    width: auto;
+    max-width: calc(100% - 36px);
+    height: 48px;
+  }
+
+  .growth-flourish {
+    width: 46px;
+    height: 46px;
+  }
+}

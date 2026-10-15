@@ -1,31 +1,19 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, useContext, useMemo } from "react";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 type MotionContextValue = {
   ready: boolean;
   reduced: boolean;
-  setReady: () => void;
 };
 
 const MotionContext = createContext<MotionContextValue | null>(null);
 
 export function MotionProvider({ children }: { children: React.ReactNode }) {
   const reduced = usePrefersReducedMotion();
-  const [ready, setReadyState] = useState(false);
-  const setReady = useCallback(() => setReadyState(true), []);
 
-  const value = useMemo(
-    () => ({ ready: ready || reduced, reduced, setReady }),
-    [ready, reduced, setReady],
-  );
+  const value = useMemo(() => ({ ready: true, reduced }), [reduced]);
 
   return (
     <MotionContext.Provider value={value}>{children}</MotionContext.Provider>

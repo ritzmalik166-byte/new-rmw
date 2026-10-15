@@ -1,0 +1,510 @@
+/* ---------- Homepage testimonial: proof-of-delivery slip ---------- */
+.hm-voice {
+  overflow: hidden;
+  padding-block: calc(var(--hm-pad-y) + 21px) var(--hm-pad-y);
+  background:
+    radial-gradient(55% 50% at 100% 30%, rgb(243 195 60 / 20%), transparent 70%),
+    radial-gradient(40% 40% at 0% 90%, rgb(201 53 110 / 10%), transparent 70%),
+    var(--hm-cream);
+}
+
+.hm-voice::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 21px;
+  background: url("/about/diagonal-stripes.png") repeat-x left center / auto 100%;
+  opacity: 0.9;
+}
+
+.hm-voice-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: clamp(40px, 6vw, 96px);
+}
+
+.hm-voice-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 28px;
+  font-family: var(--hm-mono);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.hm-voice-controls button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--hm-ink);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--hm-ink);
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--hm-ink);
+  transition:
+    transform 0.2s var(--hm-ease),
+    box-shadow 0.2s var(--hm-ease);
+}
+
+.hm-voice-controls button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--hm-ink);
+}
+
+.hm-voice-count b {
+  color: var(--hm-pink);
+}
+
+.hm-voice-progress {
+  position: relative;
+  width: 72px;
+  height: 3px;
+  overflow: hidden;
+  background: rgb(27 26 74 / 14%);
+}
+
+.hm-voice-progress s {
+  position: absolute;
+  inset: 0;
+  background: var(--hm-orange);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.hm-voice-progress s[data-running="true"] {
+  animation: hm-voice-progress 7s linear forwards;
+}
+
+@keyframes hm-voice-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------- Deck of slips: the front one is read, the next two peek out ---------- */
+.hm-voice-deck {
+  position: relative;
+  display: grid;
+  padding: 34px 40px 0 0;
+  filter: drop-shadow(0 22px 26px rgb(60 40 10 / 14%)) drop-shadow(0 3px 4px rgb(60 40 10 / 10%));
+}
+
+.hm-receipt {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  grid-area: 1 / 1;
+  margin: 0;
+  padding: clamp(28px, 3vw, 40px) clamp(22px, 3vw, 40px) clamp(22px, 2.6vw, 32px);
+  background:
+    repeating-linear-gradient(0deg, rgb(185 174 147 / 7%) 0 1px, transparent 1px 30px),
+    var(--hm-paper);
+  rotate: -1.5deg;
+  -webkit-mask: radial-gradient(6px at 50% 0, #0000 97%, #000) 50% / 16px 100%;
+  mask: radial-gradient(6px at 50% 0, #0000 97%, #000) 50% / 16px 100%;
+  transition:
+    transform 0.7s var(--hm-ease),
+    rotate 0.7s var(--hm-ease),
+    opacity 0.5s ease;
+}
+
+.hm-receipt[data-slot="0"] {
+  z-index: 4;
+}
+
+.hm-receipt[data-slot="1"],
+.hm-receipt[data-slot="2"] {
+  cursor: pointer;
+}
+
+.hm-receipt[data-slot="1"] {
+  z-index: 3;
+  background-color: #fbf3e2;
+  transform: translate(18px, -17px) scale(0.975);
+  rotate: 2deg;
+}
+
+.hm-receipt[data-slot="2"],
+.hm-receipt[data-slot="hidden"] {
+  z-index: 2;
+  background-color: #f6ead2;
+  transform: translate(36px, -34px) scale(0.95);
+  rotate: 4.5deg;
+}
+
+.hm-receipt[data-slot="hidden"] {
+  z-index: 1;
+  opacity: 0;
+}
+
+.hm-receipt[data-slot="out"] {
+  z-index: 5;
+  opacity: 0;
+  transform: translate(-55%, 60px) scale(0.92);
+  rotate: -14deg;
+  pointer-events: none;
+}
+
+.hm-receipt:not([data-slot="0"]) > * {
+  opacity: 0.45;
+}
+
+.hm-receipt-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: 12px;
+}
+
+.hm-receipt-tag {
+  padding: 4px 10px;
+  border: 1.5px solid var(--hm-ink);
+  border-radius: 999px;
+  background: var(--hm-yellow);
+  color: var(--hm-ink);
+  font-family: var(--hm-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hm-receipt-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px 20px;
+  padding-bottom: 14px;
+  border-bottom: 3px double var(--hm-navy);
+}
+
+.hm-receipt-head p {
+  margin: 0;
+}
+
+.hm-receipt-brand {
+  color: var(--hm-pink);
+  font-family: var(--hm-serif);
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.hm-receipt-sub,
+.hm-receipt-label {
+  color: #6c6553;
+  font-family: var(--hm-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hm-receipt-sub {
+  margin-top: 4px !important;
+  color: var(--hm-navy);
+}
+
+.hm-receipt-stars {
+  display: block;
+  width: 120px;
+  height: auto;
+}
+
+.hm-receipt-quote {
+  display: flex;
+  flex: 1 0 auto;
+  align-items: center;
+  margin: 24px 0 0;
+}
+
+.hm-receipt-quote p {
+  margin: 0;
+  color: var(--hm-ink-blue);
+  font-family: var(--hm-serif);
+  font-size: clamp(18px, 1.75vw, 24px);
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.hm-receipt-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 16px;
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 1.5px dashed var(--hm-rule);
+}
+
+.hm-receipt-avatar {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border: 2px solid var(--hm-navy);
+  border-radius: 50%;
+  background: var(--tone, var(--hm-navy));
+  color: #fff;
+  font-family: var(--hm-serif);
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.hm-receipt-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hm-receipt-who {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--hm-sans);
+  font-size: 13px;
+  color: var(--hm-muted);
+}
+
+.hm-receipt-who strong {
+  color: var(--hm-navy);
+  font-family: var(--hm-serif);
+  font-size: 17px;
+}
+
+.hm-receipt-sign {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+}
+
+.hm-receipt-hand {
+  min-width: 130px;
+  padding: 0 12px 2px;
+  border-bottom: 1.5px solid var(--hm-navy);
+  color: var(--hm-ink-blue);
+  font-family: var(--hm-serif);
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 700;
+  text-align: center;
+}
+
+.hm-receipt-sign .hm-receipt-label {
+  margin-top: 4px;
+}
+
+.hm-receipt-stamp {
+  position: absolute;
+  top: clamp(46px, 5vw, 62px);
+  right: calc(40px + 5%);
+  z-index: 6;
+  width: clamp(92px, 18%, 124px);
+  height: auto;
+  color: #1f8a5b;
+  rotate: -12deg;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* ---------- Belt of every slip, rolling past under the deck ---------- */
+.hm-voice-belt {
+  margin-top: clamp(48px, 7vh, 80px);
+  overflow: hidden;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.hm-voice-belt-track {
+  display: flex;
+  width: max-content;
+  animation: hm-voice-belt 60s linear infinite;
+}
+
+.hm-voice-belt:hover .hm-voice-belt-track,
+.hm-voice-belt:focus-within .hm-voice-belt-track {
+  animation-play-state: paused;
+}
+
+.hm-voice-belt-list {
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 10px 20px 14px 0;
+  list-style: none;
+}
+
+.hm-slip {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 330px;
+  height: 100%;
+  padding: 18px 20px;
+  border: 2px solid var(--hm-ink);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 4px 4px 0 var(--hm-ink);
+  color: var(--hm-navy);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 0.25s var(--hm-ease),
+    box-shadow 0.25s var(--hm-ease),
+    background-color 0.25s ease;
+}
+
+.hm-slip:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--hm-ink);
+}
+
+.hm-slip[data-active="true"] {
+  background: var(--hm-paper);
+  box-shadow: 4px 4px 0 var(--hm-pink);
+}
+
+.hm-slip-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.hm-slip-tag {
+  color: var(--hm-pink);
+  font-family: var(--hm-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hm-slip-stars {
+  color: var(--hm-gold);
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+.hm-slip-quote {
+  display: -webkit-box;
+  flex: 1 0 auto;
+  overflow: hidden;
+  color: var(--hm-ink-blue);
+  font-family: var(--hm-serif);
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.5;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+.hm-slip-who {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1.5px dashed var(--hm-rule);
+  font-family: var(--hm-sans);
+  font-size: 12px;
+  color: var(--hm-muted);
+}
+
+.hm-slip-who > span:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.hm-slip-who strong {
+  color: var(--hm-navy);
+  font-family: var(--hm-serif);
+  font-size: 15px;
+}
+
+.hm-slip .hm-receipt-avatar {
+  width: 38px;
+  height: 38px;
+  border-width: 1.5px;
+  font-size: 14px;
+}
+
+@keyframes hm-voice-belt {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 980px) {
+  .hm-voice-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .hm-voice-deck {
+    padding: 26px 22px 0 0;
+  }
+
+  .hm-receipt {
+    rotate: -0.5deg;
+  }
+
+  .hm-receipt[data-slot="1"] {
+    transform: translate(10px, -12px) scale(0.975);
+  }
+
+  .hm-receipt[data-slot="2"],
+  .hm-receipt[data-slot="hidden"] {
+    transform: translate(20px, -24px) scale(0.95);
+  }
+
+  .hm-receipt-head > div {
+    padding-right: 78px;
+  }
+
+  .hm-receipt-stamp {
+    top: 38px;
+    right: calc(22px + 3%);
+    width: 80px;
+  }
+
+  .hm-receipt-sign {
+    margin-left: 0;
+    align-items: flex-start;
+  }
+
+  .hm-slip {
+    width: 280px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hm-receipt {
+    transition: none;
+  }
+
+  .hm-voice-belt {
+    overflow-x: auto;
+  }
+
+  .hm-voice-belt-track {
+    animation: none;
+  }
+}

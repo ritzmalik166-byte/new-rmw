@@ -1,0 +1,716 @@
+/* ---------- Inner sub-service page (/services/[slug]/[sub]) ---------- */
+
+/* ---------- Hero ---------- */
+.ssd-hero {
+  overflow: hidden;
+  padding: clamp(128px, 17vh, 160px) 0 0;
+  background:
+    radial-gradient(55% 50% at 92% 10%, rgb(243 195 60 / 26%), transparent 70%),
+    radial-gradient(45% 45% at 0% 85%, rgb(201 53 110 / 10%), transparent 70%),
+    var(--hm-cream);
+}
+
+.ssd-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: center;
+  gap: clamp(40px, 6vw, 96px);
+  padding-bottom: clamp(56px, 8vh, 96px);
+}
+
+.ssd-hero .hm-title {
+  font-size: clamp(38px, 4.2vw, 62px);
+}
+
+.ssd-hero-copy {
+  container-type: inline-size;
+}
+
+.ssd-hero .hm-title.is-line-locked {
+  font-size: min(clamp(38px, 4.2vw, 62px), calc(100cqi / (var(--title-chars, 24) * 0.5)));
+}
+
+.ssd-hero .hm-lede {
+  max-width: 56ch;
+}
+
+.ssd-hero-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ssd-hero-facts li {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1.5px solid var(--hm-ink);
+  border-radius: 999px;
+  background: var(--hm-paper);
+  color: var(--hm-muted);
+  font-family: var(--hm-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ssd-hero-facts strong {
+  color: var(--hm-pink);
+  font-family: var(--hm-serif);
+  font-size: 18px;
+  letter-spacing: 0;
+}
+
+.ssd-hero-art {
+  position: relative;
+  justify-self: end;
+  width: min(100%, 760px);
+  padding: 18px 0 64px;
+}
+
+.ssd-print {
+  position: relative;
+  margin: 0;
+  padding: 12px 12px 0;
+  background: var(--hm-paper);
+  box-shadow:
+    0 30px 44px -26px rgb(60 40 10 / 48%),
+    0 2px 4px rgb(60 40 10 / 12%);
+  rotate: 2.5deg;
+}
+
+.ssd-print::before,
+.ssd-print::after {
+  position: absolute;
+  top: -12px;
+  z-index: 1;
+  width: 92px;
+  height: 26px;
+  background: rgb(243 195 60 / 75%);
+  box-shadow: 0 1px 2px rgb(60 40 10 / 18%);
+  content: "";
+}
+
+.ssd-print::before {
+  left: 24px;
+  rotate: -7deg;
+}
+
+.ssd-print::after {
+  right: 24px;
+  rotate: 6deg;
+}
+
+.ssd-print-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #e9e4d6;
+}
+
+.ssd-print-media img {
+  object-fit: cover;
+}
+
+.ssd-print figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 2px 10px;
+  padding: 12px 4px 14px 48%;
+  text-align: right;
+  color: var(--hm-navy);
+  font-family: var(--hm-serif);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.ssd-print figcaption span {
+  color: var(--hm-pink);
+  font-family: var(--hm-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ssd-ticket {
+  position: absolute;
+  bottom: 0;
+  left: -6%;
+  z-index: 2;
+  width: min(250px, 52%);
+  padding: 14px 16px 12px;
+  border: 2px solid var(--hm-ink);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 0 50%, transparent 9px, var(--hm-yellow) 10px) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 50%, transparent 9px, var(--hm-yellow) 10px) right / 51% 100% no-repeat;
+  box-shadow: 5px 5px 0 var(--hm-ink);
+  color: var(--hm-ink);
+  rotate: -4deg;
+}
+
+.ssd-ticket-head {
+  margin: 0 0 8px;
+  padding-bottom: 8px;
+  border-bottom: 1.5px dashed var(--hm-ink);
+  font-family: var(--hm-mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ssd-ticket-row {
+  display: flex;
+  gap: 10px;
+  margin: 4px 0 0;
+  font-family: var(--hm-serif);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.ssd-ticket-row span {
+  flex: none;
+  width: 34px;
+  color: var(--hm-red);
+  font-family: var(--hm-mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  line-height: 1.9;
+  text-transform: uppercase;
+}
+
+.ssd-hero-stamp {
+  position: absolute;
+  top: -2%;
+  right: -4%;
+  z-index: 3;
+  width: clamp(92px, 9vw, 124px);
+  height: auto;
+  color: #d0335d;
+  rotate: 12deg;
+  mix-blend-mode: multiply;
+}
+
+/* Hazard-striped checkpoint ticker under the hero. */
+.ssd-ticker {
+  overflow: hidden;
+  border-block: 2px solid var(--hm-ink);
+  background: var(--hm-navy);
+  color: #fff;
+}
+
+.ssd-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ssd-ticker 38s linear infinite;
+}
+
+.ssd-ticker p {
+  display: flex;
+  margin: 0;
+}
+
+.ssd-ticker span {
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  padding: 14px 22px 14px 0;
+  font-family: var(--hm-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.ssd-ticker span::after {
+  width: 34px;
+  height: 10px;
+  background: repeating-linear-gradient(-45deg, var(--hm-yellow) 0 6px, var(--hm-ink) 6px 12px);
+  content: "";
+}
+
+.ssd-ticker:hover .ssd-ticker-track {
+  animation-play-state: paused;
+}
+
+@keyframes ssd-ticker {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- Route: checkpoints along a centre road ---------- */
+.ssd-route {
+  padding-block: var(--hm-pad-y);
+  background: #fff;
+}
+
+.ssd-route-head {
+  max-width: 760px;
+  margin: 0 auto clamp(48px, 8vh, 88px);
+  text-align: center;
+}
+
+.ssd-route-head .hm-kicker {
+  justify-content: center;
+}
+
+.ssd-route-head .hm-lede {
+  margin-inline: auto;
+}
+
+.ssd-road {
+  --road-x: 50%;
+  position: relative;
+  padding-bottom: 72px;
+}
+
+.ssd-road-line {
+  position: absolute;
+  top: 0;
+  bottom: 40px;
+  left: var(--road-x);
+  width: 44px;
+  margin-left: -22px;
+  border-inline: 3px solid var(--hm-ink);
+  background:
+    linear-gradient(to bottom, var(--hm-yellow) 0 18px, transparent 18px 36px) center / 4px 36px repeat-y,
+    #2c2b33;
+}
+
+.ssd-road-truck {
+  --truck-w: 74px;
+  left: var(--road-x);
+  z-index: 2;
+}
+
+.ssd-stops {
+  position: relative;
+  display: grid;
+  gap: clamp(56px, 9vh, 110px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ssd-stop {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 120px minmax(0, 1fr);
+  align-items: center;
+}
+
+.ssd-stop-media {
+  position: relative;
+  grid-row: 1;
+  width: min(100%, 720px);
+  aspect-ratio: 653 / 470;
+  margin: 0;
+  overflow: hidden;
+  border: 2px solid var(--hm-ink);
+  border-radius: 16px;
+  background: #ece6d6;
+  box-shadow: 8px 8px 0 var(--hm-ink);
+}
+
+.ssd-stop-media img {
+  object-fit: cover;
+  transition: filter 0.5s ease;
+}
+
+.ssd-stop:hover .ssd-stop-media img {
+  filter: saturate(1.15);
+}
+
+.ssd-stop-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 6px 10px;
+  border: 2px solid var(--hm-ink);
+  border-radius: 6px;
+  background: var(--hm-yellow);
+  color: var(--hm-ink);
+  font-family: var(--hm-mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.ssd-stop-pin {
+  z-index: 3;
+  display: grid;
+  grid-row: 1;
+  grid-column: 2;
+  place-items: center;
+  justify-self: center;
+  width: 58px;
+  aspect-ratio: 1;
+  border: 3px solid var(--hm-ink);
+  border-radius: 50%;
+  background: var(--hm-pink);
+  box-shadow: 0 0 0 6px #fff;
+  color: #fff;
+  font-family: var(--hm-serif);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.ssd-stop-copy {
+  grid-row: 1;
+  max-width: 480px;
+}
+
+/* On wide screens the photos stop growing and hug the road. */
+.ssd-stop.is-left .ssd-stop-media {
+  grid-column: 1;
+  justify-self: end;
+}
+
+.ssd-stop.is-left .ssd-stop-copy {
+  grid-column: 3;
+}
+
+.ssd-stop.is-right .ssd-stop-media {
+  grid-column: 3;
+  justify-self: start;
+}
+
+.ssd-stop.is-right .ssd-stop-copy {
+  grid-column: 1;
+  justify-self: end;
+  text-align: right;
+}
+
+.ssd-stop-no {
+  margin: 0;
+  color: var(--hm-pink);
+  font-family: var(--hm-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ssd-stop-title {
+  margin: 10px 0 0;
+  color: var(--hm-navy);
+  font-family: var(--hm-serif);
+  font-size: clamp(26px, 2.5vw, 36px);
+  font-weight: 700;
+  line-height: 1.12;
+}
+
+.ssd-stop-text {
+  margin: 14px 0 0;
+  color: var(--hm-muted);
+  font-family: var(--hm-sans);
+  font-size: clamp(15px, 1.1vw, 16.5px);
+  line-height: 1.7;
+}
+
+.ssd-road-end {
+  position: absolute;
+  bottom: 0;
+  left: var(--road-x);
+  z-index: 3;
+  display: grid;
+  margin: 0;
+  padding: 8px 18px;
+  border: 2.5px solid var(--hm-ink);
+  border-radius: 8px;
+  background: var(--hm-teal);
+  box-shadow: 4px 4px 0 var(--hm-ink);
+  color: #fff;
+  font-family: var(--hm-serif);
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.ssd-road-end span {
+  font-family: var(--hm-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* ---------- More stops ---------- */
+.ssd-more {
+  padding-block: var(--hm-pad-y);
+  background: var(--hm-sand);
+}
+
+.ssd-more-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ssd-more-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  padding: 12px 12px 18px;
+  border: 2px solid var(--hm-ink);
+  border-radius: 16px;
+  background: var(--hm-paper);
+  box-shadow: 5px 5px 0 var(--hm-ink);
+  color: var(--hm-navy);
+  text-decoration: none;
+  transition:
+    transform 0.3s var(--hm-ease),
+    box-shadow 0.3s var(--hm-ease),
+    background-color 0.3s ease;
+}
+
+.ssd-more-card:hover {
+  background: #fff;
+  box-shadow: 8px 8px 0 var(--hm-ink);
+  transform: translate(-3px, -3px);
+}
+
+.ssd-more-card.is-here {
+  background: var(--hm-yellow);
+}
+
+.ssd-more-media {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 6px;
+  overflow: hidden;
+  border: 1.5px solid var(--hm-ink);
+  border-radius: 10px;
+  background: #ece6d6;
+}
+
+.ssd-more-media img {
+  object-fit: cover;
+  transition: transform 0.7s var(--hm-ease);
+}
+
+.ssd-more-card:hover .ssd-more-media img {
+  transform: scale(1.07);
+}
+
+.ssd-more-no {
+  padding-inline: 4px;
+  color: var(--hm-pink);
+  font-family: var(--hm-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ssd-more-card.is-here .ssd-more-no {
+  color: var(--hm-ink);
+}
+
+.ssd-more-name {
+  padding-inline: 4px;
+  font-family: var(--hm-serif);
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.ssd-more-cta {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-end;
+  gap: 6px;
+  margin-top: auto;
+  padding: 6px 4px 0;
+  color: var(--hm-muted);
+  font-family: var(--hm-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ssd-more-cta svg {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.25s var(--hm-ease);
+}
+
+.ssd-more-card:hover .ssd-more-cta {
+  color: var(--hm-pink);
+}
+
+.ssd-more-card:hover .ssd-more-cta svg {
+  transform: translate(2px, -2px);
+}
+
+/* ---------- Service page: link from the plan panel ---------- */
+.sd-plan-panel-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+  padding: 10px 16px;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  color: var(--hm-yellow);
+  font-family: var(--hm-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.sd-plan-panel-link svg {
+  width: 12px;
+  height: 12px;
+}
+
+.sd-plan-panel-link:hover {
+  background: var(--hm-yellow);
+  color: var(--hm-navy);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .ssd-more-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 980px) {
+  .ssd-hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ssd-hero-art {
+    justify-self: center;
+  }
+
+  .ssd-ticket {
+    left: 0;
+  }
+}
+
+/* Road moves to the left edge; every checkpoint stacks image over copy. */
+@media (max-width: 860px) {
+  .ssd-road {
+    --road-x: 22px;
+  }
+
+  .ssd-road-line {
+    width: 30px;
+    margin-left: -15px;
+  }
+
+  .ssd-road-truck {
+    --truck-w: 54px;
+  }
+
+  .ssd-stop {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    padding-left: 64px;
+  }
+
+  .ssd-stop.is-left .ssd-stop-media,
+  .ssd-stop.is-right .ssd-stop-media,
+  .ssd-stop.is-left .ssd-stop-copy,
+  .ssd-stop.is-right .ssd-stop-copy {
+    grid-row: auto;
+    grid-column: 1;
+  }
+
+  .ssd-stop.is-left .ssd-stop-media,
+  .ssd-stop.is-right .ssd-stop-media {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .ssd-stop.is-right .ssd-stop-copy {
+    justify-self: start;
+    text-align: left;
+  }
+
+  /* An absolutely placed grid item keeps its column lines as its containing
+     block, so the desktop column-2 placement would push the pin off-screen. */
+  .ssd-stop-pin {
+    position: absolute;
+    top: 0;
+    left: 22px;
+    grid-row: auto;
+    grid-column: auto;
+    width: 42px;
+    margin-left: -21px;
+    font-size: 15px;
+  }
+
+  .ssd-stop-media {
+    box-shadow: 5px 5px 0 var(--hm-ink);
+  }
+
+  .ssd-road-end {
+    left: 0;
+    transform: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .ssd-hero-facts {
+    justify-content: center;
+  }
+}
+
+/* The print is too narrow to share with the ticket, so the ticket drops below it. */
+@media (max-width: 640px) {
+  .ssd-more-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ssd-hero-art {
+    padding-bottom: 12px;
+  }
+
+  .ssd-hero-stamp {
+    right: 0;
+  }
+
+  .ssd-print figcaption {
+    padding-left: 4px;
+  }
+
+  .ssd-ticket {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    width: min(260px, 80%);
+    margin: 14px 0 0 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ssd-ticker-track {
+    animation: none;
+  }
+}

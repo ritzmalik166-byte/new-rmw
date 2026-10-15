@@ -1,77 +1,107 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
-import { useMotion } from "@/components/providers/MotionProvider";
-import { gsap, registerGsap } from "@/lib/gsap";
+import { useState } from "react";
+import Image from "next/image";
+import DriftWall from "@/components/ui/DriftWall";
 import { site } from "@/lib/site";
-
-registerGsap();
-gsap.registerPlugin(useGSAP);
+import { AnimatePresence, motion } from "framer-motion";
 
 export function Awards() {
-  const rootRef = useRef<HTMLElement>(null);
-  const { ready, reduced } = useMotion();
-  const item = site.awards.items[0];
+  const [selectedAwardIndex, setSelectedAwardIndex] = useState<number | null>(null);
 
-  useGSAP(
-    () => {
-      const root = rootRef.current;
-      if (!root || !ready || reduced) return;
+  const driftItems = site.awards.items.map((item, index) => ({
+    image: item.src,
+    title: item.heading,
+    originalIndex: index,
+  }));
 
-      gsap.fromTo(
-        root.querySelectorAll("[data-awards-item]"),
-        { autoAlpha: 0, y: 18 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.1,
-          ease: "power2.out",
-          scrollTrigger: { trigger: root, start: "top 78%" },
-        },
-      );
-    },
-    { scope: rootRef, dependencies: [ready, reduced] },
-  );
+  const activeAward = selectedAwardIndex !== null ? site.awards.items[selectedAwardIndex] : null;
 
   return (
-    <section ref={rootRef} className="awards" aria-label="Awards">
-      <div className="awards-inner">
-        <div data-awards-item className="awards-visual">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/hero-section/Truck_Art.png"
-            alt=""
-            width={900}
-            height={420}
-            className="awards-truck"
-          />
-          <h2 className="awards-title">{site.awards.title}</h2>
-        </div>
-
-        <article data-awards-item className="awards-card">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/s9/image 16.png"
-            alt=""
-            width={673}
-            height={380}
-            className="awards-card-art"
-          />
-          <div className="awards-card-inner">
-            <p className="awards-year">{item.year}</p>
-            <div className="awards-mark">
-              <div className="awards-logo">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/logo.png" alt="Ritz Media World" width={96} height={96} />
-              </div>
-              <p className="awards-heading">{item.heading}</p>
-              <p className="awards-copy">{item.copy}</p>
-            </div>
-          </div>
-        </article>
+    <section className="awards" aria-label="Awards">
+      <div className="awards-bg-overlay"></div>
+      <div className="awards-showcase-full">
+        <DriftWall
+          items={driftItems}
+          columns={6}
+          tileWidth={240}
+          tileHeight={360}
+          gap={0}
+          tilt={16}
+          turn={-14}
+          perspective={1200}
+          depth={120}
+          speed={42}
+          direction="up"
+          variance={0.45}
+          parallax={0.6}
+          lift={64}
+          fade={0}
+          dim={1}
+          overlayColor="transparent"
+          radius={0}
+          roll={0}
+          pauseOnHover={false}
+          grayscale={false}
+          onItemClick={(item) => {
+            if (item.originalIndex !== undefined) {
+              setSelectedAwardIndex(item.originalIndex);
+            }
+          }}
+        />
       </div>
+
+      <AnimatePresence>
+        {activeAward && (
+          <motion.div
+            className="carousel-modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedAwardIndex(null)}
+          >
+            <motion.div
+              className="carousel-modal"
+              initial={{ opacity: 0, y: 20, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.96 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="carousel-modal-close"
+                onClick={() => setSelectedAwardIndex(null)}
+                aria-label="Close modal"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+              
+              <div className="carousel-modal-image">
+                <Image
+                  src={activeAward.src}
+                  alt={activeAward.alt ?? activeAward.heading}
+                  fill
+                  sizes="(max-width: 768px) 90vw, 500px"
+                />
+              </div>
+              
+              <div className="carousel-modal-details">
+                {activeAward.year && (
+                  <p className="carousel-modal-year">{activeAward.year}</p>
+                )}
+                {activeAward.subtitle && (
+                  <p className="carousel-modal-subtitle">{activeAward.subtitle}</p>
+                )}
+                <h3 className="carousel-modal-title">{activeAward.heading}</h3>
+                <p className="carousel-modal-desc">{activeAward.copy}</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
