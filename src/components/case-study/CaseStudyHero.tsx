@@ -47,8 +47,9 @@ export function CaseStudyHero({ caseStudies }: { caseStudies: CaseStudy[] }) {
           />
 
           <p data-hm-fade className="hm-lede">
-            Thought-provoking ideas, industry insights and fresh perspectives from the world of
-            creativity and communication, unpacked by the Ritz Media World team.
+            Brand case studies and market intelligence reports from Ritz Media World, breaking down
+            how leading Indian and global brands win attention, alongside our own research on
+            India&apos;s fastest-growing markets.
           </p>
 
           <div data-hm-fade className="hm-actions">

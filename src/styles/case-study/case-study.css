@@ -212,6 +212,16 @@
   overflow: visible;
 }
 
+.cs-work-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cs-work-note {
+  margin: 0;
+}
+
 .cs-years {
   display: flex;
   flex-wrap: wrap;

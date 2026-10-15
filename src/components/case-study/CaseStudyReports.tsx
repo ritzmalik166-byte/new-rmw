@@ -39,8 +39,9 @@ export function CaseStudyReports() {
             lines={[{ text: "Download our" }, { text: "latest outlooks.", accent: true }]}
           />
           <p data-hm-fade className="hm-lede">
-            Deep-dive Mid-Year 2026 reports from Ritz Media World covering NCR&apos;s key luxury and
-            growth corridors, with infrastructure, buyer and market insights.
+            Free Mid-Year 2026 real estate market reports from Ritz Media World, covering North
+            India&apos;s key luxury and growth markets, from Noida, Gurgaon and Ghaziabad to the NCR
+            periphery, with insights on infrastructure, buyers and pricing.
           </p>
         </div>
 

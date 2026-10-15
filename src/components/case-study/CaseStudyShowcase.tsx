@@ -99,7 +99,7 @@ export function CaseStudyShowcase({ caseStudies }: { caseStudies: CaseStudy[] })
         <div className="cs-work-head">
           <div>
             <p data-hm-fade className="hm-kicker">
-              <span className="hm-pill">Selected work</span>
+              <span className="hm-pill">Brand Stories</span>
               <span className="hm-hindi" lang="hi">
                 चुनिंदा किस्से
               </span>
@@ -110,28 +110,34 @@ export function CaseStudyShowcase({ caseStudies }: { caseStudies: CaseStudy[] })
             />
           </div>
 
-          {years.length > 1 ? (
-            <div data-hm-fade className="cs-years" role="group" aria-label="Filter case studies by year">
-              {[ALL_YEARS, ...years].map((option) => {
-                const count =
-                  option === ALL_YEARS
-                    ? caseStudies.length
-                    : caseStudies.filter((item) => item.year === option).length;
-                return (
-                  <button
-                    key={option}
-                    type="button"
-                    className={cn("cs-year", option === year && "is-active")}
-                    aria-pressed={option === year}
-                    onClick={() => selectYear(option)}
-                  >
-                    {option === ALL_YEARS ? "All years" : option}
-                    <span className="cs-year-count">{pad(count)}</span>
-                  </button>
-                );
-              })}
-            </div>
-          ) : null}
+          <div className="cs-work-filters">
+            {years.length > 1 ? (
+              <div data-hm-fade className="cs-years" role="group" aria-label="Filter case studies by year">
+                {[ALL_YEARS, ...years].map((option) => {
+                  const count =
+                    option === ALL_YEARS
+                      ? caseStudies.length
+                      : caseStudies.filter((item) => item.year === option).length;
+                  return (
+                    <button
+                      key={option}
+                      type="button"
+                      className={cn("cs-year", option === year && "is-active")}
+                      aria-pressed={option === year}
+                      onClick={() => selectYear(option)}
+                    >
+                      {option === ALL_YEARS ? "All years" : option}
+                      <span className="cs-year-count">{pad(count)}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            ) : null}
+            <p data-hm-fade className="hm-lede cs-work-note">
+              How India&apos;s best-known brands built their success, decoded by the Ritz Media World
+              team.
+            </p>
+          </div>
         </div>
 
         {active ? (
