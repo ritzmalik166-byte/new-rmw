@@ -1,28 +1,32 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { TaxonomyListing } from "@/components/blogs/TaxonomyListing";
 import { BLOG_KEYWORDS, pageMetadata } from "@/lib/seo";
-import { decodeSlug, getTagPosts, slugToTitle } from "@/lib/taxonomy";
+import { decodeSlug, resolveTag, slugToTitle } from "@/lib/taxonomy";
 
 export const revalidate = 3600;
 
 type TagPageProps = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
-  const slug = decodeSlug((await params).slug);
-  const title = slugToTitle(slug);
+  const tag = await resolveTag((await params).slug);
+  if (!tag) return { title: { absolute: "Tag Not Found | Ritz Media World" } };
+  const title = slugToTitle(tag.slug);
   return pageMetadata({
     title: `${title} | Ritz Media World`,
     description: `Articles and insights from Ritz Media World about ${title.toLowerCase()}.`,
     keywords: BLOG_KEYWORDS,
-    path: `/tags/${encodeURIComponent(slug)}`,
+    path: `/tags/${encodeURIComponent(tag.slug)}`,
   });
 }
 
 export default async function TagPage({ params }: TagPageProps) {
-  const slug = decodeSlug((await params).slug);
-  const posts = await getTagPosts(slug);
-  if (posts.length === 0) notFound();
+  const rawSlug = (await params).slug;
+  const tag = await resolveTag(rawSlug);
+  if (!tag || tag.posts.length === 0) notFound();
+  if (tag.slug !== decodeSlug(rawSlug)) permanentRedirect(`/tags/${encodeURIComponent(tag.slug)}`);
 
-  return <TaxonomyListing kind="Tag" title={slugToTitle(slug)} parent={{ href: "/tags", label: "Tags" }} posts={posts} />;
+  return (
+    <TaxonomyListing kind="Tag" title={slugToTitle(tag.slug)} parent={{ href: "/tags", label: "Tags" }} posts={tag.posts} />
+  );
 }

@@ -14,7 +14,7 @@ export const metadata = pageMetadata({
 });
 
 export default async function TagsPage() {
-  const slugs = [...(await getTagIndex()).keys()].sort();
+  const slugs = [...(await getTagIndex()).tags.keys()].sort();
   const groups = new Map<string, string[]>();
   for (const slug of slugs) {
     const letter = /^[a-z]/.test(slug) ? slug[0].toUpperCase() : "#";

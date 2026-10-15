@@ -6,10 +6,21 @@ const CATEGORY_POSTS_URL = "https://www.ritzmediaworld.com/api/category";
 
 export type Category = { name: string; slug: string };
 
-/* Matches the slugs the previous site used for /tags/[slug], so existing URLs keep working. */
+/* Matches the slugs the previous site used for /tags/[slug], so existing URLs keep working,
+   but also drops curly quotes and stray edge punctuation ("radio advertising.") that would
+   otherwise publish a second URL for the same tag. */
 export function tagSlug(keyword: string) {
-  return keyword.replace(/['",]/g, "").replace(/\s+/g, " ").trim().toLowerCase().replace(/ /g, "-");
+  return keyword
+    .replace(/['",\u2018\u2019\u201c\u201d]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase()
+    .replace(/ /g, "-")
+    .replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, "");
 }
+
+/* Spelling variants ("omni-channel" / "omnichannel", "news-paper" / "newspaper") share one tag page. */
+const tagVariantKey = (slug: string) => slug.replace(/[^\p{L}\p{N}]/gu, "");
 
 /* Slugs containing URL delimiters cannot be served as a single path segment. */
 const isRoutableSlug = (slug: string) => slug.length > 0 && !/[/?#\\%]/.test(slug);
@@ -68,33 +79,73 @@ async function getTaggablePosts(): Promise<Blog[]> {
    one build per process instead of each repeating it. Empty builds (API outages) are
    not kept, so a transient failure cannot 404 every tag for the whole TTL. */
 const TAG_INDEX_TTL_MS = 10 * 60_000;
-let tagIndexCache: { builtAt: number; promise: Promise<Map<string, Blog[]>> } | null = null;
 
-export function getTagIndex(): Promise<Map<string, Blog[]>> {
+/* `tags` is keyed by canonical slug; `aliases` maps every variant slug, and `variants`
+   every punctuation-free key, to its canonical one. */
+export type TagIndex = { tags: Map<string, Blog[]>; aliases: Map<string, string>; variants: Map<string, string> };
+
+let tagIndexCache: { builtAt: number; promise: Promise<TagIndex> } | null = null;
+
+export function getTagIndex(): Promise<TagIndex> {
   if (tagIndexCache && Date.now() - tagIndexCache.builtAt < TAG_INDEX_TTL_MS) return tagIndexCache.promise;
 
   const promise = buildTagIndex().then((index) => {
-    if (index.size === 0 && tagIndexCache?.promise === promise) tagIndexCache = null;
+    if (index.tags.size === 0 && tagIndexCache?.promise === promise) tagIndexCache = null;
     return index;
   });
   tagIndexCache = { builtAt: Date.now(), promise };
   return promise;
 }
 
-async function buildTagIndex() {
-  const index = new Map<string, Blog[]>();
+async function buildTagIndex(): Promise<TagIndex> {
+  const bySlug = new Map<string, Blog[]>();
   for (const post of await getTaggablePosts()) {
     for (const slug of blogTagSlugs(post)) {
-      const posts = index.get(slug);
+      const posts = bySlug.get(slug);
       if (posts) posts.push(post);
-      else index.set(slug, [post]);
+      else bySlug.set(slug, [post]);
     }
   }
-  return index;
+
+  const variants = new Map<string, string[]>();
+  for (const slug of bySlug.keys()) {
+    const key = tagVariantKey(slug) || slug;
+    variants.set(key, [...(variants.get(key) ?? []), slug]);
+  }
+
+  const tags = new Map<string, Blog[]>();
+  const aliases = new Map<string, string>();
+  const canonicalByKey = new Map<string, string>();
+  for (const [key, group] of variants) {
+    const isClean = (slug: string) => (/^[a-z0-9-]+$/.test(slug) ? 0 : 1);
+    const [canonical] = group.sort(
+      (first, second) =>
+        isClean(first) - isClean(second) ||
+        bySlug.get(second)!.length - bySlug.get(first)!.length ||
+        first.localeCompare(second),
+    );
+    const posts = new Map<string, Blog>();
+    for (const slug of group) {
+      aliases.set(slug, canonical);
+      for (const post of bySlug.get(slug)!) posts.set(post.slug.toLowerCase(), post);
+    }
+    tags.set(canonical, [...posts.values()]);
+    canonicalByKey.set(key, canonical);
+  }
+
+  return { tags, aliases, variants: canonicalByKey };
 }
 
-export async function getTagPosts(slug: string): Promise<Blog[]> {
-  return (await getTagIndex()).get(decodeSlug(slug)) ?? [];
+/* Resolves a requested slug (raw, legacy, or variant spelling) to its canonical tag. */
+export function canonicalTagSlug({ aliases, variants }: TagIndex, rawSlug: string) {
+  const requested = decodeSlug(rawSlug);
+  return aliases.get(requested) ?? aliases.get(tagSlug(requested)) ?? variants.get(tagVariantKey(tagSlug(requested)));
+}
+
+export async function resolveTag(rawSlug: string): Promise<{ slug: string; posts: Blog[] } | null> {
+  const index = await getTagIndex();
+  const slug = canonicalTagSlug(index, rawSlug);
+  return slug ? { slug, posts: index.tags.get(slug) ?? [] } : null;
 }
 
 function categorySlug(name: string) {
