@@ -562,7 +562,7 @@
 
 .sd-plan-panel-nav {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   margin-top: auto;
   padding-top: 26px;
 }
@@ -570,24 +570,68 @@
 .sd-plan-panel-nav button {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
-  border: 1.5px solid rgb(255 255 255 / 35%);
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1.5px solid rgb(255 255 255 / 28%);
   border-radius: 50%;
-  background: transparent;
+  background: rgb(255 255 255 / 6%);
   color: #fff;
-  font-size: 16px;
   cursor: pointer;
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease,
-    color 0.2s ease;
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+
+.sd-plan-panel-nav svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.sd-plan-panel-nav .sd-plan-nav-next {
+  border-color: var(--hm-yellow);
+  background: var(--hm-yellow);
+  color: var(--hm-ink);
 }
 
 .sd-plan-panel-nav button:hover {
   border-color: var(--hm-yellow);
   background: var(--hm-yellow);
   color: var(--hm-ink);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 28%);
+}
+
+.sd-plan-panel-nav .sd-plan-nav-prev:hover svg {
+  transform: translateX(-3px);
+}
+
+.sd-plan-panel-nav .sd-plan-nav-next:hover svg {
+  transform: translateX(3px);
+}
+
+.sd-plan-panel-nav button:active {
+  transform: scale(0.94);
+}
+
+.sd-plan-panel-nav button:focus-visible {
+  outline: 2px solid var(--hm-yellow);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sd-plan-panel-nav button,
+  .sd-plan-panel-nav svg {
+    transition: none;
+  }
+
+  .sd-plan-panel-nav button:hover svg,
+  .sd-plan-panel-nav button:active {
+    transform: none;
+  }
 }
 
 .sd-plan-foot {

@@ -13,6 +13,21 @@ import type { SubService } from "@/lib/sub-services-data";
 const pad = (value: number) => String(value).padStart(2, "0");
 const subHref = (sub: SubService) => `/services/${sub.service}/${sub.slug}`;
 
+function NavArrow({ direction }: { direction: "prev" | "next" }) {
+  return (
+    <svg viewBox="0 0 20 20" aria-hidden>
+      <path
+        d={direction === "next" ? "M4 10h12M11 5l5 5-5 5" : "M16 10H4M9 5l-5 5 5 5"}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 /* The board lists the dedicated sub-service pages once a service has enough
    of them to fill it; otherwise it falls back to the capability summary.
    Capabilities that link their sub-service pages take precedence over both. */
@@ -173,18 +188,22 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
                     </ul>
                   </>
                 ) : null}
-                {capability.href ? (
-                  <a href={capability.href} target="_blank" rel="noopener noreferrer" className="sd-plan-panel-link">
-                    Explore {capability.title}
-                    <HmArrow />
-                  </a>
-                ) : null}
                 <div className="sd-plan-panel-nav">
-                  <button type="button" aria-label="Previous service" onClick={() => select(active - 1)}>
-                    ←
+                  <button
+                    type="button"
+                    className="sd-plan-nav-prev"
+                    aria-label="Previous service"
+                    onClick={() => select(active - 1)}
+                  >
+                    <NavArrow direction="prev" />
                   </button>
-                  <button type="button" aria-label="Next service" onClick={() => select(active + 1)}>
-                    →
+                  <button
+                    type="button"
+                    className="sd-plan-nav-next"
+                    aria-label="Next service"
+                    onClick={() => select(active + 1)}
+                  >
+                    <NavArrow direction="next" />
                   </button>
                 </div>
               </div>
