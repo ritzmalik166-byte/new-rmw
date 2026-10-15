@@ -1,7 +1,7 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
-import type { RefObject } from "react";
+import { Fragment, useLayoutEffect, type RefObject } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { cn } from "@/lib/cn";
 import { gsap, registerGsap } from "@/lib/gsap";
@@ -23,15 +23,65 @@ export function HmTitle({
 }) {
   return (
     <Tag id={id} className={cn("hm-title", className)}>
-      {lines.map((line) => (
-        <span key={line.text} className={cn("hm-line", line.accent && "is-accent")}>
-          <span data-hm-line className="hm-line-inner">
-            {line.text}
+      {lines.map((line, index) => (
+        <Fragment key={line.text}>
+          {/* Lines are blocks, so this space is invisible, but it keeps the heading's text
+              (SEO tools, screen readers, copy) from running the lines together. */}
+          {index > 0 ? " " : null}
+          <span className={cn("hm-line", line.accent && "is-accent")}>
+            <span data-hm-line className="hm-line-inner">
+              {line.text}
+            </span>
           </span>
-        </span>
+        </Fragment>
       ))}
     </Tag>
   );
+}
+
+/* Steps a heading's font size down from its stylesheet size until it renders in at
+   most `maxLines` lines and no unwrapped line overflows its mask. Re-fits whenever the
+   heading's container changes width, and once the web fonts have loaded. */
+export function useFitTitle(
+  rootRef: RefObject<HTMLElement | null>,
+  selector: string,
+  maxLines = 2,
+  minSize = 18,
+) {
+  useLayoutEffect(() => {
+    const title = rootRef.current?.querySelector<HTMLElement>(selector);
+    const box = title?.parentElement;
+    if (!title || !box) return;
+    const lines = [...title.querySelectorAll<HTMLElement>(".hm-line")];
+    let width = -1;
+
+    const fit = (force = false) => {
+      if (!force && box.clientWidth === width) return;
+      width = box.clientWidth;
+      title.style.removeProperty("font-size");
+      let size = parseFloat(getComputedStyle(title).fontSize);
+      const tooBig = () => {
+        const lineHeight = parseFloat(getComputedStyle(title).lineHeight) || size * 1.1;
+        return (
+          Math.round(title.offsetHeight / lineHeight) > maxLines ||
+          lines.some((line) => line.scrollWidth > line.clientWidth + 1)
+        );
+      };
+      while (size > minSize && tooBig()) {
+        size -= 1;
+        title.style.fontSize = `${size}px`;
+      }
+    };
+
+    fit(true);
+    const observer = new ResizeObserver(() => fit());
+    observer.observe(box);
+    document.fonts?.ready.then(() => fit(true));
+    return () => {
+      observer.disconnect();
+      title.style.removeProperty("font-size");
+    };
+  }, [rootRef, selector, maxLines, minSize]);
 }
 
 /* Same entrance as the services hero: serif lines rise out of their mask,

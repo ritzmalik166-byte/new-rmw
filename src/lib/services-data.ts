@@ -3,6 +3,8 @@ export interface ServiceCapability {
   copy: string;
   details?: string[];
   icon?: string;
+  /** Slug of the matching sub-service page under this service, if one exists. */
+  subService?: string;
 }
 
 export interface ServiceProcessStep {
@@ -49,6 +51,8 @@ export interface ServiceDetail {
   engineCategory?: string;
   badgeDate?: string;
   kicker: string;
+  /** Two-line hero H1; the service name is used when omitted. */
+  heroTitle?: { lead: string; accent: string };
   tagline: string;
   heading: string;
   shortDescription: string;
@@ -76,6 +80,25 @@ export interface ServiceDetail {
   }[];
 }
 
+const DIGITAL_WHY_US: ServicePoint[] = [
+  {
+    title: "Creative and Media Under One Roof",
+    copy: "No gap between the people who make the ads and the people who run them. Copy, creative, video, and targeting are built by one team, so every campaign stays consistent.",
+  },
+  {
+    title: "Qualified Leads, Not Vanity Likes",
+    copy: "We judge performance by qualified leads, cost per acquisition, and revenue contribution, not likes, followers, or impressions alone.",
+  },
+  {
+    title: "Experience Across Key Indian Sectors",
+    copy: "From real estate to education, e-commerce, and manufacturing, we understand what drives Indian customers in each market.",
+  },
+  {
+    title: "Certified Google and Meta Partner",
+    copy: "As a Google Partner and Meta Business Partner, we work with the latest platform tools, training, and best practices on every campaign.",
+  },
+];
+
 export const SERVICES_LIST: ServiceDetail[] = [
   {
     id: "digital",
@@ -84,10 +107,13 @@ export const SERVICES_LIST: ServiceDetail[] = [
     uppercaseName: "DIGITAL MARKETING",
     engine: "Engine Two · Digital & Media",
     kicker: "KM 05 · Performance on the road",
-    tagline: "Turn attention, clicks, and queries into predictable business revenue.",
+    heroTitle: { lead: "Digital Marketing Agency", accent: "that turns clicks into customers." },
+    tagline: "Turn attention, clicks, and searches into qualified enquiries and measurable business growth.",
     heading: "Digital marketing solutions built for sustainable commercial growth",
     shortDescription:
       "Full-funnel SEO, Meta & Google PPC, reputation management, and high-converting lead engines across India.",
+    definitionText:
+      "Digital marketing uses online channels such as search, social media, paid ads, and websites to reach customers and turn their interest into enquiries and sales.",
     fullOverview:
       "Ritz Media World is a results-first digital marketing agency helping brands turn attention into actual business growth. Over 18 years, we have mastered every shift in the Indian digital ecosystem—from search and programmatic display to viral social content and AI search answers. We engineer campaigns with clear cost-per-lead (CPL) benchmarks, conversion rate optimization, and transparent tracking so every rupee spent delivers measurable ROI.",
     image:
@@ -102,28 +128,44 @@ export const SERVICES_LIST: ServiceDetail[] = [
     ],
     capabilities: [
       {
-        title: "Search Engine Optimization (SEO & AEO)",
-        copy: "Dominate high-intent Google search rankings and get recommended in AI search answers through technical SEO, schema, and authority content.",
+        title: "Search Engine Optimization (SEO)",
+        copy: "For us, SEO is about relevance and long-term authority, not just rankings. We build strategies around search intent and customer behaviour, so the right people find your business on Google and take the next step.",
+        subService: "search-engine-optimization-seo",
       },
       {
-        title: "Pay-Per-Click Advertising (PPC)",
-        copy: "Precision Google Ads, YouTube, and Meta performance campaigns fine-tuned daily for lowest cost per qualified acquisition.",
+        title: "AIO & GEO Optimization",
+        copy: "Customers increasingly ask ChatGPT, Gemini, Perplexity, and Google AI Overviews instead of clicking through search results. We make sure your brand is the one these tools cite and recommend when people ask about your category.",
+        details: [
+          "Schema markup",
+          "Answer-first content",
+          "Entity building",
+          "Third-party mentions",
+        ],
       },
       {
         title: "Social Media Marketing (SMM)",
-        copy: "Strategic creative feeds, viral reels, and active community engagement that transform followers into brand advocates.",
+        copy: "We don’t post just to stay active. We plan content, creative, and community management that keep your brand visible and relevant, and build real relationships with the audience that matters to your business.",
+        subService: "social-media-management",
       },
       {
         title: "Online Reputation Management (ORM)",
-        copy: "Systematic review generation, crisis monitoring, and SERP control that ensure prospective buyers always see your best face first.",
+        copy: "Customers check reviews before they ever contact you. We help you monitor what people say, respond thoughtfully, and build more reasons for customers to trust your brand, because reputation management is about listening, not hiding feedback.",
+        subService: "orm-in-digital-marketing",
       },
       {
-        title: "Lead Generation & Conversion Systems",
-        copy: "Frictionless landing experiences, automated WhatsApp/email lead nurturing, and CRM pipeline integration.",
+        title: "Pay Per Click (PPC) Advertising",
+        copy: "When customers are actively searching, being visible at the right moment makes all the difference. We plan Google and Meta campaigns around your audience, budget, and goals, and optimise them for enquiries rather than clicks.",
+        subService: "ppc-google-ads-agency",
       },
       {
-        title: "Brand Awareness & Frequency Planning",
-        copy: "Omnichannel brand exposure across programmatic networks and premium publications that cements top-of-mind recall.",
+        title: "Lead Generation",
+        copy: "Attention is only the beginning. We connect your business with people who have a genuine interest in what you offer, and focus on the quality and intent of every lead, not just the number.",
+        subService: "lead-generation",
+      },
+      {
+        title: "Brand Awareness",
+        copy: "Before people choose a business, they need to know it exists. We combine content, social media, advertising, and search visibility so your brand is recognised, remembered, and considered when your audience is ready to decide.",
+        subService: "brand-awareness",
       },
     ],
     deliverables: [
@@ -139,45 +181,78 @@ export const SERVICES_LIST: ServiceDetail[] = [
         step: "01",
         km: "KM 01",
         title: "Discovery & Market Audit",
-        copy: "We analyze historical conversion data, buyer search patterns, competitor bids, and website leaks before spending a single ad rupee.",
+        copy: "We study your business, audience, competitors, and current performance across search, social, and ads, so we know where the real opportunities are before any budget is spent.",
       },
       {
         step: "02",
-        km: "KM 03",
+        km: "KM 02",
         title: "Strategy & Funnel Blueprint",
-        copy: "We define channel mix, keyword cohorts, creative variations, and conversion benchmarks mapped directly to your commercial goals.",
+        copy: "We define the channel mix, target keywords, content and creative plan, and the results we’ll measure, all mapped to your business goals.",
       },
       {
         step: "03",
-        km: "KM 06",
+        km: "KM 03",
         title: "Execution & Real-Time Testing",
-        copy: "Campaigns go live with multiple ad hooks, custom landing pages, and rapid creative iteration to find winning combinations fast.",
+        copy: "Campaigns, content, and optimisations go live in focused sprints, and we test different messages, creatives, and landing pages to find what works fastest.",
       },
       {
         step: "04",
-        km: "KM 09",
+        km: "KM 04",
         title: "Scale & Retention Optimization",
-        copy: "We aggressively scale profitable ad sets, lower acquisition costs, and build remarketing loops that maximize client lifetime value.",
+        copy: "We scale what’s working, cut what isn’t, and use remarketing and retention to bring customers back, so your cost per lead keeps falling over time.",
       },
     ],
-    whyUs: [
-      {
-        title: "Integrated Creative + Media Under One Roof",
-        copy: "No disconnect between the design studio and the media buyers. Ad copy, video hooks, and targeting are built by one synchronized team.",
-      },
-      {
-        title: "Obsession With Qualified Pipeline, Not Vanity Likes",
-        copy: "We judge performance by qualified leads, cost-per-acquisition, and revenue contribution—not superficial vanity metrics.",
-      },
-      {
-        title: "Deep Domain Mastery In High-Stakes Sectors",
-        copy: "From premium real estate to retail and technology, we understand the exact consumer psyche that moves Indian buyers.",
-      },
-      {
-        title: "Speed, Agility & Transparent Real-Time Data",
-        copy: "Live access to campaign dashboards, transparent ad spend reporting, and zero hidden platform markups.",
-      },
-    ],
+    whyUs: DIGITAL_WHY_US,
+    layout: {
+      problemFlags: [
+        {
+          title: "Visibility without visitors",
+          copy: "If customers can’t find you on Google, in AI answers, or in their feeds, even great work goes unseen.",
+        },
+        {
+          title: "Spend without a system",
+          copy: "When strategy, creative and media are planned in silos, budget leaks between them.",
+        },
+        {
+          title: "Reports without answers",
+          copy: "If you cannot see what actually moved enquiries, you cannot decide what to do next.",
+        },
+      ],
+      intentTitle: { lead: "Built to perform", accent: "Not just to post" },
+      intentPoints: DIGITAL_WHY_US,
+      faqs: [
+        {
+          question: "What digital marketing services does Ritz Media World offer?",
+          answer:
+            "Ritz Media World offers SEO, AIO and GEO optimization, social media marketing, online reputation management, PPC advertising, lead generation, and brand awareness campaigns. As a digital marketing agency in Noida serving brands across India, we plan these services together so every channel works towards the same business goal.",
+        },
+        {
+          question: "How do I choose the best digital marketing agency in Noida?",
+          answer:
+            "Look for an agency with proven experience, real results it can show you, certified platform partnerships, and transparent reporting. Ritz Media World has 18 years of experience in advertising, is a Google Partner and Meta Business Partner, and reports on leads and cost per lead rather than likes and impressions.",
+        },
+        {
+          question: "Do you offer PPC services in Delhi NCR?",
+          answer:
+            "Yes. Ritz Media World plans and manages Google Ads and Meta Ads campaigns for businesses in Delhi, Noida, and across India. As a Google Partner and Meta Business Partner, we optimise every campaign for qualified enquiries and track results from the first click to the final lead.",
+        },
+        {
+          question: "Do you provide digital marketing for real estate developers?",
+          answer:
+            "Yes. Real estate is one of our core sectors. Ritz Media World runs real estate lead generation, Google and Meta campaigns, SEO, and launch marketing for developers in Noida, Delhi NCR, and across India, and was named Best Creative Agency (Real Estate) in Delhi NCR by Big FM in 2024 and 2025.",
+        },
+        {
+          question: "Can you help our brand appear in ChatGPT and Google AI Overviews?",
+          answer:
+            "Yes. Our AIO and GEO services help brands get cited by ChatGPT, Gemini, Perplexity, and Google AI Overviews through schema, answer-first content, entity building, and third-party mentions, which are the signals AI tools rely on when recommending brands.",
+        },
+        {
+          question: "How much do digital marketing services cost?",
+          answer:
+            "The cost depends on the services you need and your advertising budget. Ritz Media World recommends a plan after understanding your goals and market, and every proposal shows clearly where your money goes.",
+        },
+      ],
+    },
   },
   {
     id: "creative",
@@ -245,19 +320,19 @@ export const SERVICES_LIST: ServiceDetail[] = [
       },
       {
         step: "02",
-        km: "KM 03",
+        km: "KM 02",
         title: "Strategic Concepting & Moodboarding",
         copy: "We present distinct creative routes with visual languages, sample headlines, and mock campaigns to align on the perfect direction.",
       },
       {
         step: "03",
-        km: "KM 05",
+        km: "KM 03",
         title: "Craft, Production & Iteration",
         copy: "Every line of copy is refined, typography is tuned down to the pixel, and assets are rendered across real-world touchpoints.",
       },
       {
         step: "04",
-        km: "KM 08",
+        km: "KM 04",
         title: "Rollout & Brand Guardianship",
         copy: "We deliver full asset packages and support your marketing teams to ensure pristine execution across all physical and digital channels.",
       },
@@ -347,19 +422,19 @@ export const SERVICES_LIST: ServiceDetail[] = [
       },
       {
         step: "02",
-        km: "KM 03",
+        km: "KM 02",
         title: "Bulk Media Buying & Rate Optimization",
         copy: "Leveraging our 18-year volume buying power, we secure prime inventory at fraction of standard rate-card costs.",
       },
       {
         step: "03",
-        km: "KM 05",
+        km: "KM 03",
         title: "High-Impact Visual & Copy Craft",
         copy: "Headlines and key visuals are designed specifically for print distance, paper texture, and immediate visual pause.",
       },
       {
         step: "04",
-        km: "KM 07",
+        km: "KM 04",
         title: "Release, Verification & Tear-Sheet Audit",
         copy: "Ads are released seamlessly with physical and digital tear-sheet verification provided on day of publication.",
       },
@@ -449,19 +524,19 @@ export const SERVICES_LIST: ServiceDetail[] = [
       },
       {
         step: "02",
-        km: "KM 03",
+        km: "KM 02",
         title: "Scriptwriting & Voiceover Auditions",
         copy: "We draft natural, punchy dialogue scripts and test matching voice talents to find the perfect emotional cadence.",
       },
       {
         step: "03",
-        km: "KM 05",
+        km: "KM 03",
         title: "Studio Production & Jingle Composition",
         copy: "Our sound designers record, compose music, mix sound effects, and master audio to FM broadcast standards.",
       },
       {
         step: "04",
-        km: "KM 07",
+        km: "KM 04",
         title: "Prime Daypart Broadcast & Monitoring",
         copy: "Spots air across scheduled station clusters with daily airing logs verifying spot times and rotation counts.",
       },
@@ -551,19 +626,19 @@ export const SERVICES_LIST: ServiceDetail[] = [
       },
       {
         step: "02",
-        km: "KM 03",
+        km: "KM 02",
         title: "Editorial Framework & Tone Definition",
         copy: "We construct an authoritative editorial voice that delivers genuine value rather than hollow marketing jargon.",
       },
       {
         step: "03",
-        km: "KM 05",
+        km: "KM 03",
         title: "Production, Visual Design & Review",
         copy: "Specialist writers and visual designers create rich, accurate, beautifully laid out content assets.",
       },
       {
         step: "04",
-        km: "KM 07",
+        km: "KM 04",
         title: "Multi-Channel Distribution & Optimization",
         copy: "Assets are published, distributed through organic and paid channels, and regularly refreshed to maintain top rankings.",
       },
@@ -653,19 +728,19 @@ export const SERVICES_LIST: ServiceDetail[] = [
       },
       {
         step: "02",
-        km: "KM 03",
+        km: "KM 02",
         title: "Interactive UI/UX Design & Prototyping",
         copy: "We design striking, modern visual interfaces that embody your brand identity while prioritizing intuitive navigation.",
       },
       {
         step: "03",
-        km: "KM 06",
+        km: "KM 03",
         title: "Modern Front-End & Back-End Engineering",
         copy: "Our engineers build the platform using modern frameworks, ensuring clean code, rapid speeds, and seamless API hooks.",
       },
       {
         step: "04",
-        km: "KM 09",
+        km: "KM 04",
         title: "Rigorous QA, Speed Tuning & Launch",
         copy: "Cross-browser testing, accessibility checks, Core Web Vitals optimization, and flawless production deployment.",
       },
@@ -755,19 +830,19 @@ export const SERVICES_LIST: ServiceDetail[] = [
       },
       {
         step: "02",
-        km: "KM 03",
+        km: "KM 02",
         title: "Talent Approach & Commercial Negotiations",
         copy: "We negotiate directly with talent management to secure favorable commercial terms, usage rights, and guaranteed shoot availability.",
       },
       {
         step: "03",
-        km: "KM 05",
+        km: "KM 03",
         title: "Script Approval & High-End Production",
         copy: "We develop concepts approved by the celebrity and manage full shoot production with top directors, stylists, and cinematographers.",
       },
       {
         step: "04",
-        km: "KM 08",
+        km: "KM 04",
         title: "Omnichannel Launch & PR Blitz",
         copy: "We orchestrate a coordinated national launch across digital, print, television, and outdoor channels for maximum commercial shockwave.",
       },
@@ -857,19 +932,19 @@ export const SERVICES_LIST: ServiceDetail[] = [
       },
       {
         step: "02",
-        km: "KM 03",
+        km: "KM 02",
         title: "Briefing, Negotiation & Deliverable Contracts",
         copy: "We lock down firm delivery dates, video formats (Reels, Shorts, Vlogs), usage rights, and commercial terms.",
       },
       {
         step: "03",
-        km: "KM 05",
+        km: "KM 03",
         title: "Draft Review & Quality Control",
         copy: "Our team reviews all drafts prior to publishing to guarantee message accuracy, clear calls-to-action, and brand safety.",
       },
       {
         step: "04",
-        km: "KM 08",
+        km: "KM 04",
         title: "Live Wave Amplification & Whitelisting",
         copy: "We coordinate simultaneous publishing waves and run paid ad boosts on the highest-converting content.",
       },
@@ -959,19 +1034,19 @@ export const SERVICES_LIST: ServiceDetail[] = [
       },
       {
         step: "02",
-        km: "KM 03",
+        km: "KM 02",
         title: "3D Geometric Modeling & Camera Angles",
         copy: "We build precise 3D geometry and present wireframe camera angles to agree on the most dramatic visual perspectives.",
       },
       {
         step: "03",
-        km: "KM 06",
+        km: "KM 03",
         title: "Texturing, Natural Lighting & Greenery",
         copy: "We apply photorealistic glass, marble, wood, atmospheric lighting, and hyper-realistic vegetation and landscaping.",
       },
       {
         step: "04",
-        km: "KM 09",
+        km: "KM 04",
         title: "Final 4K Rendering & Post-Production",
         copy: "High-end render farm processing followed by color grading and retouching, delivering assets ready for hoardings and ads.",
       },

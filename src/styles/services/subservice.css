@@ -55,6 +55,16 @@
   font-size: clamp(40px, 4.4vw, 64px);
 }
 
+/* --title-chars (longest line) gives a first-paint size that roughly fits the column;
+   useFitTitle then trims it to fit exactly. */
+.sd-hero-copy {
+  container-type: inline-size;
+}
+
+.sd-hero .hm-title.is-line-locked {
+  font-size: min(clamp(40px, 4.4vw, 64px), calc(100cqi / (var(--title-chars, 24) * 0.5)));
+}
+
 .sd-crumbs ol {
   display: flex;
   flex-wrap: wrap;

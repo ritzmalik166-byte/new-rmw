@@ -14,7 +14,8 @@ const pad = (value: number) => String(value).padStart(2, "0");
 const subHref = (sub: SubService) => `/services/${sub.service}/${sub.slug}`;
 
 /* The board lists the dedicated sub-service pages once a service has enough
-   of them to fill it; otherwise it falls back to the capability summary. */
+   of them to fill it; otherwise it falls back to the capability summary.
+   Capabilities that link their sub-service pages take precedence over both. */
 const MIN_SUB_SERVICES_FOR_BOARD = 3;
 
 type Props = { service: ServiceDetail; subServices?: SubService[] };
@@ -25,16 +26,27 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
   const [active, setActive] = useState(0);
   useHomeReveal(rootRef);
 
-  const boardFromSubs = subServices.length >= MIN_SUB_SERVICES_FOR_BOARD;
-  const capabilities = boardFromSubs
-    ? subServices.map((sub) => ({
-        title: sub.name,
-        copy: sub.intro,
-        details: sub.sections.map((section) => section.title),
-        href: subHref(sub),
-      }))
-    : service.capabilities.map((cap) => ({ ...cap, href: undefined as string | undefined }));
-  const extraSubs = boardFromSubs ? [] : subServices;
+  const boardFromCapabilities = service.capabilities.some((cap) => cap.subService);
+  const boardFromSubs = !boardFromCapabilities && subServices.length >= MIN_SUB_SERVICES_FOR_BOARD;
+  const capabilities = boardFromCapabilities
+    ? service.capabilities.map((cap) => {
+        const sub = subServices.find((item) => item.slug === cap.subService);
+        return {
+          ...cap,
+          details: cap.details ?? sub?.sections.map((section) => section.title),
+          href: sub ? subHref(sub) : undefined,
+        };
+      })
+    : boardFromSubs
+      ? subServices.map((sub) => ({
+          title: sub.name,
+          copy: sub.intro,
+          details: sub.sections.map((section) => section.title),
+          href: subHref(sub) as string | undefined,
+        }))
+      : service.capabilities.map((cap) => ({ ...cap, href: undefined as string | undefined }));
+  const linkedSubs = new Set(capabilities.map((cap) => cap.href).filter(Boolean));
+  const extraSubs = boardFromSubs ? [] : subServices.filter((sub) => !linkedSubs.has(subHref(sub)));
   const layout = getServiceLayout(service, capabilities.length);
   const capability = capabilities[active];
 

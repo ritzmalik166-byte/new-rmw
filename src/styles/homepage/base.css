@@ -105,6 +105,11 @@
   display: block;
 }
 
+/* Each authored line stays on one line; pair with useFitTitle so it shrinks to fit. */
+.hm-title.is-line-locked .hm-line-inner {
+  white-space: nowrap;
+}
+
 .hm-line.is-accent {
   color: var(--hm-pink);
 }

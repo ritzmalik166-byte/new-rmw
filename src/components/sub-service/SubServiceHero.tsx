@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, type CSSProperties } from "react";
 import { useGSAP } from "@gsap/react";
-import { HmArrow, HmStamp, HmTitle, useHomeReveal } from "@/components/homepage/shared";
+import { HmArrow, HmStamp, HmTitle, useFitTitle, useHomeReveal, type HmLine } from "@/components/homepage/shared";
 import { TransitionLink } from "@/components/motion/TransitionLink";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { gsap } from "@/lib/gsap";
@@ -18,6 +18,7 @@ export function SubServiceHero({ service, sub, stop, total }: Props) {
   const rootRef = useRef<HTMLElement>(null);
   const { ready, reduced } = useMotion();
   useHomeReveal(rootRef, "top 90%");
+  useFitTitle(rootRef, "#ssd-hero-title");
 
   useGSAP(
     () => {
@@ -50,11 +51,15 @@ export function SubServiceHero({ service, sub, stop, total }: Props) {
   );
 
   const ticker = [...sub.sections.map((section) => section.title), service.name];
+  const titleLines: HmLine[] = [{ text: sub.name }, { text: "routed to results.", accent: true }];
 
   return (
     <section ref={rootRef} className="hm ssd-hero" aria-labelledby="ssd-hero-title">
       <div className="hm-wrap ssd-hero-inner">
-        <div className="ssd-hero-copy">
+        <div
+          className="ssd-hero-copy"
+          style={{ "--title-chars": Math.max(...titleLines.map((line) => line.text.length)) } as CSSProperties}
+        >
           <nav data-hm-fade className="sd-crumbs" aria-label="Breadcrumb">
             <ol>
               <li>
@@ -80,7 +85,8 @@ export function SubServiceHero({ service, sub, stop, total }: Props) {
           <HmTitle
             as="h1"
             id="ssd-hero-title"
-            lines={[{ text: sub.name }, { text: "routed to results.", accent: true }]}
+            className="is-line-locked"
+            lines={titleLines}
           />
 
           <p data-hm-fade className="hm-lede">

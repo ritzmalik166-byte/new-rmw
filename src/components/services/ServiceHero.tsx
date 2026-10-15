@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
-import { HmArrow, HmStamp, HmTitle, useHomeReveal } from "@/components/homepage/shared";
+import { useRef, type CSSProperties } from "react";
+import { HmArrow, HmStamp, HmTitle, useFitTitle, useHomeReveal, type HmLine } from "@/components/homepage/shared";
 import { TransitionLink } from "@/components/motion/TransitionLink";
 import { cn } from "@/lib/cn";
 import { getServiceCreatives } from "@/lib/service-creatives";
@@ -11,6 +11,7 @@ import type { ServiceDetail } from "@/lib/services-data";
 export function ServiceHero({ service }: { service: ServiceDetail }) {
   const rootRef = useRef<HTMLElement>(null);
   useHomeReveal(rootRef, "top 90%");
+  useFitTitle(rootRef, "#sd-hero-title");
 
   const [engineLabel, engineName = service.engineCategory ?? "Services"] = service.engine
     .split("·")
@@ -21,11 +22,18 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
       : service.name;
   const { badge, scene, poster } = getServiceCreatives(service.slug);
   const art = service.truckArt ?? { before: "Horn", hindi: "ओके", after: "Please" };
+  const titleLines: HmLine[] = service.heroTitle
+    ? [{ text: service.heroTitle.lead }, { text: service.heroTitle.accent, accent: true }]
+    : [{ text: heading }];
+  const lockedLines = titleLines.length > 1;
 
   return (
     <section ref={rootRef} className="hm sd-hero" aria-labelledby="sd-hero-title">
       <div className="hm-wrap sd-hero-inner">
-        <div className="sd-hero-copy">
+        <div
+          className="sd-hero-copy"
+          style={{ "--title-chars": Math.max(...titleLines.map((line) => line.text.length)) } as CSSProperties}
+        >
           <nav data-hm-fade className="sd-crumbs" aria-label="Breadcrumb">
             <ol>
               <li>
@@ -46,7 +54,8 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
           <HmTitle
             as="h1"
             id="sd-hero-title"
-            lines={[{ text: heading }]}
+            className={lockedLines ? "is-line-locked" : undefined}
+            lines={titleLines}
           />
 
           <p data-hm-fade className="hm-lede">

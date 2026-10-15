@@ -1,7 +1,7 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap } from "@/lib/gsap";
 
@@ -88,10 +88,13 @@ export function ServicesHero() {
           </p>
 
           <h1 id="svch-title" className="svch-title">
-            {TITLE.map((line) => (
-              <span key={line.text} className={line.accent ? "svch-line is-accent" : "svch-line"}>
-                <span className="svch-line-inner">{line.text}</span>
-              </span>
+            {TITLE.map((line, index) => (
+              <Fragment key={line.text}>
+                {index > 0 ? " " : null}
+                <span className={line.accent ? "svch-line is-accent" : "svch-line"}>
+                  <span className="svch-line-inner">{line.text}</span>
+                </span>
+              </Fragment>
             ))}
           </h1>
 

@@ -22,6 +22,14 @@
   font-size: clamp(38px, 4.2vw, 62px);
 }
 
+.ssd-hero-copy {
+  container-type: inline-size;
+}
+
+.ssd-hero .hm-title.is-line-locked {
+  font-size: min(clamp(38px, 4.2vw, 62px), calc(100cqi / (var(--title-chars, 24) * 0.5)));
+}
+
 .ssd-hero .hm-lede {
   max-width: 56ch;
 }

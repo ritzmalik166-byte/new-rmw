@@ -1,7 +1,7 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import { TransitionLink } from "@/components/motion/TransitionLink";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap, SplitText } from "@/lib/gsap";
@@ -159,12 +159,15 @@ export function AboutHero() {
 
         <div className="about-title-wrap">
           <h1 ref={titleRef} className="about-title">
-            {TITLE.map((line) => (
-              <span key={line} className="about-line">
-                <span className="about-line-mask">
-                  <span className="about-line-inner">{line}</span>
+            {TITLE.map((line, index) => (
+              <Fragment key={line}>
+                {index > 0 ? " " : null}
+                <span className="about-line">
+                  <span className="about-line-mask">
+                    <span className="about-line-inner">{line}</span>
+                  </span>
                 </span>
-              </span>
+              </Fragment>
             ))}
           </h1>
           <span className="about-sheen" aria-hidden>

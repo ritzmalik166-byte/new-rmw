@@ -2,7 +2,7 @@
 
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
-import { useRef, type PointerEvent, type ReactNode } from "react";
+import { Fragment, useRef, type PointerEvent, type ReactNode } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap } from "@/lib/gsap";
 import { ServicesSearchGlimpse } from "./ServicesSearchGlimpse";
@@ -164,10 +164,13 @@ export function ServicesDigitalMarketing() {
         <div className="svc-dm-copy">
           <p className="svc-dm-kicker">KM 05</p>
           <h2 id="svc-dm-title" className="svc-dm-title">
-            {TITLE.map((line) => (
-              <span key={line} className="svc-dm-line">
-                <span>{line}</span>
-              </span>
+            {TITLE.map((line, index) => (
+              <Fragment key={line}>
+                {index > 0 ? " " : null}
+                <span className="svc-dm-line">
+                  <span>{line}</span>
+                </span>
+              </Fragment>
             ))}
           </h2>
           <p className="svc-dm-lede">
