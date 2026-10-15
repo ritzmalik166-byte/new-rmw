@@ -39,4 +39,5 @@
   --font-display: var(--font-display);
   --font-serif: var(--font-display);
   --font-nav: var(--font-inter);
+  --font-yatra: var(--font-yatra-devanagari), var(--font-yatra-latin);
 }
