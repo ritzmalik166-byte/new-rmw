@@ -71,12 +71,6 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
               <HmArrow />
             </a>
           </div>
-
-          <ul data-hm-fade className="sd-hero-tags" aria-label={`${service.name} focus areas`}>
-            {service.tags.slice(0, 5).map((tag) => (
-              <li key={tag}>{tag}</li>
-            ))}
-          </ul>
         </div>
 
         <div data-hm-fade className="sd-collage">

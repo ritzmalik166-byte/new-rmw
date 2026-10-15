@@ -30,7 +30,8 @@ function NavArrow({ direction }: { direction: "prev" | "next" }) {
 
 /* The board lists the dedicated sub-service pages once a service has enough
    of them to fill it; otherwise it falls back to the capability summary.
-   Capabilities that link their sub-service pages take precedence over both. */
+   Capabilities that carry their own details or link a sub-service take
+   precedence over both. */
 const MIN_SUB_SERVICES_FOR_BOARD = 3;
 
 type Props = { service: ServiceDetail; subServices?: SubService[] };
@@ -41,7 +42,7 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
   const [active, setActive] = useState(0);
   useHomeReveal(rootRef);
 
-  const boardFromCapabilities = service.capabilities.some((cap) => cap.subService);
+  const boardFromCapabilities = service.capabilities.some((cap) => cap.subService || cap.details);
   const boardFromSubs = !boardFromCapabilities && subServices.length >= MIN_SUB_SERVICES_FOR_BOARD;
   const capabilities = boardFromCapabilities
     ? service.capabilities.map((cap) => {
@@ -60,8 +61,6 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
           href: subHref(sub) as string | undefined,
         }))
       : service.capabilities.map((cap) => ({ ...cap, href: undefined as string | undefined }));
-  const linkedSubs = new Set(capabilities.map((cap) => cap.href).filter(Boolean));
-  const extraSubs = boardFromSubs ? [] : subServices.filter((sub) => !linkedSubs.has(subHref(sub)));
   const layout = getServiceLayout(service, capabilities.length);
   const capability = capabilities[active];
 
@@ -90,7 +89,9 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
       <div className="hm-wrap sd-brief-inner">
         <div className="sd-brief-main">
           <blockquote data-hm-fade className="sd-define">
-            <p className="sd-define-label">What is {service.name}?</p>
+            <p className="sd-define-label">
+              What {/services$/i.test(service.name) ? "are" : "is"} {service.name}?
+            </p>
             <p className="sd-define-text">{service.definitionText ?? service.shortDescription}</p>
           </blockquote>
 
@@ -211,12 +212,6 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
 
             <footer data-hm-fade className="sd-plan-foot">
               <span>One connected programme. A clear scope for every service.</span>
-              {extraSubs.map((sub) => (
-                <a key={sub.slug} href={subHref(sub)} target="_blank" rel="noopener noreferrer" className="hm-link">
-                  Deep dive: {sub.name}
-                  <HmArrow />
-                </a>
-              ))}
               <a href="/contact" target="_blank" rel="noopener noreferrer" className="hm-link">
                 {layout.planCta}
                 <HmArrow />

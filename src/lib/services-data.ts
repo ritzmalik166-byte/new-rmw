@@ -37,6 +37,7 @@ export interface ServiceLayoutCopy {
   intentTitle?: { lead: string; accent: string };
   intentPoints?: ServicePoint[];
   intentTape?: [string, string];
+  wallLede?: string;
   /** Optional illustrated sign; an HTML sign is rendered when omitted. */
   requirementsSign?: { src: string; alt: string };
   faqs?: ServiceFaq[];
@@ -261,12 +262,16 @@ export const SERVICES_LIST: ServiceDetail[] = [
     uppercaseName: "CREATIVE SERVICES",
     engine: "Engine One · Brand & Creative",
     kicker: "KM 01 · Make people stop and remember",
-    tagline: "Campaigns, films, and identities that cut through market clutter.",
+    heroTitle: { lead: "Creative Services", accent: "built to be remembered." },
+    tagline:
+      "Brand identities, design, packaging, and ad campaigns that cut through the clutter and stay in people’s minds.",
     heading: "Creative craft, brand platforms, and ideas people actually remember",
     shortDescription:
       "Branding & identity, packaging design, ad films, and visual communication that give businesses an enduring voice.",
+    definitionText:
+      "Creative services cover the design and ideas that shape how people see a brand, from logos and brand identity to graphic design, print ads, packaging, and advertising campaigns.",
     fullOverview:
-      "From comprehensive brand identities to multi-channel launch campaigns and films, Ritz Media World turns strategic business propositions into cultural talk-points. We believe that creative work must not merely look gorgeous—it must travel across screens, billboards, and conversations while anchoring deep trust in the buyer's mind.",
+      "Ritz Media World is a creative agency in India that turns business goals into brand identities and campaigns people remember. From logos and brand systems to print ads, packaging, and launch campaigns, we believe creative work shouldn’t just look good. It should travel across screens, hoardings, and conversations, and build lasting trust in the customer’s mind.",
     image:
       "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1400&q=80",
     accentColor: "#cf1b4b",
@@ -279,28 +284,64 @@ export const SERVICES_LIST: ServiceDetail[] = [
     ],
     capabilities: [
       {
-        title: "Branding & Identity Systems",
-        copy: "Logos, design language, color theory, typography, and cohesive brand guideline bibles built for cross-platform longevity.",
+        title: "Branding & Identity Development",
+        copy: "Brand identities built around your values, market position, and how you want to be seen, whether you’re launching, rebranding, or entering a new market.",
+        details: [
+          "Brand Strategy & Positioning",
+          "Visual Identity Systems",
+          "Brand Guidelines",
+          "Brand Naming",
+          "Rebranding",
+          "Launch Identities",
+        ],
       },
       {
-        title: "Ad Campaign Concepts & Storytelling",
-        copy: "Big campaign ideas that translate into powerful print hoardings, viral digital films, and memorable headline copywriting.",
+        title: "Graphic Design",
+        copy: "Design that tells customers who you are before they read a word, built for the platform it will live on rather than one template stretched across everything.",
+        details: [
+          "Marketing Collateral",
+          "Corporate Brochures & Profiles",
+          "Social Media Creatives",
+          "Presentations",
+          "Promotional Assets",
+          "Event & Exhibition Graphics",
+        ],
       },
       {
-        title: "Print Advertising & Publication Design",
-        copy: "Newspaper front-page spreads, magazine layouts, and sales brochures crafted with uncompromising editorial elegance.",
+        title: "Logo Design",
+        copy: "Logos that work everywhere they need to, from packaging and print to screens and signage, and still make sense five years from now.",
+        details: [
+          "Custom Logo Design",
+          "Logo Refresh & Redesign",
+          "Product & Sub-brand Marks",
+          "Scalable Logo Systems",
+          "Digital, Print & Packaging Formats",
+          "Logo Usage Guidelines",
+        ],
       },
       {
-        title: "Product Packaging & Retail Experience",
-        copy: "Shelf-stopping packaging, unboxing experiences, and POS display materials that win the final retail moment of truth.",
+        title: "Print Advertising Design",
+        copy: "Print ads, brochures, and catalogues designed to make people stop and pay attention, with layouts built for real-world printing, not just screens.",
+        details: [
+          "Newspaper & Magazine Ads",
+          "Brochures & Flyers",
+          "Posters & Catalogues",
+          "Hoardings & Outdoor Creative",
+          "Banners & Standees",
+          "Print-Ready Artwork",
+        ],
       },
       {
-        title: "Brand Film Direction & Motion Craft",
-        copy: "Cinematic commercial films, corporate documentaries, and dynamic motion graphics that evoke genuine emotion.",
-      },
-      {
-        title: "Brand Voice & Copywriting",
-        copy: "Signature taglines, brand manifestos, and authentic tone of voice that make your company instantly recognizable.",
+        title: "Packaging Design",
+        copy: "Packaging that earns the moment someone decides to buy, whether it’s on a shelf or arriving at their door.",
+        details: [
+          "Product & Box Design",
+          "Label Design",
+          "FMCG Packaging",
+          "E-commerce Packaging",
+          "Luxury & Gift Packaging",
+          "Production-Ready Artwork",
+        ],
       },
     ],
     deliverables: [
@@ -315,46 +356,98 @@ export const SERVICES_LIST: ServiceDetail[] = [
       {
         step: "01",
         km: "KM 01",
-        title: "Brand Archetype & Audience Immersion",
-        copy: "We unpack who your brand is at its core, what your competitors sound like, and the emotional trigger that hooks your ideal buyer.",
+        title: "Brand Discovery & Audience Research",
+        copy: "We learn what your brand stands for, how your competitors present themselves, and what your audience truly responds to.",
       },
       {
         step: "02",
         km: "KM 02",
-        title: "Strategic Concepting & Moodboarding",
-        copy: "We present distinct creative routes with visual languages, sample headlines, and mock campaigns to align on the perfect direction.",
+        title: "Strategy & Creative Concepts",
+        copy: "We present distinct creative routes with moodboards, sample headlines and mock layouts, so we agree on the right direction together.",
       },
       {
         step: "03",
         km: "KM 03",
-        title: "Craft, Production & Iteration",
-        copy: "Every line of copy is refined, typography is tuned down to the pixel, and assets are rendered across real-world touchpoints.",
+        title: "Design, Production & Refinement",
+        copy: "Every line, colour and layout is refined and tested across real formats, from mobile screens to hoardings.",
       },
       {
         step: "04",
         km: "KM 04",
-        title: "Rollout & Brand Guardianship",
-        copy: "We deliver full asset packages and support your marketing teams to ensure pristine execution across all physical and digital channels.",
+        title: "Rollout & Brand Consistency",
+        copy: "We deliver complete, ready-to-use files and brand guidelines, and support your team so the brand stays consistent everywhere it appears.",
       },
     ],
     whyUs: [
       {
-        title: "Ideas Grounded In Commercial Reality",
-        copy: "We don't create art for the sake of awards; we engineer creative work that convinces consumers to choose and pay for your product.",
+        title: "Ideas grounded in business goals",
+        copy: "We don’t create work just to win awards. Every idea is built to help customers choose your brand.",
       },
       {
-        title: "18 Years of Cultural Intuition in India",
-        copy: "We understand Indian consumer nuances, regional emotional cords, and the visual cues that trigger genuine trust.",
+        title: "18 years of understanding Indian audiences",
+        copy: "We understand regional cultures, languages, and the visual cues that build genuine trust with Indian customers.",
       },
       {
-        title: "Flawless Multi-Format Adaptability",
-        copy: "From a 100-foot national highway hoarding to a 6-inch smartphone story, our creative retains maximum impact at every scale.",
-      },
-      {
-        title: "In-House Production & Rapid Turnaround",
-        copy: "No third-party delays. Our studio houses designers, illustrators, copywriters, and motion artists under one coordinated roof.",
+        title: "Built for every format",
+        copy: "From a highway hoarding to a phone screen, our creative is designed to work at every size and on every channel.",
       },
     ],
+    layout: {
+      problemFlags: [
+        {
+          title: "Noise without recall",
+          copy: "Work that looks like everyone else's gets scrolled past and forgotten before it can sell.",
+        },
+        {
+          title: "Inconsistent everywhere",
+          copy: "When your logo, ads, and packaging all look different, customers struggle to recognise you, let alone trust you.",
+        },
+        {
+          title: "Design without direction",
+          copy: "Creative made without a clear strategy may look good, but it rarely moves the business forward.",
+        },
+      ],
+      planKicker: "Creative services",
+      wallLede: "Campaigns and creatives from brands that trusted us with their name.",
+      intentTitle: { lead: "Designed to be noticed,", accent: "Built to be remembered." },
+      faqs: [
+        {
+          question: "What creative services does Ritz Media World offer?",
+          answer:
+            "Ritz Media World offers branding and identity development, logo design, graphic design, print advertising design, packaging design, and ad campaign concepts. As a creative agency in Noida serving brands across India, we keep every piece consistent across print, digital, outdoor, and packaging.",
+        },
+        {
+          question: "Is Ritz Media World a creative agency in Noida?",
+          answer:
+            "Yes. Ritz Media World is a full-service creative advertising agency headquartered in Sector 142, Noida, founded in 2008. We provide creative services across Delhi NCR, including Noida, Greater Noida, and Delhi, and work with brands throughout India.",
+        },
+        {
+          question: "How do I choose the best creative agency for my brand?",
+          answer:
+            "Look for an agency with a strong portfolio, experience in your industry, a clear creative process, and work that has run for real brands. Ritz Media World has 18 years of creative experience and was named Best Creative Agency (Real Estate) in Delhi NCR by Big FM in 2024 and 2025.",
+        },
+        {
+          question: "Are you a creative agency for real estate developers?",
+          answer:
+            "Yes. Real estate is one of our core sectors. Ritz Media World creates brand identities, launch campaigns, print ads, hoardings, and brochures for real estate developers in Noida, Delhi NCR, and across India.",
+        },
+        {
+          question: "What is the difference between a logo and a brand identity?",
+          answer:
+            "A logo is a single mark, while a brand identity is the complete visual system around it, including colours, typography, imagery, and guidelines. A strong identity keeps your brand consistent and recognisable everywhere customers see it.",
+        },
+        {
+          question: "How long does a branding project take?",
+          answer:
+            "It depends on the scope. A logo or campaign creative can take a few weeks, while a complete brand identity with guidelines usually takes longer. We agree on timelines and milestones before work begins.",
+        },
+        {
+          question: "How much do creative services cost?",
+          answer:
+            "The cost depends on the scope, from a single logo or campaign to a full brand identity. We share a clear proposal after understanding your goals, so you know exactly what’s included.",
+        },
+      ],
+    },
   },
   {
     id: "print",

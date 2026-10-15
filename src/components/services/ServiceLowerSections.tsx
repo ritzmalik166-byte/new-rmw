@@ -46,6 +46,7 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
   const { reduced } = useMotion();
   useHomeReveal(rootRef);
   const { wall } = getServiceCreatives(service.slug);
+  const { wallLede } = getServiceLayout(service);
 
   const syncSlide = useCallback(() => {
     const grid = gridRef.current;
@@ -94,7 +95,7 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
             </p>
             <HmTitle id="sd-wall-title" lines={[{ text: "Work that went live." }]} />
             <p data-hm-fade className="hm-lede">
-              Campaigns, creatives and live dashboards from brands that trusted us with their name.
+              {wallLede}
             </p>
           </div>
           <TransitionLink data-hm-fade href="/portfolio" className="hm-link">
