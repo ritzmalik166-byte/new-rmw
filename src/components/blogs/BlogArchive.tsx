@@ -192,8 +192,7 @@ export function BlogArchive({
               </h2>
             </div>
             <span className="blog-latest-count">
-              <b>{filteredBlogs.length}</b> articles <span aria-hidden="true">·</span> page{" "}
-              {safePage} / {totalPages}
+              <b>{filteredBlogs.length}</b> articles
             </span>
           </div>
           <div className="blog-card-grid">

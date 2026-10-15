@@ -237,14 +237,14 @@
 
 .ticker-pattern {
   height: 19px;
-  background-image: url("/hero-section/image 17.png");
+  background-image: url("/hero-section/image-17.webp");
   background-repeat: repeat-x;
   background-position: left center;
   background-size: auto 100%;
 }
 
 .ticker-pattern-bottom {
-  background-image: url("/service/image 804.png");
+  background-image: url("/service/image-804.webp");
   background-size: 100% auto;
 }
 

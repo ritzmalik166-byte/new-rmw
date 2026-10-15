@@ -87,7 +87,7 @@
           />
           <div className="hm-mark" aria-hidden>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/s2/distance.png" alt="" width={500} height={500} />
+            <img src="/s2/distance.webp" alt="" width={500} height={500} loading="lazy" decoding="async" />
             <span className="hm-mark-label">RitzMedia</span>
           </div>
 

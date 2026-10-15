@@ -26,9 +26,14 @@ type Props = {
   rolling?: boolean;
   small?: boolean;
   priority?: boolean;
+  /** Rendered width of the full-size truck, so the browser can pick a smaller file. */
+  sizes?: string;
 };
 
-export function RealTruck({ className, flip, rolling, small, priority }: Props) {
+const TRUCK_SRCSET =
+  "/trucks/rmw-truck-sm.webp 480w, /trucks/rmw-truck-720.webp 720w, /trucks/rmw-truck.webp 1101w";
+
+export function RealTruck({ className, flip, rolling, small, priority, sizes = "100vw" }: Props) {
   return (
     <span
       className={cn("real-truck", flip && "is-flipped", rolling && "is-rolling", className)}
@@ -38,6 +43,8 @@ export function RealTruck({ className, flip, rolling, small, priority }: Props) 
       <img
         className="real-truck-body"
         src={small ? "/trucks/rmw-truck-sm.webp" : "/trucks/rmw-truck.webp"}
+        srcSet={small ? undefined : TRUCK_SRCSET}
+        sizes={small ? undefined : sizes}
         alt=""
         width={REAL_TRUCK.width}
         height={REAL_TRUCK.height}

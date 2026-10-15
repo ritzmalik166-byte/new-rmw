@@ -179,7 +179,7 @@ export function Credentials() {
 
       <div className="proof-milestone" aria-hidden>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/s2/distance.png" alt="" width={256} height={256} />
+        <img src="/s2/distance.webp" alt="" width={256} height={256} loading="lazy" decoding="async" />
         <span className="proof-milestone-text">
           Ritz
           <br />

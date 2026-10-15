@@ -238,7 +238,7 @@
 .about-drive-scallop {
   flex: 0 0 auto;
   height: 10px;
-  background: #faf6ee url("/about/image%20804.png") repeat-x left center / auto 100%;
+  background: #faf6ee url("/about/image-804.webp") repeat-x left center / auto 100%;
 }
 
 @media (max-width: 860px) {

@@ -88,7 +88,6 @@ export function BlogHero({ blogs, query, onQueryChange }: BlogHeroProps) {
     [blogs, topic],
   );
 
-  const searchCount = blogs.length >= 50 ? `${Math.floor(blogs.length / 50) * 50}+` : String(blogs.length);
   const needleTurn = 90 - segmentCenter(topicIndex);
 
   return (
@@ -130,7 +129,7 @@ export function BlogHero({ blogs, query, onQueryChange }: BlogHeroProps) {
           <span className="sr-only">Search blogs</span>
           <input
             type="search"
-            placeholder={`Or search ${searchCount} blogs`}
+            placeholder="Search..."
             value={query}
             onChange={(event) => onQueryChange(event.target.value)}
           />

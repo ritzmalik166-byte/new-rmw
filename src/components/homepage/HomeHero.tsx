@@ -327,7 +327,11 @@ export function HomeHero() {
           <span className="hm-hero-light is-pool" />
           <span className="hm-hero-light is-beam" />
           <span className="hm-hero-shadow" />
-          <RealTruck className="hm-hero-truck" priority />
+          <RealTruck
+            className="hm-hero-truck"
+            priority
+            sizes="(max-width: 1099px) min(90vw, 700px, 50vh), clamp(360px, min(42vw, 74vh), 640px)"
+          />
           <span className="hm-hero-light is-lamp" />
           {CARGO.map((item) => (
             <span key={item.name} className="hm-hero-sticker" data-tone={item.tone}>
