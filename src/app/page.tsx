@@ -16,9 +16,9 @@ import { AGENCY_KEYWORDS, pageMetadata } from "@/lib/seo";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Ritz Media World: Creative + Strategy + Media Agency",
+  title: "Advertising & Creative Agency in Delhi NCR | Ritz Media World",
   description:
-    "Top advertising agency in Delhi NCR. Ritz Media World offers SEO, radio and creative print ad services in Greater Noida. Most trusted digital marketing company.",
+    "Ritz Media World is a leading advertising and creative agency in Delhi NCR with 18 years of experience in brand strategy, creative campaigns, and marketing.",
   keywords: AGENCY_KEYWORDS,
   path: "/",
 });
