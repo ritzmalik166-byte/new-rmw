@@ -81,6 +81,12 @@
   grid-area: 1 / 1;
 }
 
+/* iOS Safari can leave a stale mid-reveal frame inside the overflow mask when
+   GSAP drops the tween's GPU layer, so the lines keep a permanent one. */
+.hm-hero-head .hm-line-inner {
+  will-change: transform;
+}
+
 /* Devanagari matras rise above the tight line box; give the reveal mask headroom. */
 .hm-hero-head .hm-line {
   padding-top: 0.28em;
