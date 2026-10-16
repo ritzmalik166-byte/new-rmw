@@ -314,7 +314,7 @@ export const site = {
         year: "2025",
         heading: "ET Young Industry Leaders",
         subtitle: "Integrated advertising solutions",
-        alt: "ET Young Industry Leaders 2025 award presented to Ritesh Malik",
+        alt: "ET Young Industry Leaders 2025 award presented to Ritz Malik",
         src: "/awards/et-young-industry-leaders-2025.png",
         copy: "Recognition for excellence in integrated advertising solutions.",
       },
@@ -332,7 +332,7 @@ export const site = {
         subtitle: "Business leadership",
         alt: "ET Business Leaders 2024 trophy",
         src: "/awards/et-business-leaders-2024.jpg",
-        copy: "Ritz Media World founder Ritesh Malik was recognised among the ET Business Leaders.",
+        copy: "Ritz Media World founder Ritz Malik was recognised among the ET Business Leaders.",
       },
       {
         year: "2025",
@@ -340,7 +340,7 @@ export const site = {
         subtitle: "Podmasters",
         alt: "Podmasters award for Best Real Estate Podcast",
         src: "/awards/podmasters-real-estate-podcast-2024.jpg",
-        copy: "Recognition for Ritesh Malik and the real estate podcast, Beyond the Blueprint.",
+        copy: "Recognition for Ritz Malik and the real estate podcast, Beyond the Blueprint.",
       },
       {
         year: "2011",
@@ -413,7 +413,7 @@ export const site = {
     faqs: [
       {
         q: "When was Ritz Media World founded, and by whom?",
-        a: "Ritz Media World was founded in August 2008 by Mr. Ritesh Malik, who has led the agency ever since. He also founded Creative Thinks Media, a sister agency.",
+        a: "Ritz Media World was founded in August 2008 by Mr. Ritz Malik, who has led the agency ever since. He also founded Creative Thinks Media, a sister agency.",
       },
       {
         q: "Where is Ritz Media World based?",

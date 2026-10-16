@@ -14,6 +14,36 @@ registerGsap();
 //   { when: "Today", detail: "Leads RMW across strategy, creative, media and AI" },
 // ] as const;
 
+type Founder = {
+  portrait: string;
+  alt: string;
+  kicker: string;
+  title: [string, string];
+  role: string;
+  lede: string;
+  reverse?: boolean;
+};
+
+const FOUNDERS: Founder[] = [
+  {
+    portrait: "/about/founder-portrait.png",
+    alt: "Ritz Malik, founder of Ritz Media World since 2008",
+    kicker: "Founder details & journey",
+    title: ["The visionary", "behind the wheel"],
+    role: "Ritz Malik · Founder & Promoter, Ritz Media World And Creative Thinks Media",
+    lede: "Mr. Ritz Malik founded Ritz Media World in August 2008 with a simple belief: brands deserve ideas that are built on insight, not assumption. Over 18 years, he has steered the agency through every major shift in Indian marketing, growing it from a creative studio into a full-service creative, digital, and media partner for brands across industries. He also founded Creative Thinks Media. Even as data and AI reshape the industry, Mr. Malik remains convinced that brands win through clear, authentic, and well-crafted storytelling.",
+  },
+  {
+    portrait: "/about/cofounder-portrait.png",
+    alt: "Satvinder Kaur, co-founder of Ritz Media World",
+    kicker: "Co-founder details & journey",
+    title: ["The strength", "behind the studio"],
+    role: "Satvinder Kaur · Co-Founder, Ritz Media World",
+    lede: "Ms. Satvinder Kaur is the name everyone at Ritz Media World knows the moment they walk into the room. Alongside Mr. Malik, she has helped build the agency from its earliest days, keeping its people, its clients, and its day-to-day work running with the same care that goes into every campaign.",
+    reverse: true,
+  },
+];
+
 type Dot = {
   x: number;
   y: number;
@@ -74,6 +104,16 @@ function easeOut(value: number) {
 }
 
 export function AboutFounder() {
+  return (
+    <>
+      {FOUNDERS.map((founder) => (
+        <FounderFeature key={founder.portrait} founder={founder} />
+      ))}
+    </>
+  );
+}
+
+function FounderFeature({ founder }: { founder: Founder }) {
   const rootRef = useRef<HTMLElement>(null);
   const { ready, reduced } = useMotion();
 
@@ -217,7 +257,10 @@ export function AboutFounder() {
   );
 
   return (
-    <section ref={rootRef} className="about-founder">
+    <section
+      ref={rootRef}
+      className={founder.reverse ? "about-founder about-founder--reverse" : "about-founder"}
+    >
       <div className="about-founder-layout">
         <div className="about-founder-visual">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -232,8 +275,8 @@ export function AboutFounder() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               className="about-founder-portrait"
-              src="/about/founder-portrait.png"
-              alt="Ritesh Malik, founder of Ritz Media World since 2008"
+              src={founder.portrait}
+              alt={founder.alt}
               width={541}
               height={541}
             />
@@ -241,18 +284,14 @@ export function AboutFounder() {
           </figure>
         </div>
         <div className="about-founder-copy">
-          <p className="about-founder-kicker">Founder details &amp; journey</p>
+          <p className="about-founder-kicker">{founder.kicker}</p>
           <h2 className="about-founder-title">
-            The visionary 
+            {founder.title[0]}
             <br />
-            behind the wheel
+            {founder.title[1]}
           </h2>
-          <p className="about-founder-role">
-            Ritesh Malik · Founder &amp; Promoter, Ritz Media World And Creative Thinks Media
-          </p>
-          <p className="about-founder-lede">
-            Mr. Ritesh Malik founded Ritz Media World in August 2008 with a simple belief: brands deserve ideas that are built on insight, not assumption. Over 18 years, he has steered the agency through every major shift in Indian marketing, growing it from a creative studio into a full-service creative, digital, and media partner for brands across industries. He also founded Creative Thinks Media. Even as data and AI reshape the industry, Mr. Malik remains convinced that brands win through clear, authentic, and well-crafted storytelling.
-          </p>
+          <p className="about-founder-role">{founder.role}</p>
+          <p className="about-founder-lede">{founder.lede}</p>
           {/* <ol className="about-founder-list">
             {STOPS.map((stop) => (
               <li key={stop.detail}>
