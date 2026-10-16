@@ -91,7 +91,7 @@ export function ThemeSurfaces() {
       window.clearTimeout(timer);
       timer = window.setTimeout(() => {
         // A full scan mid theme-change drops frames; wait for the spill to finish.
-        if (document.documentElement.classList.contains("is-spilling")) schedule(400);
+        if (document.documentElement.hasAttribute("data-theme-busy")) schedule(400);
         else scan();
       }, delay);
     };

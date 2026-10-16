@@ -94,11 +94,11 @@
 }
 
 /* Squash-and-stretch when pressed, so the switch feels physical. */
-.theme-toggle.is-popping .theme-toggle-track {
+.theme-toggle-track.is-popping {
   animation: theme-toggle-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.theme-toggle.is-popping .theme-toggle-knob {
+.theme-toggle-track.is-popping .theme-toggle-knob {
   animation: theme-toggle-knob 0.45s ease-out;
 }
 
@@ -262,6 +262,16 @@ html[data-theme="dark"] :is(img, video, canvas, iframe):not(:is([data-theme-keep
   animation: none;
 }
 
+/* Phone theme change: the colour disc that floods the screen (ThemeToggle). */
+.theme-wipe {
+  position: fixed;
+  z-index: 2147482990;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: scale(0.01);
+  will-change: transform, opacity;
+}
+
 .theme-fx canvas {
   position: absolute;
   inset: 0;
@@ -283,8 +293,8 @@ html[data-theme="dark"] .theme-fx:not(.theme-keep) > canvas {
     transition: none;
   }
 
-  .theme-toggle.is-popping .theme-toggle-track,
-  .theme-toggle.is-popping .theme-toggle-knob,
+  .theme-toggle-track.is-popping,
+  .theme-toggle-track.is-popping .theme-toggle-knob,
   .theme-toggle.is-dark .theme-toggle-stars i {
     animation: none;
   }

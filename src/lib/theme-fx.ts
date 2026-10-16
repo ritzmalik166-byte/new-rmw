@@ -7,6 +7,9 @@ import type { Theme } from "@/lib/theme";
    real colours rather than through the night filter. */
 export const THEME_FX_MS = 1600;
 
+/** Phones and small screens get a lighter switch: fewer particles, no rays. */
+export const isLiteFx = () => window.matchMedia("(pointer: coarse), (max-width: 820px)").matches;
+
 const rand = (min: number, max: number) => min + Math.random() * (max - min);
 const clamp01 = (n: number) => (n < 0 ? 0 : n > 1 ? 1 : n);
 const easeOut = (p: number) => 1 - (1 - p) ** 3;
@@ -151,10 +154,10 @@ function drawRing(ctx: CanvasRenderingContext2D, t: number, x: number, y: number
   ctx.stroke();
 }
 
-function nightScene(x: number, y: number, vw: number, vh: number): Draw {
+function nightScene(x: number, y: number, vw: number, vh: number, lite: boolean): Draw {
   const reach = Math.hypot(vw, vh) * 1.1;
-  const burstList = bursts(26, vw);
-  const twinkles: Twinkle[] = Array.from({ length: 80 }, (_, i) => ({
+  const burstList = bursts(lite ? 14 : 26, vw);
+  const twinkles: Twinkle[] = Array.from({ length: lite ? 36 : 80 }, (_, i) => ({
     x: rand(0, vw),
     y: rand(0, vh),
     delay: rand(120, 520),
@@ -204,9 +207,9 @@ function nightScene(x: number, y: number, vw: number, vh: number): Draw {
   };
 }
 
-function dayScene(x: number, y: number, vw: number, vh: number): Draw {
+function dayScene(x: number, y: number, vw: number, vh: number, lite: boolean): Draw {
   const diag = Math.hypot(vw, vh);
-  const burstList = bursts(30, vw);
+  const burstList = bursts(lite ? 16 : 30, vw);
   const gold = spark("#ffc93c");
   const sun = sunSprite();
   const rays = raysSprite();
@@ -226,7 +229,7 @@ function dayScene(x: number, y: number, vw: number, vh: number): Draw {
     }
 
     const rp = clamp01(t / (THEME_FX_MS - 100));
-    if (rp < 1) {
+    if (rp < 1 && !lite) {
       const size = diag * 1.3 * curve(rp, [[0, 0.1], [0.3, 0.7], [1, 1]]);
       ctx.save();
       ctx.translate(x, y);
@@ -263,7 +266,8 @@ export function prepareThemeFx() {
 export function playThemeFx(theme: Theme, x: number, y: number, inPage = false) {
   const vw = window.innerWidth;
   const vh = window.innerHeight;
-  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  const lite = isLiteFx();
+  const dpr = lite ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
 
   const layer = document.createElement("div");
   layer.className = inPage ? "theme-fx theme-keep" : "theme-fx";
@@ -277,7 +281,7 @@ export function playThemeFx(theme: Theme, x: number, y: number, inPage = false) 
   document.body.appendChild(layer);
 
   const ctx = canvas.getContext("2d");
-  const draw = theme === "dark" ? nightScene(x, y, vw, vh) : dayScene(x, y, vw, vh);
+  const draw = theme === "dark" ? nightScene(x, y, vw, vh, lite) : dayScene(x, y, vw, vh, lite);
   let frame = 0;
   const start = performance.now();
   const tick = (now: number) => {

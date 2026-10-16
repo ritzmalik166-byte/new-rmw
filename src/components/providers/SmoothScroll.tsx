@@ -12,6 +12,29 @@ function LenisScrollTriggerBridge() {
 
   useEffect(() => {
     if (!lenis) return;
+    // Lenis flips `lenis-scrolling` / `lenis-smooth` on <html> at every scroll start
+    // and stop, and any class change on <html> restyles the whole page (a visible
+    // hitch on phones). Only keep the classes the stylesheet actually needs.
+    const root = document.documentElement;
+    let applied = Array.from(root.classList)
+      .filter((name) => name === "lenis" || name.startsWith("lenis-"))
+      .join(" ");
+    const patched = lenis as unknown as { updateClassName: () => void };
+    patched.updateClassName = () => {
+      const next = [
+        "lenis",
+        lenis.options.autoToggle && "lenis-autoToggle",
+        lenis.isStopped && "lenis-stopped",
+        lenis.isLocked && "lenis-locked",
+      ]
+        .filter(Boolean)
+        .join(" ");
+      if (next === applied) return;
+      applied.split(" ").forEach((name) => name && root.classList.remove(name));
+      next.split(" ").forEach((name) => root.classList.add(name));
+      applied = next;
+    };
+    patched.updateClassName();
     lenis.on("scroll", ScrollTrigger.update);
     return () => {
       lenis.off("scroll", ScrollTrigger.update);
