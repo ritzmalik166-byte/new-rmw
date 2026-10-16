@@ -129,8 +129,12 @@ export function HomeHero() {
       // Road and wheels share one odometer so the tyres never skid.
       let odometer = 0;
       let visible = true;
+      let bob: gsap.core.Tween | undefined;
       const io = new IntersectionObserver(([entry]) => {
         visible = entry.isIntersecting;
+        root.classList.toggle("is-offscreen", !visible);
+        if (visible) bob?.resume();
+        else bob?.pause();
       });
       io.observe(root);
 
@@ -147,9 +151,14 @@ export function HomeHero() {
 
       // The driver idles with the road, blinks, and now and then glances at
       // the visitor or has a laugh.
-      const driverCalls: gsap.core.Tween[] = [];
+      const driverCalls = new Set<gsap.core.Tween>();
       const later = (seconds: number, fn: () => void) => {
-        driverCalls.push(gsap.delayedCall(seconds, fn));
+        const call = gsap.delayedCall(seconds, () => {
+          driverCalls.delete(call);
+          if (visible) fn();
+          else later(1, fn);
+        });
+        driverCalls.add(call);
       };
       if (cab && driver) {
         const pose = (name: DriverPose) => {
@@ -179,7 +188,7 @@ export function HomeHero() {
           }
           later(hold, act);
         };
-        gsap.to(driver, { yPercent: 2.5, duration: 0.36, ease: "sine.inOut", yoyo: true, repeat: -1 });
+        bob = gsap.to(driver, { yPercent: 2.5, duration: 0.36, ease: "sine.inOut", yoyo: true, repeat: -1 });
         later(2.4, act);
       }
 
@@ -298,7 +307,7 @@ export function HomeHero() {
         driverCalls.forEach((c) => c.kill());
         if (driver) gsap.killTweensOf(driver);
         if (cab) cab.dataset.pose = "idle";
-        root.classList.remove("is-lit");
+        root.classList.remove("is-lit", "is-offscreen");
       };
     },
     { scope: rootRef, dependencies: [ready, reduced] },

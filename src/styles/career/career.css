@@ -232,7 +232,7 @@
 .cr-drop-text span {
   color: var(--ct-muted);
   font-family: var(--ct-sans);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .cr-drop-clear {

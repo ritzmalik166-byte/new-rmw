@@ -65,6 +65,9 @@ export function getServiceLayout(service: ServiceDetail, parts = service.capabil
     intentTitle: layout.intentTitle ?? { lead: `Why ${service.name}`, accent: "moves the needle." },
     intentPoints: layout.intentPoints ?? service.whyUs.slice(0, 3),
     intentTape: layout.intentTape ?? (["Ideas that travel", "Horn ओके please"] as [string, string]),
+    wallKicker: layout.wallKicker ?? `Off the ${service.name} desk`,
+    wallTitle: layout.wallTitle ?? "Work that went live.",
+    hideProof: layout.hideProof ?? false,
     wallLede:
       layout.wallLede ?? "Campaigns, creatives and live dashboards from brands that trusted us with their name.",
     requirementsSign: layout.requirementsSign,

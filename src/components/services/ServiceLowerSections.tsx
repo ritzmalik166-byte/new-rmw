@@ -34,7 +34,7 @@ export function ServiceLowerSections({ service, relatedServices }: ServiceLowerS
         points={layout.intentPoints}
         tape={layout.intentTape}
       />
-      <ServiceProof service={service} relatedServices={relatedServices} />
+      {layout.hideProof ? null : <ServiceProof service={service} relatedServices={relatedServices} />}
     </>
   );
 }
@@ -46,7 +46,7 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
   const { reduced } = useMotion();
   useHomeReveal(rootRef);
   const { wall } = getServiceCreatives(service.slug);
-  const { wallLede } = getServiceLayout(service);
+  const { wallKicker, wallTitle, wallLede } = getServiceLayout(service);
 
   const syncSlide = useCallback(() => {
     const grid = gridRef.current;
@@ -91,9 +91,9 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
           <div>
             <p data-hm-fade className="hm-kicker">
               <span className="hm-pill">KM 03</span>
-              <span>Off the {service.name} desk</span>
+              <span>{wallKicker}</span>
             </p>
-            <HmTitle id="sd-wall-title" lines={[{ text: "Work that went live." }]} />
+            <HmTitle id="sd-wall-title" lines={[{ text: wallTitle }]} />
             <p data-hm-fade className="hm-lede">
               {wallLede}
             </p>

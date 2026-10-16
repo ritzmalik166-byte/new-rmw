@@ -119,7 +119,7 @@
   margin: 20px 0 0;
   color: var(--hm-muted);
   font-family: var(--hm-sans);
-  font-size: clamp(15px, 1.15vw, 17px);
+  font-size: clamp(17px, 1.15vw, 19px);
   line-height: 1.6;
 }
 

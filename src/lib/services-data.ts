@@ -37,7 +37,10 @@ export interface ServiceLayoutCopy {
   intentTitle?: { lead: string; accent: string };
   intentPoints?: ServicePoint[];
   intentTape?: [string, string];
+  wallKicker?: string;
+  wallTitle?: string;
   wallLede?: string;
+  hideProof?: boolean;
   /** Optional illustrated sign; an HTML sign is rendered when omitted. */
   requirementsSign?: { src: string; alt: string };
   faqs?: ServiceFaq[];
@@ -656,12 +659,16 @@ export const SERVICES_LIST: ServiceDetail[] = [
     uppercaseName: "RADIO ADVERTISING",
     engine: "Engine Two · Digital & Media",
     kicker: "KM 07 · Sound that earns a second listen",
-    tagline: "High-frequency audio advertising that travels directly into consumer memory.",
-    heading: "Audio, FM commercials, and podcasts with writing that sounds like people, not a script",
+    heroTitle: { lead: "Radio Advertising", accent: "Heard once, remembered long." },
+    tagline:
+      "FM radio ads conceptualised, scripted, voiced, produced, and booked in-house, so your brand is heard in the right cities, at the right time.",
+    heading: "FM radio ads with writing that sounds like people, not a script",
     shortDescription:
       "Radio jingles, FM network spot buying, commute prime-time scheduling, and podcast audio sponsorships.",
+    definitionText:
+      "Radio advertising means running short audio ads, such as spots and jingles, on FM stations to reach listeners in specific cities, languages and times of day.",
     fullOverview:
-      "When people are driving to work, stuck in traffic, or relaxing at home, radio and streaming audio have their undivided attention. Ritz Media World creates catchy, human-sounding radio ads that stick in the ear, backed by disciplined daypart media buying across India's premier FM networks.",
+      "When people drive to work, get stuck in traffic, or relax at home, radio has their full attention. Ritz Media World creates radio ads that stick in listeners' ears and plans media across leading FM stations, from single-city campaigns to campaigns across India.",
     image:
       "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=1400&q=80",
     accentColor: "#f07828",
@@ -674,28 +681,82 @@ export const SERVICES_LIST: ServiceDetail[] = [
     ],
     capabilities: [
       {
-        title: "Audio Concept & Scriptwriting",
-        copy: "Tight 10, 20, and 30-second scripts with irresistible opening hooks that state brand name and offer with crystal clarity.",
+        title: "Concept Development",
+        copy: "One big idea built for the ear: a hook, a format and a sound people remember after one listen.",
+        details: [
+          "Your Campaign Objective",
+          "Audience & Listener Insight",
+          "Creative Concepts",
+          "Storytelling & Emotion",
+          "Brand Integration",
+          "Launch & Festive Campaign Ideas",
+        ],
+        subService: "advertisement-concept-development",
       },
       {
-        title: "Sonic Branding & Custom Jingles",
-        copy: "Memorable sonic signatures, catchy musical jingles, and mnemonic sound designs that stay hummed for years.",
+        title: "Scriptwriting",
+        copy: "Scripts written in your brand voice, with a clear call to action in every spot.",
+        details: [
+          "10, 20, 30 & 60-Second Spots",
+          "Hindi & English Scripts",
+          "Dialogue & Narrative Formats",
+          "Jingle Lyrics",
+          "Calls to Action",
+          "Industry-Specific Scripts",
+        ],
+        subService: "scriptwriting",
       },
       {
-        title: "Voiceover Casting Across Dialects",
-        copy: "Hindi, English, and regional dialect voice artists matched to your buyer profile, from authoritative and warm to high-energy.",
+        title: "Voiceover Casting",
+        copy: "The right voice can do more for a brand than the script itself. We match your campaign with voices your audience responds to.",
+        details: [
+          "Male & Female Voice Artists",
+          "Bilingual Voices",
+          "Regional-Language Voices",
+          "Character Voices",
+          "Voice Auditions",
+          "Guided Recording Sessions",
+        ],
+        subService: "voiceover-casting",
       },
       {
-        title: "Studio Sound Engineering & Mixing",
-        copy: "Broadcast-quality mixing, sound effects design, and mastering delivered strictly to broadcast FM audio specifications.",
+        title: "Recording & Production",
+        copy: "Studio recording, music, sound design and mastering that turn a finished script into a broadcast-ready ad.",
+        details: [
+          "Studio Recording",
+          "Custom Jingles",
+          "Music & Sound Design",
+          "Editing & Mixing",
+          "Broadcast Mastering",
+          "Quality Checks Before Airing",
+        ],
+        subService: "recording-and-production",
       },
       {
-        title: "FM Network Planning & Daypart Buying",
-        copy: "Targeted spot scheduling across Mirchi, Red FM, Fever, Big FM, Radio City during peak morning and evening drive-times.",
+        title: "Media Planning",
+        copy: "Stations, time slots, and languages chosen by city-wise listenership, so your ad reaches the right people without wasted spend.",
+        details: [
+          "Station Selection",
+          "Time Slot Planning",
+          "City & Language Targeting",
+          "Multi-City Campaigns",
+          "Pan-India Planning",
+          "Budget Allocation",
+        ],
+        subService: "media-planning-and-buying",
       },
       {
-        title: "RJ Mentions & On-Air Contest Activations",
-        copy: "Organic Radio Jockey chatter, contest integrations, and on-ground station tie-ins that build authentic local buzz.",
+        title: "Cost Negotiation",
+        copy: "Better rates and premium slots through established FM network relationships, with transparent cost breakdowns.",
+        details: [
+          "Rate Negotiation",
+          "Premium Slot Booking",
+          "Value-Added Packages",
+          "Transparent Media Plans",
+          "Booking & Scheduling",
+          "Airing Monitoring",
+        ],
+        subService: "radio-cost-negotiation-india",
       },
     ],
     deliverables: [
@@ -710,46 +771,91 @@ export const SERVICES_LIST: ServiceDetail[] = [
       {
         step: "01",
         km: "KM 01",
-        title: "Auditory Hook & Message Strategy",
-        copy: "We define the one key thought a listener must remember when hearing your spot while navigating busy city traffic.",
+        title: "Message & Hook Strategy",
+        copy: "We define the one thought a listener must remember, even while driving through busy city traffic.",
       },
       {
         step: "02",
         km: "KM 02",
-        title: "Scriptwriting & Voiceover Auditions",
-        copy: "We draft natural, punchy dialogue scripts and test matching voice talents to find the perfect emotional cadence.",
+        title: "Scriptwriting & Voice Auditions",
+        copy: "We write natural, conversational scripts and audition voices to find the right tone for your brand.",
       },
       {
         step: "03",
         km: "KM 03",
-        title: "Studio Production & Jingle Composition",
-        copy: "Our sound designers record, compose music, mix sound effects, and master audio to FM broadcast standards.",
+        title: "Studio Production & Jingles",
+        copy: "We record, compose music, add sound effects, and master each ad to FM broadcast standards.",
       },
       {
         step: "04",
         km: "KM 04",
-        title: "Prime Daypart Broadcast & Monitoring",
-        copy: "Spots air across scheduled station clusters with daily airing logs verifying spot times and rotation counts.",
+        title: "Broadcast & Monitoring",
+        copy: "Your ads air on the planned stations and time slots, and we check airing reports to confirm every spot ran as booked.",
       },
     ],
     whyUs: [
       {
-        title: "Writing That Sounds Like Real Life",
-        copy: "We banish corny radio cliches. Our scripts sound like smart, humorous, real conversations that people enjoy listening to.",
+        title: "Writing that sounds like real life",
+        copy: "No tired radio clichés. Our scripts sound like real conversations people actually enjoy listening to.",
       },
       {
-        title: "Volume Buying Power Across All Major Networks",
-        copy: "Direct network partnerships with Mirchi, Red FM, Fever, Big FM, and Radio City ensure the most favorable cost-per-second.",
+        title: "Relationships across leading FM networks",
+        copy: "Established relationships with FM networks help us secure competitive rates and premium slots for your campaigns.",
       },
       {
-        title: "In-House Sound Production Studio",
-        copy: "Quick turnarounds for topical campaigns, festival specials, and flash sales without third-party production bottlenecks.",
-      },
-      {
-        title: "Strategic Drive-Time Frequency Optimization",
-        copy: "We place your spots when your buyer is actually behind the wheel, maximizing ear reach without wasted off-peak budget.",
+        title: "Recognised by the radio industry",
+        copy: "Red FM 93.5 and Big FM named us Best Creative Agency (Real Estate) in Delhi NCR in 2024 and 2025.",
       },
     ],
+    layout: {
+      problemFlags: [
+        {
+          title: "Forgotten after one play",
+          copy: "Radio has no visuals, so an ad without a strong idea is gone the moment it ends.",
+        },
+        {
+          title: "Right ad, wrong slot",
+          copy: "A great spot aired when your audience isn’t listening is wasted airtime.",
+        },
+        {
+          title: "Paying full rate",
+          copy: "Without network relationships, brands often pay more for the same airtime.",
+        },
+      ],
+      wallKicker: "Awards & Recognition",
+      wallTitle: "Recognised for Making Waves on Radio.",
+      wallLede:
+        "From impactful radio campaigns to industry recognition, our journey reflects the power of strategic media planning, creative storytelling, and effective radio advertising. Explore the milestones that celebrate our work in the radio advertising industry.",
+      intentTitle: { lead: "Ads people turn up,", accent: "not tune out." },
+      hideProof: true,
+      faqs: [
+        {
+          question: "What radio advertising services does Ritz Media World offer?",
+          answer:
+            "Ritz Media World offers end-to-end FM radio advertising, including concept development, scriptwriting, voiceover casting, recording and production, media planning, and media buying with rate negotiation. We run campaigns in Delhi NCR and across India.",
+        },
+        {
+          question: "How much does radio advertising cost?",
+          answer:
+            "Radio advertising costs depend on the station, city, time slot, spot length, and number of airings. Share your goals and budget, and we’ll send a media plan with negotiated rates.",
+        },
+        {
+          question: "Do you provide radio ad services in Delhi and Noida?",
+          answer:
+            "Yes. Ritz Media World is based in Noida and plans, produces, and books radio ads on FM stations in Delhi, Noida, and across Delhi NCR, as well as multi-city and pan-India campaigns.",
+        },
+        {
+          question: "How long should a radio ad be?",
+          answer:
+            "Most radio ads run for 10, 20, 30, or 60 seconds. Shorter spots work well for reminders and offers, while 30- and 60-second spots give more room for storytelling.",
+        },
+        {
+          question: "Which FM station is best for my brand?",
+          answer:
+            "The best station depends on your audience, city, and goal. We study listenership by station, time slot, and language to recommend the mix that reaches your customers.",
+        },
+      ],
+    },
   },
   {
     id: "content",

@@ -62,7 +62,7 @@
 .cs-hero-stats dt {
   color: var(--hm-muted);
   font-family: var(--hm-mono);
-  font-size: 10.5px;
+  font-size: 11.5px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -441,7 +441,7 @@
   overflow: hidden;
   color: var(--hm-muted);
   font-family: var(--hm-sans);
-  font-size: 15.5px;
+  font-size: 17.5px;
   line-height: 1.65;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -663,7 +663,7 @@
 .cs-index-year {
   color: var(--hm-muted);
   font-family: var(--hm-mono);
-  font-size: 10.5px;
+  font-size: 11.5px;
   font-weight: 700;
   letter-spacing: 0.06em;
 }
@@ -778,7 +778,7 @@
   background: var(--hm-paper);
   color: var(--hm-muted);
   font-family: var(--hm-sans);
-  font-size: 15px;
+  font-size: 17px;
   text-align: center;
 }
 
@@ -877,7 +877,7 @@
   margin: 14px 0 22px;
   color: var(--hm-muted);
   font-family: var(--hm-sans);
-  font-size: 14.5px;
+  font-size: 16.5px;
   line-height: 1.6;
 }
 
@@ -1049,7 +1049,7 @@
   }
 
   .cs-hero-stats dt {
-    font-size: 9.5px;
+    font-size: 10.5px;
   }
 
   .cs-stage-tags {

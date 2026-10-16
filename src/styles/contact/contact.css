@@ -104,7 +104,7 @@
   margin: clamp(8px, 1.4vh, 14px) 0 0;
   color: var(--ct-muted);
   font-family: var(--ct-sans);
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.55;
 }
 
@@ -406,7 +406,7 @@
 .ct-route-copy {
   color: var(--ct-muted);
   font-family: var(--ct-sans);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.45;
 }
 
@@ -599,7 +599,7 @@
 .ct-help {
   color: var(--ct-muted);
   font-family: var(--ct-sans);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .ct-link {
@@ -830,7 +830,7 @@
   margin-top: 2px;
   color: var(--ct-muted);
   font-family: var(--ct-sans);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
 }
 
@@ -1086,7 +1086,7 @@
   margin: 8px 0 16px;
   color: var(--ct-muted);
   font-family: var(--ct-sans);
-  font-size: 14.5px;
+  font-size: 16.5px;
   line-height: 1.55;
 }
 

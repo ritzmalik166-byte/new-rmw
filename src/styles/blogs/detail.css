@@ -52,7 +52,7 @@
   padding: 0;
   list-style: none;
   color: var(--hm-muted);
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .blog-breadcrumb li {
@@ -107,7 +107,7 @@
   gap: 6px 10px;
   margin: 0 0 24px;
   color: var(--hm-muted);
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .blog-featured-img {
@@ -450,7 +450,7 @@ a.blog-tag-chip:focus-visible {
 .enquiry-card-subtitle {
   margin: 0;
   color: var(--hm-muted);
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .enquiry-form {
@@ -552,7 +552,7 @@ a.blog-tag-chip:focus-visible {
 .enquiry-success-text {
   margin: 0 0 14px;
   color: var(--hm-muted);
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.5;
 }
 
@@ -634,7 +634,7 @@ a.blog-tag-chip:focus-visible {
 
 .blog-related-date {
   color: var(--hm-muted);
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .blog-related-title {

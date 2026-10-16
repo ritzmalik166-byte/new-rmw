@@ -251,7 +251,7 @@
   padding: 0 66px 24px 94px;
   color: var(--hm-muted);
   font-family: var(--hm-sans);
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.65;
 }
 
@@ -303,7 +303,7 @@
 
   .hm-faq-a {
     padding: 0 4px 20px;
-    font-size: 14.5px;
+    font-size: 16.5px;
   }
 
   .hm-faq-plate {

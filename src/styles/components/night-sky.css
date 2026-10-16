@@ -32,6 +32,10 @@ html[data-theme="dark"] .night-sky {
   border-radius: 50%;
   background: #fff;
   box-shadow: 0 0 calc(var(--size) * 2.4) rgb(255 255 255 / 70%);
+}
+
+/* The sky only animates while it can be seen. */
+html[data-theme="dark"] .night-star {
   animation: night-twinkle var(--twinkle) ease-in-out var(--delay) infinite;
 }
 
@@ -79,15 +83,29 @@ html[data-theme="dark"] .night-sky {
 }
 
 .night-moon svg {
+  position: relative;
   display: block;
   width: 100%;
   height: 100%;
-  animation: night-moon-glow 5s ease-in-out infinite;
+}
+
+/* Breathing halo; opacity only, so it stays on the compositor. */
+.night-moon::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(255 236 170 / 30%), transparent);
+  opacity: 0.4;
 }
 
 /* The moon stays put and simply fades up as night falls. */
 html[data-theme="dark"] .night-moon {
   animation: night-moon-fade 1.6s ease-in-out 0.3s forwards;
+}
+
+html[data-theme="dark"] .night-moon::before {
+  animation: night-moon-glow 5s ease-in-out infinite;
 }
 
 @keyframes night-moon-fade {
@@ -98,7 +116,7 @@ html[data-theme="dark"] .night-moon {
 
 @keyframes night-moon-glow {
   50% {
-    filter: brightness(1.1);
+    opacity: 1;
   }
 }
 
@@ -112,6 +130,9 @@ html[data-theme="dark"] .night-moon {
   box-shadow: -2px 0 8px rgb(255 255 255 / 60%);
   opacity: 0;
   transform-origin: left center;
+}
+
+html[data-theme="dark"] .night-shooter {
   animation: night-shoot 24s linear var(--delay) infinite;
 }
 
@@ -132,9 +153,8 @@ html[data-theme="dark"] .night-moon {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .night-star,
-  .night-moon svg,
-  .night-shooter {
+  html[data-theme="dark"] :is(.night-star, .night-shooter),
+  html[data-theme="dark"] .night-moon::before {
     animation: none;
   }
 

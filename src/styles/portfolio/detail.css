@@ -29,7 +29,7 @@
   margin: 20px 0 0;
   color: var(--hm-muted);
   font-family: var(--hm-sans);
-  font-size: clamp(16px, 1.3vw, 19px);
+  font-size: clamp(18px, 1.3vw, 21px);
   font-weight: 500;
   line-height: 1.55;
 }
@@ -295,7 +295,7 @@
   padding: 12px 2px 0;
   color: var(--hm-muted);
   font-family: var(--hm-mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -444,7 +444,7 @@
   margin: 0;
   color: var(--hm-muted);
   font-family: var(--hm-sans);
-  font-size: clamp(15px, 1.15vw, 17px);
+  font-size: clamp(17px, 1.15vw, 19px);
   line-height: 1.7;
 }
 
@@ -518,7 +518,7 @@
   margin: 8px 0 0;
   color: var(--hm-muted);
   font-family: var(--hm-sans);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.6;
 }
 

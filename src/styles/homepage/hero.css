@@ -508,3 +508,9 @@ html[data-theme="dark"] .hm-hero.is-lit .hm-hero-light.is-beam::before {
     animation: none;
   }
 }
+
+/* Nothing in the hero needs to move once it has scrolled away. */
+.hm-hero.is-offscreen,
+.hm-hero.is-offscreen * {
+  animation-play-state: paused !important;
+}

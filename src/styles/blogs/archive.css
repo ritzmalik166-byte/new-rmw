@@ -158,7 +158,7 @@
   margin: 12px 0 0;
   color: var(--hm-muted);
   font-family: var(--hm-sans);
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.6;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -326,7 +326,7 @@
   padding: 0;
   color: var(--hm-muted);
   font-family: var(--hm-sans);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.55;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -361,7 +361,7 @@
   background: var(--hm-paper);
   color: var(--hm-muted);
   font-family: var(--hm-sans);
-  font-size: 15px;
+  font-size: 17px;
   text-align: center;
 }
 
@@ -401,7 +401,7 @@
 .blog-pagination-ellipsis {
   color: var(--hm-muted);
   font-family: var(--hm-mono);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .blog-pagination-arrow,

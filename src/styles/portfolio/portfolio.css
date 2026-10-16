@@ -592,7 +592,7 @@
   margin: 16px 0 0;
   color: var(--hm-muted);
   font-family: var(--hm-sans);
-  font-size: clamp(15px, 1.1vw, 17px);
+  font-size: clamp(17px, 1.1vw, 19px);
   line-height: 1.6;
 }
 
@@ -661,7 +661,7 @@
 .pf-stat dt {
   color: var(--hm-muted);
   font-family: var(--hm-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -732,7 +732,7 @@
   margin: 10px 0 0;
   color: var(--hm-muted);
   font-family: var(--hm-sans);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.6;
 }
 
