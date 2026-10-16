@@ -67,7 +67,7 @@
   stroke-linejoin: round;
   transition:
     opacity 0.3s ease,
-    rotate 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    rotate 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .theme-toggle-sun {
@@ -89,8 +89,95 @@
 }
 
 .theme-toggle.is-dark .theme-toggle-sun {
-  opacity: 0.45;
+  opacity: 0;
   rotate: 90deg;
+}
+
+/* Squash-and-stretch when pressed, so the switch feels physical. */
+.theme-toggle.is-popping .theme-toggle-track {
+  animation: theme-toggle-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.theme-toggle.is-popping .theme-toggle-knob {
+  animation: theme-toggle-knob 0.45s ease-out;
+}
+
+@keyframes theme-toggle-pop {
+  0% {
+    scale: 1;
+  }
+  25% {
+    scale: 0.88 1.08;
+  }
+  55% {
+    scale: 1.08 0.94;
+  }
+  100% {
+    scale: 1;
+  }
+}
+
+@keyframes theme-toggle-knob {
+  40% {
+    scale: 1.35 0.8;
+  }
+}
+
+/* Stars come out in the track at night, where the sun was. */
+.theme-toggle-stars {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.4s ease 0.15s;
+}
+
+.theme-toggle.is-dark .theme-toggle-stars {
+  opacity: 1;
+}
+
+.theme-toggle-stars i {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #ffe9a8;
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  scale: 0;
+  transition: scale 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.theme-toggle-stars i:nth-child(1) {
+  top: 7px;
+  left: 9px;
+  width: 7px;
+  height: 7px;
+}
+
+.theme-toggle-stars i:nth-child(2) {
+  top: 17px;
+  left: 20px;
+  transition-delay: 0.08s;
+}
+
+.theme-toggle-stars i:nth-child(3) {
+  top: 19px;
+  left: 8px;
+  width: 5px;
+  height: 5px;
+  transition-delay: 0.16s;
+}
+
+.theme-toggle.is-dark .theme-toggle-stars i {
+  scale: 1;
+  animation: night-twinkle 2.4s ease-in-out infinite;
+}
+
+.theme-toggle.is-dark .theme-toggle-stars i:nth-child(2) {
+  animation-delay: -0.8s;
+}
+
+.theme-toggle.is-dark .theme-toggle-stars i:nth-child(3) {
+  animation-delay: -1.6s;
 }
 
 .theme-toggle.is-dark .theme-toggle-moon {
@@ -129,17 +216,22 @@
 }
 
 /* ---------- Dark mode ----------
-   The whole page is inverted with its hues turned back, so every section in
-   every stylesheet goes dark together. Media, and the surfaces ThemeSurfaces
+   The whole page runs through the night filter (ThemeFilters), so every section
+   in every stylesheet goes dark together. Media, and the surfaces ThemeSurfaces
    tags as already dark or brand-coloured, are flipped back to their real paint. */
+html {
+  --theme-night: url("#theme-night");
+  --theme-day: url("#theme-day");
+}
+
 html[data-theme="dark"] {
   background: #fff;
-  filter: invert(1) hue-rotate(180deg);
+  filter: var(--theme-night);
 }
 
 html[data-theme="dark"] :is([data-theme-keep], .theme-keep),
 html[data-theme="dark"] :is(img, video, canvas, iframe):not(:is([data-theme-keep], .theme-keep) *) {
-  filter: invert(1) hue-rotate(180deg);
+  filter: var(--theme-day);
 }
 
 /* ---------- Theme change: the new theme spreads like spilled liquid ---------- */
@@ -154,11 +246,46 @@ html[data-theme="dark"] :is(img, video, canvas, iframe):not(:is([data-theme-keep
   mask: url("/fx/spill.svg") 0 0 / 0 0 no-repeat;
 }
 
+/* ---------- Theme change: moon & stars / sun flare over the spill (lib/theme-fx) ---------- */
+.theme-fx {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  overflow: hidden;
+  pointer-events: none;
+  view-transition-name: theme-fx;
+}
+
+::view-transition-group(theme-fx),
+::view-transition-old(theme-fx),
+::view-transition-new(theme-fx) {
+  animation: none;
+}
+
+.theme-fx canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Captured on its own by the view transition, outside the night filter, so it must not undo it. */
+html[data-theme="dark"] .theme-fx:not(.theme-keep) > canvas {
+  filter: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .theme-toggle-track,
   .theme-toggle-knob,
   .theme-toggle-sun,
-  .theme-toggle-moon {
+  .theme-toggle-moon,
+  .theme-toggle-stars i {
     transition: none;
+  }
+
+  .theme-toggle.is-popping .theme-toggle-track,
+  .theme-toggle.is-popping .theme-toggle-knob,
+  .theme-toggle.is-dark .theme-toggle-stars i {
+    animation: none;
   }
 }

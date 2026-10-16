@@ -43,6 +43,50 @@
   height: 100%;
 }
 
+/* Window box is 208,72 112x64 in source px; the mask keeps the frame, wiper
+   and mirror in front of the driver. */
+.real-truck-cab {
+  position: absolute;
+  left: 18.892%;
+  top: 17.91%;
+  width: 10.172%;
+  height: 15.92%;
+  -webkit-mask: url("/trucks/driver/glass-mask.png") 0 0 / 100% 100% no-repeat luminance;
+  mask: url("/trucks/driver/glass-mask.png") 0 0 / 100% 100% no-repeat luminance;
+}
+
+.real-truck-driver {
+  position: absolute;
+  inset: 0;
+  transform-origin: 70% 100%;
+}
+
+.real-truck .real-truck-pose {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.14s linear;
+}
+
+.real-truck-pose[data-pose="blink"] {
+  transition: none;
+}
+
+.real-truck-cab[data-pose="idle"] .real-truck-pose[data-pose="idle"],
+.real-truck-cab[data-pose="blink"] .real-truck-pose[data-pose="blink"],
+.real-truck-cab[data-pose="look"] .real-truck-pose[data-pose="look"],
+.real-truck-cab[data-pose="laugh"] .real-truck-pose[data-pose="laugh"] {
+  opacity: 1;
+}
+
+/* Keep the base pose underneath while a quick blink or swap fades in. */
+.real-truck-cab[data-pose="blink"] .real-truck-pose[data-pose="idle"] {
+  opacity: 1;
+}
+
 .real-truck.is-rolling .real-truck-wheel img {
   animation: real-truck-spin var(--wheel-rev) linear infinite;
 }

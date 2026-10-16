@@ -1,0 +1,145 @@
+/* ---------- Night sky (dark mode only) ----------
+   Tagged `.theme-keep`, so it paints in its real colours under the night filter. */
+.night-sky {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  background:
+    radial-gradient(38% 46% at 80% 22%, rgb(255 236 170 / 13%), transparent 70%),
+    radial-gradient(70% 60% at 20% 110%, rgb(201 53 110 / 14%), transparent 70%),
+    linear-gradient(180deg, #040814 0%, #0a1330 55%, #121b3f 100%);
+  transition:
+    opacity 0.8s ease,
+    visibility 0s linear 0.8s;
+}
+
+html[data-theme="dark"] .night-sky {
+  visibility: visible;
+  opacity: 1;
+  transition:
+    opacity 0.8s ease,
+    visibility 0s;
+}
+
+.night-star {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 calc(var(--size) * 2.4) rgb(255 255 255 / 70%);
+  animation: night-twinkle var(--twinkle) ease-in-out var(--delay) infinite;
+}
+
+/* Four-point sparkle for the brightest stars. */
+.night-star.is-big {
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.night-star.is-big::before,
+.night-star.is-big::after {
+  content: "";
+  position: absolute;
+  inset: calc(var(--size) * -1.6) 0;
+  background: linear-gradient(180deg, transparent, #fff 45% 55%, transparent);
+  clip-path: polygon(50% 0, 62% 50%, 50% 100%, 38% 50%);
+}
+
+.night-star.is-big::after {
+  rotate: 90deg;
+}
+
+@keyframes night-twinkle {
+  0%,
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+  50% {
+    opacity: var(--dim);
+    scale: 0.6;
+  }
+}
+
+/* ---------- Moon ---------- */
+.night-moon {
+  position: absolute;
+  top: 16%;
+  right: max(6vw, calc((100% - 1280px) / 2 + 40px));
+  width: clamp(64px, 8vw, 116px);
+  aspect-ratio: 1;
+  filter: drop-shadow(0 0 18px rgb(255 236 170 / 55%)) drop-shadow(0 0 48px rgb(255 220 140 / 28%));
+  opacity: 0;
+}
+
+.night-moon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: night-moon-glow 5s ease-in-out infinite;
+}
+
+/* The moon stays put and simply fades up as night falls. */
+html[data-theme="dark"] .night-moon {
+  animation: night-moon-fade 1.6s ease-in-out 0.3s forwards;
+}
+
+@keyframes night-moon-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes night-moon-glow {
+  50% {
+    filter: brightness(1.1);
+  }
+}
+
+/* ---------- Shooting stars ---------- */
+.night-shooter {
+  position: absolute;
+  width: 140px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #fff, rgb(255 255 255 / 0%));
+  box-shadow: -2px 0 8px rgb(255 255 255 / 60%);
+  opacity: 0;
+  transform-origin: left center;
+  animation: night-shoot 24s linear var(--delay) infinite;
+}
+
+/* Head leads down and to the left. */
+@keyframes night-shoot {
+  0% {
+    opacity: 0;
+    transform: rotate(-30deg) translateX(0);
+  }
+  1% {
+    opacity: 1;
+  }
+  4%,
+  100% {
+    opacity: 0;
+    transform: rotate(-30deg) translateX(-320px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .night-star,
+  .night-moon svg,
+  .night-shooter {
+    animation: none;
+  }
+
+  html[data-theme="dark"] .night-moon {
+    animation: none;
+    opacity: 1;
+  }
+}

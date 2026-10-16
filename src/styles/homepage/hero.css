@@ -412,11 +412,11 @@ html:not([data-theme="dark"]) .hm-hero-light {
 /* Dark mode inverts the page, so the glow is pre-inverted to land as pale yellow.
    Inside an inverted page, multiply comes out as screen. */
 html[data-theme="dark"] .hm-hero-light {
-  filter: invert(1) hue-rotate(180deg);
+  filter: var(--theme-day);
 }
 
 html[data-theme="dark"] .hm-hero-light.is-beam {
-  filter: blur(5px) invert(1) hue-rotate(180deg);
+  filter: blur(5px) var(--theme-day);
 }
 
 html[data-theme="dark"] :is(.hm-hero-light.is-lamp, .hm-hero-light.is-pool) {

@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { FloatingContact } from "@/components/layout/FloatingContact";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { ThemeFilters } from "@/components/layout/ThemeFilters";
 import { ThemeSurfaces } from "@/components/layout/ThemeSurfaces";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { site } from "@/lib/site";
@@ -127,6 +128,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         className="bg-background font-sans text-foreground"
         suppressHydrationWarning
       >
+        <ThemeFilters />
         <AppProviders>
           <Header />
           <main>{children}</main>

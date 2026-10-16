@@ -4,7 +4,8 @@ import { useGSAP } from "@gsap/react";
 import { useRef, type ReactNode } from "react";
 import { TransitionLink } from "@/components/motion/TransitionLink";
 import { useMotion } from "@/components/providers/MotionProvider";
-import { REAL_TRUCK, RealTruck } from "@/components/ui/RealTruck";
+import { NightSky } from "@/components/ui/NightSky";
+import { type DriverPose, REAL_TRUCK, RealTruck } from "@/components/ui/RealTruck";
 import { gsap, registerGsap } from "@/lib/gsap";
 
 registerGsap();
@@ -84,6 +85,8 @@ export function HomeHero() {
       const stage = q(".hm-hero-stage")[0] as HTMLElement | undefined;
       const rig = q(".hm-hero-rig")[0] as HTMLElement | undefined;
       const truck = q(".real-truck")[0] as HTMLElement | undefined;
+      const cab = q(".real-truck-cab")[0] as HTMLElement | undefined;
+      const driver = q(".real-truck-driver")[0] as HTMLElement | undefined;
       if (!stage || !rig || !truck || !heads.length) return;
 
       const linesOf = (i: number) => heads[i].querySelectorAll("[data-hero-line]");
@@ -141,6 +144,44 @@ export function HomeHero() {
         truck.style.setProperty("--wheel-turn", `${(turn % 360).toFixed(2)}deg`);
       };
       gsap.ticker.add(tick);
+
+      // The driver idles with the road, blinks, and now and then glances at
+      // the visitor or has a laugh.
+      const driverCalls: gsap.core.Tween[] = [];
+      const later = (seconds: number, fn: () => void) => {
+        driverCalls.push(gsap.delayedCall(seconds, fn));
+      };
+      if (cab && driver) {
+        const pose = (name: DriverPose) => {
+          cab.dataset.pose = name;
+        };
+        const blink = () => {
+          pose("blink");
+          later(0.12, () => pose("idle"));
+        };
+        const act = () => {
+          const roll = Math.random();
+          let hold = gsap.utils.random(1.6, 3.4);
+          if (roll < 0.55) {
+            blink();
+            if (Math.random() < 0.3) later(0.32, blink);
+          } else if (roll < 0.8) {
+            const glance = gsap.utils.random(1.6, 2.4);
+            pose("look");
+            gsap.to(driver, { rotation: -3, duration: 0.22, yoyo: true, repeat: 1, ease: "sine.inOut", delay: 0.2 });
+            later(glance, () => pose("idle"));
+            hold += glance;
+          } else {
+            pose("laugh");
+            gsap.to(driver, { rotation: 2.5, duration: 0.11, yoyo: true, repeat: 7, ease: "sine.inOut" });
+            later(1.5, () => pose("idle"));
+            hold += 1.5;
+          }
+          later(hold, act);
+        };
+        gsap.to(driver, { yPercent: 2.5, duration: 0.36, ease: "sine.inOut", yoyo: true, repeat: -1 });
+        later(2.4, act);
+      }
 
       const fillBars = (index: number) => {
         bars.forEach((bar, i) => {
@@ -254,6 +295,9 @@ export function HomeHero() {
         swapCall?.kill();
         gsap.killTweensOf(stickers);
         gsap.killTweensOf(lights);
+        driverCalls.forEach((c) => c.kill());
+        if (driver) gsap.killTweensOf(driver);
+        if (cab) cab.dataset.pose = "idle";
         root.classList.remove("is-lit");
       };
     },
@@ -262,6 +306,7 @@ export function HomeHero() {
 
   return (
     <section ref={rootRef} className="hm hm-hero" aria-labelledby="hm-hero-title">
+      <NightSky />
       <div className="hm-wrap hm-hero-inner">
         <div className="hm-hero-copy">
           <p data-hero-fade className="hm-kicker">
@@ -330,6 +375,7 @@ export function HomeHero() {
           <RealTruck
             className="hm-hero-truck"
             priority
+            driver
             sizes="(max-width: 1099px) min(90vw, 700px, 50vh), clamp(360px, min(42vw, 74vh), 640px)"
           />
           <span className="hm-hero-light is-lamp" />

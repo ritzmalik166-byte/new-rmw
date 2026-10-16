@@ -62,7 +62,7 @@ function scan() {
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, {
     acceptNode(node) {
       const el = node as Element;
-      if (SKIP_TAGS.has(el.tagName)) return NodeFilter.FILTER_REJECT;
+      if (SKIP_TAGS.has(el.tagName) || el.hasAttribute("data-theme-ignore")) return NodeFilter.FILTER_REJECT;
       const box = el.getBoundingClientRect();
       if (box.width * box.height < MIN_AREA) return NodeFilter.FILTER_SKIP;
       const style = getComputedStyle(el);
@@ -89,11 +89,25 @@ export function ThemeSurfaces() {
     let timer = 0;
     const schedule = (delay = 250) => {
       window.clearTimeout(timer);
-      timer = window.setTimeout(scan, delay);
+      timer = window.setTimeout(() => {
+        // A full scan mid theme-change drops frames; wait for the spill to finish.
+        if (document.documentElement.classList.contains("is-spilling")) schedule(400);
+        else scan();
+      }, delay);
     };
 
+    const ignored = (node: Node) =>
+      node instanceof Element && node.closest("[data-theme-ignore]") !== null;
+
     schedule(0);
-    const observer = new MutationObserver(() => schedule());
+    const observer = new MutationObserver((records) => {
+      const relevant = records.some((record) =>
+        record.type === "childList"
+          ? ![...record.addedNodes, ...record.removedNodes].every(ignored) && !ignored(record.target)
+          : !ignored(record.target),
+      );
+      if (relevant) schedule();
+    });
     observer.observe(document.body, {
       childList: true,
       subtree: true,
