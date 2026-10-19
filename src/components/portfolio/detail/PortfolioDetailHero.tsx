@@ -98,7 +98,7 @@ export function PortfolioDetailHero({ detail }: { detail: PortfolioDetail }) {
 
         <div className="pfd-hero-stage" aria-hidden>
           <figure className="pfd-hero-cover">
-            <Image src={detail.cover} alt="" fill priority sizes="(max-width: 980px) 80vw, 460px" />
+            <Image src={detail.cover} alt={`${detail.name} work by Ritz Media World`} fill priority sizes="(max-width: 980px) 80vw, 460px" />
           </figure>
           {picks.map((item, index) => (
             <figure key={index} className={`pfd-hero-card is-${index + 1}`}>

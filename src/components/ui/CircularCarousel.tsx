@@ -211,7 +211,7 @@ export default function CircularCarousel({
                     <span className="circular-carousel-card-inner">
                       <Image
                         src={item.src}
-                        alt=""
+                        alt={item.alt ?? item.title ?? "Company award"}
                         fill
                         sizes="(max-width: 640px) 400px, 640px"
                         quality={95}

@@ -59,7 +59,7 @@ export function RealTruck({
         src={small ? "/trucks/rmw-truck-sm.webp" : "/trucks/rmw-truck.webp"}
         srcSet={small ? undefined : TRUCK_SRCSET}
         sizes={small ? undefined : sizes}
-        alt=""
+        alt="Ritz Media World painted Indian truck"
         width={REAL_TRUCK.width}
         height={REAL_TRUCK.height}
         loading={priority ? "eager" : "lazy"}
@@ -76,7 +76,7 @@ export function RealTruck({
                 className="real-truck-pose"
                 data-pose={pose}
                 src={`/trucks/driver/${pose}.webp`}
-                alt=""
+                alt="Truck driver at the wheel"
                 width={336}
                 height={192}
                 loading={priority ? "eager" : "lazy"}
@@ -88,11 +88,11 @@ export function RealTruck({
       )}
       <span className="real-truck-wheel is-front">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/trucks/rmw-wheel-front.webp" alt="" width={140} height={140} draggable={false} />
+        <img src="/trucks/rmw-wheel-front.webp" alt="Truck front wheel" width={140} height={140} draggable={false} />
       </span>
       <span className="real-truck-wheel is-rear">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/trucks/rmw-wheel-rear.webp" alt="" width={140} height={140} draggable={false} />
+        <img src="/trucks/rmw-wheel-rear.webp" alt="Truck rear wheel" width={140} height={140} draggable={false} />
       </span>
     </span>
   );

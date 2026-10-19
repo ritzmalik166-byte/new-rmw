@@ -197,7 +197,7 @@ export function ServicesRendering() {
               >
                 <span className="svc-render-thumb" aria-hidden>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={RENDER_ICONS[item.id]} alt="" width={64} height={64} loading="lazy" />
+                  <img src={RENDER_ICONS[item.id]} alt={`${item.title} icon`} width={64} height={64} loading="lazy" />
                 </span>
                 <span className="svc-render-tab-text">
                   <span className="svc-render-tab-title">{item.title}</span>

@@ -103,7 +103,7 @@ export function Footer() {
                 className="site-footer-google"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/footer/partners/google-g.png" alt="" width={20} height={20} />
+                <img src="/footer/partners/google-g.png" alt="Google logo" width={20} height={20} />
                 <span>
                   Add as a preferred
                   <br />
@@ -212,7 +212,7 @@ export function Footer() {
         </div>
         <div className="site-footer-milestone">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/footer/milestone.png" alt="" width={256} height={256} />
+          <img src="/footer/milestone.png" alt="Ritz Media World milestone stone" width={256} height={256} />
           <span className="site-footer-milestone-text">
             Ritz
             <br />

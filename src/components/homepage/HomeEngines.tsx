@@ -88,7 +88,7 @@
           />
           <div className="hm-mark" aria-hidden>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/s2/distance.webp" alt="" width={500} height={500} loading="lazy" decoding="async" />
+            <img src="/s2/distance.webp" alt="Ritz Media World milestone stone" width={500} height={500} loading="lazy" decoding="async" />
             <span className="hm-mark-label">RitzMedia</span>
           </div>
 
@@ -140,7 +140,7 @@
                           <span className="hm-chip-icon" aria-hidden>
                             {icon ? (
                               // eslint-disable-next-line @next/next/no-img-element
-                              <img src={icon} alt="" width={64} height={64} loading="lazy" />
+                              <img src={icon} alt={`${service.name} icon`} width={64} height={64} loading="lazy" />
                             ) : (
                               service.name.charAt(0)
                             )}

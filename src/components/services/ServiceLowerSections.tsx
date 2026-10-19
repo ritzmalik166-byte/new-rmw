@@ -301,7 +301,7 @@ function ServiceProof({ service, relatedServices }: ServiceLowerSectionsProps) {
               return (
                 <li key={related.slug}>
                   <TransitionLink href={`/services/${related.slug}`} className="sd-exit">
-                    {icon ? <Image src={icon} alt="" width={30} height={30} /> : null}
+                    {icon ? <Image src={icon} alt={`${related.name} icon`} width={30} height={30} /> : null}
                     {related.name}
                     <HmArrow />
                   </TransitionLink>

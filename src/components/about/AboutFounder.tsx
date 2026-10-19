@@ -267,7 +267,7 @@ function FounderFeature({ founder }: { founder: Founder }) {
           <img
             className="about-founder-stripes"
             src="/about/founder-stripes.png"
-            alt=""
+            alt="Decorative stripes"
             width={83}
             height={754}
           />

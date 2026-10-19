@@ -86,7 +86,7 @@ export function HomeIntro() {
             {[...partners, ...partners].map((src, index) => (
               <span key={`${src}-${index}`} className="hm-cargo-logo">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt="" loading="lazy" decoding="async" />
+                <img src={src} alt="Ritz Media World client brand logo" loading="lazy" decoding="async" />
               </span>
             ))}
           </div>

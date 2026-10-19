@@ -90,7 +90,7 @@ export function ServicesMegaMenu({
             </div>
 
             <span className="smm-intro-mark" aria-hidden>
-              <Image src="/logo.png" alt="" fill sizes="220px" />
+              <Image src="/logo.png" alt="Ritz Media World logo" fill sizes="220px" />
             </span>
           </aside>
 
@@ -115,7 +115,7 @@ export function ServicesMegaMenu({
                   >
                     <span className="smm-card-num">{String(index + 1).padStart(2, "0")}</span>
                     <span className="smm-card-icon">
-                      {icon ? <Image src={icon} alt="" width={160} height={160} sizes="96px" /> : null}
+                      {icon ? <Image src={icon} alt={`${service.name} icon`} width={160} height={160} sizes="96px" /> : null}
                     </span>
                     <span className="smm-card-text">
                       <span className="smm-card-name">{service.name}</span>

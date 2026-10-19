@@ -398,7 +398,7 @@ function MobileMenu({
                           {SERVICE_ICONS[svc.slug] ? (
                             <Image
                               src={SERVICE_ICONS[svc.slug]!}
-                              alt=""
+                              alt={`${svc.name} icon`}
                               width={32}
                               height={32}
                               className="h-8 w-8 shrink-0 object-contain"
@@ -459,7 +459,7 @@ function BrandMark() {
     <span className="brand-mark">
       <Image
         src="/logo.png"
-        alt=""
+        alt="Ritz Media World logo"
         width={61}
         height={77}
         className="brand-mark-logo"

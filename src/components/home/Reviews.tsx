@@ -51,7 +51,7 @@ function ReviewCard({
     >
       <div className="reviews-avatar">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={review.photo} alt="" width={64} height={64} />
+        <img src={review.photo} alt={`${review.role}, ${review.company}`} width={64} height={64} />
       </div>
       <p className="reviews-role">- {review.role}</p>
       <p className="reviews-company">{review.company}</p>

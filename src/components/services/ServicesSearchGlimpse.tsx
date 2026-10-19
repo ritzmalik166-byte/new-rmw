@@ -170,7 +170,7 @@ function ResultBody() {
       <div className="svc-dm-result-site">
         <span className="svc-dm-result-favicon">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="" width={20} height={20} />
+          <img src="/logo.png" alt="Ritz Media World logo" width={20} height={20} />
         </span>
         <span>
           <span className="svc-dm-result-name">Ritz Media World</span>

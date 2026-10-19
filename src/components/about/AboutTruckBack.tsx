@@ -126,7 +126,7 @@ export function AboutTruckBack() {
           <div className="about-tb-truck">
             <Image
               src="/about/truck-back.png"
-              alt=""
+              alt="Back of a Ritz Media World truck"
               width={810}
               height={668}
               sizes="(max-width: 900px) 92vw, 620px"
