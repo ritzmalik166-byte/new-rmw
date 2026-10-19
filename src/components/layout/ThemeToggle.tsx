@@ -2,7 +2,7 @@
 
 import { useEffect, useSyncExternalStore } from "react";
 import { cn } from "@/lib/cn";
-import { readStoredTheme, storeTheme, themeForTime, type Theme } from "@/lib/theme";
+import { storeTheme, type Theme } from "@/lib/theme";
 import { isLiteFx, playThemeFx, prepareThemeFx, THEME_FX_MS } from "@/lib/theme-fx";
 
 /* Smallest share of the spill mask's width that is solid in every direction. */
@@ -147,17 +147,6 @@ export function ThemeToggle({ className }: { className?: string }) {
     const idle = window.requestIdleCallback ?? ((fn: () => void) => window.setTimeout(fn, 1200));
     idle(() => prepareThemeFx());
   }, []);
-
-  // Follow the clock while the page stays open, unless the visitor picked a theme.
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      if (readStoredTheme()) return;
-      const timed = themeForTime();
-      if (timed !== readTheme()) spillTo(timed, window.innerWidth / 2, window.innerHeight / 2);
-    }, 60_000);
-    return () => window.clearInterval(id);
-  }, []);
-
   const toggle = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (document.documentElement.hasAttribute("data-theme-busy")) return;
     const next: Theme = dark ? "light" : "dark";
