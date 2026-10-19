@@ -1029,12 +1029,16 @@ export const SERVICES_LIST: ServiceDetail[] = [
     uppercaseName: "WEB DEVELOPMENT",
     engine: "Engine Two · Digital & Media",
     kicker: "KM 02 · Digital experiences that convert",
-    tagline: "High-performance websites and digital flagships built to convert visitors into inquiries.",
-    heading: "Modern web platforms, landing ecosystems, and interactive experiences",
+    heroTitle: { lead: "Website Design & Development", accent: "that turns visitors into enquiries." },
+    tagline:
+      "Custom WordPress, eCommerce, and landing page websites that look sharp, load fast on every device, and are built to rank and convert.",
+    heading: "Websites built to turn visitors into enquiries, not just look good",
     shortDescription:
       "Ultra-fast Next.js websites, mobile-optimized landing funnels, interactive 3D web showcases, and conversion architecture.",
+    definitionText:
+      "Website design and development is planning, designing, and building a website that looks good, works smoothly on every device, and helps visitors take action.",
     fullOverview:
-      "Your website is the single digital showroom where all your campaigns, brand promises, and buyer journeys culminate. If it loads slowly, confuses navigation, or fails on mobile, millions in ad spend go to waste. Ritz Media World builds lightning-fast, visually stunning, search-ready web platforms engineered from day one to maximize commercial conversions.",
+      "Your website is where every campaign, search, and recommendation eventually leads. If it loads slowly, confuses visitors, or breaks on mobile, you lose the traffic you’ve paid for. Our website design and development services combine clear UI/UX design, fast and secure builds, and an SEO-friendly structure from day one, so your website looks sharp, ranks well, and turns more visitors into enquiries.",
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=80",
     accentColor: "#1e4e9e",
@@ -1047,28 +1051,69 @@ export const SERVICES_LIST: ServiceDetail[] = [
     ],
     capabilities: [
       {
-        title: "Custom Corporate & Brand Web Development",
-        copy: "Tailored Next.js and modern stack digital flagships with silky GSAP micro-animations and responsive perfection.",
+        title: "UI/UX Design",
+        copy: "Interfaces people can use without thinking, on any device. We start with research, then wireframes and prototypes, so problems are fixed before the site is built.",
+        details: [
+          "User Research",
+          "Wireframes & Prototypes",
+          "Responsive Layouts",
+          "Interaction Design",
+          "Accessibility",
+          "Conversion-Focused Design",
+        ],
+        subService: "ui-ux-design",
       },
       {
-        title: "High-Conversion Landing Page Systems",
-        copy: "Dedicated campaign landing pages designed for PPC ads with single-focus calls to action and instant form submission.",
+        title: "Custom Website Development",
+        copy: "Scalable, secure websites built around what your business actually needs, with SEO-friendly structure and fast performance from the first line of code.",
+        details: [
+          "Corporate Websites",
+          "Custom Web Applications",
+          "Scalable Architecture",
+          "SEO-Friendly Structure",
+          "Speed Optimization",
+          "Security Built-In",
+        ],
+        subService: "custom-design-development",
       },
       {
-        title: "Interactive 3D & WebGL Experiences",
-        copy: "Three.js and WebGL digital walkthroughs that allow visitors to inspect products or properties in photorealistic 3D directly in browser.",
+        title: "WordPress Website Development",
+        copy: "Flexible WordPress websites your team can update themselves, with search visibility, mobile responsiveness, and speed built in.",
+        details: [
+          "Custom WordPress Design",
+          "Business & Corporate Sites",
+          "Blogs & Content Sites",
+          "Easy-to-Manage CMS",
+          "WooCommerce Stores",
+          "Plugin Integration",
+        ],
+        subService: "wordpress-web-designing",
       },
       {
-        title: "Technical SEO & Core Web Vitals Mastery",
-        copy: "Clean semantic markup, optimized server-side rendering, and sub-second load speeds that Google's algorithm rewards.",
+        title: "eCommerce Website Development",
+        copy: "Online stores built to turn browsers into buyers, with simple navigation, strong product pages, and secure checkout.",
+        details: [
+          "WooCommerce Stores",
+          "Shopify Stores",
+          "Custom eCommerce Platforms",
+          "Product & Category Pages",
+          "Secure Payment Integration",
+          "Mobile Shopping Experience",
+        ],
+        subService: "e-commerce-web-designing",
       },
       {
-        title: "Lead Capture & CRM Integrations",
-        copy: "Seamless integrations with Salesforce, HubSpot, Zoho, and custom WhatsApp bots for instant lead delivery to sales teams.",
-      },
-      {
-        title: "E-Commerce & Digital Catalog Systems",
-        copy: "Frictionless checkout flows, product filtering, and fast payment gateway integrations built for scale.",
+        title: "Landing Page Design & Development",
+        copy: "High-converting landing pages built for your Google Ads, Meta Ads and email campaigns, so the traffic you pay for turns into leads.",
+        details: [
+          "Campaign Landing Pages",
+          "Google & Meta Ads Pages",
+          "Persuasive Copy & Layout",
+          "Lead Capture Forms",
+          "Fast Mobile Loading",
+          "A/B Testing",
+        ],
+        subService: "landing-page-development-services",
       },
     ],
     deliverables: [
@@ -1083,46 +1128,79 @@ export const SERVICES_LIST: ServiceDetail[] = [
       {
         step: "01",
         km: "KM 01",
-        title: "Architecture & User Journey Mapping",
-        copy: "We define page hierarchies, conversion pathways, and user mental models to eliminate friction before writing code.",
+        title: "Discovery & Site Planning",
+        copy: "We map your goals, audience, and the pages your website needs, so every visitor has a clear path to enquire.",
       },
       {
         step: "02",
         km: "KM 02",
-        title: "Interactive UI/UX Design & Prototyping",
-        copy: "We design striking, modern visual interfaces that embody your brand identity while prioritizing intuitive navigation.",
+        title: "UI/UX Design & Prototypes",
+        copy: "We design clean, on-brand layouts and share clickable prototypes before development begins.",
       },
       {
         step: "03",
         km: "KM 03",
-        title: "Modern Front-End & Back-End Engineering",
-        copy: "Our engineers build the platform using modern frameworks, ensuring clean code, rapid speeds, and seamless API hooks.",
+        title: "Website Development",
+        copy: "Our developers build a fast, secure, and mobile-friendly website with an SEO-friendly structure from the start.",
       },
       {
         step: "04",
         km: "KM 04",
-        title: "Rigorous QA, Speed Tuning & Launch",
-        copy: "Cross-browser testing, accessibility checks, Core Web Vitals optimization, and flawless production deployment.",
+        title: "Testing, Launch & Support",
+        copy: "We test across browsers and devices, check speed and Core Web Vitals, launch the site, and keep it maintained.",
       },
     ],
     whyUs: [
       {
-        title: "Marketer-Led Web Engineering",
-        copy: "We build websites from the perspective of closing sales—not just pretty code. Every button, heading, and form has a conversion job.",
+        title: "Built by marketers, not just developers",
+        copy: "Every heading, button and form on your website has a job to do, because we build from the perspective of winning enquiries, not just writing code.",
       },
       {
-        title: "Cutting-Edge Performance Stacks",
-        copy: "We utilize modern stacks like Next.js, React, Tailwind, and GSAP to deliver world-class speed without bloated legacy plugins.",
+        title: "The right platform for your business",
+        copy: "From WordPress and Shopify to fully custom builds, we choose the platform that fits your goals, budget, and team.",
       },
       {
-        title: "Seamless Synchronization With Your Ad Campaigns",
-        copy: "We design the landing page and run the Google/Meta ads simultaneously, ensuring 100% message match and top Quality Scores.",
-      },
-      {
-        title: "Post-Launch Support & Iterative CRO",
-        copy: "We monitor user heatmaps, run A/B conversion tests, and continually optimize performance after going live.",
+        title: "Landing pages and ads built together",
+        copy: "Because the same team builds your landing pages and runs your Google and Meta ads, the message stays consistent from click to enquiry.",
       },
     ],
+    layout: {
+      planKicker: "Website design & development services",
+      wallLede: "Websites and launch results from brands that trusted us with their name.",
+      intentTitle: { lead: "Websites that work", accent: "as hard as your ads." },
+      faqs: [
+        {
+          question: "What do your website design and development services include?",
+          answer:
+            "Our website design and development services cover UI/UX design, custom website development, WordPress websites, eCommerce stores, landing pages, and ongoing maintenance and support. Every site is mobile-friendly, fast-loading, and built with an SEO-friendly structure.",
+        },
+        {
+          question: "Are you a web development company in Delhi NCR?",
+          answer:
+            "Ritz Media World is a website design and development company headquartered in Noida, working with businesses across Delhi, Noida, Greater Noida, and the rest of Delhi NCR, as well as brands throughout India.",
+        },
+        {
+          question: "How much does website design and development cost?",
+          answer:
+            "The cost depends on the type of website, the number of pages, the features you need, and whether it’s built on WordPress, Shopify or a custom platform. We share a clear proposal after understanding your requirements.",
+        },
+        {
+          question: "How long does it take to build a website?",
+          answer:
+            "A landing page can be ready within days, while a business website usually takes a few weeks. Larger custom or eCommerce websites take longer, and we agree on the timeline before work begins.",
+        },
+        {
+          question: "Should I choose WordPress or a custom website?",
+          answer:
+            "WordPress suits most business websites and blogs, since your team can update content easily. A custom website is better when you need specific features, integrations, or room to scale. We recommend the right option after understanding your goals.",
+        },
+        {
+          question: "Will my website be mobile-friendly and SEO-ready?",
+          answer:
+            "Yes. Every website we build is responsive across mobile, tablet, and desktop, and includes SEO-friendly structure, fast loading, and clean code, so it’s ready to rank from launch.",
+        },
+      ],
+    },
   },
   {
     id: "celebrity",
