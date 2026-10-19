@@ -21,71 +21,6 @@
   container-type: inline-size;
 }
 
-/* ---------- Services ticker: painted truck lettering ---------- */
-.site-footer-ticker {
-  display: flex;
-  overflow: hidden;
-  border-bottom: 3px solid var(--footer-ink);
-  background: var(--footer-gold);
-}
-
-.site-footer-ticker-track {
-  display: flex;
-  flex: none;
-  align-items: center;
-  margin: 0;
-  padding: 12px 0;
-  list-style: none;
-  animation: site-footer-ticker 42s linear infinite;
-}
-
-.site-footer-ticker:hover .site-footer-ticker-track,
-.site-footer-ticker:focus-within .site-footer-ticker-track {
-  animation-play-state: paused;
-}
-
-.site-footer-ticker li {
-  display: flex;
-  align-items: center;
-}
-
-.site-footer-ticker-item {
-  padding: 0 22px;
-  color: var(--footer-navy);
-  font-family: var(--font-quattrocento), Georgia, serif;
-  font-size: clamp(20px, 2.1vw, 30px);
-  font-weight: 700;
-  line-height: 1.1;
-  text-transform: uppercase;
-  white-space: nowrap;
-  transition: color 0.2s ease;
-}
-
-.site-footer-ticker-item:hover,
-.site-footer-ticker-item:focus-visible {
-  color: var(--footer-pink);
-}
-
-.site-footer-ticker-flower {
-  color: var(--footer-pink);
-  font-size: 20px;
-  line-height: 1;
-}
-
-.site-footer-ticker li:nth-child(3n + 2) .site-footer-ticker-flower {
-  color: #167a7d;
-}
-
-.site-footer-ticker li:nth-child(3n) .site-footer-ticker-flower {
-  color: #1457a8;
-}
-
-@keyframes site-footer-ticker {
-  to {
-    transform: translateX(-100%);
-  }
-}
-
 .site-footer-inner {
   width: min(1280px, calc(100% - 5rem));
   margin: 0 auto;
@@ -1392,18 +1327,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .site-footer-ticker {
-    overflow-x: auto;
-  }
-
-  .site-footer-ticker-track {
-    animation: none;
-  }
-
-  .site-footer-ticker-track + .site-footer-ticker-track {
-    display: none;
-  }
-
   .site-footer-truck {
     will-change: auto;
   }

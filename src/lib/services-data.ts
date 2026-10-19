@@ -864,12 +864,16 @@ export const SERVICES_LIST: ServiceDetail[] = [
     uppercaseName: "CONTENT MARKETING",
     engine: "Engine One · Brand & Creative",
     kicker: "KM 02 · Words with a mission",
-    tagline: "Always-on editorial, research, and thought leadership that drives business results.",
-    heading: "Content with an objective, planned around what your buyers actually search for",
+    heroTitle: { lead: "Content Marketing Services", accent: "that rank, read, and convert." },
+    tagline:
+      "From SEO content and blogs to website copy, social media, and email, our content marketing services help brands in Delhi NCR and across India get found, earn trust, and turn readers into enquiries.",
+    heading: "Content with a purpose, planned around what your customers search for",
     shortDescription:
       "Articles, email newsletters, whitepapers, thought leadership, and organic content that converts readers into buyers.",
+    definitionText:
+      "Content marketing is creating useful content, such as blogs, website copy, social posts, and emails, that attracts the right audience and turns readers into customers.",
     fullOverview:
-      "Content marketing isn't just filling an editorial calendar with generic posts. At Ritz Media World, content is an intentional commercial engine. We map real customer search intent, build authoritative thought leadership, and produce long-form and micro-content that ranks on Google, feeds AI answers, and guides buyers down the purchase funnel.",
+      "Content marketing isn’t about filling a calendar with generic posts. Our content marketing services start with real search intent, so every blog, web page, social post, and email answers what your customers are actually looking for. Our content writers and SEO specialists create content that ranks on Google, appears in AI answers, and moves readers closer to becoming customers, bringing in steady organic traffic and qualified leads rather than just likes.",
     image:
       "https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1400&q=80",
     accentColor: "#c83256",
@@ -882,28 +886,39 @@ export const SERVICES_LIST: ServiceDetail[] = [
     ],
     capabilities: [
       {
-        title: "Search-Led Editorial Strategy",
-        copy: "Deep keyword cluster mapping, search intent analysis, and editorial roadmaps targeted at high-converting queries.",
+        title: "SEO Content Writing",
+        copy: "Content built around what your customers actually search for, so it ranks on Google because it genuinely answers the question.",
       },
       {
-        title: "High-Value Industry Whitepapers & Guides",
-        copy: "In-depth market research reports, buying guides, and case studies that establish undeniable domain authority.",
+        title: "Website Content Writing",
+        copy: "Clear, persuasive website copy that explains what you do, why it matters, and what visitors should do next, written for both readers and search engines.",
       },
       {
-        title: "High-Open Email Newsletters",
-        copy: "Engaging email sequences and weekly newsletters that keep prospective and existing clients closely connected.",
+        title: "Blog Writing Services",
+        copy: "Research-backed blogs published on a consistent schedule, building your authority and bringing in organic traffic month after month.",
       },
       {
-        title: "Infographics & Visual Explainer Assets",
-        copy: "Complex data and market insights translated into captivating, shareable charts and social carousels.",
+        title: "Copywriting Services",
+        copy: "Landing page, ad and campaign copy written to turn readers into enquiries, with a clear call to action in every piece.",
       },
       {
-        title: "AI Answer Engine Optimization (AEO)",
-        copy: "Formatting content with structured facts and authoritative schema so LLMs cite your brand as the primary reference.",
+        title: "Social Media Content",
+        copy: "Platform-specific posts, captions and reel scripts that keep your brand visible, consistent and worth engaging with.",
       },
       {
-        title: "Distribution & Multi-Channel Repurposing",
-        copy: "Transforming single flagship reports into 20+ micro-assets across LinkedIn, social feeds, and PR syndication.",
+        title: "Email Marketing & Newsletters",
+        copy: "Welcome sequences, newsletters and promotional emails that earn the open and keep customers coming back.",
+        subService: "email-and-newsletters-marketing",
+      },
+      {
+        title: "Visual Assets & Infographics",
+        copy: "Infographics, presentations and eBooks that turn complex information into content people stop to read and share.",
+        subService: "asset-creation-and-infographics",
+      },
+      {
+        title: "Content Promotion & Optimization",
+        copy: "Distribution, content refreshes, and on-page SEO that keep your content ranking and generating leads long after it’s published.",
+        subService: "content-promotion-and-optimization",
       },
     ],
     deliverables: [
@@ -918,46 +933,94 @@ export const SERVICES_LIST: ServiceDetail[] = [
       {
         step: "01",
         km: "KM 01",
-        title: "Search Demand & Question Mining",
-        copy: "We unearth the specific questions, objections, and buying criteria your target customers research before purchasing.",
+        title: "Search & Audience Research",
+        copy: "We find the questions, keywords, and buying concerns your customers research before they decide.",
       },
       {
         step: "02",
         km: "KM 02",
-        title: "Editorial Framework & Tone Definition",
-        copy: "We construct an authoritative editorial voice that delivers genuine value rather than hollow marketing jargon.",
+        title: "Content Strategy & Brand Voice",
+        copy: "We build a content marketing strategy and a clear brand voice, mapped to your business goals.",
       },
       {
         step: "03",
         km: "KM 03",
-        title: "Production, Visual Design & Review",
-        copy: "Specialist writers and visual designers create rich, accurate, beautifully laid out content assets.",
+        title: "Writing, Design & Review",
+        copy: "Our content writers and designers create accurate, well-structured content, reviewed before anything goes live.",
       },
       {
         step: "04",
         km: "KM 04",
-        title: "Multi-Channel Distribution & Optimization",
-        copy: "Assets are published, distributed through organic and paid channels, and regularly refreshed to maintain top rankings.",
+        title: "Publish, Promote & Improve",
+        copy: "Content is published, promoted across channels, and refreshed regularly to improve rankings and conversions.",
       },
     ],
     whyUs: [
       {
-        title: "Subject Matter Depth Over Fluff",
-        copy: "Our writers have genuine domain understanding across real estate, finance, and retail—ensuring authentic depth.",
+        title: "Experienced content writers who know your industry",
+        copy: "From real estate and healthcare to education and e-commerce, our writers understand the sectors we serve, so every piece has genuine depth.",
       },
       {
-        title: "Engineered For Search Engines & AI Models",
-        copy: "Structured data, natural conversational syntax, and clear answers designed to rank in Google SERPs and ChatGPT/Perplexity citations.",
+        title: "Built for Google and AI search",
+        copy: "Clear answers, structured content, and natural language help your content rank on Google and get cited by ChatGPT, Gemini, and Perplexity.",
       },
       {
-        title: "Asset Longevity & Evergreen Compounding",
-        copy: "We create assets that continue to drive traffic, inbound leads, and client trust for months and years after publication.",
-      },
-      {
-        title: "Seamless Integration With Paid Ad Funnels",
-        copy: "Content isn't an island; we connect high-performing guides directly to your retargeting and sales follow-up pipelines.",
+        title: "Content that drives enquiries, not just traffic",
+        copy: "Every piece is planned with a clear next step for the reader, so content marketing becomes a steady source of qualified leads.",
       },
     ],
+    layout: {
+      problemFlags: [
+        {
+          title: "Published but never found",
+          copy: "Content written without keyword research rarely ranks, so the people searching for you never see it.",
+        },
+        {
+          title: "Posting without a plan",
+          copy: "Random posts and one-off blogs don’t build authority or bring in steady traffic.",
+        },
+        {
+          title: "Words that don’t convert",
+          copy: "Content that informs but never asks for action leaves leads on the table.",
+        },
+      ],
+      planLede:
+        "Everything a complete content marketing strategy needs, written, designed, and optimised by one team.",
+      wallLede: "Content, social campaigns, and search results from brands that trusted us with their name.",
+      intentTitle: { lead: "Content that keeps", accent: "working for you." },
+      faqs: [
+        {
+          question: "What do your content marketing services include?",
+          answer:
+            "Our content marketing services cover SEO content writing, website content, blog writing, copywriting, social media content, email marketing, infographics, and content promotion. We combine them into one content marketing strategy based on your goals and audience.",
+        },
+        {
+          question: "How much do content marketing services cost in Delhi NCR?",
+          answer:
+            "The cost depends on the type and volume of content, such as a set of website pages, a monthly blog plan, or a full content and social programme. We share a clear proposal after understanding your goals, so you know exactly what’s included.",
+        },
+        {
+          question: "How is content marketing different from SEO?",
+          answer:
+            "SEO improves how your website ranks, while content marketing creates the blogs, pages, and resources that give it something worth ranking. The two work best together, which is why our content writers and SEO specialists plan every piece as one team.",
+        },
+        {
+          question: "How long does content marketing take to show results?",
+          answer:
+            "Content usually starts gaining search visibility within a few months, and the results build over time as more content is published and refreshed. Social media and email content can drive engagement much sooner.",
+        },
+        {
+          question: "Can your content help us appear in ChatGPT and Google AI Overviews?",
+          answer:
+            "Yes. We write answer-first, well-structured content with clear facts and schema markup, which makes it easier for AI tools to understand, cite, and recommend your brand.",
+        },
+        {
+          question: "How do you measure the success of content marketing?",
+          answer:
+            "We track organic traffic, keyword rankings, engagement, and, most importantly, the enquiries and leads your content brings in, and share clear monthly reports.",
+        },
+      ],
+    },
   },
   {
     id: "web",

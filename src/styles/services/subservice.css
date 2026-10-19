@@ -74,7 +74,7 @@
   padding: 0;
   list-style: none;
   font-family: var(--hm-mono);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -192,7 +192,7 @@
   flex: none;
   color: var(--hm-pink);
   font-family: var(--hm-mono);
-  font-size: 10px;
+  font-size: 11.5px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -308,7 +308,7 @@
   margin: 0;
   color: var(--hm-pink);
   font-family: var(--hm-mono);
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -357,7 +357,7 @@
   display: block;
   color: var(--hm-red);
   font-family: var(--hm-mono);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -428,7 +428,7 @@
 .sd-plan-tab-no {
   color: var(--hm-pink);
   font-family: var(--hm-mono);
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 700;
 }
 
@@ -476,7 +476,7 @@
   margin: 0;
   color: var(--hm-yellow);
   font-family: var(--hm-mono);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -508,7 +508,7 @@
   border-top: 1px dashed rgb(255 255 255 / 22%);
   color: rgb(255 255 255 / 60%);
   font-family: var(--hm-mono);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -648,7 +648,7 @@
   background: var(--hm-navy);
   color: var(--hm-yellow);
   font-family: var(--hm-mono);
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -680,7 +680,7 @@
 .sd-query-field > label {
   color: var(--hm-navy);
   font-family: var(--hm-mono);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -952,7 +952,7 @@
 .sd-req-kicker {
   color: var(--hm-yellow);
   font-family: var(--hm-mono);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1246,7 +1246,7 @@
   border-bottom: 1.5px dashed var(--hm-rule);
   color: #6c6553;
   font-family: var(--hm-mono);
-  font-size: 10px;
+  font-size: 11.5px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1332,7 +1332,7 @@
   background: var(--hm-paper);
   color: var(--hm-ink);
   font-family: var(--hm-mono);
-  font-size: 10px;
+  font-size: 11.5px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1507,7 +1507,7 @@
   border-bottom: 1.5px dashed var(--hm-rule);
   color: #6c6553;
   font-family: var(--hm-mono);
-  font-size: 10px;
+  font-size: 11.5px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1557,7 +1557,7 @@
   margin: 0;
   color: var(--hm-navy);
   font-family: var(--hm-mono);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;

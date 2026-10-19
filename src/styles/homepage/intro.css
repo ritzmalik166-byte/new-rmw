@@ -34,7 +34,7 @@
 .hm-log-kicker {
   color: var(--hm-yellow);
   font-family: var(--hm-mono);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -88,7 +88,7 @@
 .hm-log-stat dt {
   color: rgb(255 255 255 / 62%);
   font-family: var(--hm-mono);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -107,7 +107,7 @@
 .hm-log-foot-label {
   color: rgb(255 255 255 / 55%);
   font-family: var(--hm-mono);
-  font-size: 10px;
+  font-size: 11.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -151,7 +151,7 @@
   margin: 0 auto 18px;
   color: var(--hm-navy);
   font-family: var(--hm-mono);
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -231,7 +231,7 @@
   }
 
   .hm-log-stat dt {
-    font-size: 9.5px;
+    font-size: 10.5px;
   }
 
   .hm-cargo-logo {

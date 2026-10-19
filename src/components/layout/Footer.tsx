@@ -6,7 +6,6 @@ import { TransitionLink } from "@/components/motion/TransitionLink";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { RealTruck, setWheelTurn } from "@/components/ui/RealTruck";
 import { gsap, registerGsap } from "@/lib/gsap";
-import { MENU_SERVICES } from "@/lib/services-data";
 import { site } from "@/lib/site";
 import {
   ContactCard,
@@ -76,27 +75,6 @@ export function Footer() {
 
   return (
     <footer ref={rootRef} className="site-footer">
-      <nav className="site-footer-ticker" aria-label="Services">
-        {[0, 1].map((copy) => (
-          <ul key={copy} className="site-footer-ticker-track" aria-hidden={copy === 1 || undefined}>
-            {MENU_SERVICES.map((service) => (
-              <li key={service.slug}>
-                <TransitionLink
-                  href={`/services/${service.slug}`}
-                  className="site-footer-ticker-item"
-                  tabIndex={copy === 1 ? -1 : undefined}
-                >
-                  {service.name}
-                </TransitionLink>
-                <span className="site-footer-ticker-flower" aria-hidden>
-                  ✿
-                </span>
-              </li>
-            ))}
-          </ul>
-        ))}
-      </nav>
-
       <div className="site-footer-inner">
         <div className="site-footer-top">
           <div className="site-footer-intro">

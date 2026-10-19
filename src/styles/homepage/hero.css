@@ -48,7 +48,7 @@
   margin: 0 0 clamp(8px, 1.4vh, 14px);
   color: var(--hm-navy);
   font-family: var(--hm-mono);
-  font-size: 12px;
+  font-size: 13.5px;
   font-weight: 700;
   line-height: 1.5;
   letter-spacing: 0.08em;
@@ -135,7 +135,7 @@
 .hm-hero-tick b {
   color: var(--hm-navy);
   font-family: var(--hm-mono);
-  font-size: 10px;
+  font-size: 11.5px;
   font-weight: 700;
   letter-spacing: 0.1em;
 }
@@ -170,10 +170,11 @@
   bottom: var(--road-h);
   left: 0;
   height: var(--verge-h);
-  /* The tile is exactly as tall as the verge so the milestone domes never clip. */
+  /* The tile is exactly as tall as the verge so the milestone domes never clip.
+     It holds four stones so each one can carry a different distance. */
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='460' height='44' viewBox='0 0 460 44'%3E%3Cg stroke='%23161616' stroke-width='2'%3E%3Cpath d='M38 43V17a13 13 0 0 1 26 0v26z' fill='%23fff'/%3E%3Cpath d='M38 24v-7a13 13 0 0 1 26 0v7z' fill='%23f3c33c'/%3E%3Crect x='268' y='21' width='5' height='22' fill='%23fff'/%3E%3C/g%3E%3Crect x='268' y='21' width='5' height='6' fill='%23d9333f'/%3E%3C/svg%3E")
-      var(--road-x, 0) 100% / calc(var(--verge-h) * 460 / 44) var(--verge-h) repeat-x,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1840' height='44' viewBox='0 0 1840 44'%3E%3Cdefs%3E%3Cg id='m'%3E%3Cg stroke='%23161616' stroke-width='2'%3E%3Cpath d='M38 43V17a13 13 0 0 1 26 0v26z' fill='%23fff'/%3E%3Cpath d='M38 24v-7a13 13 0 0 1 26 0v7z' fill='%23f3c33c'/%3E%3Crect x='268' y='21' width='5' height='22' fill='%23fff'/%3E%3C/g%3E%3Crect x='268' y='21' width='5' height='6' fill='%23d9333f'/%3E%3Ctext x='51' y='19.5' font-size='7.5' letter-spacing='.4'%3EKM%3C/text%3E%3C/g%3E%3C/defs%3E%3Cg font-family='Arial,Helvetica,sans-serif' font-weight='700' text-anchor='middle' fill='%23161616'%3E%3Cuse href='%23m'/%3E%3Cuse href='%23m' x='460'/%3E%3Cuse href='%23m' x='920'/%3E%3Cuse href='%23m' x='1380'/%3E%3Cg font-size='12'%3E%3Ctext x='51' y='38'%3E72%3C/text%3E%3Ctext x='511' y='38'%3E54%3C/text%3E%3Ctext x='971' y='38'%3E36%3C/text%3E%3Ctext x='1431' y='38'%3E18%3C/text%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+      var(--road-x, 0) 100% / calc(var(--verge-h) * 1840 / 44) var(--verge-h) repeat-x,
     linear-gradient(transparent calc(100% - 12px), #e8d9b8 calc(100% - 12px));
 }
 
@@ -479,7 +480,7 @@ html[data-theme="dark"] .hm-hero.is-lit .hm-hero-light.is-beam::before {
   }
 
   .hm-hero-seo {
-    font-size: 10.5px;
+    font-size: 11.5px;
   }
 
   .hm-hero-tick {
