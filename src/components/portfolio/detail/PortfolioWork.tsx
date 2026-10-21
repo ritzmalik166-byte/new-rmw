@@ -25,7 +25,7 @@ const slugify = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g, "-")
 
 type Entry = { item: PortfolioWorkItem; group: string; number: number };
 
-const captionOf = (item: PortfolioWorkItem) => (item.kind === "video" ? undefined : item.caption);
+const captionOf = (item: PortfolioWorkItem) => item.caption;
 
 export function PortfolioWork({ detail, km }: { detail: PortfolioDetail; km: string }) {
   const rootRef = useRef<HTMLElement>(null);

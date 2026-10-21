@@ -15,7 +15,7 @@ export interface BrandAnatomy {
 export type PortfolioWorkItem =
   | { kind: "image"; src: string; alt: string; full?: string; caption?: string; brand?: BrandAnatomy }
   | { kind: "youtube"; src: string; alt: string; youtubeId: string; caption?: string }
-  | { kind: "video"; video: string; alt: string };
+  | { kind: "video"; video: string; alt: string; caption?: string };
 
 export interface PortfolioWorkGroup {
   title: string;
@@ -90,21 +90,22 @@ const youtube = (folder: string, prefix: string, films: [string, string, string]
     caption,
   }));
 
-const INFLUENCER_VIDEOS = [
-  "https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%201%20(1).mp4",
-  "https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%202%20(1).mp4",
-  "https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%203%20(1).mp4",
-  "https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%204%20(1).mp4",
-  "https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%2010%20(1).mp4",
-  "https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%209%20(1).mp4",
-  "https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%207.mp4",
-  "https://contenaissance.blob.core.windows.net/ct-assets/644Px%20X%20621Px%20-%203%20(1).mp4",
-  "https://contenaissance.blob.core.windows.net/ct-assets/2nd.mp4",
-  "https://contenaissance.blob.core.windows.net/ct-assets/3rd.mp4",
-  "https://contenaissance.blob.core.windows.net/ct-assets/4th.mp4",
-  "https://contenaissance.blob.core.windows.net/ct-assets/5th.mp4",
-  "https://contenaissance.blob.core.windows.net/ct-assets/6th.mp4",
-  "https://contenaissance.blob.core.windows.net/ct-assets/7th.mp4",
+/** Each video is `[url, client]`; a `null` client keeps the generic label. */
+const INFLUENCER_VIDEOS: [string, string | null][] = [
+  ["https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%201%20(1).mp4", "Eldeco"],
+  ["https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%202%20(1).mp4", "Onyx by Splendor"],
+  ["https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%203%20(1).mp4", null],
+  ["https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%204%20(1).mp4", null],
+  ["https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%2010%20(1).mp4", "Ashiana Malhar"],
+  ["https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%209%20(1).mp4", "Ashiana Malhar"],
+  ["https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%207.mp4", null],
+  ["https://contenaissance.blob.core.windows.net/ct-assets/644Px%20X%20621Px%20-%203%20(1).mp4", null],
+  ["https://contenaissance.blob.core.windows.net/ct-assets/2nd.mp4", "Eldeco"],
+  ["https://contenaissance.blob.core.windows.net/ct-assets/3rd.mp4", "EON, Eye of Noida"],
+  ["https://contenaissance.blob.core.windows.net/ct-assets/4th.mp4", "Risland"],
+  ["https://contenaissance.blob.core.windows.net/ct-assets/5th.mp4", "Onyx by Splendor"],
+  ["https://contenaissance.blob.core.windows.net/ct-assets/6th.mp4", "VVIP"],
+  ["https://contenaissance.blob.core.windows.net/ct-assets/7th.mp4", null],
 ];
 
 const WHY_RMW = {
@@ -869,10 +870,13 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
       {
         title: "Influencer Marketing Videos",
         aspect: "644 / 621",
-        items: INFLUENCER_VIDEOS.map((video, index) => ({
+        items: INFLUENCER_VIDEOS.map(([video, client], index) => ({
           kind: "video" as const,
           video,
-          alt: `Influencer marketing video ${index + 1} by Ritz Media World`,
+          alt: client
+            ? `${client} influencer marketing video by Ritz Media World`
+            : `Influencer marketing video ${index + 1} by Ritz Media World`,
+          ...(client ? { caption: client } : {}),
         })),
       },
     ],
