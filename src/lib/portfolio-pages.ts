@@ -3,6 +3,17 @@ import type { PortfolioTone } from "@/lib/portfolio";
 /** A region of a 4:5 mockup, in percent of the image's width (x, w) and height (y, h). */
 export type BrandBox = { x: number; y: number; w: number; h: number };
 
+/** A region of a style guide sheet, in the sheet's own pixels. */
+export type BrandCrop = { x: number; y: number; w: number; h: number };
+
+/** A client's style guide sheet, written out next to the logo in the brand viewer. */
+export interface BrandGuide {
+  sheet: string;
+  /** Natural size of the sheet image, in pixels. */
+  size: { w: number; h: number };
+  /** The sheet's regions for each viewer step, in the order they are written. */
+  steps: BrandCrop[][];
+}
 /** Where the logo sits in a brand identity mockup, used to draw its construction overlay. */
 export interface BrandAnatomy {
   client: string;
@@ -10,7 +21,74 @@ export interface BrandAnatomy {
   logo: BrandBox;
   /** The symbol on its own. */
   mark: BrandBox;
+  guide?: BrandGuide;
 }
+
+const crops = (list: [number, number, number, number][]) => list.map(([x, y, w, h]) => ({ x, y, w, h }));
+
+const PINCODE_GUIDE: BrandGuide = {
+  sheet: "/portfolio/brand-identity/guides/pincode-infra.jpg",
+  size: { w: 1024, h: 676 },
+  steps: [
+    // The finished identity: title, logo, primary logo and logo with tagline
+    crops([
+      [78, 48, 135, 42],
+      [382, 36, 270, 125],
+      [822, 48, 130, 42],
+      [78, 163, 870, 6],
+      [486, 170, 6, 130],
+      [505, 172, 232, 125],
+      [746, 170, 6, 130],
+      [755, 172, 195, 125],
+    ]),
+    // Grid & keylines: typography and the wordmark
+    crops([
+      [78, 429, 870, 6],
+      [78, 436, 245, 96],
+      [325, 440, 6, 90],
+      [345, 440, 245, 92],
+      [705, 436, 6, 96],
+      [710, 436, 132, 98],
+    ]),
+    // Geometry of the symbol: C + pin + leaf = symbol, favicon and submark
+    crops([
+      [78, 172, 100, 16],
+      [80, 186, 82, 110],
+      [160, 205, 18, 25],
+      [178, 180, 80, 116],
+      [256, 205, 18, 25],
+      [262, 186, 102, 110],
+      [364, 205, 18, 25],
+      [380, 180, 82, 116],
+      [600, 436, 6, 96],
+      [605, 436, 100, 98],
+      [845, 436, 6, 96],
+      [850, 436, 100, 98],
+    ]),
+    // Clear space: logo structure and applications
+    crops([
+      [78, 300, 870, 6],
+      [78, 308, 272, 122],
+      [78, 538, 140, 18],
+      [215, 540, 225, 92],
+      [445, 540, 248, 92],
+      [697, 540, 252, 92],
+    ]),
+    // Colour palette
+    crops([
+      [372, 306, 6, 124],
+      [392, 308, 110, 16],
+      [394, 326, 92, 98],
+      [486, 326, 92, 98],
+      [578, 326, 92, 98],
+      [670, 326, 92, 98],
+      [762, 326, 92, 98],
+      [854, 326, 92, 98],
+    ]),
+  ],
+};
+/** Style guides by mockup number (`logo-N.jpg`). */
+const BRAND_GUIDES: Record<number, BrandGuide> = { 11: PINCODE_GUIDE };
 
 export type PortfolioWorkItem =
   | { kind: "image"; src: string; alt: string; full?: string; caption?: string; brand?: BrandAnatomy }
@@ -156,7 +234,7 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
             kind: "image" as const,
             src: `/portfolio/brand-identity/logo-${index + 1}.jpg`,
             alt: `${client} logo and brand identity by Ritz Media World`,
-            brand: { client, logo: box(logo), mark: box(mark) },
+            brand: { client, logo: box(logo), mark: box(mark), guide: BRAND_GUIDES[index + 1] },
           };
         }),
       },

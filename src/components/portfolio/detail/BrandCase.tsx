@@ -14,6 +14,7 @@ import {
 import { useMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap } from "@/lib/gsap";
 import type { BrandAnatomy } from "@/lib/portfolio-pages";
+import { BrandArrow, BrandSheet } from "./BrandSheet";
 
 registerGsap();
 
@@ -493,6 +494,7 @@ export function BrandCase({
   const swatches = usePalette(entry);
   const current = STEPS[step];
   const autoplay = playing && !reduced;
+  const guide = entry.brand.guide;
 
   useEffect(() => {
     lenis?.stop();
@@ -823,7 +825,18 @@ export function BrandCase({
     >
       <div ref={backdropRef} className="bc-backdrop" onClick={() => close()} aria-hidden />
 
-      <div ref={shellRef} className="bc-shell">
+      <div ref={shellRef} className={guide ? "bc-shell has-guide" : "bc-shell"}>
+        {guide ? (
+          <BrandArrow
+            key={`${entry.src}:${step}`}
+            shellRef={shellRef}
+            stageRef={stageRef}
+            logo={entry.brand.logo}
+            guide={guide}
+            step={step}
+            reduced={reduced}
+          />
+        ) : null}
         <div className="bc-mhead" aria-hidden>
           <span>
             {pad2(index + 1)} / {pad2(entries.length)}
@@ -929,8 +942,25 @@ export function BrandCase({
             <h2 key={entry.src} className="bc-title">
               {entry.brand.client}
             </h2>
-            <p className="bc-sub">How the logo is built, layer by layer. Scroll or pinch the viewport to zoom in.</p>
+            <p className="bc-sub">
+              {guide
+                ? "How the logo was designed, from the first idea to the final palette. Watch its style guide being written out."
+                : "How the logo is built, layer by layer. Scroll or pinch the viewport to zoom in."}
+            </p>
           </header>
+
+          {guide ? (
+            <div data-bc-in>
+              <BrandSheet
+                key={entry.src}
+                guide={guide}
+                client={entry.brand.client}
+                step={step}
+                seconds={(step === 0 ? STEP_MS * 0.6 : STEP_MS) / 1000}
+                reduced={reduced}
+              />
+            </div>
+          ) : null}
 
           <div data-bc-in className={autoplay ? "bc-anatomy is-playing" : "bc-anatomy"}>
             <div className="bc-anatomy-head">
@@ -978,7 +1008,7 @@ export function BrandCase({
             </div>
           </div>
 
-          <div data-bc-in className={step === 4 ? "bc-palette is-lit" : "bc-palette"}>
+          <div data-bc-in hidden={!!guide} className={step === 4 ? "bc-palette is-lit" : "bc-palette"}>
             <div className="bc-anatomy-head">
               <span>Palette</span>
               <span>{copied ? `Copied ${copied}` : "Tap to copy"}</span>
