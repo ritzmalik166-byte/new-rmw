@@ -48,6 +48,8 @@ export function RealTruck({
   sizes = "100vw",
   driver,
 }: Props) {
+  const src = small ? "/trucks/rmw-truck-sm.webp" : "/trucks/rmw-truck.webp";
+
   return (
     <span
       className={cn("real-truck", flip && "is-flipped", rolling && "is-rolling", className)}
@@ -56,7 +58,7 @@ export function RealTruck({
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         className="real-truck-body"
-        src={small ? "/trucks/rmw-truck-sm.webp" : "/trucks/rmw-truck.webp"}
+        src={src}
         srcSet={small ? undefined : TRUCK_SRCSET}
         sizes={small ? undefined : sizes}
         alt="Ritz Media World painted Indian truck"
@@ -66,6 +68,14 @@ export function RealTruck({
         fetchPriority={priority ? "high" : undefined}
         draggable={false}
       />
+      {flip &&
+        ["is-sign", "is-horn"].map((panel) => (
+          <span
+            key={panel}
+            className={cn("real-truck-panel", panel)}
+            style={{ backgroundImage: `url(${src})` }}
+          />
+        ))}
       {driver && (
         <span className="real-truck-cab" data-pose="idle">
           <span className="real-truck-driver">

@@ -1209,12 +1209,16 @@ export const SERVICES_LIST: ServiceDetail[] = [
     uppercaseName: "CELEBRITY ENDORSEMENTS",
     engine: "Engine One · Brand & Creative",
     kicker: "KM 07 · Borrow the spotlight",
-    tagline: "High-impact star power that elevates credibility and sparks national fascination.",
+    heroTitle: { lead: "Celebrity Endorsements", accent: "that build trust, not just buzz." },
+    tagline:
+      "From finding the right celebrity to contracts, creative and launch, our celebrity endorsement services build partnerships that feel genuine and turn attention into business.",
     heading: "Faces that fit the brand ethos, not just the marketing budget",
     shortDescription:
       "A-list celebrity partnerships, contract negotiations, creative commercial integration, and high-impact PR launches.",
+    definitionText:
+      "Celebrity endorsement is when a well-known personality promotes a brand, product or project, using their credibility and reach to build trust and recognition with customers.",
     fullOverview:
-      "A famous face can catapult brand awareness overnight—but only if the partnership feels authentic, the idea has creative merit, and the legal framework protects your commercial interests. Ritz Media World bridges brands with top Bollywood celebrities, sports icons, and prominent cultural figures, handling everything from talent matching and contract negotiations to commercial production and multi-channel PR rollouts.",
+      "A famous face can lift brand awareness quickly, but only when the partnership feels genuine, the creative idea is strong, and the contract protects your interests. Our celebrity endorsement services connect brands with Bollywood actors, sports personalities, television stars, and digital creators who genuinely fit and handle everything from talent selection and negotiations to brand films, PR, and legal sign-off.",
     image:
       "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1400&q=80",
     accentColor: "#cf1b4b",
@@ -1227,28 +1231,82 @@ export const SERVICES_LIST: ServiceDetail[] = [
     ],
     capabilities: [
       {
-        title: "Strategic Talent Identification & Fit",
-        copy: "Matching your brand values, target audience demographics, and budget to the most credible celebrity personalities.",
+        title: "Celebrity Identification & Selection",
+        copy: "The biggest following isn’t the same as the right fit. We match celebrities to your brand, audience, and campaign goals, so the partnership feels natural.",
+        details: [
+          "Market & Audience Research",
+          "Celebrity Profiling",
+          "Bollywood, Sports & TV Talent",
+          "Digital Creator Options",
+          "Shortlisting & Vetting",
+          "Reputation Checks",
+        ],
+        subService: "celebrity-identification-services",
       },
       {
-        title: "Rigorous Contract Negotiations",
-        copy: "Structuring favorable terms for shoot days, digital rights, social media deliverables, exclusivity windows, and print usage.",
+        title: "Contract Negotiations",
+        copy: "We negotiate directly with celebrity representatives, so fees, deliverables, usage rights, and timelines are agreed upon in writing before the shoot.",
+        details: [
+          "Commercial Terms",
+          "Deliverables & Timelines",
+          "Usage Rights",
+          "Exclusivity Windows",
+          "Payment Schedules",
+          "Risk Reduction",
+        ],
+        subService: "negotiating-contracts",
       },
       {
-        title: "Creative Commercial Scripting & Directing",
-        copy: "Writing scripts and campaign themes that give the celebrity a compelling, natural role rather than an artificial sales pitch.",
+        title: "Creative Collaboration",
+        copy: "Campaigns built around the celebrity’s real personality, so brand films, social content, and behind-the-scenes clips feel authentic.",
+        details: [
+          "Campaign Concepts",
+          "Brand Films & Ad Films",
+          "Social Media Content",
+          "Photo Shoots",
+          "Behind-the-Scenes Content",
+          "Brand & Celebrity Alignment",
+        ],
+        subService: "creative-collaboration",
       },
       {
-        title: "Celebrity Photo & Film Shoot Production",
-        copy: "Managing star logistics, vanity requirements, premier director coordination, and rapid on-set execution.",
+        title: "Campaign Integration",
+        copy: "We carry the celebrity content across digital, social, print, TV, and events, so it reads as one campaign rather than scattered assets.",
+        details: [
+          "Digital & Social Rollout",
+          "Print & Outdoor Campaigns",
+          "Event Appearances",
+          "Product Launches",
+          "Consistent Messaging",
+          "Cross-Channel Planning",
+        ],
+        subService: "campaign-integration",
       },
       {
-        title: "High-Voltage PR & Media Conferences",
-        copy: "Orchestrating national press conferences, launch events, and media interviews that maximize earned press coverage.",
+        title: "Public Relations",
+        copy: "We build the story around the partnership and secure press coverage that earns attention beyond the media budget.",
+        details: [
+          "Launch Announcements",
+          "Press Releases",
+          "Media Outreach",
+          "Interviews & Features",
+          "Social Amplification",
+          "Event PR",
+        ],
+        subService: "public-relations",
       },
       {
-        title: "Cross-Channel Digital & Outdoor Rollout",
-        copy: "Amplifying the endorsement across television, outdoor hoardings, print ads, and targeted social media campaigns.",
+        title: "Legal Compliance",
+        copy: "We take care of disclosure rules, image rights, and advertising standards before launch, so the partnership stays transparent and protected.",
+        details: [
+          "Advertising Standards Compliance",
+          "Image Rights & Usage",
+          "Disclosure Requirements",
+          "Content Approvals",
+          "Contract Documentation",
+          "Reputational Risk Checks",
+        ],
+        subService: "legal-compliance",
       },
     ],
     deliverables: [
@@ -1263,46 +1321,73 @@ export const SERVICES_LIST: ServiceDetail[] = [
       {
         step: "01",
         km: "KM 01",
-        title: "Brand Affinity & Budget Modeling",
-        copy: "We define the exact personality traits needed and screen celebrity rosters against your brand's regional and demographic goals.",
+        title: "Brand & Audience Fit",
+        copy: "We define the personality, audience, and budget your campaign needs, and screen celebrities against your brand’s goals.",
       },
       {
         step: "02",
         km: "KM 02",
-        title: "Talent Approach & Commercial Negotiations",
-        copy: "We negotiate directly with talent management to secure favorable commercial terms, usage rights, and guaranteed shoot availability.",
+        title: "Approach & Negotiation",
+        copy: "We approach the celebrity’s team and negotiate fees, usage rights, exclusivity, and shoot dates.",
       },
       {
         step: "03",
         km: "KM 03",
-        title: "Script Approval & High-End Production",
-        copy: "We develop concepts approved by the celebrity and manage full shoot production with top directors, stylists, and cinematographers.",
+        title: "Creative & Production",
+        copy: "We develop concepts the celebrity is comfortable with and manage the shoot from script to final edit.",
       },
       {
         step: "04",
         km: "KM 04",
-        title: "Omnichannel Launch & PR Blitz",
-        copy: "We orchestrate a coordinated national launch across digital, print, television, and outdoor channels for maximum commercial shockwave.",
+        title: "Launch & PR",
+        copy: "We launch the campaign across the right channels and support it with PR, so the partnership gets the attention it deserves.",
       },
     ],
     whyUs: [
       {
-        title: "Direct Access Without Bloated Middlemen",
-        copy: "Direct relationships with leading Indian celebrity talent agencies ensure transparent fee structures and direct access.",
+        title: "Fit before fame",
+        copy: "We recommend celebrities based on brand fit and audience relevance, not just follower counts, so the endorsement feels credible.",
       },
       {
-        title: "Watertight Legal & Rights Protection",
-        copy: "Decades of experience crafting endorsement contracts that protect usage rights, avoid PR conflicts, and prevent overcharges.",
+        title: "Clear contracts, fewer surprises",
+        copy: "Usage rights, exclusivity, and deliverables are agreed upon in writing upfront, protecting your brand for the length of the campaign.",
       },
       {
-        title: "Scripting That Celebrates The Brand First",
-        copy: "We make sure the star elevates your brand—not shadows it. The audience remembers your product, not just the famous face.",
-      },
-      {
-        title: "Maximum Amplification Beyond The Shoot",
-        copy: "We extract maximum value from every contracted shoot minute, creating collateral for digital ads, hoardings, and press releases.",
+        title: "Your brand stays the hero",
+        copy: "Every script is written so audiences remember your product, not just the famous face.",
       },
     ],
+    layout: {
+      wallLede: "Celebrity campaigns and brand films from partnerships we’ve brought to life.",
+      intentTitle: { lead: "The right face,", accent: "remembered for the right brand." },
+      faqs: [
+        {
+          question: "What do your celebrity endorsement services include?",
+          answer:
+            "Our celebrity endorsement services cover celebrity identification and selection, contract negotiations, creative collaboration, campaign integration, public relations, and legal compliance, managed end-to-end by one team.",
+        },
+        {
+          question: "How do I hire a celebrity for brand endorsement in India?",
+          answer:
+            "Start by defining your audience, budget, and campaign goal. A celebrity endorsement agency then shortlists suitable names, approaches their representatives, negotiates terms, and manages the campaign. Ritz Media World handles each of these steps for you.",
+        },
+        {
+          question: "How much does celebrity endorsement cost in India?",
+          answer:
+            "The cost depends on the celebrity’s popularity, the length of the contract, usage rights, exclusivity, and the number of shoots or appearances. We share options across different budgets after understanding your goals.",
+        },
+        {
+          question: "Can a celebrity endorse a real estate project launch?",
+          answer:
+            "Yes. Celebrity-led launches can build trust and attention quickly for real estate projects. We plan the celebrity’s role across ads, films, events, and PR so the project stays the focus.",
+        },
+        {
+          question: "Should I choose a celebrity or an influencer?",
+          answer:
+            "Celebrities build broad recognition and credibility quickly, while influencers offer targeted reach and stronger engagement within specific communities. Many brands combine both, and we can plan either or a mix of the two.",
+        },
+      ],
+    },
   },
   {
     id: "influencer",
@@ -1311,12 +1396,16 @@ export const SERVICES_LIST: ServiceDetail[] = [
     uppercaseName: "INFLUENCER MARKETING",
     engine: "Engine One · Brand & Creative",
     kicker: "KM 08 · Make people listen",
-    tagline: "Creator partnerships and viral social voices that build undeniable community trust.",
+    heroTitle: { lead: "Influencer Marketing", accent: "with voices people already trust." },
+    tagline:
+      "Our influencer marketing services connect your brand with creators your audience already follows on Instagram, YouTube, and beyond, turning their content into reach, engagement, and inquiries.",
     heading: "Creators who can carry the campaign idea with authenticity and cultural relevance",
     shortDescription:
       "Macro, micro, and nano influencer networks, creator collaborations, content seeding, and performance whitelisting.",
+    definitionText:
+      "Influencer marketing is partnering with social media creators who promote your brand to their followers, using the trust they’ve built to reach the right audience in an authentic way.",
     fullOverview:
-      "Modern consumers trust authentic creator recommendations far more than corporate claims. Ritz Media World structures data-driven influencer marketing campaigns that move beyond hollow follower counts. We partner with vetted creators across tier-1, tier-2, and regional niches to generate authentic reviews, viral reels, and trackable sales conversions.",
+      "People trust recommendations from creators they follow far more than brand claims. Our influencer marketing services look beyond follower counts to audience relevance, engagement quality, and content style, partnering with micro, macro, niche, and regional creators whose followers genuinely match your customers. The result is content that feels natural, earns real engagement, and supports your awareness, lead, and sales goals.",
     image:
       "https://images.unsplash.com/photo-1611926653458-09294b3142bf?auto=format&fit=crop&w=1400&q=80",
     accentColor: "#2457dc",
@@ -1329,28 +1418,82 @@ export const SERVICES_LIST: ServiceDetail[] = [
     ],
     capabilities: [
       {
-        title: "Data-Driven Creator Identification",
-        copy: "Auditing audience demographics, engagement authenticity, and fake follower ratios to ensure real human reach.",
+        title: "Influencer Identification",
+        copy: "We look past follower counts to audience relevance, engagement quality, and content style, so every creator genuinely fits your brand.",
+        details: [
+          "Audience Fit Analysis",
+          "Engagement Quality Checks",
+          "Micro & Macro Creators",
+          "Niche & Regional Creators",
+          "Creator Vetting",
+          "Celebrity vs Creator Recommendations",
+        ],
+        subService: "identification-influence-marketing-agency",
       },
       {
-        title: "Structured Creative Briefing & Storyboarding",
-        copy: "Equipping creators with core campaign USPs while granting enough creative freedom for authentic audience resonance.",
+        title: "Cost-Benefit Analysis",
+        copy: "We compare what each creator charges with what they’re likely to deliver, so your budget goes to the partnerships with the best cost per result.",
+        details: [
+          "Fee-to-Value Comparison",
+          "Reach & Engagement Analysis",
+          "Budget Allocation",
+          "Single & Multi-Creator Planning",
+          "Cost per Result Estimates",
+          "Data-Led Recommendations",
+        ],
+        subService: "cost-benefit-analysis",
       },
       {
-        title: "Regional & Vernacular Influencer Outreach",
-        copy: "Mobilizing regional creators across Hindi, Punjabi, Bengali, Marathi, and South Indian markets for hyper-local impact.",
+        title: "Terms Negotiation",
+        copy: "We negotiate directly with creators and their teams, so deliverables, timelines, usage rights, and approvals are agreed upon before any content is made.",
+        details: [
+          "Commercial Terms",
+          "Deliverables & Formats",
+          "Timelines",
+          "Usage Rights",
+          "Approval Process",
+          "Transparent Contracts",
+        ],
+        subService: "terms-negotiations",
       },
       {
-        title: "Product Seeding & Experiential Activations",
-        copy: "Curated unboxing experiences, launch event invites, and hands-on site visits that spark spontaneous social sharing.",
+        title: "Creative Collaboration",
+        copy: "We give creators a clear brief and the freedom to sound like themselves, because content that feels authentic is content people actually watch.",
+        details: [
+          "Campaign Concepts",
+          "Creative Briefs",
+          "Reels & Shorts",
+          "Storytelling Direction",
+          "Brand Alignment",
+          "Content Reviews",
+        ],
+        subService: "creative-collaboration",
       },
       {
-        title: "Paid Whitelisting & Creator Spark Ads",
-        copy: "Boosting top-performing creator posts through brand ad accounts to scale viral content into sustained performance leads.",
+        title: "Campaign Integration",
+        copy: "We connect creator content with your social, paid media, and launch plans, so it reinforces one message instead of disappearing after a single post.",
+        details: [
+          "Social Media Integration",
+          "Paid Amplification",
+          "Product Launches",
+          "Promotional Campaigns",
+          "Cross-Channel Messaging",
+          "Coordinated Publishing",
+        ],
+        subService: "campaign-integration",
       },
       {
-        title: "End-to-End Campaign Compliance & Tracking",
-        copy: "Enforcing ASCI disclosure guidelines, monitoring post live-times, and measuring clicks, promo codes, and sales attribution.",
+        title: "Messaging Optimization",
+        copy: "We refine talking points and calls to action using real performance data, tuning the message for awareness, leads, or sales.",
+        details: [
+          "Talking Points",
+          "Calls to Action",
+          "Performance Tracking",
+          "Message Refinement",
+          "Awareness Campaigns",
+          "Lead & Conversion Campaigns",
+        ],
+        subService: "messaging-optimization",
       },
     ],
     deliverables: [
@@ -1365,46 +1508,92 @@ export const SERVICES_LIST: ServiceDetail[] = [
       {
         step: "01",
         km: "KM 01",
-        title: "Audience Alignment & Creator Screening",
-        copy: "We filter thousands of creators to select only those whose actual followers align precisely with your paying demographic.",
+        title: "Audience Fit & Creator Selection",
+        copy: "We shortlist creators whose followers genuinely match your customers, based on audience data and engagement quality.",
       },
       {
         step: "02",
         km: "KM 02",
-        title: "Briefing, Negotiation & Deliverable Contracts",
-        copy: "We lock down firm delivery dates, video formats (Reels, Shorts, Vlogs), usage rights, and commercial terms.",
+        title: "Briefing & Negotiation",
+        copy: "We agree on delivery dates, formats such as reels, shorts, and vlogs, usage rights, and commercial terms.",
       },
       {
         step: "03",
         km: "KM 03",
-        title: "Draft Review & Quality Control",
-        copy: "Our team reviews all drafts prior to publishing to guarantee message accuracy, clear calls-to-action, and brand safety.",
+        title: "Content Review",
+        copy: "We review every draft before it goes live, checking the message, call to action, and brand safety.",
       },
       {
         step: "04",
         km: "KM 04",
-        title: "Live Wave Amplification & Whitelisting",
-        copy: "We coordinate simultaneous publishing waves and run paid ad boosts on the highest-converting content.",
+        title: "Launch & Paid Amplification",
+        copy: "We coordinate publishing across creators and boost the best-performing content with paid ads to extend its reach.",
       },
     ],
     whyUs: [
       {
-        title: "Vetted Audiences, Zero Bot Waste",
-        copy: "We utilize advanced analytics to detect fake followers, pod engagement, and ghost accounts so every rupee reaches real eyes.",
+        title: "Audience fit over follower counts",
+        copy: "We check engagement quality and audience relevance before recommending any creator, so your budget reaches real, relevant people.",
       },
       {
-        title: "Creative Storytelling Over Mechanical Scripts",
-        copy: "We ensure creators integrate your product seamlessly into their natural content style, preventing audience ad-blindness.",
+        title: "Creative storytelling, not mechanical scripts",
+        copy: "Creators feature your product in their own style, so the content feels natural and keeps audiences watching.",
       },
       {
-        title: "Performance Ad Integration (Whitelisting)",
-        copy: "We don't let great influencer content vanish after 24 hours. We turn top creator reels into high-converting paid ad assets.",
-      },
-      {
-        title: "Fast Scalability For Product Launches",
-        copy: "Capable of activating 10 to 100+ creators simultaneously across India to generate overwhelming launch day momentum.",
+        title: "Creator content that keeps working",
+        copy: "We turn the best-performing creator content into paid ads, so it keeps reaching new audiences long after the original post.",
       },
     ],
+    layout: {
+      problemFlags: [
+        {
+          title: "Big following, wrong audience",
+          copy: "A creator with millions of followers means little if few of them are your customers.",
+        },
+        {
+          title: "Content that feels like an ad",
+          copy: "Over-scripted posts are easy to spot, and audiences scroll straight past them.",
+        },
+        {
+          title: "One post, then nothing",
+          copy: "Influencer content that isn’t connected to the rest of your marketing disappears from the feed within days.",
+        },
+      ],
+      wallLede: "Creator campaigns from brands that trusted us with their name.",
+      intentTitle: { lead: "Real voices,", accent: "real results." },
+      faqs: [
+        {
+          question: "What do your influencer marketing services include?",
+          answer:
+            "Our influencer marketing services cover influencer identification, cost-benefit analysis, terms negotiation, creative collaboration, campaign integration, and messaging optimization, managed end-to-end by one team.",
+        },
+        {
+          question: "Are you an influencer marketing agency in Delhi NCR?",
+          answer:
+            "Ritz Media World is an influencer marketing agency headquartered in Noida, working with brands across Delhi NCR and India, and with creators throughout the country.",
+        },
+        {
+          question: "How much does influencer marketing cost in India?",
+          answer:
+            "The cost depends on the creators’ audience size, engagement, content format, usage rights, and the number of posts. We recommend a mix of creators that fits your budget and goals.",
+        },
+        {
+          question: "What is the difference between micro and macro influencers?",
+          answer:
+            "Micro influencers have smaller, highly engaged audiences within specific niches, while macro influencers offer much wider reach. Many campaigns combine both to balance reach with engagement.",
+        },
+        {
+          question: "Which platforms do you run influencer campaigns on?",
+          answer:
+            "We run influencer campaigns on Instagram, YouTube, Facebook, and LinkedIn and work with regional and niche creators to reach specific communities.",
+        },
+        {
+          question: "Should I choose an influencer or a celebrity?",
+          answer:
+            "Influencers offer targeted reach and stronger engagement within specific communities, while celebrities build broad recognition quickly. We can plan either or combine the two.",
+        },
+      ],
+    },
   },
   {
     id: "render",
@@ -1413,12 +1602,16 @@ export const SERVICES_LIST: ServiceDetail[] = [
     uppercaseName: "3D RENDERING SERVICES",
     engine: "Engine Three · 3D Rendering Services",
     kicker: "KM 09 · Worlds you can walk through",
-    tagline: "Cinema-grade 3D architectural visualization, interior renderings, and CGI.",
+    heroTitle: { lead: "3D Rendering Services", accent: "that sell the project before it’s built." },
+    tagline:
+      "Photorealistic exterior, interior, township, and floor plan renders that help developers, architects, and designers sell, present, and launch projects before construction begins.",
     heading: "Show buyers the home, the township, and the view before a single brick is laid",
     shortDescription:
       "4K exterior towers, luxury sample flat interiors, township masterplan flythroughs, and interactive 3D floor plans.",
+    definitionText:
+      "3D rendering services turn architectural drawings into photorealistic images, so buyers, investors, and teams can see a building, interior, or township before it is built.",
     fullOverview:
-      "High-value purchases—especially real estate and luxury products—demand total emotional conviction before money changes hands. Ritz Media World's 3D visualization studio renders architectural towers, residential interiors, township masterplans, and commercial developments with photorealistic lighting, lush landscaping, and cinematic atmosphere.",
+      "Ritz Media World is a 3D rendering and architectural visualization company in India. Our 3D rendering services turn architectural drawings into photorealistic exteriors, interiors, townships, floor plans, and landscapes, with accurate materials, natural lighting, and real-world surroundings. Every render is created to be marketing-ready, so it works across brochures, hoardings, websites, sales galleries, and investor presentations from day one.",
     image:
       "https://images.unsplash.com/photo-1617791160505-6f00504e3519?auto=format&fit=crop&w=1400&q=80",
     accentColor: "#167a7d",
@@ -1431,28 +1624,69 @@ export const SERVICES_LIST: ServiceDetail[] = [
     ],
     capabilities: [
       {
-        title: "3D Exterior Architectural Rendering",
-        copy: "Tower elevations, majestic facades, and grand entrance lobbies rendered in golden-hour sunlight or moody twilight glow.",
+        title: "3D Exterior Rendering",
+        copy: "Photorealistic exteriors that show your project’s architecture, materials, landscaping, and surroundings, ready for pre-launch marketing, brochures, and investor decks.",
+        details: [
+          "Residential Towers",
+          "Commercial Buildings",
+          "Villas & Independent Homes",
+          "Facade & Material Detailing",
+          "Day & Dusk Views",
+          "Landscaping & Surroundings",
+        ],
+        subService: "3d-exterior-rendering",
       },
       {
-        title: "3D Interior Sample Flat Visualization",
-        copy: "Sample living rooms, designer kitchens, and master bedrooms styled with luxury furniture, accurate materials, and warm lighting.",
+        title: "3D Interior Rendering",
+        copy: "Furnished, naturally lit interiors that let buyers feel a space and its lifestyle before it exists.",
+        details: [
+          "Sample Flat Interiors",
+          "Living & Bedroom Spaces",
+          "Kitchens & Bathrooms",
+          "Lobbies & Common Areas",
+          "Furniture & Material Detailing",
+          "Natural Lighting",
+        ],
+        subService: "3d-interior-rendering",
       },
       {
-        title: "Aerial & Township Masterplan Visuals",
-        copy: "Bird's-eye views of large townships, connecting road networks, lush greens, clubhouses, and surrounding infrastructure.",
+        title: "Aerial & Township 3D Visualization",
+        copy: "Entire developments are shown from above, with master plans, amenities, landscaping and connectivity explained at a glance.",
+        details: [
+          "Aerial Views",
+          "Township Master Plans",
+          "Mixed-Use Developments",
+          "Site Context & Connectivity",
+          "Amenity Placement",
+          "Launch & Investor Visuals",
+        ],
+        subService: "aerial-township",
       },
       {
-        title: "3D Floor Plans & Cutaway Perspectives",
-        copy: "Transforming flat 2D blueprint drawings into fully furnished 3D spatial floor plans that buyers comprehend in seconds.",
+        title: "3D Floor Plan Rendering",
+        copy: "Technical layouts turned into furnished 3D plans that show flow, proportion and space clearly.",
+        details: [
+          "2D to 3D Floor Plans",
+          "Furnished Layouts",
+          "Unit Plans",
+          "Cluster Plans",
+          "Brochure-Ready Formats",
+          "Website & Sales Visuals",
+        ],
+        subService: "3d-floor-plan-rendering",
       },
       {
-        title: "Cinematic 3D Animated Walkthroughs",
-        copy: "Smooth drone-style video flythroughs complete with ambient sound design, moving foliage, and realistic light dynamics.",
-      },
-      {
-        title: "Interactive 360° VR Sales Experiences",
-        copy: "Immersive virtual reality tours ready for digital sales galleries, touch kiosks, and prospective buyer smartphones.",
+        title: "Amenity & Landscape Rendering",
+        copy: "Pools, clubhouses, gardens and open spaces rendered to show the lifestyle that sells the project.",
+        details: [
+          "Swimming Pools",
+          "Clubhouses",
+          "Gardens & Landscapes",
+          "Kids’ Play Areas",
+          "Sports & Fitness Zones",
+          "Rooftop & Open Spaces",
+        ],
+        subService: "amenity-landscape-rendering",
       },
     ],
     deliverables: [
@@ -1467,46 +1701,91 @@ export const SERVICES_LIST: ServiceDetail[] = [
       {
         step: "01",
         km: "KM 01",
-        title: "CAD & Architectural Blueprint Ingestion",
-        copy: "We study your 2D CAD drawings, material specifications, landscape plans, and exact sun orientation coordinates.",
+        title: "Drawings & Brief Review",
+        copy: "We study your CAD drawings, material specifications, landscape plans, and site orientation to get every detail right.",
       },
       {
         step: "02",
         km: "KM 02",
-        title: "3D Geometric Modeling & Camera Angles",
-        copy: "We build precise 3D geometry and present wireframe camera angles to agree on the most dramatic visual perspectives.",
+        title: "3D Modelling & Camera Angles",
+        copy: "We build an accurate 3D model and share camera angles, so we agree on the best views before rendering.",
       },
       {
         step: "03",
         km: "KM 03",
-        title: "Texturing, Natural Lighting & Greenery",
-        copy: "We apply photorealistic glass, marble, wood, atmospheric lighting, and hyper-realistic vegetation and landscaping.",
+        title: "Materials, Lighting & Landscaping",
+        copy: "We add realistic materials, natural lighting, and greenery, so every render looks true to life.",
       },
       {
         step: "04",
         km: "KM 04",
-        title: "Final 4K Rendering & Post-Production",
-        copy: "High-end render farm processing followed by color grading and retouching, delivering assets ready for hoardings and ads.",
+        title: "Final Rendering & Delivery",
+        copy: "We render in high resolution, finish each image with color grading and retouching, and deliver files ready for hoardings, brochures, and ads.",
       },
     ],
     whyUs: [
       {
-        title: "Unmatched Real Estate Industry Experience",
-        copy: "We have partnered with India's leading developers (Eldeco, Gaurs, ATS, Mahagun, Prateek) and know what converts homebuyers.",
+        title: "Built for real estate marketing",
+        copy: "With years of experience marketing real estate projects, we know which views, angles, and details help buyers decide.",
       },
       {
-        title: "Cinema-Grade Lighting & Photorealism",
-        copy: "No plastic-looking renders. We study atmospheric physics, natural sun angles, and material reflections to create believable beauty.",
+        title: "AI-powered rendering at 5X speed",
+        copy: "Our AI-powered rendering workflow delivers photorealistic visuals up to five times faster, so launch timelines don’t slip.",
       },
       {
-        title: "Built For Immediate Marketing Integration",
-        copy: "We don't just hand over renders; we adapt them directly into your website, launch hoardings, digital brochures, and social ads.",
-      },
-      {
-        title: "Fast Turnaround On High-Stakes Launches",
-        copy: "Dedicated GPU render infrastructure that meets tight project launch deadlines without sacrificing quality.",
+        title: "Ready for every channel",
+        copy: "We don’t just deliver renders. We adapt them for your website, hoardings, brochures, and social ads, so they’re ready to use straight away.",
       },
     ],
+    layout: {
+      problemFlags: [
+        {
+          title: "Hard to picture on paper",
+          copy: "Most buyers struggle to imagine a space from a floor plan or drawing alone.",
+        },
+        {
+          title: "Renders that look fake",
+          copy: "Plastic-looking visuals make a project feel less real, not more.",
+        },
+        {
+          title: "Visuals that don’t fit the campaign",
+          copy: "Renders made without marketing in mind often need reworking before they can be used in ads or brochures.",
+        },
+      ],
+      wallLede: "Renders created for real projects, from first drawing to launch campaign.",
+      faqs: [
+        {
+          question: "What 3D rendering services do you offer?",
+          answer:
+            "We offer 3D exterior rendering, 3D interior rendering, aerial and township visualization, 3D floor plan rendering, and amenity and landscape rendering for real estate developers, architects, interior designers, and builders.",
+        },
+        {
+          question: "What is architectural visualization?",
+          answer:
+            "Architectural visualization is the process of turning architectural plans into realistic images, so people can see how a building or space will look before it’s built.",
+        },
+        {
+          question: "Can you create renders for projects that are not yet built?",
+          answer:
+            "Yes. That’s what 3D rendering is for. We create photorealistic visuals from your drawings and plans, so buyers and investors can see the project before construction begins.",
+        },
+        {
+          question: "How long does a 3D rendering project take?",
+          answer:
+            "The timeline depends on the number of views and the project’s complexity. With our AI-powered workflow, we can deliver photorealistic renders significantly faster than traditional methods.",
+        },
+        {
+          question: "How much do 3D rendering services cost in India?",
+          answer:
+            "The cost depends on the type of render, the number of views, the level of detail, and the delivery timeline. We share a clear quote once we’ve reviewed your drawings.",
+        },
+        {
+          question: "Do you provide 3D rendering services across India?",
+          answer:
+            "Yes. We work with developers, architects, and designers across India, and all files can be shared and reviewed online.",
+        },
+      ],
+    },
   },
 ];
 
