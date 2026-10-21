@@ -156,6 +156,7 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
             kind: "image" as const,
             src: `/portfolio/brand-identity/logo-${index + 1}.jpg`,
             alt: `${client} logo and brand identity by Ritz Media World`,
+            caption: client,
             brand: { client, logo: box(logo), mark: box(mark) },
           };
         }),
