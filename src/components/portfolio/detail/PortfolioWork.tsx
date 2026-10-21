@@ -3,7 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import { useLenis } from "lenis/react";
-import { useEffect, useRef, useState, type CSSProperties, type MouseEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type MouseEvent } from "react";
 import { HmTitle, useHomeReveal } from "@/components/homepage/shared";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap, ScrollTrigger } from "@/lib/gsap";
@@ -14,6 +14,7 @@ import {
   workCount,
   workNoun,
 } from "@/lib/portfolio-pages";
+import { BrandCase, type BrandCaseEntry } from "./BrandCase";
 import { useAutoplayVideos } from "./useAutoplayVideos";
 import { WorkThumb } from "./WorkThumb";
 
@@ -32,6 +33,7 @@ export function PortfolioWork({ detail, km }: { detail: PortfolioDetail; km: str
   const navRef = useRef<HTMLElement>(null);
   const [open, setOpen] = useState<number | null>(null);
   const [activeGroup, setActiveGroup] = useState(0);
+  const [origin, setOrigin] = useState<DOMRect | null>(null);
   const lenis = useLenis();
   const { ready, reduced } = useMotion();
   useHomeReveal(rootRef);
@@ -43,6 +45,15 @@ export function PortfolioWork({ detail, km }: { detail: PortfolioDetail; km: str
   const offsets = detail.groups.map((_, index) =>
     detail.groups.slice(0, index).reduce((total, group) => total + group.items.length, 0),
   );
+
+  // Brand identity pieces open the construction viewer instead of the plain lightbox.
+  const brandEntries = useMemo(() => {
+    const items = detail.groups.flatMap((group) => group.items);
+    const brands = items.flatMap((item) =>
+      item.kind === "image" && item.brand ? [{ src: item.src, alt: item.alt, brand: item.brand }] : [],
+    );
+    return brands.length && brands.length === items.length ? (brands satisfies BrandCaseEntry[]) : null;
+  }, [detail]);
 
   useGSAP(
     () => {
@@ -125,10 +136,10 @@ export function PortfolioWork({ detail, km }: { detail: PortfolioDetail; km: str
 
   useEffect(() => {
     const dialog = dialogRef.current;
-    if (!dialog) return;
+    if (!dialog || brandEntries) return;
     if (open !== null && !dialog.open) dialog.showModal();
     if (open === null && dialog.open) dialog.close();
-  }, [open]);
+  }, [open, brandEntries]);
 
   const step = (delta: number) =>
     setOpen((current) => (current === null ? current : (current + delta + entries.length) % entries.length));
@@ -184,14 +195,22 @@ export function PortfolioWork({ detail, km }: { detail: PortfolioDetail; km: str
                   <button
                     type="button"
                     className="pfd-tile"
-                    onClick={() => setOpen(offsets[groupIndex] + index)}
-                    aria-label={`Open ${item.alt}`}
+                    onClick={(event) => {
+                      setOrigin(event.currentTarget.querySelector(".pfd-tile-media")?.getBoundingClientRect() ?? null);
+                      setOpen(offsets[groupIndex] + index);
+                    }}
+                    aria-label={brandEntries ? `See how the ${item.alt} was built` : `Open ${item.alt}`}
                   >
-                    <span className="pfd-tile-media">
+                    <span className={brandEntries ? "pfd-tile-media is-brand" : "pfd-tile-media"}>
                       <WorkThumb item={item} sizes="(max-width: 640px) 46vw, (max-width: 1100px) 31vw, 23vw" />
                       {item.kind !== "image" ? (
                         <span className="pfd-play" aria-hidden>
                           ▶
+                        </span>
+                      ) : null}
+                      {brandEntries ? (
+                        <span className="pfd-tile-hint" aria-hidden>
+                          <span>⌖</span> See how it&apos;s built
                         </span>
                       ) : null}
                     </span>
@@ -207,43 +226,55 @@ export function PortfolioWork({ detail, km }: { detail: PortfolioDetail; km: str
         ))}
       </div>
 
-      <dialog
-        ref={dialogRef}
-        className="pf-lightbox"
-        aria-label={current ? current.item.alt : "Portfolio piece"}
-        onClose={() => setOpen(null)}
-        onClick={(event) => {
-          if (event.target === event.currentTarget) setOpen(null);
-        }}
-        onKeyDown={(event) => {
-          if (event.key === "ArrowRight") step(1);
-          if (event.key === "ArrowLeft") step(-1);
-        }}
-      >
-        {current ? (
-          <figure className="pf-lightbox-figure">
-            <LightboxMedia key={open} item={current.item} />
-            <figcaption>
-              <span className="pf-lightbox-count">
-                {pad((open ?? 0) + 1)} / {pad(entries.length)}
-              </span>
-              <span className="pf-lightbox-client">{current.group}</span>
-              <span className="pf-lightbox-medium">No. {pad(current.number)}</span>
-            </figcaption>
-          </figure>
-        ) : null}
-        <div className="pf-lightbox-nav">
-          <button type="button" aria-label="Previous piece" onClick={() => step(-1)}>
-            ←
+      {brandEntries ? (
+        open !== null ? (
+          <BrandCase
+            entries={brandEntries}
+            index={open}
+            origin={origin}
+            onIndex={setOpen}
+            onClose={() => setOpen(null)}
+          />
+        ) : null
+      ) : (
+        <dialog
+          ref={dialogRef}
+          className="pf-lightbox"
+          aria-label={current ? current.item.alt : "Portfolio piece"}
+          onClose={() => setOpen(null)}
+          onClick={(event) => {
+            if (event.target === event.currentTarget) setOpen(null);
+          }}
+          onKeyDown={(event) => {
+            if (event.key === "ArrowRight") step(1);
+            if (event.key === "ArrowLeft") step(-1);
+          }}
+        >
+          {current ? (
+            <figure className="pf-lightbox-figure">
+              <LightboxMedia key={open} item={current.item} />
+              <figcaption>
+                <span className="pf-lightbox-count">
+                  {pad((open ?? 0) + 1)} / {pad(entries.length)}
+                </span>
+                <span className="pf-lightbox-client">{current.group}</span>
+                <span className="pf-lightbox-medium">No. {pad(current.number)}</span>
+              </figcaption>
+            </figure>
+          ) : null}
+          <div className="pf-lightbox-nav">
+            <button type="button" aria-label="Previous piece" onClick={() => step(-1)}>
+              ←
+            </button>
+            <button type="button" aria-label="Next piece" onClick={() => step(1)}>
+              →
+            </button>
+          </div>
+          <button type="button" className="pf-lightbox-close" aria-label="Close" onClick={() => setOpen(null)}>
+            ×
           </button>
-          <button type="button" aria-label="Next piece" onClick={() => step(1)}>
-            →
-          </button>
-        </div>
-        <button type="button" className="pf-lightbox-close" aria-label="Close" onClick={() => setOpen(null)}>
-          ×
-        </button>
-      </dialog>
+        </dialog>
+      )}
     </section>
   );
 }

@@ -1,7 +1,19 @@
 import type { PortfolioTone } from "@/lib/portfolio";
 
+/** A region of a 4:5 mockup, in percent of the image's width (x, w) and height (y, h). */
+export type BrandBox = { x: number; y: number; w: number; h: number };
+
+/** Where the logo sits in a brand identity mockup, used to draw its construction overlay. */
+export interface BrandAnatomy {
+  client: string;
+  /** The whole lockup: symbol, wordmark and tagline. */
+  logo: BrandBox;
+  /** The symbol on its own. */
+  mark: BrandBox;
+}
+
 export type PortfolioWorkItem =
-  | { kind: "image"; src: string; alt: string; full?: string; caption?: string }
+  | { kind: "image"; src: string; alt: string; full?: string; caption?: string; brand?: BrandAnatomy }
   | { kind: "youtube"; src: string; alt: string; youtubeId: string; caption?: string }
   | { kind: "video"; video: string; alt: string };
 
@@ -121,24 +133,30 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
       {
         title: "Brand Identity",
         aspect: "4 / 5",
-        items: [
-          "Numax Civil Lines",
-          "Kinza Estate",
-          "Ashtech Presidential Towers",
-          "Opal County",
-          "Shubh Anandam",
-          "VVIP Madhuban",
-          "Lumora Estates",
-          "Pincode Infra",
-          "Gulshan Empire, Wave City",
-          "GXP Goa Expressway",
-          "Pincode Infra",
-          "Highway Greens by Kinza Estate",
-        ].map((client, index) => ({
-          kind: "image" as const,
-          src: `/portfolio/brand-identity/logo-${index + 1}.jpg`,
-          alt: `${client} logo and brand identity by Ritz Media World`,
-        })),
+        items: (
+          [
+            ["Numax Civil Lines", [15.6, 35.4, 64, 27.1], [50.3, 35.4, 29.3, 20.5]],
+            ["Kinza Estate", [21, 41.8, 63.9, 28.3], [21, 41.8, 20.5, 16.3]],
+            ["Ashtech Presidential Towers", [8.8, 38.4, 82.5, 16.8], [8.8, 38.4, 13.8, 12.9]],
+            ["Opal County", [8.8, 36.9, 82.2, 28], [8.8, 36.9, 24.8, 20]],
+            ["Shubh Anandam", [14.4, 30.3, 66, 45.9], [27.1, 30.3, 40.7, 28.8]],
+            ["VVIP Madhuban", [8.5, 41.8, 83.7, 20.7], [8.5, 41.8, 26, 20.7]],
+            ["Lumora Estates", [10.4, 41.2, 79.4, 16.4], [48, 41.2, 15.5, 12.7]],
+            ["Pincode Infra", [21.7, 37.6, 55.8, 19], [53.5, 37.6, 8.5, 13]],
+            ["Gulshan Empire, Wave City", [17.1, 37.6, 71.1, 31.9], [50.7, 39.6, 19.9, 15.9]],
+            ["GXP Goa Expressway", [5.1, 32.5, 90.7, 27.5], [34.8, 35.2, 31.7, 17.1]],
+            ["Pincode Infra", [8.8, 38.3, 82.2, 27.1], [39.7, 41.5, 11.4, 10.7]],
+            ["Highway Greens by Kinza Estate", [6.7, 37.3, 80, 18.6], [6.7, 37.3, 23.6, 18.2]],
+          ] as const
+        ).map(([client, logo, mark], index) => {
+          const box = ([x, y, w, h]: readonly number[]) => ({ x, y, w, h });
+          return {
+            kind: "image" as const,
+            src: `/portfolio/brand-identity/logo-${index + 1}.jpg`,
+            alt: `${client} logo and brand identity by Ritz Media World`,
+            brand: { client, logo: box(logo), mark: box(mark) },
+          };
+        }),
       },
     ],
     intro: {
@@ -166,7 +184,10 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
             copy: "A complete visual language, including marks, patterns, imagery and layouts.",
           },
           { title: "Brand Guidelines", copy: "Clear rules so every team and vendor uses your brand correctly." },
-          { title: "Typography & Colour Palette", copy: "Type and colour choices that carry your brand's personality." },
+          {
+            title: "Typography & Colour Palette",
+            copy: "Type and colour choices that carry your brand's personality.",
+          },
           {
             title: "Marketing & Brand Collateral",
             copy: "Stationery, brochures, signage and social templates that match your identity.",
@@ -179,10 +200,16 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
         items: [
           { title: "Brand Discovery & Research", copy: "We study your business, audience, competitors and ambitions." },
           { title: "Brand Strategy", copy: "We define what your brand stands for and how it should feel." },
-          { title: "Logo & Visual Concept Development", copy: "We explore several creative routes and refine the strongest." },
+          {
+            title: "Logo & Visual Concept Development",
+            copy: "We explore several creative routes and refine the strongest.",
+          },
           { title: "Brand Identity Design", copy: "The chosen route grows into a full identity system." },
           { title: "Brand Guidelines", copy: "Everything is documented so your brand stays consistent." },
-          { title: "Final Brand Implementation", copy: "We roll the identity out across print, digital and on-ground." },
+          {
+            title: "Final Brand Implementation",
+            copy: "We roll the identity out across print, digital and on-ground.",
+          },
         ],
       },
       {
@@ -192,8 +219,14 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
           { title: "Strategic & Creative Approach", copy: "Ideas grounded in research, designed to stand out." },
           { title: "Consistent Brand Experience", copy: "One look and feel across every touchpoint." },
           { title: "Industry-Focused Branding", copy: "Identities shaped by how your industry and buyers think." },
-          { title: "Scalable Brand Identity Systems", copy: "Systems that grow with new products, places and platforms." },
-          { title: "End-to-End Branding Solutions", copy: "From the first sketch to launch campaigns, under one roof." },
+          {
+            title: "Scalable Brand Identity Systems",
+            copy: "Systems that grow with new products, places and platforms.",
+          },
+          {
+            title: "End-to-End Branding Solutions",
+            copy: "From the first sketch to launch campaigns, under one roof.",
+          },
         ],
       },
       {
@@ -256,7 +289,11 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
     workTitle: ["Five formats", "70 pieces."],
     workLede: "Stationery · Hoardings · Print Ads · Social Media · Brochures",
     groups: [
-      { title: "Stationery", aspect: "4 / 5", items: images("creative", "stationery", range(1, 14), "Stationery design") },
+      {
+        title: "Stationery",
+        aspect: "4 / 5",
+        items: images("creative", "stationery", range(1, 14), "Stationery design"),
+      },
       {
         title: "Hoardings",
         aspect: "4 / 5",
