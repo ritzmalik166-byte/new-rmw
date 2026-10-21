@@ -445,7 +445,7 @@ export const site = {
     kicker: "Start a Project",
     title: "Get a Free Consultation for Your Brand",
     formTitle: "Shuru Karein – It's Free",
-    cta: "Get My Free Audit",
+    cta: "Get My Free Consultation",
     pills: ["Branding", "SEO", "Social Media", "Performance"],
     services: [
       "Digital Marketing",

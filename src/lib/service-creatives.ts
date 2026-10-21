@@ -94,11 +94,10 @@ const WORK = {
     fit: "contain",
   },
   metaInsights: {
-    src: "/about/proofs/laptop-meta-insights.webp",
+    src: "/about/proofs/meta.jpg",
     alt: "Meta Business Suite insights showing 19.4M views",
     medium: "Meta insights",
     caption: "19.4M views across Facebook and Instagram this year.",
-    fit: "contain",
   },
   googleAds: {
     src: "/mobile-1.png",

@@ -1218,6 +1218,8 @@
   aspect-ratio: 4 / 5;
   overflow: hidden;
   background: #e9e4d6;
+  outline: 1px solid rgb(28 20 12 / 10%);
+  outline-offset: -1px;
 }
 
 .sd-pin-media img {

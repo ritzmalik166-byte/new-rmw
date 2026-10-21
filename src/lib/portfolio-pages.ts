@@ -67,12 +67,14 @@ const images = (folder: string, prefix: string, numbers: number[], label: string
     alt: `${label} ${index + 1} by Ritz Media World`,
   }));
 
-const youtube = (folder: string, prefix: string, ids: string[], label: string): PortfolioWorkItem[] =>
-  ids.map((youtubeId, index) => ({
+/** Each film is `[youtubeId, caption, alt]`; thumbnails are numbered in the same order. */
+const youtube = (folder: string, prefix: string, films: [string, string, string][]): PortfolioWorkItem[] =>
+  films.map(([youtubeId, caption, alt], index) => ({
     kind: "youtube",
     src: `/portfolio/${folder}/${prefix}-${index + 1}.jpg`,
-    alt: `${label} ${index + 1} by Ritz Media World`,
+    alt: `${alt}, by Ritz Media World`,
     youtubeId,
+    caption,
   }));
 
 const INFLUENCER_VIDEOS = [
@@ -615,38 +617,66 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
       description:
         "Bring spaces and ideas to life with professional walk-through videos for real estate, interiors and architecture. Explore our video production services.",
     },
-    h1: ["Walk-Through", "Videos"],
-    tagline: "Bringing stories to motion & ideas to screen with AI-Powered Video Creation",
-    workTitle: "Our Portfolio",
+    h1: ["3D Walkthrough", "Videos"],
+    tagline: "Photorealistic 3D tours of homes, towers, and amenities.",
+    workTitle: "Our 3D Walkthrough Portfolio",
+    workLede: "11 walkthroughs made for real projects. Tap any film to watch.",
     groups: [
       {
         title: "Walk-Through Videos",
         aspect: "4 / 5",
-        items: youtube(
-          "walk-through-videos",
-          "walk",
+        items: youtube("walk-through-videos", "walk", [
           [
             "LMz36aAXPus",
-            "M6Dm4SiqSsc",
-            "XRYVFJ5u_2g",
-            "pbXiujM1QjM",
-            "T8GtiRWPvKM",
-            "ukRR5iNZv4I",
-            "xrhEXyUfBVM",
-            "hnG-LjQYP5k",
-            "TjveWflbrkM",
-            "ub6D5lHq6DU",
-            "4Z4ZOWnVJ4Y",
+            "RMW Estate",
+            "3D walkthrough of the RMW Estate township entrance, gated boulevard and commercial frontage",
           ],
-          "Walk-through video",
-        ),
+          [
+            "M6Dm4SiqSsc",
+            "Edelstein",
+            "AI-powered CGI film of the Edelstein glass tower and landscaped entrance plaza",
+          ],
+          [
+            "XRYVFJ5u_2g",
+            "Trevoc Royal Residences",
+            "Ultra-luxury 3D walkthrough of Trevoc Royal Residences on Golf Course Road, Gurugram",
+          ],
+          [
+            "pbXiujM1QjM",
+            "Vedvan Elemental Living",
+            "3D visualisation of a wellness pavilion and lotus pond deck at Vedvan Elemental Living",
+          ],
+          [
+            "T8GtiRWPvKM",
+            "Forbes Global Properties",
+            "Cinematic 3D interior tour of a Forbes Global Properties residence lobby",
+          ],
+          [
+            "ukRR5iNZv4I",
+            "Laadli Govindvan",
+            "AI-powered 3D flythrough of the Laadli Govindvan township, gateway and gardens",
+          ],
+          [
+            "xrhEXyUfBVM",
+            "Maza Nahin Aaya?",
+            "Maza Nahin Aaya? cinematic AI film on the client and agency creative process",
+          ],
+          ["hnG-LjQYP5k", "Gulshan", "Cinematic AI teaser film for Gulshan real estate"],
+          [
+            "TjveWflbrkM",
+            "Northwind Estates",
+            "AI-powered 3D walkthrough of the Northwind Estates residential project",
+          ],
+          ["ub6D5lHq6DU", "Vedvan", "AI real estate film of Vedvan's nature-inspired preventive living community"],
+          ["4Z4ZOWnVJ4Y", "GHD", "AI-powered 3D walkthrough and real estate visualisation for GHD"],
+        ]),
       },
     ],
     intro: {
       title: "Bring Your Spaces to Life",
       copy: [
-        "Let buyers walk through your project before the first brick is laid. Our 3D walk-through videos show every room, view and amenity in rich, realistic detail.",
-        "Built for real estate launches, interiors and architecture, they help people picture themselves in the space, and that is what turns interest into site visits and bookings.",
+        "Let buyers walk through your project long before construction begins. Our 3D walkthrough videos show every room, view, and amenity in rich, realistic detail.",
+        "Built for real estate launches, interiors, and architecture, they help people picture themselves in the space, and that's what turns interest into site visits and bookings.",
       ],
     },
     blocks: [
@@ -657,9 +687,42 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
           { title: "Real Estate Videos", copy: "Project films that show the location, towers, homes and lifestyle." },
           { title: "3D Walk-Through Videos", copy: "Photo-real 3D tours of interiors, exteriors and amenities." },
           { title: "Architectural Videos", copy: "Cinematic visualisations that bring designs and plans to life." },
+          {
+            title: "Interior Walkthroughs",
+            copy: "Furnished, naturally lit tours of sample flats, lobbies and common areas.",
+          },
+          {
+            title: "Amenity & Township Flythroughs",
+            copy: "Aerial tours of clubhouses, landscapes and complete townships.",
+          },
+          {
+            title: "Social Media Cut-Downs",
+            copy: "Short versions of your walkthroughs sized for Reels, YouTube Shorts and WhatsApp.",
+          },
         ],
       },
-      WHY_RMW,
+      {
+        title: "Why Choose Ritz Media World?",
+        kind: "cards",
+        items: [
+          {
+            title: "Built for real estate sales",
+            copy: "We've marketed real estate projects for years, so every walkthrough highlights what buyers actually ask about.",
+          },
+          {
+            title: "Photorealistic detail",
+            copy: "Accurate materials, natural lighting, and real surroundings make your project feel real, not computer-generated.",
+          },
+          {
+            title: "Faster with AI-powered rendering",
+            copy: "Our AI-powered workflow speeds up rendering, so walkthroughs are ready in time for your launch.",
+          },
+          {
+            title: "Ready for every channel",
+            copy: "We deliver full walkthroughs and short cuts for your website, sales gallery, YouTube, and social media.",
+          },
+        ],
+      },
     ],
     faqTitle: ["Questions about", "walk-through videos."],
     faqs: [
@@ -679,8 +742,17 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
         q: "How long does a walk-through video take?",
         a: "Typically two to five weeks depending on the size of the project, the number of spaces and the level of detail.",
       },
+      {
+        q: "What is the difference between a 3D render and a walkthrough video?",
+        a: "A 3D render is a single still image of a space, while a walkthrough video is an animated tour that moves through it. Renders suit brochures and hoardings, while walkthroughs work best on websites, in sales galleries and on social media.",
+      },
+      {
+        q: "How much does a 3D walkthrough video cost?",
+        a: "The cost depends on the length of the video, the number of spaces shown, the level of detail, and the delivery timeline. We share a clear quote after reviewing your plans.",
+      },
     ],
     closing: "Let's Create Your Video",
+    closingLede: "Share your plans, and we'll bring your project to life in 3D.",
   },
   {
     slug: "influencer-marketing-videos",

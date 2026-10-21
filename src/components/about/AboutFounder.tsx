@@ -3,7 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
-import { registerGsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap, registerGsap, ScrollTrigger } from "@/lib/gsap";
 
 registerGsap();
 
@@ -30,7 +30,7 @@ const FOUNDERS: Founder[] = [
     kicker: "Founder details & journey",
     title: ["The visionary", "behind the wheel"],
     role: "Ritz Malik · Founder & Promoter, Ritz Media World And Creative Thinks Media",
-    lede: "Mr. Ritz Malik founded Ritz Media World in August 2008 with a simple belief: brands deserve ideas that are built on insight, not assumption. Over 18 years, he has steered the agency through every major shift in Indian marketing, growing it from a creative studio into a full-service creative, digital, and media partner for brands across industries. He also founded Creative Thinks Media. Even as data and AI reshape the industry, Mr. Malik remains convinced that brands win through clear, authentic, and well-crafted storytelling.",
+    lede: "Mr. Ritz Malik founded Ritz Media World in August 2008 with a simple belief: brands deserve ideas built on insight, not assumption. For 18 years, he has shaped the agency's vision and creative direction, growing it into a full-service creative, digital, and media partner, and he also founded Creative Thinks Media. He believes brands win through clear, authentic storytelling.",
   },
   {
     portrait: "/about/cofounder-portrait.png",
@@ -38,23 +38,20 @@ const FOUNDERS: Founder[] = [
     kicker: "Co-founder details & journey",
     title: ["The strength", "behind the studio"],
     role: "Satvinder Kaur · Co-Founder, Ritz Media World",
-    lede: "Ms. Satvinder Kaur is the name everyone at Ritz Media World knows the moment they walk into the room. Alongside Mr. Malik, she has helped build the agency from its earliest days, keeping its people, its clients, and its day-to-day work running with the same care that goes into every campaign.",
+    lede: "Ms. Satvinder Kaur has co-led Ritz Media World since its earliest days, building it into a place where people do their best work. For 18 years, she has looked after the agency's people, its clients and its day-to-day running, making sure every promise becomes delivered work. She believes great work is built on trust, care and consistency.",
   },
 ];
 
-type Dot = {
-  x: number;
-  y: number;
-  sx: number;
-  sy: number;
-  delay: number;
-  r: number;
-  color: string;
-};
+/** The pinned hand-off needs room for the portrait beside the copy. */
+const STAGE_QUERY = "(min-width: 861px) and (min-height: 600px)";
+const CLIP_BELOW = "inset(100% 0% 0% 0%)";
+const CLIP_OPEN = "inset(0% 0% 0% 0%)";
 
+type Dot = { x: number; y: number; sx: number; sy: number; delay: number; r: number; color: string };
+
+/** Samples the portrait into a grid of coloured dots, each starting from a scattered position. */
 function samplePortrait(img: HTMLImageElement, width: number, height: number) {
-  const cols = 62;
-  const step = Math.max(4, width / cols);
+  const step = Math.max(4, width / 62);
   const sampleW = Math.max(1, Math.round(width / step));
   const sampleH = Math.max(1, Math.round(height / step));
   const sample = document.createElement("canvas");
@@ -69,106 +66,109 @@ function samplePortrait(img: HTMLImageElement, width: number, height: number) {
   const cx = width / 2;
   const cy = height / 2;
   const maxDist = Math.hypot(cx, cy) || 1;
+  const inset = 6;
   for (let row = 0; row < sampleH; row++) {
     for (let col = 0; col < sampleW; col++) {
       const index = (row * sampleW + col) * 4;
-      const alpha = pixels[index + 3];
-      if (alpha < 24) continue;
-
+      if (pixels[index + 3] < 24) continue;
       const x = (col + 0.5) * (width / sampleW);
       const y = (row + 0.5) * (height / sampleH);
-      const fromCenter = Math.hypot(x - cx, y - cy) / maxDist;
-      const inset = 6;
-      const jitterX = (Math.random() - 0.5) * width * 0.62;
-      const jitterY = (Math.random() - 0.5) * height * 0.62;
-
       dots.push({
         x,
         y,
-        sx: Math.min(width - inset, Math.max(inset, x + jitterX)),
-        sy: Math.min(height - inset, Math.max(inset, y + jitterY)),
-        delay: fromCenter * 0.22,
+        sx: Math.min(width - inset, Math.max(inset, x + (Math.random() - 0.5) * width * 0.62)),
+        sy: Math.min(height - inset, Math.max(inset, y + (Math.random() - 0.5) * height * 0.62)),
+        delay: (Math.hypot(x - cx, y - cy) / maxDist) * 0.4,
         r: (width / sampleW) * 0.48,
         color: `rgb(${pixels[index]},${pixels[index + 1]},${pixels[index + 2]})`,
       });
     }
   }
-
   return dots;
 }
 
-function easeOut(value: number) {
-  return 1 - (1 - value) ** 3;
-}
-
-type PortraitRig = {
-  draw: (progress: number) => void;
-  settle: () => void;
-};
-
-function rigPortrait(person: HTMLElement): PortraitRig | null {
+/** Returns a painter for the portrait's dot canvas; 0 is fully scattered, 1 is fully assembled. */
+function rigDots(person: HTMLElement) {
   const card = person.querySelector<HTMLElement>(".about-founder-card");
   const img = person.querySelector<HTMLImageElement>(".about-founder-portrait");
   const canvas = person.querySelector<HTMLCanvasElement>(".about-founder-assemble");
-  if (!card || !img || !canvas) return null;
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return null;
+  const ctx = canvas?.getContext("2d");
+  let dots: Dot[] = [];
+  let sized = "";
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
 
-  const settle = () => {
-    card.classList.add("is-settled");
-    canvas.hidden = true;
+  const prepare = () => {
+    if (!card || !img || !canvas || !img.complete || !img.naturalWidth) return false;
+    const key = `${card.clientWidth}x${card.clientHeight}`;
+    if (key === sized) return dots.length > 0;
+    width = card.clientWidth;
+    height = card.clientHeight;
+    if (!width || !height) return false;
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    dots = samplePortrait(img, width, height);
+    sized = key;
+    return dots.length > 0;
   };
 
-  const width = card.clientWidth;
-  const height = card.clientHeight;
-  if (!width || !height) return null;
-
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  canvas.width = Math.round(width * dpr);
-  canvas.height = Math.round(height * dpr);
-
-  const dots = samplePortrait(img, width, height);
-  if (!dots.length) {
-    settle();
-    return null;
-  }
-
-  const paint = (progress: number) => {
+  return (progress: number) => {
+    if (!ctx || !prepare()) return;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, width, height);
-
     for (const dot of dots) {
-      const span = 1 - dot.delay;
-      const local = Math.min(1, Math.max(0, (progress - dot.delay) / span));
-      const eased = easeOut(local);
-      const x = dot.sx + (dot.x - dot.sx) * eased;
-      const y = dot.sy + (dot.y - dot.sy) * eased;
+      const local = Math.min(1, Math.max(0, (progress - dot.delay) / (1 - dot.delay)));
+      const eased = 1 - (1 - local) ** 3;
       ctx.globalAlpha = 0.72 + 0.28 * eased;
       ctx.fillStyle = dot.color;
       ctx.beginPath();
-      ctx.arc(x, y, dot.r * (0.55 + 0.45 * eased), 0, Math.PI * 2);
+      ctx.arc(
+        dot.sx + (dot.x - dot.sx) * eased,
+        dot.sy + (dot.y - dot.sy) * eased,
+        dot.r * (0.55 + 0.45 * eased),
+        0,
+        Math.PI * 2,
+      );
       ctx.fill();
     }
-
     ctx.globalAlpha = 1;
   };
+}
 
-  canvas.hidden = false;
-  canvas.style.opacity = "1";
-  img.style.opacity = "0";
-
-  let played = 0;
-  const draw = (progress: number) => {
-    if (progress < played) return;
-    played = progress;
-    paint(Math.min(1, played / 0.78));
-    const fade = Math.max(0, (played - 0.72) / 0.28);
-    img.style.opacity = String(fade);
-    img.style.visibility = fade > 0.01 ? "visible" : "hidden";
-    canvas.style.opacity = String(1 - fade);
+function partsOf(person: HTMLElement) {
+  const q = gsap.utils.selector(person);
+  return {
+    card: q(".about-founder-card"),
+    img: q(".about-founder-portrait"),
+    canvas: q(".about-founder-assemble"),
+    lines: q(".about-founder-line > span"),
+    fades: q(".about-founder-kicker, .about-founder-role, .about-founder-lede"),
   };
+}
 
-  return { draw, settle };
+/**
+ * Portrait wipes up from the bottom while scattered dots gather into it, then the photo resolves over
+ * the dots and settles from a zoom; the headline rises line by line.
+ */
+function reveal(tl: gsap.core.Timeline, person: HTMLElement, at = 0) {
+  const { card, img, canvas, lines, fades } = partsOf(person);
+  const paint = rigDots(person);
+  const dots = { p: 0 };
+  return tl
+    .fromTo(card, { clipPath: CLIP_BELOW }, { clipPath: CLIP_OPEN, duration: 0.8, ease: "power3.inOut" }, at)
+    .fromTo(
+      dots,
+      { p: 0 },
+      { p: 1, duration: 1.7, ease: "sine.inOut", onUpdate: () => paint(dots.p), onReverseComplete: () => paint(0) },
+      at,
+    )
+    .fromTo(img, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "none" }, at + 1.45)
+    .fromTo(canvas, { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.4, ease: "none" }, at + 1.6)
+    .fromTo(img, { scale: 1.3 }, { scale: 1, duration: 2, ease: "power2.out" }, at)
+    .fromTo(lines, { y: 0, yPercent: 110 }, { y: 0, yPercent: 0, stagger: 0.08, duration: 0.5 }, at + 0.3)
+    .fromTo(fades, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, stagger: 0.07, duration: 0.4 }, at + 0.4);
 }
 
 export function AboutFounder() {
@@ -178,107 +178,114 @@ export function AboutFounder() {
   useGSAP(
     () => {
       const root = rootRef.current;
-      if (!root || !ready) return;
+      if (!root || !ready || reduced) return;
 
       const people = Array.from(root.querySelectorAll<HTMLElement>(".about-founder-person"));
-      const imgs = people
-        .map((person) => person.querySelector<HTMLImageElement>(".about-founder-portrait"))
-        .filter((img): img is HTMLImageElement => !!img);
-
-      if (reduced) {
-        people.forEach((person) => {
-          person.querySelector(".about-founder-card")?.classList.add("is-settled");
-          const canvas = person.querySelector<HTMLCanvasElement>(".about-founder-assemble");
-          if (canvas) canvas.hidden = true;
-        });
-        return;
-      }
+      const [first, second] = people;
+      if (!first || !second) return;
 
       let cancelled = false;
-      let triggers: ScrollTrigger[] = [];
-      let stopLayout = () => { };
+      let match: gsap.MatchMedia | undefined;
+      const refresh = () => ScrollTrigger.refresh();
 
-      const play = () => {
+      // The pinned sections above build their triggers after fonts load; ours must be measured after theirs.
+      document.fonts.ready.then(() => {
         if (cancelled) return;
-        triggers.forEach((t) => t.kill());
-        triggers = [];
+        match = gsap.matchMedia();
+        match.add({ staged: STAGE_QUERY }, (context) => build(!!context.conditions?.staged));
+        window.addEventListener("load", refresh);
+      });
 
-        const rigs = people.map(rigPortrait);
-        const pin = root.offsetHeight <= window.innerHeight + 2;
+      const build = (staged: boolean) => {
+        if (!staged) {
+          people.forEach((person) =>
+            reveal(
+              gsap.timeline({
+                defaults: { ease: "power2.out" },
+                scrollTrigger: {
+                  trigger: person,
+                  start: "top 82%",
+                  toggleActions: "play none none none",
+                  refreshPriority: -1,
+                },
+              }),
+              person,
+            ),
+          );
+          return;
+        }
 
-        const watch = (target: HTMLElement, group: (PortraitRig | null)[]) => {
-          const trigger = ScrollTrigger.create({
-            trigger: target,
-            start: pin ? "top top" : "top 75%",
-            end: () => `+=${Math.round(window.innerHeight * (pin ? 1.45 : 0.9))}`,
-            pin,
-            pinSpacing: true,
+        root.classList.add("is-staged");
+        const stripes = root.querySelector(".about-founder-stripes");
+        const track = root.querySelector(".about-founder-count-track");
+        const leaving = partsOf(first);
+
+        const enter = gsap.timeline({
+          defaults: { ease: "power2.out" },
+          scrollTrigger: { trigger: root, start: "top bottom", end: "top top", scrub: true, refreshPriority: -1 },
+        });
+        if (stripes) enter.fromTo(stripes, { scaleY: 0 }, { scaleY: 1, duration: 1, ease: "none" }, 0);
+        reveal(enter, first, 0.1);
+
+        const handOff = gsap.timeline({
+          defaults: { ease: "power2.out" },
+          scrollTrigger: {
+            trigger: root,
+            start: "top top",
+            end: () => `+=${Math.round(window.innerHeight * 2.6)}`,
+            pin: true,
             scrub: true,
             anticipatePin: 1,
             invalidateOnRefresh: true,
-            onUpdate: (self) => {
-              if (self.direction < 0) return;
-              group.forEach((rig) => rig?.draw(self.progress));
-            },
-          });
-          triggers.push(trigger);
-        };
+            refreshPriority: -1,
+          },
+        });
+        const out = { ease: "power2.in", immediateRender: false };
+        handOff
+          .to({}, { duration: 0.2 })
+          .fromTo(leaving.lines, { y: 0, yPercent: 0 }, { ...out, y: 0, yPercent: -115, stagger: 0.06, duration: 0.4 }, 0.2)
+          .fromTo(leaving.fades, { autoAlpha: 1, y: 0 }, { ...out, autoAlpha: 0, y: -24, stagger: 0.04, duration: 0.3 }, 0.2)
+          .fromTo(leaving.img, { scale: 1 }, { scale: 1.12, duration: 0.7, ease: "power3.inOut", immediateRender: false }, 0.3);
+        if (track) handOff.fromTo(track, { yPercent: 0 }, { yPercent: -50, duration: 0.5, ease: "power3.inOut" }, 0.35);
+        reveal(handOff, second, 0.3).to({}, { duration: 0.4 });
 
-        const sideBySide =
-          people.length > 1 && Math.abs(people[0].offsetTop - people[1].offsetTop) < 4;
-
-        // Side by side: both portraits assemble together; stacked (mobile): each on its own.
-        if (pin || sideBySide) {
-          watch(root, rigs);
-        } else {
-          people.forEach((person, i) => watch(person, [rigs[i]]));
-        }
-
-        const sync = () => {
-          if (cancelled) return;
-          triggers.forEach((trigger, i) => {
-            trigger.refresh();
-            if (trigger.direction < 0) return;
-            const group = pin || sideBySide ? rigs : [rigs[i]];
-            group.forEach((rig) => rig?.draw(trigger.progress));
-          });
-        };
-
-        requestAnimationFrame(sync);
-        window.addEventListener("load", sync);
-        const pendingImages = Array.from(document.images).filter((image) => !image.complete);
-        pendingImages.forEach((image) => image.addEventListener("load", sync, { once: true }));
-        const timers = [400, 1200, 2400].map((delay) => window.setTimeout(sync, delay));
-
+        const frame = requestAnimationFrame(refresh);
         return () => {
-          window.removeEventListener("load", sync);
-          pendingImages.forEach((image) => image.removeEventListener("load", sync));
-          timers.forEach((timer) => window.clearTimeout(timer));
+          cancelAnimationFrame(frame);
+          root.classList.remove("is-staged");
         };
       };
-
-      const begin = () => {
-        if (!imgs.every((img) => img.complete && img.naturalWidth > 0)) return;
-        stopLayout();
-        stopLayout = play() ?? (() => { });
-      };
-
-      begin();
-      imgs.forEach((img) => img.addEventListener("load", begin));
 
       return () => {
         cancelled = true;
-        imgs.forEach((img) => img.removeEventListener("load", begin));
-        stopLayout();
-        triggers.forEach((t) => t.kill());
+        window.removeEventListener("load", refresh);
+        match?.revert();
       };
     },
     { dependencies: [ready, reduced], scope: rootRef },
   );
 
   return (
-    <section ref={rootRef} className="about-founder">
+    <section ref={rootRef} className="about-founder" aria-label="Our founders">
       <div className="about-founder-layout">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          className="about-founder-stripes"
+          src="/about/founder-stripes.png"
+          alt=""
+          aria-hidden="true"
+          width={83}
+          height={754}
+        />
+        <p className="about-founder-count" aria-hidden="true">
+          <span className="about-founder-count-roll">
+            <span className="about-founder-count-track">
+              <span>01</span>
+              <span>02</span>
+            </span>
+          </span>
+          <span>/ {String(FOUNDERS.length).padStart(2, "0")}</span>
+        </p>
         {FOUNDERS.map((founder) => (
           <FounderFeature key={founder.portrait} founder={founder} />
         ))}
@@ -291,32 +298,20 @@ function FounderFeature({ founder }: { founder: Founder }) {
   return (
     <article className="about-founder-person">
       <div className="about-founder-visual">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          className="about-founder-stripes"
-          src="/about/founder-stripes.png"
-          alt="Decorative stripes"
-          width={83}
-          height={754}
-        />
         <figure className="about-founder-card">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            className="about-founder-portrait"
-            src={founder.portrait}
-            alt={founder.alt}
-            width={541}
-            height={541}
-          />
+          <img className="about-founder-portrait" src={founder.portrait} alt={founder.alt} width={541} height={541} />
           <canvas className="about-founder-assemble" aria-hidden="true" />
         </figure>
       </div>
       <div className="about-founder-copy">
         <p className="about-founder-kicker">{founder.kicker}</p>
         <h2 className="about-founder-title">
-          {founder.title[0]}
-          <br />
-          {founder.title[1]}
+          {founder.title.map((line) => (
+            <span key={line} className="about-founder-line">
+              <span>{line}</span>
+            </span>
+          ))}
         </h2>
         <p className="about-founder-role">{founder.role}</p>
         <p className="about-founder-lede">{founder.lede}</p>
