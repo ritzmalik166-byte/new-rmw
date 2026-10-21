@@ -6,6 +6,8 @@ export interface PortfolioCategory {
   /** Short name for the "View … work" button; defaults to `title`. */
   cta?: string;
   href: string;
+  /** Where the card links from the "Next stop" strip on detail pages; defaults to `href`. */
+  moreHref?: string;
   image: string;
   copy: string;
   items: [string, string, string, string];
@@ -61,7 +63,8 @@ export const PORTFOLIO_CATEGORIES: PortfolioCategory[] = [
   {
     id: "walk-through-videos",
     href: "/portfolio/walk-through-videos",
-    title: "3D Rendering & Walkthroughs",
+    moreHref: "/services/3d-rendering",
+    title: "3D Rendering Services",
     cta: "3D Rendering",
     image: "/portfolio/cat-3d-rendering.jpg",
     copy: "Walkthrough videos and photorealistic renders that let buyers and investors explore a project, room by room and from above, long before construction begins.",

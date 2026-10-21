@@ -10,7 +10,20 @@ import { HmTitle, useHomeReveal } from "./shared";
 
 registerGsap();
 
-const TITLE = [{ text: "Insight » Idea »" }, { text: "Impact.", accent: true }] as const;
+/* The » marks are drawn by CSS so the heading's text reads "Insight Idea Impact." */
+const Sep = () => <span className="hm-route-sep" aria-hidden />;
+
+const TITLE = [
+  {
+    text: "Insight Idea",
+    node: (
+      <>
+        Insight <Sep /> Idea <Sep />
+      </>
+    ),
+  },
+  { text: "Impact.", accent: true },
+];
 
 export function HomeRoute() {
   const rootRef = useRef<HTMLElement>(null);

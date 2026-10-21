@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import type { Blog } from "@/lib/blogs";
 
 const TOPICS = [
@@ -21,7 +21,7 @@ const TOPICS = [
   {
     id: "real-estate",
     chip: "Real Estate Marketing",
-    gauge: "Real Estate Marketing",
+    gauge: ["Real Estate", "Marketing"],
     color: "#c9356e",
     test: /\breal estate\b|\bproperty\b|\bproperties\b|\bresidential\b|\bbuilder\b|\bapartment\b/i,
   },
@@ -38,7 +38,8 @@ const TOPICS = [
 const CX = 220;
 const CY = 210;
 const ARC_R = 130;
-const LABEL_R = 174;
+const LABEL_R = 170;
+const LABEL_LINE_RADII = [180, 163];
 const SEGMENT = 180 / TOPICS.length;
 const GAP = 1.4;
 
@@ -69,7 +70,11 @@ function formatDate(date: string | null) {
     .toUpperCase();
 }
 
-const DIAL = "M 15 210 A 205 205 0 0 1 425 210 L 425 224 Q 425 244 405 244 L 35 244 Q 15 244 15 224 Z";
+function labelArc(radius: number) {
+  return `M ${CX - radius} ${CY} A ${radius} ${radius} 0 0 1 ${CX + radius} ${CY}`;
+}
+
+const DIAL = "M 15 210 A 205 205 0 0 1 425 210 L 425 254 Q 425 274 405 274 L 35 274 Q 15 274 15 254 Z";
 
 type BlogHeroProps = {
   blogs: Blog[];
@@ -78,6 +83,7 @@ type BlogHeroProps = {
 };
 
 export function BlogHero({ blogs, query, onQueryChange }: BlogHeroProps) {
+  const arcId = useId().replace(/:/g, "");
   const [topicIndex, setTopicIndex] = useState(0);
   const topic = TOPICS[topicIndex];
 
@@ -147,25 +153,41 @@ export function BlogHero({ blogs, query, onQueryChange }: BlogHeroProps) {
       </div>
 
       <div className="bh-meter">
-        <svg className="bh-gauge" viewBox="0 0 440 254" aria-hidden="true">
+        <svg className="bh-gauge" viewBox="0 0 440 284" aria-hidden="true">
+          <defs>
+            <path id={`${arcId}-l`} d={labelArc(LABEL_R)} />
+            {LABEL_LINE_RADII.map((radius, line) => (
+              <path key={radius} id={`${arcId}-l${line}`} d={labelArc(radius)} />
+            ))}
+          </defs>
+
           <path d={DIAL} className="bh-dial-ring" />
           <path d={DIAL} className="bh-dial" />
 
           {TOPICS.map((item, index) => {
             const from = 180 - SEGMENT * index - (index === 0 ? 0 : GAP);
             const to = 180 - SEGMENT * (index + 1) + (index === TOPICS.length - 1 ? 0 : GAP);
-            const label = polar(segmentCenter(index), LABEL_R);
+            const offset = `${((index + 0.5) / TOPICS.length) * 100}%`;
+            const lines = typeof item.gauge === "string" ? [item.gauge] : item.gauge;
             return (
               <g key={item.id} className={index === topicIndex ? "bh-seg is-active" : "bh-seg"}>
                 <path d={arcPath(from, to, ARC_R)} stroke={item.color} />
-                <text x={label.x} y={label.y + 4} textAnchor="middle">
-                  {item.gauge.toUpperCase()}
-                </text>
+                {lines.map((line, lineIndex) => (
+                  <text key={line} dy="4">
+                    <textPath
+                      href={lines.length === 1 ? `#${arcId}-l` : `#${arcId}-l${lineIndex}`}
+                      startOffset={offset}
+                      textAnchor="middle"
+                    >
+                      {line.toUpperCase()}
+                    </textPath>
+                  </text>
+                ))}
               </g>
             );
           })}
 
-          <text className="bh-gauge-name" x={CX + 40} y={CY - 52} textAnchor="middle">
+          <text className="bh-gauge-name" x={CX} y={CY + 52} textAnchor="middle">
             Read-o-Meter
           </text>
 

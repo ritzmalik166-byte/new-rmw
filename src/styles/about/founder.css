@@ -1,7 +1,9 @@
 .about-founder {
-  --fd-pad-y: clamp(28px, 8vh, 96px);
-  --fd-pad-l: clamp(28px, 4.5vw, 61px);
-  --fd-size: min(541px, calc(100svh - 2 * var(--fd-pad-y)), 40vw);
+  /* Height of the stuck site header, which overlays the pinned section. */
+  --fd-head: 72px;
+  --fd-pad-y: clamp(12px, 3vh, 40px);
+  --fd-pad-x: clamp(20px, 3vw, 56px);
+  --fd-size: min(460px, calc((100svh - var(--fd-head)) * 0.42), 32vw);
 
   position: relative;
   display: flex;
@@ -11,52 +13,49 @@
   overflow: hidden;
   background: #a71b10;
   color: #ffffff;
-  padding: var(--fd-pad-y) clamp(28px, 4vw, 72px) var(--fd-pad-y) var(--fd-pad-l);
+  padding: calc(var(--fd-head) + var(--fd-pad-y)) var(--fd-pad-x) var(--fd-pad-y);
 }
 
 .about-founder-layout {
-  display: flex;
-  align-items: center;
-  gap: clamp(36px, 4.5vw, 61px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(24px, 3vw, 64px);
   width: 100%;
-  max-width: none;
-  margin: 0;
+  max-width: 1520px;
+  margin: 0 auto;
+}
+
+.about-founder-person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(12px, 2.2vh, 28px);
+  min-width: 0;
+  text-align: center;
 }
 
 .about-founder-visual {
+  position: relative;
   z-index: 1;
-  flex: 0 0 var(--fd-size);
+  flex: 0 0 auto;
   width: var(--fd-size);
   height: var(--fd-size);
 }
 
-/* The visual is unpositioned so the stripes span the full section height. */
+/* Stripes run from the section top down behind the portrait. */
 .about-founder-stripes {
   position: absolute;
   z-index: 0;
-  top: 0;
+  top: -100svh;
   bottom: 0;
-  left: calc(var(--fd-pad-l) + var(--fd-size) / 2);
-  width: 92px;
-  height: 100%;
+  left: 50%;
+  width: 72px;
+  height: calc(100% + 100svh);
   object-fit: cover;
   object-position: center;
   pointer-events: none;
   transform: translateX(-50%);
-}
-
-.about-founder--reverse {
-  padding: var(--fd-pad-y) var(--fd-pad-l) var(--fd-pad-y) clamp(28px, 4vw, 72px);
-}
-
-.about-founder--reverse .about-founder-layout {
-  flex-direction: row-reverse;
-}
-
-.about-founder--reverse .about-founder-stripes {
-  left: auto;
-  right: calc(var(--fd-pad-l) + var(--fd-size) / 2);
-  transform: translateX(50%);
 }
 
 .about-founder-card {
@@ -93,11 +92,12 @@
 .about-founder-copy {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   flex: 1 1 auto;
-  gap: clamp(12px, 3vh, 32px);
+  gap: clamp(6px, 1.3vh, 16px);
   min-width: 0;
-  max-width: 805px;
+  max-width: 700px;
   padding: 0;
 }
 
@@ -117,7 +117,7 @@
   color: #ffffff;
   font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
   font-weight: 700;
-  font-size: clamp(32px, min(6.6vh, 4.2vw), 56px);
+  font-size: clamp(24px, min(4.6vh, 3vw), 50px);
   line-height: 1;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -128,7 +128,7 @@
   color: #e59b20;
   font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
   font-weight: 700;
-  font-size: clamp(15px, 2.2vh, 18px);
+  font-size: clamp(14px, 2.1vh, 18px);
   line-height: 1.3;
   letter-spacing: 0;
   text-transform: capitalize;
@@ -140,8 +140,8 @@
   color: #ffffffcc;
   font-family: var(--font-inter), Inter, sans-serif;
   font-weight: 400;
-  font-size: clamp(14px, 2.1vh, 17px);
-  line-height: 1.55;
+  font-size: clamp(13.5px, 2vh, 17px);
+  line-height: 1.5;
   letter-spacing: 0;
   text-transform: capitalize;
 }
@@ -213,11 +213,15 @@
     padding: 48px 20px 56px;
   }
 
-  .about-founder-layout,
-  .about-founder--reverse .about-founder-layout {
-    flex-direction: column;
-    align-items: center;
+  .about-founder-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 56px;
     width: 100%;
+  }
+
+  .about-founder-person {
+    align-items: center;
+    gap: 0;
   }
 
   .about-founder-visual {
@@ -243,8 +247,7 @@
     overflow: hidden;
   }
 
-  .about-founder-stripes,
-  .about-founder--reverse .about-founder-stripes {
+  .about-founder-stripes {
     top: 0;
     bottom: 0;
     right: auto;

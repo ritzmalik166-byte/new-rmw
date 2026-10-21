@@ -17,6 +17,10 @@
   color: var(--hm-yellow);
 }
 
+.hm-route-sep::before {
+  content: "»";
+}
+
 .hm-route .hm-lede {
   margin: 0;
   color: rgb(255 255 255 / 70%);
