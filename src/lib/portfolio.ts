@@ -63,12 +63,10 @@ export const PORTFOLIO_CATEGORIES: PortfolioCategory[] = [
   {
     id: "walk-through-videos",
     href: "/portfolio/walk-through-videos",
-    moreHref: "/services/3d-rendering",
-    title: "3D Rendering Services",
-    cta: "3D Rendering",
-    image: "/portfolio/cat-3d-rendering.jpg",
-    copy: "Walkthrough videos and photorealistic renders that let buyers and investors explore a project, room by room and from above, long before construction begins.",
-    items: ["3D Walkthrough Videos", "Exterior & Interior Renders", "Aerial & Township Views", "Amenity & Landscape Renders"],
+    title: "Walk-Through Videos",
+    image: "/portfolio/cat-walkthrough.jpg",
+    copy: "3D walk-throughs that let buyers tour a project, room by room, before the first brick is laid.",
+    items: ["3D Walkthroughs", "Real Estate Visualizations", "Interior & Exterior Tours", "Amenity Showcases"],
     tone: "red",
   },
   {
