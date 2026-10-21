@@ -314,10 +314,12 @@ body:has(.site-header.is-stuck:not(.is-hidden)) .pfd-group-nav {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
+  text-align: left;
   text-transform: uppercase;
 }
 
 .pfd-tile-meta span:last-child {
+  flex: none;
   color: var(--tone);
 }
 

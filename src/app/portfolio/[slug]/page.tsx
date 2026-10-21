@@ -59,7 +59,7 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
         km={km(faqKm + 1)}
         kicker="What we deliver"
         title={splitTitle(detail.closing)}
-        lede="Have a project in mind? Let's bring your brand's creative vision to life."
+        lede={detail.closingLede ?? "Have a project in mind? Let's bring your brand's creative vision to life."}
       />
       <StartProject />
     </article>

@@ -24,6 +24,8 @@ const slugify = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g, "-")
 
 type Entry = { item: PortfolioWorkItem; group: string; number: number };
 
+const captionOf = (item: PortfolioWorkItem) => (item.kind === "image" ? item.caption : undefined);
+
 export function PortfolioWork({ detail, km }: { detail: PortfolioDetail; km: string }) {
   const rootRef = useRef<HTMLElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -36,7 +38,7 @@ export function PortfolioWork({ detail, km }: { detail: PortfolioDetail; km: str
   useAutoplayVideos(rootRef);
 
   const entries: Entry[] = detail.groups.flatMap((group) =>
-    group.items.map((item, index) => ({ item, group: group.title, number: index + 1 })),
+    group.items.map((item, index) => ({ item, group: captionOf(item) ?? group.title, number: index + 1 })),
   );
   const offsets = detail.groups.map((_, index) =>
     detail.groups.slice(0, index).reduce((total, group) => total + group.items.length, 0),
@@ -194,7 +196,7 @@ export function PortfolioWork({ detail, km }: { detail: PortfolioDetail; km: str
                       ) : null}
                     </span>
                     <span className="pfd-tile-meta">
-                      <span>{group.title}</span>
+                      <span>{captionOf(item) ?? group.title}</span>
                       <span>{pad(index + 1)}</span>
                     </span>
                   </button>

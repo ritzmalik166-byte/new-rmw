@@ -1,7 +1,7 @@
 import type { PortfolioTone } from "@/lib/portfolio";
 
 export type PortfolioWorkItem =
-  | { kind: "image"; src: string; alt: string; full?: string }
+  | { kind: "image"; src: string; alt: string; full?: string; caption?: string }
   | { kind: "youtube"; src: string; alt: string; youtubeId: string }
   | { kind: "video"; video: string; alt: string };
 
@@ -41,6 +41,7 @@ export interface PortfolioDetail {
   faqTitle: [string, string];
   faqs: { q: string; a: string }[];
   closing: string;
+  closingLede?: string;
 }
 
 const range = (from: number, to: number) => Array.from({ length: to - from + 1 }, (_, index) => from + index);
@@ -346,17 +347,26 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
       ],
     },
     h1: ["Web Design", "Portfolio"],
-    tagline: "Designing experiences & building presence with Website Design",
+    tagline: "Fast, responsive websites built for real brands",
     workTitle: "Our Website Design Projects",
+    workLede: "Real websites for real brands. Tap any project to see it up close.",
     groups: [
       {
         title: "Website Design",
         aspect: "4 / 5",
-        items: range(1, 6).map((number) => ({
+        items: [
+          ["My Property Fact", "Real estate portal"],
+          ["Saya Homes", "Real estate developer website"],
+          ["Nova Vista Education", "Education website"],
+          ["Contenaissance", "AI creative studio website"],
+          ["Eldeco La Vida Bella", "Real estate project website"],
+          ["India Forbes Global Properties", "Luxury real estate website"],
+        ].map(([client, type], index) => ({
           kind: "image" as const,
-          src: `/portfolio/web-design/site-${number}.jpg`,
-          full: `/portfolio/web-design/site-${number}-full.jpg`,
-          alt: `Website design project ${number} by Ritz Media World`,
+          src: `/portfolio/web-design/site-${index + 1}.jpg`,
+          full: `/portfolio/web-design/site-${index + 1}-full.jpg`,
+          alt: `${client} website designed by Ritz Media World`,
+          caption: `${client} · ${type}`,
         })),
       },
     ],
@@ -379,7 +389,29 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
           { title: "Launch & Grow", copy: "We launch, track performance and keep improving the site." },
         ],
       },
-      WHY_RMW,
+      {
+        title: WHY_RMW.title,
+        kicker: "Why Choose Us",
+        kind: "cards",
+        items: [
+          {
+            title: "Built by marketers, not just developers",
+            copy: "Every page, button, and form is designed to win enquiries, because we also run the ads and SEO that bring visitors in.",
+          },
+          {
+            title: "Mobile-first by default",
+            copy: "Every website is designed for phones first, then tested on tablets and desktops.",
+          },
+          {
+            title: "SEO-ready from day one",
+            copy: "Clean structure, fast loading, and search-friendly pages, so your website is ready to rank from launch.",
+          },
+          {
+            title: "One team, from design to launch",
+            copy: "Design, content, development, and SEO are handled under one roof, so nothing gets lost between teams.",
+          },
+        ],
+      },
     ],
     faqTitle: ["Questions about", "website design."],
     faqs: [
@@ -396,11 +428,20 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
         a: "A landing page can go live in one to two weeks. A full corporate website usually takes four to eight weeks, depending on pages and features.",
       },
       {
+        q: "How much does website design cost?",
+        a: "The cost depends on the number of pages, the features you need, and the platform, such as WordPress, Shopify, or a custom build. We share a clear quote after understanding your requirements.",
+      },
+      {
+        q: "Do you design real estate project websites?",
+        a: "Yes. We design real estate project websites with floor plans, amenities, location details, galleries, and lead forms, built to turn property searches into site-visit enquiries.",
+      },
+      {
         q: "Do you help with SEO and content?",
         a: "Yes. We build sites with SEO best practices and our content team can write pages that rank and convert.",
       },
     ],
     closing: "Let's Build Your Website",
+    closingLede: "Planning a new website or a redesign? Let's build one that brings in enquiries.",
   },
   {
     slug: "brand-films",
