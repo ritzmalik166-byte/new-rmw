@@ -104,7 +104,7 @@ function FieldIcon({ name }: { name: "user" | "mail" | "phone" | "tag" | "doc" |
   );
 }
 
-export function StartProject() {
+export function StartProject({ cta }: { cta?: string } = {}) {
   const data = site.startProject;
   const formRef = useRef<HTMLFormElement>(null);
   const [captchaArmed, setCaptchaArmed] = useState(false);
@@ -336,7 +336,7 @@ export function StartProject() {
             </div>
 
             <button className="audit-submit" type="submit" disabled={status === "submitting"}>
-              {status === "submitting" ? "Sending..." : data.cta}
+              {status === "submitting" ? "Sending..." : (cta ?? data.cta)}
               <svg viewBox="0 0 20 14" aria-hidden>
                 <path
                   d="M1 9.5h8.2v2.2H1V9.5Zm8.6-1.2 2.2-2.6h5.4l1.6 2.6H9.6Zm1.2 1.2h2.4v1.6h-2.4V9.5Zm6.2 0H18v1.6h-1v-1.6Z"

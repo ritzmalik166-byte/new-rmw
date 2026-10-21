@@ -61,7 +61,7 @@ export default async function PortfolioDetailPage({ params }: { params: Promise<
         title={splitTitle(detail.closing)}
         lede={detail.closingLede ?? "Have a project in mind? Let's bring your brand's creative vision to life."}
       />
-      <StartProject />
+      <StartProject cta={detail.formCta} />
     </article>
   );
 }

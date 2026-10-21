@@ -2,7 +2,7 @@ import type { PortfolioTone } from "@/lib/portfolio";
 
 export type PortfolioWorkItem =
   | { kind: "image"; src: string; alt: string; full?: string; caption?: string }
-  | { kind: "youtube"; src: string; alt: string; youtubeId: string }
+  | { kind: "youtube"; src: string; alt: string; youtubeId: string; caption?: string }
   | { kind: "video"; video: string; alt: string };
 
 export interface PortfolioWorkGroup {
@@ -42,6 +42,8 @@ export interface PortfolioDetail {
   faqs: { q: string; a: string }[];
   closing: string;
   closingLede?: string;
+  /** Replaces the default submit label on the "Start a project" form. */
+  formCta?: string;
 }
 
 const range = (from: number, to: number) => Array.from({ length: to - from + 1 }, (_, index) => from + index);
@@ -460,19 +462,27 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
       {
         title: "Brand Films",
         aspect: "4 / 5",
-        items: youtube(
-          "brand-films",
-          "film",
-          ["iiEgYU72mWg", "X-i-iN7urcM", "OT4Dc214r3Q", "-ih5T6UnZBw", "Lp3i_u7O79o", "a1Q9U0ezsyQ"],
-          "Brand film",
-        ),
+        items: [
+          ["iiEgYU72mWg", "The Power of AI Storytelling", "AI storytelling and generative content brand film"],
+          ["X-i-iN7urcM", "Not Just Content. Impact.", "Brand film on creating marketing impact"],
+          ["OT4Dc214r3Q", "Client vs Creativity", "Client vs Creativity comedy sketch film"],
+          ["-ih5T6UnZBw", "Built Different", "Built Different official music video"],
+          ["Lp3i_u7O79o", "One Vision, Many Solutions", "One Vision, Many Solutions brand film for RMW Sky Baazaar"],
+          ["a1Q9U0ezsyQ", "Black or White, Reimagined with AI", "Black or White reimagined with AI video"],
+        ].map(([youtubeId, caption, description], index) => ({
+          kind: "youtube" as const,
+          src: `/portfolio/brand-films/film-${index + 1}.jpg`,
+          alt: `${description} by Ritz Media World`,
+          youtubeId,
+          caption,
+        })),
       },
     ],
     intro: {
       title: "Creating Powerful Brand Stories Through Film",
       copy: [
         "A great brand film makes people feel something about your brand. We write, shoot and edit films that tell your story with emotion and clarity, and give audiences a reason to remember you.",
-        "Combining classic production with AI-powered video tools, we create cinematic films faster and for every screen your buyers watch, from TV and YouTube to Reels and WhatsApp.",
+        "By combining classic production with AI-powered video tools, we create cinematic films faster and in every format your audience watches, from YouTube and your website to Instagram Reels and WhatsApp.",
       ],
     },
     blocks: [
@@ -515,12 +525,11 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
         title: "Brand Films for Every Industry",
         kind: "chips",
         items: [
-          { title: "Corporate & Professional Brands" },
-          { title: "Hospitality & Tourism" },
           { title: "Real Estate" },
-          { title: "Retail & E-commerce" },
+          { title: "Healthcare" },
           { title: "Education" },
-          { title: "Lifestyle & Consumer Brands" },
+          { title: "Retail & E-commerce" },
+          { title: "Corporate" },
         ],
       },
     ],
@@ -529,6 +538,10 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
       {
         q: "What is a brand film?",
         a: "A brand film is a short video that tells the story of your brand: what you believe, who you serve and why it matters. It focuses on emotion and connection rather than a hard sell.",
+      },
+      {
+        q: "What is AI-powered video production?",
+        a: "AI-powered video production uses AI tools alongside traditional filming and editing to create visuals, extend scenes, and speed up post-production. It helps deliver high-quality films faster, especially for short promos and social media formats.",
       },
       {
         q: "Why does a business need a brand film?",
@@ -551,7 +564,9 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
         a: "Watch their past work, check that they understand your industry and ask about their process. Ritz Media World handles strategy, production and distribution end to end.",
       },
     ],
-    closing: "Let's Create Something Your Brand Will Be Known For",
+    closing: "Let's Make a Film Your Audience Remembers",
+    closingLede: "Have a story to tell? Let's bring it to the screen.",
+    formCta: "Get My Free Consultation",
   },
   {
     slug: "walk-through-videos",
