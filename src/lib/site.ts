@@ -262,48 +262,47 @@ export const site = {
     title: "Testimonials",
     items: [
       {
-        role: "Managing Director",
-        company: "Eldeco Group",
+        role: "GHD Infra",
+        company: "SEO, Creative, Social Media & Paid Campaigns",
+        industry: "Real Estate",
+        quote:
+          "We’ve had a great experience working with the team on our digital marketing needs. From SEO and creative designs to social media management and paid campaigns, they have been supportive, responsive, and committed to our goals. Their efforts have helped us strengthen our online presence and promote our real estate projects in Goa.",
+      },
+      {
+        role: "Eldeco Group",
+        company: "Lead Generation",
         industry: "Real Estate",
         photo: "/s8/51e3ade5d235d3158f1e504c1ea3497f09c9d0c9.jpg",
         quote:
-          "They not only make sure that they deliver on their promises, but also educate you on what exactly is needed to be done for your brand, thereby preventing you from under or over spending your precious money.",
+          "We’ve had a positive experience working with the team on lead generation for Eldeco Group. They understood our real estate business needs and focused on reaching potential homebuyers through targeted campaigns. Their efforts have helped us connect with relevant audiences and generate enquiries for our property projects.",
       },
-      // SAMPLE COPY: replace the entries below with real, approved client testimonials.
       {
-        role: "Head of Marketing",
-        company: "Real Estate Developer, Noida",
+        role: "ONYX by Splendor",
+        company: "Lead Generation, Creative & Social Media",
+        industry: "Commercial Real Estate",
+        quote:
+          "The team has supported us in promoting ONYX by Splendor through lead generation, creative design, and social media marketing. Their work has helped us showcase the project’s commercial spaces, share updates across social platforms, and reach potential investors and businesses looking for commercial property in Noida.",
+      },
+      {
+        role: "Exotica Housing",
+        company: "Lead Generation",
         industry: "Real Estate",
         quote:
-          "From the launch film to the hoardings and the lead campaigns, one team owned the whole project. Site visits picked up within the first month, and every rupee was accounted for in the weekly review.",
+          "The team has been helpful in promoting Exotica Housing’s residential projects through lead generation campaigns. They focused on reaching potential homebuyers interested in properties across Delhi-NCR and understood our project requirements well. We appreciate their efforts in bringing relevant enquiries and supporting our property marketing goals.",
       },
       {
-        role: "Admissions Head",
-        company: "K-12 School Group",
-        industry: "Education",
+        role: "Renox Group",
+        company: "Lead Generation",
+        industry: "Real Estate",
         quote:
-          "Radio, print and digital all told the same story during admission season. The team planned the media around our counselling calendar and the enquiries came in exactly when we could handle them.",
+          "We’ve had a great experience working with the team on lead generation for our real estate projects. They understood our business needs and helped us reach potential homebuyers through targeted campaigns. Their approach has supported our efforts to generate enquiries and connect with people interested in our properties.",
       },
       {
-        role: "Founder",
-        company: "D2C Lifestyle Brand",
-        industry: "E-commerce",
+        role: "Vedvan",
+        company: "Creative Design & Social Media",
+        industry: "Wellness Living",
         quote:
-          "Sharp creatives, honest numbers and no jargon. They cut the campaigns that were not working within days and doubled down on the ones that were, which is rare for an agency.",
-      },
-      {
-        role: "Business Head",
-        company: "Industrial Manufacturer",
-        industry: "Manufacturing",
-        quote:
-          "We came in with a dated catalogue and left with a brand our dealers are proud to show. The new website and trade-show material started conversations we were never able to start before.",
-      },
-      {
-        role: "Co-founder",
-        company: "Early-stage Fintech Startup",
-        industry: "Startups",
-        quote:
-          "They treated our small launch budget like it was their own. The identity, the launch video and the first performance campaigns were delivered on time and felt bigger than what we paid for.",
+          "The team has done an impressive job supporting Vedvan’s brand through creative design and social media marketing. They understood our vision of nature-inspired, wellness-focused living and helped communicate it through engaging visuals and content. We appreciate their creative approach and efforts in presenting Vedvan’s unique lifestyle concept to the right audience.",
       },
     ] as Testimonial[],
   },

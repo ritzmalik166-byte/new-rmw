@@ -11,8 +11,9 @@ const AUTO_MS = 7000;
 const TONES = ["#c9356e", "#e4532a", "#167a7d", "#1b1a4a", "#1457a8", "#d9333f"];
 
 function initials(review: Testimonial) {
-  return review.industry
+  return review.role
     .split(/[\s-]+/)
+    .filter((word) => !/^(by|of|the)$/i.test(word))
     .map((word) => word.charAt(0))
     .join("")
     .slice(0, 2)
