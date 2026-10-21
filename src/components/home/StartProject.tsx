@@ -211,9 +211,9 @@ export function StartProject() {
 
           <div className="audit-truck">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={site.highways.truck} alt="Ritz Media World truck carrying a Free SEO Audit billboard" width={961} height={615} />
+            <img src={site.highways.truck} alt="Ritz Media World truck carrying a Free Consultation billboard" width={961} height={615} />
             <p className="audit-billboard">
-              <strong>Free SEO Audit</strong>
+              <strong>Free Consultation</strong>
               <span>Ritz Media World</span>
             </p>
           </div>

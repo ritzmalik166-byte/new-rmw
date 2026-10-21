@@ -54,7 +54,7 @@ export function HomeFaq({
             <p className="hm-faq-help-kicker">Dispatch office</p>
             <p className="hm-faq-help-title">Road not on the map?</p>
             <p className="hm-faq-help-copy">
-              Ask the dispatcher and The right person from our Noida team will call you back within one
+              Ask the dispatcher and the right person from our Noida team will call you back within one
               working day.
             </p>
             <ul className="hm-faq-help-list">

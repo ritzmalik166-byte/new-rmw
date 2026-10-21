@@ -578,13 +578,34 @@
   box-shadow: 3px 3px 0 var(--hm-ink);
 }
 
-.pfd-chip:nth-child(3n + 1) {
+.pfd-chip:nth-child(5n + 1) {
   background: var(--hm-yellow);
+}
+
+.pfd-chip:nth-child(5n + 2) {
+  --chip-fg: #fff;
+  background: var(--hm-pink);
+}
+
+.pfd-chip:nth-child(5n + 3) {
+  --chip-fg: #fff;
+  background: var(--hm-teal);
+}
+
+.pfd-chip:nth-child(5n + 4) {
+  --chip-fg: #fff;
+  background: var(--hm-orange);
+}
+
+.pfd-chip:nth-child(5n + 5) {
+  --chip-fg: #fff;
+  background: var(--hm-ink);
+  box-shadow: 3px 3px 0 var(--hm-yellow);
 }
 
 .pfd-chip h3 {
   margin: 0;
-  color: var(--hm-ink);
+  color: var(--chip-fg, var(--hm-ink));
   font-family: var(--hm-serif);
   font-size: clamp(16px, 1.3vw, 19px);
   font-weight: 700;

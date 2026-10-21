@@ -110,13 +110,30 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
         "Ritz Media World is a brand identity design agency in India offering logo design, visual identity and complete branding solutions for businesses.",
     },
     h1: ["Brand Identity", "Design Agency"],
-    tagline: "Crafting identities & shaping stories with Custom Logo Design",
+    tagline: "Custom logos and brand identities that stay remembered",
     workTitle: "Our Brand Identity Design Portfolio",
     groups: [
       {
         title: "Brand Identity",
         aspect: "4 / 5",
-        items: images("brand-identity", "logo", range(1, 12), "Client brand identity"),
+        items: [
+          "Numax Civil Lines",
+          "Kinza Estate",
+          "Ashtech Presidential Towers",
+          "Opal County",
+          "Shubh Anandam",
+          "VVIP Madhuban",
+          "Lumora Estates",
+          "Pincode Infra",
+          "Gulshan Empire, Wave City",
+          "GXP Goa Expressway",
+          "Pincode Infra",
+          "Highway Greens by Kinza Estate",
+        ].map((client, index) => ({
+          kind: "image" as const,
+          src: `/portfolio/brand-identity/logo-${index + 1}.jpg`,
+          alt: `${client} logo and brand identity by Ritz Media World`,
+        })),
       },
     ],
     intro: {
@@ -131,12 +148,24 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
         title: "Our Brand Identity Design Services",
         kind: "cards",
         items: [
-          { title: "Logo Design", copy: "Distinctive, timeless logos built on an idea, not a trend." },
-          { title: "Brand Strategy", copy: "Positioning, personality and messaging that set you apart." },
-          { title: "Visual Identity Design", copy: "A complete visual language: marks, patterns, imagery and layouts." },
+          {
+            title: "Logo Design",
+            copy: "Distinctive, timeless logos built on an idea, not a trend, and designed to work at every size.",
+          },
+          {
+            title: "Brand Strategy",
+            copy: "Positioning, personality, and messaging that set your brand apart from competitors.",
+          },
+          {
+            title: "Visual Identity Design",
+            copy: "A complete visual language, including marks, patterns, imagery and layouts.",
+          },
           { title: "Brand Guidelines", copy: "Clear rules so every team and vendor uses your brand correctly." },
-          { title: "Typography & Color Palette", copy: "Type and colour choices that carry your brand's personality." },
-          { title: "Marketing & Brand Collateral", copy: "Stationery, brochures, signage and social templates that match." },
+          { title: "Typography & Colour Palette", copy: "Type and colour choices that carry your brand's personality." },
+          {
+            title: "Marketing & Brand Collateral",
+            copy: "Stationery, brochures, signage and social templates that match your identity.",
+          },
         ],
       },
       {
@@ -166,11 +195,11 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
         title: "Industries We Serve",
         kind: "chips",
         items: [
-          { title: "Hospitality & Restaurants" },
-          { title: "Beauty & Wellness" },
           { title: "Real Estate" },
+          { title: "Healthcare" },
           { title: "Education" },
           { title: "Retail & E-commerce" },
+          { title: "Startups" },
         ],
       },
     ],
@@ -187,6 +216,10 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
       {
         q: "How much does brand identity design cost in India?",
         a: "Cost depends on the scope, from a logo refresh to a complete identity system with guidelines and collateral. Share your requirements and we will send a clear, itemised proposal.",
+      },
+      {
+        q: "How much does logo design cost?",
+        a: "The cost of logo design depends on the number of concepts, revisions, and the files and formats you need. A logo can be designed on its own or as part of a complete brand identity package, and we share a clear quote after understanding your brief.",
       },
       {
         q: "How long does the brand identity design process take?",

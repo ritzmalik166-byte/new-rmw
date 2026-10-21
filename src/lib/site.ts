@@ -443,7 +443,7 @@ export const site = {
   },
   startProject: {
     kicker: "Start a Project",
-    title: "Get A Free SEO And Digital Audit For Your Brand",
+    title: "Get a Free Consultation for Your Brand",
     formTitle: "Shuru Karein – It's Free",
     cta: "Get My Free Audit",
     pills: ["Branding", "SEO", "Social Media", "Performance"],
@@ -462,7 +462,7 @@ export const site = {
   footer: {
     title: ["Have a", "destination", "in", "mind?"],
     blurb:
-      "Ritz Media World is an independent creative, branding, digital and media agency, founded in 2008 and based in Noida, Delhi NCR.",
+      "Ritz Media World is a creative, branding, digital, and media agency, founded in 2008 and based in Noida, Delhi NCR.",
     address: "402–404, 4th Floor, Corporate Park, Tower A1, Sector 142, Noida 201305",
     email: "info@ritzmediaworld.com",
     phones: ["+91 7290002168"],
