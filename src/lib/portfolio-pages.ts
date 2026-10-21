@@ -32,7 +32,9 @@ export interface PortfolioDetail {
   seo: { title: string; description: string; keywords?: string[] };
   h1: [string, string];
   tagline: string;
-  workTitle: string;
+  workTitle: PortfolioTitle;
+  /** Replaces the default "N pieces made for real brands" line beside the work title. */
+  workLede?: string;
   groups: PortfolioWorkGroup[];
   intro: { title: PortfolioTitle; copy: string[] };
   blocks: PortfolioBlock[];
@@ -247,25 +249,26 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
         "Explore Ritz Media World's creative design portfolio featuring branding, graphic design, print, OOH, social media and brochure designs that inspire.",
     },
     h1: ["Creative Design", "Portfolio"],
-    tagline: "Bringing ideas to life & shaping bold brands with Creative Design",
-    workTitle: "Creative Design Portfolio",
+    tagline: "Hoardings, print ads, and social creatives that get noticed.",
+    workTitle: ["Five formats", "70 pieces."],
+    workLede: "Stationery · Hoardings · Print Ads · Social Media · Brochures",
     groups: [
-      { title: "Stationery Creative", aspect: "4 / 5", items: images("creative", "stationery", range(1, 14), "Stationery creative") },
+      { title: "Stationery", aspect: "4 / 5", items: images("creative", "stationery", range(1, 14), "Stationery design") },
       {
-        title: "OOH Creative",
+        title: "Hoardings",
         aspect: "4 / 5",
-        items: images("creative", "ooh", [...range(1, 12), ...range(15, 19)], "OOH creative"),
+        items: images("creative", "ooh", [...range(1, 12), ...range(15, 19)], "Hoarding design"),
       },
-      { title: "Print Creative", aspect: "4 / 5", items: images("creative", "print", range(1, 12), "Print creative") },
+      { title: "Print Ads", aspect: "4 / 5", items: images("creative", "print", range(1, 12), "Print ad design") },
       {
-        title: "Social Media Creative",
+        title: "Social Media",
         aspect: "4 / 5",
         items: images("creative", "social", range(1, 21), "Social media creative"),
       },
-      { title: "Brochure Creative", aspect: "4 / 5", items: images("creative", "brochure", range(1, 6), "Brochure creative") },
+      { title: "Brochures", aspect: "4 / 5", items: images("creative", "brochure", range(1, 6), "Brochure design") },
     ],
     intro: {
-      title: "Our Creative Design Work",
+      title: ["Made to be noticed,", "Built to be Remembered."],
       copy: [
         "Great creative stops people mid-scroll, mid-drive and mid-page. Our designers turn your message into visuals that get noticed, get remembered and get people to act.",
         "From stationery and brochures to highway hoardings, newspaper ads and social media campaigns, every piece is designed for the place it will live and the people who will see it.",
@@ -276,13 +279,24 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
         title: "What we design",
         kind: "cards",
         items: [
-          { title: "Branding & Visual Identity", copy: "Logos, identity systems and brand assets with one clear voice." },
-          { title: "Graphic Design", copy: "Campaign key visuals, posters, packaging and marketing material." },
-          { title: "Print & OOH Design", copy: "Newspaper ads, hoardings, unipoles and transit media that read in seconds." },
+          { title: "Hoarding Design", copy: "Hoardings, unipoles, and transit media designed to be read in seconds." },
+          { title: "Print Ad Design", copy: "Newspaper and magazine ads that win attention on a crowded page." },
           { title: "Social Media Creatives", copy: "Feed posts, stories and campaign creatives built for engagement." },
+          {
+            title: "Brochure Design",
+            copy: "Brochures and sales kits that tell your story clearly and look premium in hand.",
+          },
+          {
+            title: "Stationery & Brand Collateral",
+            copy: "Visiting cards, letterheads, and collateral that keep your brand consistent.",
+          },
+          {
+            title: "Packaging & Key Visuals",
+            copy: "Packaging and campaign key visuals that tie every format together.",
+          },
         ],
       },
-      WHY_RMW,
+      { ...WHY_RMW, kicker: "Why Choose Us" },
     ],
     faqTitle: ["Questions about", "creative design."],
     faqs: [
@@ -301,6 +315,14 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
       {
         q: "Can you work with our existing brand guidelines?",
         a: "Absolutely. We work within your guidelines, or help you build them if you don't have any yet.",
+      },
+      {
+        q: "Do you design hoardings and outdoor ads?",
+        a: "Yes. We design hoardings, unipoles, bus shelters, and transit media, sized and laid out so the message reads clearly from a distance and in a few seconds.",
+      },
+      {
+        q: "How much do creative design services cost?",
+        a: "The cost depends on the number of creatives, formats, and adaptations. A single creative costs less than a full campaign across print, outdoor and social, and we share a clear quote after understanding your brief.",
       },
     ],
     closing: "Let's Create Something Your Brand Will Be Known For",

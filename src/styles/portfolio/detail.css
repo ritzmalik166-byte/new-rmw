@@ -132,9 +132,12 @@
 }
 
 .pfd-group-nav {
+  --nav-top: 10px;
+
   position: sticky;
-  top: 84px;
+  top: var(--nav-top);
   z-index: 5;
+  transition: top 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   display: flex;
   gap: 8px;
   margin: 0 0 clamp(28px, 4vw, 44px);
@@ -150,8 +153,9 @@
 
 .pfd-group-nav a {
   display: inline-flex;
-  flex: 0 0 auto;
+  flex: 1 0 auto;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 8px 14px;
   border-radius: 999px;
@@ -172,13 +176,25 @@
   color: var(--tone);
 }
 
-.pfd-group-nav a:hover {
+/* Sit below the stuck site header while it is showing; hug the top once it hides. */
+body:has(.site-header.is-stuck:not(.is-hidden)) .pfd-group-nav {
+  --nav-top: 84px;
+}
+
+.pfd-group-nav a:hover,
+.pfd-group-nav a.is-active {
   background: var(--hm-navy);
   color: #fff;
 }
 
-.pfd-group-nav a:hover span {
+.pfd-group-nav a:hover span,
+.pfd-group-nav a.is-active span {
   color: var(--hm-yellow);
+}
+
+/* PortfolioWork offsets group jumps itself, around the sticky bar. */
+.pf-page .pfd-group {
+  scroll-margin-top: 0;
 }
 
 .pfd-group + .pfd-group {
