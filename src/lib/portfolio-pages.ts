@@ -60,12 +60,25 @@ export interface PortfolioDetail {
 
 const range = (from: number, to: number) => Array.from({ length: to - from + 1 }, (_, index) => from + index);
 
-const images = (folder: string, prefix: string, numbers: number[], label: string): PortfolioWorkItem[] =>
-  numbers.map((number, index) => ({
-    kind: "image",
-    src: `/portfolio/${folder}/${prefix}-${number}.jpg`,
-    alt: `${label} ${index + 1} by Ritz Media World`,
-  }));
+/** `clients` lines up with `numbers`; a `null` entry keeps the generic label for that piece. */
+const images = (
+  folder: string,
+  prefix: string,
+  numbers: number[],
+  label: string,
+  clients: (string | null)[] = [],
+): PortfolioWorkItem[] =>
+  numbers.map((number, index) => {
+    const client = clients[index];
+    return {
+      kind: "image",
+      src: `/portfolio/${folder}/${prefix}-${number}.jpg`,
+      alt: client
+        ? `${client} ${label.toLowerCase()} by Ritz Media World`
+        : `${label} ${index + 1} by Ritz Media World`,
+      ...(client ? { caption: client } : {}),
+    };
+  });
 
 /** Each film is `[youtubeId, caption, alt]`; thumbnails are numbered in the same order. */
 const youtube = (folder: string, prefix: string, films: [string, string, string][]): PortfolioWorkItem[] =>
@@ -295,20 +308,103 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
       {
         title: "Stationery",
         aspect: "4 / 5",
-        items: images("creative", "stationery", range(1, 14), "Stationery design"),
+        items: images("creative", "stationery", range(1, 14), "Stationery design", [
+          "Lumora Estates",
+          "Pincode Infra",
+          "Gulshan Empire, Wave City",
+          null,
+          "Blanco Thornton",
+          "Mirage",
+          "Highway Greens",
+          "Kinza Estate",
+          "Highway Greens",
+          "Kinza Estate",
+          "Highway Greens",
+          "Fairfox",
+          "Highway Greens",
+          "Highway Greens",
+        ]),
       },
       {
         title: "Hoardings",
         aspect: "4 / 5",
-        items: images("creative", "ooh", [...range(1, 12), ...range(15, 19)], "Hoarding design"),
+        items: images("creative", "ooh", [...range(1, 12), ...range(15, 19)], "Hoarding design", [
+          "Fab Luxe",
+          "RudraDhara",
+          "GHD Group, Goa",
+          "Ashtech Presidential Towers",
+          "Gulshan Group",
+          "Onyx by Splendor",
+          "Onyx by Splendor, Zewar Lane",
+          "Highway Greens",
+          "Highway Greens",
+          "North Wind Estates",
+          "Gulshan Empire, Wave City",
+          "Lumora Estates × Avacasa",
+          "Renox Thrive",
+          "Risland Sky Mansion",
+          "Risland Sky Mansion",
+          "Risland Sky Mansion",
+          "Navrang Square by Renox Group",
+        ]),
       },
-      { title: "Print Ads", aspect: "4 / 5", items: images("creative", "print", range(1, 12), "Print ad design") },
+      {
+        title: "Print Ads",
+        aspect: "4 / 5",
+        items: images("creative", "print", range(1, 12), "Print ad design", [
+          "Ashtech",
+          "Ashtech Presidential Towers",
+          "Gulshan Group",
+          "Ashtech Presidential Towers",
+          "Lumora Estates × Avacasa",
+          "Continuuance",
+          "GHD Group, Goa",
+          "GHD Group, Goa",
+          "Gulshan Group",
+          "Gulshan Empire, Wave City",
+          "Veridia",
+          "Veridia",
+        ]),
+      },
       {
         title: "Social Media",
         aspect: "4 / 5",
-        items: images("creative", "social", range(1, 21), "Social media creative"),
+        items: images("creative", "social", range(1, 21), "Social media creative", [
+          "Roots Courtyard 2",
+          "Lumora Estates × Avacasa",
+          "Onyx by Splendor",
+          "Fab Luxe",
+          "Gulshan Group",
+          "Grace Resilviaa",
+          "Highway Greens",
+          null,
+          "Highway Greens",
+          "Highway Greens",
+          "Highway Greens",
+          "Highway Greens",
+          "GHD Group, Goa",
+          "Highway Greens",
+          "Highway Greens",
+          null,
+          null,
+          null,
+          null,
+          "Renox Thrive",
+          "Renox Thrive",
+        ]),
       },
-      { title: "Brochures", aspect: "4 / 5", items: images("creative", "brochure", range(1, 6), "Brochure design") },
+      {
+        title: "Brochures",
+        aspect: "4 / 5",
+        items: images("creative", "brochure", range(1, 6), "Brochure design", [
+          "Kingsun",
+          null,
+          "KB Mart",
+          "Aangan",
+          "Gulshan Empire, Wave City",
+          "Anantram",
+        ]),
+      },
     ],
     intro: {
       title: ["Made to be noticed,", "Built to be Remembered."],
