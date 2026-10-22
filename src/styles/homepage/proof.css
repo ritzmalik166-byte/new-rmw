@@ -9,7 +9,8 @@
 .hm-proof-inner {
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  /* Outer 1fr tracks centre the "KM 04" + label + heading group; stats span all four. */
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, auto) minmax(0, 1fr);
   align-items: center;
   column-gap: clamp(32px, 6vw, 96px);
   width: min(1440px, 100%);
@@ -23,12 +24,12 @@
 }
 
 .hm-proof .hm-kicker {
-  grid-column: 2;
+  grid-column: 3;
   grid-row: 1;
 }
 
 .hm-proof .hm-title {
-  grid-column: 2;
+  grid-column: 3;
   grid-row: 2;
 }
 
@@ -38,7 +39,7 @@
 }
 
 .hm-proof-index {
-  grid-column: 1;
+  grid-column: 2;
   grid-row: 2;
   margin: 0;
   color: var(--hm-gold);
@@ -122,7 +123,7 @@
 
 @media (max-width: 1100px) {
   .hm-proof-badge {
-    grid-column: 2;
+    grid-column: 3;
     justify-self: start;
   }
 

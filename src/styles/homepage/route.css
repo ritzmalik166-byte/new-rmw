@@ -53,7 +53,8 @@
   flex-direction: column;
   align-items: center;
   width: 96px;
-  translate: -50% 0;
+  /* Centre on --at with a margin: the CSS minifier drops `translate` next to `transform`. */
+  margin-left: -48px;
   opacity: 0.4;
   transform: translateY(10px) scale(0.92);
   transform-origin: 50% 100%;
@@ -109,6 +110,30 @@
   font-size: 17px;
   font-weight: 700;
   line-height: 1;
+}
+
+/* KM 0: compact start marker at the left edge of the road (no stop card). */
+.hm-stone.is-start {
+  width: 64px;
+  margin-left: 0;
+}
+
+.hm-stone.is-start .hm-stone-body {
+  height: 78px;
+  padding-bottom: 10px;
+  border-radius: 32px 32px 5px 5px;
+}
+
+.hm-stone.is-start::after {
+  width: 76px;
+}
+
+.hm-stone.is-start .hm-stone-km {
+  top: 12px;
+}
+
+.hm-stone.is-start .hm-stone-name {
+  font-size: 14px;
 }
 
 /* ---------- Road (full-bleed, same strip as the contact page) ---------- */
@@ -301,29 +326,37 @@
     height: 92px;
   }
 
-  .hm-stone {
+  /* Cards stack here, so the four stones share the road evenly. */
+  .hm-stone,
+  .hm-stone.is-start {
+    left: calc(var(--at-m, var(--at)) * 100%);
     width: 68px;
+    margin-left: -34px;
   }
 
-  .hm-stone-body {
+  .hm-stone-body,
+  .hm-stone.is-start .hm-stone-body {
     height: 76px;
     padding-bottom: 10px;
     border-width: 2.5px;
     border-radius: 34px 34px 5px 5px;
   }
 
-  .hm-stone::after {
-    width: 84px;
+  .hm-stone::after,
+  .hm-stone.is-start::after {
+    width: 76px;
     height: 8px;
     border-width: 2.5px;
   }
 
-  .hm-stone-km {
+  .hm-stone-km,
+  .hm-stone.is-start .hm-stone-km {
     top: 11px;
     font-size: 8px;
   }
 
-  .hm-stone-name {
+  .hm-stone-name,
+  .hm-stone.is-start .hm-stone-name {
     font-size: 13px;
   }
 }

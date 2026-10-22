@@ -31,7 +31,7 @@ export function HomeIntro() {
         <div className="hm-intro-copy">
           <p data-hm-fade className="hm-kicker">
             <span className="hm-pill">Who&rsquo;s driving</span>
-            <span>Since 2008 · Noida UP16</span>
+            <span>KM 01 · Since 2008 · Noida UP16</span>
           </p>
           <HmTitle id="hm-intro-title" lines={TITLE} />
           <p data-hm-fade className="hm-lede">

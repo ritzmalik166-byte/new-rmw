@@ -32,9 +32,10 @@
   box-shadow: 6px 6px 0 var(--hm-ink);
 }
 
+/* Blog covers are 1200×628 with a corner logo; match that ratio so nothing is cropped. */
 .hm-post-media {
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 1200 / 628;
   overflow: hidden;
   border-bottom: 2px solid var(--hm-ink);
   background: #eee9df;
@@ -45,11 +46,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.8s var(--hm-ease);
-}
-
-.hm-post:hover .hm-post-media img {
-  transform: scale(1.04);
+  object-position: center top;
 }
 
 .hm-post-body {
@@ -157,7 +154,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .hm-post,
-  .hm-post-media img,
   .hm-post-go {
     transition: none;
   }
