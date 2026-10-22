@@ -61,6 +61,12 @@ const WORK = {
     caption: "See It Differently: truck art scaled up to a highway hoarding.",
     fit: "contain",
   },
+  skyMansion: {
+    src: "/s5/risland-sky-mansion-billboard.webp",
+    alt: "Risland Sky Mansion highway billboard: Now, private living rises above the city",
+    medium: "Outdoor",
+    caption: "Risland Sky Mansion: a skyline launch, scaled up to a highway billboard.",
+  },
   billboard: {
     src: "/s5/digital-marketing.jpg",
     alt: "See It Differently billboard with a Ritz Media World truck and a woman holding a magnifying glass",
@@ -183,7 +189,7 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
     badge: ["Fresh", "off studio"],
     scene: { ...WORK.safarChai, medium: "Big idea" },
     poster: WORK.vvipDistinctive,
-    wall: [WORK.vvipTradition, WORK.renoxThrive, WORK.forestwalk, WORK.hoarding],
+    wall: [WORK.vvipTradition, WORK.renoxThrive, WORK.forestwalk, WORK.skyMansion],
   },
   "print-advertising": {
     badge: ["Front", "page"],
