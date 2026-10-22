@@ -193,7 +193,12 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
   },
   "print-advertising": {
     badge: ["Front", "page"],
-    scene: scene("print", "Print", "Ink that stays on the table."),
+    scene: {
+      src: "/about/mile/print-veridia.jpg",
+      alt: "Veridia newspaper ads in The Times of India laid out on a dark blue table",
+      medium: "Print",
+      caption: "Ink that stays on the table.",
+    },
     poster: WORK.renoxLegacy,
     wall: [WORK.renoxLegacy, WORK.renoxThrive, WORK.hoarding, WORK.vvipDistinctive],
   },
