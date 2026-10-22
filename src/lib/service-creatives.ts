@@ -5,6 +5,8 @@ export interface ServiceCreative {
   caption: string;
   /** Screenshots and cut-outs sit inside the frame instead of filling it. */
   fit?: "contain";
+  /** Frame aspect ratio when the artwork must show edge to edge, e.g. "3 / 2". */
+  ratio?: string;
 }
 
 export interface ServiceCreativeSet {
@@ -64,6 +66,13 @@ const WORK = {
     alt: "See It Differently billboard with a Ritz Media World truck and a woman holding a magnifying glass",
     medium: "Brand campaign",
     caption: "See It Differently: same roads, new perspectives.",
+  },
+  safarChai: {
+    src: "/s5/safar-chai-branding.webp",
+    alt: "Safar Chai brand identity in truck-art style on a carry bag, tea box, poster, business cards and colour palette",
+    medium: "Brand identity",
+    caption: "Safar Chai: one truck-art identity, from sketch to shelf.",
+    ratio: "1024 / 682",
   },
   searchConsole: {
     src: "/about/proofs/laptop-search-console.webp",
@@ -172,9 +181,9 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
   },
   "creative-services": {
     badge: ["Fresh", "off studio"],
-    scene: { ...WORK.billboard, medium: "Big idea" },
+    scene: { ...WORK.safarChai, medium: "Big idea" },
     poster: WORK.vvipDistinctive,
-    wall: [WORK.renoxThrive, WORK.vvipTradition, WORK.forestwalk, WORK.hoarding],
+    wall: [WORK.vvipTradition, WORK.renoxThrive, WORK.forestwalk, WORK.hoarding],
   },
   "print-advertising": {
     badge: ["Front", "page"],

@@ -75,7 +75,10 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
 
         <div data-hm-fade className="sd-collage">
           <figure className="sd-collage-scene">
-            <div className={cn("sd-collage-media", scene.fit && "is-contain")}>
+            <div
+              className={cn("sd-collage-media", scene.fit && "is-contain")}
+              style={scene.ratio ? { aspectRatio: scene.ratio } : undefined}
+            >
               <Image
                 src={scene.src}
                 alt={scene.alt}
