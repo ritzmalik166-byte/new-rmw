@@ -77,7 +77,8 @@
   text-wrap: balance;
 }
 
-.about-mile-dot {
+.about-mile-dot::after {
+  content: ".";
   color: var(--mile-gold);
 }
 

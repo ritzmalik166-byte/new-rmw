@@ -119,7 +119,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     definitionText:
       "Digital marketing uses online channels such as search, social media, paid ads, and websites to reach customers and turn their interest into enquiries and sales.",
     fullOverview:
-      "Ritz Media World is a results-first digital marketing agency helping brands turn attention into actual business growth. Over 18 years, we have mastered every shift in the Indian digital ecosystem—from search and programmatic display to viral social content and AI search answers. We engineer campaigns with clear cost-per-lead (CPL) benchmarks, conversion rate optimization, and transparent tracking so every rupee spent delivers measurable ROI.",
+      "Ritz Media World is a results-first digital marketing agency helping brands turn attention into actual business growth. Over 18 years, we have mastered every shift in the Indian digital ecosystem, from search and programmatic display to viral social content and AI search answers. We engineer campaigns with clear cost-per-lead (CPL) benchmarks, conversion rate optimization, and transparent tracking so every rupee spent delivers measurable ROI.",
     image:
       "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=1400&q=80",
     accentColor: "#1457a8",
@@ -222,7 +222,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
           copy: "If you cannot see what actually moved enquiries, you cannot decide what to do next.",
         },
       ],
-      intentTitle: { lead: "Built to perform", accent: "Not just to post" },
+      intentTitle: { lead: "Built to perform,", accent: "Not just to post" },
       intentPoints: DIGITAL_WHY_US,
       faqs: [
         {

@@ -95,7 +95,7 @@ export function HomeRoute() {
           <div>
             <p data-hm-fade className="hm-kicker is-light">
               <span className="hm-pill">How we think</span>
-              <span>Route 02 · Every project, same road</span>
+              <span>Every project, same road</span>
             </p>
             <HmTitle id="hm-route-title" lines={TITLE} />
           </div>

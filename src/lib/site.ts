@@ -72,13 +72,13 @@ export const site = {
     ],
   },
   route: {
-    kicker: "Route 02 • How we think",
+    kicker: "How we think",
     title: ["Insight", "Idea", "Impact"],
     lede: "Every project at Ritz Media World follows the same proven road, whether it is a brand launch, an advertising campaign, or a real estate project. ",
     stops: [
       {
         name: "Insight",
-        km: "KM 0",
+        km: "KM 01",
         copy: "Every project starts with your business, audience, and market, so we find the real opportunity first.",
       },
       {
@@ -411,31 +411,31 @@ export const site = {
   about: {
     faqs: [
       {
-        q: "When was Ritz Media World founded, and by whom?",
+        q: "When Was Ritz Media World Founded, and by Whom?",
         a: "Ritz Media World was founded in August 2008 by Mr. Ritz Malik, who has led the agency ever since. He also founded Creative Thinks Media, a sister agency.",
       },
       {
-        q: "Where is Ritz Media World based?",
+        q: "Where Is Ritz Media World Based?",
         a: "Ritz Media World is headquartered in Noida, Delhi NCR, and works with brands across India.",
       },
       {
-        q: "How has Ritz Media World grown since 2008?",
+        q: "How Has Ritz Media World Grown Since 2008?",
         a: "The agency began with a mission to reimagine brand communication for India's growth markets. In 2012, it pioneered centrespread storytelling in Hindustan Times, and in 2016 it expanded into 360° digital marketing. In 2026, it introduced AI-powered 3D rendering, continuing 18 years of adapting to every major shift in Indian marketing.",
       },
       {
-        q: "What awards and recognition has Ritz Media World received?",
+        q: "What Awards and Recognition Has Ritz Media World Received?",
         a: "Ritz Media World was named Best Creative Agency (Real Estate) in Delhi NCR by Big FM in both 2024 and 2025.",
       },
       {
-        q: "What partnerships and accreditations does Ritz Media World hold?",
+        q: "What Partnerships and Accreditations Does Ritz Media World Hold?",
         a: "Ritz Media World is a Google Partner, a Meta Business Partner, a member of the Indian Newspaper Society, and a registered MSME.",
       },
       {
-        q: "What makes Ritz Media World different from other agencies?",
+        q: "What Makes Ritz Media World Different from Other Agencies?",
         a: "As an independent agency, Ritz Media World combines 18 years of experience across print, radio and digital with newer capabilities in AI and 3D. This means clients get the judgement of a long-established agency together with the speed and tools of a modern one, all from a single team.",
       },
       {
-        q: "How can I start working with Ritz Media World?",
+        q: "How Can I Start Working with Ritz Media World?",
         a: "You can reach the team through the contact form on the website, by email at info@ritzmediaworld.com, or by phone at +91 7290002168. We usually begin with a conversation about your brand's goals, followed by a free audit and a tailored plan.",
       },
     ],
@@ -464,13 +464,15 @@ export const site = {
       "Ritz Media World is a creative, branding, digital, and media agency, founded in 2008 and based in Noida, Delhi NCR.",
     address: "402–404, 4th Floor, Corporate Park, Tower A1, Sector 142, Noida 201305",
     email: "info@ritzmediaworld.com",
-    phones: ["+91 7290002168"],
+    phones: ["+91 7290002168", "+91 9220516777"],
     company: [
       { label: "Home", href: "/" },
+      { label: "Services", href: "/services" },
       { label: "Portfolio", href: "/portfolio" },
       { label: "About", href: "/about.html" },
       { label: "Blogs", href: "/blog" },
       { label: "Career", href: "/career" },
+      { label: "Contact Us", href: "/contact" },
     ],
     socials: [
       { label: "Facebook", href: "https://www.facebook.com/ritzmediaworld/" },

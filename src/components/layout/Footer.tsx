@@ -83,11 +83,11 @@ export function Footer() {
               <span className="site-footer-hindi">मंज़िल यहीं है</span>
             </p>
             <h2 className="site-footer-title">
-              <span>{data.title[0]}</span>
+              <span>{data.title[0]}</span>{" "}
               <span className="site-footer-title-row">
-                <span className="site-footer-title-accent">{data.title[1]}</span>
+                <span className="site-footer-title-accent">{data.title[1]}</span>{" "}
                 <span>{data.title[2]}</span>
-              </span>
+              </span>{" "}
               <span>{data.title[3]}</span>
             </h2>
             <p className="site-footer-blurb">{data.blurb}</p>
@@ -139,15 +139,6 @@ export function Footer() {
                 <div>
                   <h3 className="site-footer-sign-title">Connect</h3>
                   <ul className="site-footer-sign-list">
-                    <li>
-                      <TransitionLink href="/contact" className="site-footer-sign-link">
-                        <span className="site-footer-sign-arrow" aria-hidden>
-                          ↑
-                        </span>
-                        <span className="site-footer-sign-label">Contact Us</span>
-                        <span className="site-footer-sign-km">0 km</span>
-                      </TransitionLink>
-                    </li>
                     {data.socials.map((link) => (
                       <li key={link.label}>
                         <a
@@ -217,6 +208,8 @@ export function Footer() {
             Ritz
             <br />
             Media
+            <br />
+            World
           </span>
         </div>
       </div>

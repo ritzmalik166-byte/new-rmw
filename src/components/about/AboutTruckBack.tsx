@@ -91,7 +91,7 @@ export function AboutTruckBack() {
         <FadeIn className="about-tb-head">
           <p className="about-tb-kicker">UP16 · Ritz Media World 2008</p>
           <h2 id="about-tb-title" className="about-tb-title">
-            Read the back of our truck.
+            Read the Back of Our Truck.
           </h2>
         </FadeIn>
 

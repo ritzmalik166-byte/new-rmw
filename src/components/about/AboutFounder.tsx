@@ -1,7 +1,7 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap, ScrollTrigger } from "@/lib/gsap";
 
@@ -28,7 +28,7 @@ const FOUNDERS: Founder[] = [
     portrait: "/about/founder-portrait.png",
     alt: "Ritz Malik, founder of Ritz Media World since 2008",
     kicker: "Founder details & journey",
-    title: ["The visionary", "behind the wheel"],
+    title: ["The Visionary", "Behind the Wheel"],
     role: "Ritz Malik · Founder & Promoter, Ritz Media World And Creative Thinks Media",
     lede: "Mr. Ritz Malik founded Ritz Media World in August 2008 with a simple belief: brands deserve ideas built on insight, not assumption. For 18 years, he has shaped the agency's vision and creative direction, growing it into a full-service creative, digital, and media partner, and he also founded Creative Thinks Media. He believes brands win through clear, authentic storytelling.",
   },
@@ -36,7 +36,7 @@ const FOUNDERS: Founder[] = [
     portrait: "/about/cofounder-portrait.png",
     alt: "Satvinder Kaur, co-founder of Ritz Media World",
     kicker: "Co-founder details & journey",
-    title: ["The strength", "behind the studio"],
+    title: ["The Strength", "Behind the Studio"],
     role: "Satvinder Kaur · Co-Founder, Ritz Media World",
     lede: "Ms. Satvinder Kaur has co-led Ritz Media World since its earliest days, building it into a place where people do their best work. For 18 years, she has looked after the agency's people, its clients and its day-to-day running, making sure every promise becomes delivered work. She believes great work is built on trust, care and consistency.",
   },
@@ -307,10 +307,13 @@ function FounderFeature({ founder }: { founder: Founder }) {
       <div className="about-founder-copy">
         <p className="about-founder-kicker">{founder.kicker}</p>
         <h2 className="about-founder-title">
-          {founder.title.map((line) => (
-            <span key={line} className="about-founder-line">
-              <span>{line}</span>
-            </span>
+          {founder.title.map((line, index) => (
+            <Fragment key={line}>
+              {index > 0 ? " " : null}
+              <span className="about-founder-line">
+                <span>{line}</span>
+              </span>
+            </Fragment>
           ))}
         </h2>
         <p className="about-founder-role">{founder.role}</p>

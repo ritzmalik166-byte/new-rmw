@@ -45,7 +45,11 @@ export default function AboutPage() {
       <AboutJourney />
       <AboutProofs />
       <AboutFounder />
-      <HomeFaq kicker="Before you set off" faqs={site.about.faqs} />
+      <HomeFaq
+        kicker="Before you set off"
+        title={[{ text: "Common" }, { text: "Highways", accent: true }]}
+        faqs={site.about.faqs}
+      />
       <StartProject />
     </>
   );

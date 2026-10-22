@@ -43,7 +43,7 @@ const STOPS = [
   },
   {
     year: "2026",
-    title: "AI-Powered 3D Rendering at 5X",
+    title: "AI-Powered 3D Rendering at 5X Speed",
     copy: "Launched AI-powered 3D rendering that produces photorealistic visuals five times faster than before.",
     place: "below",
     at: "86%",

@@ -38,14 +38,14 @@ const ERAS = [
     alt: "A laptop showing an empty search bar on a desk at night",
   },
   {
-    name: "Social media",
+    name: "Social Media",
     short: "Social",
     line: "Brands started talking back.",
     src: "/about/mile/social.jpg",
     alt: "A hand holding a smartphone with a social feed on a city street",
   },
   {
-    name: "Performance",
+    name: "Performance Marketing",
     short: "Performance",
     line: "Every rupee tracked to a result.",
     src: "/about/mile/performance.jpg",
@@ -392,7 +392,7 @@ export function AboutMileage() {
         <div className="about-mile-copy">
           <p className="about-mile-kicker">Mile marker 18</p>
           <h2 id="about-mile-title" className="about-mile-title">
-            What 18 Years on the Road Have Taught Us<span className="about-mile-dot">.</span>
+            What 18 Years on the Road Have Taught Us<span className="about-mile-dot" aria-hidden />
           </h2>
           <p className="about-mile-lede">
             Over the years, we have worked through launches, market slowdowns, new platforms, and changing customer

@@ -89,7 +89,6 @@ export function HomeFaq({
                     aria-controls={panelId}
                     onClick={() => setOpen(isOpen ? null : index)}
                   >
-                    <span className="hm-faq-km">KM {String(index + 1).padStart(2, "0")}</span>
                     <span className="hm-faq-text">{item.q}</span>
                     <span className="hm-faq-toggle" aria-hidden />
                   </button>

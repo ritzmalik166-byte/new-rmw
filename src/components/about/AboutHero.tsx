@@ -191,10 +191,10 @@ export function AboutHero() {
             <DashFrame />
             <span>See our work</span>
           </TransitionLink>
-          <a href="#founder" className="about-btn about-btn-ink">
+          <TransitionLink href="/services" className="about-btn about-btn-ink">
             <DashFrame />
-            <span>Meet the founder</span>
-          </a>
+            <span>Explore our services</span>
+          </TransitionLink>
         </div>
       </div>
     </section>

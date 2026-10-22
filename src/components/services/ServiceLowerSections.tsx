@@ -294,7 +294,7 @@ function ServiceProof({ service, relatedServices }: ServiceLowerSectionsProps) {
         </p>
 
         <nav data-hm-fade className="sd-exits" aria-label="Related services">
-          <p className="sd-exits-label">Next exits</p>
+          <p className="sd-exits-label">Next destination</p>
           <ul>
             {relatedServices.map((related) => {
               const icon = SERVICE_ICONS[related.slug];
