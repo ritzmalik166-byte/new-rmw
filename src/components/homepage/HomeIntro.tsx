@@ -50,10 +50,12 @@ export function HomeIntro() {
 
         <aside data-hm-fade className="hm-log" aria-label="Trip log">
           <header className="hm-log-head">
-            <p className="hm-log-kicker">Trip log</p>
-            <p className="hm-log-name">Ritz Media World Roadways</p>
+            <div>
+              <p className="hm-log-kicker">Trip log</p>
+              <p className="hm-log-name">Ritz Media World Roadways</p>
+            </div>
+            <HmPlate className="hm-log-plate" />
           </header>
-          <HmPlate className="hm-log-plate" />
 
           <dl className="hm-log-grid">
             {TRIP_LOG.map((stat) => (
@@ -84,7 +86,7 @@ export function HomeIntro() {
         <div className="hm-cargo-lane">
           <div className="hm-cargo-track" aria-hidden>
             {[...partners, ...partners].map((src, index) => (
-              <span key={`${src}-${index}`} className="hm-cargo-logo">
+              <span key={`${src}-${index}`} className="hm-cargo-logo theme-keep">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={src} alt="Ritz Media World client brand logo" loading="lazy" decoding="async" />
               </span>

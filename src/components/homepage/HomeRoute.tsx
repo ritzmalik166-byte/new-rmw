@@ -105,26 +105,28 @@ export function HomeRoute() {
         </header>
 
         <div className="hm-route-map">
-          <div className="hm-route-stones" aria-hidden>
-            {stops.map((stop, index) => (
-              <span
-                key={stop.name}
-                className="hm-stone"
-                style={{ "--at": (index * 2 + 1) / (stops.length * 2) } as CSSProperties}
-              >
-                <span className="hm-stone-body">
-                  <span className="hm-stone-km">{stop.km}</span>
-                  <span className="hm-stone-name">{stop.name}</span>
+          <div className="hm-route-track">
+            <div className="hm-route-stones" aria-hidden>
+              {stops.map((stop, index) => (
+                <span
+                  key={stop.name}
+                  className="hm-stone"
+                  style={{ "--at": (index * 2 + 1) / (stops.length * 2) } as CSSProperties}
+                >
+                  <span className="hm-stone-body">
+                    <span className="hm-stone-km">{stop.km}</span>
+                    <span className="hm-stone-name">{stop.name}</span>
+                  </span>
                 </span>
-              </span>
-            ))}
-          </div>
+              ))}
+            </div>
 
-          <div className="hm-road" aria-hidden>
-            <span className="hm-road-lane" />
-            <span className="hm-road-truck">
-              <RealTruck flip small />
-            </span>
+            <div className="hm-road" aria-hidden>
+              <span className="hm-road-lane" />
+              <span className="hm-road-truck">
+                <RealTruck flip small />
+              </span>
+            </div>
           </div>
 
           <ol className="hm-route-stops">

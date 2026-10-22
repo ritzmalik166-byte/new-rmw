@@ -1,6 +1,7 @@
 /* ---------- Homepage route: Insight » Idea » Impact ---------- */
+/* `clip`, not `hidden`, so the road can stick on phones. */
 .hm-route {
-  overflow: hidden;
+  overflow: clip;
   padding-block: var(--hm-pad-y);
   background:
     radial-gradient(55% 45% at 92% 0%, rgb(243 195 60 / 14%), transparent 70%),
@@ -250,8 +251,50 @@
 }
 
 @media (max-width: 820px) {
+  /* Height of the pinned road below (padding + stones + road), so the cards stack just under it. */
+  .hm-route-map {
+    --hm-track-h: calc(134px + clamp(150px, 15vw, 210px) * 0.365);
+  }
+
   .hm-route-stops {
     grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  /* Each card pins under the road and the next one slides over it, leaving a sliver of the last. */
+  .hm-stop {
+    position: sticky;
+    top: calc(var(--hm-track-h) + 16px + var(--i, 0) * 14px);
+    border-style: solid;
+    border-color: rgb(255 255 255 / 18%);
+    background: #23224f;
+    box-shadow: 0 -14px 30px -18px rgb(0 0 0 / 70%);
+  }
+
+  .hm-stop:nth-child(2) {
+    --i: 1;
+  }
+
+  .hm-stop:nth-child(3) {
+    --i: 2;
+  }
+
+  .hm-stop.is-reached {
+    box-shadow:
+      0 -14px 30px -18px rgb(0 0 0 / 70%),
+      6px 6px 0 var(--hm-yellow);
+    transform: none;
+  }
+
+  /* The stop cards stack, so the road rides along at the top of the screen while they scroll past. */
+  .hm-route-track {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding-top: 12px;
+    background: var(--hm-navy);
+    box-shadow: 0 0 0 100vmax var(--hm-navy);
+    clip-path: inset(0 -100vmax);
   }
 
   .hm-route-stones {

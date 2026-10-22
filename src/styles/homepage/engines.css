@@ -343,7 +343,7 @@ a.hm-chip:hover .hm-chip-arrow {
 
 @media (max-width: 720px) {
   .hm-engines-inner {
-    padding: var(--hm-pad-y) 20px var(--hm-pad-y) 64px;
+    padding: var(--hm-pad-y) 20px var(--hm-pad-y) 78px;
   }
 
   .hm-rail,
@@ -357,9 +357,9 @@ a.hm-chip:hover .hm-chip-arrow {
 
   .hm-mark {
     top: 40px;
-    left: -6px;
-    width: 68px;
-    height: 88px;
+    left: -2px;
+    width: 60px;
+    height: 80px;
   }
 
   .hm-mark-label {
