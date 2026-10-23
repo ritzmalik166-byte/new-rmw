@@ -358,7 +358,7 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
           "Gulshan Group",
           "Ashtech Presidential Towers",
           "Lumora Estates × Avacasa",
-          "Continuuance",
+          "Contenaissance",
           "GHD Group, Goa",
           "GHD Group, Goa",
           "Gulshan Group",
