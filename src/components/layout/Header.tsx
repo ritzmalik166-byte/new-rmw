@@ -460,8 +460,9 @@ function BrandMark() {
       <Image
         src="/logo.png"
         alt="Ritz Media World logo"
-        width={61}
-        height={77}
+        width={160}
+        height={202}
+        quality={95}
         className="brand-mark-logo"
         priority
       />
