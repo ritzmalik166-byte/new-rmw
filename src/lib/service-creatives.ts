@@ -279,7 +279,17 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
       medium: "Mobile content",
       caption: "Small Changes, Big Comfort: an article built to turn readers into enquiries.",
     },
-    wall: [WORK.metaInsights, WORK.forestwalk, WORK.navrang, WORK.aiOverview],
+    wall: [
+      WORK.metaInsights,
+      {
+        src: "/services/content-highway-greens-social.jpg",
+        alt: "Highway Greens Instagram posts on a phone and cards: Your Mind Deserves a Greener View and Open Spaces Better Vibes",
+        medium: "Social",
+        caption: "Highway Greens: outdoor living stories built for the feed.",
+      },
+      WORK.navrang,
+      WORK.aiOverview,
+    ],
   },
   "web-designing-and-development": {
     badge: ["Live", "site"],
