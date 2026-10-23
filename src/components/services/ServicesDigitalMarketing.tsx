@@ -197,12 +197,10 @@ export function ServicesDigitalMarketing() {
         <ul className="svc-dm-grid" onPointerMove={onGridMove} onPointerLeave={onGridLeave}>
           {SERVICES.map((service) => (
             <li key={service.id} className="svc-dm-card">
-              <Link href="/services/digital-marketing" className="svc-dm-card-link" style={{ display: "block", textDecoration: "none", color: "inherit", height: "100%" }}>
-                <span className="svc-dm-stripe" aria-hidden />
-                <ServiceIcon name={service.icon} />
-                <h3 className="svc-dm-card-title">{service.title}</h3>
-                <p className="svc-dm-card-copy">{service.copy}</p>
-              </Link>
+              <span className="svc-dm-stripe" aria-hidden />
+              <ServiceIcon name={service.icon} />
+              <h3 className="svc-dm-card-title">{service.title}</h3>
+              <p className="svc-dm-card-copy">{service.copy}</p>
             </li>
           ))}
         </ul>
