@@ -35,7 +35,6 @@ const HEADLINES: { tone: string; lines: [ReactNode, ReactNode] }[] = [
 const CARGO: { name: string; tone: string }[] = [
   { name: "Digital Marketing", tone: "orange" },
   { name: "Creative Services", tone: "pink" },
-  { name: "SEO", tone: "teal" },
   { name: "Web Development", tone: "navy" },
   { name: "Print Advertising", tone: "yellow" },
   { name: "Radio Advertising", tone: "red" },
