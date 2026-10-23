@@ -7,6 +7,8 @@ export interface ServiceCreative {
   fit?: "contain";
   /** Frame aspect ratio when the artwork must show edge to edge, e.g. "3 / 2". */
   ratio?: string;
+  /** Muted looping clip shown on the wall card; `src` doubles as its poster frame. */
+  video?: string;
 }
 
 export interface ServiceCreativeSet {
@@ -287,8 +289,18 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
         medium: "Social",
         caption: "Highway Greens: outdoor living stories built for the feed.",
       },
-      WORK.navrang,
-      WORK.aiOverview,
+      {
+        src: "/services/content-radio-ads-ranking.png",
+        alt: "Google results for Best Radio Ads Services in Delhi showing Ritz Media World first in the local pack and the top organic result",
+        medium: "Ranking",
+        caption: "#1 on Google for “best radio ads services in Delhi”.",
+      },
+      {
+        src: "/services/content-radio-ads-local-pack.png",
+        alt: "Google Top Radio Ad Services in Delhi NCR showing Ritz Media World with a 4.9 rating and the #1 organic result",
+        medium: "Local search",
+        caption: "Top of the Delhi NCR local pack, rated 4.9 from 149 reviews.",
+      },
     ],
   },
   "web-designing-and-development": {
@@ -314,7 +326,11 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
     scene: render("Aerial", "/services/icons/3d/aerial.png"),
     poster: render("Interior", "/services/icons/3d/interior.png"),
     wall: [
-      render("Exterior", "/services/icons/3d/exterior.png"),
+      {
+        ...render("Exterior", "/services/icons/3d/exterior.png"),
+        fit: undefined,
+        video: "/services/3d-exterior-render.mp4",
+      },
       render("Floor plan", "/services/icons/3d/floor-plan.png"),
       render("Amenity", "/services/icons/3d/amenity.png"),
       WORK.renoxThrive,

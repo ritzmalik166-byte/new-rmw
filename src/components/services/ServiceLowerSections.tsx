@@ -148,7 +148,20 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
                 <span className="sd-pin-peg" aria-hidden />
                 <figure className="sd-pin-card">
                   <div className={cn("sd-pin-media", item.fit && "is-contain")}>
-                    <Image src={item.src} alt={item.alt} fill sizes="(max-width: 980px) 70vw, 280px" />
+                    {item.video ? (
+                      <video
+                        src={item.video}
+                        poster={item.src}
+                        aria-label={item.alt}
+                        autoPlay={!reduced}
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                      />
+                    ) : (
+                      <Image src={item.src} alt={item.alt} fill sizes="(max-width: 980px) 70vw, 280px" />
+                    )}
                   </div>
                   <figcaption>
                     <span className="sd-pin-meta">

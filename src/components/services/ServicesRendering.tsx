@@ -20,26 +20,31 @@ const RenderStage = dynamic(
   },
 );
 
-const RENDERS: { id: RenderKind; title: string }[] = [
+const RENDERS: { id: RenderKind; title: string; video?: string }[] = [
   {
     id: "exterior",
     title: "3D Exterior Rendering",
+    video: "/services/3d-exterior-render.mp4",
   },
   {
     id: "interior",
     title: "3D Interior Rendering",
+    video: "/services/3d-interior-render.mp4",
   },
   {
     id: "aerial",
     title: "Aerial & Township 3D Visualization",
+    video: "/services/3d-aerial-township.mp4",
   },
   {
     id: "plan",
     title: "3D Floor Plan Rendering",
+    video: "/services/3d-floor-plan.mp4",
   },
   {
     id: "amenity",
     title: "Amenity & Landscape Rendering",
+    video: "/services/3d-amenity-landscape.mp4",
   },
 ];
 
@@ -163,7 +168,21 @@ export function ServicesRendering() {
           role="tabpanel"
           aria-labelledby={`svc-render-tab-${render.id}`}
         >
-          <RenderStage kind={render.id} reduced={reduced} />
+          {render.video ? (
+            <video
+              key={render.video}
+              className="svc-render-video"
+              src={render.video}
+              aria-label={`${render.title} walkthrough`}
+              autoPlay={!reduced}
+              controls={reduced}
+              muted
+              loop
+              playsInline
+            />
+          ) : (
+            <RenderStage kind={render.id} reduced={reduced} />
+          )}
 
           <span className="svc-render-buckets" aria-hidden>
             {BUCKETS.map((i) => (

@@ -1227,7 +1227,17 @@
   transition: transform 0.8s var(--hm-ease);
 }
 
-.sd-pin:hover .sd-pin-media img {
+.sd-pin-media video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--hm-ease);
+}
+
+.sd-pin:hover .sd-pin-media img,
+.sd-pin:hover .sd-pin-media video {
   transform: scale(1.04);
 }
 
@@ -1860,7 +1870,8 @@
   .sd-collage-media img,
   .sd-collage-poster,
   .sd-pin,
-  .sd-pin-media img {
+  .sd-pin-media img,
+  .sd-pin-media video {
     transition: none;
   }
 }
