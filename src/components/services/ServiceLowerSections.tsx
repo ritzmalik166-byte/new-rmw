@@ -147,7 +147,10 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
               >
                 <span className="sd-pin-peg" aria-hidden />
                 <figure className="sd-pin-card">
-                  <div className={cn("sd-pin-media", item.fit && "is-contain")}>
+                  <div
+                    className={cn("sd-pin-media", item.fit && "is-contain")}
+                    style={item.ratio ? { aspectRatio: item.ratio } : undefined}
+                  >
                     {item.video ? (
                       <video
                         src={item.video}

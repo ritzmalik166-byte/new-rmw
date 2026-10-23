@@ -1179,6 +1179,8 @@
 
 .sd-pin {
   position: relative;
+  display: flex;
+  flex-direction: column;
   flex: 0 1 calc((100% - 3 * var(--sd-gap)) / 4);
   min-width: 0;
   max-width: 360px;
@@ -1205,6 +1207,7 @@
 }
 
 .sd-pin-card {
+  flex: 1;
   margin: 20px 0 0;
   padding: 10px 10px 16px;
   background: #fff;

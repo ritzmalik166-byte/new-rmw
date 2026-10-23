@@ -222,6 +222,33 @@ const scene = (key: keyof typeof SCENES, medium: string, caption: string): Servi
   caption,
 });
 
+const PRESENTER_REELS: ServiceCreative[] = [
+  {
+    src: "/services/celebrity-ashiana-aaroham.jpg",
+    alt: "Presenter outside the Ashiana Aaroham entrance: One thing that makes Ashiana Aaroham truly special",
+    medium: "Ashiana Aaroham",
+    caption: "Ashiana Aaroham: one thing that makes it truly special.",
+  },
+  {
+    src: "/services/celebrity-payment-plan.jpg",
+    alt: "Presenter on a sofa holding a project brochure: an attractive 30:40:30 payment plan",
+    medium: "Payment plan",
+    caption: "An attractive 30:40:30 payment plan, explained on camera.",
+  },
+  {
+    src: "/services/celebrity-eldeco.jpg",
+    alt: "Presenter in front of the Eldeco wall showing 200+ projects, 40+ years and 30000+ homes",
+    medium: "Eldeco",
+    caption: "Eldeco: 200+ projects, 40+ years, 30,000+ homes.",
+  },
+  {
+    src: "/services/celebrity-onyx.jpg",
+    alt: "Presenter at the Onyx reception: Can Noida's next iconic jewellery destination be right here?",
+    medium: "Onyx",
+    caption: "Onyx: Noida's next iconic jewellery destination.",
+  },
+];
+
 export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
   "digital-marketing": {
     badge: ["Live", "campaign"],
@@ -356,50 +383,90 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
     },
     wall: [
       {
-        src: "/services/celebrity-ashiana-aaroham.jpg",
-        alt: "Presenter outside the Ashiana Aaroham entrance: One thing that makes Ashiana Aaroham truly special",
-        medium: "Ashiana Aaroham",
-        caption: "Ashiana Aaroham: one thing that makes it truly special.",
+        src: "/services/celebrity-ritesh-script-read.jpg",
+        alt: "Ritesh Malik going over the brief with an actress in a gold outfit before a shoot",
+        medium: "Brand shoot",
+        caption: "Final notes on the brief before the cameras roll.",
+        ratio: "300 / 248",
       },
       {
-        src: "/services/celebrity-payment-plan.jpg",
-        alt: "Presenter on a sofa holding a project brochure: an attractive 30:40:30 payment plan",
-        medium: "Payment plan",
-        caption: "An attractive 30:40:30 payment plan, explained on camera.",
+        src: "/services/celebrity-ritesh-on-set.jpg",
+        alt: "Ritesh Malik in a pink blazer talking with a filmmaker in a denim jacket on set",
+        medium: "On set",
+        caption: "Talking through the shot with the director.",
+        ratio: "300 / 248",
       },
       {
-        src: "/services/celebrity-eldeco.jpg",
-        alt: "Presenter in front of the Eldeco wall showing 200+ projects, 40+ years and 30000+ homes",
-        medium: "Eldeco",
-        caption: "Eldeco: 200+ projects, 40+ years, 30,000+ homes.",
+        src: "/services/celebrity-ritesh-location-shoot.jpg",
+        alt: "Ritesh Malik with an actress in a green saree at an outdoor location shoot",
+        medium: "Location shoot",
+        caption: "Out on location for a brand film.",
+        ratio: "300 / 248",
       },
       {
-        src: "/services/celebrity-onyx.jpg",
-        alt: "Presenter at the Onyx reception: Can Noida's next iconic jewellery destination be right here?",
-        medium: "Onyx",
-        caption: "Onyx: Noida's next iconic jewellery destination.",
+        src: "/services/celebrity-ritesh-product-shoot.jpg",
+        alt: "Ritesh Malik handing a product to an actress in a pink saree in a photo studio",
+        medium: "Product shoot",
+        caption: "The product, handed over for the hero frame.",
+        ratio: "300 / 248",
       },
     ],
   },
   "influencer-marketing-agency-in-india": {
     badge: ["Now", "trending"],
-    scene: scene("social", "Creators", "Voices people already follow."),
-    poster: WORK.navrang,
-    wall: [WORK.forestwalk, WORK.navrang, WORK.metaInsights, WORK.vvipTradition],
+    scene: {
+      src: "/services/influencer-marketing-hero.jpg",
+      alt: "Creator filming a vlog on a phone gimbal in a sunlit high-rise apartment with a ring light beside her",
+      medium: "Creators",
+      caption: "Voices people already follow.",
+    },
+    poster: {
+      src: "/services/influencer-marketing-reel.jpg",
+      alt: "Hand holding a phone playing a creator's reel with hearts floating up and a comment saying Need the details!",
+      medium: "Reel",
+      caption: "The reel lands, the comments roll in.",
+    },
+    wall: PRESENTER_REELS,
   },
   "3d-rendering": {
     badge: ["Freshly", "rendered"],
-    scene: render("Aerial", "/services/icons/3d/aerial.png"),
-    poster: render("Interior", "/services/icons/3d/interior.png"),
+    scene: {
+      src: "/services/3d-rendering-hero-aerial.jpg",
+      alt: "3D aerial render of a high-rise residential township at dusk with a lit clubhouse, pool and landscaped greens",
+      medium: "Aerial",
+      caption: "A whole township, lit up before the first brick.",
+    },
+    poster: {
+      src: "/services/3d-rendering-hero-floor-plan.jpg",
+      alt: "3D cutaway floor plan of a furnished three-bedroom apartment with living, dining, kitchen and balcony",
+      medium: "Floor plan",
+      caption: "Every room, furnished in 3D.",
+    },
     wall: [
       {
-        ...render("Exterior", "/services/icons/3d/exterior.png"),
-        fit: undefined,
-        video: "/services/3d-exterior-render.mp4",
+        src: "/services/3d-tower-pool-topdown.png",
+        alt: "3D top-down render looking down a tower's planted balconies onto a landscaped pool deck and gardens",
+        medium: "Bird's-eye",
+        caption: "Straight down the tower to the pool deck.",
       },
-      render("Floor plan", "/services/icons/3d/floor-plan.png"),
-      render("Amenity", "/services/icons/3d/amenity.png"),
-      WORK.renoxThrive,
+      {
+        src: "/services/3d-edelstein-empire.png",
+        alt: "3D exterior render of the Edelstein Empire glass tower with retail at street level at sunset",
+        medium: "Tower exterior",
+        caption: "Edelstein Empire: a glass tower, lit for golden hour.",
+      },
+      {
+        src: "/services/3d-fountain-promenade.png",
+        alt: "3D landscape render of a couple walking a palm-lined promenade past tiered fountains at dusk",
+        medium: "Landscape",
+        caption: "A palm-lined promenade, walked before it's built.",
+      },
+      {
+        src: "/services/3d-villa-avenue.png",
+        alt: "3D streetscape render of modern villas along a tree-lined avenue with residents walking by",
+        medium: "Streetscape",
+        caption: "Villa avenues, complete with neighbours.",
+      },
     ],
   },
 };
