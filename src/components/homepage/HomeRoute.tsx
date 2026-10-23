@@ -42,10 +42,9 @@ export function HomeRoute() {
       const stones = gsap.utils.toArray<HTMLElement>(".hm-stone", root);
       const cards = gsap.utils.toArray<HTMLElement>(".hm-stop", root);
 
-      // The first stone is the KM 0 start marker, which has no stop card.
       const mark = (count: number) => {
         stones.forEach((el, index) => el.classList.toggle("is-reached", index < count));
-        cards.forEach((el, index) => el.classList.toggle("is-reached", index < count - 1));
+        cards.forEach((el, index) => el.classList.toggle("is-reached", index < count));
       };
 
       const parkedX = () => road.clientWidth - truck.offsetWidth - Math.max(16, road.clientWidth * 0.03);
@@ -108,25 +107,11 @@ export function HomeRoute() {
         <div className="hm-route-map">
           <div className="hm-route-track">
             <div className="hm-route-stones" aria-hidden>
-              <span
-                className="hm-stone is-start"
-                style={{ "--at": 0, "--at-m": 1 / ((stops.length + 1) * 2) } as CSSProperties}
-              >
-                <span className="hm-stone-body">
-                  <span className="hm-stone-km">KM 0</span>
-                  <span className="hm-stone-name">Start</span>
-                </span>
-              </span>
               {stops.map((stop, index) => (
                 <span
                   key={stop.name}
                   className="hm-stone"
-                  style={
-                    {
-                      "--at": (index * 2 + 1) / (stops.length * 2),
-                      "--at-m": (index * 2 + 3) / ((stops.length + 1) * 2),
-                    } as CSSProperties
-                  }
+                  style={{ "--at": (index * 2 + 1) / (stops.length * 2) } as CSSProperties}
                 >
                   <span className="hm-stone-body">
                     <span className="hm-stone-km">{stop.km}</span>
