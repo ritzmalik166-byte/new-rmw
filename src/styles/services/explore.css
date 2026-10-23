@@ -36,8 +36,7 @@
   text-decoration: none;
   transition:
     color 0.9s var(--explore-ease),
-    border-color 0.9s var(--explore-ease),
-    transform 0.6s var(--explore-ease);
+    border-color 0.9s var(--explore-ease);
 }
 
 .svc-explore::before {
@@ -52,26 +51,16 @@
   transition: transform 0.9s var(--explore-ease);
 }
 
-.svc-explore span {
-  transition: transform 0.6s var(--explore-ease);
-}
-
 .svc-explore:hover,
 .svc-explore:focus-visible {
   border-color: var(--explore-fill);
   color: var(--explore-ink);
-  transform: translateY(-2px);
 }
 
 .svc-explore:hover::before,
 .svc-explore:focus-visible::before {
   transform: scaleX(1);
   transform-origin: left center;
-}
-
-.svc-explore:hover span,
-.svc-explore:focus-visible span {
-  transform: translateX(4px);
 }
 
 .svc-dm .svc-explore,
@@ -110,6 +99,8 @@
 
 .svc-paper-cta.is-alt:hover,
 .svc-paper-cta.is-alt:focus-visible {
+  translate: none;
+  box-shadow: 4px 4px 0 var(--np-ink);
   color: #ffffff;
 }
 
@@ -128,7 +119,6 @@
 @media (prefers-reduced-motion: reduce) {
   .svc-explore,
   .svc-explore::before,
-  .svc-explore span,
   .svc-paper-cta.is-alt,
   .svc-paper-cta.is-alt::before {
     transition: none;

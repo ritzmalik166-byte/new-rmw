@@ -267,7 +267,12 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
   },
   "content-marketing": {
     badge: ["Now", "publishing"],
-    scene: scene("social", "Content", "Stories made for the scroll."),
+    scene: {
+      src: "/services/content-blog-laptop.jpg",
+      alt: "Laptop showing a blog post titled 5 Things to Check Before You Buy a Home, with a phone, notebook of blog ideas and a cup of chai",
+      medium: "Content",
+      caption: "Stories made for the scroll.",
+    },
     poster: WORK.forestwalk,
     wall: [WORK.metaInsights, WORK.forestwalk, WORK.navrang, WORK.aiOverview],
   },

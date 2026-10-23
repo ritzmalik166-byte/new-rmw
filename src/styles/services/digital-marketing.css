@@ -119,30 +119,12 @@
   font-size: 14px;
   text-decoration: none;
   box-shadow: 0 10px 30px -12px rgba(245, 165, 36, 0.7);
-  will-change: transform;
+  transition: background 0.3s ease;
 }
 
-.svc-dm-cta::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
-  transform: translateX(-120%);
-  transition: transform 0.7s ease;
-}
-
-.svc-dm-cta span {
-  transition: transform 0.3s ease;
-}
-
-.svc-dm-cta:hover::after,
-.svc-dm-cta:focus-visible::after {
-  transform: translateX(120%);
-}
-
-.svc-dm-cta:hover span,
-.svc-dm-cta:focus-visible span {
-  transform: translateX(4px);
+.svc-dm-cta:hover,
+.svc-dm-cta:focus-visible {
+  background: #ffbb45;
 }
 
 .svc-dm-search {
@@ -738,7 +720,6 @@
     animation: none;
   }
 
-  .svc-dm-cta::after,
   .svc-dm-card::before,
   .svc-dm-card::after {
     transition: none;
