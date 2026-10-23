@@ -8,6 +8,8 @@ import { Header } from "@/components/layout/Header";
 import { ThemeFilters } from "@/components/layout/ThemeFilters";
 import { ThemeSurfaces } from "@/components/layout/ThemeSurfaces";
 import { AppProviders } from "@/components/providers/AppProviders";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/schema";
 import { site } from "@/lib/site";
 import { THEME_BOOT_SCRIPT } from "@/lib/theme";
 import "./globals.css";
@@ -125,6 +127,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
+        <JsonLd data={organizationJsonLd()} />
+        <JsonLd data={websiteJsonLd()} />
       </head>
       <body
         className="bg-background font-sans text-foreground"

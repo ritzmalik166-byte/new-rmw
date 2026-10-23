@@ -11,6 +11,51 @@ const ORGANIZATION = {
   logo: { "@type": "ImageObject", url: `${SEO_ORIGIN}/logo.png` },
 };
 
+export function organizationJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${SEO_ORIGIN}/#organization`,
+    name: "Ritz Media World",
+    alternateName: "RMW",
+    url: `${SEO_ORIGIN}/`,
+    logo: `${SEO_ORIGIN}/logo.png`,
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+91-9220516777",
+      contactType: "customer service",
+      areaServed: "IN",
+      availableLanguage: "en",
+    },
+    sameAs: [
+      "https://www.facebook.com/ritzmediaworld/",
+      "https://twitter.com/ritzmediaworld",
+      "https://www.instagram.com/ritzmediaworld/",
+      "https://www.youtube.com/@ritzmediaworld",
+      "https://www.linkedin.com/company/ritzmediaworld/",
+    ],
+  };
+}
+
+export function websiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${SEO_ORIGIN}/#website`,
+    name: "Ritz Media World",
+    url: `${SEO_ORIGIN}/`,
+    publisher: { "@id": `${SEO_ORIGIN}/#organization` },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${SEO_ORIGIN}/blog?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+}
+
 export function breadcrumbJsonLd(crumbs: Crumb[]) {
   return {
     "@context": "https://schema.org",
