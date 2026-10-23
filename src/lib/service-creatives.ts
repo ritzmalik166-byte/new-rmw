@@ -54,6 +54,18 @@ const WORK = {
     medium: "Newspaper",
     caption: "Laurora × Akshara: luxury villas launched in Saharanpur.",
   },
+  eldecoOmicron: {
+    src: "/s6/eldeco-omicron-meta-ad.jpg",
+    alt: "Eldeco sponsored ad: 7 Towers, One Epic View, 3 & 4 BHK ultra-luxury residences in Omicron 1A, Greater Noida",
+    medium: "Brand campaign",
+    caption: "Eldeco: 7 towers, one epic view in Greater Noida.",
+  },
+  llmoraAvacasa: {
+    src: "/s6/llmora-avacasa-social.jpg",
+    alt: "Lumora and Avacasa social creatives: The villa you add to your bucket list, in the Shivalik Hills",
+    medium: "Social",
+    caption: "Lumora × Avacasa: villa living in the Shivalik Hills.",
+  },
   ghdGoa: {
     src: "/s6/ghd-goa-hindustan-times.jpg",
     alt: "GHD Group full-page ad in the Sunday Hindustan Times: Sun, Sea, Sophistication Living in Goa",
@@ -201,7 +213,7 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
     badge: ["Live", "campaign"],
     scene: scene("performance", "Performance", "Spend you can trace to enquiries."),
     poster: WORK.googleAds,
-    wall: [WORK.metaInsights, WORK.googleAds, WORK.billboard, WORK.navrang],
+    wall: [WORK.metaInsights, WORK.googleAds, WORK.eldecoOmicron, WORK.llmoraAvacasa],
   },
   "creative-services": {
     badge: ["Fresh", "off studio"],
