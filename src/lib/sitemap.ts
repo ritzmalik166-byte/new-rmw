@@ -6,7 +6,7 @@ import { getAllServices } from "@/lib/services-data";
 import { SITEMAP_EXCLUDED_CATEGORIES } from "@/lib/sitemap-exclusions";
 import { SITEMAP_LEGACY_TAGS } from "@/lib/sitemap-legacy-tags";
 import { SUB_SERVICES, subServiceHref } from "@/lib/sub-services-data";
-import { canonicalTagSlug, getCategories, getCategoryPosts, getTagIndex } from "@/lib/taxonomy";
+import { getCategories, getCategoryPosts } from "@/lib/taxonomy";
 
 export const SITEMAP_INDEX_FILES = [
   "sitemap-0.xml",
@@ -55,16 +55,11 @@ export function getStaticPagePaths() {
   ];
 }
 
-/* Only listings that render (i.e. have posts) are published. Tags are limited to the ones
-   the previous sitemap listed, each under its current canonical URL. */
+/* Only category listings that render (i.e. have posts) are published. Tags are exactly the
+   ones the previous sitemap listed, under the same URLs. */
 export async function getTaxonomyPaths() {
-  const [categories, tagIndex] = await Promise.all([getCategories(), getTagIndex()]);
-  const tags = new Set(
-    SITEMAP_LEGACY_TAGS.flatMap((legacy) => {
-      const slug = canonicalTagSlug(tagIndex, legacy);
-      return slug && tagIndex.tags.get(slug)?.length ? [slug] : [];
-    }),
-  );
+  const categories = await getCategories();
+  const tags = new Set(SITEMAP_LEGACY_TAGS);
   const populated = await Promise.all(
     categories
       .filter((category) => !SITEMAP_EXCLUDED_CATEGORIES.has(category.slug))
@@ -77,11 +72,12 @@ export async function getTaxonomyPaths() {
   ].sort();
 }
 
+export function getMainServicePaths() {
+  return getAllServices().map((service) => `/services/${service.slug}`);
+}
+
 export function getServicePaths() {
-  return [
-    ...getAllServices().map((service) => `/services/${service.slug}`),
-    ...SUB_SERVICES.map(subServiceHref),
-  ];
+  return [...getMainServicePaths(), ...SUB_SERVICES.map(subServiceHref)];
 }
 
 /* Blog posts and case studies share the root `/[slug]` route. */
