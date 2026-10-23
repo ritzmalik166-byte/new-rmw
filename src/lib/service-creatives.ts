@@ -239,7 +239,12 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
   },
   "radio-advertising": {
     badge: ["On", "air"],
-    scene: scene("broadcast", "Broadcast", "Sound that earns a second listen."),
+    scene: {
+      src: "/s6/radio-voiceover-studio.jpg",
+      alt: "Voice artist recording a radio script on a Rode microphone in the Ritz Media World studio",
+      medium: "Broadcast",
+      caption: "Sound that earns a second listen.",
+    },
     poster: WORK.podmasters,
     wall: [WORK.redFm, WORK.podmasters, WORK.billboard],
   },
