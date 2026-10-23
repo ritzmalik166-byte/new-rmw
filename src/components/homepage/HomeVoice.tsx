@@ -119,14 +119,16 @@ export function HomeVoice() {
                       Ritz Media World Roadways · Consignment {String(i + 1).padStart(3, "0")}
                     </p>
                     <span className="hm-receipt-meta">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        className="hm-receipt-stars"
-                        src="/s8/star-rating.png"
-                        alt="Rated 5 out of 5"
-                        width={138}
-                        height={18}
-                      />
+                      <span className="hm-receipt-rating" role="img" aria-label="Rated 5 out of 5">
+                        <span className="hm-receipt-stars theme-keep" aria-hidden>
+                          {Array.from({ length: 5 }, (_, star) => (
+                            <svg key={star} viewBox="0 0 24 24">
+                              <path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z" />
+                            </svg>
+                          ))}
+                        </span>
+                        <b aria-hidden>5.0</b>
+                      </span>
                       <span className="hm-receipt-tag">{review.industry}</span>
                     </span>
                   </div>

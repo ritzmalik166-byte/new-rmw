@@ -214,10 +214,31 @@
   color: var(--hm-navy);
 }
 
+.hm-receipt-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .hm-receipt-stars {
-  display: block;
-  width: 120px;
-  height: auto;
+  display: inline-flex;
+  gap: 3px;
+}
+
+.hm-receipt-stars svg {
+  width: 17px;
+  height: 17px;
+  fill: #f5b301;
+  stroke: #c98a00;
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+
+.hm-receipt-rating b {
+  color: var(--hm-navy);
+  font-family: var(--hm-mono);
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .hm-receipt-quote {

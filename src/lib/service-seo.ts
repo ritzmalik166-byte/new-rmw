@@ -2,24 +2,24 @@ export type ServiceSeo = { title: string; description: string };
 
 export const SERVICE_SEO: Record<string, ServiceSeo> = {
   "digital-marketing": {
-    title: "Digital Marketing Agency in India | ROI-Driven Marketing Solutions | Ritz Media World",
+    title: "Ritz Media World | Digital Marketing Agency India",
     description:
-      "Digital Marketing Agency Ritz Media World helps brands turn attention into actual growth. We handle SEO, Social Media Marketing, PPC, Reputation Management, Lead Generation, and Brand Awareness, building strategies across India that get results you can measure and count on.",
+      "Grow your business with Ritz Media World's digital marketing services, including SEO, social media, PPC, and lead generation to reach the right audience.",
   },
   "creative-services": {
-    title: "Creative Services Agency in India | Branding, Graphic Design & Logo Design | Ritz Media World",
+    title: "Ritz Media World | Creative Services Agency India",
     description:
-      "Ritz Media World offers Creative Services including branding, logo design, graphic design, packaging design, and print advertising to elevate your brand.",
+      "Bring your brand to life with Ritz Media World's creative services, from logo and graphic design to branding, packaging, and print advertising solutions.",
   },
   "print-advertising": {
-    title: "Print Advertising Services | Newspaper Advertising Agency in India | Ritz Media World",
+    title: "Ritz Media World | Print Advertising Agency India",
     description:
-      "Ritz Media World provides Print Advertising Services in India, including newspaper and magazine advertising, ad design, media planning, and campaign execution.",
+      "Reach the right audience with Ritz Media World's print advertising services. From newspaper and magazine ads to creative design and strategic ad placement.",
   },
   "radio-advertising": {
-    title: "Radio Advertising Agency in India | FM Radio Advertising Services | Ritz Media World",
+    title: "Ritz Media World | Radio Advertising Agency India",
     description:
-      "Reach millions with Ritz Media World's Radio Advertising Services in India. Expert FM radio ads, media planning, scriptwriting, voiceovers, and campaign management.",
+      "Reach the right audience with Ritz Media World's radio advertising services. From creative scripts to FM ad placements, make your brand heard.",
   },
   "content-marketing": {
     title: "Content Marketing Agency in India | Ritz Media World",
@@ -32,14 +32,14 @@ export const SERVICE_SEO: Record<string, ServiceSeo> = {
       "Looking for a website design & development company in India? Ritz Media World builds responsive, SEO-friendly, WordPress, and custom websites.",
   },
   "celebrity-endorsements": {
-    title: "Celebrity Endorsement Agency in India | Ritz Media World",
+    title: "Ritz Media World | Celebrity Endorsement Agency India",
     description:
-      "Ritz Media World is a leading celebrity endorsement agency in India, offering celebrity marketing, brand partnerships, campaign management, PR and talent selection services.",
+      "Connect your brand with the right celebrities through Ritz Media World's endorsement services. Build trust, increase brand awareness, and reach new audiences.",
   },
   "influencer-marketing-agency-in-india": {
-    title: "Influencer Marketing Agency in India | Influencer Marketing Services | Ritz Media World",
+    title: "Ritz Media World | Influencer Marketing Agency India",
     description:
-      "Influencer Marketing Agency in India offering influencer marketing services, creator partnerships, campaign management, brand collaborations, and strategic campaigns.",
+      "Partner with Ritz Media World for influencer marketing that connects your brand with the right creators, builds trust, boosts engagement, and drives results.",
   },
   "3d-rendering": {
     title: "3D Rendering Services | Ritz Media World",

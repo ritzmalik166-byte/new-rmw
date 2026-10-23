@@ -8,9 +8,9 @@ import "@/styles/case-study/case-study.css";
 export const revalidate = 300;
 
 export const metadata = pageMetadata({
-  title: "Case Studies in Advertising & Marketing | Ritz Media World",
+  title: "Ritz Media World Case Studies & Market Insights",
   description:
-    "Explore Ritz Media World case studies - bold design, brand films, and campaigns that defy convention.",
+    "Explore real-world case studies, creative campaigns, branding strategies, and market insights from Ritz Media World to discover what drives brand success.",
   keywords: AGENCY_KEYWORDS,
   path: "/case-study",
 });

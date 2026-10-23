@@ -348,8 +348,38 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
   "celebrity-endorsements": {
     badge: ["In the", "spotlight"],
     scene: { ...WORK.stage, medium: "Spotlight" },
-    poster: WORK.vvipTradition,
-    wall: [WORK.stage, WORK.renoxThrive, WORK.vvipDistinctive, WORK.vvipTradition],
+    poster: {
+      src: "/services/celebrity-endorsement-shoot.jpg",
+      alt: "Celebrity in a cream suit holding a product up to the camera on a brand endorsement photoshoot",
+      medium: "Celebrity shoot",
+      caption: "On set: the face, the product and the flash.",
+    },
+    wall: [
+      {
+        src: "/services/celebrity-ashiana-aaroham.jpg",
+        alt: "Presenter outside the Ashiana Aaroham entrance: One thing that makes Ashiana Aaroham truly special",
+        medium: "Ashiana Aaroham",
+        caption: "Ashiana Aaroham: one thing that makes it truly special.",
+      },
+      {
+        src: "/services/celebrity-payment-plan.jpg",
+        alt: "Presenter on a sofa holding a project brochure: an attractive 30:40:30 payment plan",
+        medium: "Payment plan",
+        caption: "An attractive 30:40:30 payment plan, explained on camera.",
+      },
+      {
+        src: "/services/celebrity-eldeco.jpg",
+        alt: "Presenter in front of the Eldeco wall showing 200+ projects, 40+ years and 30000+ homes",
+        medium: "Eldeco",
+        caption: "Eldeco: 200+ projects, 40+ years, 30,000+ homes.",
+      },
+      {
+        src: "/services/celebrity-onyx.jpg",
+        alt: "Presenter at the Onyx reception: Can Noida's next iconic jewellery destination be right here?",
+        medium: "Onyx",
+        caption: "Onyx: Noida's next iconic jewellery destination.",
+      },
+    ],
   },
   "influencer-marketing-agency-in-india": {
     badge: ["Now", "trending"],
