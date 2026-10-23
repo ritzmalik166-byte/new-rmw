@@ -79,7 +79,7 @@ export function HomeAwards() {
               aria-label={`${award.heading}, ${award.year}. View details`}
             >
               <span className="hm-award-year">{award.year}</span>
-              <span className="hm-award-media">
+              <span className={`hm-award-media${award.fit === "contain" ? " is-contain" : ""}`}>
                 <Image src={award.src} alt={award.alt} fill sizes="300px" />
               </span>
               <span className="hm-award-sub">{award.subtitle}</span>
@@ -131,7 +131,7 @@ function AwardModal({ award, onClose }: { award: Award; onClose: () => void }) {
             <path d="M18 6 6 18M6 6l12 12" />
           </svg>
         </button>
-        <div className="hm-modal-media">
+        <div className={`hm-modal-media${award.fit === "contain" ? " is-contain" : ""}`}>
           <Image src={award.src} alt={award.alt} fill sizes="(max-width: 760px) 90vw, 420px" />
         </div>
         <div className="hm-modal-body">

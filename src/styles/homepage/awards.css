@@ -143,6 +143,16 @@
   transition: transform 0.8s var(--hm-ease);
 }
 
+.hm-award-media.is-contain,
+.hm-modal-media.is-contain {
+  background: #0d0a07;
+}
+
+.hm-award-media.is-contain img,
+.hm-modal-media.is-contain img {
+  object-fit: contain;
+}
+
 .hm-award:hover .hm-award-media img {
   transform: scale(1.05);
 }
