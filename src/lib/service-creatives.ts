@@ -28,7 +28,7 @@ const WORK = {
     src: "/s6/renox-legacy.jpg",
     alt: "Renox Thrive full-page ad in The Times of India: Built for those who leave a legacy",
     medium: "Newspaper",
-    caption: "Front-page legacy ad in The Times of India.",
+    caption: "Renox Thrive: a front-page legacy ad.",
   },
   vvipDistinctive: {
     src: "/s6/VVIP-1.jpg",
@@ -41,6 +41,24 @@ const WORK = {
     alt: "VVIP campaign creative: Where tradition finds its most luxurious address",
     medium: "Campaign",
     caption: "VVIP: tradition, told in a contemporary voice.",
+  },
+  gulshanChess: {
+    src: "/s6/gulshan-ht-city.jpg",
+    alt: "Gulshan full-page ad in HT City: Every game of chess has just one king",
+    medium: "Newspaper",
+    caption: "Gulshan: one king, one front page.",
+  },
+  lauroraSaharanpur: {
+    src: "/s6/laurora-saharanpur-toi.jpg",
+    alt: "Laurora Group and Akshara Properties full-page ad in The Times of India: Discover a lifestyle most extraordinary in Saharanpur",
+    medium: "Newspaper",
+    caption: "Laurora × Akshara: luxury villas launched in Saharanpur.",
+  },
+  ghdGoa: {
+    src: "/s6/ghd-goa-hindustan-times.jpg",
+    alt: "GHD Group full-page ad in the Sunday Hindustan Times: Sun, Sea, Sophistication Living in Goa",
+    medium: "Newspaper",
+    caption: "GHD Group: sun, sea and luxury living in Goa.",
   },
   navrang: {
     src: "/s6/navrang-square.jpg",
@@ -200,7 +218,12 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
       caption: "Ink that stays on the table.",
     },
     poster: WORK.renoxLegacy,
-    wall: [WORK.renoxLegacy, WORK.renoxThrive, WORK.hoarding, WORK.vvipDistinctive],
+    wall: [
+      { ...WORK.renoxLegacy, medium: "The Times of India" },
+      { ...WORK.lauroraSaharanpur, medium: "The Times of India" },
+      { ...WORK.ghdGoa, medium: "Hindustan Times" },
+      { ...WORK.gulshanChess, medium: "HT City" },
+    ],
   },
   "radio-advertising": {
     badge: ["On", "air"],
