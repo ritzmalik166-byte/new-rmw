@@ -51,6 +51,7 @@ export function getStaticPagePaths() {
     "/services",
     "/portfolio",
     "/tags",
+    "/privacy-policy",
     ...PORTFOLIO_DETAILS.map((detail) => `/portfolio/${detail.slug}`),
   ];
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { AutoTitles } from "@/components/layout/AutoTitles";
+import { CookieConsent } from "@/components/layout/CookieConsent";
 import { FloatingContact } from "@/components/layout/FloatingContact";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -135,7 +136,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <main>{children}</main>
           <Footer />
           <FloatingContact />
-          <ThemeSurfaces />
+          <CookieConsent />          <ThemeSurfaces />
           <AutoTitles />
         </AppProviders>
       </body>

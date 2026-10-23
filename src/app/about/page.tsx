@@ -7,6 +7,8 @@ import { AboutProofs } from "@/components/about/AboutProofs";
 import { AboutTruckBack } from "@/components/about/AboutTruckBack";
 import { StartProject } from "@/components/home/StartProject";
 import { HomeFaq } from "@/components/homepage/HomeFaq";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 import "@/styles/about/hero.css";
@@ -39,6 +41,12 @@ export const metadata: Metadata = pageMetadata({
 export default function AboutPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about.html" },
+        ])}
+      />
       <AboutHero />
       <AboutTruckBack />
       <AboutMileage />

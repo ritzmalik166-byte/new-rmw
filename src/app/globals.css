@@ -34,6 +34,7 @@
 
 @import "../styles/layout/footer.css";
 @import "../styles/layout/floating-contact.css";
+@import "../styles/layout/cookie-consent.css";
 
 @import "../styles/responsive/mobile-nav.css";
 @import "../styles/responsive/home.css";

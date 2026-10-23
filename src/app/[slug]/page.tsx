@@ -5,6 +5,8 @@ import { getCaseStudies, getCaseStudySlugs } from "@/lib/case-studies";
 import { BlogImage } from "@/components/blogs/BlogImage";
 import { BlogShare } from "@/components/blogs/BlogShare";
 import { BlogEnquiryForm } from "@/components/blogs/BlogEnquiryForm";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { articleJsonLd, blogFaqJsonLd, breadcrumbJsonLd } from "@/lib/schema";
 import { tagHref } from "@/lib/taxonomy";
 import "@/styles/blogs/detail.css";
 
@@ -81,7 +83,7 @@ export default async function BlogDetailPage({
   const isCaseStudy = (await getCaseStudySlugs()).has(blog.slug.toLowerCase());
   const section = isCaseStudy
     ? { href: "/case-study", label: "Case Studies", back: "Back to all case studies", related: "More Case Studies" }
-    : { href: "/blog", label: "Blogs", back: "Back to all blogs", related: "Related Blogs" };
+    : { href: "/blog", label: "Blog", back: "Back to all blogs", related: "Related Blogs" };
 
   const readingTime = calculateReadingTime(blog.content);
   const tags = [
@@ -98,6 +100,15 @@ export default async function BlogDetailPage({
 
   return (
     <div className="hm blog-post-page">
+      <JsonLd data={articleJsonLd(blog, isCaseStudy)} />
+      <JsonLd data={blogFaqJsonLd(blog)} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: section.label, path: section.href },
+          { name: blog.title, path: `/${blog.slug}` },
+        ])}
+      />
       <div className="blog-post-layout">
         <article className="blog-post-main">
           <nav className="blog-breadcrumb" aria-label="Breadcrumb">

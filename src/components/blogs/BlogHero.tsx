@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useMemo, useState } from "react";
+import { TransitionLink } from "@/components/motion/TransitionLink";
 import type { Blog } from "@/lib/blogs";
 
 const TOPICS = [
@@ -99,6 +100,15 @@ export function BlogHero({ blogs, query, onQueryChange }: BlogHeroProps) {
   return (
     <header className="bh">
       <div className="bh-copy">
+        <nav className="sd-crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <TransitionLink href="/">Home</TransitionLink>
+            </li>
+            <li aria-current="page">Blog</li>
+          </ol>
+        </nav>
+
         <p className="hm-kicker">
           <span className="hm-pill">Blogs</span>
           <span className="hm-hindi" lang="hi">

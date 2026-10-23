@@ -215,7 +215,12 @@ export function Footer() {
       </div>
 
       <div className="site-footer-bottom">
-        <p>© {new Date().getFullYear()} {site.fullName}. All rights reserved.</p>
+        <div className="site-footer-legal">
+          <p>© {new Date().getFullYear()} {site.fullName}. All rights reserved.</p>
+          <nav className="site-footer-legal-links" aria-label="Legal">
+            <TransitionLink href="/privacy-policy">Privacy Policy</TransitionLink>
+          </nav>
+        </div>
         <p className="site-footer-horn">Horn OK Please</p>
       </div>
     </footer>

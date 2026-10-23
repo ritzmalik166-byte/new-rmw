@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { BlogArchive } from "@/components/blogs/BlogArchive";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { getBlogsOrEmpty } from "@/lib/blogs";
+import { breadcrumbJsonLd } from "@/lib/schema";
 import { BLOG_KEYWORDS, pageMetadata } from "@/lib/seo";
 import "@/styles/blogs/hero.css";
 
@@ -30,6 +32,12 @@ export default async function BlogPage({
 
   return (
     <main className="hm blog-archive" aria-label="Blogs">
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/blog" },
+        ])}
+      />
       <BlogArchive
         blogs={blogs}
         initialPage={initialPage}

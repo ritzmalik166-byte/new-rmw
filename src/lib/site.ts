@@ -516,6 +516,7 @@ export const site = {
       { label: "Blogs", href: "/blog" },
       { label: "Career", href: "/career" },
       { label: "Contact Us", href: "/contact" },
+      { label: "Privacy Policy", href: "/privacy-policy" },
     ],
     socials: [
       { label: "Facebook", href: "https://www.facebook.com/ritzmediaworld/" },

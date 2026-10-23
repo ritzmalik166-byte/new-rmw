@@ -150,6 +150,15 @@ export function AboutHero() {
   return (
     <section ref={rootRef} className="about-hero">
       <div className="about-hero-main">
+        <nav className="hm sd-crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <TransitionLink href="/">Home</TransitionLink>
+            </li>
+            <li aria-current="page">About</li>
+          </ol>
+        </nav>
+
         <p className="about-kicker">
           <span className="about-kicker-item about-pill">About us</span>
           <span className="about-kicker-item about-kicker-hindi">हमारी कहानी</span>
