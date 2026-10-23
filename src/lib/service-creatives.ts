@@ -183,6 +183,12 @@ const WORK = {
     medium: "ET Awards",
     caption: "ET Young Industry Leaders 2025 for integrated advertising.",
   },
+  bigDreamMakers: {
+    src: "/awards/big-dream-makers-moderator-2025.png",
+    alt: "92.7 BIG FM Dream Makers Conclave & Awards 2025 trophy thanking Mr. Ritesh Malik for moderating a panel discussion",
+    medium: "92.7 BIG FM",
+    caption: "BIG Dream Makers 2025: moderating the real estate panel.",
+  },
   stage: {
     src: "/awards/my-property-face-stage.jpg",
     alt: "My Property Face award ceremony on stage",
@@ -257,7 +263,7 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
       medium: "Studio",
       caption: "Scripted, voiced and produced for the airwaves.",
     },
-    wall: [WORK.redFm, WORK.podmasters, WORK.etYoungLeaders, WORK.billboard],
+    wall: [WORK.redFm, WORK.podmasters, WORK.etYoungLeaders, WORK.bigDreamMakers],
   },
   "content-marketing": {
     badge: ["Now", "publishing"],
