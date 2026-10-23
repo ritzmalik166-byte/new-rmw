@@ -22,6 +22,7 @@ import "@/styles/services/web-mockup.css";
 import "@/styles/services/radio.css";
 import "@/styles/services/render.css";
 import "@/styles/services/industries.css";
+import "@/styles/services/explore.css";
 import "@/styles/services/responsive.css";
 
 export const metadata: Metadata = pageMetadata({

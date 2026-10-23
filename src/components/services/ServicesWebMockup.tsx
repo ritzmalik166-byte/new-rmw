@@ -1,7 +1,6 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
-import Link from "next/link";
 import {
   useEffect,
   useId,
@@ -20,21 +19,19 @@ type TabId = "uiux" | "custom" | "wp" | "ecom" | "landing" | "maint";
 
 export const WEB_SERVICE_HREF = "/services/web-designing-and-development";
 
-const TABS: { id: TabId; label: string; url: string; summary: string; href: string }[] = [
+const TABS: { id: TabId; label: string; url: string; summary: string }[] = [
   {
     id: "uiux",
     label: "UI/UX Design",
     url: "figma.com/design/yourbrand-home",
     summary:
       "A designer lays out a homepage in a design tool: navigation, headline, image and a call-to-action button.",
-    href: `${WEB_SERVICE_HREF}/ui-ux-design`,
   },
   {
     id: "custom",
     label: "Custom Development",
     url: "yourbrand.com",
     summary: "A finished custom website template, scrolling from the hero to services and a testimonial.",
-    href: `${WEB_SERVICE_HREF}/custom-design-development`,
   },
   {
     id: "wp",
@@ -42,14 +39,12 @@ const TABS: { id: TabId; label: string; url: string; summary: string; href: stri
     url: "yourbrand.com/wp-admin/post.php",
     summary:
       "A WordPress page is edited in the block editor while the live page updates alongside it.",
-    href: `${WEB_SERVICE_HREF}/wordpress-web-designing`,
   },
   {
     id: "ecom",
     label: "E-Commerce",
     url: "shop.yourbrand.com",
     summary: "An online store where products are added to the cart and the cart count updates.",
-    href: `${WEB_SERVICE_HREF}/e-commerce-web-designing`,
   },
   {
     id: "landing",
@@ -57,7 +52,6 @@ const TABS: { id: TabId; label: string; url: string; summary: string; href: stri
     url: "localhost:3000/vedvan",
     summary:
       "Code is written on the left while the Vedvan real estate landing page builds live on the right.",
-    href: `${WEB_SERVICE_HREF}/landing-page-development-services`,
   },
   {
     id: "maint",
@@ -65,7 +59,6 @@ const TABS: { id: TabId; label: string; url: string; summary: string; href: stri
     url: "status.yourbrand.com",
     summary:
       "A site-health dashboard runs updates, renews the SSL certificate, scans for threats and completes a backup while page speed and uptime stay high.",
-    href: WEB_SERVICE_HREF,
   },
 ];
 
@@ -212,9 +205,6 @@ export function ServicesWebMockup() {
             {activeIndex + 1}/{TABS.length}
           </span>
         </p>
-        <Link className="wm-explore" href={tab.href}>
-          Explore {tab.label} <span aria-hidden>→</span>
-        </Link>
       </div>
     </div>
   );

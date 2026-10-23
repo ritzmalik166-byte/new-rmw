@@ -178,14 +178,19 @@ export function ServicesDigitalMarketing() {
             across India, we run SEO, social media, and paid campaigns together, so every rupee is
             tracked from the first click to the final enquiry.
           </p>
-          <Link
-            className="svc-dm-cta"
-            href="/contact" target="_blank" rel="noopener noreferrer"
-            onPointerMove={onCtaMove}
-            onPointerLeave={onCtaLeave}
-          >
-            Get a Free SEO Audit <span aria-hidden>→</span>
-          </Link>
+          <div className="svc-explore-row">
+            <Link
+              className="svc-dm-cta"
+              href="/contact" target="_blank" rel="noopener noreferrer"
+              onPointerMove={onCtaMove}
+              onPointerLeave={onCtaLeave}
+            >
+              Get a Free SEO Audit <span aria-hidden>→</span>
+            </Link>
+            <Link className="svc-explore" href="/services/digital-marketing">
+              Explore Digital Marketing <span aria-hidden>→</span>
+            </Link>
+          </div>
           <ServicesSearchGlimpse />
         </div>
 

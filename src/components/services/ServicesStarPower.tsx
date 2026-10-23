@@ -1,6 +1,7 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
+import Link from "next/link";
 import { useRef, type CSSProperties } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap } from "@/lib/gsap";
@@ -13,6 +14,8 @@ const CARDS = [
     id: "celebrity",
     kicker: "KM 03 · Borrow the spotlight",
     title: "Celebrity Endorsement Services",
+    href: "/services/celebrity-endorsements",
+    cta: "Explore Celebrity Endorsements",
     items: [
       "Celebrity Identification & Selection",
       "Contract Negotiations",
@@ -27,6 +30,8 @@ const CARDS = [
     id: "influencer",
     kicker: "KM 04 · Make people listen",
     title: "Influencer Marketing Services",
+    href: "/services/influencer-marketing-agency-in-india",
+    cta: "Explore Influencer Marketing",
     items: [
       "Influencer Identification",
       "Cost-Benefit Analysis",
@@ -169,6 +174,9 @@ export function ServicesStarPower() {
                   </li>
                 ))}
               </ol>
+              <Link className="svc-explore" href={card.href}>
+                {card.cta} <span aria-hidden>→</span>
+              </Link>
             </article>
           ))}
         </div>

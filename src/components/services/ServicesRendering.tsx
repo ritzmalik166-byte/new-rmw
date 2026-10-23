@@ -2,6 +2,7 @@
 
 import { useGSAP } from "@gsap/react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { useRef, useState, type KeyboardEvent } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { cn } from "@/lib/cn";
@@ -141,6 +142,11 @@ export function ServicesRendering() {
             <h2 id="svc-render-title" className="svc-render-title">
               3D Rendering Services
             </h2>
+            <div className="svc-explore-row">
+              <Link className="svc-explore" href="/services/3d-rendering">
+                Explore 3D Rendering Services <span aria-hidden>→</span>
+              </Link>
+            </div>
           </div>
           <p className="svc-render-lede">
             Photorealistic renders for real estate developers, architects, interior designers, and

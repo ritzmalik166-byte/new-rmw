@@ -166,16 +166,22 @@ const WORK = {
     fit: "contain",
   },
   redFm: {
-    src: "/awards/red-fm-2011.jpg",
+    src: "/awards/red-fm-special-achievement-trophy-2011.jpg",
     alt: "Red FM 93.5 Special Achievement Award, Retail Category, Delhi",
     medium: "Red FM 93.5",
     caption: "Special Achievement Award for retail radio in Delhi.",
   },
   podmasters: {
-    src: "/awards/podmasters-2024.jpg",
+    src: "/awards/podmasters-trophy-2025.png",
     alt: "Podmasters trophy for Best Real Estate Podcast, Beyond the Blueprint",
     medium: "Podcast",
     caption: "Best Real Estate Podcast at Podmasters for Beyond the Blueprint.",
+  },
+  etYoungLeaders: {
+    src: "/awards/et-young-industry-leaders-2025-trophy.jpg",
+    alt: "ET Young Industry Leaders 2025 trophy awarded to Ritesh Malik, Founder, Ritz Media World, for Excellence in Integrated Advertising Solutions",
+    medium: "ET Awards",
+    caption: "ET Young Industry Leaders 2025 for integrated advertising.",
   },
   stage: {
     src: "/awards/my-property-face-stage.jpg",
@@ -251,7 +257,7 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
       medium: "Studio",
       caption: "Scripted, voiced and produced for the airwaves.",
     },
-    wall: [WORK.redFm, WORK.podmasters, WORK.billboard],
+    wall: [WORK.redFm, WORK.podmasters, WORK.etYoungLeaders, WORK.billboard],
   },
   "content-marketing": {
     badge: ["Now", "publishing"],
