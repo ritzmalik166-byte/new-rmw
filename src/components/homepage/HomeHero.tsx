@@ -354,7 +354,7 @@ export function HomeHero() {
               Start a project <span aria-hidden>→</span>
             </a>
             <TransitionLink href="/portfolio" className="hm-btn is-ink">
-              See our work <span aria-hidden>→</span>
+              Explore our work <span aria-hidden>→</span>
             </TransitionLink>
           </div>
 

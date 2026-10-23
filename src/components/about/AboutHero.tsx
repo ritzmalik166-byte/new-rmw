@@ -198,7 +198,7 @@ export function AboutHero() {
         <div className="about-actions">
           <TransitionLink href="/portfolio" className="about-btn about-btn-hot">
             <DashFrame />
-            <span>See our work</span>
+            <span>Explore our work</span>
           </TransitionLink>
           <TransitionLink href="/services" className="about-btn about-btn-ink">
             <DashFrame />

@@ -566,7 +566,7 @@ function CustomScene() {
             </span>
             <span className="wm-tpl-btns">
               <span className="wm-tpl-btn">Get started</span>
-              <span className="wm-tpl-btn wm-tpl-btn--ghost">See our work</span>
+              <span className="wm-tpl-btn wm-tpl-btn--ghost">Explore our work</span>
             </span>
           </div>
           <div className="wm-tpl-hero-art">
