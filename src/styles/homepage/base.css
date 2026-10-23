@@ -279,6 +279,12 @@
   font-weight: 700;
 }
 
+@media (min-width: 721px) and (max-width: 980px) {
+  .hm-title {
+    font-size: clamp(40px, 5.4vw, 52px);
+  }
+}
+
 @media (max-width: 720px) {
   .hm {
     --hm-pad-y: 64px;

@@ -245,7 +245,12 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
       medium: "Broadcast",
       caption: "Sound that earns a second listen.",
     },
-    poster: WORK.podmasters,
+    poster: {
+      src: "/s6/radio-rode-microphone.png",
+      alt: "Rode studio microphone with shock mount and pop filter against warm acoustic panels",
+      medium: "Studio",
+      caption: "Scripted, voiced and produced for the airwaves.",
+    },
     wall: [WORK.redFm, WORK.podmasters, WORK.billboard],
   },
   "content-marketing": {

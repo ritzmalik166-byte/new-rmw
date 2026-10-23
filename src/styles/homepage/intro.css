@@ -231,7 +231,8 @@ html[data-theme="dark"] .hm-cargo-logo {
   }
 
   .hm-log {
-    width: min(100%, 560px);
+    width: 100%;
+    box-sizing: border-box;
   }
 }
 

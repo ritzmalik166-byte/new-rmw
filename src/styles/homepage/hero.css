@@ -467,6 +467,22 @@ html[data-theme="dark"] .hm-hero.is-lit .hm-hero-light.is-beam::before {
   }
 }
 
+/* Portrait tablets (iPad mini / Air / Pro): plenty of height, so the copy can carry more weight. */
+@media (min-width: 641px) and (max-width: 1099px) and (orientation: portrait) {
+  .hm-hero-title {
+    font-size: clamp(48px, 7vw, 76px);
+  }
+
+  .hm-hero-seo {
+    font-size: 14px;
+  }
+
+  .hm-hero-lede {
+    max-width: 48ch;
+    font-size: 19px;
+  }
+}
+
 @media (max-width: 640px) {
   .hm-hero {
     --road-h: 56px;

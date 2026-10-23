@@ -270,7 +270,7 @@
 
   .hm-faq-help {
     order: 3;
-    width: min(100%, 520px);
+    width: 100%;
     box-sizing: border-box;
   }
 }
@@ -291,7 +291,10 @@
     padding: 0 4px 20px;
     font-size: 16.5px;
   }
+}
 
+/* Phones, and the narrow sidebar on small laptops / iPad Pro, have no room beside the title. */
+@media (max-width: 640px), (min-width: 981px) and (max-width: 1180px) {
   .hm-faq-plate {
     position: static;
     display: inline-block;
