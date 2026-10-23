@@ -273,7 +273,12 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
       medium: "Content",
       caption: "Stories made for the scroll.",
     },
-    poster: WORK.forestwalk,
+    poster: {
+      src: "/services/content-phone-article.jpg",
+      alt: "Phone showing a home upgrades article titled Small Changes, Big Comfort, with an Enquire Now button",
+      medium: "Mobile content",
+      caption: "Small Changes, Big Comfort: an article built to turn readers into enquiries.",
+    },
     wall: [WORK.metaInsights, WORK.forestwalk, WORK.navrang, WORK.aiOverview],
   },
   "web-designing-and-development": {
