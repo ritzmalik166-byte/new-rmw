@@ -57,10 +57,12 @@ export function getServiceLayout(service: ServiceDetail, parts = service.capabil
   return {
     problemSummary: layout.problemSummary ?? service.problemCopy ?? service.fullOverview,
     problemFlags: layout.problemFlags ?? DEFAULT_FLAGS,
-    planKicker: layout.planKicker ?? `${service.name} services`,
+    planKicker:
+      layout.planKicker ?? (/\bservices$/i.test(service.name) ? service.name : `${service.name} services`),
     planTitle: `${NUMBER_WORDS[parts] ?? parts} parts.`,
     planLede:
-      layout.planLede ?? `Explore the work behind a complete ${service.name.toLowerCase()} programme.`,
+      layout.planLede ??
+      `Explore the work behind a complete ${service.name.replace(/\b[A-Z][a-z]+\b/g, (word) => word.toLowerCase())} programme.`,
     planCta: layout.planCta ?? `Let's discuss your ${service.name} scope`,
     intentTitle: layout.intentTitle ?? { lead: `Why ${service.name}`, accent: "moves the needle." },
     intentPoints: layout.intentPoints ?? service.whyUs.slice(0, 3),

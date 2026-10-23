@@ -305,9 +305,45 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
   },
   "web-designing-and-development": {
     badge: ["Live", "site"],
-    scene: { ...WORK.devices, medium: "Web" },
-    poster: WORK.searchPhone,
-    wall: [WORK.devices, WORK.searchLaptop, WORK.searchConsole, WORK.searchPhone],
+    scene: {
+      src: "/services/web-vedvan-devices.jpg",
+      alt: "Vedvan Timeless Living website shown on a laptop, tablet and phone on a sunlit desk",
+      medium: "Web",
+      caption: "Vedvan: one build, every screen.",
+      ratio: "1024 / 682",
+    },
+    poster: {
+      src: "/services/web-vedvan-phone-enquiry.jpg",
+      alt: "Hand holding a phone showing the Vedvan website with a New website enquiry notification",
+      medium: "Enquiries",
+      caption: "Vedvan: a site built to bring in enquiries.",
+    },
+    wall: [
+      {
+        src: "/services/web-mansha-devices.jpg",
+        alt: "Mansha real estate website shown on a laptop, tablet and phone on a sunlit desk",
+        medium: "Responsive build",
+        caption: "One build that holds up on laptop, tablet and phone.",
+      },
+      {
+        src: "/services/web-figma-design.png",
+        alt: "Contenaissance AI creative studio homepage designed in Figma",
+        medium: "UI design",
+        caption: "Every page is designed and approved in Figma before it is built.",
+      },
+      {
+        src: "/services/web-vedvan-figma.jpg",
+        alt: "Vedvan luxury forest wellness community homepage designed in Figma",
+        medium: "Homepage design",
+        caption: "Vedvan: a homepage designed around a life rooted in nature.",
+      },
+      {
+        src: "/services/web-renox-build.jpg",
+        alt: "Renox Thrive website being designed and coded, shown on a monitor, laptop, tablet and phone",
+        medium: "Design to code",
+        caption: "Renox Thrive: designed, coded and launched on every screen.",
+      },
+    ],
   },
   "celebrity-endorsements": {
     badge: ["In the", "spotlight"],

@@ -123,7 +123,7 @@ export function AboutTruckBack() {
         </FadeIn>
 
         <FadeIn className="about-tb-stage" delay={0.15} y={60}>
-          <div className="about-tb-truck">
+          <div className="about-tb-truck theme-keep">
             <Image
               src="/about/truck-back.png"
               alt="Back of a Ritz Media World truck"

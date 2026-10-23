@@ -97,6 +97,34 @@
   border-radius: 12px;
   background: var(--hm-paper);
   box-shadow: 6px 6px 0 var(--hm-ink);
+  transition:
+    rotate 0.35s var(--hm-ease),
+    scale 0.35s var(--hm-ease),
+    translate 0.35s var(--hm-ease),
+    box-shadow 0.35s var(--hm-ease);
+}
+
+@media (hover: hover) {
+  .cs-hero-stage .cs-hero-file:hover {
+    z-index: 5;
+    rotate: 0deg;
+    scale: 1.08;
+    translate: 0 -8px;
+    padding-bottom: 12px;
+    box-shadow: 10px 12px 0 var(--hm-ink);
+  }
+
+  .cs-hero-file:hover figcaption {
+    position: static;
+    margin: 10px 4px 0;
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-hero-file {
+    transition: none;
+  }
 }
 
 /* Folder tab, so each card reads as a case file. */
