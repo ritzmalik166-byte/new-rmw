@@ -14,7 +14,7 @@ const TITLE = [
 
 const TRIP_LOG = [
   { value: 18, suffix: "+", label: "Years on the road" },
-  { value: 90, suffix: "+", label: "Crew on board" },
+  { value: 100, suffix: "+", label: "Crew on board" },
   { value: 9, suffix: "", label: "Services in the cargo" },
   { value: 3, suffix: "", label: "Engines, one agency" },
 ] as const;
