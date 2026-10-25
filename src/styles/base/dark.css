@@ -224,6 +224,17 @@ html {
   --theme-day: url("#theme-day");
 }
 
+/* Mobile WebKit and phone GPUs drop SVG reference filters on a layer as tall as
+   the page, which left phones in light mode. The built-in functions are
+   composited everywhere; they match the night matrix minus its navy lift, and
+   hue-rotate(180deg) is its own inverse, so `day` still undoes `night`. */
+@media (pointer: coarse), (max-width: 820px) {
+  html {
+    --theme-night: invert(1) hue-rotate(180deg);
+    --theme-day: hue-rotate(180deg) invert(1);
+  }
+}
+
 html[data-theme="dark"] {
   background: #fff;
   filter: var(--theme-night);
