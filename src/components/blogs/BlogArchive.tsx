@@ -163,14 +163,14 @@ export function BlogArchive({
                 <HmArrow />
               </span>
             </span>
+            <HmStamp
+              id="blog-featured-stamp"
+              className="blog-featured-stamp"
+              top="EDITOR'S PICK"
+              bottom="RITZ MEDIA WORLD"
+              word="Must Read"
+            />
           </div>
-          <HmStamp
-            id="blog-featured-stamp"
-            className="blog-featured-stamp"
-            top="EDITOR'S PICK"
-            bottom="RITZ MEDIA WORLD"
-            word="Must Read"
-          />
         </a>
       ) : (
         <p className="blog-empty">

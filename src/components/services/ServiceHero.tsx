@@ -91,6 +91,13 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
               <span>{scene.medium}</span>
               {scene.caption}
             </figcaption>
+            <HmStamp
+              id={`sd-stamp-${service.slug}`}
+              top="RITZ MEDIA WORLD"
+              bottom="SINCE 2008 · NOIDA"
+              word="Approved"
+              className="sd-collage-stamp"
+            />
           </figure>
 
           <figure className="sd-collage-poster">
@@ -107,14 +114,6 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
           <p className="hm-plate sd-collage-plate" aria-hidden>
             {art.before} <span lang="hi">{art.hindi}</span> {art.after}
           </p>
-
-          <HmStamp
-            id={`sd-stamp-${service.slug}`}
-            top="RITZ MEDIA WORLD"
-            bottom="SINCE 2008 · NOIDA"
-            word="Approved"
-            className="sd-collage-stamp"
-          />
         </div>
       </div>
     </section>

@@ -175,6 +175,12 @@ export function HmStamp({
   word: string;
   className?: string;
 }) {
+  /* The word has to sit inside the inner ring (~80 units across): two-word labels
+     stack like a rubber stamp, and anything still too wide shrinks. */
+  const lines = word.includes(" ") && word.length > 7 ? word.split(/\s+/) : [word];
+  const longest = Math.max(...lines.map((line) => line.length));
+  const wordSize = Math.min(lines.length > 1 ? 20 : 21, 80 / (longest * 0.56));
+
   return (
     <svg data-hm-stamp className={cn("hm-stamp", className)} viewBox="0 0 120 120" aria-hidden>
       <defs>
@@ -196,11 +202,23 @@ export function HmStamp({
       <text
         className="hm-stamp-word"
         x="60"
-        y="67"
+        y="60"
+        dominantBaseline="central"
         textAnchor="middle"
+        style={{ fontSize: wordSize }}
         transform="rotate(-12 60 60)"
       >
-        {word}
+        {lines.length > 1
+          ? lines.map((line, index) => (
+              <tspan
+                key={line}
+                x="60"
+                dy={index === 0 ? `${-0.5 * (lines.length - 1)}em` : "1em"}
+              >
+                {line}
+              </tspan>
+            ))
+          : word}
       </text>
     </svg>
   );

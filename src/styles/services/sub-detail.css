@@ -190,13 +190,13 @@
 
 .ssd-hero-stamp {
   position: absolute;
-  top: -2%;
-  right: -4%;
+  top: 28px;
+  right: -34px;
   z-index: 3;
-  width: clamp(92px, 9vw, 124px);
-  height: auto;
+  width: clamp(92px, 9vw, 120px);
+  height: clamp(92px, 9vw, 120px);
   color: #d0335d;
-  rotate: 12deg;
+  rotate: 10deg;
   mix-blend-mode: multiply;
 }
 
@@ -693,7 +693,10 @@
   }
 
   .ssd-hero-stamp {
-    right: 0;
+    top: 20px;
+    right: -6px;
+    width: 80px;
+    height: 80px;
   }
 
   .ssd-print figcaption {

@@ -248,13 +248,13 @@
 
 .sd-collage-stamp {
   position: absolute;
-  top: 30%;
-  right: -3%;
+  top: 28px;
+  right: -34px;
   z-index: 3;
-  width: 19%;
-  height: auto;
+  width: clamp(92px, 8vw, 116px);
+  height: clamp(92px, 8vw, 116px);
   color: #d0335d;
-  rotate: -10deg;
+  rotate: -12deg;
   mix-blend-mode: multiply;
   opacity: 0.92;
 }
@@ -1946,6 +1946,13 @@
 
   .sd-collage-scene {
     padding: 8px 8px 0;
+  }
+
+  .sd-collage-stamp {
+    top: 20px;
+    right: -6px;
+    width: 80px;
+    height: 80px;
   }
 
   .sd-collage-scene figcaption {
