@@ -1,7 +1,6 @@
 import { fetchJson, getBlogPost, getBlogsOrEmpty, normalizeImage } from "@/lib/blogs";
 
 const CASE_STUDY_LIST_URL = "https://www.ritzmediaworld.com/api/category/case-study";
-const REPORTS_ORIGIN = "https://ritzmediaworld.com";
 
 export type CaseStudy = {
   slug: string;
@@ -21,7 +20,6 @@ export type CaseStudyReport = {
   summary: string;
   period: string;
   pages: number;
-  href: string;
 };
 
 export const CASE_STUDY_REPORTS: CaseStudyReport[] = [
@@ -34,7 +32,6 @@ export const CASE_STUDY_REPORTS: CaseStudyReport[] = [
       "The Ring Awakens: Infrastructure, Premiumisation and the Next Wave of North India's Real Estate Story.",
     period: "Mid-Year 2026",
     pages: 13,
-    href: "/case-studies/RMW%20Outer%20Ring%20Rd%20Market%20Intelligence%20Reports.pdf",
   },
   {
     id: "noida",
@@ -45,7 +42,6 @@ export const CASE_STUDY_REPORTS: CaseStudyReport[] = [
       "Beyond the Affordable Tag: How Infrastructure, Wealth and a New Buyer Are Re-Rating Noida's Real Estate Market.",
     period: "Mid-Year 2026",
     pages: 12,
-    href: "/case-studies/RMW%20Noida%20Market%20Intelligence%20Reports.pdf",
   },
   {
     id: "gurgaon",
@@ -56,7 +52,6 @@ export const CASE_STUDY_REPORTS: CaseStudyReport[] = [
       "India's Most Mature Luxury Market and What Comes Next: Corridors, Circle Rates, and the Capital.",
     period: "Mid-Year 2026",
     pages: 13,
-    href: "/case-studies/RMW%20Gurgaon%20Market%20Intelligence%20Reports.pdf",
   },
   {
     id: "ghaziabad",
@@ -67,7 +62,6 @@ export const CASE_STUDY_REPORTS: CaseStudyReport[] = [
       "Gateway Reimagined: Infrastructure, National Developers and a New Buyer Class Are Writing Ghaziabad's First Luxury Chapter.",
     period: "Mid-Year 2026",
     pages: 13,
-    href: "/case-studies/RMW%20Ghaziabad%20Market%20Intelligence%20Reports.pdf",
   },
   {
     id: "north-india",
@@ -77,10 +71,9 @@ export const CASE_STUDY_REPORTS: CaseStudyReport[] = [
     summary:
       "The defining feature of North India's 2026 cycle is that outside capital and outside developers are reshaping the market.",
     period: "Mid-Year 2026",
-    pages: 25,
-    href: "/case-studies/RMW_North%20India%20Report%20creative_24%20july_Revised.pdf",
+    pages: 26,
   },
-].map((report) => ({ ...report, href: `${REPORTS_ORIGIN}${report.href}` }));
+];
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);

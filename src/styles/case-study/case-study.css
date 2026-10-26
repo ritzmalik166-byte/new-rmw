@@ -943,6 +943,11 @@
   font-size: 13px;
 }
 
+.cs-report-actions button.hm-btn {
+  border: 0;
+  cursor: pointer;
+}
+
 .cs-report.is-brief {
   overflow: hidden;
   background: var(--hm-navy);

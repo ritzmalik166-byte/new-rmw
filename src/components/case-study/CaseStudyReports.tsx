@@ -1,9 +1,11 @@
 "use client";
 
-import { useRef } from "react";
+import { useLenis } from "lenis/react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { HmArrow, HmStamp, HmTitle, useHomeReveal } from "@/components/homepage/shared";
+import { ReportDownloadForm } from "@/components/case-study/ReportDownloadForm";
 import { TransitionLink } from "@/components/motion/TransitionLink";
-import { CASE_STUDY_REPORTS } from "@/lib/case-studies";
+import { CASE_STUDY_REPORTS, type CaseStudyReport } from "@/lib/case-studies";
 
 function DownloadIcon() {
   return (
@@ -22,7 +24,41 @@ function DownloadIcon() {
 
 export function CaseStudyReports() {
   const rootRef = useRef<HTMLElement>(null);
+  const sheetRef = useRef<HTMLDialogElement>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const lenis = useLenis();
+  const [active, setActive] = useState<CaseStudyReport | null>(null);
   useHomeReveal(rootRef);
+
+  const isOpen = active !== null;
+  useEffect(() => {
+    if (!isOpen) return;
+    const root = document.documentElement;
+    root.style.overflow = "hidden";
+    lenis?.stop();
+    return () => {
+      root.style.overflow = "";
+      lenis?.start();
+    };
+  }, [isOpen, lenis]);
+
+  const open = (report: CaseStudyReport, trigger: HTMLButtonElement) => {
+    triggerRef.current = trigger;
+    setActive(report);
+    const sheet = sheetRef.current;
+    if (sheet && !sheet.open) sheet.showModal();
+  };
+
+  const close = () => sheetRef.current?.close();
+
+  const onClosed = () => {
+    setActive(null);
+    triggerRef.current?.focus({ preventScroll: true });
+  };
+
+  const onBackdrop = (event: MouseEvent<HTMLDialogElement>) => {
+    if (event.target === event.currentTarget) close();
+  };
 
   return (
     <section ref={rootRef} id="reports" className="cs-reports" aria-labelledby="cs-reports-title">
@@ -61,9 +97,14 @@ export function CaseStudyReports() {
                 <span>PDF</span>
               </p>
               <div className="cs-report-actions">
-                <a className="hm-btn" href={report.href} target="_blank" rel="noopener noreferrer">
+                <button
+                  type="button"
+                  className="hm-btn"
+                  aria-haspopup="dialog"
+                  onClick={(event) => open(report, event.currentTarget)}
+                >
                   Download report <DownloadIcon />
-                </a>
+                </button>
                 <TransitionLink href="/contact" className="hm-link">
                   Contact us
                   <HmArrow />
@@ -96,6 +137,17 @@ export function CaseStudyReports() {
           </li>
         </ul>
       </div>
+
+      <dialog
+        ref={sheetRef}
+        className="sd-sheet is-center"
+        aria-label={active ? `Download ${active.title}` : "Download report"}
+        onClose={onClosed}
+        onClick={onBackdrop}
+        data-lenis-prevent
+      >
+        {active ? <ReportDownloadForm key={active.id} report={active} onClose={close} /> : null}
+      </dialog>
     </section>
   );
 }

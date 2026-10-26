@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
 import { TransitionLink } from "@/components/motion/TransitionLink";
 import { PrivacyRoad } from "@/components/privacy/PrivacyRoad";
 import { pageMetadata } from "@/lib/seo";
@@ -9,47 +8,28 @@ import "@/styles/privacy/privacy.css";
 export const metadata: Metadata = pageMetadata({
   title: "Privacy Policy | Ritz Media World",
   description:
-    "Read how Ritz Media World collects, uses and protects your personal data on ritzmediaworld.com.",
+    "Read how Ritz Media World, a full-service advertising agency, collects, uses & protects your personal information when you visit our website or contact us.",
   keywords: ["Ritz Media World privacy policy", "data protection Ritz Media World"],
   path: "/privacy-policy",
 });
 
-const UPDATED = "23 October 2026";
-const { email, address, phones } = site.footer;
+const UPDATED = "26 October 2026";
+const EMAIL = "info@ritzmediaworld.com";
+const PHONE = "+91-9220516777";
+const ADDRESS = "Unit No. 404, 4th Floor, Corporate Park Tower A1, Sector 142, Noida, Uttar Pradesh 201305, India";
 
 const SECTIONS = [
-  { id: "who-we-are", title: "Who we are" },
-  { id: "data-we-collect", title: "Information we collect" },
-  { id: "how-we-use", title: "How we use your information" },
-  { id: "cookies", title: "Cookies & local storage" },
-  { id: "sharing", title: "Sharing & third parties" },
-  { id: "retention", title: "How long we keep data" },
-  { id: "security", title: "Keeping data secure" },
+  { id: "information-we-collect", title: "Information we collect" },
+  { id: "how-we-use", title: "How we use this information" },
+  { id: "cookies", title: "Cookies & tracking technologies" },
+  { id: "sharing", title: "Sharing of information" },
+  { id: "retention", title: "Data retention" },
+  { id: "security", title: "Data security" },
   { id: "your-rights", title: "Your rights" },
+  { id: "third-party", title: "Third-party links & embedded content" },
   { id: "children", title: "Children's privacy" },
   { id: "changes", title: "Changes to this policy" },
-  { id: "contact", title: "Contact & grievances" },
-] as const;
-
-const COOKIES = [
-  {
-    name: "Essential",
-    tone: "#0b6b3a",
-    always: true,
-    copy: "Remember your theme (light or dark) and your cookie choice, and keep forms and page transitions working. These are stored in your browser and are never used to track you.",
-  },
-  {
-    name: "Embedded services",
-    tone: "#e0457e",
-    always: false,
-    copy: "Google Maps on our contact cards and YouTube or social media embeds may set their own cookies when they load. These are governed by Google's and the respective platforms' privacy policies.",
-  },
-  {
-    name: "Analytics & marketing",
-    tone: "#f3c33c",
-    always: false,
-    copy: "We do not currently run analytics or advertising trackers on this site. If we add them in future, they will only load after you choose “Accept all”, and this policy will be updated.",
-  },
+  { id: "contact", title: "Contact us" },
 ] as const;
 
 export default function PrivacyPage() {
@@ -67,8 +47,15 @@ export default function PrivacyPage() {
             Privacy <span>Policy</span>
           </h1>
           <p className="pv-lede">
-            Your data rides with us only as far as it needs to. This page explains what we collect
-            when you visit {site.fullName}, why we collect it, and the controls you have over it.
+            {site.fullName} (&ldquo;the company,&rdquo; &ldquo;we,&rdquo; &ldquo;our,&rdquo; or
+            &ldquo;us&rdquo;) cares about the privacy of everyone who visits this website or gets in
+            touch about a brand, a campaign, or a partnership. This policy explains what information
+            we collect, how we use it, and what choices are available. Using this website means
+            agreeing to the practices described below.
+          </p>
+          <p className="pv-lede">
+            It applies to www.ritzmediaworld.com and any related services offered under the{" "}
+            {site.fullName} name.
           </p>
           <p className="pv-updated">
             <span>Last updated</span> {UPDATED}
@@ -96,195 +83,197 @@ export default function PrivacyPage() {
         </nav>
 
         <div className="pv-content">
-          <section id="who-we-are" className="pv-section">
-            <h2>Who we are</h2>
-            <p>
-              {site.fullName} (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) is a creative,
-              branding, digital and media agency founded in 2008 and based at {address}, India. We
-              operate this website and are responsible for the personal data collected through it.
-            </p>
-            <p>
-              This policy is written in line with India&rsquo;s Digital Personal Data Protection Act,
-              2023 and the Information Technology Act, 2000 and its rules. By using this website you
-              agree to the practices described here.
-            </p>
-          </section>
-
-          <section id="data-we-collect" className="pv-section">
-            <h2>Information we collect</h2>
-            <h3>Information you give us</h3>
+          <section id="information-we-collect" className="pv-section">
+            <h2>Information We Collect</h2>
+            <h3>Information Visitors Provide Directly</h3>
+            <p>Filling out the contact or enquiry form means sharing a few details:</p>
             <ul>
-              <li>
-                <strong>Contact &amp; project enquiries:</strong> your name, email address, phone
-                number, the service you&rsquo;re interested in and your message.
-              </li>
-              <li>
-                <strong>Phone verification:</strong> your mobile number, used to send a one-time
-                password (OTP) that confirms the enquiry is genuine.
-              </li>
-              <li>
-                <strong>Job applications:</strong> your name, contact details, the role you&rsquo;re
-                applying for and the resume or documents you upload.
-              </li>
-              <li>
-                <strong>Website audit requests:</strong> your website address and contact details so
-                we can send you the report.
-              </li>
+              <li>Full name</li>
+              <li>Email address</li>
+              <li>Contact number</li>
+              <li>Service of interest</li>
+              <li>Country</li>
+              <li>Enquiry message</li>
             </ul>
-            <h3>Information collected automatically</h3>
-            <ul>
-              <li>
-                Standard technical data your browser sends, such as IP address, browser type, device
-                and pages requested, which our hosting provider may log for security and performance.
-              </li>
-              <li>
-                Preferences stored in your own browser, such as your theme and cookie choice (see{" "}
-                <a href="#cookies">Cookies &amp; local storage</a>).
-              </li>
-            </ul>
+            <p>
+              None of this is collected unless a visitor chooses to submit the form. Sharing it is
+              entirely voluntary, whether the reason is a new campaign, a brand partnership, or a
+              general question about our services.
+            </p>
+            <h3>Information Collected Automatically</h3>
+            <p>
+              Like most websites, this one gathers some technical information in the background. This
+              includes browser type, device type, an approximate location based on IP address, the
+              pages viewed, the length of a visit, and how someone arrived at the site. This data is
+              usually aggregated or anonymized, and it helps us understand how people use the site and
+              where it can be improved.
+            </p>
           </section>
 
           <section id="how-we-use" className="pv-section">
-            <h2>How we use your information</h2>
+            <h2>How We Use This Information</h2>
+            <p>
+              The information gathered through the contact form and general site activity is used for
+              the following purposes:
+            </p>
             <ul>
-              <li>To respond to your enquiries, prepare proposals and deliver our services.</li>
-              <li>To verify phone numbers and protect our forms from spam and abuse.</li>
-              <li>To review job applications and contact shortlisted candidates.</li>
-              <li>To prepare and send website audits you request.</li>
-              <li>To keep the website secure, working properly and improving over time.</li>
-              <li>To meet legal, accounting and regulatory obligations.</li>
+              <li>Responding to enquiries, campaign briefs, and partnership requests</li>
+              <li>
+                Understanding which advertising, digital, and creative services visitors are most
+                interested in
+              </li>
+              <li>Improving website content, design, and user experience</li>
+              <li>Sending updates related to an ongoing enquiry, proposal, or project</li>
+              <li>Keeping the website secure and running properly</li>
             </ul>
             <p>
-              We do not sell your personal data, and we will not send you marketing messages unless
-              you have asked us to or agreed to receive them.
+              We don&rsquo;t sell contact information to third parties. It is used to follow up on the
+              enquiry a visitor submits and for nothing more.
             </p>
           </section>
 
           <section id="cookies" className="pv-section">
-            <h2>Cookies &amp; local storage</h2>
+            <h2>Cookies &amp; Tracking Technologies</h2>
             <p>
-              Cookies and local storage are small pieces of data saved in your browser. When you
-              first visit, a banner asks you to choose between <strong>Accept all</strong> and{" "}
-              <strong>Essentials only</strong>. To change your choice later, clear this site&rsquo;s
-              data in your browser and the banner will appear again.
+              This website may use cookies and similar tracking technologies to keep things running
+              smoothly, remember visitor preferences, and understand overall traffic patterns. Cookies
+              are small text files that a website stores on a visitor&rsquo;s device so that certain
+              information can carry over between visits.
             </p>
-            <ul className="pv-cookies">
-              {COOKIES.map((cookie) => (
-                <li key={cookie.name} style={{ "--pv-tone": cookie.tone } as CSSProperties}>
-                  <p className="pv-cookie-head">
-                    <span>{cookie.name}</span>
-                    <em>{cookie.always ? "Always on" : "With consent"}</em>
-                  </p>
-                  <p>{cookie.copy}</p>
-                </li>
-              ))}
-            </ul>
             <p>
-              You can also block or delete cookies through your browser settings. Blocking essential
-              storage may stop some parts of the site from remembering your preferences.
+              As an advertising agency, we may also use analytics and advertising tools, such as
+              website analytics and advertising pixels, to measure how our own website and campaigns
+              perform. These tools help us understand which pages and messages are useful to visitors.
+            </p>
+            <p>
+              Visitors can control or turn off cookies through their browser settings. Doing so might
+              affect how parts of the site function, but the core content remains accessible either
+              way.
+            </p>
+            <p>
+              A separate Cookies Policy covers the specific categories of cookies this site uses, for
+              anyone who wants the finer details.
             </p>
           </section>
 
           <section id="sharing" className="pv-section">
-            <h2>Sharing &amp; third parties</h2>
-            <p>We share personal data only when needed, with:</p>
+            <h2>Sharing of Information</h2>
+            <p>
+              Personal information is not shared with outside parties, except in the following
+              situations:
+            </p>
             <ul>
               <li>
-                Service providers who host the website, send emails and deliver OTP messages on our
-                behalf, under confidentiality obligations.
+                With service providers who help run this website or process enquiries, such as
+                hosting providers or email delivery services, and only to the extent they need that
+                information to do their job
               </li>
+              <li>When required by law, regulation, or a valid legal process</li>
+              <li>To protect the rights, safety, or property of {site.fullName}, its clients, or the public</li>
               <li>
-                Embedded platforms such as Google Maps and YouTube when you choose to load or interact
-                with them.
-              </li>
-              <li>
-                Authorities or advisers where required by law, or to protect our rights, users or the
-                public.
+                As part of a business transition, such as a merger or acquisition, where information
+                may transfer along with it
               </li>
             </ul>
             <p>
-              Links to social networks and other websites are governed by those sites&rsquo; own
-              privacy policies.
+              {site.fullName} is the parent company of a group that includes Contenaissance, Creative
+              Thinks Media, and My Property Fact. Information may be shared internally within this
+              group where it is needed to respond to an enquiry or deliver a requested service.
             </p>
           </section>
 
           <section id="retention" className="pv-section">
-            <h2>How long we keep data</h2>
+            <h2>Data Retention</h2>
             <p>
-              We keep enquiry data for as long as needed to respond and maintain our business
-              relationship, and job applications for up to 12 months so we can consider you for
-              future roles, unless you ask us to delete them sooner. Data we must keep for legal or
-              tax reasons is retained for the period the law requires.
+              Information submitted through the contact form is kept for as long as it is needed to
+              respond to the enquiry, manage an ongoing client relationship, or meet legal and
+              accounting obligations. Once that purpose has been served, the information is deleted or
+              anonymized.
             </p>
           </section>
 
           <section id="security" className="pv-section">
-            <h2>Keeping data secure</h2>
+            <h2>Data Security</h2>
             <p>
-              The site is served over HTTPS and access to submitted information is limited to the
-              team members who need it. No method of transmission or storage is completely secure,
-              but we take reasonable technical and organisational measures to protect your data.
+              Reasonable technical and organizational measures are in place to protect personal
+              information from unauthorized access, alteration, disclosure, or loss. However, no method
+              of transmission over the internet or electronic storage can offer a complete guarantee.
+              No one can promise total security, and we won&rsquo;t pretend otherwise.
             </p>
           </section>
 
           <section id="your-rights" className="pv-section">
-            <h2>Your rights</h2>
-            <p>Subject to applicable law, you can ask us to:</p>
+            <h2>Your Rights</h2>
+            <p>Depending on the data protection laws that apply, visitors may have the right to:</p>
             <ul>
-              <li>Tell you what personal data we hold about you and how it is used.</li>
-              <li>Correct, complete or update inaccurate data.</li>
-              <li>Delete your data when it is no longer needed.</li>
-              <li>Withdraw consent you have given, including your cookie choice.</li>
-              <li>Nominate someone to exercise these rights on your behalf.</li>
+              <li>Request access to the personal information held about them</li>
+              <li>Request correction of inaccurate or incomplete information</li>
+              <li>Request deletion of their personal information, where applicable</li>
+              <li>Withdraw consent for future communication at any time</li>
             </ul>
             <p>
-              Write to <a href={`mailto:${email}`}>{email}</a> and we&rsquo;ll respond within a
-              reasonable time.
+              Visitors based in India are covered under the Digital Personal Data Protection Act, and
+              this policy is built to align with its principles. Visitors from other regions may have
+              additional rights under their own local laws.
+            </p>
+            <p>
+              To exercise any of these rights, visitors can reach out using the{" "}
+              <a href="#contact">contact details below</a>.
+            </p>
+          </section>
+
+          <section id="third-party" className="pv-section">
+            <h2>Third-Party Links &amp; Embedded Content</h2>
+            <p>
+              This website may include links to third-party platforms, such as social media pages, or
+              embedded content like campaign videos and showreels. These third parties operate under
+              their own privacy policies, and {site.fullName} is not responsible for how they collect
+              or use information. Visitors are encouraged to review the privacy practices of any
+              third-party site before sharing information there.
             </p>
           </section>
 
           <section id="children" className="pv-section">
-            <h2>Children&rsquo;s privacy</h2>
+            <h2>Children&rsquo;s Privacy</h2>
             <p>
-              This website is intended for businesses and adults. We do not knowingly collect
-              personal data from children under 18. If you believe a child has shared data with us,
-              please contact us and we will delete it.
+              This website is not directed at children, and personal information is not knowingly
+              collected from anyone under the age of 18. If we learn that a minor has submitted
+              information without appropriate consent, it will be deleted.
             </p>
           </section>
 
           <section id="changes" className="pv-section">
-            <h2>Changes to this policy</h2>
+            <h2>Changes to This Policy</h2>
             <p>
-              We may update this policy as our services or the law change. The &ldquo;Last
-              updated&rdquo; date at the top shows when it was last revised.
+              This Privacy Policy may be updated from time to time to reflect changes in practices,
+              technology, legal requirements, or other factors. Any changes will be posted on this page
+              along with an updated effective date. Continuing to use the website after changes go
+              live means accepting the revised policy.
             </p>
           </section>
 
           <section id="contact" className="pv-section pv-contact">
-            <h2>Contact &amp; grievances</h2>
+            <h2>Contact Us</h2>
             <p>
-              For privacy questions, requests or complaints, reach our grievance team:
+              Questions about this Privacy Policy or how personal information is handled can be sent
+              here:
             </p>
             <dl>
               <div>
                 <dt>Email</dt>
                 <dd>
-                  <a href={`mailto:${email}`}>{email}</a>
+                  <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
                 </dd>
               </div>
               <div>
                 <dt>Phone</dt>
                 <dd>
-                  {phones.map((phone) => (
-                    <a key={phone} href={`tel:${phone.replace(/\s/g, "")}`}>
-                      {phone}
-                    </a>
-                  ))}
+                  <a href={`tel:${PHONE.replace(/-/g, "")}`}>{PHONE}</a>
                 </dd>
               </div>
               <div>
                 <dt>Address</dt>
-                <dd>{address}</dd>
+                <dd>{ADDRESS}</dd>
               </div>
             </dl>
             <TransitionLink href="/contact" className="pv-cta">

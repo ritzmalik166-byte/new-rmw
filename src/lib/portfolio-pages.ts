@@ -131,6 +131,9 @@ const WHY_RMW = {
   ],
 } satisfies PortfolioBlock;
 
+/* Images stay numbered by their original slot, so these are filtered out after mapping. */
+const HIDDEN_BRAND_IDENTITY = new Set(["/portfolio/brand-identity/logo-4.jpg", "/portfolio/brand-identity/logo-8.jpg"]);
+
 export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
   {
     slug: "brand-identity",
@@ -173,7 +176,7 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
             caption: client,
             brand: { client, logo: box(logo), mark: box(mark) },
           };
-        }),
+        }).filter((item) => !HIDDEN_BRAND_IDENTITY.has(item.src)),
       },
     ],
     intro: {
