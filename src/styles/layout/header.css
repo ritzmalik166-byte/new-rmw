@@ -15,8 +15,21 @@
   }
 }
 
+/* Entrance in CSS so the header paints with the HTML, not after hydration. */
 .site-header {
-  opacity: 0;
+  animation: site-header-in 1.05s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes site-header-in {
+  from {
+    translate: 0 -10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header {
+    animation: none;
+  }
 }
 
 .site-header.is-stuck {

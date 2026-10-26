@@ -304,7 +304,7 @@ export function Highways({ faqs = site.highways.faqs }: { faqs?: { q: string; a:
 
               <div className="highways-truck" aria-hidden>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={data.truck} alt="Ritz Media World truck on the highway" width={1024} height={766} />
+                <img src={data.truck} alt="Ritz Media World truck on the highway" width={1024} height={766} loading="lazy" />
               </div>
             </div>
           </div>

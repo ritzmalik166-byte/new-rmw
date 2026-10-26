@@ -19,10 +19,61 @@
     var(--hm-cream);
 }
 
-.hm-hero:not(.is-armed) .hm-hero-heads,
-.hm-hero:not(.is-armed) [data-hero-fade],
-.hm-hero:not(.is-armed) .hm-hero-rig {
-  visibility: hidden;
+/* The entrance runs in CSS (on `translate`, leaving `transform` to GSAP) so the
+   hero paints with the HTML instead of waiting for JavaScript to hydrate. */
+.hm-hero [data-hero-fade] {
+  animation: hm-hero-fade 0.75s cubic-bezier(0.215, 0.61, 0.355, 1) 0.25s both;
+}
+
+.hm-hero-seo[data-hero-fade] {
+  animation-delay: 0.33s;
+}
+
+.hm-hero-lede[data-hero-fade] {
+  animation-delay: 0.41s;
+}
+
+.hm-hero .hm-actions[data-hero-fade] {
+  animation-delay: 0.49s;
+}
+
+.hm-hero-meter[data-hero-fade] {
+  animation-delay: 0.57s;
+}
+
+.hm-hero-head:first-child .hm-line-inner {
+  animation: hm-hero-line-in 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.hm-hero-head:first-child .hm-line + .hm-line .hm-line-inner {
+  animation-delay: 0.19s;
+}
+
+/* Later headlines wait below the line mask until GSAP rotates them in. */
+.hm-hero-head:not(:first-child) .hm-line-inner {
+  transform: translateY(145%);
+}
+
+.hm-hero-rig {
+  animation: hm-hero-drive 2.6s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+}
+
+@keyframes hm-hero-fade {
+  from {
+    translate: 0 22px;
+  }
+}
+
+@keyframes hm-hero-line-in {
+  from {
+    translate: 0 145%;
+  }
+}
+
+@keyframes hm-hero-drive {
+  from {
+    translate: var(--drive-from) 0;
+  }
 }
 
 .hm-hero-inner {
@@ -209,6 +260,8 @@
   z-index: 2;
   width: var(--truck-w);
   will-change: transform;
+  /* Start just past the stage's right edge. */
+  --drive-from: calc(100% + var(--hm-gutter) + 40px);
 }
 
 .hm-hero-truck {
@@ -464,6 +517,7 @@ html[data-theme="dark"] .hm-hero.is-lit .hm-hero-light.is-beam::before {
     right: auto;
     left: 50%;
     margin-left: calc(var(--truck-w) / -2);
+    --drive-from: calc(50vw + 50% + 40px);
   }
 }
 
@@ -525,6 +579,9 @@ html[data-theme="dark"] .hm-hero.is-lit .hm-hero-light.is-beam::before {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hm-hero [data-hero-fade],
+  .hm-hero-head .hm-line-inner,
+  .hm-hero-rig,
   .hm-hero-sticker-face,
   .hm-hero.is-lit .hm-hero-light.is-pool,
   .hm-hero.is-lit .hm-hero-light.is-beam::before {
