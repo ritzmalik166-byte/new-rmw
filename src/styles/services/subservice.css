@@ -1081,6 +1081,48 @@
   }
 }
 
+.sd-query-dial {
+  display: grid;
+  place-items: center;
+  height: 44px;
+  border: 1.5px solid var(--hm-ink);
+  border-radius: 10px;
+  background: var(--hm-sand);
+  color: var(--hm-ink);
+  font-family: var(--hm-sans);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sd-query-submit:disabled:not([aria-busy="true"]) {
+  cursor: not-allowed;
+}
+
+/* Centred popup on wider screens; phones keep the bottom sheet. */
+@media (min-width: 641px) {
+  .sd-sheet.is-center {
+    margin: auto;
+    border-bottom: 2px solid var(--hm-ink);
+    border-radius: 20px;
+    box-shadow: 6px 6px 0 var(--hm-ink);
+  }
+
+  .sd-sheet.is-center[open] {
+    animation: sd-sheet-pop 0.3s var(--hm-ease);
+  }
+
+  .sd-sheet.is-center .sd-query-head {
+    border-radius: 18px 18px 0 0;
+  }
+}
+
+@keyframes sd-sheet-pop {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+}
+
 .sd-query.is-sheet {
   border: 0;
   border-radius: 0;

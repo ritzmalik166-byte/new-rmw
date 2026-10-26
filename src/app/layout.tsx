@@ -118,7 +118,14 @@ export const metadata: Metadata = {
     template: `%s — ${site.fullName}`,
   },
   description: site.description,
+  verification: { google: "UxPn6Ev5qoa4SEusQQ3cjHn6fqVh8eavLsme-8pKxBw" },
 };
+
+const GA_ID = "G-0YHLN54GF7";
+const GA_INIT = `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_ID}');`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -128,6 +135,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <head>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+        <script dangerouslySetInnerHTML={{ __html: GA_INIT }} />
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
