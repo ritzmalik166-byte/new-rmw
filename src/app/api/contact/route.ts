@@ -10,7 +10,7 @@ import {
   isValidName,
   isValidPhone,
 } from "@/lib/contact";
-import { isPhoneVerified } from "@/lib/contact-otp";
+import { emailSubject, isVerified } from "@/lib/contact-otp";
 import { ENQUIRY_URL, postRemote, remoteMessage } from "@/lib/enquiry";
 
 type ContactBody = Record<string, unknown>;
@@ -57,10 +57,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "Please check the highlighted fields.", errors }, { status: 400 });
   }
 
-  const needsOtp = dial === OTP_DIAL_CODE;
-  if (needsOtp && !isPhoneVerified(phone, verifiedToken)) {
+  const bySms = dial === OTP_DIAL_CODE;
+  if (!isVerified(bySms ? phone : emailSubject(email), verifiedToken)) {
     return NextResponse.json(
-      { ok: false, error: "Please verify your mobile number with the OTP first.", errors: { phone: "Verify this number." } },
+      bySms
+        ? { ok: false, error: "Please verify your mobile number with the OTP first.", errors: { phone: "Verify this number." } }
+        : { ok: false, error: "Please verify your email with the OTP first.", errors: { email: "Verify this email." } },
       { status: 400 },
     );
   }
