@@ -7,6 +7,7 @@ import { BlogShare } from "@/components/blogs/BlogShare";
 import { BlogEnquiryForm } from "@/components/blogs/BlogEnquiryForm";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { articleJsonLd, blogFaqJsonLd, breadcrumbJsonLd } from "@/lib/schema";
+import { SEO_ORIGIN } from "@/lib/seo";
 import { tagHref } from "@/lib/taxonomy";
 import "@/styles/blogs/detail.css";
 
@@ -34,14 +35,20 @@ export async function generateMetadata({
   if (!blog) return { title: "Blog Not Found | Ritz Media World" };
 
   const title = blog.metaTitle || blog.title;
+  const url = `${SEO_ORIGIN}/${encodeURIComponent(blog.slug)}`;
 
   return {
     title: { absolute: title },
     description: blog.excerpt,
     keywords: blog.keywords,
+    alternates: { canonical: url },
+    robots: { index: true, follow: true },
+    authors: [{ name: "Ritz Media World" }],
+    publisher: "Ritz Media World",
     openGraph: {
       title,
       description: blog.excerpt,
+      url,
       images: blog.image ? [blog.image] : [],
     },
   };
