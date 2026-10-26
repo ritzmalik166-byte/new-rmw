@@ -204,7 +204,7 @@
 
 .hm-hero-rig {
   position: absolute;
-  right: max(var(--hm-gutter), calc((100% - 1280px) / 2 + var(--hm-gutter)));
+  right: var(--hm-gutter);
   bottom: calc(var(--road-h) * 0.3);
   z-index: 2;
   width: var(--truck-w);

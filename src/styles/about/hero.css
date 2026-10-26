@@ -13,9 +13,8 @@
   flex: 1;
   flex-direction: column;
   justify-content: center;
-  width: min(1242px, 100%);
-  margin-inline: auto;
-  padding: 148px clamp(20px, 5.5vw, 79px) 48px;
+  width: 100%;
+  padding: 148px var(--site-gutter) 48px;
 }
 
 .about-kicker {

@@ -18,8 +18,7 @@
 }
 
 .svc-radio-inner {
-  width: min(1440px, 100%);
-  margin-inline: auto;
+  width: 100%;
   padding: 80px clamp(32px, 6vw, 88px) 88px;
   box-sizing: border-box;
 }

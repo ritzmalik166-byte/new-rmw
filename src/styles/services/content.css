@@ -6,8 +6,7 @@
 }
 
 .svc-content-inner {
-  width: min(1440px, 100%);
-  margin-inline: auto;
+  width: 100%;
   padding: 72px clamp(40px, 5vw, 72px) 64px;
   box-sizing: border-box;
 }

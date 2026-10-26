@@ -3,24 +3,6 @@
   scroll-margin-top: 96px;
 }
 
-/* Match the header bar's edges on wide screens instead of the 1280px home column. */
-.sd-page .hm-wrap {
-  max-width: none;
-  padding-inline: 20px;
-}
-
-@media (min-width: 768px) {
-  .sd-page .hm-wrap {
-    padding-inline: 40px;
-  }
-}
-
-@media (min-width: 981px) {
-  .sd-page .audit-inner {
-    width: calc(100% - 80px);
-  }
-}
-
 .sd-head {
   max-width: 760px;
 }

@@ -4,7 +4,7 @@ export const metadata: Metadata = { title: "Industries" };
 
 export default function IndustriesPage() {
   return (
-    <section className="mx-auto max-w-[1280px] px-5 pt-32 pb-24 md:px-10">
+    <section className="px-5 pt-32 pb-24 md:px-10">
       <p className="hero-kicker">Who we work with</p>
       <h1 className="hero-title">Industries</h1>
       <p className="hero-lede">

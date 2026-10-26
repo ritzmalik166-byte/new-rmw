@@ -3,24 +3,6 @@
   scroll-margin-top: 96px;
 }
 
-/* Match the header bar's edges on wide screens, as on the service pages. */
-.pf-page .hm-wrap {
-  max-width: none;
-  padding-inline: 20px;
-}
-
-@media (min-width: 768px) {
-  .pf-page .hm-wrap {
-    padding-inline: 40px;
-  }
-}
-
-@media (min-width: 981px) {
-  .pf-page .audit-inner {
-    width: calc(100% - 80px);
-  }
-}
-
 .pf-page[data-tone="pink"],
 .pf-page [data-tone="pink"] {
   --tone: #c9356e;

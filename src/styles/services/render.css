@@ -22,8 +22,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 40px;
-  width: min(1440px, 100%);
-  margin-inline: auto;
+  width: 100%;
   padding: 44px clamp(32px, 6vw, 88px);
   box-sizing: border-box;
 }
@@ -63,8 +62,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(260px, 300px);
   align-items: center;
   gap: 28px;
-  width: min(1440px, 100%);
-  margin-inline: auto;
+  width: 100%;
   padding: 48px clamp(32px, 6vw, 88px) 56px;
   box-sizing: border-box;
 }

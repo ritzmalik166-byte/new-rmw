@@ -3,6 +3,17 @@
  * whole layout grows with the root font size. Height is part of the ratio so wide-but-short
  * screens don't overflow their 100vh sections.
  */
+/* Page edge shared by every section; matches the header bar's px-5 / md:px-10. */
+:root {
+  --site-gutter: 20px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --site-gutter: 40px;
+  }
+}
+
 html {
   font-size: max(100%, min(1.1111vw, 1.7778vh));
   background: var(--background);
