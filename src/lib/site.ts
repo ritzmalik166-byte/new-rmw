@@ -29,7 +29,7 @@ export const site = {
     edge: "Ideas That Travel",
     stats: [
       { value: 18, suffix: "+", label: "Years in brand building" },
-      { value: 90, suffix: "+", label: "Professionals" },
+      { value: 100, suffix: "+", label: "Professionals" },
     ],
     partners: [
       "/s2/clients/prm-9.webp",
