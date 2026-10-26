@@ -14,7 +14,7 @@ const TITLE = [
 
 const TRIP_LOG = [
   { value: 18, suffix: "+", label: "Years on the road" },
-  { value: 90, suffix: "+", label: "Crew on board" },
+  { value: 100, suffix: "+", label: "Crew on board" },
   { value: 9, suffix: "", label: "Services in the cargo" },
   { value: 3, suffix: "", label: "Engines, one agency" },
 ] as const;
@@ -31,7 +31,7 @@ export function HomeIntro() {
         <div className="hm-intro-copy">
           <p data-hm-fade className="hm-kicker">
             <span className="hm-pill">Who&rsquo;s driving</span>
-            <span>Since 2008 · Noida UP16</span>
+            <span>KM 01 · Since 2008 · Noida UP16</span>
           </p>
           <HmTitle id="hm-intro-title" lines={TITLE} />
           <p data-hm-fade className="hm-lede">
@@ -50,10 +50,12 @@ export function HomeIntro() {
 
         <aside data-hm-fade className="hm-log" aria-label="Trip log">
           <header className="hm-log-head">
-            <p className="hm-log-kicker">Trip log</p>
-            <p className="hm-log-name">Ritz Media World Roadways</p>
+            <div>
+              <p className="hm-log-kicker">Trip log</p>
+              <p className="hm-log-name">Ritz Media World Roadways</p>
+            </div>
+            <HmPlate className="hm-log-plate" />
           </header>
-          <HmPlate className="hm-log-plate" />
 
           <dl className="hm-log-grid">
             {TRIP_LOG.map((stat) => (
@@ -79,14 +81,14 @@ export function HomeIntro() {
       <div data-hm-fade className="hm-cargo">
         <p className="hm-wrap hm-cargo-label">
           <span>Cargo we&rsquo;ve carried</span>
-          <span className="hm-cargo-count">100+ brands on board</span>
+          <span className="hm-cargo-count">300+ brands on board</span>
         </p>
         <div className="hm-cargo-lane">
           <div className="hm-cargo-track" aria-hidden>
             {[...partners, ...partners].map((src, index) => (
-              <span key={`${src}-${index}`} className="hm-cargo-logo">
+              <span key={`${src}-${index}`} className="hm-cargo-logo theme-keep">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt="" loading="lazy" decoding="async" />
+                <img src={src} alt="Ritz Media World client brand logo" loading="lazy" decoding="async" />
               </span>
             ))}
           </div>

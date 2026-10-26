@@ -6,6 +6,8 @@ export interface PortfolioCategory {
   /** Short name for the "View … work" button; defaults to `title`. */
   cta?: string;
   href: string;
+  /** Where the card links from the "Next stop" strip on detail pages; defaults to `href`. */
+  moreHref?: string;
   image: string;
   copy: string;
   items: [string, string, string, string];
@@ -61,11 +63,10 @@ export const PORTFOLIO_CATEGORIES: PortfolioCategory[] = [
   {
     id: "walk-through-videos",
     href: "/portfolio/walk-through-videos",
-    title: "3D Rendering & Walkthroughs",
-    cta: "3D Rendering",
-    image: "/portfolio/cat-3d-rendering.jpg",
-    copy: "Walkthrough videos and photorealistic renders that let buyers and investors explore a project, room by room and from above, long before construction begins.",
-    items: ["3D Walkthrough Videos", "Exterior & Interior Renders", "Aerial & Township Views", "Amenity & Landscape Renders"],
+    title: "Walk-Through Videos",
+    image: "/portfolio/cat-walkthrough.jpg",
+    copy: "3D walk-throughs that let buyers tour a project, room by room, before the first brick is laid.",
+    items: ["3D Walkthroughs", "Real Estate Visualizations", "Interior & Exterior Tours", "Amenity Showcases"],
     tone: "red",
   },
   {

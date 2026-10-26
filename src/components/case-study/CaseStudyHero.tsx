@@ -81,7 +81,7 @@ export function CaseStudyHero({ caseStudies }: { caseStudies: CaseStudy[] }) {
         <div className="cs-hero-stage" aria-hidden>
           {files.map((file, index) => (
             <figure key={file.slug} className={`cs-hero-file ${FILE_TILTS[index]}`}>
-              <BlogImage src={file.image} alt="" className="cs-hero-file-media" />
+              <BlogImage src={file.image} alt={file.title} className="cs-hero-file-media" />
               <figcaption>
                 <span>Case {String(index + 1).padStart(2, "0")}</span>
                 {file.title}

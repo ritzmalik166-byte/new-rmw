@@ -76,9 +76,9 @@ export function AboutProofs() {
   return (
     <section ref={rootRef} className="about-proofs" aria-labelledby="about-proofs-title">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/about/proof-wave-left.png" className="about-proofs-wave is-left" alt="" />
+      <img src="/about/proof-wave-left.png" className="about-proofs-wave is-left" alt="Decorative wave pattern" />
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/about/proof-wave-right.png" className="about-proofs-wave is-right" alt="" />
+      <img src="/about/proof-wave-right.png" className="about-proofs-wave is-right" alt="Decorative wave pattern" />
 
       <header className="about-proofs-head">
         <p className="about-proofs-kicker">

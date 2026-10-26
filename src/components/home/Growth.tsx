@@ -66,7 +66,7 @@ export function Growth() {
       <div className="growth-body">
         <div className="growth-art" aria-hidden>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/s5/highway.jpg" alt="" width={1024} height={576} />
+          <img src="/s5/highway.jpg" alt="Indian highway at dusk" width={1024} height={576} />
         </div>
 
         <div data-growth-item className="growth-portrait">
@@ -82,7 +82,7 @@ export function Growth() {
 
         <div className="growth-road" aria-hidden>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/s5/highway.jpg" alt="" width={1024} height={576} />
+          <img src="/s5/highway.jpg" alt="Indian highway road" width={1024} height={576} />
         </div>
 
         <div className="growth-inner">

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Fragment, type CSSProperties } from "react";
 
 const SERVICES = [
@@ -103,6 +104,12 @@ export function ServicesContentMarketing() {
             </li>
           ))}
         </ul>
+
+        <div className="svc-explore-row is-center">
+          <Link className="svc-explore" href="/services/content-marketing">
+            Explore Content Marketing Services <span aria-hidden>→</span>
+          </Link>
+        </div>
       </div>
     </section>
   );

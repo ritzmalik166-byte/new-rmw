@@ -26,7 +26,7 @@
   padding: clamp(22px, 2.4vw, 30px) clamp(20px, 2.2vw, 28px);
   border-radius: 16px;
   background:
-    radial-gradient(120% 70% at 0% 0%, rgb(243 195 60 / 16%), transparent 60%),
+    radial-gradient(120% 70% at 0% 0%, rgb(255 255 255 / 12%), rgb(243 195 60 / 16%) 32%, transparent 60%),
     var(--hm-navy);
   color: #fff;
   box-shadow: 0 30px 50px -28px rgb(27 26 74 / 60%);
@@ -45,7 +45,7 @@
 .hm-faq-help-kicker {
   color: var(--hm-yellow);
   font-family: var(--hm-mono);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -87,7 +87,7 @@
 .hm-faq-help-list span {
   color: rgb(255 255 255 / 55%);
   font-family: var(--hm-mono);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -153,7 +153,7 @@
 
 .hm-faq-q button {
   display: grid;
-  grid-template-columns: 64px minmax(0, 1fr) 38px;
+  grid-template-columns: minmax(0, 1fr) 38px;
   align-items: center;
   gap: 16px;
   width: 100%;
@@ -163,14 +163,6 @@
   color: inherit;
   text-align: left;
   cursor: pointer;
-}
-
-.hm-faq-km {
-  color: var(--hm-pink);
-  font-family: var(--hm-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
 }
 
 .hm-faq-text {
@@ -248,10 +240,10 @@
 
 .hm-faq-a {
   margin: 0;
-  padding: 0 66px 24px 94px;
+  padding: 0 66px 24px 14px;
   color: var(--hm-muted);
   font-family: var(--hm-sans);
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.65;
 }
 
@@ -278,7 +270,7 @@
 
   .hm-faq-help {
     order: 3;
-    width: min(100%, 520px);
+    width: 100%;
     box-sizing: border-box;
   }
 }
@@ -290,22 +282,19 @@
     padding: 18px 4px;
   }
 
-  .hm-faq-km {
-    grid-column: 1 / -1;
-  }
-
   .hm-faq-toggle {
-    grid-row: 2;
-    grid-column: 2;
     width: 34px;
     height: 34px;
   }
 
   .hm-faq-a {
     padding: 0 4px 20px;
-    font-size: 14.5px;
+    font-size: 16.5px;
   }
+}
 
+/* Phones, and the narrow sidebar on small laptops / iPad Pro, have no room beside the title. */
+@media (max-width: 640px), (min-width: 981px) and (max-width: 1180px) {
   .hm-faq-plate {
     position: static;
     display: inline-block;

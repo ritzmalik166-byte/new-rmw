@@ -304,7 +304,7 @@ export function Highways({ faqs = site.highways.faqs }: { faqs?: { q: string; a:
 
               <div className="highways-truck" aria-hidden>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={data.truck} alt="" width={1024} height={766} />
+                <img src={data.truck} alt="Ritz Media World truck on the highway" width={1024} height={766} />
               </div>
             </div>
           </div>
@@ -388,7 +388,7 @@ function SearchPopup() {
           <div className="highways-serp-site">
             <span className="highways-serp-favicon">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.png" alt="" width={18} height={18} />
+              <img src="/logo.png" alt="Ritz Media World logo" width={18} height={18} />
             </span>
             <span>
               <span className="highways-serp-name">Ritz Media World</span>

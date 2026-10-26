@@ -8,6 +8,10 @@ export const REAL_TRUCK = {
   wheel: 140,
 } as const;
 
+/* Driver poses share one box over the cab window; animate by toggling `data-pose`. */
+export const DRIVER_POSES = ["idle", "blink", "look", "laugh"] as const;
+export type DriverPose = (typeof DRIVER_POSES)[number];
+
 /** Turn the wheels of the `.real-truck` inside `scope` to match `distance` px travelled. */
 export function setWheelTurn(scope: HTMLElement, distance: number) {
   const truck = scope.matches(".real-truck")
@@ -28,12 +32,24 @@ type Props = {
   priority?: boolean;
   /** Rendered width of the full-size truck, so the browser can pick a smaller file. */
   sizes?: string;
+  /** Seat a driver behind the cab window. */
+  driver?: boolean;
 };
 
 const TRUCK_SRCSET =
   "/trucks/rmw-truck-sm.webp 480w, /trucks/rmw-truck-720.webp 720w, /trucks/rmw-truck.webp 1101w";
 
-export function RealTruck({ className, flip, rolling, small, priority, sizes = "100vw" }: Props) {
+export function RealTruck({
+  className,
+  flip,
+  rolling,
+  small,
+  priority,
+  sizes = "100vw",
+  driver,
+}: Props) {
+  const src = small ? "/trucks/rmw-truck-sm.webp" : "/trucks/rmw-truck.webp";
+
   return (
     <span
       className={cn("real-truck", flip && "is-flipped", rolling && "is-rolling", className)}
@@ -42,23 +58,51 @@ export function RealTruck({ className, flip, rolling, small, priority, sizes = "
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         className="real-truck-body"
-        src={small ? "/trucks/rmw-truck-sm.webp" : "/trucks/rmw-truck.webp"}
+        src={src}
         srcSet={small ? undefined : TRUCK_SRCSET}
         sizes={small ? undefined : sizes}
-        alt=""
+        alt="Ritz Media World painted Indian truck"
         width={REAL_TRUCK.width}
         height={REAL_TRUCK.height}
         loading={priority ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : undefined}
         draggable={false}
       />
+      {flip &&
+        ["is-sign", "is-horn"].map((panel) => (
+          <span
+            key={panel}
+            className={cn("real-truck-panel", panel)}
+            style={{ backgroundImage: `url(${src})` }}
+          />
+        ))}
+      {driver && (
+        <span className="real-truck-cab" data-pose="idle">
+          <span className="real-truck-driver">
+            {DRIVER_POSES.map((pose) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={pose}
+                className="real-truck-pose"
+                data-pose={pose}
+                src={`/trucks/driver/${pose}.webp`}
+                alt="Truck driver at the wheel"
+                width={336}
+                height={192}
+                loading={priority ? "eager" : "lazy"}
+                draggable={false}
+              />
+            ))}
+          </span>
+        </span>
+      )}
       <span className="real-truck-wheel is-front">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/trucks/rmw-wheel-front.webp" alt="" width={140} height={140} draggable={false} />
+        <img src="/trucks/rmw-wheel-front.webp" alt="Truck front wheel" width={140} height={140} draggable={false} />
       </span>
       <span className="real-truck-wheel is-rear">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/trucks/rmw-wheel-rear.webp" alt="" width={140} height={140} draggable={false} />
+        <img src="/trucks/rmw-wheel-rear.webp" alt="Truck rear wheel" width={140} height={140} draggable={false} />
       </span>
     </span>
   );

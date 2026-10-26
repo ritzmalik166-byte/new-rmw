@@ -1,7 +1,7 @@
 /* ---------- Homepage proof band (services engine-banner language) ---------- */
 .hm-proof {
   background:
-    radial-gradient(60% 80% at 100% 0%, rgb(255 180 0 / 14%), transparent 70%),
+    radial-gradient(60% 80% at 100% 0%, rgb(255 255 255 / 65%), rgb(255 180 0 / 14%) 32%, transparent 70%),
     #1457a8;
   color: #fbf8f2;
 }
@@ -9,15 +9,38 @@
 .hm-proof-inner {
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  /* Outer 1fr tracks centre the "KM 04" + label + heading group; stats span all four. */
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, auto) minmax(0, 1fr);
   align-items: center;
   column-gap: clamp(32px, 6vw, 96px);
   width: min(1440px, 100%);
   margin-inline: auto;
-  padding: clamp(64px, 9vh, 96px) clamp(24px, 7vw, 101px) clamp(56px, 8vh, 88px);
+  padding: clamp(64px, min(9vh, 5.625vw), 96px) clamp(24px, 7vw, 101px) clamp(56px, min(8vh, 5vw), 88px);
+}
+
+/* Labels and heading sit on the grid themselves, so "KM 04" centres on the heading, not the label row. */
+.hm-proof-head {
+  display: contents;
+}
+
+.hm-proof .hm-kicker {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.hm-proof .hm-title {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.hm-proof .hm-hindi {
+  line-height: 1;
+  translate: 0 2px;
 }
 
 .hm-proof-index {
+  grid-column: 2;
+  grid-row: 2;
   margin: 0;
   color: var(--hm-gold);
   font-family: var(--hm-serif);
@@ -61,7 +84,7 @@
   display: grid;
   grid-column: 1 / -1;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin: clamp(36px, 5vh, 56px) 0 0;
+  margin: clamp(36px, min(5vh, 3.125vw), 56px) 0 0;
   border-top: 1px dashed rgb(255 255 255 / 34%);
 }
 
@@ -69,12 +92,13 @@
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-end;
+  align-items: center;
   gap: 10px;
-  padding: 28px 20px 0 0;
+  padding: 28px clamp(12px, 2vw, 28px) 0;
+  text-align: center;
 }
 
 .hm-proof-stat + .hm-proof-stat {
-  padding-left: clamp(16px, 2vw, 28px);
   border-left: 1px dashed rgb(255 255 255 / 34%);
 }
 
@@ -92,20 +116,15 @@
 .hm-proof-stat dt {
   color: #fbf8f2;
   font-family: var(--hm-sans);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 800;
   letter-spacing: 2.5px;
   text-transform: uppercase;
 }
 
 @media (max-width: 1100px) {
-  .hm-proof-inner {
-    grid-template-columns: auto minmax(0, 1fr);
-    row-gap: 24px;
-  }
-
   .hm-proof-badge {
-    grid-column: 2;
+    grid-column: 3;
     justify-self: start;
   }
 
@@ -114,7 +133,6 @@
   }
 
   .hm-proof-stat:nth-child(3) {
-    padding-left: 0;
     border-left: 0;
   }
 
@@ -128,13 +146,45 @@
   }
 }
 
-@media (max-width: 720px) {
+/* Tablets and phones: "KM 04", the label and the heading stack and centre over the stats. */
+@media (max-width: 980px) {
   .hm-proof-inner {
     grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+  }
+
+  .hm-proof-index,
+  .hm-proof .hm-kicker,
+  .hm-proof .hm-title {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .hm-proof-index {
+    margin-bottom: 20px;
+  }
+
+  .hm-proof .hm-kicker {
+    justify-content: center;
+  }
+
+  .hm-proof .hm-title {
+    text-align: center;
+  }
+
+  .hm-proof-stats {
+    justify-self: stretch;
+  }
+}
+
+@media (max-width: 720px) {
+  .hm-proof-inner {
     padding: 56px 20px 48px;
   }
 
   .hm-proof-index {
+    margin-bottom: 20px;
     font-size: 56px;
   }
 
@@ -144,7 +194,7 @@
   }
 
   .hm-proof-stat dt {
-    font-size: 10.5px;
+    font-size: 11.5px;
     letter-spacing: 1.5px;
   }
 }

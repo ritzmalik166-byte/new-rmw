@@ -3,9 +3,9 @@
 /* ---------- Hero ---------- */
 .ssd-hero {
   overflow: hidden;
-  padding: clamp(128px, 17vh, 160px) 0 0;
+  padding: clamp(128px, min(17vh, 10.625vw), 160px) 0 0;
   background:
-    radial-gradient(55% 50% at 92% 10%, rgb(243 195 60 / 26%), transparent 70%),
+    radial-gradient(55% 50% at 92% 10%, rgb(255 255 255 / 65%), rgb(243 195 60 / 26%) 32%, transparent 70%),
     radial-gradient(45% 45% at 0% 85%, rgb(201 53 110 / 10%), transparent 70%),
     var(--hm-cream);
 }
@@ -15,7 +15,7 @@
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   align-items: center;
   gap: clamp(40px, 6vw, 96px);
-  padding-bottom: clamp(56px, 8vh, 96px);
+  padding-bottom: clamp(56px, min(8vh, 5vw), 96px);
 }
 
 .ssd-hero .hm-title {
@@ -53,7 +53,7 @@
   background: var(--hm-paper);
   color: var(--hm-muted);
   font-family: var(--hm-mono);
-  font-size: 10.5px;
+  font-size: 11.5px;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -257,7 +257,7 @@
 
 .ssd-route-head {
   max-width: 760px;
-  margin: 0 auto clamp(48px, 8vh, 88px);
+  margin: 0 auto clamp(48px, min(8vh, 5vw), 88px);
   text-align: center;
 }
 
@@ -415,7 +415,7 @@
   margin: 14px 0 0;
   color: var(--hm-muted);
   font-family: var(--hm-sans);
-  font-size: clamp(15px, 1.1vw, 16.5px);
+  font-size: clamp(17px, 1.1vw, 18.5px);
   line-height: 1.7;
 }
 
@@ -541,7 +541,7 @@
   padding: 6px 4px 0;
   color: var(--hm-muted);
   font-family: var(--hm-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;

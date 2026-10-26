@@ -19,6 +19,37 @@
   height: 100%;
 }
 
+/* Flipped trucks mirror the photo, so the painted signs are re-drawn from
+   the same art and flipped back to stay readable. Boxes are source px:
+   sign 588,60 284x148 and horn 991,97 80x118. */
+.real-truck-panel {
+  position: absolute;
+  background-repeat: no-repeat;
+  scale: -1 1;
+}
+
+.real-truck-panel.is-sign {
+  left: 53.406%;
+  top: 14.925%;
+  width: 25.795%;
+  height: 36.816%;
+  background-size: 387.676% 271.622%;
+  background-position: 71.971% 23.622%;
+}
+
+.real-truck-panel.is-horn {
+  left: 90.009%;
+  top: 24.129%;
+  width: 7.266%;
+  height: 29.353%;
+  background-size: 1376.25% 340.678%;
+  background-position: 97.062% 34.155%;
+}
+
+.real-truck.is-rolling .real-truck-panel {
+  animation: real-truck-ride 0.42s ease-in-out infinite alternate;
+}
+
 .real-truck-wheel {
   position: absolute;
   width: 12.716%;
@@ -41,6 +72,50 @@
   width: 100%;
   max-width: none;
   height: 100%;
+}
+
+/* Window box is 208,72 112x64 in source px; the mask keeps the frame, wiper
+   and mirror in front of the driver. */
+.real-truck-cab {
+  position: absolute;
+  left: 18.892%;
+  top: 17.91%;
+  width: 10.172%;
+  height: 15.92%;
+  -webkit-mask: url("/trucks/driver/glass-mask.png") 0 0 / 100% 100% no-repeat luminance;
+  mask: url("/trucks/driver/glass-mask.png") 0 0 / 100% 100% no-repeat luminance;
+}
+
+.real-truck-driver {
+  position: absolute;
+  inset: 0;
+  transform-origin: 70% 100%;
+}
+
+.real-truck .real-truck-pose {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.14s linear;
+}
+
+.real-truck-pose[data-pose="blink"] {
+  transition: none;
+}
+
+.real-truck-cab[data-pose="idle"] .real-truck-pose[data-pose="idle"],
+.real-truck-cab[data-pose="blink"] .real-truck-pose[data-pose="blink"],
+.real-truck-cab[data-pose="look"] .real-truck-pose[data-pose="look"],
+.real-truck-cab[data-pose="laugh"] .real-truck-pose[data-pose="laugh"] {
+  opacity: 1;
+}
+
+/* Keep the base pose underneath while a quick blink or swap fades in. */
+.real-truck-cab[data-pose="blink"] .real-truck-pose[data-pose="idle"] {
+  opacity: 1;
 }
 
 .real-truck.is-rolling .real-truck-wheel img {
@@ -68,7 +143,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .real-truck.is-rolling .real-truck-wheel img,
-  .real-truck.is-rolling img.real-truck-body {
+  .real-truck.is-rolling img.real-truck-body,
+  .real-truck.is-rolling .real-truck-panel {
     animation: none;
   }
 }

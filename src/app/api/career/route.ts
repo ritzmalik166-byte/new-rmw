@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { CAREER_UPLOAD_URL, isCareerRole, resumeError } from "@/lib/career";
 import { digitsOnly, isIndianMobile, isValidEmail, isValidName } from "@/lib/contact";
-import { isPhoneVerified } from "@/lib/contact-otp";
+import { isVerified } from "@/lib/contact-otp";
 import { ENQUIRY_URL, postRemote, remoteMessage } from "@/lib/enquiry";
 
 function text(form: FormData, key: string, max = 120) {
@@ -42,7 +42,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "Please check the highlighted fields.", errors }, { status: 400 });
   }
 
-  if (!isPhoneVerified(phone, verifiedToken)) {
+  if (!isVerified(phone, verifiedToken)) {
     return NextResponse.json(
       { ok: false, error: "Please verify your mobile number with the OTP first.", errors: { phone: "Verify this number." } },
       { status: 400 },

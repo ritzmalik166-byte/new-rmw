@@ -1,14 +1,15 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
-import { Fragment, useLayoutEffect, type RefObject } from "react";
+import { Fragment, useLayoutEffect, type ReactNode, type RefObject } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { cn } from "@/lib/cn";
 import { gsap, registerGsap } from "@/lib/gsap";
 
 registerGsap();
 
-export type HmLine = { text: string; accent?: boolean };
+/** `node`, when set, is rendered in place of `text` (which still keys the line). */
+export type HmLine = { text: string; node?: ReactNode; accent?: boolean };
 
 export function HmTitle({
   id,
@@ -30,7 +31,7 @@ export function HmTitle({
           {index > 0 ? " " : null}
           <span className={cn("hm-line", line.accent && "is-accent")}>
             <span data-hm-line className="hm-line-inner">
-              {line.text}
+              {line.node ?? line.text}
             </span>
           </span>
         </Fragment>

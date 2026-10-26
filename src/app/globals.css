@@ -8,6 +8,7 @@
 @import "../styles/components/buttons.css";
 @import "../styles/components/select-menu.css";
 @import "../styles/components/real-truck.css";
+@import "../styles/components/night-sky.css";
 
 @import "../styles/layout/header.css";
 @import "../styles/base/dark.css";
@@ -33,6 +34,7 @@
 
 @import "../styles/layout/footer.css";
 @import "../styles/layout/floating-contact.css";
+@import "../styles/layout/cookie-consent.css";
 
 @import "../styles/responsive/mobile-nav.css";
 @import "../styles/responsive/home.css";
@@ -48,3 +50,4 @@
 @import "../styles/services/sub-detail.css";
 
 @import "../styles/responsive/mobile-center.css";
+@import "../styles/responsive/tablet.css";

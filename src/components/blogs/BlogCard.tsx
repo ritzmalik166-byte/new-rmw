@@ -20,7 +20,7 @@ function formatDate(date: string | null) {
   if (!date) return "Ritz Media World";
   return new Intl.DateTimeFormat("en-IN", {
     dateStyle: "medium",
-    timeZone: "UTC",
+    timeZone: "Asia/Kolkata",
   }).format(new Date(date));
 }
 

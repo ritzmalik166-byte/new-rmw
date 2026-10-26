@@ -5,6 +5,10 @@ export interface ServiceCreative {
   caption: string;
   /** Screenshots and cut-outs sit inside the frame instead of filling it. */
   fit?: "contain";
+  /** Frame aspect ratio when the artwork must show edge to edge, e.g. "3 / 2". */
+  ratio?: string;
+  /** Muted looping clip shown on the wall card; `src` doubles as its poster frame. */
+  video?: string;
 }
 
 export interface ServiceCreativeSet {
@@ -26,7 +30,7 @@ const WORK = {
     src: "/s6/renox-legacy.jpg",
     alt: "Renox Thrive full-page ad in The Times of India: Built for those who leave a legacy",
     medium: "Newspaper",
-    caption: "Front-page legacy ad in The Times of India.",
+    caption: "Renox Thrive: a front-page legacy ad.",
   },
   vvipDistinctive: {
     src: "/s6/VVIP-1.jpg",
@@ -39,6 +43,36 @@ const WORK = {
     alt: "VVIP campaign creative: Where tradition finds its most luxurious address",
     medium: "Campaign",
     caption: "VVIP: tradition, told in a contemporary voice.",
+  },
+  gulshanChess: {
+    src: "/s6/gulshan-ht-city.jpg",
+    alt: "Gulshan full-page ad in HT City: Every game of chess has just one king",
+    medium: "Newspaper",
+    caption: "Gulshan: one king, one front page.",
+  },
+  lauroraSaharanpur: {
+    src: "/s6/laurora-saharanpur-toi.jpg",
+    alt: "Laurora Group and Akshara Properties full-page ad in The Times of India: Discover a lifestyle most extraordinary in Saharanpur",
+    medium: "Newspaper",
+    caption: "Laurora × Akshara: luxury villas launched in Saharanpur.",
+  },
+  eldecoOmicron: {
+    src: "/s6/eldeco-omicron-meta-ad.jpg",
+    alt: "Eldeco sponsored ad: 7 Towers, One Epic View, 3 & 4 BHK ultra-luxury residences in Omicron 1A, Greater Noida",
+    medium: "Brand campaign",
+    caption: "Eldeco: 7 towers, one epic view in Greater Noida.",
+  },
+  llmoraAvacasa: {
+    src: "/s6/llmora-avacasa-social.jpg",
+    alt: "Lumora and Avacasa social creatives: The villa you add to your bucket list, in the Shivalik Hills",
+    medium: "Social",
+    caption: "Lumora × Avacasa: villa living in the Shivalik Hills.",
+  },
+  ghdGoa: {
+    src: "/s6/ghd-goa-hindustan-times.jpg",
+    alt: "GHD Group full-page ad in the Sunday Hindustan Times: Sun, Sea, Sophistication Living in Goa",
+    medium: "Newspaper",
+    caption: "GHD Group: sun, sea and luxury living in Goa.",
   },
   navrang: {
     src: "/s6/navrang-square.jpg",
@@ -59,11 +93,24 @@ const WORK = {
     caption: "See It Differently: truck art scaled up to a highway hoarding.",
     fit: "contain",
   },
+  skyMansion: {
+    src: "/s5/risland-sky-mansion-billboard.webp",
+    alt: "Risland Sky Mansion highway billboard: Now, private living rises above the city",
+    medium: "Outdoor",
+    caption: "Risland Sky Mansion: a skyline launch, scaled up to a highway billboard.",
+  },
   billboard: {
     src: "/s5/digital-marketing.jpg",
     alt: "See It Differently billboard with a Ritz Media World truck and a woman holding a magnifying glass",
     medium: "Brand campaign",
     caption: "See It Differently: same roads, new perspectives.",
+  },
+  safarChai: {
+    src: "/s5/safar-chai-branding.webp",
+    alt: "Safar Chai brand identity in truck-art style on a carry bag, tea box, poster, business cards and colour palette",
+    medium: "Brand identity",
+    caption: "Safar Chai: one truck-art identity, from sketch to shelf.",
+    ratio: "1024 / 682",
   },
   searchConsole: {
     src: "/about/proofs/laptop-search-console.webp",
@@ -94,11 +141,10 @@ const WORK = {
     fit: "contain",
   },
   metaInsights: {
-    src: "/about/proofs/laptop-meta-insights.webp",
+    src: "/about/proofs/meta.jpg",
     alt: "Meta Business Suite insights showing 19.4M views",
     medium: "Meta insights",
     caption: "19.4M views across Facebook and Instagram this year.",
-    fit: "contain",
   },
   googleAds: {
     src: "/mobile-1.png",
@@ -122,22 +168,34 @@ const WORK = {
     fit: "contain",
   },
   redFm: {
-    src: "/awards/red-fm-2011.jpg",
+    src: "/awards/red-fm-special-achievement-trophy-2011.jpg",
     alt: "Red FM 93.5 Special Achievement Award, Retail Category, Delhi",
     medium: "Red FM 93.5",
     caption: "Special Achievement Award for retail radio in Delhi.",
   },
   podmasters: {
-    src: "/awards/podmasters-2024.jpg",
+    src: "/awards/podmasters-trophy-2025.png",
     alt: "Podmasters trophy for Best Real Estate Podcast, Beyond the Blueprint",
     medium: "Podcast",
     caption: "Best Real Estate Podcast at Podmasters for Beyond the Blueprint.",
   },
+  etYoungLeaders: {
+    src: "/awards/et-young-industry-leaders-2025-trophy.jpg",
+    alt: "ET Young Industry Leaders 2025 trophy awarded to Ritesh Malik, Founder, Ritz Media World, for Excellence in Integrated Advertising Solutions",
+    medium: "ET Awards",
+    caption: "ET Young Industry Leaders 2025 for integrated advertising.",
+  },
+  bigDreamMakers: {
+    src: "/awards/big-dream-makers-moderator-2025.png",
+    alt: "92.7 BIG FM Dream Makers Conclave & Awards 2025 trophy thanking Mr. Ritesh Malik for moderating a panel discussion",
+    medium: "92.7 BIG FM",
+    caption: "BIG Dream Makers 2025: moderating the real estate panel.",
+  },
   stage: {
     src: "/awards/my-property-face-stage.jpg",
-    alt: "My Property Face award ceremony on stage",
+    alt: "My Property Fact award ceremony on stage",
     medium: "On stage",
-    caption: "My Property Face: faces, stage and spotlight, run end to end.",
+    caption: "My Property Fact: faces, stage and spotlight, run end to end.",
   },
 } satisfies Record<string, ServiceCreative>;
 
@@ -164,64 +222,251 @@ const scene = (key: keyof typeof SCENES, medium: string, caption: string): Servi
   caption,
 });
 
+const PRESENTER_REELS: ServiceCreative[] = [
+  {
+    src: "/services/celebrity-ashiana-aaroham.jpg",
+    alt: "Presenter outside the Ashiana Aaroham entrance: One thing that makes Ashiana Aaroham truly special",
+    medium: "Ashiana Aaroham",
+    caption: "Ashiana Aaroham: one thing that makes it truly special.",
+  },
+  {
+    src: "/services/celebrity-payment-plan.jpg",
+    alt: "Presenter on a sofa holding a project brochure: an attractive 30:40:30 payment plan",
+    medium: "Payment plan",
+    caption: "An attractive 30:40:30 payment plan, explained on camera.",
+  },
+  {
+    src: "/services/celebrity-eldeco.jpg",
+    alt: "Presenter in front of the Eldeco wall showing 200+ projects, 40+ years and 30000+ homes",
+    medium: "Eldeco",
+    caption: "Eldeco: 200+ projects, 40+ years, 30,000+ homes.",
+  },
+  {
+    src: "/services/celebrity-onyx.jpg",
+    alt: "Presenter at the Onyx reception: Can Noida's next iconic jewellery destination be right here?",
+    medium: "Onyx",
+    caption: "Onyx: Noida's next iconic jewellery destination.",
+  },
+];
+
 export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
   "digital-marketing": {
     badge: ["Live", "campaign"],
     scene: scene("performance", "Performance", "Spend you can trace to enquiries."),
     poster: WORK.googleAds,
-    wall: [WORK.metaInsights, WORK.googleAds, WORK.billboard, WORK.navrang],
+    wall: [WORK.metaInsights, WORK.googleAds, WORK.eldecoOmicron, WORK.llmoraAvacasa],
   },
   "creative-services": {
     badge: ["Fresh", "off studio"],
-    scene: { ...WORK.billboard, medium: "Big idea" },
+    scene: { ...WORK.safarChai, medium: "Big idea" },
     poster: WORK.vvipDistinctive,
-    wall: [WORK.renoxThrive, WORK.vvipTradition, WORK.forestwalk, WORK.hoarding],
+    wall: [WORK.vvipTradition, WORK.renoxThrive, WORK.forestwalk, WORK.skyMansion],
   },
   "print-advertising": {
     badge: ["Front", "page"],
-    scene: scene("print", "Print", "Ink that stays on the table."),
+    scene: {
+      src: "/about/mile/print-veridia.jpg",
+      alt: "Veridia newspaper ads in The Times of India laid out on a dark blue table",
+      medium: "Print",
+      caption: "Ink that stays on the table.",
+    },
     poster: WORK.renoxLegacy,
-    wall: [WORK.renoxLegacy, WORK.renoxThrive, WORK.hoarding, WORK.vvipDistinctive],
+    wall: [
+      { ...WORK.renoxLegacy, medium: "The Times of India" },
+      { ...WORK.lauroraSaharanpur, medium: "The Times of India" },
+      { ...WORK.ghdGoa, medium: "Hindustan Times" },
+      { ...WORK.gulshanChess, medium: "HT City" },
+    ],
   },
   "radio-advertising": {
     badge: ["On", "air"],
-    scene: scene("broadcast", "Broadcast", "Sound that earns a second listen."),
-    poster: WORK.podmasters,
-    wall: [WORK.redFm, WORK.podmasters, WORK.billboard],
+    scene: {
+      src: "/s6/radio-voiceover-studio.jpg",
+      alt: "Voice artist recording a radio script on a Rode microphone in the Ritz Media World studio",
+      medium: "Broadcast",
+      caption: "Sound that earns a second listen.",
+    },
+    poster: {
+      src: "/s6/radio-rode-microphone.png",
+      alt: "Rode studio microphone with shock mount and pop filter against warm acoustic panels",
+      medium: "Studio",
+      caption: "Scripted, voiced and produced for the airwaves.",
+    },
+    wall: [WORK.redFm, WORK.podmasters, WORK.etYoungLeaders, WORK.bigDreamMakers],
   },
   "content-marketing": {
     badge: ["Now", "publishing"],
-    scene: scene("social", "Content", "Stories made for the scroll."),
-    poster: WORK.forestwalk,
-    wall: [WORK.metaInsights, WORK.forestwalk, WORK.navrang, WORK.aiOverview],
+    scene: {
+      src: "/services/content-blog-laptop.jpg",
+      alt: "Laptop showing a blog post titled 5 Things to Check Before You Buy a Home, with a phone, notebook of blog ideas and a cup of chai",
+      medium: "Content",
+      caption: "Stories made for the scroll.",
+    },
+    poster: {
+      src: "/services/content-phone-article.jpg",
+      alt: "Phone showing a home upgrades article titled Small Changes, Big Comfort, with an Enquire Now button",
+      medium: "Mobile content",
+      caption: "Small Changes, Big Comfort: an article built to turn readers into enquiries.",
+    },
+    wall: [
+      WORK.metaInsights,
+      {
+        src: "/services/content-highway-greens-social.jpg",
+        alt: "Highway Greens Instagram posts on a phone and cards: Your Mind Deserves a Greener View and Open Spaces Better Vibes",
+        medium: "Social",
+        caption: "Highway Greens: outdoor living stories built for the feed.",
+      },
+      {
+        src: "/services/content-radio-ads-ranking.png",
+        alt: "Google results for Best Radio Ads Services in Delhi showing Ritz Media World first in the local pack and the top organic result",
+        medium: "Ranking",
+        caption: "#1 on Google for “best radio ads services in Delhi”.",
+      },
+      {
+        src: "/services/content-radio-ads-local-pack.png",
+        alt: "Google Top Radio Ad Services in Delhi NCR showing Ritz Media World with a 4.9 rating and the #1 organic result",
+        medium: "Local search",
+        caption: "Top of the Delhi NCR local pack, rated 4.9 from 149 reviews.",
+      },
+    ],
   },
   "web-designing-and-development": {
     badge: ["Live", "site"],
-    scene: { ...WORK.devices, medium: "Web" },
-    poster: WORK.searchPhone,
-    wall: [WORK.devices, WORK.searchLaptop, WORK.searchConsole, WORK.searchPhone],
+    scene: {
+      src: "/services/web-vedvan-devices.jpg",
+      alt: "Vedvan Timeless Living website shown on a laptop, tablet and phone on a sunlit desk",
+      medium: "Web",
+      caption: "Vedvan: one build, every screen.",
+      ratio: "1024 / 682",
+    },
+    poster: {
+      src: "/services/web-vedvan-phone-enquiry.jpg",
+      alt: "Hand holding a phone showing the Vedvan website with a New website enquiry notification",
+      medium: "Enquiries",
+      caption: "Vedvan: a site built to bring in enquiries.",
+    },
+    wall: [
+      {
+        src: "/services/web-mansha-devices.jpg",
+        alt: "Mansha real estate website shown on a laptop, tablet and phone on a sunlit desk",
+        medium: "Responsive build",
+        caption: "One build that holds up on laptop, tablet and phone.",
+      },
+      {
+        src: "/services/web-figma-design.png",
+        alt: "Contenaissance AI creative studio homepage designed in Figma",
+        medium: "UI design",
+        caption: "Every page is designed and approved in Figma before it is built.",
+      },
+      {
+        src: "/services/web-vedvan-figma.jpg",
+        alt: "Vedvan luxury forest wellness community homepage designed in Figma",
+        medium: "Homepage design",
+        caption: "Vedvan: a homepage designed around a life rooted in nature.",
+      },
+      {
+        src: "/services/web-renox-build.jpg",
+        alt: "Renox Thrive website being designed and coded, shown on a monitor, laptop, tablet and phone",
+        medium: "Design to code",
+        caption: "Renox Thrive: designed, coded and launched on every screen.",
+      },
+    ],
   },
   "celebrity-endorsements": {
     badge: ["In the", "spotlight"],
     scene: { ...WORK.stage, medium: "Spotlight" },
-    poster: WORK.vvipTradition,
-    wall: [WORK.stage, WORK.renoxThrive, WORK.vvipDistinctive, WORK.vvipTradition],
+    poster: {
+      src: "/services/celebrity-endorsement-shoot.jpg",
+      alt: "Celebrity in a cream suit holding a product up to the camera on a brand endorsement photoshoot",
+      medium: "Celebrity shoot",
+      caption: "On set: the face, the product and the flash.",
+    },
+    wall: [
+      {
+        src: "/services/celebrity-ritesh-script-read.jpg",
+        alt: "Ritesh Malik going over the brief with an actress in a gold outfit before a shoot",
+        medium: "Brand shoot",
+        caption: "Final notes on the brief before the cameras roll.",
+        ratio: "300 / 248",
+      },
+      {
+        src: "/services/celebrity-ritesh-on-set.jpg",
+        alt: "Ritesh Malik in a pink blazer talking with a filmmaker in a denim jacket on set",
+        medium: "On set",
+        caption: "Talking through the shot with the director.",
+        ratio: "300 / 248",
+      },
+      {
+        src: "/services/celebrity-ritesh-location-shoot.jpg",
+        alt: "Ritesh Malik with an actress in a green saree at an outdoor location shoot",
+        medium: "Location shoot",
+        caption: "Out on location for a brand film.",
+        ratio: "300 / 248",
+      },
+      {
+        src: "/services/celebrity-ritesh-product-shoot.jpg",
+        alt: "Ritesh Malik handing a product to an actress in a pink saree in a photo studio",
+        medium: "Product shoot",
+        caption: "The product, handed over for the hero frame.",
+        ratio: "300 / 248",
+      },
+    ],
   },
   "influencer-marketing-agency-in-india": {
     badge: ["Now", "trending"],
-    scene: scene("social", "Creators", "Voices people already follow."),
-    poster: WORK.navrang,
-    wall: [WORK.forestwalk, WORK.navrang, WORK.metaInsights, WORK.vvipTradition],
+    scene: {
+      src: "/services/influencer-marketing-hero.jpg",
+      alt: "Creator filming a vlog on a phone gimbal in a sunlit high-rise apartment with a ring light beside her",
+      medium: "Creators",
+      caption: "Voices people already follow.",
+    },
+    poster: {
+      src: "/services/influencer-marketing-reel.jpg",
+      alt: "Hand holding a phone playing a creator's reel with hearts floating up and a comment saying Need the details!",
+      medium: "Reel",
+      caption: "The reel lands, the comments roll in.",
+    },
+    wall: PRESENTER_REELS,
   },
   "3d-rendering": {
     badge: ["Freshly", "rendered"],
-    scene: render("Aerial", "/services/icons/3d/aerial.png"),
-    poster: render("Interior", "/services/icons/3d/interior.png"),
+    scene: {
+      src: "/services/3d-rendering-hero-aerial.jpg",
+      alt: "3D aerial render of a high-rise residential township at dusk with a lit clubhouse, pool and landscaped greens",
+      medium: "Aerial",
+      caption: "A whole township, lit up before the first brick.",
+    },
+    poster: {
+      src: "/services/3d-rendering-hero-floor-plan.jpg",
+      alt: "3D cutaway floor plan of a furnished three-bedroom apartment with living, dining, kitchen and balcony",
+      medium: "Floor plan",
+      caption: "Every room, furnished in 3D.",
+    },
     wall: [
-      render("Exterior", "/services/icons/3d/exterior.png"),
-      render("Floor plan", "/services/icons/3d/floor-plan.png"),
-      render("Amenity", "/services/icons/3d/amenity.png"),
-      WORK.renoxThrive,
+      {
+        src: "/services/3d-tower-pool-topdown.png",
+        alt: "3D top-down render looking down a tower's planted balconies onto a landscaped pool deck and gardens",
+        medium: "Bird's-eye",
+        caption: "Straight down the tower to the pool deck.",
+      },
+      {
+        src: "/services/3d-edelstein-empire.png",
+        alt: "3D exterior render of the Edelstein Empire glass tower with retail at street level at sunset",
+        medium: "Tower exterior",
+        caption: "Edelstein Empire: a glass tower, lit for golden hour.",
+      },
+      {
+        src: "/services/3d-fountain-promenade.png",
+        alt: "3D landscape render of a couple walking a palm-lined promenade past tiered fountains at dusk",
+        medium: "Landscape",
+        caption: "A palm-lined promenade, walked before it's built.",
+      },
+      {
+        src: "/services/3d-villa-avenue.png",
+        alt: "3D streetscape render of modern villas along a tree-lined avenue with residents walking by",
+        medium: "Streetscape",
+        caption: "Villa avenues, complete with neighbours.",
+      },
     ],
   },
 };

@@ -34,7 +34,7 @@ export function ServiceLowerSections({ service, relatedServices }: ServiceLowerS
         points={layout.intentPoints}
         tape={layout.intentTape}
       />
-      <ServiceProof service={service} relatedServices={relatedServices} />
+      {layout.hideProof ? null : <ServiceProof service={service} relatedServices={relatedServices} />}
     </>
   );
 }
@@ -46,6 +46,7 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
   const { reduced } = useMotion();
   useHomeReveal(rootRef);
   const { wall } = getServiceCreatives(service.slug);
+  const { wallKicker, wallTitle, wallLede } = getServiceLayout(service);
 
   const syncSlide = useCallback(() => {
     const grid = gridRef.current;
@@ -90,11 +91,11 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
           <div>
             <p data-hm-fade className="hm-kicker">
               <span className="hm-pill">KM 03</span>
-              <span>Off the {service.name} desk</span>
+              <span>{wallKicker}</span>
             </p>
-            <HmTitle id="sd-wall-title" lines={[{ text: "Work that went live." }]} />
+            <HmTitle id="sd-wall-title" lines={[{ text: wallTitle }]} />
             <p data-hm-fade className="hm-lede">
-              Campaigns, creatives and live dashboards from brands that trusted us with their name.
+              {wallLede}
             </p>
           </div>
           <TransitionLink data-hm-fade href="/portfolio" className="hm-link">
@@ -146,8 +147,24 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
               >
                 <span className="sd-pin-peg" aria-hidden />
                 <figure className="sd-pin-card">
-                  <div className={cn("sd-pin-media", item.fit && "is-contain")}>
-                    <Image src={item.src} alt={item.alt} fill sizes="(max-width: 980px) 70vw, 280px" />
+                  <div
+                    className={cn("sd-pin-media", item.fit && "is-contain")}
+                    style={item.ratio ? { aspectRatio: item.ratio } : undefined}
+                  >
+                    {item.video ? (
+                      <video
+                        src={item.video}
+                        poster={item.src}
+                        aria-label={item.alt}
+                        autoPlay={!reduced}
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                      />
+                    ) : (
+                      <Image src={item.src} alt={item.alt} fill sizes="(max-width: 980px) 70vw, 280px" />
+                    )}
                   </div>
                   <figcaption>
                     <span className="sd-pin-meta">
@@ -293,14 +310,14 @@ function ServiceProof({ service, relatedServices }: ServiceLowerSectionsProps) {
         </p>
 
         <nav data-hm-fade className="sd-exits" aria-label="Related services">
-          <p className="sd-exits-label">Next exits</p>
+          <p className="sd-exits-label">Next destination</p>
           <ul>
             {relatedServices.map((related) => {
               const icon = SERVICE_ICONS[related.slug];
               return (
                 <li key={related.slug}>
                   <TransitionLink href={`/services/${related.slug}`} className="sd-exit">
-                    {icon ? <Image src={icon} alt="" width={30} height={30} /> : null}
+                    {icon ? <Image src={icon} alt={`${related.name} icon`} width={30} height={30} /> : null}
                     {related.name}
                     <HmArrow />
                   </TransitionLink>

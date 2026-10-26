@@ -54,7 +54,7 @@ export function HomeFaq({
             <p className="hm-faq-help-kicker">Dispatch office</p>
             <p className="hm-faq-help-title">Road not on the map?</p>
             <p className="hm-faq-help-copy">
-              Ask the dispatcher and The right person from our Noida team will call you back within one
+              Ask the dispatcher and the right person from our Noida team will call you back within one
               working day.
             </p>
             <ul className="hm-faq-help-list">
@@ -89,7 +89,6 @@ export function HomeFaq({
                     aria-controls={panelId}
                     onClick={() => setOpen(isOpen ? null : index)}
                   >
-                    <span className="hm-faq-km">KM {String(index + 1).padStart(2, "0")}</span>
                     <span className="hm-faq-text">{item.q}</span>
                     <span className="hm-faq-toggle" aria-hidden />
                   </button>

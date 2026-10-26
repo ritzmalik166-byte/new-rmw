@@ -2,6 +2,7 @@
 
 import { useGSAP } from "@gsap/react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { useRef, useState, type KeyboardEvent } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { cn } from "@/lib/cn";
@@ -19,26 +20,31 @@ const RenderStage = dynamic(
   },
 );
 
-const RENDERS: { id: RenderKind; title: string }[] = [
+const RENDERS: { id: RenderKind; title: string; video?: string }[] = [
   {
     id: "exterior",
     title: "3D Exterior Rendering",
+    video: "/services/3d-exterior-render.mp4",
   },
   {
     id: "interior",
     title: "3D Interior Rendering",
+    video: "/services/3d-interior-render.mp4",
   },
   {
     id: "aerial",
     title: "Aerial & Township 3D Visualization",
+    video: "/services/3d-aerial-township.mp4",
   },
   {
     id: "plan",
     title: "3D Floor Plan Rendering",
+    video: "/services/3d-floor-plan.mp4",
   },
   {
     id: "amenity",
     title: "Amenity & Landscape Rendering",
+    video: "/services/3d-amenity-landscape.mp4",
   },
 ];
 
@@ -141,6 +147,11 @@ export function ServicesRendering() {
             <h2 id="svc-render-title" className="svc-render-title">
               3D Rendering Services
             </h2>
+            <div className="svc-explore-row">
+              <Link className="svc-explore" href="/services/3d-rendering">
+                Explore 3D Rendering Services <span aria-hidden>→</span>
+              </Link>
+            </div>
           </div>
           <p className="svc-render-lede">
             Photorealistic renders for real estate developers, architects, interior designers, and
@@ -157,7 +168,21 @@ export function ServicesRendering() {
           role="tabpanel"
           aria-labelledby={`svc-render-tab-${render.id}`}
         >
-          <RenderStage kind={render.id} reduced={reduced} />
+          {render.video ? (
+            <video
+              key={render.video}
+              className="svc-render-video"
+              src={render.video}
+              aria-label={`${render.title} walkthrough`}
+              autoPlay={!reduced}
+              controls={reduced}
+              muted
+              loop
+              playsInline
+            />
+          ) : (
+            <RenderStage kind={render.id} reduced={reduced} />
+          )}
 
           <span className="svc-render-buckets" aria-hidden>
             {BUCKETS.map((i) => (
@@ -197,7 +222,7 @@ export function ServicesRendering() {
               >
                 <span className="svc-render-thumb" aria-hidden>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={RENDER_ICONS[item.id]} alt="" width={64} height={64} loading="lazy" />
+                  <img src={RENDER_ICONS[item.id]} alt={`${item.title} icon`} width={64} height={64} loading="lazy" />
                 </span>
                 <span className="svc-render-tab-text">
                   <span className="svc-render-tab-title">{item.title}</span>

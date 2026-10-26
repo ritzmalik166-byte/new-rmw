@@ -38,14 +38,14 @@ const ERAS = [
     alt: "A laptop showing an empty search bar on a desk at night",
   },
   {
-    name: "Social media",
+    name: "Social Media",
     short: "Social",
     line: "Brands started talking back.",
     src: "/about/mile/social.jpg",
     alt: "A hand holding a smartphone with a social feed on a city street",
   },
   {
-    name: "Performance",
+    name: "Performance Marketing",
     short: "Performance",
     line: "Every rupee tracked to a result.",
     src: "/about/mile/performance.jpg",
@@ -71,7 +71,7 @@ const REST = [
 
 const YEARS = 18;
 const DIGITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-const PIN_QUERY = "(min-width: 901px) and (min-height: 680px)";
+const PIN_QUERY = "(min-width: 901px) and (min-height: 680px) and (orientation: landscape)";
 const AUTOPLAY_MS = 2600;
 const AUTOPLAY_HOLD_MS = 4200;
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -392,7 +392,7 @@ export function AboutMileage() {
         <div className="about-mile-copy">
           <p className="about-mile-kicker">Mile marker 18</p>
           <h2 id="about-mile-title" className="about-mile-title">
-            What 18 Years on the Road Have Taught Us<span className="about-mile-dot">.</span>
+            What 18 Years on the Road Have Taught Us<span className="about-mile-dot" aria-hidden />
           </h2>
           <p className="about-mile-lede">
             Over the years, we have worked through launches, market slowdowns, new platforms, and changing customer

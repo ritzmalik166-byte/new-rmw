@@ -2,8 +2,8 @@
 
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
-import { useRef } from "react";
-import { HmArrow, HmStamp, HmTitle, useHomeReveal } from "@/components/homepage/shared";
+import { useRef, type CSSProperties } from "react";
+import { HmArrow, HmStamp, HmTitle, useFitTitle, useHomeReveal } from "@/components/homepage/shared";
 import { TransitionLink } from "@/components/motion/TransitionLink";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap } from "@/lib/gsap";
@@ -17,6 +17,7 @@ export function PortfolioDetailHero({ detail }: { detail: PortfolioDetail }) {
   const rootRef = useRef<HTMLElement>(null);
   const { ready, reduced } = useMotion();
   useHomeReveal(rootRef, "top 90%");
+  useFitTitle(rootRef, "#pfd-hero-title");
   useAutoplayVideos(rootRef);
 
   const picks = detail.groups.flatMap((group) => group.items).slice(0, 2);
@@ -50,7 +51,10 @@ export function PortfolioDetailHero({ detail }: { detail: PortfolioDetail }) {
   return (
     <section ref={rootRef} className="hm pf-hero pfd-hero" aria-labelledby="pfd-hero-title">
       <div className="hm-wrap pf-hero-inner">
-        <div className="pf-hero-copy">
+        <div
+          className="pf-hero-copy pfd-hero-copy"
+          style={{ "--title-chars": Math.max(...detail.h1.map((line) => line.length)) } as CSSProperties}
+        >
           <nav data-hm-fade className="sd-crumbs" aria-label="Breadcrumb">
             <ol>
               <li>
@@ -73,6 +77,7 @@ export function PortfolioDetailHero({ detail }: { detail: PortfolioDetail }) {
           <HmTitle
             as="h1"
             id="pfd-hero-title"
+            className="is-line-locked"
             lines={[{ text: detail.h1[0] }, { text: detail.h1[1], accent: true }]}
           />
 
@@ -93,7 +98,7 @@ export function PortfolioDetailHero({ detail }: { detail: PortfolioDetail }) {
 
         <div className="pfd-hero-stage" aria-hidden>
           <figure className="pfd-hero-cover">
-            <Image src={detail.cover} alt="" fill priority sizes="(max-width: 980px) 80vw, 460px" />
+            <Image src={detail.cover} alt={`${detail.name} work by Ritz Media World`} fill priority sizes="(max-width: 980px) 80vw, 460px" />
           </figure>
           {picks.map((item, index) => (
             <figure key={index} className={`pfd-hero-card is-${index + 1}`}>

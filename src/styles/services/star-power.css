@@ -172,7 +172,19 @@
 
 @media (max-width: 1100px) {
   .svc-star-grid {
-    grid-template-columns: minmax(0, 600px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .svc-star-card {
+    min-height: 0;
+    padding: 30px 26px;
+  }
+
+  .svc-star-card-title {
+    font-size: 26px;
+    line-height: 1.2;
   }
 
   .svc-star-title {
@@ -181,6 +193,13 @@
 
   .svc-star-km {
     font-size: 24px;
+  }
+}
+
+@media (max-width: 760px) {
+  .svc-star-grid {
+    grid-template-columns: minmax(0, 600px);
+    justify-content: center;
   }
 }
 

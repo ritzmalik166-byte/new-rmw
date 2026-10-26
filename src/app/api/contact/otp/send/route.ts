@@ -1,30 +1,46 @@
 import { NextResponse } from "next/server";
-import { digitsOnly, isIndianMobile } from "@/lib/contact";
-import { checkSendLimits, clientIp, createOtp, recordSend, sendOtpSms } from "@/lib/contact-otp";
+import { digitsOnly, isIndianMobile, isValidEmail } from "@/lib/contact";
+import {
+  checkSendLimits,
+  clientIp,
+  createOtp,
+  emailSubject,
+  recordSend,
+  sendOtpEmail,
+  sendOtpSms,
+} from "@/lib/contact-otp";
 
 export async function POST(request: Request) {
   let phone = "";
+  let email = "";
   try {
-    const body = (await request.json()) as { phone?: unknown };
+    const body = (await request.json()) as { phone?: unknown; email?: unknown };
     phone = typeof body.phone === "string" ? digitsOnly(body.phone) : "";
+    email = typeof body.email === "string" ? body.email.trim().slice(0, 160) : "";
   } catch {
     return NextResponse.json({ ok: false, error: "Invalid request." }, { status: 400 });
   }
 
-  if (!isIndianMobile(phone)) {
-    return NextResponse.json({ ok: false, error: "Enter a valid 10-digit Indian mobile number." }, { status: 400 });
+  const byEmail = Boolean(email);
+  if (byEmail ? !isValidEmail(email) : !isIndianMobile(phone)) {
+    return NextResponse.json(
+      { ok: false, error: byEmail ? "Enter a valid email address." : "Enter a valid 10-digit Indian mobile number." },
+      { status: 400 },
+    );
   }
 
+  const subject = byEmail ? emailSubject(email) : phone;
   const ip = clientIp(request);
-  const limit = checkSendLimits(phone, ip);
+  const limit = checkSendLimits(subject, ip);
   if (!limit.ok) {
     return NextResponse.json({ ok: false, error: limit.error, retryIn: limit.retryIn }, { status: 429 });
   }
 
   try {
-    const { otp, token } = createOtp(phone);
-    await sendOtpSms(phone, otp);
-    recordSend(phone, ip);
+    const { otp, token } = createOtp(subject);
+    if (byEmail) await sendOtpEmail(email, otp);
+    else await sendOtpSms(phone, otp);
+    recordSend(subject, ip);
     return NextResponse.json({ ok: true, token });
   } catch (error) {
     console.error("[contact-otp] send failed", error instanceof Error ? error.message : error);

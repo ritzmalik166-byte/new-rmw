@@ -96,9 +96,9 @@ export function ContactForm() {
   const [bookedOn, setBookedOn] = useState("");
   const bookedRef = useRef<HTMLHeadingElement>(null);
 
-  const needsOtp = values.dial === OTP_DIAL_CODE;
-  const phoneLocked = otpStage === "verified" || otpStage === "verifying";
-  const otpOpen = needsOtp && (otpStage === "sent" || otpStage === "verifying");
+  const bySms = values.dial === OTP_DIAL_CODE;
+  const otpLocked = otpStage === "verified" || otpStage === "verifying";
+  const otpOpen = otpStage === "sent" || otpStage === "verifying";
 
   useEffect(() => {
     if (sentName) bookedRef.current?.focus({ preventScroll: true });
@@ -130,7 +130,12 @@ export function ContactForm() {
   const onPhoneChange = (event: ChangeEvent<HTMLInputElement>) => {
     const max = values.dial === OTP_DIAL_CODE ? 10 : 14;
     update("phone", digitsOnly(event.target.value).slice(0, max));
-    if (otpStage !== "idle") resetOtp();
+    if (bySms && otpStage !== "idle") resetOtp();
+  };
+
+  const onEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+    update("email", event.target.value);
+    if (!bySms && otpStage !== "idle") resetOtp();
   };
 
   const onDialChange = (dial: string) => {
@@ -153,9 +158,11 @@ export function ContactForm() {
     setErrors(validate(values));
   };
 
+  const otpTarget = () => (bySms ? { phone: values.phone } : { email: values.email.trim() });
+
   const sendOtp = async () => {
-    if (!isIndianMobile(values.phone)) {
-      setTouched((current) => ({ ...current, phone: true }));
+    if (bySms ? !isIndianMobile(values.phone) : !isValidEmail(values.email.trim())) {
+      setTouched((current) => ({ ...current, [bySms ? "phone" : "email"]: true }));
       setErrors(validate(values));
       return;
     }
@@ -163,13 +170,13 @@ export function ContactForm() {
     setOtpError("");
     const result = await postJson<{ ok: boolean; token?: string; error?: string; retryIn?: number }>(
       "/api/contact/otp/send",
-      { phone: values.phone },
+      otpTarget(),
     );
     if (result.ok && result.token) {
       setOtpToken(result.token);
       setOtp("");
       setOtpStage("sent");
-      setOtpMessage(`Sent to +91 ${values.phone}`);
+      setOtpMessage(bySms ? `Sent to +91 ${values.phone}` : `Sent to ${values.email.trim()}`);
       setResendIn(OTP_RESEND_SECONDS);
       window.setTimeout(() => otpRefs.current[0]?.focus(), 60);
     } else {
@@ -185,7 +192,7 @@ export function ContactForm() {
     setOtpError("");
     const result = await postJson<{ ok: boolean; verifiedToken?: string; error?: string }>(
       "/api/contact/otp/verify",
-      { phone: values.phone, otp: code, token: otpToken },
+      { ...otpTarget(), otp: code, token: otpToken },
     );
     if (result.ok && result.verifiedToken) {
       setVerifiedToken(result.verifiedToken);
@@ -234,8 +241,10 @@ export function ContactForm() {
     event.preventDefault();
     const nextErrors = validate(values);
     setTouched({ firstName: true, lastName: true, email: true, phone: true, country: true });
-    if (needsOtp && otpStage !== "verified" && !nextErrors.phone) {
-      nextErrors.phone = "Verify your number with the OTP to continue.";
+    if (otpStage !== "verified" && !nextErrors.phone && (bySms || !nextErrors.email)) {
+      nextErrors.phone = bySms
+        ? "Verify your number with the OTP to continue."
+        : "Verify your email with the OTP to continue.";
     }
     setErrors(nextErrors);
     setSubmitError("");
@@ -334,8 +343,9 @@ export function ContactForm() {
               name="email"
               autoComplete="email"
               value={values.email}
-              onChange={(event) => update("email", event.target.value)}
+              onChange={onEmailChange}
               onBlur={() => blur("email")}
+              readOnly={!bySms && otpLocked}
               aria-invalid={Boolean(errors.email && touched.email)}
               required
             />
@@ -361,11 +371,11 @@ export function ContactForm() {
                 inputMode="numeric"
                 autoComplete="tel-national"
                 name="phone"
-                placeholder={needsOtp ? "10-digit mobile" : "Phone number"}
+                placeholder={bySms ? "10-digit mobile" : "Phone number"}
                 value={values.phone}
                 onChange={onPhoneChange}
                 onBlur={() => blur("phone")}
-                readOnly={phoneLocked}
+                readOnly={bySms && otpLocked}
                 aria-invalid={Boolean(phoneError)}
                 aria-describedby="ct-phone-help"
                 required
@@ -377,7 +387,7 @@ export function ContactForm() {
                   </svg>
                   Verified
                 </span>
-              ) : needsOtp ? (
+              ) : (
                 <button
                   type="button"
                   className="ct-otp-send"
@@ -387,12 +397,14 @@ export function ContactForm() {
                   {otpStage === "sending"
                     ? "Sending…"
                     : otpStage === "idle"
-                      ? "Send OTP"
+                      ? bySms
+                        ? "Send OTP"
+                        : "Email OTP"
                       : resendIn > 0
                         ? `Resend ${resendIn}s`
                         : "Resend"}
                 </button>
-              ) : null}
+              )}
             </div>
             {phoneError ? (
               <span id="ct-phone-help" className="ct-error" role={otpError ? "alert" : undefined}>
@@ -400,16 +412,16 @@ export function ContactForm() {
               </span>
             ) : otpStage === "verified" ? (
               <span id="ct-phone-help" className="ct-help">
-                Number verified.{" "}
+                {bySms ? "Number" : "Email"} verified.{" "}
                 <button type="button" className="ct-link" onClick={resetOtp}>
-                  Use a different number
+                  {bySms ? "Use a different number" : "Use a different email"}
                 </button>
               </span>
             ) : (
-              <span id="ct-phone-help" className={cn("ct-help", needsOtp && "sr-only")}>
-                {needsOtp
+              <span id="ct-phone-help" className={cn("ct-help", bySms && "sr-only")}>
+                {bySms
                   ? "We'll text you a one-time code to confirm it's you."
-                  : "We'll confirm international numbers by call."}
+                  : "We'll email a one-time code to the address above to confirm it's you."}
               </span>
             )}
 

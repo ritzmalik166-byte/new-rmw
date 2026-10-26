@@ -92,14 +92,9 @@ export function PortfolioCta({
               </a>
             </>
           ) : (
-            <>
-              <TransitionLink href="/contact" className="hm-btn is-ink">
-                Contact us <span aria-hidden>→</span>
-              </TransitionLink>
-              <a href="/contact" target="_blank" rel="noopener noreferrer" className="hm-btn pf-cta-btn">
-                Start a project <span aria-hidden>→</span>
-              </a>
-            </>
+            <TransitionLink href="/contact" className="hm-btn is-ink">
+              Contact us <span aria-hidden>→</span>
+            </TransitionLink>
           )}
         </div>
         <ul data-hm-fade className="pf-cta-lines" aria-label="Reach us">

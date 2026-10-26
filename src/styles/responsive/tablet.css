@@ -1,0 +1,130 @@
+/* ---------- Portrait tablets (iPad mini / Air / Pro, Galaxy Tab) ----------
+   These screens are much taller than their content, so "fill one screen" sections
+   left large empty bands above and below the copy. Let them size to content.
+   Selectors are prefixed with `html` to beat page stylesheets that load later. */
+@media (min-width: 600px) and (max-width: 1100px) and (orientation: portrait) {
+  html .hm-hero,
+  html .about-hero,
+  html .about-proofs,
+  html .reviews,
+  html .ct,
+  html .blog-archive,
+  html .blog-post-page {
+    min-height: 0;
+  }
+
+  html .hm-hero {
+    padding-bottom: 8px;
+  }
+
+  html .about-hero-main {
+    flex: 0 0 auto;
+    justify-content: flex-start;
+    padding-bottom: 64px;
+  }
+}
+
+/* ---------- Service pages on tablets ----------
+   Between the phone layout (centred) and desktop (two columns, left-aligned) the
+   service sections stack to one column but kept left-aligned copy beside centred
+   visuals. Use the phone's centred treatment here; mock-UI illustrations keep
+   their own alignment, as in mobile-center.css. */
+@media (min-width: 721px) and (max-width: 980px) {
+  main :where(.svc-page, .sd-page) {
+    text-align: center;
+  }
+
+  main :where(.svc-page, .sd-page) :is(h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd):not(
+      :is(form, table, .hm-faq-list, .svch-note, .svc-dm-search, .wm-frame, .bc, [class*="svc-paper"]) *
+    ) {
+    text-align: center !important;
+  }
+
+  main :where(.svc-page, .sd-page) :is(form, table, .hm-faq-list, .hm-chip, .svch-note, .svc-dm-search, .wm-frame, .bc, [class*="svc-paper"]) {
+    text-align: start;
+  }
+
+  main :where(.svc-page, .sd-page) :is(h1, h2, h3, h4, h5, h6, p, blockquote):not(form *, table *, .bc *, li > *) {
+    margin-inline: auto;
+  }
+
+  main :where(.svc-page, .sd-page) :is(.hm-btn, .hm-link, a[class*="-more"], a[class*="-cta"]):not(form *) {
+    align-self: center;
+    justify-self: center;
+  }
+
+  main
+    :where(.svc-page, .sd-page)
+    :is(
+      [class*="kicker"],
+      [class*="-meta"],
+      [class*="actions"],
+      [class*="chips"],
+      [class*="tags"],
+      [class*="pills"],
+      [class$="-head"],
+      [class*="-head "],
+      [class*="-heading"],
+      .hm-actions,
+      .sd-crumbs ol
+    ):not(:is(form, .svch-note, .svc-dm-search, .wm-frame, .bc) *) {
+    justify-content: center;
+  }
+
+  html .ssd-stop-copy {
+    max-width: 560px;
+    justify-self: center;
+  }
+
+  html .sd-head.is-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  html .sd-stop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  html .sd-why-point {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+  }
+
+  html :is(.sd-flag, .sd-plan-foot) {
+    justify-content: center;
+    text-align: center;
+  }
+
+  html :is(.sd-plan-panel-nav, .sd-proof ul, .sd-plan-tabs, .ssd-hero-facts) {
+    justify-content: center;
+  }
+
+  html .sd-plan-panel ul {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    column-gap: 40px;
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+    text-align: left;
+  }
+
+  html .svc-content-card-inner {
+    align-items: center;
+    text-align: center;
+  }
+
+  html .svc-star-list {
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  html .svc-star-list li {
+    justify-content: flex-start;
+    text-align: left;
+  }
+}

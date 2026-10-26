@@ -91,7 +91,7 @@ export function AboutTruckBack() {
         <FadeIn className="about-tb-head">
           <p className="about-tb-kicker">UP16 · Ritz Media World 2008</p>
           <h2 id="about-tb-title" className="about-tb-title">
-            Read the back of our truck.
+            Read the Back of Our Truck.
           </h2>
         </FadeIn>
 
@@ -123,10 +123,10 @@ export function AboutTruckBack() {
         </FadeIn>
 
         <FadeIn className="about-tb-stage" delay={0.15} y={60}>
-          <div className="about-tb-truck">
+          <div className="about-tb-truck theme-keep">
             <Image
               src="/about/truck-back.png"
-              alt=""
+              alt="Back of a Ritz Media World truck"
               width={810}
               height={668}
               sizes="(max-width: 900px) 92vw, 620px"

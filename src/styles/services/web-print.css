@@ -983,6 +983,8 @@
   .svc-print-item-title {
     font-size: 15px;
     line-height: 18px;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 
   .svc-print-item-copy {

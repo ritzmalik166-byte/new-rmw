@@ -18,6 +18,7 @@
       .svch-note,
       .svc-dm-search,
       .wm-frame,
+      .bc,
       [class*="svc-paper"]
     ) {
     text-align: start;
@@ -38,6 +39,7 @@
           .svch-note,
           .svc-dm-search,
           .wm-frame,
+          .bc,
           [class*="svc-paper"]
         )
         *
@@ -46,7 +48,7 @@
   }
 
   /* Centres width-capped ledes; list rows keep their flex spacing. */
-  main :is(h1, h2, h3, h4, h5, h6, p, blockquote):not(form *, table *, .blog-prose *, li > *) {
+  main :is(h1, h2, h3, h4, h5, h6, p, blockquote):not(form *, table *, .blog-prose *, .bc *, li > *) {
     margin-inline: auto;
   }
 
@@ -65,7 +67,7 @@
       .sd-crumbs ol,
       .blog-breadcrumb ol,
       .blog-post-tag-list
-    ):not(:is(form, .svch-note, .svc-dm-search, .wm-frame) *) {
+    ):not(:is(form, .svch-note, .svc-dm-search, .wm-frame, .bc) *) {
     justify-content: center;
   }
 

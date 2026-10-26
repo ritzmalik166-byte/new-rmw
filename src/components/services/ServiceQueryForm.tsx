@@ -74,9 +74,29 @@ async function postJson<T>(url: string, body: unknown): Promise<T> {
   }) as T;
 }
 
-type ServiceQueryFormProps = { service: string; className?: string; onClose?: () => void };
+type ServiceQueryFormProps = {
+  service: string;
+  title?: string;
+  lede?: string;
+  doneText?: string;
+  /** First line of the message sent to the CRM; defaults to "Service: {service}". */
+  context?: string;
+  /** Tighter layout for narrow sticky sidebars that must fit within the viewport. */
+  compact?: boolean;
+  className?: string;
+  onClose?: () => void;
+};
 
-export function ServiceQueryForm({ service, className, onClose }: ServiceQueryFormProps) {
+export function ServiceQueryForm({
+  service,
+  title = "Quick query",
+  lede = `Tell us what you need for ${service}.`,
+  doneText = `Our ${service} team will call you within one working day.`,
+  context = `Service: ${service}`,
+  compact = false,
+  className,
+  onClose,
+}: ServiceQueryFormProps) {
   const uid = useId();
   const titleId = `${uid}-title`;
   const phoneId = `${uid}-phone`;
@@ -95,10 +115,10 @@ export function ServiceQueryForm({ service, className, onClose }: ServiceQueryFo
   const [submitError, setSubmitError] = useState("");
   const [sentName, setSentName] = useState("");
 
-  const needsOtp = values.dial === OTP_DIAL_CODE;
-  const phoneLocked = otpStage === "verified" || otpStage === "verifying";
-  const otpOpen = needsOtp && (otpStage === "sent" || otpStage === "verifying");
-  const phoneMax = needsOtp ? 10 : 14;
+  const bySms = values.dial === OTP_DIAL_CODE;
+  const otpLocked = otpStage === "verified" || otpStage === "verifying";
+  const otpOpen = otpStage === "sent" || otpStage === "verifying";
+  const phoneMax = bySms ? 10 : 14;
 
   useEffect(() => {
     if (resendIn <= 0) return;
@@ -121,7 +141,12 @@ export function ServiceQueryForm({ service, className, onClose }: ServiceQueryFo
 
   const onPhoneChange = (event: ChangeEvent<HTMLInputElement>) => {
     update("phone", digitsOnly(event.target.value).slice(0, phoneMax));
-    if (otpStage !== "idle") resetOtp();
+    if (bySms && otpStage !== "idle") resetOtp();
+  };
+
+  const onEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+    update("email", event.target.value);
+    if (!bySms && otpStage !== "idle") resetOtp();
   };
 
   const onDialChange = (dial: string) => {
@@ -139,16 +164,22 @@ export function ServiceQueryForm({ service, className, onClose }: ServiceQueryFo
     }
   };
 
+  const otpTarget = () => (bySms ? { phone: values.phone } : { email: values.email.trim() });
+
   const sendOtp = async () => {
-    if (!isIndianMobile(values.phone)) {
+    if (bySms && !isIndianMobile(values.phone)) {
       setErrors((current) => ({ ...current, phone: "Enter a 10-digit mobile number." }));
+      return;
+    }
+    if (!bySms && !isValidEmail(values.email.trim())) {
+      setErrors((current) => ({ ...current, email: "Enter a valid email address." }));
       return;
     }
     setOtpStage("sending");
     setOtpError("");
     const result = await postJson<{ ok: boolean; token?: string; error?: string; retryIn?: number }>(
       "/api/contact/otp/send",
-      { phone: values.phone },
+      otpTarget(),
     );
     if (result.ok && result.token) {
       setOtpToken(result.token);
@@ -168,7 +199,7 @@ export function ServiceQueryForm({ service, className, onClose }: ServiceQueryFo
     setOtpError("");
     const result = await postJson<{ ok: boolean; verifiedToken?: string; error?: string }>(
       "/api/contact/otp/verify",
-      { phone: values.phone, otp: code, token: otpToken },
+      { ...otpTarget(), otp: code, token: otpToken },
     );
     if (result.ok && result.verifiedToken) {
       setVerifiedToken(result.verifiedToken);
@@ -190,8 +221,10 @@ export function ServiceQueryForm({ service, className, onClose }: ServiceQueryFo
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const nextErrors = validate(values);
-    if (needsOtp && otpStage !== "verified" && !nextErrors.phone) {
-      nextErrors.phone = "Verify your number with the OTP to continue.";
+    if (otpStage !== "verified" && !nextErrors.phone && (bySms || !nextErrors.email)) {
+      nextErrors.phone = bySms
+        ? "Verify your number with the OTP to continue."
+        : "Verify your email with the OTP to continue.";
     }
     setErrors(nextErrors);
     setSubmitError("");
@@ -206,7 +239,7 @@ export function ServiceQueryForm({ service, className, onClose }: ServiceQueryFo
       firstName: values.firstName.trim(),
       lastName: values.lastName.trim(),
       email: values.email.trim(),
-      message: [`Service: ${service}`, values.message.trim()].filter(Boolean).join("\n"),
+      message: [context, values.message.trim()].filter(Boolean).join("\n"),
       verifiedToken,
     });
     setSubmitting(false);
@@ -243,7 +276,7 @@ export function ServiceQueryForm({ service, className, onClose }: ServiceQueryFo
         </p>
         <div className="sd-query-done">
           <p className="sd-query-done-title">Thank you, {sentName}!</p>
-          <p>Our {service} team will call you within one working day.</p>
+          <p>{doneText}</p>
           <button type="button" className="sd-query-link" onClick={sendAnother}>
             Send another query
           </button>
@@ -255,14 +288,17 @@ export function ServiceQueryForm({ service, className, onClose }: ServiceQueryFo
   const phoneError = errors.phone || (!otpOpen ? otpError : "");
 
   return (
-    <form className={cn("sd-query", className)} onSubmit={submit} noValidate aria-labelledby={titleId}>
+    <form className={cn("sd-query", compact && "is-compact", className)} onSubmit={submit} noValidate aria-labelledby={titleId}>
       <p className="sd-query-head">
-        <span id={titleId}>Quick query</span>
+        <span id={titleId}>{title}</span>
         {closeButton ?? <span aria-hidden>↗</span>}
       </p>
 
       <div className="sd-query-body">
-        <p className="sd-query-lede">Tell us what you need for {service}. Fields marked * are required.</p>
+        <p className="sd-query-lede">
+          {lede}
+          {compact ? null : " Fields marked * are required."}
+        </p>
 
         <div className="sd-query-pair">
           <label className={cn("sd-query-field", errors.firstName && "has-error")}>
@@ -298,7 +334,8 @@ export function ServiceQueryForm({ service, className, onClose }: ServiceQueryFo
             name="email"
             autoComplete="email"
             value={values.email}
-            onChange={(event) => update("email", event.target.value)}
+            onChange={onEmailChange}
+            readOnly={!bySms && otpLocked}
             aria-invalid={Boolean(errors.email)}
             required
           />
@@ -313,7 +350,7 @@ export function ServiceQueryForm({ service, className, onClose }: ServiceQueryFo
               ariaLabel="Country code"
               value={values.dial}
               options={DIAL_CODES}
-              disabled={phoneLocked}
+              disabled={otpLocked}
               onChange={onDialChange}
             />
             <input
@@ -322,10 +359,10 @@ export function ServiceQueryForm({ service, className, onClose }: ServiceQueryFo
               inputMode="numeric"
               autoComplete="tel-national"
               name="phone"
-              placeholder={needsOtp ? "10-digit mobile" : "Phone number"}
+              placeholder={bySms ? "10-digit mobile" : "Phone number"}
               value={values.phone}
               onChange={onPhoneChange}
-              readOnly={phoneLocked}
+              readOnly={bySms && otpLocked}
               aria-invalid={Boolean(phoneError)}
               required
             />
@@ -333,12 +370,12 @@ export function ServiceQueryForm({ service, className, onClose }: ServiceQueryFo
 
           {otpStage === "verified" ? (
             <p className="sd-query-verified">
-              <span aria-hidden>✓</span> Number verified.{" "}
+              <span aria-hidden>✓</span> {bySms ? "Number" : "Email"} verified.{" "}
               <button type="button" className="sd-query-link" onClick={resetOtp}>
                 Change
               </button>
             </p>
-          ) : needsOtp ? (
+          ) : (
             <button
               type="button"
               className="sd-query-otp-send"
@@ -348,18 +385,20 @@ export function ServiceQueryForm({ service, className, onClose }: ServiceQueryFo
               {otpStage === "sending"
                 ? "Sending…"
                 : otpStage === "idle"
-                  ? "Send OTP"
+                  ? bySms
+                    ? "Send OTP"
+                    : "Email OTP to verify"
                   : resendIn > 0
                     ? `Resend OTP in ${resendIn}s`
                     : "Resend OTP"}
             </button>
-          ) : null}
+          )}
 
           {phoneError ? <small role={otpError ? "alert" : undefined}>{phoneError}</small> : null}
 
           {otpOpen ? (
             <div className="sd-query-otp">
-              <label htmlFor={otpId}>Enter the code sent to +91 {values.phone}</label>
+              <label htmlFor={otpId}>Enter the code sent to {bySms ? `+91 ${values.phone}` : values.email.trim()}</label>
               <div className="sd-query-otp-row">
                 <input
                   id={otpId}
@@ -385,29 +424,31 @@ export function ServiceQueryForm({ service, className, onClose }: ServiceQueryFo
           ) : null}
         </div>
 
-        <div className={cn("sd-query-field", errors.country && "has-error")}>
-          <span id={`${uid}-country`}>Country*</span>
-          <SelectMenu
-            className="sd-query-select"
-            labelledBy={`${uid}-country`}
-            placeholder="Select your country"
-            value={values.country}
-            options={COUNTRY_NAMES}
-            invalid={Boolean(errors.country)}
-            onChange={onCountryChange}
-          />
-          {errors.country ? <small>{errors.country}</small> : null}
-        </div>
+        <div className={compact ? "sd-query-pair" : "sd-query-stack"}>
+          <div className={cn("sd-query-field", errors.country && "has-error")}>
+            <span id={`${uid}-country`}>Country*</span>
+            <SelectMenu
+              className="sd-query-select"
+              labelledBy={`${uid}-country`}
+              placeholder={compact ? "Select" : "Select your country"}
+              value={values.country}
+              options={COUNTRY_NAMES}
+              invalid={Boolean(errors.country)}
+              onChange={onCountryChange}
+            />
+            {errors.country ? <small>{errors.country}</small> : null}
+          </div>
 
-        <div className="sd-query-field">
-          <span id={`${uid}-reason`}>Reason for inquiry*</span>
-          <SelectMenu
-            className="sd-query-select"
-            labelledBy={`${uid}-reason`}
-            value={values.reason}
-            options={INQUIRY_REASONS}
-            onChange={(value) => update("reason", value)}
-          />
+          <div className="sd-query-field">
+            <span id={`${uid}-reason`}>{compact ? "Reason*" : "Reason for inquiry*"}</span>
+            <SelectMenu
+              className="sd-query-select"
+              labelledBy={`${uid}-reason`}
+              value={values.reason}
+              options={INQUIRY_REASONS}
+              onChange={(value) => update("reason", value)}
+            />
+          </div>
         </div>
 
         <div className="sd-query-field">
@@ -425,7 +466,7 @@ export function ServiceQueryForm({ service, className, onClose }: ServiceQueryFo
           <span>Message (optional)</span>
           <textarea
             name="message"
-            rows={3}
+            rows={compact ? 2 : 3}
             maxLength={1900}
             placeholder="Goals, budget or timeline"
             value={values.message}

@@ -1,4 +1,10 @@
+/*
+ * Styles are authored in px for a 1440×900 canvas and compiled to rem, so above that size the
+ * whole layout grows with the root font size. Height is part of the ratio so wide-but-short
+ * screens don't overflow their 100vh sections.
+ */
 html {
+  font-size: max(100%, min(1.1111vw, 1.7778vh));
   background: var(--background);
   color: var(--foreground);
   overflow-x: clip;

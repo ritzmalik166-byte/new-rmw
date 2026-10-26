@@ -167,7 +167,7 @@ export function Credentials() {
               {[...partners, ...partners].map((src, index) => (
                 <figure key={`${src}-${index}`} className="proof-logo">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={src} alt="" />
+                  <img src={src} alt="Ritz Media World client brand logo" />
                 </figure>
               ))}
             </div>
@@ -179,7 +179,7 @@ export function Credentials() {
 
       <div className="proof-milestone" aria-hidden>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/s2/distance.webp" alt="" width={256} height={256} loading="lazy" decoding="async" />
+        <img src="/s2/distance.webp" alt="Ritz Media World milestone stone" width={256} height={256} loading="lazy" decoding="async" />
         <span className="proof-milestone-text">
           Ritz
           <br />

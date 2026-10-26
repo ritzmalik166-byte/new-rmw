@@ -1,17 +1,23 @@
 import { createHmac, randomInt, timingSafeEqual } from "node:crypto";
+import nodemailer, { type Transporter } from "nodemailer";
 import { OTP_LENGTH, OTP_RESEND_SECONDS } from "@/lib/contact";
 
 const OTP_TTL_MS = 10 * 60 * 1000;
 const VERIFIED_TTL_MS = 30 * 60 * 1000;
 const MAX_VERIFY_ATTEMPTS = 5;
-const MAX_SENDS_PER_PHONE_PER_HOUR = 5;
+const MAX_SENDS_PER_SUBJECT_PER_HOUR = 5;
 const MAX_SENDS_PER_IP_PER_HOUR = 15;
 
 const DEFAULT_TEMPLATE =
   "{otp} is your OTP to verify your enquiry with Ritz Media World. It is valid for 10 minutes. Do not share it with anyone.";
 
-type OtpPayload = { kind: "otp"; phone: string; exp: number; hash: string };
-type VerifiedPayload = { kind: "verified"; phone: string; exp: number };
+/** A subject is what the OTP proves ownership of: an Indian mobile number, or `email:<address>`. */
+type OtpPayload = { kind: "otp"; subject: string; exp: number; hash: string };
+type VerifiedPayload = { kind: "verified"; subject: string; exp: number };
+
+export function emailSubject(email: string) {
+  return `email:${email.trim().toLowerCase()}`;
+}
 
 function secret() {
   const value = process.env.OTP_SECRET;
@@ -59,40 +65,40 @@ function recentHits(key: string, windowMs: number) {
 
 export type SendCheck = { ok: true } | { ok: false; error: string; retryIn?: number };
 
-export function checkSendLimits(phone: string, ip: string): SendCheck {
-  const phoneHits = recentHits(`phone:${phone}`, 60 * 60 * 1000);
+export function checkSendLimits(subject: string, ip: string): SendCheck {
+  const subjectHits = recentHits(`subject:${subject}`, 60 * 60 * 1000);
   const ipHits = recentHits(`ip:${ip}`, 60 * 60 * 1000);
-  const last = phoneHits.at(-1);
+  const last = subjectHits.at(-1);
   if (last && Date.now() - last < OTP_RESEND_SECONDS * 1000) {
     const retryIn = Math.ceil((OTP_RESEND_SECONDS * 1000 - (Date.now() - last)) / 1000);
     return { ok: false, error: `Please wait ${retryIn}s before requesting another OTP.`, retryIn };
   }
-  if (phoneHits.length >= MAX_SENDS_PER_PHONE_PER_HOUR || ipHits.length >= MAX_SENDS_PER_IP_PER_HOUR) {
+  if (subjectHits.length >= MAX_SENDS_PER_SUBJECT_PER_HOUR || ipHits.length >= MAX_SENDS_PER_IP_PER_HOUR) {
     return { ok: false, error: "Too many OTP requests. Please try again in an hour, or call us directly." };
   }
   return { ok: true };
 }
 
-export function recordSend(phone: string, ip: string) {
+export function recordSend(subject: string, ip: string) {
   const now = Date.now();
-  for (const key of [`phone:${phone}`, `ip:${ip}`]) {
+  for (const key of [`subject:${subject}`, `ip:${ip}`]) {
     sendLog.set(key, [...(sendLog.get(key) ?? []), now]);
   }
   if (verifyAttempts.size > 5000) verifyAttempts.clear();
 }
 
-export function createOtp(phone: string) {
+export function createOtp(subject: string) {
   const otp = String(randomInt(0, 10 ** OTP_LENGTH)).padStart(OTP_LENGTH, "0");
   const exp = Date.now() + OTP_TTL_MS;
-  const token = sign({ kind: "otp", phone, exp, hash: hmac(`${phone}:${otp}:${exp}`) });
+  const token = sign({ kind: "otp", subject, exp, hash: hmac(`${subject}:${otp}:${exp}`) });
   return { otp, token };
 }
 
 export type VerifyResult = { ok: true; verifiedToken: string } | { ok: false; error: string };
 
-export function verifyOtp(phone: string, otp: string, token: string): VerifyResult {
+export function verifyOtp(subject: string, otp: string, token: string): VerifyResult {
   const payload = unsign<OtpPayload>(token, "otp");
-  if (!payload || payload.phone !== phone) {
+  if (!payload || payload.subject !== subject) {
     return { ok: false, error: "This OTP has expired. Please request a new one." };
   }
 
@@ -102,18 +108,18 @@ export function verifyOtp(phone: string, otp: string, token: string): VerifyResu
     return { ok: false, error: "Too many wrong attempts. Please request a new OTP." };
   }
 
-  if (!safeEqual(payload.hash, hmac(`${phone}:${otp}:${payload.exp}`))) {
+  if (!safeEqual(payload.hash, hmac(`${subject}:${otp}:${payload.exp}`))) {
     const left = MAX_VERIFY_ATTEMPTS - attempts;
     return { ok: false, error: left > 0 ? `That code is not right. ${left} attempt${left === 1 ? "" : "s"} left.` : "Too many wrong attempts. Please request a new OTP." };
   }
 
   verifyAttempts.delete(token);
-  return { ok: true, verifiedToken: sign({ kind: "verified", phone, exp: Date.now() + VERIFIED_TTL_MS }) };
+  return { ok: true, verifiedToken: sign({ kind: "verified", subject, exp: Date.now() + VERIFIED_TTL_MS }) };
 }
 
-export function isPhoneVerified(phone: string, verifiedToken: string) {
+export function isVerified(subject: string, verifiedToken: string) {
   const payload = unsign<VerifiedPayload>(verifiedToken, "verified");
-  return Boolean(payload && payload.phone === phone);
+  return Boolean(payload && payload.subject === subject);
 }
 
 export async function sendOtpSms(phone: string, otp: string) {
@@ -143,6 +149,34 @@ export async function sendOtpSms(phone: string, otp: string) {
     console.error("[contact-otp] SMS gateway rejected the request", { status: response.status, body: text.slice(0, 200) });
     throw new Error("SMS gateway rejected the request.");
   }
+}
+
+let mailer: Transporter | null = null;
+
+function getMailer() {
+  const host = process.env.SMTP_HOST;
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+  if (!host || !user || !pass) throw new Error("SMTP is not configured.");
+  const port = Number(process.env.SMTP_PORT || 465);
+  mailer ??= nodemailer.createTransport({ host, port, secure: port === 465, auth: { user, pass } });
+  return mailer;
+}
+
+export async function sendOtpEmail(email: string, otp: string) {
+  const from = process.env.SMTP_FROM || `Ritz Media World <${process.env.SMTP_USER}>`;
+  await getMailer().sendMail({
+    from,
+    to: email,
+    subject: `${otp} is your Ritz Media World verification code`,
+    text: DEFAULT_TEMPLATE.replace("{otp}", otp),
+    html: `<div style="font-family:Arial,sans-serif;font-size:15px;color:#1d1a3a;line-height:1.5">
+  <p>Your one-time code to verify your enquiry with Ritz Media World is:</p>
+  <p style="font-size:30px;font-weight:700;letter-spacing:6px;margin:16px 0">${otp}</p>
+  <p>It is valid for 10 minutes. Do not share it with anyone.</p>
+  <p style="color:#777;font-size:12px">If you didn't request this, you can ignore this email.</p>
+</div>`,
+  });
 }
 
 export function clientIp(request: Request) {

@@ -6,7 +6,6 @@ import { TransitionLink } from "@/components/motion/TransitionLink";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { RealTruck, setWheelTurn } from "@/components/ui/RealTruck";
 import { gsap, registerGsap } from "@/lib/gsap";
-import { MENU_SERVICES } from "@/lib/services-data";
 import { site } from "@/lib/site";
 import {
   ContactCard,
@@ -30,7 +29,7 @@ export function Footer() {
   const { ready, reduced } = useMotion();
 
   useGSAP(
-    () => {
+    (_context, contextSafe) => {
       const root = rootRef.current;
       if (!root || !ready) return;
 
@@ -54,49 +53,35 @@ export function Footer() {
 
       gsap.set(truck, { x: 0 });
 
-      gsap.fromTo(
-        truck,
-        { x: 0 },
-        {
-          x: destinationX,
-          ease: "none",
-          onUpdate: () => setWheelTurn(truck, Number(gsap.getProperty(truck, "x"))),
-          scrollTrigger: {
-            trigger: root,
-            start: "top 85%",
-            end: "bottom bottom",
-            scrub: 2.2,
-            invalidateOnRefresh: true,
+      /* Created a tick late: in the same tick it force-refreshes the page's pending
+         `once` triggers, which can kill themselves mid-loop when the page is restored
+         mid-scroll and crash ScrollTrigger ("reading 'end'"). */
+      const build = contextSafe!(() => {
+        if (!root.isConnected) return;
+        gsap.fromTo(
+          truck,
+          { x: 0 },
+          {
+            x: destinationX,
+            ease: "none",
+            onUpdate: () => setWheelTurn(truck, Number(gsap.getProperty(truck, "x"))),
+            scrollTrigger: {
+              trigger: root,
+              start: "top 85%",
+              end: "bottom bottom",
+              scrub: 2.2,
+              invalidateOnRefresh: true,
+            },
           },
-        },
-      );
+        );
+      });
+      gsap.delayedCall(0.1, build);
     },
     { scope: rootRef, dependencies: [ready, reduced] },
   );
 
   return (
     <footer ref={rootRef} className="site-footer">
-      <nav className="site-footer-ticker" aria-label="Services">
-        {[0, 1].map((copy) => (
-          <ul key={copy} className="site-footer-ticker-track" aria-hidden={copy === 1 || undefined}>
-            {MENU_SERVICES.map((service) => (
-              <li key={service.slug}>
-                <TransitionLink
-                  href={`/services/${service.slug}`}
-                  className="site-footer-ticker-item"
-                  tabIndex={copy === 1 ? -1 : undefined}
-                >
-                  {service.name}
-                </TransitionLink>
-                <span className="site-footer-ticker-flower" aria-hidden>
-                  ✿
-                </span>
-              </li>
-            ))}
-          </ul>
-        ))}
-      </nav>
-
       <div className="site-footer-inner">
         <div className="site-footer-top">
           <div className="site-footer-intro">
@@ -105,11 +90,11 @@ export function Footer() {
               <span className="site-footer-hindi">मंज़िल यहीं है</span>
             </p>
             <h2 className="site-footer-title">
-              <span>{data.title[0]}</span>
+              <span>{data.title[0]}</span>{" "}
               <span className="site-footer-title-row">
-                <span className="site-footer-title-accent">{data.title[1]}</span>
+                <span className="site-footer-title-accent">{data.title[1]}</span>{" "}
                 <span>{data.title[2]}</span>
-              </span>
+              </span>{" "}
               <span>{data.title[3]}</span>
             </h2>
             <p className="site-footer-blurb">{data.blurb}</p>
@@ -125,7 +110,7 @@ export function Footer() {
                 className="site-footer-google"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/footer/partners/google-g.png" alt="" width={20} height={20} />
+                <img src="/footer/partners/google-g.png" alt="Google logo" width={20} height={20} />
                 <span>
                   Add as a preferred
                   <br />
@@ -161,15 +146,6 @@ export function Footer() {
                 <div>
                   <h3 className="site-footer-sign-title">Connect</h3>
                   <ul className="site-footer-sign-list">
-                    <li>
-                      <TransitionLink href="/contact" className="site-footer-sign-link">
-                        <span className="site-footer-sign-arrow" aria-hidden>
-                          ↑
-                        </span>
-                        <span className="site-footer-sign-label">Contact Us</span>
-                        <span className="site-footer-sign-km">0 km</span>
-                      </TransitionLink>
-                    </li>
                     {data.socials.map((link) => (
                       <li key={link.label}>
                         <a
@@ -234,17 +210,24 @@ export function Footer() {
         </div>
         <div className="site-footer-milestone">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/footer/milestone.png" alt="" width={256} height={256} />
+          <img src="/footer/milestone.png" alt="Ritz Media World milestone stone" width={256} height={256} />
           <span className="site-footer-milestone-text">
             Ritz
             <br />
             Media
+            <br />
+            World
           </span>
         </div>
       </div>
 
       <div className="site-footer-bottom">
-        <p>© {new Date().getFullYear()} {site.fullName}. All rights reserved.</p>
+        <div className="site-footer-legal">
+          <p>© {new Date().getFullYear()} {site.fullName}. All rights reserved.</p>
+          <nav className="site-footer-legal-links" aria-label="Legal">
+            <TransitionLink href="/privacy-policy">Privacy Policy</TransitionLink>
+          </nav>
+        </div>
         <p className="site-footer-horn">Horn OK Please</p>
       </div>
     </footer>

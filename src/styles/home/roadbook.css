@@ -11,7 +11,7 @@
   height: 100dvh;
   max-height: 100svh;
   max-height: 100dvh;
-  padding: clamp(1.25rem, 3.5vh, 4.25rem) 1.5rem;
+  padding: clamp(1.25rem, min(3.5vh, 2.188vw), 4.25rem) 1.5rem;
   overflow: hidden;
   overflow: clip;
   overflow-anchor: none;

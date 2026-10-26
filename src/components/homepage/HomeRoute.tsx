@@ -10,7 +10,20 @@ import { HmTitle, useHomeReveal } from "./shared";
 
 registerGsap();
 
-const TITLE = [{ text: "Insight » Idea »" }, { text: "Impact.", accent: true }] as const;
+/* The » marks are drawn by CSS so the heading's text reads "Insight Idea Impact." */
+const Sep = () => <span className="hm-route-sep" aria-hidden />;
+
+const TITLE = [
+  {
+    text: "Insight Idea",
+    node: (
+      <>
+        Insight <Sep /> Idea <Sep />
+      </>
+    ),
+  },
+  { text: "Impact.", accent: true },
+];
 
 export function HomeRoute() {
   const rootRef = useRef<HTMLElement>(null);
@@ -82,7 +95,7 @@ export function HomeRoute() {
           <div>
             <p data-hm-fade className="hm-kicker is-light">
               <span className="hm-pill">How we think</span>
-              <span>Route 02 · Every project, same road</span>
+              <span>KM 02 · Every project, same road</span>
             </p>
             <HmTitle id="hm-route-title" lines={TITLE} />
           </div>
@@ -92,26 +105,28 @@ export function HomeRoute() {
         </header>
 
         <div className="hm-route-map">
-          <div className="hm-route-stones" aria-hidden>
-            {stops.map((stop, index) => (
-              <span
-                key={stop.name}
-                className="hm-stone"
-                style={{ "--at": (index * 2 + 1) / (stops.length * 2) } as CSSProperties}
-              >
-                <span className="hm-stone-body">
-                  <span className="hm-stone-km">{stop.km}</span>
-                  <span className="hm-stone-name">{stop.name}</span>
+          <div className="hm-route-track">
+            <div className="hm-route-stones" aria-hidden>
+              {stops.map((stop, index) => (
+                <span
+                  key={stop.name}
+                  className="hm-stone"
+                  style={{ "--at": (index * 2 + 1) / (stops.length * 2) } as CSSProperties}
+                >
+                  <span className="hm-stone-body">
+                    <span className="hm-stone-km">{stop.km}</span>
+                    <span className="hm-stone-name">{stop.name}</span>
+                  </span>
                 </span>
-              </span>
-            ))}
-          </div>
+              ))}
+            </div>
 
-          <div className="hm-road" aria-hidden>
-            <span className="hm-road-lane" />
-            <span className="hm-road-truck">
-              <RealTruck flip small />
-            </span>
+            <div className="hm-road" aria-hidden>
+              <span className="hm-road-lane" />
+              <span className="hm-road-truck">
+                <RealTruck flip small />
+              </span>
+            </div>
           </div>
 
           <ol className="hm-route-stops">

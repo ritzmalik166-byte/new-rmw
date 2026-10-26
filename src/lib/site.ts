@@ -72,13 +72,13 @@ export const site = {
     ],
   },
   route: {
-    kicker: "Route 02 • How we think",
+    kicker: "How we think",
     title: ["Insight", "Idea", "Impact"],
     lede: "Every project at Ritz Media World follows the same proven road, whether it is a brand launch, an advertising campaign, or a real estate project. ",
     stops: [
       {
         name: "Insight",
-        km: "KM 0",
+        km: "KM 01",
         copy: "Every project starts with your business, audience, and market, so we find the real opportunity first.",
       },
       {
@@ -262,48 +262,47 @@ export const site = {
     title: "Testimonials",
     items: [
       {
-        role: "Managing Director",
-        company: "Eldeco Group",
+        role: "GHD Infra",
+        company: "SEO, Creative, Social Media & Paid Campaigns",
+        industry: "Real Estate",
+        quote:
+          "We’ve had a great experience working with the team on our digital marketing needs. From SEO and creative designs to social media management and paid campaigns, they have been supportive, responsive, and committed to our goals. Their efforts have helped us strengthen our online presence and promote our real estate projects in Goa.",
+      },
+      {
+        role: "Eldeco Group",
+        company: "Lead Generation",
         industry: "Real Estate",
         photo: "/s8/51e3ade5d235d3158f1e504c1ea3497f09c9d0c9.jpg",
         quote:
-          "They not only make sure that they deliver on their promises, but also educate you on what exactly is needed to be done for your brand, thereby preventing you from under or over spending your precious money.",
+          "We’ve had a positive experience working with the team on lead generation for Eldeco Group. They understood our real estate business needs and focused on reaching potential homebuyers through targeted campaigns. Their efforts have helped us connect with relevant audiences and generate enquiries for our property projects.",
       },
-      // SAMPLE COPY: replace the entries below with real, approved client testimonials.
       {
-        role: "Head of Marketing",
-        company: "Real Estate Developer, Noida",
+        role: "ONYX by Splendor",
+        company: "Lead Generation, Creative & Social Media",
+        industry: "Commercial Real Estate",
+        quote:
+          "The team has supported us in promoting ONYX by Splendor through lead generation, creative design, and social media marketing. Their work has helped us showcase the project’s commercial spaces, share updates across social platforms, and reach potential investors and businesses looking for commercial property in Noida.",
+      },
+      {
+        role: "Exotica Housing",
+        company: "Lead Generation",
         industry: "Real Estate",
         quote:
-          "From the launch film to the hoardings and the lead campaigns, one team owned the whole project. Site visits picked up within the first month, and every rupee was accounted for in the weekly review.",
+          "The team has been helpful in promoting Exotica Housing’s residential projects through lead generation campaigns. They focused on reaching potential homebuyers interested in properties across Delhi-NCR and understood our project requirements well. We appreciate their efforts in bringing relevant enquiries and supporting our property marketing goals.",
       },
       {
-        role: "Admissions Head",
-        company: "K-12 School Group",
-        industry: "Education",
+        role: "Renox Group",
+        company: "Lead Generation",
+        industry: "Real Estate",
         quote:
-          "Radio, print and digital all told the same story during admission season. The team planned the media around our counselling calendar and the enquiries came in exactly when we could handle them.",
+          "We’ve had a great experience working with the team on lead generation for our real estate projects. They understood our business needs and helped us reach potential homebuyers through targeted campaigns. Their approach has supported our efforts to generate enquiries and connect with people interested in our properties.",
       },
       {
-        role: "Founder",
-        company: "D2C Lifestyle Brand",
-        industry: "E-commerce",
+        role: "Vedvan",
+        company: "Creative Design & Social Media",
+        industry: "Wellness Living",
         quote:
-          "Sharp creatives, honest numbers and no jargon. They cut the campaigns that were not working within days and doubled down on the ones that were, which is rare for an agency.",
-      },
-      {
-        role: "Business Head",
-        company: "Industrial Manufacturer",
-        industry: "Manufacturing",
-        quote:
-          "We came in with a dated catalogue and left with a brand our dealers are proud to show. The new website and trade-show material started conversations we were never able to start before.",
-      },
-      {
-        role: "Co-founder",
-        company: "Early-stage Fintech Startup",
-        industry: "Startups",
-        quote:
-          "They treated our small launch budget like it was their own. The identity, the launch video and the first performance campaigns were delivered on time and felt bigger than what we paid for.",
+          "The team has done an impressive job supporting Vedvan’s brand through creative design and social media marketing. They understood our vision of nature-inspired, wellness-focused living and helped communicate it through engaging visuals and content. We appreciate their creative approach and efforts in presenting Vedvan’s unique lifestyle concept to the right audience.",
       },
     ] as Testimonial[],
   },
@@ -311,44 +310,54 @@ export const site = {
     title: "Awards",
     items: [
       {
+        year: "2026",
+        heading: "Generative AI Campaign of the Year",
+        subtitle: "AdAura Awards · AI & innovation",
+        alt: "AdAura Awards 2026 trophy for Generative AI Campaign of the Year, awarded to Ritz Media World",
+        src: "/awards/adaura-ai-innovation-2026.jpg",
+        copy: "Marketing Mind's AdAura Awards recognised Ritz Media World's TREVOC campaign, Transforming Celebrity Endorsement into AI Cinematic Experience, in the AI & Innovation Excellence category.",
+      },
+      {
         year: "2025",
         heading: "ET Young Industry Leaders",
         subtitle: "Integrated advertising solutions",
-        alt: "ET Young Industry Leaders 2025 award presented to Ritesh Malik",
-        src: "/awards/et-young-industry-leaders-2025.png",
+        alt: "ET Young Industry Leaders 2025 award presented to Ritesh Malik, Founder, Ritz Media World",
+        src: "/awards/et-young-industry-leaders-2025.jpg",
+        fit: "contain",
         copy: "Recognition for excellence in integrated advertising solutions.",
       },
       {
         year: "2025",
         heading: "BIG Dream Makers",
         subtitle: "Creative services — real estate",
-        alt: "BIG Dream Makers Conclave Awards 2025 award and trophy",
-        src: "/awards/big-dream-makers-trophy-2025.jpg",
+        alt: "BIG Dream Makers Conclave & Awards 2025 certificate awarded to Ritz Media World",
+        src: "/awards/big-dream-makers-certificate-2025.jpg",
+        fit: "contain",
         copy: "Awarded to Ritz Media World for excellence in creative services in real estate.",
-      },
-      {
-        year: "2024",
-        heading: "ET Business Leaders",
-        subtitle: "Business leadership",
-        alt: "ET Business Leaders 2024 trophy",
-        src: "/awards/et-business-leaders-2024.jpg",
-        copy: "Ritz Media World founder Ritesh Malik was recognised among the ET Business Leaders.",
       },
       {
         year: "2025",
         heading: "Best Real Estate Podcast",
         subtitle: "Podmasters",
-        alt: "Podmasters award for Best Real Estate Podcast",
-        src: "/awards/podmasters-real-estate-podcast-2024.jpg",
-        copy: "Recognition for Ritesh Malik and the real estate podcast, Beyond the Blueprint.",
+        alt: "Podmasters award for Best Real Estate Podcast, Beyond the Blueprint",
+        src: "/awards/podmasters-best-real-estate-podcast.jpg",
+        copy: "Recognition for Ritz Malik and the real estate podcast, Beyond the Blueprint.",
       },
       {
-        year: "2011",
-        heading: "Special Achievement Award",
-        subtitle: "RED FM 93.5 · Retail category",
-        alt: "RED FM 93.5 Special Achievement Award in the retail category",
-        src: "/awards/red-fm-special-achievement-2011.jpg",
-        copy: "Creative Thinks Media received the Special Achievement Award at the National Sales Meet in Goa.",
+        year: "2025",
+        heading: "HT Media Festival of Gifts",
+        subtitle: "Hindustan Times · Season 3",
+        alt: "Framed Hindustan Times feature on the HT Media Festival of Gifts Season 3",
+        src: "/awards/ht-festival-of-gifts-ritesh.jpg",
+        copy: "Featured by Hindustan Times at the HT Media Festival of Gifts, where brands take centre stage.",
+      },
+      {
+        year: "2025",
+        heading: "For Us, You Are the Headline",
+        subtitle: "Hindustan Times feature",
+        alt: "Framed Hindustan Times front page from the HT Media Festival of Gifts",
+        src: "/awards/ht-festival-of-gifts-feature.jpg",
+        copy: "A Hindustan Times front-page feature celebrating the brands at the HT Media Festival of Gifts.",
       },
       {
         year: "2025",
@@ -357,6 +366,39 @@ export const site = {
         alt: "Ritz Media World team receiving a BIG Dream Makers award",
         src: "/awards/my-property-face-stage.jpg",
         copy: "The team celebrates its recognition at the BIG Dream Makers Conclave Awards.",
+      },
+      {
+        year: "2024",
+        heading: "ET Business Leaders",
+        subtitle: "Business leadership",
+        alt: "ET Business Leaders 2024 trophy",
+        src: "/awards/et-business-leaders-2024-trophy.jpg",
+        copy: "Ritz Media World founder Ritz Malik was recognised among the ET Business Leaders.",
+      },
+      {
+        year: "2024",
+        heading: "Jagran Gaurav Ratna",
+        subtitle: "Excellence in digital media",
+        alt: "Dainik Jagran Gaurav Ratna 2024 certificate of excellence for Ritesh Malik",
+        src: "/awards/jagran-gaurav-ratna-2024.jpg",
+        fit: "contain",
+        copy: "Dainik Jagran felicitated Ritesh Malik, Managing Director, Ritz Media World, for excellence in digital media at Gautambuddha Nagar.",
+      },
+      {
+        year: "2022",
+        heading: "ET Excellence Leadership Awards",
+        subtitle: "Most trusted advertising agency in NCR",
+        alt: "Framed Economic Times Excellence Leadership Awards 2022 feature on Ritz Media World",
+        src: "/awards/et-excellence-leadership-2022.jpg",
+        copy: "The Economic Times named Ritz Media World one of the most trusted advertising agencies in NCR.",
+      },
+      {
+        year: "2011",
+        heading: "Special Achievement Award",
+        subtitle: "RED FM 93.5 · Retail category",
+        alt: "RED FM 93.5 Special Achievement Award in the retail category",
+        src: "/awards/red-fm-special-achievement-2011.jpg",
+        copy: "Creative Thinks Media received the Special Achievement Award at the National Sales Meet in Goa.",
       },
     ],
   },
@@ -412,40 +454,40 @@ export const site = {
   about: {
     faqs: [
       {
-        q: "When was Ritz Media World founded, and by whom?",
-        a: "Ritz Media World was founded in August 2008 by Mr. Ritesh Malik, who has led the agency ever since. He also founded Creative Thinks Media, a sister agency.",
+        q: "When Was Ritz Media World Founded, and by Whom?",
+        a: "Ritz Media World was founded in August 2008 by Mr. Ritz Malik, who has led the agency ever since. He also founded Creative Thinks Media, a sister agency.",
       },
       {
-        q: "Where is Ritz Media World based?",
+        q: "Where Is Ritz Media World Based?",
         a: "Ritz Media World is headquartered in Noida, Delhi NCR, and works with brands across India.",
       },
       {
-        q: "How has Ritz Media World grown since 2008?",
+        q: "How Has Ritz Media World Grown Since 2008?",
         a: "The agency began with a mission to reimagine brand communication for India's growth markets. In 2012, it pioneered centrespread storytelling in Hindustan Times, and in 2016 it expanded into 360° digital marketing. In 2026, it introduced AI-powered 3D rendering, continuing 18 years of adapting to every major shift in Indian marketing.",
       },
       {
-        q: "What awards and recognition has Ritz Media World received?",
+        q: "What Awards and Recognition Has Ritz Media World Received?",
         a: "Ritz Media World was named Best Creative Agency (Real Estate) in Delhi NCR by Big FM in both 2024 and 2025.",
       },
       {
-        q: "What partnerships and accreditations does Ritz Media World hold?",
+        q: "What Partnerships and Accreditations Does Ritz Media World Hold?",
         a: "Ritz Media World is a Google Partner, a Meta Business Partner, a member of the Indian Newspaper Society, and a registered MSME.",
       },
       {
-        q: "What makes Ritz Media World different from other agencies?",
+        q: "What Makes Ritz Media World Different from Other Agencies?",
         a: "As an independent agency, Ritz Media World combines 18 years of experience across print, radio and digital with newer capabilities in AI and 3D. This means clients get the judgement of a long-established agency together with the speed and tools of a modern one, all from a single team.",
       },
       {
-        q: "How can I start working with Ritz Media World?",
+        q: "How Can I Start Working with Ritz Media World?",
         a: "You can reach the team through the contact form on the website, by email at info@ritzmediaworld.com, or by phone at +91 7290002168. We usually begin with a conversation about your brand's goals, followed by a free audit and a tailored plan.",
       },
     ],
   },
   startProject: {
     kicker: "Start a Project",
-    title: "Get A Free SEO And Digital Audit For Your Brand",
+    title: "Get a Free Consultation for Your Brand",
     formTitle: "Shuru Karein – It's Free",
-    cta: "Get My Free Audit",
+    cta: "Get My Free Consultation",
     pills: ["Branding", "SEO", "Social Media", "Performance"],
     services: [
       "Digital Marketing",
@@ -462,16 +504,19 @@ export const site = {
   footer: {
     title: ["Have a", "destination", "in", "mind?"],
     blurb:
-      "Ritz Media World is an independent creative, branding, digital and media agency, founded in 2008 and based in Noida, Delhi NCR.",
+      "Ritz Media World is a creative, branding, digital, and media agency, founded in 2008 and based in Noida, Delhi NCR.",
     address: "402–404, 4th Floor, Corporate Park, Tower A1, Sector 142, Noida 201305",
     email: "info@ritzmediaworld.com",
-    phones: ["+91 7290002168"],
+    phones: ["+91 7290002168", "+91 9220516777"],
     company: [
       { label: "Home", href: "/" },
+      { label: "Services", href: "/services" },
       { label: "Portfolio", href: "/portfolio" },
       { label: "About", href: "/about.html" },
       { label: "Blogs", href: "/blog" },
       { label: "Career", href: "/career" },
+      { label: "Contact Us", href: "/contact" },
+      { label: "Privacy Policy", href: "/privacy-policy" },
     ],
     socials: [
       { label: "Facebook", href: "https://www.facebook.com/ritzmediaworld/" },

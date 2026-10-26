@@ -73,9 +73,9 @@
 /* ---------- Hero ---------- */
 .pf-hero {
   overflow: hidden;
-  padding: clamp(128px, 17vh, 160px) 0 0;
+  padding: clamp(128px, min(17vh, 10.625vw), 160px) 0 clamp(64px, min(10vh, 6.25vw), 112px);
   background:
-    radial-gradient(55% 50% at 92% 10%, rgb(243 195 60 / 24%), transparent 70%),
+    radial-gradient(55% 50% at 92% 10%, rgb(255 255 255 / 65%), rgb(243 195 60 / 24%) 32%, transparent 70%),
     radial-gradient(45% 45% at 0% 85%, rgb(201 53 110 / 10%), transparent 70%),
     var(--hm-cream);
 }
@@ -210,44 +210,6 @@
   transform: rotate(12deg);
 }
 
-.pf-hero-marquee {
-  margin-top: clamp(48px, 8vh, 88px);
-  padding: 18px 0 22px;
-  border-top: 2px solid var(--hm-navy);
-  overflow: hidden;
-}
-
-.pf-hero-marquee-track {
-  display: flex;
-  width: max-content;
-  margin: 0;
-  color: transparent;
-  font-family: var(--hm-serif);
-  font-size: clamp(56px, 9vw, 140px);
-  font-weight: 700;
-  line-height: 1;
-  white-space: nowrap;
-  -webkit-text-stroke: 1.5px var(--hm-navy);
-  will-change: transform;
-}
-
-.pf-hero-marquee-track span {
-  display: inline-flex;
-  align-items: center;
-}
-
-.pf-hero-marquee-track span::after {
-  margin: 0 0.3em;
-  color: var(--hm-pink);
-  font-size: 0.4em;
-  content: "✦";
-  -webkit-text-stroke: 0;
-}
-
-.pf-hero-marquee-track span:nth-child(4n + 2) {
-  color: var(--hm-navy);
-}
-
 /* ---------- Road strip (CTA) ---------- */
 .pf-road-lane {
   position: absolute;
@@ -280,7 +242,7 @@
   padding: var(--hm-pad-y) 0;
   background:
     radial-gradient(60% 40% at 100% 0%, rgb(201 53 110 / 22%), transparent 70%),
-    radial-gradient(50% 40% at 0% 100%, rgb(243 195 60 / 12%), transparent 70%),
+    radial-gradient(50% 40% at 0% 100%, rgb(255 255 255 / 65%), rgb(243 195 60 / 12%) 32%, transparent 70%),
     var(--hm-navy);
   color: #fff;
 }
@@ -384,7 +346,7 @@
   height: 100dvh;
   max-height: none;
   margin: 0;
-  padding: clamp(56px, 7vh, 72px) clamp(16px, 4vw, 64px) clamp(24px, 4vh, 40px);
+  padding: clamp(56px, min(7vh, 4.375vw), 72px) clamp(16px, 4vw, 64px) clamp(24px, min(4vh, 2.5vw), 40px);
   border: 0;
   background: rgb(15 14 40 / 96%);
   color: #fff;
@@ -592,7 +554,7 @@
   margin: 16px 0 0;
   color: var(--hm-muted);
   font-family: var(--hm-sans);
-  font-size: clamp(15px, 1.1vw, 17px);
+  font-size: clamp(17px, 1.1vw, 19px);
   line-height: 1.6;
 }
 
@@ -661,7 +623,7 @@
 .pf-stat dt {
   color: var(--hm-muted);
   font-family: var(--hm-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -732,7 +694,7 @@
   margin: 10px 0 0;
   color: var(--hm-muted);
   font-family: var(--hm-sans);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.6;
 }
 
@@ -807,7 +769,7 @@
   --pf-truck-w: clamp(150px, 15vw, 210px);
   position: relative;
   height: calc(var(--pf-truck-w) * 0.365 + 30px);
-  margin-top: clamp(48px, 7vh, 80px);
+  margin-top: clamp(48px, min(7vh, 4.375vw), 80px);
   border-top: 8px solid transparent;
   background:
     repeating-linear-gradient(90deg, var(--hm-ink) 0 22px, var(--hm-yellow) 22px 44px) top / 100% 8px
@@ -897,6 +859,13 @@
 
   .pf-stat {
     padding-inline: 12px;
+  }
+
+  .pf-stat dt {
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 
   .pf-hero-photo.is-front {

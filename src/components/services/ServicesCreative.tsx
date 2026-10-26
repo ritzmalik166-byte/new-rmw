@@ -93,9 +93,14 @@ export function ServicesCreative() {
             design, every piece is shaped around your business and built to stay consistent wherever
             customers see it, whether you are launching, rebranding, or entering a new market.
           </p>
-          <Link className="svc-creative-cta" href="/contact" target="_blank" rel="noopener noreferrer">
-            Get a Free Creative Consultation <span aria-hidden>→</span>
-          </Link>
+          <div className="svc-explore-row">
+            <Link className="svc-explore" href="/services/creative-services">
+              Explore Creative Services <span aria-hidden>→</span>
+            </Link>
+            <Link className="svc-creative-cta" href="/contact" target="_blank" rel="noopener noreferrer">
+              Get a Free Creative Consultation <span aria-hidden>→</span>
+            </Link>
+          </div>
         </div>
 
         <div

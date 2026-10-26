@@ -81,12 +81,17 @@ export function HomeWork() {
     };
   }, [syncSlide]);
 
-  const goTo = (index: number) => {
+  // Step from the real scroll position: when 2+ cards fit (tablets), the last card's
+  // offset is past the max scroll, so jumping to a card index would not move the row.
+  const step = (dir: 1 | -1) => {
     const grid = gridRef.current;
-    const card = grid?.children[index] as HTMLElement | undefined;
-    if (!grid || !card) return;
+    const cards = grid?.children;
+    if (!grid || !cards || cards.length < 2) return;
+    const size = (cards[1] as HTMLElement).offsetLeft - (cards[0] as HTMLElement).offsetLeft;
+    const maxScroll = grid.scrollWidth - grid.clientWidth;
+    const current = Math.round(grid.scrollLeft / size);
     grid.scrollTo({
-      left: card.offsetLeft - parseFloat(getComputedStyle(grid).paddingLeft),
+      left: Math.max(0, Math.min(maxScroll, (current + dir) * size)),
       behavior: reduced ? "auto" : "smooth",
     });
   };
@@ -173,7 +178,7 @@ export function HomeWork() {
             className="hm-work-arrow"
             aria-label="Previous consignment"
             disabled={slide.atStart}
-            onClick={() => goTo(slide.index - 1)}
+            onClick={() => step(-1)}
           >
             <svg viewBox="0 0 24 24" aria-hidden>
               <path d="M15 5l-7 7 7 7" />
@@ -190,7 +195,7 @@ export function HomeWork() {
             className="hm-work-arrow"
             aria-label="Next consignment"
             disabled={slide.atEnd}
-            onClick={() => goTo(slide.index + 1)}
+            onClick={() => step(1)}
           >
             <svg viewBox="0 0 24 24" aria-hidden>
               <path d="M9 5l7 7-7 7" />

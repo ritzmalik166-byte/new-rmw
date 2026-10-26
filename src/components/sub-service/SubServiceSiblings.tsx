@@ -50,7 +50,7 @@ export function SubServiceSiblings({ service, current, siblings }: Props) {
                   <span className="ssd-more-media">
                     <Image
                       src={sub.cover}
-                      alt=""
+                      alt={`${sub.name} - Ritz Media World`}
                       fill
                       sizes="(max-width: 640px) 90vw, (max-width: 1100px) 45vw, 30vw"
                       unoptimized={sub.cover.endsWith(".gif")}

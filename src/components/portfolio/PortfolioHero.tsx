@@ -11,8 +11,6 @@ import { PORTFOLIO_CATEGORIES, PORTFOLIO_HERO } from "@/lib/portfolio";
 
 registerGsap();
 
-const MARQUEE = ["Portfolio", "Safarnama", "Creative OK Please", "Ideas that travel"];
-
 export function PortfolioHero() {
   const rootRef = useRef<HTMLElement>(null);
   const { ready, reduced } = useMotion();
@@ -38,8 +36,7 @@ export function PortfolioHero() {
           scrollTrigger: { trigger: root, start: "top top", end: "bottom top", scrub: 0.6 },
         })
         .to(back, { xPercent: -14, yPercent: -10, rotation: -12 }, 0)
-        .to(front, { xPercent: 12, yPercent: 14, rotation: 10 }, 0)
-        .to(root.querySelector(".pf-hero-marquee-track"), { xPercent: -28 }, 0);
+        .to(front, { xPercent: 12, yPercent: 14, rotation: 10 }, 0);
     },
     { scope: rootRef, dependencies: [ready, reduced] },
   );
@@ -122,14 +119,6 @@ export function PortfolioHero() {
             className="pf-hero-stamp"
           />
         </div>
-      </div>
-
-      <div className="pf-hero-marquee" aria-hidden>
-        <p className="pf-hero-marquee-track">
-          {[...MARQUEE, ...MARQUEE, ...MARQUEE].map((word, index) => (
-            <span key={`${word}-${index}`}>{word}</span>
-          ))}
-        </p>
       </div>
     </section>
   );

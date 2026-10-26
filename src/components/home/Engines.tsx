@@ -469,7 +469,7 @@ export function Engines() {
               <img
                 className="engines-truck"
                 src="/s4/engines-truck.png?v=3"
-                alt=""
+                alt="Ritz Media World service truck"
                 width={1024}
                 height={472}
               />
@@ -479,7 +479,7 @@ export function Engines() {
                   ref={cargoRef}
                   key={engine.id}
                   src={engine.cargo}
-                  alt=""
+                  alt={`${engine.label} cargo`}
                   width={1400}
                   height={900}
                 />
@@ -488,7 +488,7 @@ export function Engines() {
               <img
                 className="engines-horn"
                 src="/s4/Frame 105331.png"
-                alt=""
+                alt="Horn OK Please truck sign"
                 width={640}
                 height={220}
               />

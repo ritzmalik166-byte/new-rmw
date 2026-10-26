@@ -85,6 +85,14 @@
   inset: 0;
 }
 
+.svc-render-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .svc-render-loading {
   position: absolute;
   inset: 0;

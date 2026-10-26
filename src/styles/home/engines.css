@@ -149,7 +149,7 @@
   position: relative;
   align-self: center;
   max-width: 34rem;
-  margin-bottom: 7vh;
+  margin-bottom: min(7vh, 4.375vw);
   padding: 0 0 0 1.15rem;
 }
 

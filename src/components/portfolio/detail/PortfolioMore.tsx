@@ -63,7 +63,7 @@ export function PortfolioMore({ slug, km }: { slug: string; km: string }) {
         <ul className="pfd-more-list">
           {others.map((category) => (
             <li key={category.id} className="pfd-more-card" data-tone={category.tone}>
-              <TransitionLink href={category.href}>
+              <TransitionLink href={category.moreHref ?? category.href}>
                 <span className="pfd-more-media">
                   <Image
                     src={category.image}

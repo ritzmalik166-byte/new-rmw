@@ -9,24 +9,36 @@
   --svch-rule: #b9ae93;
   --svch-head: #efe4cc;
 
+  /* Same frame as the service / sub-service heroes (.sd-hero, .ssd-hero) so the
+     copy doesn't jump when navigating between them. */
   position: relative;
-  display: flex;
-  align-items: center;
   box-sizing: border-box;
-  min-height: min(100svh, 860px);
   overflow: hidden;
-  padding: 136px clamp(20px, 5.5vw, 80px) clamp(48px, 7vh, 88px);
-  background: var(--svch-cream);
+  padding: clamp(128px, min(17vh, 10.625vw), 160px) 0 clamp(64px, min(9vh, 5.625vw), 104px);
+  background:
+    radial-gradient(55% 50% at 92% 10%, rgb(255 255 255 / 65%), rgb(243 195 60 / 24%) 32%, transparent 70%),
+    radial-gradient(45% 45% at 0% 85%, rgb(201 53 110 / 10%), transparent 70%),
+    var(--svch-cream);
 }
 
 .svch-inner {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
-  gap: clamp(40px, 6vw, 110px);
+  gap: clamp(40px, 6vw, 96px);
+  box-sizing: border-box;
   width: 100%;
-  max-width: 1240px;
-  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+@media (min-width: 768px) {
+  .svch-inner {
+    padding-inline: 40px;
+  }
+}
+
+.svch-crumbs {
+  opacity: 0;
 }
 
 /* ---------- Copy ---------- */
@@ -34,11 +46,11 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 10px 12px;
   margin: 0 0 18px;
   color: var(--svch-navy);
   font-family: var(--font-inter), Inter, sans-serif;
-  font-size: 12px;
+  font-size: 13.5px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -50,7 +62,7 @@
   background: var(--svch-orange);
   color: #fff;
   font-family: var(--font-inter), Inter, sans-serif;
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 600;
   line-height: 1;
   letter-spacing: 0.6px;
@@ -60,7 +72,7 @@
   margin: 0;
   color: var(--svch-navy);
   font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
-  font-size: clamp(44px, 5.4vw, 78px);
+  font-size: clamp(40px, 4.4vw, 64px);
   font-weight: 700;
   line-height: 1.04;
   letter-spacing: 0.005em;
@@ -80,6 +92,21 @@
 
 .svch-line.is-accent {
   color: var(--svch-pink);
+}
+
+/* Desktop: two locked lines, scaled down to fit the copy column. */
+@media (min-width: 981px) {
+  .svch-copy {
+    container-type: inline-size;
+  }
+
+  .svch-title {
+    font-size: min(clamp(40px, 4.4vw, 64px), 8.8cqi);
+  }
+
+  .svch-line-inner {
+    white-space: nowrap;
+  }
 }
 
 .svch-lede {
@@ -131,7 +158,7 @@
 
 /* ---------- Consignment note ---------- */
 .svch-note-wrap {
-  justify-self: center;
+  justify-self: end;
   width: min(100%, 560px);
   filter: drop-shadow(0 22px 28px rgb(60 40 10 / 18%)) drop-shadow(0 3px 4px rgb(60 40 10 / 12%));
   opacity: 0;
@@ -357,16 +384,12 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 980px) {
-  .svch {
-    min-height: 0;
-    padding-top: 120px;
-  }
-
   .svch-inner {
     grid-template-columns: 1fr;
   }
 
   .svch-note-wrap {
+    justify-self: center;
     width: min(100%, 540px);
   }
 }

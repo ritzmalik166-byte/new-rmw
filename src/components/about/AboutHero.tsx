@@ -150,6 +150,15 @@ export function AboutHero() {
   return (
     <section ref={rootRef} className="about-hero">
       <div className="about-hero-main">
+        <nav className="hm sd-crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <TransitionLink href="/">Home</TransitionLink>
+            </li>
+            <li aria-current="page">About</li>
+          </ol>
+        </nav>
+
         <p className="about-kicker">
           <span className="about-kicker-item about-pill">About us</span>
           <span className="about-kicker-item about-kicker-hindi">हमारी कहानी</span>
@@ -180,21 +189,18 @@ export function AboutHero() {
         </div>
 
         <p ref={ledeRef} className="about-lede">
-          Founded in 2008, Ritz Media World is a full-service agency headquartered in Noida, Delhi NCR, working with
-          brands across India. We turn business problems into ideas that travel, delivering brand strategy, advertising
-          campaigns, media planning, digital marketing, film production, 3D rendering, and AI solutions. Our work spans
-          real estate, education, e-commerce, manufacturing, and startups.
+        Founded in 2008, Ritz Media World is a full-service agency headquartered in Noida, Delhi NCR, working with brands across India. We turn business problems into ideas that travel, delivering brand strategy, advertising campaigns, media planning, digital marketing, film production, 3D rendering, and AI solutions. Our work spans real estate, education, e-commerce, manufacturing, and startups.
         </p>
 
         <div className="about-actions">
           <TransitionLink href="/portfolio" className="about-btn about-btn-hot">
             <DashFrame />
-            <span>See our work</span>
+            <span>Explore our work</span>
           </TransitionLink>
-          <a href="#founder" className="about-btn about-btn-ink">
+          <TransitionLink href="/services" className="about-btn about-btn-ink">
             <DashFrame />
-            <span>Meet the founder</span>
-          </a>
+            <span>Explore our services</span>
+          </TransitionLink>
         </div>
       </div>
     </section>

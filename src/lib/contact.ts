@@ -12,7 +12,7 @@ export const HEARD_FROM = ["Search Engine", "Social Media", "Referral", "Adverti
 
 export const DIAL_CODES = COUNTRIES.map((country) => country.dial);
 
-/** OTP is sent through an Indian DLT gateway, so only +91 mobiles can be verified by SMS. */
+/** OTP is sent through an Indian DLT gateway, so only +91 mobiles are verified by SMS; other countries verify by email. */
 export const OTP_DIAL_CODE = "+91";
 
 export const OTP_LENGTH = 6;

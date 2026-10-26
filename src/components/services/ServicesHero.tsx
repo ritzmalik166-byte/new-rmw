@@ -2,16 +2,15 @@
 
 import { useGSAP } from "@gsap/react";
 import { Fragment, useRef } from "react";
+import { TransitionLink } from "@/components/motion/TransitionLink";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap } from "@/lib/gsap";
 
 registerGsap();
 
 const TITLE = [
-  { text: "We deliver", accent: false },
-  { text: "brands from", accent: false },
-  { text: "present to", accent: true },
-  { text: "prominent.", accent: true },
+  { text: "We deliver brands from", accent: false },
+  { text: "present to prominent.", accent: true },
 ] as const;
 
 const CONSIGNMENT = [
@@ -31,18 +30,19 @@ export function ServicesHero() {
 
       const q = gsap.utils.selector(root);
       const lines = q(".svch-line-inner");
+      const crumbs = q(".svch-crumbs");
       const fades = q(".svch-kicker, .svch-lede, .svch-cta");
       const note = q(".svch-note-wrap");
       const stamp = q(".svch-stamp");
       const rows = q(".svch-note-table tbody tr");
 
       if (reduced) {
-        gsap.set([lines, fades, note, stamp, rows], { autoAlpha: 1, clearProps: "transform" });
+        gsap.set([crumbs, lines, fades, note, stamp, rows], { autoAlpha: 1, clearProps: "transform" });
         return;
       }
 
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.fromTo(fades[0], { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6 })
+      tl.fromTo([crumbs, fades[0]], { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6 })
         .fromTo(
           lines,
           { yPercent: 110, autoAlpha: 1 },
@@ -79,9 +79,18 @@ export function ServicesHero() {
   );
 
   return (
-    <section ref={rootRef} className="svch" aria-labelledby="svch-title">
+    <section ref={rootRef} className="hm svch" aria-labelledby="svch-title">
       <div className="svch-inner">
         <div className="svch-copy">
+          <nav className="sd-crumbs svch-crumbs" aria-label="Breadcrumb">
+            <ol>
+              <li>
+                <TransitionLink href="/">Home</TransitionLink>
+              </li>
+              <li aria-current="page">Services</li>
+            </ol>
+          </nav>
+
           <p className="svch-kicker">
             <span className="svch-pill">Services</span>
             <span>One agency · Three engines</span>

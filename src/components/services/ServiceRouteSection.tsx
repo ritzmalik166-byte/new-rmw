@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState, type KeyboardEvent } from "react";
+import { useLenis } from "lenis/react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { HmArrow, HmPlate, HmTitle, useHomeReveal } from "@/components/homepage/shared";
 import { ServiceQueryCta } from "@/components/services/ServiceQueryCta";
 import { ServiceQueryForm } from "@/components/services/ServiceQueryForm";
@@ -13,26 +14,55 @@ import type { SubService } from "@/lib/sub-services-data";
 const pad = (value: number) => String(value).padStart(2, "0");
 const subHref = (sub: SubService) => `/services/${sub.service}/${sub.slug}`;
 
+function NavArrow({ direction }: { direction: "prev" | "next" }) {
+  return (
+    <svg viewBox="0 0 20 20" aria-hidden>
+      <path
+        d={direction === "next" ? "M4 10h12M11 5l5 5-5 5" : "M16 10H4M9 5l-5 5 5 5"}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 /* The board lists the dedicated sub-service pages once a service has enough
    of them to fill it; otherwise it falls back to the capability summary.
-   Capabilities that link their sub-service pages take precedence over both. */
+   Capabilities that carry their own details or link a sub-service take
+   precedence over both. */
 const MIN_SUB_SERVICES_FOR_BOARD = 3;
+const HEADER_OFFSET = 110;
+/* Lets the page-transition overlay lift and the hero lay out before scrolling. */
+const PAGE_SETTLE_MS = 1000;
+const HASH_SCROLL_DURATION = 1.6;
+const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
 
 type Props = { service: ServiceDetail; subServices?: SubService[] };
 
 export function ServiceRouteSection({ service, subServices = [] }: Props) {
   const rootRef = useRef<HTMLElement>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const boardRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const lenis = useLenis();
+  const lenisRef = useRef(lenis);
   useHomeReveal(rootRef);
 
-  const boardFromCapabilities = service.capabilities.some((cap) => cap.subService);
+  useEffect(() => {
+    lenisRef.current = lenis;
+  }, [lenis]);
+
+  const boardFromCapabilities = service.capabilities.some((cap) => cap.subService || cap.details);
   const boardFromSubs = !boardFromCapabilities && subServices.length >= MIN_SUB_SERVICES_FOR_BOARD;
   const capabilities = boardFromCapabilities
     ? service.capabilities.map((cap) => {
         const sub = subServices.find((item) => item.slug === cap.subService);
         return {
           ...cap,
+          slug: cap.subService,
           details: cap.details ?? sub?.sections.map((section) => section.title),
           href: sub ? subHref(sub) : undefined,
         };
@@ -40,15 +70,56 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
     : boardFromSubs
       ? subServices.map((sub) => ({
           title: sub.name,
+          slug: sub.slug as string | undefined,
           copy: sub.intro,
           details: sub.sections.map((section) => section.title),
           href: subHref(sub) as string | undefined,
         }))
-      : service.capabilities.map((cap) => ({ ...cap, href: undefined as string | undefined }));
-  const linkedSubs = new Set(capabilities.map((cap) => cap.href).filter(Boolean));
-  const extraSubs = boardFromSubs ? [] : subServices.filter((sub) => !linkedSubs.has(subHref(sub)));
+      : service.capabilities.map((cap) => ({
+          ...cap,
+          slug: cap.subService,
+          href: undefined as string | undefined,
+        }));
   const layout = getServiceLayout(service, capabilities.length);
   const capability = capabilities[active];
+  const slugKey = capabilities.map((item) => item.slug ?? "").join("|");
+
+  /* `#<sub-service-slug>` opens that stop on the board and brings the board into view. */
+  useEffect(() => {
+    const slugs = slugKey.split("|");
+    const timers: number[] = [];
+    const openFromHash = (delay: number) => {
+      const slug = decodeURIComponent(window.location.hash.slice(1));
+      const index = slug ? slugs.indexOf(slug) : -1;
+      if (index < 0) return;
+      setActive(index);
+      timers.push(
+        window.setTimeout(() => {
+          const board = boardRef.current;
+          if (!board) return;
+          const smooth = lenisRef.current;
+          if (smooth) {
+            smooth.scrollTo(board, {
+              offset: -HEADER_OFFSET,
+              duration: HASH_SCROLL_DURATION,
+              easing: easeInOutCubic,
+              force: true,
+            });
+          } else {
+            board.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, delay),
+      );
+    };
+    const onHashChange = () => openFromHash(0);
+
+    openFromHash(PAGE_SETTLE_MS);
+    window.addEventListener("hashchange", onHashChange);
+    return () => {
+      timers.forEach((timer) => window.clearTimeout(timer));
+      window.removeEventListener("hashchange", onHashChange);
+    };
+  }, [slugKey]);
 
   const select = (index: number, focus = false) => {
     const next = (index + capabilities.length) % capabilities.length;
@@ -75,7 +146,9 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
       <div className="hm-wrap sd-brief-inner">
         <div className="sd-brief-main">
           <blockquote data-hm-fade className="sd-define">
-            <p className="sd-define-label">What is {service.name}?</p>
+            <p className="sd-define-label">
+              What {/services$/i.test(service.name) ? "are" : "is"} {service.name}?
+            </p>
             <p className="sd-define-text">{service.definitionText ?? service.shortDescription}</p>
           </blockquote>
 
@@ -118,7 +191,7 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
               {layout.planLede}
             </p>
 
-            <div data-hm-fade className="sd-plan-board">
+            <div ref={boardRef} data-hm-fade className="sd-plan-board">
               <div
                 className="sd-plan-tabs"
                 role="tablist"
@@ -173,18 +246,22 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
                     </ul>
                   </>
                 ) : null}
-                {capability.href ? (
-                  <a href={capability.href} target="_blank" rel="noopener noreferrer" className="sd-plan-panel-link">
-                    Explore {capability.title}
-                    <HmArrow />
-                  </a>
-                ) : null}
                 <div className="sd-plan-panel-nav">
-                  <button type="button" aria-label="Previous service" onClick={() => select(active - 1)}>
-                    ←
+                  <button
+                    type="button"
+                    className="sd-plan-nav-prev"
+                    aria-label="Previous service"
+                    onClick={() => select(active - 1)}
+                  >
+                    <NavArrow direction="prev" />
                   </button>
-                  <button type="button" aria-label="Next service" onClick={() => select(active + 1)}>
-                    →
+                  <button
+                    type="button"
+                    className="sd-plan-nav-next"
+                    aria-label="Next service"
+                    onClick={() => select(active + 1)}
+                  >
+                    <NavArrow direction="next" />
                   </button>
                 </div>
               </div>
@@ -192,12 +269,6 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
 
             <footer data-hm-fade className="sd-plan-foot">
               <span>One connected programme. A clear scope for every service.</span>
-              {extraSubs.map((sub) => (
-                <a key={sub.slug} href={subHref(sub)} target="_blank" rel="noopener noreferrer" className="hm-link">
-                  Deep dive: {sub.name}
-                  <HmArrow />
-                </a>
-              ))}
               <a href="/contact" target="_blank" rel="noopener noreferrer" className="hm-link">
                 {layout.planCta}
                 <HmArrow />

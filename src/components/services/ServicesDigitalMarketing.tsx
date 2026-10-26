@@ -136,22 +136,6 @@ export function ServicesDigitalMarketing() {
     gsap.to(cards, { rotationX: 0, rotationY: 0, duration: 0.8, ease: "elastic.out(1, 0.6)", overwrite: "auto" });
   };
 
-  const onCtaMove = (event: PointerEvent<HTMLAnchorElement>) => {
-    if (reduced || event.pointerType !== "mouse") return;
-    const cta = event.currentTarget;
-    const rect = cta.getBoundingClientRect();
-    gsap.to(cta, {
-      x: (event.clientX - rect.left - rect.width / 2) * 0.25,
-      y: (event.clientY - rect.top - rect.height / 2) * 0.35,
-      duration: 0.4,
-      ease: "power3.out",
-    });
-  };
-
-  const onCtaLeave = (event: PointerEvent<HTMLAnchorElement>) => {
-    gsap.to(event.currentTarget, { x: 0, y: 0, duration: 0.9, ease: "elastic.out(1, 0.4)" });
-  };
-
   return (
     <section ref={rootRef} className="svc-dm" aria-labelledby="svc-dm-title">
       <div className="svc-dm-edge" aria-hidden />
@@ -178,26 +162,27 @@ export function ServicesDigitalMarketing() {
             across India, we run SEO, social media, and paid campaigns together, so every rupee is
             tracked from the first click to the final enquiry.
           </p>
-          <Link
-            className="svc-dm-cta"
-            href="/contact" target="_blank" rel="noopener noreferrer"
-            onPointerMove={onCtaMove}
-            onPointerLeave={onCtaLeave}
-          >
-            Get a Free SEO Audit <span aria-hidden>→</span>
-          </Link>
+          <div className="svc-explore-row">
+            <Link className="svc-explore" href="/services/digital-marketing">
+              Explore Digital Marketing <span aria-hidden>→</span>
+            </Link>
+            <Link
+              className="svc-dm-cta"
+              href="/contact" target="_blank" rel="noopener noreferrer"
+            >
+              Get a Free SEO Audit <span aria-hidden>→</span>
+            </Link>
+          </div>
           <ServicesSearchGlimpse />
         </div>
 
         <ul className="svc-dm-grid" onPointerMove={onGridMove} onPointerLeave={onGridLeave}>
           {SERVICES.map((service) => (
             <li key={service.id} className="svc-dm-card">
-              <Link href="/services/digital-marketing" className="svc-dm-card-link" style={{ display: "block", textDecoration: "none", color: "inherit", height: "100%" }}>
-                <span className="svc-dm-stripe" aria-hidden />
-                <ServiceIcon name={service.icon} />
-                <h3 className="svc-dm-card-title">{service.title}</h3>
-                <p className="svc-dm-card-copy">{service.copy}</p>
-              </Link>
+              <span className="svc-dm-stripe" aria-hidden />
+              <ServiceIcon name={service.icon} />
+              <h3 className="svc-dm-card-title">{service.title}</h3>
+              <p className="svc-dm-card-copy">{service.copy}</p>
             </li>
           ))}
         </ul>

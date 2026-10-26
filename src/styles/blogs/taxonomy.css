@@ -1,0 +1,47 @@
+/* ---------- Tag & category listings ---------- */
+.tax-section {
+  margin-top: clamp(28px, min(4vh, 2.5vw), 40px);
+}
+
+.tax-group + .tax-group {
+  margin-top: clamp(28px, min(4vh, 2.5vw), 40px);
+}
+
+.tax-group-letter {
+  margin: 0 0 14px;
+  color: var(--hm-red);
+  font-family: var(--hm-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.tax-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tax-chip {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1.5px solid var(--hm-ink);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--hm-navy);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.tax-chip:hover,
+.tax-chip:focus-visible {
+  background: var(--hm-yellow);
+  box-shadow: 2px 2px 0 var(--hm-ink);
+}

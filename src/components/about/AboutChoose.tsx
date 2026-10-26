@@ -60,7 +60,7 @@ export function AboutChoose() {
       <div className="about-choose-stage">
         <div className="about-choose-truck">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/about/choose-truck.png" alt="" width={1012} height={571} />
+          <img src="/about/choose-truck.png" alt="Ritz Media World truck" width={1012} height={571} />
           <article className="about-choose-card">
             <span className="about-choose-num">
               <svg viewBox="0 0 100 100" aria-hidden>

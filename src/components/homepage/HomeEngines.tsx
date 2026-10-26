@@ -21,11 +21,11 @@
 
   const RENDER_HREF = "/services/3d-rendering";
   const RENDER_TYPES = [
-    { slug: "3d-exterior", name: "3D Exterior Rendering", icon: RENDER_ICONS.exterior },
-    { slug: "3d-interior", name: "3D Interior Rendering", icon: RENDER_ICONS.interior },
-    { slug: "3d-aerial", name: "Aerial & Township", icon: RENDER_ICONS.aerial },
-    { slug: "3d-floor-plan", name: "3D Floor Plans", icon: RENDER_ICONS.plan },
-    { slug: "3d-amenity", name: "Amenity Rendering", icon: RENDER_ICONS.amenity },
+    { slug: "3d-exterior-rendering", name: "3D Exterior Rendering", icon: RENDER_ICONS.exterior },
+    { slug: "3d-interior-rendering", name: "3D Interior Rendering", icon: RENDER_ICONS.interior },
+    { slug: "aerial-township", name: "Aerial & Township", icon: RENDER_ICONS.aerial },
+    { slug: "3d-floor-plan-rendering", name: "3D Floor Plans", icon: RENDER_ICONS.plan },
+    { slug: "amenity-landscape-rendering", name: "Amenity Rendering", icon: RENDER_ICONS.amenity },
   ];
 
   const ENGINES: Engine[] = [
@@ -66,7 +66,7 @@
       title: "3D Rendering Services",
       copy: "Brand films, photorealistic 3D rendering, and AI-assisted production that let audiences see your product, project, or space before it is even built.",
       tone: "#167a7d",
-      cargo: RENDER_TYPES.map((type) => ({ ...type, href: RENDER_HREF })),
+      cargo: RENDER_TYPES.map((type) => ({ ...type, href: `${RENDER_HREF}#${type.slug}` })),
       extras: [],
     },
   ];
@@ -88,8 +88,8 @@
           />
           <div className="hm-mark" aria-hidden>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/s2/distance.webp" alt="" width={500} height={500} loading="lazy" decoding="async" />
-            <span className="hm-mark-label">RitzMedia</span>
+            <img src="/s2/distance.webp" alt="Ritz Media World milestone stone" width={500} height={500} loading="lazy" decoding="async" />
+            <span className="hm-mark-label theme-keep">RitzMedia</span>
           </div>
 
           <header className="hm-engines-head">
@@ -140,7 +140,7 @@
                           <span className="hm-chip-icon" aria-hidden>
                             {icon ? (
                               // eslint-disable-next-line @next/next/no-img-element
-                              <img src={icon} alt="" width={64} height={64} loading="lazy" />
+                              <img src={icon} alt={`${service.name} icon`} width={64} height={64} loading="lazy" />
                             ) : (
                               service.name.charAt(0)
                             )}

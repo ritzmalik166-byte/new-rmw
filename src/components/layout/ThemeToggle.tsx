@@ -2,12 +2,21 @@
 
 import { useEffect, useSyncExternalStore } from "react";
 import { cn } from "@/lib/cn";
-import { readStoredTheme, storeTheme, themeForTime, type Theme } from "@/lib/theme";
+import { storeTheme, type Theme } from "@/lib/theme";
+import { isLiteFx, playThemeFx, prepareThemeFx, THEME_FX_MS } from "@/lib/theme-fx";
 
 /* Smallest share of the spill mask's width that is solid in every direction. */
 const SPILL_CORE = 0.28;
-const SPILL_MS = 1500;
+const SPILL_MS = THEME_FX_MS;
 const SPILL_MASK = "/fx/spill.svg";
+const WIPE_IN_MS = 480;
+const WIPE_OUT_MS = 420;
+const WIPE_DOT = 160;
+/* The disc is painted through whatever filter the page has at the time, so these
+   are the inputs that show the new theme's background: before the swap they go
+   through the old theme's filter, after it the page's own cream does the job. */
+const WIPE_BEFORE: Record<Theme, string> = { dark: "#0a1124", light: "#160900" };
+const WIPE_AFTER = "#fff3e2";
 
 function subscribe(onChange: () => void) {
   const observer = new MutationObserver(onChange);
@@ -18,24 +27,36 @@ function subscribe(onChange: () => void) {
 const readTheme = (): Theme =>
   document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 
-/* Pours the new theme out from (x, y) like spilled liquid spreading over the floor. */
+/* Pours the new theme out from (x, y) like spilled liquid spreading over the floor,
+   with the stars / sun-flare effect playing on top. */
 function spillTo(theme: Theme, x: number, y: number) {
   const root = document.documentElement;
-  const apply = () => {
-    root.dataset.theme = theme;
-  };
+  let clearFx = () => {};
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduced || typeof document.startViewTransition !== "function") {
-    apply();
+  if (reduced) {
+    root.dataset.theme = theme;
     return;
   }
+  if (isLiteFx()) {
+    wipeTo(theme, x, y);
+    return;
+  }
+  if (typeof document.startViewTransition !== "function") {
+    root.dataset.theme = theme;
+    window.setTimeout(playThemeFx(theme, x, y, true), THEME_FX_MS);
+    return;
+  }
+  const apply = () => {
+    root.dataset.theme = theme;
+    clearFx = playThemeFx(theme, x, y);
+  };
 
   const reach = Math.hypot(
     Math.max(x, window.innerWidth - x),
     Math.max(y, window.innerHeight - y),
   );
   const size = reach / SPILL_CORE;
-  root.classList.add("is-spilling");
+  root.setAttribute("data-theme-busy", "");
   const transition = document.startViewTransition(apply);
   transition.ready
     .then(() => {
@@ -59,7 +80,61 @@ function spillTo(theme: Theme, x: number, y: number) {
       );
     })
     .catch(() => {});
-  transition.finished.finally(() => root.classList.remove("is-spilling"));
+  transition.finished.finally(() => {
+    root.removeAttribute("data-theme-busy");
+    clearFx();
+  });
+}
+
+/* Phones can't hold frame rate through a page snapshot and mask animation, so a
+   disc of the new theme's colour floods out from the toggle on the compositor,
+   the theme is swapped while the screen is covered, and the disc fades away. */
+function wipeTo(theme: Theme, x: number, y: number) {
+  const root = document.documentElement;
+  const reach = Math.hypot(
+    Math.max(x, window.innerWidth - x),
+    Math.max(y, window.innerHeight - y),
+  );
+  const cover = document.createElement("div");
+  cover.className = "theme-wipe";
+  cover.dataset.themeIgnore = "";
+  cover.setAttribute("aria-hidden", "true");
+  Object.assign(cover.style, {
+    left: `${x - WIPE_DOT / 2}px`,
+    top: `${y - WIPE_DOT / 2}px`,
+    width: `${WIPE_DOT}px`,
+    height: `${WIPE_DOT}px`,
+    background: WIPE_BEFORE[theme],
+  });
+  document.body.appendChild(cover);
+  root.setAttribute("data-theme-busy", "");
+
+  const done = () => {
+    cover.remove();
+    root.removeAttribute("data-theme-busy");
+  };
+  const grow = cover.animate(
+    [{ transform: "scale(0.01)" }, { transform: `scale(${(reach * 2 + 8) / WIPE_DOT})` }],
+    { duration: WIPE_IN_MS, easing: "cubic-bezier(0.65, 0, 0.35, 1)", fill: "forwards" },
+  );
+  grow.finished
+    .then(() => {
+      root.dataset.theme = theme;
+      cover.style.background = WIPE_AFTER;
+      window.setTimeout(playThemeFx(theme, x, y, true), THEME_FX_MS);
+      // Two frames so the swapped page has painted under the cover before it lifts.
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          cover
+            .animate([{ opacity: 1 }, { opacity: 0 }], { duration: WIPE_OUT_MS, easing: "ease-out", fill: "forwards" })
+            .finished.finally(done);
+        }),
+      );
+    })
+    .catch(() => {
+      root.dataset.theme = theme;
+      done();
+    });
 }
 
 export function ThemeToggle({ className }: { className?: string }) {
@@ -69,21 +144,22 @@ export function ThemeToggle({ className }: { className?: string }) {
   // An unloaded mask image hides the new theme entirely, so fetch it before the first toggle.
   useEffect(() => {
     new Image().src = SPILL_MASK;
+    const idle = window.requestIdleCallback ?? ((fn: () => void) => window.setTimeout(fn, 1200));
+    idle(() => prepareThemeFx());
   }, []);
-
-  // Follow the clock while the page stays open, unless the visitor picked a theme.
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      if (readStoredTheme()) return;
-      const timed = themeForTime();
-      if (timed !== readTheme()) spillTo(timed, window.innerWidth / 2, window.innerHeight / 2);
-    }, 60_000);
-    return () => window.clearInterval(id);
-  }, []);
-
   const toggle = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (document.documentElement.hasAttribute("data-theme-busy")) return;
     const next: Theme = dark ? "light" : "dark";
-    const box = event.currentTarget.getBoundingClientRect();
+    const button = event.currentTarget;
+    const box = button.getBoundingClientRect();
+    // The pop lives on the track: React rewrites the button's classes when the theme lands.
+    const track = button.firstElementChild as HTMLElement;
+    track.classList.remove("is-popping");
+    void track.offsetWidth;
+    track.classList.add("is-popping");
+    // Slide the knob now rather than after the theme work.
+    button.classList.toggle("is-dark", next === "dark");
+    navigator.vibrate?.(14);
     storeTheme(next);
     spillTo(next, box.left + box.width / 2, box.top + box.height / 2);
   };
@@ -92,12 +168,21 @@ export function ThemeToggle({ className }: { className?: string }) {
     <button
       type="button"
       className={cn("theme-toggle", dark && "is-dark", className)}
+      data-theme-ignore=""
       aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
       aria-pressed={dark}
       title={dark ? "Light mode" : "Dark mode"}
       onClick={toggle}
+      onAnimationEnd={(event) => {
+        if (event.animationName === "theme-toggle-pop") (event.target as HTMLElement).classList.remove("is-popping");
+      }}
     >
       <span className="theme-toggle-track" aria-hidden>
+        <span className="theme-toggle-stars theme-keep">
+          <i />
+          <i />
+          <i />
+        </span>
         <svg className="theme-toggle-sun" viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="4.2" />
           <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" />

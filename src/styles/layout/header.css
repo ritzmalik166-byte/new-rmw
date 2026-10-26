@@ -120,9 +120,21 @@ body:has(.site-header.is-stuck) .smm {
   }
 }
 
+/* Too narrow for equal outer columns: the theme toggle and CTA would run into the links. */
 @media (min-width: 1024px) and (max-width: 1180px) {
+  .site-header-bar {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    column-gap: 20px;
+  }
+
   .site-nav {
-    gap: 24px;
+    justify-self: center;
+    gap: 20px;
+  }
+
+  .site-nav-link {
+    font-size: 13px;
+    letter-spacing: 0.4px;
   }
 }
 

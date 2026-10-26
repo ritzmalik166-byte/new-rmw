@@ -368,13 +368,13 @@ function MobileMenu({
                   <button
                     type="button"
                     onClick={() => setMobileServicesOpen((prev) => !prev)}
-                    className="p-3 text-white/70 hover:text-amber-400 transition-colors"
+                    className="p-3 text-(--mnav-fg)/70 hover:text-(--mnav-active-num) transition-colors"
                     aria-label="Toggle sub services"
                   >
                     <span
                       className={cn(
                         "inline-block text-xs transition-transform duration-200",
-                        mobileServicesOpen ? "rotate-180 text-amber-400" : "",
+                        mobileServicesOpen ? "rotate-180 text-(--mnav-active-num)" : "",
                       )}
                     >
                       ▼
@@ -383,22 +383,22 @@ function MobileMenu({
                 </div>
 
                 {mobileServicesOpen && (
-                  <div className="pl-8 pr-2 py-2 flex flex-col gap-1.5 bg-white/[0.04] rounded-lg my-1">
+                  <div className="pl-8 pr-2 py-2 flex flex-col gap-1.5 bg-(--mnav-line) rounded-lg my-1">
                     {MENU_SERVICES.map((svc) => (
                       <Link
                         key={svc.slug}
                         href={`/services/${svc.slug}`}
                         onClick={onClose}
                         className={cn(
-                          "text-sm py-1.5 px-2 rounded text-white/75 hover:text-amber-400 transition-colors flex items-center justify-between gap-3",
-                          pathname === `/services/${svc.slug}` && "text-amber-400 font-semibold bg-white/5",
+                          "text-sm py-1.5 px-2 rounded text-(--mnav-fg)/85 hover:text-(--mnav-active-num) transition-colors flex items-center justify-between gap-3",
+                          pathname === `/services/${svc.slug}` && "text-(--mnav-active-num) font-semibold bg-(--mnav-line)",
                         )}
                       >
                         <span className="flex items-center gap-3">
                           {SERVICE_ICONS[svc.slug] ? (
                             <Image
                               src={SERVICE_ICONS[svc.slug]!}
-                              alt=""
+                              alt={`${svc.name} icon`}
                               width={32}
                               height={32}
                               className="h-8 w-8 shrink-0 object-contain"
@@ -408,7 +408,7 @@ function MobileMenu({
                           )}
                           {svc.name}
                         </span>
-                        <span className="text-xs text-white/30">→</span>
+                        <span className="text-xs text-(--mnav-fg)/40">→</span>
                       </Link>
                     ))}
                   </div>
@@ -459,9 +459,10 @@ function BrandMark() {
     <span className="brand-mark">
       <Image
         src="/logo.png"
-        alt=""
-        width={61}
-        height={77}
+        alt="Ritz Media World logo"
+        width={160}
+        height={202}
+        quality={95}
         className="brand-mark-logo"
         priority
       />

@@ -119,6 +119,24 @@
 
 @media (max-width: 1023px) {
   .mnav {
+    /* Palette — the whole menu is themed from these. */
+    /* Ink: dark enough that ThemeSurfaces keeps it as-is, so it is identical in light and dark mode. */
+    --mnav-bg: linear-gradient(165deg, #1d1b1a 0%, #141313 55%, #0d0d0d 100%);
+    --mnav-dots: rgb(255 243 226 / 0.06);
+    --mnav-glow:
+      radial-gradient(55% 38% at 100% 0%, rgb(201 53 110 / 0.28), transparent 70%),
+      radial-gradient(60% 36% at 0% 100%, rgb(255 255 255 / 12%), rgb(243 195 60 / 0.14) 32%, transparent 72%);
+    --mnav-fg: #fff3e2;
+    --mnav-dim: rgb(255 243 226 / 0.5);
+    --mnav-line: rgb(255 243 226 / 0.14);
+    --mnav-stroke: rgb(255 243 226 / 0.07);
+    --mnav-active: linear-gradient(90deg, #fff8e1 0%, #f3c33c 24%, #f07828 60%, #e0457f);
+    --mnav-active-num: #f3c33c;
+    --mnav-btn-bg: #fff3e2;
+    --mnav-btn-fg: #161616;
+    --mnav-btn-border: #fff3e2;
+    --mnav-btn-shadow: #c9356e;
+
     position: fixed;
     inset: 0;
     z-index: 200;
@@ -128,10 +146,10 @@
     overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior: contain;
-    color: #ffffff;
+    color: var(--mnav-fg);
     background:
-      radial-gradient(rgb(255 255 255 / 0.06) 1px, transparent 1.6px) 0 0 / 22px 22px,
-      linear-gradient(165deg, #1e1c4b 0%, #15141f 46%, #0f0f12 100%);
+      radial-gradient(var(--mnav-dots) 1px, transparent 1.6px) 0 0 / 22px 22px,
+      var(--mnav-bg);
     visibility: hidden;
     clip-path: circle(0% at calc(100% - 42px) 42px);
     transition:
@@ -154,10 +172,7 @@
     z-index: 0;
     overflow: hidden;
     pointer-events: none;
-    background:
-      radial-gradient(55% 38% at 100% 0%, rgb(201 53 110 / 0.45), transparent 70%),
-      radial-gradient(50% 30% at 0% 58%, rgb(243 195 60 / 0.14), transparent 70%),
-      radial-gradient(70% 42% at 85% 100%, rgb(38 84 200 / 0.4), transparent 72%);
+    background: var(--mnav-glow);
   }
 
   .mnav-glow::before {
@@ -173,7 +188,7 @@
     text-align: right;
     white-space: pre;
     color: transparent;
-    -webkit-text-stroke: 1px rgb(255 255 255 / 0.07);
+    -webkit-text-stroke: 1px var(--mnav-stroke);
   }
 
   .mnav-glow::after {
@@ -209,10 +224,6 @@
     padding: 1.25rem 1.25rem 0;
   }
 
-  .mnav-top .brand-mark-logo {
-    filter: drop-shadow(0 0 12px rgb(255 255 255 / 0.18));
-  }
-
   .mnav-close {
     position: relative;
     isolation: isolate;
@@ -220,10 +231,10 @@
     height: 48px;
     padding: 0;
     overflow: hidden;
-    border: 2px solid #fff3e2;
+    border: 2px solid var(--mnav-btn-border);
     border-radius: 999px;
-    background: #fff3e2;
-    box-shadow: 3px 3px 0 #c9356e;
+    background: var(--mnav-btn-bg);
+    box-shadow: 3px 3px 0 var(--mnav-btn-shadow);
     cursor: pointer;
     transition:
       transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
@@ -233,7 +244,7 @@
   .mnav-close:hover,
   .mnav-close:focus-visible {
     transform: translate(-2px, -2px);
-    box-shadow: 5px 5px 0 #c9356e;
+    box-shadow: 5px 5px 0 var(--mnav-btn-shadow);
   }
 
   .mnav-close:focus-visible {
@@ -248,8 +259,10 @@
     width: 20px;
     height: 2px;
     border-radius: 2px;
-    background: #161616;
-    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: var(--mnav-btn-fg);
+    transition:
+      transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+      background-color 0.3s ease;
   }
 
   .mnav-close span:nth-child(1) {
@@ -258,6 +271,11 @@
 
   .mnav-close span:nth-child(2) {
     transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  .mnav-close:hover span,
+  .mnav-close:focus-visible span {
+    background: #161616;
   }
 
   .mnav-close:hover span:nth-child(1),
@@ -285,8 +303,8 @@
     align-items: baseline;
     gap: 14px;
     padding: clamp(0.7rem, 2.2svh, 1.15rem) 0;
-    border-bottom: 1px solid rgb(255 255 255 / 0.12);
-    color: #ffffff;
+    border-bottom: 1px solid var(--mnav-line);
+    color: var(--mnav-fg);
     text-decoration: none;
     opacity: 0;
     transform: translateY(28px);
@@ -310,12 +328,7 @@
     right: 0;
     bottom: -1px;
     height: 2px;
-    background: linear-gradient(
-      90deg,
-      var(--truck-yellow),
-      var(--truck-orange) 48%,
-      var(--truck-pink)
-    );
+    background: var(--mnav-active);
     transform: scaleX(0);
     transform-origin: left center;
     transition: transform 0.45s ease;
@@ -327,7 +340,7 @@
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.08em;
-    color: rgb(255 255 255 / 0.45);
+    color: var(--mnav-dim);
   }
 
   .mnav-label {
@@ -344,7 +357,7 @@
   .mnav-arrow {
     align-self: center;
     font-size: clamp(1.25rem, 4.5vw, 1.75rem);
-    color: rgb(255 255 255 / 0.4);
+    color: var(--mnav-dim);
     transform: translateX(-6px);
     transition: transform 0.4s ease, color 0.4s ease;
   }
@@ -394,14 +407,14 @@
   }
 
   .mnav-link.is-active .mnav-label {
-    background: linear-gradient(90deg, var(--truck-yellow), var(--truck-orange) 50%, var(--truck-pink));
+    background: var(--mnav-active);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
   .mnav-link.is-active .mnav-num {
-    color: var(--truck-yellow);
+    color: var(--mnav-active-num);
   }
 
   .mnav-link:hover :is(.mnav-num, .mnav-label, .mnav-arrow),
@@ -436,7 +449,7 @@
     height: 56px;
     padding: 0 22px;
     overflow: hidden;
-    border: 2px solid #fff3e2;
+    border: 2px solid var(--mnav-btn-border);
     border-radius: 999px;
     font-family: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
     font-size: 14px;
@@ -444,10 +457,11 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     text-decoration: none;
-    color: #161616;
-    background: #fff3e2;
-    box-shadow: 4px 4px 0 #c9356e;
+    color: var(--mnav-btn-fg);
+    background: var(--mnav-btn-bg);
+    box-shadow: 4px 4px 0 var(--mnav-btn-shadow);
     transition:
+      color 0.3s ease,
       transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
       box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -459,8 +473,9 @@
 
   .mnav-cta:hover,
   .mnav-cta:focus-visible {
+    color: #161616;
     transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 #c9356e;
+    box-shadow: 6px 6px 0 var(--mnav-btn-shadow);
   }
 
   .mnav-cta:hover span,
@@ -470,7 +485,7 @@
 
   .mnav-cta:active {
     transform: translate(1px, 1px);
-    box-shadow: 1px 1px 0 #c9356e;
+    box-shadow: 1px 1px 0 var(--mnav-btn-shadow);
   }
 
   .mnav-cta:focus-visible {
@@ -486,14 +501,15 @@
   }
 
   .mnav-contact a {
-    color: rgb(255 255 255 / 0.72);
+    color: var(--mnav-fg);
+    opacity: 0.8;
     text-decoration: none;
     transition: color 0.2s ease;
   }
 
   .mnav-contact a:hover,
   .mnav-contact a:focus-visible {
-    color: #ffffff;
+    opacity: 1;
   }
 
   .mnav-tagline {
@@ -503,7 +519,7 @@
     font-weight: 600;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: rgb(255 255 255 / 0.35);
+    color: var(--mnav-dim);
   }
 }
 
@@ -590,6 +606,10 @@
     display: none;
   }
 
+  .site-header-brand {
+    flex-shrink: 0;
+  }
+
   .audit-card-title {
     white-space: normal;
   }
@@ -597,5 +617,12 @@
   .audit-copy {
     padding: 18px 14px 16px;
     box-shadow: 5px 5px 0 var(--audit-ink);
+  }
+}
+
+/* Fold-width phones: the menu already carries the contact CTA, so the logo keeps its room. */
+@media (max-width: 359px) {
+  html .site-header-cta {
+    display: none;
   }
 }

@@ -43,7 +43,7 @@ const STOPS = [
   },
   {
     year: "2026",
-    title: "AI-Powered 3D Rendering at 5X",
+    title: "AI-Powered 3D Rendering at 5X Speed",
     copy: "Launched AI-powered 3D rendering that produces photorealistic visuals five times faster than before.",
     place: "below",
     at: "86%",
@@ -87,12 +87,12 @@ export function AboutJourney() {
 
         match = gsap.matchMedia();
 
-        match.add("(max-width: 900px)", () => {
+        match.add("(max-width: 900px), (orientation: portrait)", () => {
           const cards = root.querySelectorAll<HTMLElement>(".about-journey-stop");
           gsap.set(cards, { clearProps: "transform", autoAlpha: 1 });
         });
 
-        match.add("(min-width: 901px)", () => {
+        match.add("(min-width: 901px) and (orientation: landscape)", () => {
           const road = root.querySelector<HTMLElement>(".about-journey-road");
           const truck = root.querySelector<HTMLElement>(".about-journey-truck");
           const cards = root.querySelectorAll<HTMLElement>(".about-journey-stop");

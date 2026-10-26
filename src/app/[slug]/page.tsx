@@ -5,6 +5,9 @@ import { getCaseStudies, getCaseStudySlugs } from "@/lib/case-studies";
 import { BlogImage } from "@/components/blogs/BlogImage";
 import { BlogShare } from "@/components/blogs/BlogShare";
 import { BlogEnquiryForm } from "@/components/blogs/BlogEnquiryForm";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { articleJsonLd, blogFaqJsonLd, breadcrumbJsonLd } from "@/lib/schema";
+import { tagHref } from "@/lib/taxonomy";
 import "@/styles/blogs/detail.css";
 
 export const revalidate = 300;
@@ -26,15 +29,17 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const blog = findBlog(await getBlogsOrEmpty(), slug) ?? (await getBlogPost(slug));
+  const blog = (await getBlogPost(slug)) ?? findBlog(await getBlogsOrEmpty(), slug);
   if (!blog) return { title: "Blog Not Found | Ritz Media World" };
 
+  const title = blog.metaTitle || blog.title;
+
   return {
-    title: `${blog.title} | Ritz Media World`,
+    title: { absolute: title },
     description: blog.excerpt,
     keywords: blog.keywords,
     openGraph: {
-      title: blog.title,
+      title,
       description: blog.excerpt,
       images: blog.image ? [blog.image] : [],
     },
@@ -48,12 +53,21 @@ function findBlog(blogs: Blog[], slug: string) {
 
 function formatDate(date: string | null) {
   if (!date) return "Ritz Media World";
-  return new Intl.DateTimeFormat("en-US", {
-    month: "short",
+  return new Intl.DateTimeFormat("en-IN", {
     day: "numeric",
+    month: "short",
     year: "numeric",
-    timeZone: "UTC",
+    timeZone: "Asia/Kolkata",
   }).format(new Date(date));
+}
+
+/** Normalises content pasted from Google Docs: scrollable tables, and "•   text"
+ *  paragraphs (manual bullets padded with spaces) rendered as real bullet points. */
+function prepareContent(html: string) {
+  return html
+    .replace(/<table\b/gi, '<div class="blog-table-wrap"><table')
+    .replace(/<\/table>/gi, "</table></div>")
+    .replace(/<p\b([^>]*)>\s*(?:•|&bull;|●|▪)(?:\s|&nbsp;|&#160;)*/gi, "<p data-blog-bullet$1>");
 }
 
 function calculateReadingTime(html: string): number {
@@ -69,7 +83,7 @@ export default async function BlogDetailPage({
 }) {
   const { slug } = await params;
   const allBlogs = await getBlogsOrEmpty();
-  const blog = findBlog(allBlogs, slug) ?? (await getBlogPost(slug));
+  const blog = (await getBlogPost(slug)) ?? findBlog(allBlogs, slug);
 
   if (!blog) {
     notFound();
@@ -78,7 +92,7 @@ export default async function BlogDetailPage({
   const isCaseStudy = (await getCaseStudySlugs()).has(blog.slug.toLowerCase());
   const section = isCaseStudy
     ? { href: "/case-study", label: "Case Studies", back: "Back to all case studies", related: "More Case Studies" }
-    : { href: "/blog", label: "Blogs", back: "Back to all blogs", related: "Related Blogs" };
+    : { href: "/blog", label: "Blog", back: "Back to all blogs", related: "Related Blogs" };
 
   const readingTime = calculateReadingTime(blog.content);
   const tags = [
@@ -95,6 +109,15 @@ export default async function BlogDetailPage({
 
   return (
     <div className="hm blog-post-page">
+      <JsonLd data={articleJsonLd(blog, isCaseStudy)} />
+      <JsonLd data={blogFaqJsonLd(blog)} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: section.label, path: section.href },
+          { name: blog.title, path: `/${blog.slug}` },
+        ])}
+      />
       <div className="blog-post-layout">
         <article className="blog-post-main">
           <nav className="blog-breadcrumb" aria-label="Breadcrumb">
@@ -129,7 +152,7 @@ export default async function BlogDetailPage({
 
           <div
             className="blog-prose blog-post-content"
-            dangerouslySetInnerHTML={{ __html: blog.content }}
+            dangerouslySetInnerHTML={{ __html: prepareContent(blog.content) }}
           />
 
           <footer className="blog-post-footer">
@@ -137,11 +160,18 @@ export default async function BlogDetailPage({
               <div className="blog-post-tags">
                 <span className="blog-post-footer-label">Tags</span>
                 <div className="blog-post-tag-list">
-                  {tags.map((tag) => (
-                    <span key={tag} className="blog-tag-chip">
-                      #{tag}
-                    </span>
-                  ))}
+                  {tags.map((tag) => {
+                    const href = tagHref(tag);
+                    return href ? (
+                      <Link key={tag} href={href} className="blog-tag-chip">
+                        #{tag}
+                      </Link>
+                    ) : (
+                      <span key={tag} className="blog-tag-chip">
+                        #{tag}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
             )}
@@ -154,7 +184,7 @@ export default async function BlogDetailPage({
 
         <aside className="blog-post-aside">
           <div className="blog-post-aside-sticky">
-            <BlogEnquiryForm />
+            <BlogEnquiryForm source={`${isCaseStudy ? "Case study" : "Blog"}: ${blog.title}`} />
             <Link href={section.href} className="blog-back-link">
               <span aria-hidden="true">←</span> {section.back}
             </Link>

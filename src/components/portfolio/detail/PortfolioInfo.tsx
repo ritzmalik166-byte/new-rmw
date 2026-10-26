@@ -50,6 +50,16 @@ export function PortfolioBlockSection({
   const { ready, reduced } = useMotion();
   useHomeReveal(rootRef);
   const id = `pfd-block-${index}`;
+  const titleText = Array.isArray(block.title) ? block.title.join(" ") : block.title;
+  const kicker =
+    block.kicker ??
+    (block.kind === "steps"
+      ? "How we work"
+      : block.kind === "chips"
+        ? "Who we work with"
+        : /^why\b/i.test(titleText)
+          ? "Why us"
+          : "What you get");
 
   useGSAP(
     () => {
@@ -109,7 +119,7 @@ export function PortfolioBlockSection({
         <header className="pf-head">
           <p data-hm-fade className="hm-kicker">
             <span className="hm-pill">{km}</span>
-            <span>{block.kind === "steps" ? "How we work" : block.kind === "chips" ? "Who we work with" : "What you get"}</span>
+            <span>{kicker}</span>
           </p>
           <HmTitle id={id} lines={splitTitle(block.title)} />
           {block.lede ? (
