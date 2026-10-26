@@ -7,7 +7,7 @@ import { useRef, useState, type KeyboardEvent } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { cn } from "@/lib/cn";
 import { gsap, registerGsap } from "@/lib/gsap";
-import { RENDER_ICONS } from "@/lib/service-icons";
+import { RENDER_ICONS, iconThumb } from "@/lib/service-icons";
 import type { RenderKind } from "./ServicesRenderStage";
 
 registerGsap();
@@ -222,7 +222,7 @@ export function ServicesRendering() {
               >
                 <span className="svc-render-thumb" aria-hidden>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={RENDER_ICONS[item.id]} alt={`${item.title} icon`} width={64} height={64} loading="lazy" />
+                  <img src={iconThumb(RENDER_ICONS[item.id])} alt={`${item.title} icon`} width={64} height={64} loading="lazy" />
                 </span>
                 <span className="svc-render-tab-text">
                   <span className="svc-render-tab-title">{item.title}</span>

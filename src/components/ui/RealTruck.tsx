@@ -38,7 +38,7 @@ type Props = {
 };
 
 const TRUCK_SRCSET =
-  "/trucks/rmw-truck-sm.webp 480w, /trucks/rmw-truck-720.webp 720w, /trucks/rmw-truck.webp 1101w";
+  "/trucks/rmw-truck-sm.webp 480w, /trucks/rmw-truck-600.webp 600w, /trucks/rmw-truck-720.webp 720w, /trucks/rmw-truck.webp 1101w";
 
 export function RealTruck({
   className,
@@ -49,7 +49,7 @@ export function RealTruck({
   sizes = "100vw",
   driver,
 }: Props) {
-  const src = small ? "/trucks/rmw-truck-sm.webp" : "/trucks/rmw-truck.webp";
+  const src = small ? "/trucks/rmw-truck-xs.webp" : "/trucks/rmw-truck.webp";
   if (priority) {
     // Hoisted into <head> so the download starts before the parser reaches the hero.
     preload(src, {
@@ -95,10 +95,10 @@ export function RealTruck({
                 key={pose}
                 className="real-truck-pose"
                 data-pose={pose}
-                src={`/trucks/driver/${pose}.webp`}
+                src={`/trucks/driver/sm/${pose}.webp`}
                 alt="Truck driver at the wheel"
-                width={336}
-                height={192}
+                width={168}
+                height={96}
                 loading={priority ? "eager" : "lazy"}
                 fetchPriority={pose === "idle" ? undefined : "low"}
                 draggable={false}

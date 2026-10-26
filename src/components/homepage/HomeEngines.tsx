@@ -3,7 +3,7 @@
   import { useRef, type CSSProperties } from "react";
   import { TransitionLink } from "@/components/motion/TransitionLink";
   import { ServicesRouteTruck } from "@/components/services/ServicesRouteTruck";
-  import { RENDER_ICONS, SERVICE_ICONS } from "@/lib/service-icons";
+  import { RENDER_ICONS, SERVICE_ICONS, iconThumb } from "@/lib/service-icons";
   import { HmArrow, HmTitle, useHomeReveal } from "./shared";
 
   const TITLE = [{ text: "One agency." }, { text: "Three engines.", accent: true }] as const;
@@ -140,7 +140,7 @@
                           <span className="hm-chip-icon" aria-hidden>
                             {icon ? (
                               // eslint-disable-next-line @next/next/no-img-element
-                              <img src={icon} alt={`${service.name} icon`} width={64} height={64} loading="lazy" />
+                              <img src={iconThumb(icon)} alt={`${service.name} icon`} width={64} height={64} loading="lazy" />
                             ) : (
                               service.name.charAt(0)
                             )}

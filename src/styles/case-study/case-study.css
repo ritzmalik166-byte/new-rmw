@@ -231,12 +231,15 @@
   text-transform: uppercase;
 }
 
+/* Pressed onto the middle file's bottom-right corner. */
 .cs-hero-stamp {
   position: absolute;
-  top: -4%;
-  right: 2%;
+  top: 62%;
+  left: 79%;
   z-index: 4;
-  width: 22%;
+  width: 21%;
+  height: auto;
+  aspect-ratio: 1;
   color: var(--hm-red);
   rotate: 12deg;
 }

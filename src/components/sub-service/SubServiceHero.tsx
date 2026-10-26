@@ -133,6 +133,13 @@ export function SubServiceHero({ service, sub, stop, total }: Props) {
               <span>KM {pad(stop)}</span>
               {sub.name}
             </figcaption>
+            <HmStamp
+              id={`ssd-stamp-${sub.service}-${sub.slug}`}
+              top="RITZ MEDIA WORLD"
+              bottom="SINCE 2008 · NOIDA"
+              word="Approved"
+              className="ssd-hero-stamp"
+            />
           </figure>
 
           <div className="ssd-ticket" aria-hidden>
@@ -150,14 +157,6 @@ export function SubServiceHero({ service, sub, stop, total }: Props) {
               {pad(sub.sections.length)} checkpoints
             </p>
           </div>
-
-          <HmStamp
-            id={`ssd-stamp-${sub.service}-${sub.slug}`}
-            top="RITZ MEDIA WORLD"
-            bottom="SINCE 2008 · NOIDA"
-            word="Approved"
-            className="ssd-hero-stamp"
-          />
         </div>
       </div>
 

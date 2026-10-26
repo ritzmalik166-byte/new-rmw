@@ -20,5 +20,10 @@ export const RENDER_ICONS = {
   amenity: "/services/icons/3d/amenity.png",
 } as const;
 
+/** 80px WebP copy of an icon for plain `<img>` tags (built by scripts/optimize-images.mjs). */
+export function iconThumb(src: string) {
+  return src.replace("/services/icons/", "/services/icons/sm/").replace(/\.png$/, ".webp");
+}
+
 /** Truck-art palette sampled from the service icons. */
 export const SERVICE_ACCENTS = ["#f6c431", "#d81f5f", "#167a68", "#4ec3ea"] as const;
