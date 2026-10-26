@@ -283,7 +283,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
       { value: "300+", label: "Brands Served" },
       { value: "18+", label: "Years In Strategic Brand Craft" },
       { value: "100%", label: "In-House Strategy & Production" },
-      { value: "90+", label: "Creative Minds On The Team" },
+      { value: "100+", label: "Creative Minds On The Team" },
     ],
     capabilities: [
       {
