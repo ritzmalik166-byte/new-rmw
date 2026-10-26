@@ -280,7 +280,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     accentColor: "#cf1b4b",
     tags: ["Brand Identity", "Graphic Design", "Logo Design", "Packaging", "Ad Campaigns", "Art Direction"],
     stats: [
-      { value: "500+", label: "Brand Identities & Campaigns Built" },
+      { value: "300+", label: "Brands Served" },
       { value: "18+", label: "Years In Strategic Brand Craft" },
       { value: "100%", label: "In-House Strategy & Production" },
       { value: "90+", label: "Creative Minds On The Team" },

@@ -258,6 +258,41 @@
   }
 }
 
+/* Narrow desktops: dead centre would cover the end of the copyright line, so park
+   the pills in the gap between it and the horn instead. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .fab.is-visible.is-docked {
+    right: calc(50% - 127px);
+  }
+}
+
+/* Tablets: the bottom bar is too crowded to share, so the two round buttons park
+   side by side in a bay the footer reserves beneath it (see footer.css). */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .fab.is-visible.is-docked {
+    right: calc(50% - 27px);
+    bottom: 16px;
+    transition:
+      transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 0.3s ease,
+      visibility 0s,
+      right 0.75s cubic-bezier(0.65, 0, 0.35, 1),
+      bottom 0.75s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .fab.is-docked .fab-btn.is-wa {
+    translate: -34px 68px;
+  }
+
+  .fab.is-docked .fab-btn.is-call {
+    translate: 34px 0;
+  }
+
+  .fab.is-docked .fab-label {
+    display: none;
+  }
+}
+
 /* Phones: a two-button bar pinned to the bottom edge. */
 @media (max-width: 767px) {
   body {

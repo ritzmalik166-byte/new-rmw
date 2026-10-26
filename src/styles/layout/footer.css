@@ -269,6 +269,7 @@
   align-items: center;
   gap: 8px;
   min-width: 0;
+  white-space: nowrap;
   transition: color 0.2s ease;
 }
 
@@ -1199,6 +1200,41 @@
   .site-footer-top {
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
     gap: 2.5rem;
+  }
+}
+
+/* Landscape tablets keep the sign beside the intro, so it is too narrow for the desktop spacing. */
+@media (min-width: 1000px) and (max-width: 1100px) {
+  .site-footer-sign-board {
+    padding-inline: 18px;
+  }
+
+  .site-footer-sign-cols > div:first-child {
+    padding-right: 16px;
+  }
+
+  .site-footer-sign-cols > div + div {
+    padding-left: 16px;
+  }
+
+  .site-footer-sign-link {
+    gap: 8px;
+    font-size: 14.5px;
+  }
+
+  .site-footer-sign-label {
+    gap: 6px;
+  }
+
+  .site-footer-sign-label::after {
+    min-width: 8px;
+  }
+}
+
+/* Parking bay for the floating WhatsApp/call buttons (54px + 16px offset + breathing room). */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .site-footer-bottom {
+    padding-bottom: 96px;
   }
 }
 
