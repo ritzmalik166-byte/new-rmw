@@ -7,8 +7,7 @@
 .hm-engines-inner {
   position: relative;
   box-sizing: border-box;
-  width: min(1440px, 100%);
-  margin-inline: auto;
+  width: 100%;
   padding: var(--hm-pad-y) clamp(24px, 7vw, 101px) var(--hm-pad-y) clamp(84px, 7vw, 101px);
 }
 

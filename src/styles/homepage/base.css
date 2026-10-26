@@ -19,7 +19,7 @@
   --hm-sans: var(--font-inter), Inter, sans-serif;
   --hm-jakarta: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
   --hm-mono: var(--font-inter), Inter, sans-serif;
-  --hm-gutter: clamp(20px, 5.5vw, 80px);
+  --hm-gutter: var(--site-gutter);
   --hm-pad-y: clamp(72px, min(10vh, 6.25vw), 120px);
 
   position: relative;
@@ -30,8 +30,6 @@
 .hm-wrap {
   box-sizing: border-box;
   width: 100%;
-  max-width: 1280px;
-  margin-inline: auto;
   padding-inline: var(--hm-gutter);
 }
 

@@ -31,7 +31,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(300px, 1.08fr);
   gap: clamp(1.25rem, 2.6vw, 2.4rem);
   align-items: start;
-  width: min(1180px, calc(100% - 4rem));
+  width: calc(100% - 2 * var(--site-gutter));
   margin: 0 auto;
   padding: clamp(1.6rem, 3vw, 2.5rem) 0 0.35rem;
 }

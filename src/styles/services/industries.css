@@ -32,8 +32,7 @@
   flex-wrap: wrap;
   align-items: flex-end;
   gap: 16px clamp(40px, 7vw, 96px);
-  width: min(1440px, 100%);
-  margin-inline: auto;
+  width: 100%;
   padding-inline: clamp(24px, 6vw, 88px);
   box-sizing: border-box;
 }

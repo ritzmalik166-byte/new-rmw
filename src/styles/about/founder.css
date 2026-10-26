@@ -2,7 +2,7 @@
   /* Height of the stuck site header, which overlays the pinned section. */
   --fd-head: 72px;
   --fd-pad-y: clamp(16px, 4vh, 48px);
-  --fd-pad-x: clamp(20px, 4vw, 72px);
+  --fd-pad-x: var(--site-gutter);
   --fd-size: min(541px, 38vw);
 
   position: relative;
@@ -28,8 +28,6 @@
   display: grid;
   gap: clamp(72px, 12vh, 128px);
   width: 100%;
-  max-width: 1320px;
-  margin: 0 auto;
 }
 
 .about-founder.is-staged .about-founder-person {

@@ -30,7 +30,7 @@
   justify-content: center;
   min-height: 100svh;
   overflow: hidden;
-  padding: var(--ct-top) clamp(20px, 4.5vw, 72px) var(--ct-bottom);
+  padding: var(--ct-top) var(--site-gutter) var(--ct-bottom);
   background:
     radial-gradient(60% 50% at 85% 10%, rgb(255 255 255 / 65%), rgb(243 195 60 / 22%) 32%, transparent 70%),
     radial-gradient(50% 40% at 0% 60%, rgb(201 53 110 / 10%), transparent 70%),
@@ -44,7 +44,6 @@
   grid-template-columns: minmax(0, 5fr) minmax(0, 8fr);
   gap: clamp(28px, 3.5vw, 56px);
   width: 100%;
-  max-width: 1280px;
   min-height: min(calc(100svh - var(--ct-top) - var(--ct-bottom)), 720px);
   margin-inline: auto;
 }

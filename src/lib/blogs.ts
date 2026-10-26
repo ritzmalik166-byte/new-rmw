@@ -153,6 +153,25 @@ function isRetryableStatus(status: number) {
   return status === 408 || status === 429 || status >= 500;
 }
 
+/* The API host drops new connections when one client opens too many at once
+   (20+ parallel requests time out), so requests to it are queued. */
+const MAX_PARALLEL_REQUESTS = 4;
+let activeRequests = 0;
+const requestQueue: (() => void)[] = [];
+
+async function limited<T>(task: () => Promise<T>): Promise<T> {
+  if (activeRequests >= MAX_PARALLEL_REQUESTS) {
+    await new Promise<void>((resolve) => requestQueue.push(resolve));
+  }
+  activeRequests++;
+  try {
+    return await task();
+  } finally {
+    activeRequests--;
+    requestQueue.shift()?.();
+  }
+}
+
 export async function fetchJson(url: string): Promise<unknown> {
   let lastError: unknown;
 
@@ -161,18 +180,25 @@ export async function fetchJson(url: string): Promise<unknown> {
       await wait(RETRY_DELAYS_MS[attempt - 1] + Math.random() * 250);
     }
 
-    let response: Response;
+    let result: { status: number; data?: unknown };
     try {
-      response = await fetch(url, { next: { revalidate: 300 } });
+      result = await limited(async () => {
+        const response = await fetch(url, { next: { revalidate: 300 } });
+        if (!response.ok) {
+          await response.body?.cancel();
+          return { status: response.status };
+        }
+        return { status: response.status, data: await response.json() };
+      });
     } catch (error) {
       lastError = error;
       continue;
     }
 
-    if (response.ok) return response.json();
+    if ("data" in result) return result.data;
 
-    lastError = new Error(`Blog API request failed (${response.status}): ${url}`);
-    if (!isRetryableStatus(response.status)) break;
+    lastError = new Error(`Blog API request failed (${result.status}): ${url}`);
+    if (!isRetryableStatus(result.status)) break;
   }
 
   throw lastError;

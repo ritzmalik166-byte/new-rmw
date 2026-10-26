@@ -8,7 +8,7 @@
   --tb-amber: #f39c1f;
 
   position: relative;
-  padding: calc(clamp(64px, 8vw, 104px) + 21px) clamp(20px, 5.5vw, 80px) clamp(64px, 8vw, 104px);
+  padding: calc(clamp(64px, 8vw, 104px) + 21px) var(--site-gutter) clamp(64px, 8vw, 104px);
   background: #f6f1ea;
 }
 
@@ -31,8 +31,6 @@
   grid-template-rows: auto 1fr;
   column-gap: clamp(40px, 7vw, 110px);
   row-gap: 28px;
-  max-width: 1180px;
-  margin-inline: auto;
 }
 
 .about-tb-head {

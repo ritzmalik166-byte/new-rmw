@@ -1,7 +1,7 @@
 /* ---------- About journey ---------- */
 .about-journey {
   background: #faf6ee;
-  padding: 96px 88px 0;
+  padding: 96px var(--site-gutter) 0;
   border-bottom: 1px solid #e2ddd3;
 }
 
@@ -229,7 +229,7 @@
 
 .about-journey-stripes {
   height: 21px;
-  margin: 72px -88px 0;
+  margin: 72px calc(-1 * var(--site-gutter)) 0;
   background: url("/about/diagonal-stripes.png") repeat-x left center / auto 100%;
 }
 
@@ -291,24 +291,14 @@
 }
 
 @media (max-width: 1100px) {
-  .about-journey {
-    padding-right: 32px;
-    padding-left: 32px;
-  }
-
   .about-journey-stop {
     width: 190px;
-  }
-
-  .about-journey-stripes {
-    margin-right: -32px;
-    margin-left: -32px;
   }
 }
 
 @media (max-width: 900px), (orientation: portrait) {
   .about-journey {
-    padding: 64px clamp(20px, 5.5vw, 80px) 0;
+    padding: 64px var(--site-gutter) 0;
   }
 
   .about-journey-head {
@@ -351,8 +341,8 @@
 
   .about-journey-stripes {
     margin-top: 40px;
-    margin-right: calc(-1 * clamp(20px, 5.5vw, 80px));
-    margin-left: calc(-1 * clamp(20px, 5.5vw, 80px));
+    margin-right: calc(-1 * var(--site-gutter));
+    margin-left: calc(-1 * var(--site-gutter));
   }
 
   .about-journey-intro br {
