@@ -61,10 +61,13 @@ function formatDate(date: string | null) {
   }).format(new Date(date));
 }
 
-function wrapTables(html: string) {
+/** Normalises content pasted from Google Docs: scrollable tables, and "•   text"
+ *  paragraphs (manual bullets padded with spaces) rendered as real bullet points. */
+function prepareContent(html: string) {
   return html
     .replace(/<table\b/gi, '<div class="blog-table-wrap"><table')
-    .replace(/<\/table>/gi, "</table></div>");
+    .replace(/<\/table>/gi, "</table></div>")
+    .replace(/<p\b([^>]*)>\s*(?:•|&bull;|●|▪)(?:\s|&nbsp;|&#160;)*/gi, "<p data-blog-bullet$1>");
 }
 
 function calculateReadingTime(html: string): number {
@@ -149,7 +152,7 @@ export default async function BlogDetailPage({
 
           <div
             className="blog-prose blog-post-content"
-            dangerouslySetInnerHTML={{ __html: wrapTables(blog.content) }}
+            dangerouslySetInnerHTML={{ __html: prepareContent(blog.content) }}
           />
 
           <footer className="blog-post-footer">

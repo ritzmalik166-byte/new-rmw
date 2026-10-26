@@ -66,7 +66,7 @@
       title: "3D Rendering Services",
       copy: "Brand films, photorealistic 3D rendering, and AI-assisted production that let audiences see your product, project, or space before it is even built.",
       tone: "#167a7d",
-      cargo: RENDER_TYPES.map((type) => ({ ...type, href: `${RENDER_HREF}/${type.slug}` })),
+      cargo: RENDER_TYPES.map((type) => ({ ...type, href: `${RENDER_HREF}#${type.slug}` })),
       extras: [],
     },
   ];

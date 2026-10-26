@@ -259,6 +259,25 @@
   rotate: 45deg;
 }
 
+.blog-prose p[data-blog-bullet] {
+  position: relative;
+  margin-bottom: 0.85rem;
+  padding-left: 30px;
+  line-height: 1.7 !important;
+}
+
+.blog-prose p[data-blog-bullet]::before {
+  content: "";
+  position: absolute;
+  top: 0.55em;
+  left: 4px;
+  width: 11px;
+  height: 11px;
+  border: 1.5px solid var(--hm-ink);
+  background: var(--hm-yellow);
+  rotate: 45deg;
+}
+
 .blog-prose ol {
   margin: 1.5rem 0;
   padding-left: 1.6rem;
