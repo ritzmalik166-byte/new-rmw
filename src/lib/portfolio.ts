@@ -230,7 +230,7 @@ export const PORTFOLIO_GALLERY: PortfolioPiece[] = [
 export const PORTFOLIO_STATS = [
   { value: 18, suffix: "+", label: "Years building brands" },
   { value: 6, suffix: "", label: "Specialist desks in-house" },
-  { value: 90, suffix: "+", label: "Marketing & creative professionals" },
+  { value: 100, suffix: "+", label: "Marketing & creative professionals" },
   { value: 1, suffix: "", label: "Roof for Strategy to Media" },
 ];
 
