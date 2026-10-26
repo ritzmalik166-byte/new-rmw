@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { BlogImage } from "@/components/blogs/BlogImage";
 import { HmArrow, HmStamp, HmTitle, useHomeReveal } from "@/components/homepage/shared";
 import { TransitionLink } from "@/components/motion/TransitionLink";
@@ -10,7 +11,27 @@ const FILE_TILTS = ["is-back", "is-mid", "is-front"] as const;
 
 export function CaseStudyHero({ caseStudies }: { caseStudies: CaseStudy[] }) {
   const rootRef = useRef<HTMLElement>(null);
+  const router = useRouter();
+  const [picked, setPicked] = useState<number | null>(null);
   useHomeReveal(rootRef, "top 90%");
+
+  // Touch screens have no hover, so the first tap lifts a card and the second opens it.
+  const onFileClick = (event: MouseEvent, index: number, slug: string) => {
+    const canHover = window.matchMedia("(hover: hover)").matches;
+    if (!canHover && picked !== index) {
+      event.stopPropagation();
+      setPicked(index);
+      return;
+    }
+    router.push(`/${encodeURIComponent(slug)}`);
+  };
+
+  useEffect(() => {
+    if (picked === null) return;
+    const drop = () => setPicked(null);
+    document.addEventListener("click", drop);
+    return () => document.removeEventListener("click", drop);
+  }, [picked]);
 
   const files = caseStudies.filter((item) => item.image).slice(0, FILE_TILTS.length);
   const years = caseStudies.flatMap((item) => (item.year ? [Number(item.year)] : []));
@@ -80,7 +101,11 @@ export function CaseStudyHero({ caseStudies }: { caseStudies: CaseStudy[] }) {
 
         <div className="cs-hero-stage" aria-hidden>
           {files.map((file, index) => (
-            <figure key={file.slug} className={`cs-hero-file ${FILE_TILTS[index]}`}>
+            <figure
+              key={file.slug}
+              className={`cs-hero-file ${FILE_TILTS[index]}${picked === index ? " is-picked" : ""}`}
+              onClick={(event) => onFileClick(event, index, file.slug)}
+            >
               <BlogImage src={file.image} alt={file.title} className="cs-hero-file-media" />
               <figcaption>
                 <span>Case {String(index + 1).padStart(2, "0")}</span>
