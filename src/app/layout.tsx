@@ -10,6 +10,7 @@ import { ThemeSurfaces } from "@/components/layout/ThemeSurfaces";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/schema";
+import { SEO_ORIGIN } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { THEME_BOOT_SCRIPT } from "@/lib/theme";
 import "./globals.css";
@@ -111,6 +112,7 @@ const caveat = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SEO_ORIGIN),
   title: {
     default: `${site.fullName} — ${site.tagline}`,
     template: `%s — ${site.fullName}`,

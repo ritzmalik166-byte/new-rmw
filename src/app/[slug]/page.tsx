@@ -11,6 +11,7 @@ import { tagHref } from "@/lib/taxonomy";
 import "@/styles/blogs/detail.css";
 
 export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
   const blogs = await getBlogsOrEmpty();

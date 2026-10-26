@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { fetchJson, getBlogsOrEmpty, normalizeImage, type Blog } from "@/lib/blogs";
 import { getCaseStudies } from "@/lib/case-studies";
 
@@ -84,17 +85,18 @@ const TAG_INDEX_TTL_MS = 10 * 60_000;
    every punctuation-free key, to its canonical one. */
 export type TagIndex = { tags: Map<string, Blog[]>; aliases: Map<string, string>; variants: Map<string, string> };
 
-let tagIndexCache: { builtAt: number; promise: Promise<TagIndex> } | null = null;
+let tagIndexCache: { builtAt: number; index: TagIndex } | null = null;
 
-export function getTagIndex(): Promise<TagIndex> {
-  if (tagIndexCache && Date.now() - tagIndexCache.builtAt < TAG_INDEX_TTL_MS) return tagIndexCache.promise;
+/* Resolved data only. Sharing the in-flight promise across pages deadlocks
+   static generation, because that promise is tied to the first page's fetch. */
+const loadTagIndex = cache(buildTagIndex);
 
-  const promise = buildTagIndex().then((index) => {
-    if (index.tags.size === 0 && tagIndexCache?.promise === promise) tagIndexCache = null;
-    return index;
-  });
-  tagIndexCache = { builtAt: Date.now(), promise };
-  return promise;
+export async function getTagIndex(): Promise<TagIndex> {
+  if (tagIndexCache && Date.now() - tagIndexCache.builtAt < TAG_INDEX_TTL_MS) return tagIndexCache.index;
+
+  const index = await loadTagIndex();
+  if (index.tags.size > 0) tagIndexCache = { builtAt: Date.now(), index };
+  return index;
 }
 
 async function buildTagIndex(): Promise<TagIndex> {

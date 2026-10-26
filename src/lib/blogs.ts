@@ -1,3 +1,5 @@
+import { cache } from "react";
+
 const LATEST_BLOGS_URL = "https://www.ritzmediaworld.com/api/get_all_blogs";
 const ALL_BLOGS_URL = "https://www.ritzmediaworld.com/api/all_blogs";
 const BLOG_POST_URL = "https://www.ritzmediaworld.com/api/blog";
@@ -144,6 +146,8 @@ function validDate(value: string) {
 
 const RETRY_DELAYS_MS = [500, 1500, 3000];
 const SHARED_REQUEST_TTL_MS = 60_000;
+const FETCH_TIMEOUT_MS = 12_000;
+const ARCHIVE_LOCK_STALE_MS = 45_000;
 
 function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -183,7 +187,10 @@ export async function fetchJson(url: string): Promise<unknown> {
     let result: { status: number; data?: unknown };
     try {
       result = await limited(async () => {
-        const response = await fetch(url, { next: { revalidate: 300 } });
+        const response = await fetch(url, {
+          next: { revalidate: 300 },
+          signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+        });
         if (!response.ok) {
           await response.body?.cancel();
           return { status: response.status };
@@ -208,12 +215,17 @@ async function fetchBlogRecords(url: string) {
   return getRecords(await fetchJson(url));
 }
 
-/* get_all_blogs only returns 10 posts per request, so every ?page= is fetched until an
-   empty page comes back. */
+/* get_all_blogs only returns 10 posts per request. It is newest-first, and the
+   archive already holds everything from mid-2025 back, so paging stops at the first
+   page whose posts are all in the archive instead of walking the older pages too. */
 const LATEST_PAGE_BATCH = 5;
 const LATEST_MAX_PAGES = 200;
 
-async function fetchLatestBlogRecords() {
+function recordSlug(record: Record<string, unknown>) {
+  return getString(record, "blogSlug", "slug").toLowerCase();
+}
+
+async function fetchLatestBlogRecords(knownSlugs: Set<string> | null) {
   const records: Record<string, unknown>[] = [];
 
   for (let start = 1; start <= LATEST_MAX_PAGES; start += LATEST_PAGE_BATCH) {
@@ -227,48 +239,188 @@ async function fetchLatestBlogRecords() {
       if (result.status === "rejected") {
         if (records.length === 0) throw result.reason;
         console.error("Stopped paging get_all_blogs early:", result.reason);
-        return records;
+        return { records, complete: false };
       }
-      if (result.value.length === 0) return records;
+      if (result.value.length === 0) return { records, complete: true };
+      const covered =
+        knownSlugs !== null &&
+        result.value.every((record) => {
+          const slug = recordSlug(record);
+          return slug.length > 0 && knownSlugs.has(slug);
+        });
+      if (covered) return { records, complete: true };
       records.push(...result.value);
     }
   }
 
-  return records;
+  return { records, complete: true };
 }
 
-// Static generation renders dozens of blog pages at once; sharing one request
-// per process keeps the upstream API from rate-limiting the build with 503s.
-let sharedRequest: { startedAt: number; promise: Promise<Blog[]> } | null = null;
 let lastLoadedBlogs: Blog[] | null = null;
 let lastLoadedComplete = false;
+let lastLoadedAt = 0;
 
-export function getBlogs(): Promise<Blog[]> {
-  if (sharedRequest && Date.now() - sharedRequest.startedAt < SHARED_REQUEST_TTL_MS) {
-    return sharedRequest.promise;
+function rememberBlogs(blogs: Blog[], complete: boolean) {
+  // The archive alone stops in mid-2025, so a run where get_all_blogs failed must
+  // not replace a complete result, and should be retried on the next request.
+  if (!complete && lastLoadedBlogs && lastLoadedComplete) return lastLoadedBlogs;
+  if (blogs.length === 0) return lastLoadedBlogs ?? blogs;
+  lastLoadedBlogs = blogs;
+  lastLoadedComplete = complete;
+  lastLoadedAt = Date.now();
+  return blogs;
+}
+
+function freshBlogs() {
+  if (!lastLoadedBlogs || !lastLoadedComplete) return null;
+  if (Date.now() - lastLoadedAt > SHARED_REQUEST_TTL_MS) return null;
+  return lastLoadedBlogs;
+}
+
+type ArchiveSnapshot = { savedAt: number; blogs: Blog[] };
+
+async function archiveCachePaths() {
+  const path = await import("node:path");
+  const dir = path.join(process.cwd(), ".next", "cache");
+  return {
+    dir,
+    file: path.join(dir, "rmw-blog-archive.json"),
+    lock: path.join(dir, "rmw-blog-archive.lock"),
+  };
+}
+
+async function readArchiveCache(): Promise<ArchiveSnapshot | null> {
+  try {
+    const fs = await import("node:fs");
+    const { file } = await archiveCachePaths();
+    const parsed = JSON.parse(fs.readFileSync(/*turbopackIgnore: true*/ file, "utf8")) as ArchiveSnapshot;
+    if (!parsed || !Array.isArray(parsed.blogs) || parsed.blogs.length === 0) return null;
+    if (Date.now() - parsed.savedAt > SHARED_REQUEST_TTL_MS) return null;
+    return parsed;
+  } catch {
+    return null;
   }
+}
 
-  const promise: Promise<Blog[]> = loadBlogs().then(
-    ({ blogs, complete }) => {
-      // The archive alone stops in mid-2025, so a run where get_all_blogs failed must
-      // not replace a complete result, and should be retried on the next request.
-      if (!complete) {
-        if (sharedRequest?.promise === promise) sharedRequest = null;
-        if (lastLoadedBlogs && lastLoadedComplete) return lastLoadedBlogs;
+async function writeArchiveCache(snapshot: ArchiveSnapshot) {
+  const fs = await import("node:fs");
+  const { dir, file } = await archiveCachePaths();
+  fs.mkdirSync(/*turbopackIgnore: true*/ dir, { recursive: true });
+  const temp = `${file}.${process.pid}.tmp`;
+  fs.writeFileSync(/*turbopackIgnore: true*/ temp, JSON.stringify(snapshot));
+  try {
+    fs.unlinkSync(/*turbopackIgnore: true*/ file);
+  } catch {
+    // First writer.
+  }
+  fs.renameSync(/*turbopackIgnore: true*/ temp, file);
+}
+
+let archiveLockHeld = false;
+
+async function tryArchiveLock() {
+  const fs = await import("node:fs");
+  const { dir, lock } = await archiveCachePaths();
+  fs.mkdirSync(/*turbopackIgnore: true*/ dir, { recursive: true });
+  try {
+    fs.writeFileSync(/*turbopackIgnore: true*/ lock, String(Date.now()), { flag: "wx" });
+    archiveLockHeld = true;
+    return true;
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "EEXIST") return false;
+    try {
+      const started = Number(fs.readFileSync(/*turbopackIgnore: true*/ lock, "utf8"));
+      if (!Number.isFinite(started) || Date.now() - started < ARCHIVE_LOCK_STALE_MS) return false;
+      fs.unlinkSync(/*turbopackIgnore: true*/ lock);
+      fs.writeFileSync(/*turbopackIgnore: true*/ lock, String(Date.now()), { flag: "wx" });
+      archiveLockHeld = true;
+      return true;
+    } catch {
+      return false;
+    }
+  }
+}
+
+async function releaseArchiveLock() {
+  if (!archiveLockHeld) return;
+  archiveLockHeld = false;
+  try {
+    const fs = await import("node:fs");
+    fs.unlinkSync(/*turbopackIgnore: true*/ (await archiveCachePaths()).lock);
+  } catch {
+    // Already released.
+  }
+}
+
+async function archiveLockExists() {
+  try {
+    const fs = await import("node:fs");
+    fs.accessSync(/*turbopackIgnore: true*/ (await archiveCachePaths()).lock);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function waitForArchiveCache() {
+  for (let attempt = 0; attempt < 80; attempt++) {
+    await wait(250);
+    const snapshot = await readArchiveCache();
+    if (snapshot) return snapshot;
+    if (!(await archiveLockExists())) return null;
+  }
+  return null;
+}
+
+/* Each static page used to await one shared in-flight download. That promise is bound
+   to whichever page started it, and the other pages then deadlock until the 60s
+   build timeout. Resolved data is shared instead: one worker writes the archive to
+   disk and the rest read it. `cache()` only dedupes inside a single render. */
+async function loadSharedBlogs(): Promise<Blog[]> {
+  const fresh = freshBlogs();
+  if (fresh) return fresh;
+
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const cached = await readArchiveCache();
+    if (cached) return rememberBlogs(cached.blogs, true);
+
+    if (!(await tryArchiveLock())) {
+      const waited = await waitForArchiveCache();
+      if (waited) return rememberBlogs(waited.blogs, true);
+      continue;
+    }
+
+    try {
+      const raced = await readArchiveCache();
+      if (raced) return rememberBlogs(raced.blogs, true);
+
+      const { blogs, complete } = await loadBlogs();
+      if (complete && blogs.length > 0) {
+        try {
+          await writeArchiveCache({ savedAt: Date.now(), blogs });
+        } catch (error) {
+          console.error("Unable to cache the blog archive:", error);
+        }
       }
-      lastLoadedBlogs = blogs;
-      lastLoadedComplete = complete;
-      return blogs;
-    },
-    (error) => {
-      if (sharedRequest?.promise === promise) sharedRequest = null;
+      return rememberBlogs(blogs, complete);
+    } catch (error) {
       if (lastLoadedBlogs) return lastLoadedBlogs;
       throw error;
-    },
-  );
-  sharedRequest = { startedAt: Date.now(), promise };
-  return promise;
+    } finally {
+      await releaseArchiveLock();
+    }
+  }
+
+  try {
+    const { blogs, complete } = await loadBlogs();
+    return rememberBlogs(blogs, complete);
+  } catch (error) {
+    if (lastLoadedBlogs) return lastLoadedBlogs;
+    throw error;
+  }
 }
+
+export const getBlogs = cache(loadSharedBlogs);
 
 let lastLatestBlogs: Blog[] | null = null;
 
@@ -310,27 +462,31 @@ export async function getBlogsOrEmpty(): Promise<Blog[]> {
 }
 
 async function loadBlogs(): Promise<{ blogs: Blog[]; complete: boolean }> {
-  const results = await Promise.allSettled([
-    fetchLatestBlogRecords(),
-    fetchBlogRecords(ALL_BLOGS_URL),
-  ]);
-  const [latestResult, allResult] = results;
-  const latestRecords = latestResult.status === "fulfilled"
-    ? latestResult.value
-    : [];
-  const allRecords = allResult.status === "fulfilled"
-    ? allResult.value
-    : [];
+  let allRecords: Record<string, unknown>[] = [];
+  let allError: unknown;
+  try {
+    allRecords = await fetchBlogRecords(ALL_BLOGS_URL);
+  } catch (error) {
+    allError = error;
+    console.error("Unable to load the full blog archive:", error);
+  }
 
-  if (latestResult.status === "rejected") {
-    console.error("Unable to load latest blogs:", latestResult.reason);
+  const knownSlugs = new Set(allRecords.map(recordSlug).filter(Boolean));
+  let latestRecords: Record<string, unknown>[] = [];
+  let latestComplete = false;
+  let latestError: unknown;
+  try {
+    const latest = await fetchLatestBlogRecords(knownSlugs.size > 0 ? knownSlugs : null);
+    latestRecords = latest.records;
+    latestComplete = latest.complete;
+  } catch (error) {
+    latestError = error;
+    console.error("Unable to load latest blogs:", error);
   }
-  if (allResult.status === "rejected") {
-    console.error("Unable to load the full blog archive:", allResult.reason);
-  }
-  if (latestResult.status === "rejected" && allResult.status === "rejected") {
+
+  if (allError && latestError) {
     throw new AggregateError(
-      [latestResult.reason, allResult.reason],
+      [allError, latestError],
       "Both blog APIs failed; the blog archive cannot be loaded.",
     );
   }
@@ -361,7 +517,7 @@ async function loadBlogs(): Promise<{ blogs: Blog[]; complete: boolean }> {
 
   return {
     blogs: sortByNewest([...blogsBySlug.values()]),
-    complete: latestResult.status === "fulfilled",
+    complete: latestError === undefined && latestComplete,
   };
 }
 

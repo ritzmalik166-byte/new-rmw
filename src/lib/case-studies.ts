@@ -1,4 +1,4 @@
-import { fetchJson, getBlogPost, normalizeImage } from "@/lib/blogs";
+import { fetchJson, getBlogPost, getBlogsOrEmpty, normalizeImage } from "@/lib/blogs";
 
 const CASE_STUDY_LIST_URL = "https://www.ritzmediaworld.com/api/category/case-study";
 const REPORTS_ORIGIN = "https://ritzmediaworld.com";
@@ -129,7 +129,16 @@ export async function getCaseStudies(): Promise<CaseStudy[]> {
     return [];
   }
 
-  const posts = await Promise.all(list.map((item) => getBlogPost(item.slug)));
+  /* Most case studies are absent from both blog list APIs, so the archive cannot
+     supply their dates or excerpts. Only those misses hit the post endpoint. */
+  const blogs = new Map((await getBlogsOrEmpty()).map((blog) => [blog.slug.toLowerCase(), blog]));
+  const posts = await Promise.all(
+    list.map(async (item) => {
+      const known = blogs.get(item.slug.toLowerCase());
+      if (known?.excerpt || known?.createdAt) return known;
+      return getBlogPost(item.slug);
+    }),
+  );
 
   return list.map((item, index) => {
     const post = posts[index];
