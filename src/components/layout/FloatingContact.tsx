@@ -39,13 +39,15 @@ function usePastHero() {
 const EXPAND_AFTER_MS = 800;
 const COLLAPSE_MS = 350;
 
-/* On wide screens the buttons park in the footer's bottom bar once it is in view. */
+/* From tablet up the buttons park in the footer's bottom bar once it is in view;
+   only desktops have room to widen them into labelled pills. */
 function useFooterDock() {
   const pathname = usePathname();
   const [parked, setParked] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
+    const tablet = window.matchMedia("(min-width: 768px)");
     const wide = window.matchMedia("(min-width: 1024px)");
     let docked = false;
     let timer = 0;
@@ -53,13 +55,13 @@ function useFooterDock() {
     const check = () => {
       const bar = document.querySelector(".site-footer-bottom");
       const next =
-        !!bar && wide.matches && bar.getBoundingClientRect().bottom - window.innerHeight < 24;
+        !!bar && tablet.matches && bar.getBoundingClientRect().bottom - window.innerHeight < 24;
       if (next === docked) return;
       docked = next;
       window.clearTimeout(timer);
       if (next) {
         setParked(true);
-        timer = window.setTimeout(() => setExpanded(true), EXPAND_AFTER_MS);
+        if (wide.matches) timer = window.setTimeout(() => setExpanded(true), EXPAND_AFTER_MS);
       } else {
         setExpanded(false);
         timer = window.setTimeout(() => setParked(false), COLLAPSE_MS);
