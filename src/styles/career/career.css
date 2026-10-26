@@ -4,7 +4,7 @@
 }
 
 .cr-board {
-  padding-bottom: clamp(18px, 2.8vh, 28px);
+  padding-bottom: clamp(18px, min(2.8vh, 1.75vw), 28px);
 }
 
 /* Clears the "Horn OK Please" plate pinned to the board's corner. */
@@ -40,8 +40,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: clamp(12px, 2.2vh, 20px) 0 0;
-  padding: clamp(12px, 2vh, 18px) 0 0;
+  margin: clamp(12px, min(2.2vh, 1.375vw), 20px) 0 0;
+  padding: clamp(12px, min(2vh, 1.25vw), 18px) 0 0;
   border-top: 1px dashed rgb(255 255 255 / 18%);
   list-style: none;
 }

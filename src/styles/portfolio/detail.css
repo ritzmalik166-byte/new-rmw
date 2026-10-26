@@ -5,7 +5,7 @@
 
 /* ---------- Hero ---------- */
 .pfd-hero {
-  padding-bottom: clamp(64px, 9vh, 104px);
+  padding-bottom: clamp(64px, min(9vh, 5.625vw), 104px);
 }
 
 @media (min-width: 981px) {
@@ -463,7 +463,7 @@ body:has(.site-header.is-stuck:not(.is-hidden)) .pfd-group-nav {
   inset: 0;
   background:
     radial-gradient(60% 55% at 18% 25%, rgb(201 53 110 / 18%), transparent 70%),
-    radial-gradient(50% 45% at 92% 92%, rgb(243 195 60 / 12%), transparent 70%), rgb(13 12 34 / 97%);
+    radial-gradient(50% 45% at 92% 92%, rgb(255 255 255 / 12%), rgb(243 195 60 / 12%) 32%, transparent 70%), rgb(13 12 34 / 97%);
 }
 
 .bc-backdrop::after {

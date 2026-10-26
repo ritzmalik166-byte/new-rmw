@@ -189,10 +189,7 @@ export function AboutHero() {
         </div>
 
         <p ref={ledeRef} className="about-lede">
-          Founded in 2008, Ritz Media World is a full-service agency headquartered in Noida, Delhi NCR, working with
-          brands across India. We turn business problems into ideas that travel, delivering brand strategy, advertising
-          campaigns, media planning, digital marketing, film production, 3D rendering, and AI solutions. Our work spans
-          real estate, education, e-commerce, manufacturing, and startups.
+        Founded in 2008, Ritz Media World is a full-service agency headquartered in Noida, Delhi NCR, working with brands across India. We turn business problems into ideas that travel, delivering brand strategy, advertising campaigns, media planning, digital marketing, film production, 3D rendering, and AI solutions. Our work spans real estate, education, e-commerce, manufacturing, and startups.
         </p>
 
         <div className="about-actions">

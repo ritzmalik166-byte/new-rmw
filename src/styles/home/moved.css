@@ -18,7 +18,7 @@
   gap: clamp(32px, 5vw, 0px);
   width: min(1280px, calc(100% - 3rem));
   margin: 0 auto;
-  padding: clamp(4.5rem, 8vh, 6.25rem) 0 5rem;
+  padding: clamp(4.5rem, min(8vh, 5vw), 6.25rem) 0 5rem;
 }
 
 .moved-copy {

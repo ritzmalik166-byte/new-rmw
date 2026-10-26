@@ -71,7 +71,7 @@ const REST = [
 
 const YEARS = 18;
 const DIGITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-const PIN_QUERY = "(min-width: 901px) and (min-height: 680px)";
+const PIN_QUERY = "(min-width: 901px) and (min-height: 680px) and (orientation: landscape)";
 const AUTOPLAY_MS = 2600;
 const AUTOPLAY_HOLD_MS = 4200;
 const pad = (n: number) => String(n).padStart(2, "0");

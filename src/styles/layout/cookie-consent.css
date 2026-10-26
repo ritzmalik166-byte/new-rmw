@@ -14,7 +14,7 @@
   z-index: 300;
   padding-bottom: env(safe-area-inset-bottom);
   background:
-    radial-gradient(60% 120% at 0% 0%, rgb(243 195 60 / 12%), transparent 65%),
+    radial-gradient(60% 120% at 0% 0%, rgb(255 255 255 / 12%), rgb(243 195 60 / 12%) 32%, transparent 65%),
     radial-gradient(45% 120% at 100% 100%, rgb(224 69 126 / 12%), transparent 70%),
     var(--cc-navy);
   color: #fff;

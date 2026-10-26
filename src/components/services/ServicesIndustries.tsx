@@ -343,7 +343,7 @@ export function ServicesIndustries() {
                   <span
                     key={ci}
                     className="svc-ind-chunk"
-                    style={{ "--w": `${c.w}px`, "--h": `${c.h}px` } as CSSProperties}
+                    style={{ "--w": `${c.w / 16}rem`, "--h": `${c.h / 16}rem` } as CSSProperties}
                     aria-hidden
                   />
                 ))}
@@ -351,7 +351,7 @@ export function ServicesIndustries() {
                 <span className="svc-ind-cone is-right" aria-hidden />
                 <span className="svc-ind-dust" aria-hidden>
                   {DUST.map((dx) => (
-                    <i key={dx} style={{ "--dx": `${dx}px` } as CSSProperties} />
+                    <i key={dx} style={{ "--dx": `${dx / 16}rem` } as CSSProperties} />
                   ))}
                 </span>
               </li>

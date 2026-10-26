@@ -94,7 +94,7 @@ export function HomeHero() {
 
       const seat = (sticker: HTMLElement, slot: Slot, index: number) => {
         sticker.style.left = `${slot.x}%`;
-        sticker.style.setProperty("--lift", `${slot.lift}px`);
+        sticker.style.setProperty("--lift", `${slot.lift / 16}rem`);
         if (count) count.textContent = String(index + 1).padStart(2, "0");
       };
 

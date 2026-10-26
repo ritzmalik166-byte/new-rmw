@@ -32,7 +32,7 @@
   overflow: hidden;
   padding: var(--ct-top) clamp(20px, 4.5vw, 72px) var(--ct-bottom);
   background:
-    radial-gradient(60% 50% at 85% 10%, rgb(243 195 60 / 22%), transparent 70%),
+    radial-gradient(60% 50% at 85% 10%, rgb(255 255 255 / 65%), rgb(243 195 60 / 22%) 32%, transparent 70%),
     radial-gradient(50% 40% at 0% 60%, rgb(201 53 110 / 10%), transparent 70%),
     var(--ct-cream);
 }
@@ -64,7 +64,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
-  margin: 0 0 clamp(8px, 1.4vh, 14px);
+  margin: 0 0 clamp(8px, min(1.4vh, 0.875vw), 14px);
 }
 
 .ct-pill {
@@ -101,7 +101,7 @@
 
 .ct-lede {
   max-width: 44ch;
-  margin: clamp(8px, 1.4vh, 14px) 0 0;
+  margin: clamp(8px, min(1.4vh, 0.875vw), 14px) 0 0;
   color: var(--ct-muted);
   font-family: var(--ct-sans);
   font-size: 17px;
@@ -110,10 +110,10 @@
 
 .ct-dispatch {
   position: relative;
-  padding: clamp(16px, 2.6vh, 30px) clamp(20px, 1.8vw, 26px);
+  padding: clamp(16px, min(2.6vh, 1.625vw), 30px) clamp(20px, 1.8vw, 26px);
   border-radius: 16px;
   background:
-    radial-gradient(120% 70% at 0% 0%, rgb(243 195 60 / 16%), transparent 60%),
+    radial-gradient(120% 70% at 0% 0%, rgb(255 255 255 / 12%), rgb(243 195 60 / 16%) 32%, transparent 60%),
     var(--ct-navy);
   color: #fff;
   box-shadow: 0 30px 50px -28px rgb(27 26 74 / 60%);
@@ -139,7 +139,7 @@
 
 .ct-dispatch-copy {
   max-width: 40ch;
-  margin: clamp(6px, 1vh, 10px) 0 0;
+  margin: clamp(6px, min(1vh, 0.625vw), 10px) 0 0;
   color: rgb(255 255 255 / 72%);
   font-family: var(--ct-sans);
   font-size: 13px;
@@ -150,8 +150,8 @@
   display: flex;
   flex-direction: column;
   gap: clamp(8px, 1.5vh, 16px);
-  margin: clamp(12px, 2.2vh, 22px) 0 0;
-  padding: clamp(12px, 2vh, 20px) 0 0;
+  margin: clamp(12px, min(2.2vh, 1.375vw), 22px) 0 0;
+  padding: clamp(12px, min(2vh, 1.25vw), 20px) 0 0;
   border-top: 1px dashed rgb(255 255 255 / 18%);
   list-style: none;
 }
@@ -439,7 +439,7 @@
   justify-content: space-between;
   gap: 6px 20px;
   margin-bottom: var(--ct-space);
-  padding-bottom: clamp(6px, 1.2vh, 14px);
+  padding-bottom: clamp(6px, min(1.2vh, 0.75vw), 14px);
   border-bottom: 3px double var(--ct-navy);
 }
 
@@ -938,7 +938,7 @@
   align-items: center;
   gap: 10px 20px;
   margin-top: var(--ct-space);
-  padding-top: clamp(10px, 1.8vh, 18px);
+  padding-top: clamp(10px, min(1.8vh, 1.125vw), 18px);
   border-top: 1.5px dashed var(--ct-rule);
 }
 

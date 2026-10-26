@@ -193,9 +193,9 @@ const WORK = {
   },
   stage: {
     src: "/awards/my-property-face-stage.jpg",
-    alt: "My Property Face award ceremony on stage",
+    alt: "My Property Fact award ceremony on stage",
     medium: "On stage",
-    caption: "My Property Face: faces, stage and spotlight, run end to end.",
+    caption: "My Property Fact: faces, stage and spotlight, run end to end.",
   },
 } satisfies Record<string, ServiceCreative>;
 

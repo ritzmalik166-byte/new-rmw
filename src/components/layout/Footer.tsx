@@ -29,7 +29,7 @@ export function Footer() {
   const { ready, reduced } = useMotion();
 
   useGSAP(
-    () => {
+    (_context, contextSafe) => {
       const root = rootRef.current;
       if (!root || !ready) return;
 
@@ -53,22 +53,29 @@ export function Footer() {
 
       gsap.set(truck, { x: 0 });
 
-      gsap.fromTo(
-        truck,
-        { x: 0 },
-        {
-          x: destinationX,
-          ease: "none",
-          onUpdate: () => setWheelTurn(truck, Number(gsap.getProperty(truck, "x"))),
-          scrollTrigger: {
-            trigger: root,
-            start: "top 85%",
-            end: "bottom bottom",
-            scrub: 2.2,
-            invalidateOnRefresh: true,
+      /* Created a tick late: in the same tick it force-refreshes the page's pending
+         `once` triggers, which can kill themselves mid-loop when the page is restored
+         mid-scroll and crash ScrollTrigger ("reading 'end'"). */
+      const build = contextSafe!(() => {
+        if (!root.isConnected) return;
+        gsap.fromTo(
+          truck,
+          { x: 0 },
+          {
+            x: destinationX,
+            ease: "none",
+            onUpdate: () => setWheelTurn(truck, Number(gsap.getProperty(truck, "x"))),
+            scrollTrigger: {
+              trigger: root,
+              start: "top 85%",
+              end: "bottom bottom",
+              scrub: 2.2,
+              invalidateOnRefresh: true,
+            },
           },
-        },
-      );
+        );
+      });
+      gsap.delayedCall(0.1, build);
     },
     { scope: rootRef, dependencies: [ready, reduced] },
   );

@@ -213,8 +213,13 @@
     justify-items: center;
   }
 
-  .svc-star-title {
+  .svc-star-title,
+  .svc-star-km {
     grid-column: 1 / -1;
+  }
+
+  .svc-star-km {
+    margin-left: 0;
   }
 
   .svc-star-rule {
@@ -226,6 +231,14 @@
     align-items: center;
     text-align: center;
   }
+
+  .svc-render-head-inner > div {
+    display: contents;
+  }
+
+  .svc-render-head-inner .svc-explore-row {
+    order: 1;
+  }
 }
 
 /* Mobile centring (pairs with responsive/mobile-center.css). */
@@ -235,7 +248,9 @@
     text-align: center;
   }
 
-  .svc-star-list li {
-    justify-content: center;
+  .svc-star-list {
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
   }
 }

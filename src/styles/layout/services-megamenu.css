@@ -87,7 +87,7 @@
   padding: 26px 24px 22px;
   border-radius: 16px;
   background:
-    radial-gradient(120% 70% at 0% 0%, rgb(255 194 26 / 14%), transparent 60%),
+    radial-gradient(120% 70% at 0% 0%, rgb(255 255 255 / 12%), rgb(255 194 26 / 14%) 32%, transparent 60%),
     var(--smm-navy);
   color: #fff;
   isolation: isolate;
@@ -145,7 +145,7 @@
 
 .smm-title em {
   font-style: normal;
-  background: linear-gradient(90deg, var(--smm-yellow), #f07828 55%, #ff5c97);
+  background: linear-gradient(90deg, #fff8e1 0%, var(--smm-yellow) 24%, #f07828 62%, #ff5c97);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

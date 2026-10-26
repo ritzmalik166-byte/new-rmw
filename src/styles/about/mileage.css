@@ -573,7 +573,11 @@
   }
 
   .about-mile-stage {
-    justify-items: start;
+    justify-items: center;
+  }
+
+  .about-mile-lede {
+    max-width: 680px;
   }
 }
 

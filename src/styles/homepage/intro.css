@@ -3,7 +3,7 @@
   overflow: hidden;
   padding-top: var(--hm-pad-y);
   background:
-    radial-gradient(55% 50% at 90% 8%, rgb(243 195 60 / 22%), transparent 70%),
+    radial-gradient(55% 50% at 90% 8%, rgb(255 255 255 / 65%), rgb(243 195 60 / 22%) 32%, transparent 70%),
     radial-gradient(45% 40% at 0% 70%, rgb(201 53 110 / 10%), transparent 70%),
     var(--hm-cream);
 }
@@ -21,7 +21,7 @@
   padding: clamp(24px, 2.6vw, 34px) clamp(22px, 2.4vw, 32px);
   border-radius: 18px;
   background:
-    radial-gradient(120% 70% at 0% 0%, rgb(243 195 60 / 16%), transparent 60%),
+    radial-gradient(120% 70% at 0% 0%, rgb(255 255 255 / 12%), rgb(243 195 60 / 16%) 32%, transparent 60%),
     var(--hm-navy);
   color: #fff;
   box-shadow: 0 34px 60px -30px rgb(27 26 74 / 65%);
@@ -149,7 +149,7 @@
 
 /* ---------- Cargo: client logos ---------- */
 .hm-cargo {
-  margin-top: clamp(56px, 8vh, 88px);
+  margin-top: clamp(56px, min(8vh, 5vw), 88px);
   padding: 22px 0 26px;
   border-top: 1.5px dashed var(--hm-rule);
   background: rgb(255 252 243 / 70%);

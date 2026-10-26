@@ -37,9 +37,9 @@
 /* ---------- Hero ---------- */
 .sd-hero {
   overflow: hidden;
-  padding: clamp(128px, 17vh, 160px) 0 clamp(64px, 9vh, 104px);
+  padding: clamp(128px, min(17vh, 10.625vw), 160px) 0 clamp(64px, min(9vh, 5.625vw), 104px);
   background:
-    radial-gradient(55% 50% at 92% 10%, rgb(243 195 60 / 24%), transparent 70%),
+    radial-gradient(55% 50% at 92% 10%, rgb(255 255 255 / 65%), rgb(243 195 60 / 24%) 32%, transparent 70%),
     radial-gradient(45% 45% at 0% 85%, rgb(201 53 110 / 10%), transparent 70%),
     var(--hm-cream);
 }
@@ -299,7 +299,7 @@
 }
 
 .sd-define {
-  margin: 0 0 clamp(48px, 7vh, 72px);
+  margin: 0 0 clamp(48px, min(7vh, 4.375vw), 72px);
   padding: 4px 0 4px clamp(18px, 2vw, 28px);
   border-left: 4px solid var(--hm-pink);
 }
@@ -381,7 +381,7 @@
 }
 
 .sd-plan {
-  margin-top: clamp(64px, 9vh, 104px);
+  margin-top: clamp(64px, min(9vh, 5.625vw), 104px);
 }
 
 .sd-plan-board {
@@ -464,7 +464,7 @@
   flex-direction: column;
   padding: clamp(24px, 2.6vw, 34px);
   background:
-    radial-gradient(120% 70% at 100% 0%, rgb(243 195 60 / 16%), transparent 60%),
+    radial-gradient(120% 70% at 100% 0%, rgb(255 255 255 / 12%), rgb(243 195 60 / 16%) 32%, transparent 60%),
     var(--hm-navy);
   color: #fff;
 }
@@ -767,6 +767,10 @@
   gap: 10px;
 }
 
+.sd-query-stack {
+  display: contents;
+}
+
 .sd-query-phone {
   display: grid;
   grid-template-columns: 78px minmax(0, 1fr);
@@ -942,7 +946,7 @@
   padding: 24px 22px 26px;
   border-radius: 16px;
   background:
-    radial-gradient(120% 70% at 0% 0%, rgb(243 195 60 / 16%), transparent 60%),
+    radial-gradient(120% 70% at 0% 0%, rgb(255 255 255 / 12%), rgb(243 195 60 / 16%) 32%, transparent 60%),
     var(--hm-navy);
   color: #fff;
   text-decoration: none;
@@ -1015,7 +1019,7 @@
   padding: 24px 20px 22px;
   border-radius: 16px;
   background:
-    radial-gradient(120% 70% at 0% 0%, rgb(243 195 60 / 16%), transparent 60%),
+    radial-gradient(120% 70% at 0% 0%, rgb(255 255 255 / 12%), rgb(243 195 60 / 16%) 32%, transparent 60%),
     var(--hm-navy);
   color: #fff;
   box-shadow: 0 30px 50px -28px rgb(27 26 74 / 60%);
@@ -1142,6 +1146,79 @@
   color: var(--hm-ink);
 }
 
+/* Compact: sticky sidebars (blog detail) where the whole form has to fit on screen. */
+.sd-query.is-compact .sd-query-head {
+  padding: 10px 16px;
+}
+
+.sd-query.is-compact .sd-query-body {
+  gap: 8px;
+  padding: 12px 14px 14px;
+}
+
+.sd-query.is-compact .sd-query-lede {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.sd-query.is-compact .sd-query-pair {
+  gap: 8px;
+}
+
+.sd-query.is-compact .sd-query-field {
+  gap: 3px;
+}
+
+.sd-query.is-compact .sd-query-field > span,
+.sd-query.is-compact .sd-query-field > label {
+  font-size: 11px;
+}
+
+.sd-query.is-compact .sd-query-field input {
+  height: 38px;
+  padding-block: 8px;
+}
+
+.sd-query.is-compact .sd-query-select {
+  --sx-h: 38px;
+}
+
+.sd-query.is-compact .sd-query-field textarea {
+  min-height: 52px;
+  padding-block: 8px;
+}
+
+.sd-query.is-compact .sd-query-field:has(> .sd-query-phone) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 3px 6px;
+}
+
+.sd-query.is-compact .sd-query-field:has(> .sd-query-phone) > * {
+  grid-column: 1 / -1;
+}
+
+.sd-query.is-compact .sd-query-field:has(> .sd-query-phone) > .sd-query-phone {
+  grid-column: 1;
+  grid-template-columns: 70px minmax(0, 1fr);
+}
+
+.sd-query.is-compact .sd-query-field:has(> .sd-query-phone) > .sd-query-otp-send {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: stretch;
+  padding-inline: 12px;
+}
+
+.sd-query.is-compact .sd-query-submit {
+  margin-top: 2px;
+  padding-block: 10px 9px;
+}
+
+.sd-query.is-compact .sd-query-note {
+  font-size: 12px;
+}
+
 /* ---------- Creatives: work pegged on a rope ---------- */
 .sd-wall {
   --sd-gap: clamp(18px, 2.4vw, 32px);
@@ -1154,7 +1231,7 @@
 
 .sd-wall-line {
   position: relative;
-  margin-top: clamp(36px, 5vh, 52px);
+  margin-top: clamp(36px, min(5vh, 3.125vw), 52px);
 }
 
 .sd-wall-rope {
@@ -1201,7 +1278,7 @@
   width: 14px;
   height: 32px;
   border-radius: 3px;
-  background: linear-gradient(90deg, #b9862d, #f3c33c 50%, #b9862d);
+  background: linear-gradient(90deg, #b9862d, #f3c33c 36%, #fff6d6 50%, #f3c33c 64%, #b9862d);
   box-shadow: 0 2px 3px rgb(0 0 0 / 25%);
   translate: -50% 0;
 }
@@ -1276,7 +1353,7 @@
   overflow: hidden;
   padding-block: var(--hm-pad-y);
   background:
-    radial-gradient(50% 50% at 100% 0%, rgb(243 195 60 / 18%), transparent 70%),
+    radial-gradient(50% 50% at 100% 0%, rgb(255 255 255 / 65%), rgb(243 195 60 / 18%) 32%, transparent 70%),
     var(--hm-cream);
 }
 
@@ -1285,7 +1362,7 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(20px, 2.6vw, 36px);
-  margin: clamp(40px, 6vh, 56px) 0 0;
+  margin: clamp(40px, min(6vh, 3.75vw), 56px) 0 0;
   padding: 0;
   list-style: none;
 }
@@ -1375,7 +1452,7 @@
   overflow: hidden;
   padding-top: var(--hm-pad-y);
   background:
-    radial-gradient(55% 45% at 92% 0%, rgb(243 195 60 / 14%), transparent 70%),
+    radial-gradient(55% 45% at 92% 0%, rgb(255 255 255 / 65%), rgb(243 195 60 / 14%) 32%, transparent 70%),
     radial-gradient(45% 50% at 0% 100%, rgb(201 53 110 / 20%), transparent 70%),
     var(--hm-navy);
   color: #fff;
@@ -1482,7 +1559,7 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(16px, 2vw, 24px);
-  margin: clamp(32px, 5vh, 48px) 0 0;
+  margin: clamp(32px, min(5vh, 3.125vw), 48px) 0 0;
   padding: 0;
   list-style: none;
 }
@@ -1563,7 +1640,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 14px 22px;
-  margin-top: clamp(40px, 6vh, 56px);
+  margin-top: clamp(40px, min(6vh, 3.75vw), 56px);
   padding-top: 28px;
   border-top: 1.5px dashed var(--hm-rule);
 }
@@ -1667,6 +1744,14 @@
   .sd-hero-inner,
   .sd-why-inner {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sd-define {
+    max-width: 640px;
+    margin-inline: auto;
+    padding: 18px 0 0;
+    border-top: 4px solid var(--hm-pink);
+    border-left: 0;
   }
 
   .sd-stops {

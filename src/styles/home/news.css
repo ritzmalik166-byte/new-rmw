@@ -9,7 +9,7 @@
 .news-inner {
   width: min(1280px, calc(100% - 3rem));
   margin: 0 auto;
-  padding: clamp(4rem, 8vh, 5.5rem) 0;
+  padding: clamp(4rem, min(8vh, 5vw), 5.5rem) 0;
 }
 
 .news-head {

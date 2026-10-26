@@ -14,7 +14,7 @@
   box-sizing: border-box;
   width: 100%;
   min-height: 100svh;
-  padding: clamp(32px, 5vh, 56px) 16px;
+  padding: clamp(32px, min(5vh, 3.125vw), 56px) 16px;
   overflow: hidden;
   isolation: isolate;
   background: linear-gradient(322.29deg, #ffffff 0.31%, #f8ead5 88.31%);
@@ -98,7 +98,7 @@
   z-index: 2;
   width: min(1000px, 100%, calc((100svh - 370px) * 2));
   min-width: min(560px, 100%);
-  margin-top: clamp(16px, 3vh, 32px);
+  margin-top: clamp(16px, min(3vh, 1.875vw), 32px);
   container-type: inline-size;
 }
 
@@ -374,7 +374,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-top: clamp(20px, 3.5vh, 36px);
+  margin-top: clamp(20px, min(3.5vh, 2.188vw), 36px);
 }
 
 .about-proofs-arrow {

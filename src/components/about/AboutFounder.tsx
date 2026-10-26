@@ -43,7 +43,7 @@ const FOUNDERS: Founder[] = [
 ];
 
 /** The pinned hand-off needs room for the portrait beside the copy. */
-const STAGE_QUERY = "(min-width: 861px) and (min-height: 600px)";
+const STAGE_QUERY = "(min-width: 861px) and (min-height: 600px) and (orientation: landscape)";
 const CLIP_BELOW = "inset(100% 0% 0% 0%)";
 const CLIP_OPEN = "inset(0% 0% 0% 0%)";
 

@@ -22,10 +22,10 @@
   --pv-truck-w: clamp(210px, 27vw, 340px);
   position: relative;
   overflow: hidden;
-  padding: clamp(130px, 18vh, 170px) clamp(20px, 4.5vw, 72px)
+  padding: clamp(130px, min(18vh, 11.25vw), 170px) clamp(20px, 4.5vw, 72px)
     calc(46px + var(--pv-truck-w) * 0.365 + 28px);
   background:
-    radial-gradient(60% 70% at 85% 10%, rgb(243 195 60 / 24%), transparent 70%),
+    radial-gradient(60% 70% at 85% 10%, rgb(255 255 255 / 65%), rgb(243 195 60 / 24%) 32%, transparent 70%),
     radial-gradient(50% 60% at 0% 80%, rgb(201 53 110 / 10%), transparent 70%),
     var(--pv-cream);
 }
@@ -147,7 +147,7 @@
   gap: clamp(28px, 4vw, 64px);
   max-width: 1180px;
   margin-inline: auto;
-  padding: clamp(48px, 8vh, 80px) clamp(20px, 4.5vw, 72px) clamp(64px, 10vh, 110px);
+  padding: clamp(48px, min(8vh, 5vw), 80px) clamp(20px, 4.5vw, 72px) clamp(64px, min(10vh, 6.25vw), 110px);
 }
 
 .pv-toc {

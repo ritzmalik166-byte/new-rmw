@@ -10,10 +10,10 @@
   flex-direction: column;
   height: 100svh;
   min-height: 580px;
-  padding-top: clamp(92px, 14vh, 140px);
+  padding-top: clamp(116px, min(14vh, 8.75vw), 140px);
   overflow: hidden;
   background:
-    radial-gradient(42% 52% at 80% 58%, rgb(243 195 60 / 30%), transparent 70%),
+    radial-gradient(42% 52% at 80% 58%, rgb(255 255 255 / 65%), rgb(243 195 60 / 30%) 32%, transparent 70%),
     radial-gradient(40% 50% at 0% 100%, rgb(201 53 110 / 12%), transparent 70%),
     radial-gradient(50% 40% at 100% 0%, rgb(228 83 42 / 10%), transparent 70%),
     var(--hm-cream);
@@ -30,7 +30,7 @@
   flex: 1 1 auto;
   align-items: center;
   min-height: 0;
-  padding-bottom: clamp(12px, 3vh, 40px);
+  padding-bottom: clamp(12px, min(3vh, 1.875vw), 40px);
 }
 
 .hm-hero-copy {
@@ -40,12 +40,12 @@
 }
 
 .hm-hero .hm-kicker {
-  margin-bottom: clamp(10px, 2vh, 18px);
+  margin-bottom: clamp(10px, min(2vh, 1.25vw), 18px);
 }
 
 .hm-hero-seo {
   max-width: 44rem;
-  margin: 0 0 clamp(8px, 1.4vh, 14px);
+  margin: 0 0 clamp(8px, min(1.4vh, 0.875vw), 14px);
   color: var(--hm-navy);
   font-family: var(--hm-mono);
   font-size: 13.5px;
@@ -112,18 +112,18 @@
 
 .hm-hero-lede {
   max-width: 44ch;
-  margin-top: clamp(12px, 2.4vh, 22px);
+  margin-top: clamp(12px, min(2.4vh, 1.5vw), 22px);
 }
 
 .hm-hero .hm-actions {
-  margin-top: clamp(16px, 3vh, 28px);
+  margin-top: clamp(16px, min(3vh, 1.875vw), 28px);
 }
 
 /* ---------- Headline odometer ---------- */
 .hm-hero-meter {
   display: flex;
   gap: 14px;
-  margin-top: clamp(16px, 3.4vh, 34px);
+  margin-top: clamp(16px, min(3.4vh, 2.125vw), 34px);
 }
 
 .hm-hero-tick {

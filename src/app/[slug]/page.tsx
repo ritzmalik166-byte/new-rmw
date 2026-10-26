@@ -61,6 +61,12 @@ function formatDate(date: string | null) {
   }).format(new Date(date));
 }
 
+function wrapTables(html: string) {
+  return html
+    .replace(/<table\b/gi, '<div class="blog-table-wrap"><table')
+    .replace(/<\/table>/gi, "</table></div>");
+}
+
 function calculateReadingTime(html: string): number {
   const text = html.replace(/<[^>]*>/g, " ");
   const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
@@ -143,7 +149,7 @@ export default async function BlogDetailPage({
 
           <div
             className="blog-prose blog-post-content"
-            dangerouslySetInnerHTML={{ __html: blog.content }}
+            dangerouslySetInnerHTML={{ __html: wrapTables(blog.content) }}
           />
 
           <footer className="blog-post-footer">
@@ -175,7 +181,7 @@ export default async function BlogDetailPage({
 
         <aside className="blog-post-aside">
           <div className="blog-post-aside-sticky">
-            <BlogEnquiryForm />
+            <BlogEnquiryForm source={`${isCaseStudy ? "Case study" : "Blog"}: ${blog.title}`} />
             <Link href={section.href} className="blog-back-link">
               <span aria-hidden="true">←</span> {section.back}
             </Link>

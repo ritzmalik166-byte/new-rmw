@@ -3,7 +3,7 @@
   overflow: hidden;
   padding-block: calc(var(--hm-pad-y) + 21px) var(--hm-pad-y);
   background:
-    radial-gradient(55% 50% at 100% 30%, rgb(243 195 60 / 20%), transparent 70%),
+    radial-gradient(55% 50% at 100% 30%, rgb(255 255 255 / 65%), rgb(243 195 60 / 20%) 32%, transparent 70%),
     radial-gradient(40% 40% at 0% 90%, rgb(201 53 110 / 10%), transparent 70%),
     var(--hm-cream);
 }
@@ -343,7 +343,7 @@
 
 /* ---------- Belt of every slip, rolling past under the deck ---------- */
 .hm-voice-belt {
-  margin-top: clamp(48px, 7vh, 80px);
+  margin-top: clamp(48px, min(7vh, 4.375vw), 80px);
   overflow: hidden;
   -webkit-mask: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
   mask: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);

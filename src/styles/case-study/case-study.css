@@ -22,9 +22,9 @@
 /* ---------- Hero ---------- */
 .cs-hero {
   overflow: hidden;
-  padding: clamp(128px, 17vh, 160px) 0 clamp(64px, 9vh, 104px);
+  padding: clamp(128px, min(17vh, 10.625vw), 160px) 0 clamp(64px, min(9vh, 5.625vw), 104px);
   background:
-    radial-gradient(55% 50% at 92% 10%, rgb(243 195 60 / 24%), transparent 70%),
+    radial-gradient(55% 50% at 92% 10%, rgb(255 255 255 / 65%), rgb(243 195 60 / 24%) 32%, transparent 70%),
     radial-gradient(45% 45% at 0% 85%, rgb(201 53 110 / 10%), transparent 70%),
     var(--hm-cream);
 }
@@ -815,7 +815,7 @@
   padding: var(--hm-pad-y) 0;
   border-top: 2px solid var(--hm-navy);
   background:
-    radial-gradient(40% 32% at 88% 6%, rgb(243 195 60 / 22%), transparent 70%),
+    radial-gradient(40% 32% at 88% 6%, rgb(255 255 255 / 65%), rgb(243 195 60 / 22%) 32%, transparent 70%),
     var(--hm-cream);
 }
 

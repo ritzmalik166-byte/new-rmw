@@ -8,7 +8,7 @@
   position: relative;
   box-sizing: border-box;
   overflow: hidden;
-  padding: clamp(72px, 12vh, 120px) var(--fd-pad-x);
+  padding: clamp(72px, min(12vh, 7.5vw), 120px) var(--fd-pad-x);
   background: #a71b10;
   color: #ffffff;
 }
@@ -189,7 +189,6 @@
   font-size: clamp(14px, 2vh, 17px);
   line-height: 1.6;
   letter-spacing: 0;
-  text-transform: capitalize;
 }
 
 .about-founder-list {

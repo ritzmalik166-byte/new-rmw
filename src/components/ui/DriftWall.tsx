@@ -89,6 +89,7 @@ const DriftWall = ({
   const lastTsRef = useRef<number | null>(null);
 
   const [containerHeight, setContainerHeight] = useState(600);
+  const [remScale, setRemScale] = useState(1);
   const [activeId, setActiveId] = useState<string | null>(null);
   const activeIdRef = useRef<string | null>(null);
   const [reduced, setReduced] = useState(false);
@@ -109,18 +110,19 @@ const DriftWall = ({
   }, [items, columns]);
 
   const columnMeta = useMemo(() => {
-    const unit = tileHeight + gap;
+    const unit = (tileHeight + gap) * remScale;
     return columnItems.map(col => {
       const copyHeight = Math.max(unit, col.length * unit);
       const copies = Math.max(2, Math.ceil((containerHeight * 1.6) / copyHeight) + 1);
       return { copyHeight, copies };
     });
-  }, [columnItems, tileHeight, gap, containerHeight]);
+  }, [columnItems, tileHeight, gap, containerHeight, remScale]);
 
   useLayoutEffect(() => {
     if (!containerRef.current) return;
     const ro = new ResizeObserver(([entry]) => {
       setContainerHeight(entry.contentRect.height || 600);
+      setRemScale(parseFloat(getComputedStyle(document.documentElement).fontSize) / 16 || 1);
     });
     ro.observe(containerRef.current);
     return () => ro.disconnect();
@@ -251,12 +253,12 @@ const DriftWall = ({
 
   const cssVars = useMemo(
     () => ({
-      '--dw-tile-w': `${tileWidth}px`,
-      '--dw-tile-h': `${tileHeight}px`,
-      '--dw-gap': `${gap}px`,
+      '--dw-tile-w': `${tileWidth / 16}rem`,
+      '--dw-tile-h': `${tileHeight / 16}rem`,
+      '--dw-gap': `${gap / 16}rem`,
       '--dw-radius': `${radius}px`,
-      '--dw-perspective': `${perspective}px`,
-      '--dw-lift': `${lift}px`,
+      '--dw-perspective': `${perspective / 16}rem`,
+      '--dw-lift': `${lift / 16}rem`,
       '--dw-dim': dim,
       '--dw-gray': grayscale ? 1 : 0,
       '--dw-overlay': overlayColor,

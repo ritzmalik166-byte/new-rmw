@@ -1,10 +1,10 @@
 /* ---------- Tag & category listings ---------- */
 .tax-section {
-  margin-top: clamp(28px, 4vh, 40px);
+  margin-top: clamp(28px, min(4vh, 2.5vw), 40px);
 }
 
 .tax-group + .tax-group {
-  margin-top: clamp(28px, 4vh, 40px);
+  margin-top: clamp(28px, min(4vh, 2.5vw), 40px);
 }
 
 .tax-group-letter {

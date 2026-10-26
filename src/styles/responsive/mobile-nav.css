@@ -125,12 +125,12 @@
     --mnav-dots: rgb(255 243 226 / 0.06);
     --mnav-glow:
       radial-gradient(55% 38% at 100% 0%, rgb(201 53 110 / 0.28), transparent 70%),
-      radial-gradient(60% 36% at 0% 100%, rgb(243 195 60 / 0.14), transparent 72%);
+      radial-gradient(60% 36% at 0% 100%, rgb(255 255 255 / 12%), rgb(243 195 60 / 0.14) 32%, transparent 72%);
     --mnav-fg: #fff3e2;
     --mnav-dim: rgb(255 243 226 / 0.5);
     --mnav-line: rgb(255 243 226 / 0.14);
     --mnav-stroke: rgb(255 243 226 / 0.07);
-    --mnav-active: linear-gradient(90deg, #f3c33c, #f07828 50%, #e0457f);
+    --mnav-active: linear-gradient(90deg, #fff8e1 0%, #f3c33c 24%, #f07828 60%, #e0457f);
     --mnav-active-num: #f3c33c;
     --mnav-btn-bg: #fff3e2;
     --mnav-btn-fg: #161616;
@@ -606,6 +606,10 @@
     display: none;
   }
 
+  .site-header-brand {
+    flex-shrink: 0;
+  }
+
   .audit-card-title {
     white-space: normal;
   }
@@ -613,5 +617,12 @@
   .audit-copy {
     padding: 18px 14px 16px;
     box-shadow: 5px 5px 0 var(--audit-ink);
+  }
+}
+
+/* Fold-width phones: the menu already carries the contact CTA, so the logo keeps its room. */
+@media (max-width: 359px) {
+  html .site-header-cta {
+    display: none;
   }
 }

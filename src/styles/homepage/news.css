@@ -8,7 +8,7 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(20px, 2.4vw, 32px);
-  margin-top: clamp(40px, 6vh, 56px);
+  margin-top: clamp(40px, min(6vh, 3.75vw), 56px);
 }
 
 .hm-post {

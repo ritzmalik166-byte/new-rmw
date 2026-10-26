@@ -4,7 +4,7 @@
   overflow: clip;
   padding-block: var(--hm-pad-y);
   background:
-    radial-gradient(55% 45% at 92% 0%, rgb(243 195 60 / 14%), transparent 70%),
+    radial-gradient(55% 45% at 92% 0%, rgb(255 255 255 / 65%), rgb(243 195 60 / 14%) 32%, transparent 70%),
     radial-gradient(45% 50% at 0% 100%, rgb(201 53 110 / 20%), transparent 70%),
     var(--hm-navy);
   color: #fff;
@@ -36,7 +36,7 @@
 
 .hm-route-map {
   position: relative;
-  margin-top: clamp(48px, 7vh, 80px);
+  margin-top: clamp(48px, min(7vh, 4.375vw), 80px);
 }
 
 /* ---------- Milestone stones ---------- */
@@ -156,7 +156,7 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(16px, 2.4vw, 32px);
-  margin: clamp(32px, 5vh, 52px) 0 0;
+  margin: clamp(32px, min(5vh, 3.125vw), 52px) 0 0;
   padding: 0;
   list-style: none;
 }

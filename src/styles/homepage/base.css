@@ -20,7 +20,7 @@
   --hm-jakarta: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
   --hm-mono: var(--font-inter), Inter, sans-serif;
   --hm-gutter: clamp(20px, 5.5vw, 80px);
-  --hm-pad-y: clamp(72px, 10vh, 120px);
+  --hm-pad-y: clamp(72px, min(10vh, 6.25vw), 120px);
 
   position: relative;
   z-index: 1;
@@ -282,6 +282,14 @@
 @media (min-width: 721px) and (max-width: 980px) {
   .hm-title {
     font-size: clamp(40px, 5.4vw, 52px);
+  }
+}
+
+/* Tablet layouts stack to one column, so a 46ch measure left half the row empty. */
+@media (min-width: 641px) and (max-width: 1100px) {
+  .hm-lede {
+    max-width: 64ch;
+    font-size: 18px;
   }
 }
 

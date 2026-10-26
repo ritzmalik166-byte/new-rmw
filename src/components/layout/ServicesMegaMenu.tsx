@@ -18,7 +18,7 @@ interface ServicesMegaMenuProps {
 
 const STATS = [
   { value: "18+", label: "Years" },
-  { value: "500+", label: "Brands" },
+  { value: "300+", label: "Brands" },
   { value: "100+", label: "Experts" },
 ] as const;
 
