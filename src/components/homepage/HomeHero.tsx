@@ -76,7 +76,6 @@ export function HomeHero() {
 
       const q = gsap.utils.selector(root);
       const heads = q(".hm-hero-head");
-      const fades = q("[data-hero-fade]");
       const stickers = q(".hm-hero-sticker") as HTMLElement[];
       const bars = q("[data-hero-bar]");
       const lights = q(".hm-hero-light");
@@ -89,7 +88,6 @@ export function HomeHero() {
       if (!stage || !rig || !truck || !heads.length) return;
 
       const linesOf = (i: number) => heads[i].querySelectorAll("[data-hero-line]");
-      const offX = () => stage.clientWidth - rig.offsetLeft + 40;
       const slots = window.matchMedia("(max-width: 640px)").matches ? SLOTS_SMALL : SLOTS;
 
       const seat = (sticker: HTMLElement, slot: Slot, index: number) => {
@@ -99,11 +97,10 @@ export function HomeHero() {
       };
 
       gsap.set(stickers, { xPercent: -50, autoAlpha: 0 });
+      // CSS parks the later headlines with a plain transform; hand them to GSAP.
+      heads.forEach((_, i) => i > 0 && gsap.set(linesOf(i), { y: 0, yPercent: LINE_OFF }));
 
       if (reduced) {
-        gsap.set(fades, { autoAlpha: 1, y: 0 });
-        heads.forEach((_, i) => gsap.set(linesOf(i), { yPercent: i === 0 ? 0 : LINE_OFF }));
-        gsap.set(rig, { x: 0 });
         slots.forEach((slot, i) => {
           seat(stickers[i], slot, i);
           gsap.set(stickers[i], { autoAlpha: 1, rotation: slot.rot });
@@ -111,22 +108,24 @@ export function HomeHero() {
         gsap.set(lights, { autoAlpha: 1 });
         gsap.set(bars, { scaleX: 0 });
         gsap.set(bars[0], { scaleX: 1 });
-        root.classList.add("is-armed", "is-lit");
+        root.classList.add("is-lit");
         return;
       }
 
-      gsap.set(fades, { autoAlpha: 0, y: 22 });
-      heads.forEach((_, i) => gsap.set(linesOf(i), { yPercent: LINE_OFF }));
       gsap.set(lights, { autoAlpha: 0 });
       gsap.set(bars, { scaleX: 0 });
-      const startX = offX();
-      gsap.set(rig, { x: startX });
-      root.classList.add("is-armed");
 
       if (!ready) return;
 
-      // Road and wheels share one odometer so the tyres never skid.
+      // Road and wheels share one odometer so the tyres never skid. While the
+      // CSS drive-in runs, the distance it covers turns the wheels too.
       let odometer = 0;
+      let arriving = rig.getAnimations().some((a) => a.playState === "running");
+      const onArrive = (event: AnimationEvent) => {
+        if (event.target === rig) arriving = false;
+      };
+      rig.addEventListener("animationend", onArrive);
+      const rigOffset = () => (arriving ? parseFloat(getComputedStyle(rig).translate) || 0 : 0);
       let visible = true;
       let bob: gsap.core.Tween | undefined;
       const io = new IntersectionObserver(([entry]) => {
@@ -141,8 +140,7 @@ export function HomeHero() {
         if (!visible) return;
         const length = truck.offsetWidth;
         odometer += length * SPEED * (Math.min(deltaTime, 64) / 1000);
-        const driven = startX - Number(gsap.getProperty(rig, "x"));
-        const turn = ((odometer + driven) / (Math.PI * length * WHEEL_RATIO)) * 360;
+        const turn = ((odometer - rigOffset()) / (Math.PI * length * WHEEL_RATIO)) * 360;
         stage.style.setProperty("--road-x", `${odometer.toFixed(1)}px`);
         truck.style.setProperty("--wheel-turn", `${(turn % 360).toFixed(2)}deg`);
       };
@@ -280,11 +278,8 @@ export function HomeHero() {
         call = gsap.delayedCall(HOLD, next);
       };
 
-      const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+      const intro = gsap.timeline();
       intro
-        .to(linesOf(0), { yPercent: 0, duration: 1, ease: "expo.out", stagger: 0.09 }, 0.1)
-        .to(fades, { autoAlpha: 1, y: 0, duration: 0.75, stagger: 0.08 }, 0.25)
-        .to(rig, { x: 0, duration: 2.6, ease: "power3.out" }, 0)
         .add(() => {
           slots.forEach((_, i) => load(i, i * 0.18));
           turn = 0;
@@ -298,6 +293,7 @@ export function HomeHero() {
 
       return () => {
         gsap.ticker.remove(tick);
+        rig.removeEventListener("animationend", onArrive);
         io.disconnect();
         call?.kill();
         swapCall?.kill();

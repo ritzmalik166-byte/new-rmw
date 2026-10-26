@@ -9,7 +9,7 @@
   z-index: 1;
   overflow: hidden;
   background-color: var(--audit-red);
-  background-image: url("/audit/floral-bg.png");
+  background-image: url("/audit/floral-bg.webp");
   background-repeat: repeat;
   background-position: center top;
   background-size: 720px auto;

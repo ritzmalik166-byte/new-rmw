@@ -211,7 +211,7 @@ export function StartProject({ cta }: { cta?: string } = {}) {
 
           <div className="audit-truck">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={site.highways.truck} alt="Ritz Media World truck carrying a Free Consultation billboard" width={961} height={615} />
+            <img src={site.highways.truck} alt="Ritz Media World truck carrying a Free Consultation billboard" width={961} height={615} loading="lazy" />
             <p className="audit-billboard">
               <strong>Free Consultation</strong>
               <span>Ritz Media World</span>

@@ -33,18 +33,21 @@ const montserrat = localFont({
   src: "./fonts/montserrat-latin.woff2",
   weight: "400 700",
   variable: "--font-montserrat",
+  preload: false,
 });
 
 const jakarta = localFont({
   src: "./fonts/plus-jakarta-sans-latin.woff2",
   weight: "400 800",
   variable: "--font-jakarta",
+  preload: false,
 });
 
 const playfair = localFont({
   src: "./fonts/playfair-display-900-latin.woff2",
   weight: "900",
   variable: "--font-playfair",
+  preload: false,
   adjustFontFallback: "Times New Roman",
 });
 
@@ -52,12 +55,14 @@ const archivo = localFont({
   src: "./fonts/archivo-black-latin.woff2",
   weight: "400",
   variable: "--font-display",
+  preload: false,
 });
 
 const quicksand = localFont({
   src: "./fonts/quicksand-700-latin.woff2",
   weight: "700",
   variable: "--font-quicksand",
+  preload: false,
 });
 
 const quattrocento = localFont({
@@ -73,6 +78,7 @@ const rye = localFont({
   src: "./fonts/rye-latin.woff2",
   weight: "400",
   variable: "--font-rye",
+  preload: false,
 });
 
 /* Rye is Latin-only; Yatra One covers Devanagari for the Hindi "OK" swap.
@@ -82,6 +88,7 @@ const yatraLatin = localFont({
   src: "./fonts/yatra-one-latin.woff2",
   weight: "400",
   variable: "--font-yatra-latin",
+  preload: false,
 });
 
 const yatraDevanagari = localFont({
@@ -103,12 +110,14 @@ const yeseva = localFont({
   src: "./fonts/yeseva-one-latin.woff2",
   weight: "400",
   variable: "--font-yeseva",
+  preload: false,
 });
 
 const caveat = localFont({
   src: "./fonts/caveat-latin.woff2",
   weight: "500 700",
   variable: "--font-caveat",
+  preload: false,
 });
 
 export const metadata: Metadata = {

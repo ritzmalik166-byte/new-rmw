@@ -1,6 +1,5 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
 import { useLenis } from "lenis/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +7,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { TransitionLink } from "@/components/motion/TransitionLink";
-import { useMotion } from "@/components/providers/MotionProvider";
 import { cn } from "@/lib/cn";
 import { gsap, registerGsap } from "@/lib/gsap";
 import { site } from "@/lib/site";
@@ -19,7 +17,6 @@ import { SERVICE_ICONS } from "@/lib/service-icons";
 import { MENU_SERVICES } from "@/lib/services-data";
 
 registerGsap();
-gsap.registerPlugin(useGSAP);
 
 const HEADER_STICK_AFTER = 160;
 const HEADER_IDLE_MS = 700;
@@ -30,7 +27,6 @@ const isCurrent = (pathname: string, href: string) =>
 export function Header() {
   const pathname = usePathname();
   const rootRef = useRef<HTMLElement>(null);
-  const { ready, reduced } = useMotion();
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -164,36 +160,6 @@ export function Header() {
       window.removeEventListener("keydown", onKey);
     };
   }, [menuOpen]);
-
-  useGSAP(
-    () => {
-      const root = rootRef.current;
-      if (!root) return;
-
-      if (reduced) {
-        gsap.set(root, { autoAlpha: 1, y: 0 });
-        return;
-      }
-
-      gsap.set(root, { autoAlpha: 0, y: -10 });
-    },
-    { dependencies: [reduced] },
-  );
-
-  useGSAP(
-    () => {
-      const root = rootRef.current;
-      if (!root || !ready || reduced) return;
-
-      gsap.to(root, {
-        autoAlpha: 1,
-        y: 0,
-        duration: 1.05,
-        ease: "power2.out",
-      });
-    },
-    { dependencies: [ready, reduced] },
-  );
 
   return (
     <header ref={rootRef} className="site-header absolute top-0 right-0 left-0 z-50">

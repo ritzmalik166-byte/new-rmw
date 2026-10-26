@@ -1,3 +1,4 @@
+import { preload } from "react-dom";
 import { cn } from "@/lib/cn";
 
 /* Source art is 1101x402 with the cab on the left; wheel layers are 140px
@@ -49,6 +50,15 @@ export function RealTruck({
   driver,
 }: Props) {
   const src = small ? "/trucks/rmw-truck-sm.webp" : "/trucks/rmw-truck.webp";
+  if (priority) {
+    // Hoisted into <head> so the download starts before the parser reaches the hero.
+    preload(src, {
+      as: "image",
+      fetchPriority: "high",
+      imageSrcSet: small ? undefined : TRUCK_SRCSET,
+      imageSizes: small ? undefined : sizes,
+    });
+  }
 
   return (
     <span
@@ -90,6 +100,7 @@ export function RealTruck({
                 width={336}
                 height={192}
                 loading={priority ? "eager" : "lazy"}
+                fetchPriority={pose === "idle" ? undefined : "low"}
                 draggable={false}
               />
             ))}
@@ -98,11 +109,25 @@ export function RealTruck({
       )}
       <span className="real-truck-wheel is-front">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/trucks/rmw-wheel-front.webp" alt="Truck front wheel" width={140} height={140} draggable={false} />
+        <img
+          src="/trucks/rmw-wheel-front.webp"
+          alt="Truck front wheel"
+          width={140}
+          height={140}
+          loading={priority ? "eager" : "lazy"}
+          draggable={false}
+        />
       </span>
       <span className="real-truck-wheel is-rear">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/trucks/rmw-wheel-rear.webp" alt="Truck rear wheel" width={140} height={140} draggable={false} />
+        <img
+          src="/trucks/rmw-wheel-rear.webp"
+          alt="Truck rear wheel"
+          width={140}
+          height={140}
+          loading={priority ? "eager" : "lazy"}
+          draggable={false}
+        />
       </span>
     </span>
   );
