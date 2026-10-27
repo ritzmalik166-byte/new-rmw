@@ -72,14 +72,40 @@ function formatDate(date: string | null) {
 /** Normalises content pasted from Google Docs: scrollable tables, and "•   text"
  *  paragraphs (manual bullets padded with spaces) rendered as real bullet points. */
 function prepareContent(html: string) {
-  return html
+  const normalized = html
     .replace(/<table\b/gi, '<div class="blog-table-wrap"><table')
     .replace(/<\/table>/gi, "</table></div>")
     .replace(/<p\b([^>]*)>\s*(?:•|&bull;|●|▪)(?:\s|&nbsp;|&#160;)*/gi, "<p data-blog-bullet$1>")
     .replace(
+      /href=(["'])call:\s*(?:\+?91\s*)?([\d\s-]+)\1/gi,
+      (_match, quote: string, number: string) =>
+        `href=${quote}tel:+91${number.replace(/\D/g, "")}${quote}`,
+    )
+    .replace(
       /href=(["'])(?:https?:\/\/(?:www\.)?ritzmediaworld\.com)?\/contact(?:-us)?\/?(?=[?#"'])/gi,
       "href=$1/contact.html",
     );
+
+  let insideAnchor = false;
+  return normalized
+    .split(/(<[^>]*>)/g)
+    .map((part) => {
+      if (part.startsWith("<")) {
+        if (/^<a\b/i.test(part)) insideAnchor = true;
+        if (/^<\/a\b/i.test(part)) insideAnchor = false;
+        return part;
+      }
+      if (insideAnchor) return part;
+
+      return part.replace(
+        /(\+91\s*[-–]?\s*\d{5}\s*[-–]?\s*\d{5})/g,
+        (phone) => {
+          const digits = phone.replace(/\D/g, "");
+          return `<a href="tel:+${digits}" class="blog-phone-link">${phone}</a>`;
+        },
+      );
+    })
+    .join("");
 }
 
 export default async function BlogDetailPage({
