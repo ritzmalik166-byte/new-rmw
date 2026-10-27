@@ -223,7 +223,7 @@ export function Header() {
 
         <div className="site-header-actions">
           <ThemeToggle />
-          <TransitionLink href="/contact" className="site-header-cta">
+          <TransitionLink href="/contact.html" className="site-header-cta">
             <span className="site-header-cta-label">Contact Us</span>
             <span className="site-header-cta-arrow" aria-hidden>
               →
@@ -402,7 +402,7 @@ function MobileMenu({
       </nav>
 
       <div className="mnav-foot">
-        <Link href="/contact" target="_blank" rel="noopener noreferrer" className="mnav-cta" onClick={onClose}>
+        <Link href="/contact.html" target="_blank" rel="noopener noreferrer" className="mnav-cta" onClick={onClose}>
           Start a project
           <span aria-hidden>→</span>
         </Link>

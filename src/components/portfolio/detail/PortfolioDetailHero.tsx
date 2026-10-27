@@ -89,7 +89,7 @@ export function PortfolioDetailHero({ detail }: { detail: PortfolioDetail }) {
             <a href="#work" className="hm-btn">
               See the work <span aria-hidden>→</span>
             </a>
-            <a href="/contact" target="_blank" rel="noopener noreferrer" className="hm-link">
+            <a href="/contact.html" target="_blank" rel="noopener noreferrer" className="hm-link">
               Start your project
               <HmArrow />
             </a>

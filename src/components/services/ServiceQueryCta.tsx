@@ -41,7 +41,7 @@ export function ServiceQueryCta({ service }: { service: string }) {
           <button ref={triggerRef} type="button" className="sd-req-cta" onClick={open} aria-haspopup="dialog">
             Send a query <span aria-hidden>→</span>
           </button>
-          <Link href="/contact" target="_blank" rel="noopener noreferrer" className="sd-brief-cta-link">
+          <Link href="/contact.html" target="_blank" rel="noopener noreferrer" className="sd-brief-cta-link">
             Start a project <span aria-hidden>↗</span>
           </Link>
         </div>

@@ -105,7 +105,7 @@ export function CaseStudyReports() {
                 >
                   Download report <DownloadIcon />
                 </button>
-                <TransitionLink href="/contact" className="hm-link">
+                <TransitionLink href="/contact.html" className="hm-link">
                   Contact us
                   <HmArrow />
                 </TransitionLink>
@@ -130,7 +130,7 @@ export function CaseStudyReports() {
               report built around your corridor, buyer and budget.
             </p>
             <div className="cs-report-actions">
-              <TransitionLink href="/contact" className="hm-btn is-ink">
+              <TransitionLink href="/contact.html" className="hm-btn is-ink">
                 Request a custom briefing <span aria-hidden>→</span>
               </TransitionLink>
             </div>

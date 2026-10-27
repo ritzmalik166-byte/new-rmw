@@ -168,7 +168,7 @@ export function ServicesDigitalMarketing() {
             </Link>
             <Link
               className="svc-dm-cta"
-              href="/contact" target="_blank" rel="noopener noreferrer"
+              href="/contact.html" target="_blank" rel="noopener noreferrer"
             >
               Get a Free SEO Audit <span aria-hidden>→</span>
             </Link>

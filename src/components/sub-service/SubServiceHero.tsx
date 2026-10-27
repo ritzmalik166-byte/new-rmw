@@ -94,7 +94,7 @@ export function SubServiceHero({ service, sub, stop, total }: Props) {
           </p>
 
           <div data-hm-fade className="hm-actions">
-            <a href="/contact" target="_blank" rel="noopener noreferrer" className="hm-btn">
+            <a href="/contact.html" target="_blank" rel="noopener noreferrer" className="hm-btn">
               Start your project <span aria-hidden>→</span>
             </a>
             <a href="#route" className="hm-link">

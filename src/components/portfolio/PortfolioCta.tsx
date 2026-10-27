@@ -84,7 +84,7 @@ export function PortfolioCta({
         <div data-hm-fade className="hm-actions">
           {whatsapp ? (
             <>
-              <TransitionLink href="/contact" className="hm-btn is-ink">
+              <TransitionLink href="/contact.html" className="hm-btn is-ink">
                 Start a project <span aria-hidden>→</span>
               </TransitionLink>
               <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer" className="hm-btn pf-cta-btn">
@@ -92,7 +92,7 @@ export function PortfolioCta({
               </a>
             </>
           ) : (
-            <TransitionLink href="/contact" className="hm-btn is-ink">
+            <TransitionLink href="/contact.html" className="hm-btn is-ink">
               Contact us <span aria-hidden>→</span>
             </TransitionLink>
           )}

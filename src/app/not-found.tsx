@@ -50,7 +50,7 @@ export default function NotFound() {
               Back to Home
               <span className="btn-icon btn-icon-arrow" aria-hidden />
             </Link>
-            <Link href="/contact" className="btn btn-ink">
+            <Link href="/contact.html" className="btn btn-ink">
               Ask for Directions
             </Link>
           </div>

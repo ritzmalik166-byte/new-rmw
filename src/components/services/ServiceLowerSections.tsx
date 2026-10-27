@@ -287,7 +287,7 @@ function ServiceProof({ service, relatedServices }: ServiceLowerSectionsProps) {
             </p>
             <HmTitle id="sd-proof-title" lines={[{ text: "Proof on the tailgate." }]} />
           </div>
-          <a data-hm-fade href="/contact" target="_blank" rel="noopener noreferrer" className="hm-btn is-ink">
+          <a data-hm-fade href="/contact.html" target="_blank" rel="noopener noreferrer" className="hm-btn is-ink">
             Discuss your numbers <span aria-hidden>→</span>
           </a>
         </header>

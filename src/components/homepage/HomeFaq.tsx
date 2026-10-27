@@ -67,7 +67,7 @@ export function HomeFaq({
                 <a href={`mailto:${email}`}>{email}</a>
               </li>
             </ul>
-            <TransitionLink href="/contact" className="hm-faq-help-cta">
+            <TransitionLink href="/contact.html" className="hm-faq-help-cta">
               Talk to us <span aria-hidden>→</span>
             </TransitionLink>
           </aside>

@@ -46,7 +46,7 @@ export function getStaticPagePaths() {
     "/about.html",
     "/blog",
     "/career",
-    "/contact",
+    "/contact.html",
     "/case-study",
     "/services",
     "/portfolio",

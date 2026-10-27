@@ -269,7 +269,7 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
 
             <footer data-hm-fade className="sd-plan-foot">
               <span>One connected programme. A clear scope for every service.</span>
-              <a href="/contact" target="_blank" rel="noopener noreferrer" className="hm-link">
+              <a href="/contact.html" target="_blank" rel="noopener noreferrer" className="hm-link">
                 {layout.planCta}
                 <HmArrow />
               </a>
@@ -287,7 +287,7 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
           {layout.requirementsSign ? (
             <Link
               data-hm-fade
-              href="/contact" target="_blank" rel="noopener noreferrer"
+              href="/contact.html" target="_blank" rel="noopener noreferrer"
               className="sd-sign"
               aria-label={`Discuss your ${service.name} requirements and start a project`}
             >
@@ -300,7 +300,7 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
               />
             </Link>
           ) : (
-            <Link data-hm-fade href="/contact" target="_blank" rel="noopener noreferrer" className="sd-req">
+            <Link data-hm-fade href="/contact.html" target="_blank" rel="noopener noreferrer" className="sd-req">
               <span className="sd-req-kicker">Dispatch office</span>
               <span className="sd-req-title">Discuss your {service.name} requirements</span>
               <span className="sd-req-copy">

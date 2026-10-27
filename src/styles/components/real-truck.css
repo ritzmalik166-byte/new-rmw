@@ -54,7 +54,6 @@
   position: absolute;
   width: 12.716%;
   height: 34.826%;
-  rotate: calc(var(--wheel-turn, 0deg) * -1);
 }
 
 .real-truck-wheel.is-front {
@@ -68,10 +67,17 @@
 }
 
 .real-truck .real-truck-wheel img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   max-width: none;
   height: 100%;
+}
+
+.real-truck .real-truck-wheel-spin {
+  rotate: calc(var(--wheel-turn, 0deg) * -1);
+  will-change: rotate;
 }
 
 /* Window box is 208,72 112x64 in source px; the mask keeps the frame, wiper
@@ -118,7 +124,7 @@
   opacity: 1;
 }
 
-.real-truck.is-rolling .real-truck-wheel img {
+.real-truck.is-rolling .real-truck-wheel-spin {
   animation: real-truck-spin var(--wheel-rev) linear infinite;
 }
 
@@ -142,7 +148,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .real-truck.is-rolling .real-truck-wheel img,
+  .real-truck.is-rolling .real-truck-wheel-spin,
   .real-truck.is-rolling img.real-truck-body,
   .real-truck.is-rolling .real-truck-panel {
     animation: none;
