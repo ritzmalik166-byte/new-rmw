@@ -53,11 +53,6 @@ function formatDate(date: string | null) {
     .toUpperCase();
 }
 
-function getReadingTime(blog: Blog) {
-  const words = `${blog.title} ${blog.excerpt}`.trim().split(/\s+/).length;
-  return Math.max(3, Math.ceil(words / 200));
-}
-
 function updateUrl(page: number, query: string) {
   const url = new URL(window.location.href);
   if (page > 1) url.searchParams.set("page", String(page));
@@ -149,7 +144,6 @@ export function BlogArchive({
             </p>
             <p className="blog-featured-meta">
               <span>{formatDate(featuredBlog.createdAt)}</span>
-              <span>{getReadingTime(featuredBlog)} min read</span>
               <span>{getCategories(featuredBlog).slice(0, 2).join(" · ")}</span>
             </p>
             <h2>{featuredBlog.title}</h2>
@@ -201,7 +195,6 @@ export function BlogArchive({
                 key={blog.slug}
                 blog={blog}
                 category={getCategories(blog)[0]}
-                readingTime={getReadingTime(blog)}
               />
             ))}
           </div>

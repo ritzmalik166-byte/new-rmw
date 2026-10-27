@@ -54,7 +54,6 @@ export function HomeNewsContent({ blogs }: { blogs: Blog[] }) {
                 <span className="hm-post-body">
                   <span className="hm-post-meta">
                     <span>{formatDate(blog.createdAt)}</span>
-                    <span>5 min read</span>
                   </span>
                   <span className="hm-post-title">{blog.title}</span>
                   {blog.excerpt ? <span className="hm-post-excerpt">{blog.excerpt}</span> : null}
