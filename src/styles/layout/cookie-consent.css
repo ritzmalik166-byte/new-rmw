@@ -11,6 +11,7 @@
   right: 0;
   bottom: 0;
   left: 0;
+  pointer-events: none;
   z-index: 300;
   padding-bottom: env(safe-area-inset-bottom);
   background:
@@ -54,6 +55,7 @@
   width: calc(100% - 2 * var(--site-gutter));
   margin: 0 auto;
   padding: 1.5rem 0 1.4rem;
+  pointer-events: auto;
 }
 
 .cc-sign {
