@@ -113,7 +113,7 @@ export function ServicesHero() {
             one team.
           </p>
 
-          <a href="/contact" target="_blank" rel="noopener noreferrer" className="svch-cta">
+          <a href="/contact.html" target="_blank" rel="noopener noreferrer" className="svch-cta">
             Book your consignment <span aria-hidden>→</span>
           </a>
         </div>

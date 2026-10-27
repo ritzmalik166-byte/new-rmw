@@ -276,7 +276,7 @@ export default function PrivacyPage() {
                 <dd>{ADDRESS}</dd>
               </div>
             </dl>
-            <TransitionLink href="/contact" className="pv-cta">
+            <TransitionLink href="/contact.html" className="pv-cta">
               Contact us
               <span aria-hidden>→</span>
             </TransitionLink>

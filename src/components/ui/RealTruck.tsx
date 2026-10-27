@@ -107,28 +107,37 @@ export function RealTruck({
           </span>
         </span>
       )}
-      <span className="real-truck-wheel is-front">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/trucks/rmw-wheel-front.webp"
-          alt="Truck front wheel"
-          width={140}
-          height={140}
-          loading={priority ? "eager" : "lazy"}
-          draggable={false}
-        />
-      </span>
-      <span className="real-truck-wheel is-rear">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/trucks/rmw-wheel-rear.webp"
-          alt="Truck rear wheel"
-          width={140}
-          height={140}
-          loading={priority ? "eager" : "lazy"}
-          draggable={false}
-        />
-      </span>
+      <TruckWheel position="is-front" priority={priority} />
+      <TruckWheel position="is-rear" priority={priority} />
+    </span>
+  );
+}
+
+/* One drawn wheel for both axles: tread and rim turn, the light layer above stays fixed. */
+function TruckWheel({ position, priority }: { position: string; priority?: boolean }) {
+  const loading = priority ? "eager" : "lazy";
+  return (
+    <span className={cn("real-truck-wheel", position)}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        className="real-truck-wheel-spin"
+        src="/trucks/rmw-wheel.svg"
+        alt="Truck wheel"
+        width={140}
+        height={140}
+        loading={loading}
+        draggable={false}
+      />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        className="real-truck-wheel-light"
+        src="/trucks/rmw-wheel-light.svg"
+        alt=""
+        width={140}
+        height={140}
+        loading={loading}
+        draggable={false}
+      />
     </span>
   );
 }

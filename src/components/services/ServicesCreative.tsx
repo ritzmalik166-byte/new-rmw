@@ -97,7 +97,7 @@ export function ServicesCreative() {
             <Link className="svc-explore" href="/services/creative-services">
               Explore Creative Services <span aria-hidden>→</span>
             </Link>
-            <Link className="svc-creative-cta" href="/contact" target="_blank" rel="noopener noreferrer">
+            <Link className="svc-creative-cta" href="/contact.html" target="_blank" rel="noopener noreferrer">
               Get a Free Creative Consultation <span aria-hidden>→</span>
             </Link>
           </div>

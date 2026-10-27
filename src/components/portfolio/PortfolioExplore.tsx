@@ -123,7 +123,7 @@ export function PortfolioExplore() {
                     <TransitionLink href={category.href} className="hm-btn">
                       View {category.cta ?? category.title} work <span aria-hidden>→</span>
                     </TransitionLink>
-                    <a href="/contact" target="_blank" rel="noopener noreferrer" className="hm-link">
+                    <a href="/contact.html" target="_blank" rel="noopener noreferrer" className="hm-link">
                       Start a project
                       <HmArrow />
                     </a>

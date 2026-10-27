@@ -12,7 +12,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "Have a project in mind? Get in touch with Ritz Media World to discuss your digital marketing, SEO, branding or performance marketing needs.",
   keywords: AGENCY_KEYWORDS,
-  path: "/contact",
+  path: "/contact.html",
 });
 
 const ROUTE = [
