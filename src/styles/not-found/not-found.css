@@ -1,0 +1,497 @@
+/* ---------- 404: wrong turn, back of the truck ---------- */
+.nf {
+  --nf-navy: #1b1f4b;
+  --nf-teal: #2e7a6b;
+  --nf-yellow: #f3c33c;
+  --nf-red: #d9333f;
+  --nf-amber: #f39c1f;
+  --nf-asphalt: #2b2d33;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: #f6f1ea;
+  color: var(--nf-navy);
+}
+
+.nf::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 21px;
+  background: url("/about/diagonal-stripes.png") repeat-x left center / auto 100%;
+}
+
+.nf-inner {
+  display: grid;
+  flex: 1;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(40px, 6vw, 96px);
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+  padding: 148px var(--site-gutter) 56px;
+}
+
+/* ---------- Copy ---------- */
+.nf-kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 22px;
+}
+
+.nf-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  background: #c8231b;
+  color: #fff;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.nf-kicker-hindi {
+  color: var(--nf-teal);
+  font-family: var(--font-yatra), "Yatra One", serif;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.nf-title {
+  margin: 0;
+  font-family: var(--font-quattrocento), Quattrocento, Georgia, serif;
+  font-size: clamp(36px, 4.4vw, 60px);
+  font-weight: 700;
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+.nf-title-accent {
+  color: var(--nf-red);
+}
+
+.nf-lede {
+  max-width: 46ch;
+  margin: 20px 0 0;
+  color: #4a4d5c;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.nf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.nf-actions .btn-hot {
+  width: auto;
+}
+
+.nf-detours {
+  margin-top: 36px;
+}
+
+.nf-detours-label {
+  margin: 0 0 12px;
+  color: var(--nf-teal);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.nf-detours-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nf-detour {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 14px;
+  border: 1px solid rgb(27 31 75 / 14%);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--nf-navy);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nf-detour:hover {
+  background: var(--nf-yellow);
+  transform: translateY(-2px);
+}
+
+.nf-detour:focus-visible {
+  outline: 2px solid var(--nf-teal);
+  outline-offset: 2px;
+}
+
+/* ---------- Stage: truck, sign, road ---------- */
+.nf-stage {
+  position: relative;
+  padding-bottom: 54px;
+}
+
+/* Overlay positions are percentages of the 810x668 truck-back.png artwork. */
+.nf-truck {
+  position: relative;
+  z-index: 2;
+  width: min(560px, 100%);
+  margin-inline: auto;
+  container-type: inline-size;
+  animation: nf-idle 1.6s ease-in-out infinite;
+}
+
+.nf-truck-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  pointer-events: none;
+}
+
+.nf-panel {
+  position: absolute;
+  top: 21.9%;
+  left: 21.4%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 57.9%;
+  height: 36.5%;
+  text-align: center;
+}
+
+.nf-painted {
+  margin: 0;
+  color: var(--nf-yellow);
+  font-family: var(--font-rye), "Rye", serif;
+  font-size: clamp(44px, 17cqw, 108px);
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+  text-shadow:
+    3px 3px 0 var(--nf-red),
+    6px 6px 0 #06302e;
+  animation: nf-paint 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+.nf-painted-sub {
+  margin: 1.6cqw 0 0;
+  color: #fff;
+  font-family: var(--font-yatra), "Yatra One", serif;
+  font-size: clamp(14px, 4.4cqw, 28px);
+  line-height: 1.1;
+  text-shadow: 2px 2px 0 #06302e;
+  animation: nf-paint 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+}
+
+.nf-painted-en {
+  margin: 0.8cqw 0 0;
+  color: rgb(255 255 255 / 80%);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: clamp(9px, 2cqw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  animation: nf-paint 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
+}
+
+/* Hazard lights: both tail lights flash together, like a truck parked on the shoulder. */
+.nf-light {
+  position: absolute;
+  top: 74.25%;
+  width: 5%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  color: rgb(255 150 40 / 90%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: nf-hazard 1.1s steps(1, end) infinite;
+}
+
+.nf-light.is-left {
+  left: 11%;
+}
+
+.nf-light.is-right {
+  left: 89.4%;
+}
+
+.nf-plate {
+  position: absolute;
+  top: 71%;
+  left: 40.5%;
+  display: grid;
+  place-items: center;
+  width: 18.6%;
+  height: 7%;
+  color: #141414;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: clamp(10px, 2.5cqw, 15px);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.nf-shadow {
+  position: absolute;
+  bottom: 44px;
+  left: 50%;
+  z-index: 1;
+  width: min(480px, 82%);
+  height: 26px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(0 0 0 / 38%), transparent);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.nf-road {
+  position: absolute;
+  right: -12%;
+  bottom: 0;
+  left: -12%;
+  height: 64px;
+  background: var(--nf-asphalt);
+  clip-path: polygon(8% 0, 92% 0, 100% 100%, 0 100%);
+}
+
+.nf-road::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 5px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--nf-yellow) 0 38px,
+    transparent 38px 76px
+  );
+  transform: translateY(-50%);
+  animation: nf-road 1.2s linear infinite;
+}
+
+/* ---------- Road sign ---------- */
+.nf-sign {
+  position: absolute;
+  top: 6%;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: rotate(6deg);
+  transform-origin: bottom center;
+  animation: nf-sway 3.2s ease-in-out infinite;
+}
+
+.nf-sign-board {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 3px solid #141414;
+  border-radius: 6px;
+  background: var(--nf-yellow);
+  box-shadow: 4px 4px 0 #141414;
+  color: #141414;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.nf-sign-arrow {
+  color: var(--nf-red);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.nf-sign-post {
+  width: 6px;
+  height: 56px;
+  background: repeating-linear-gradient(180deg, #141414 0 10px, #f6f1ea 10px 20px);
+}
+
+/* ---------- Slogan ribbon ---------- */
+.nf-ribbon {
+  position: relative;
+  overflow: hidden;
+  padding: 14px 0;
+  border-top: 4px solid var(--nf-yellow);
+  background: var(--nf-navy);
+}
+
+.nf-ribbon-track {
+  display: flex;
+  width: max-content;
+  animation: nf-marquee 38s linear infinite;
+}
+
+.nf-ribbon-list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nf-ribbon-item {
+  display: flex;
+  align-items: center;
+  padding-inline: 28px;
+  color: var(--nf-yellow);
+  font-family: var(--font-rye), var(--font-yatra), serif;
+  font-size: 18px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.nf-ribbon-item::after {
+  content: "✦";
+  margin-left: 56px;
+  color: var(--nf-red);
+  font-size: 14px;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes nf-idle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes nf-paint {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(14px) scale(0.96);
+  }
+}
+
+@keyframes nf-hazard {
+  0% {
+    background: rgb(255 214 150 / 70%);
+    box-shadow: 0 0 26px 10px currentColor;
+  }
+  50% {
+    background: transparent;
+    box-shadow: none;
+  }
+}
+
+@keyframes nf-road {
+  to {
+    background-position: -76px 0;
+  }
+}
+
+@keyframes nf-sway {
+  0%,
+  100% {
+    transform: rotate(6deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes nf-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .nf-inner {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: 120px;
+    text-align: center;
+  }
+
+  .nf-kicker,
+  .nf-actions,
+  .nf-detours-list {
+    justify-content: center;
+  }
+
+  .nf-lede {
+    margin-inline: auto;
+  }
+
+  .nf-stage {
+    order: -1;
+  }
+}
+
+@media (max-width: 520px) {
+  .nf-sign {
+    top: -4%;
+  }
+
+  .nf-sign-board {
+    padding: 7px 10px;
+    font-size: 9px;
+  }
+
+  .nf-sign-post {
+    height: 36px;
+  }
+
+  .nf-ribbon-item {
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nf-truck,
+  .nf-painted,
+  .nf-painted-sub,
+  .nf-painted-en,
+  .nf-light,
+  .nf-road::after,
+  .nf-sign,
+  .nf-ribbon-track {
+    animation: none;
+  }
+
+  .nf-detour {
+    transition: none;
+  }
+}
