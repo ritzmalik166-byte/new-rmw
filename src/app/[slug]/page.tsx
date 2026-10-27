@@ -75,7 +75,11 @@ function prepareContent(html: string) {
   return html
     .replace(/<table\b/gi, '<div class="blog-table-wrap"><table')
     .replace(/<\/table>/gi, "</table></div>")
-    .replace(/<p\b([^>]*)>\s*(?:•|&bull;|●|▪)(?:\s|&nbsp;|&#160;)*/gi, "<p data-blog-bullet$1>");
+    .replace(/<p\b([^>]*)>\s*(?:•|&bull;|●|▪)(?:\s|&nbsp;|&#160;)*/gi, "<p data-blog-bullet$1>")
+    .replace(
+      /href=(["'])(?:https?:\/\/(?:www\.)?ritzmediaworld\.com)?\/contact(?:-us)?\/?(?=[?#"'])/gi,
+      "href=$1/contact.html",
+    );
 }
 
 function calculateReadingTime(html: string): number {
