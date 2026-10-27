@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" width="140" height="140">
+  <defs>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.12"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.7" stop-color="#000" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.38"/>
+    </linearGradient>
+    <radialGradient id="dish" cx="50%" cy="50%" r="50%">
+      <stop offset="0.6" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.28"/>
+    </radialGradient>
+  </defs>
+  <!-- Fixed light: stays put while the wheel turns underneath it -->
+  <circle cx="70" cy="70" r="69.5" fill="url(#shade)"/>
+  <circle cx="70" cy="70" r="49.5" fill="url(#dish)"/>
+  <path d="M26.77 54.27 A46 46 0 0 1 85.73 26.77" fill="none" stroke="#fff" stroke-opacity="0.4" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M13.81 43.8 A62 62 0 0 1 59.24 8.94" fill="none" stroke="#fff" stroke-opacity="0.09" stroke-width="5" stroke-linecap="round"/>
+</svg>
