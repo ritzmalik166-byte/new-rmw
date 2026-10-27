@@ -32,11 +32,9 @@ function getExcerpt(excerpt: string, maxLength: number) {
 export function BlogCard({
   blog,
   category,
-  readingTime = 5,
 }: {
   blog: Blog;
   category?: string;
-  readingTime?: number;
 }) {
   return (
     <a
@@ -52,8 +50,6 @@ export function BlogCard({
         <p className="news-card-tags">
           {category ? <span className="blog-card-category">{category}</span> : null}
           <span>{formatDate(blog.createdAt)}</span>
-          <span aria-hidden="true">·</span>
-          <span>{readingTime} MIN READ</span>
         </p>
         <h2 className="news-card-title">{blog.title}</h2>
         {blog.excerpt ? (

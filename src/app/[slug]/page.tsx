@@ -82,12 +82,6 @@ function prepareContent(html: string) {
     );
 }
 
-function calculateReadingTime(html: string): number {
-  const text = html.replace(/<[^>]*>/g, " ");
-  const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
-  return Math.max(1, Math.ceil(wordCount / 220));
-}
-
 export default async function BlogDetailPage({
   params,
 }: {
@@ -106,7 +100,6 @@ export default async function BlogDetailPage({
     ? { href: "/case-study", label: "Case Studies", back: "Back to all case studies", related: "More Case Studies" }
     : { href: "/blog", label: "Blog", back: "Back to all blogs", related: "Related Blogs" };
 
-  const readingTime = calculateReadingTime(blog.content);
   const tags = [
     ...new Set(
       blog.keywords
@@ -150,8 +143,6 @@ export default async function BlogDetailPage({
             <span>
               Posted on <time>{formatDate(blog.createdAt)}</time>
             </span>
-            <span aria-hidden="true">·</span>
-            <span>{readingTime} min read</span>
           </p>
 
           {blog.image ? (
