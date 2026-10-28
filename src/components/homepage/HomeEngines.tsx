@@ -56,7 +56,7 @@
       index: "03",
       kicker: "See it before it exists.",
       title: "3D Rendering & AI Services",
-      copy: "Photorealistic 3D renders, AI-powered creatives and videos, and AI solutions that automate your workflows, helping you create more and work faster without compromising on quality.",
+      copy: "Photorealistic renders that show a project before it’s built, and AI services that help brands create content faster, adopt AI across their business and automate everyday work.",
       tone: "#167a7d",
       cargo: [
         { slug: "3d-rendering", name: "3D Rendering", href: RENDER_HREF },

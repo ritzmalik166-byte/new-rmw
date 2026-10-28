@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AboutFounder } from "@/components/about/AboutFounder";
 import { AboutHero } from "@/components/about/AboutHero";
+import { AboutOfficeTour } from "@/components/about/AboutOfficeTour";
 import { AboutJourney } from "@/components/about/AboutJourney";
 import { AboutMileage } from "@/components/about/AboutMileage";
 import { AboutProofs } from "@/components/about/AboutProofs";
@@ -18,6 +19,7 @@ import "@/styles/about/mileage.css";
 import "@/styles/about/journey.css";
 import "@/styles/about/proofs.css";
 import "@/styles/about/founder.css";
+import "@/styles/about/office-tour.css";
 
 export const metadata: Metadata = pageMetadata({
   title: "About Ritz Media World | Award-Winning Delhi NCR Advertising Agency",
@@ -47,6 +49,7 @@ export default function AboutPage() {
           { name: "About", path: "/about.html" },
         ])}
       />
+      <AboutOfficeTour />
       <AboutHero />
       <AboutTruckBack />
       <AboutMileage />

@@ -12,7 +12,7 @@ export const site = {
   fullName: "Ritz Media World",
   tagline: "Creative OK Please",
   description:
-    "Independent creative media agency in India. We turn business problems into ideas that travel—from brand and campaign to media, digital, film, 3D and AI.",
+    "Explore Ritz Media World’s full-service solutions in creative, digital, print, radio, 3D rendering, and AI, designed to grow your brand and drive real results.",
   nav: [
     { href: "/about.html", label: "About" },
     { href: "/services", label: "Services" },
@@ -282,7 +282,7 @@ export const site = {
         role: "ONYX by Splendor",
         company: "Lead Generation, Creative & Social Media",
         industry: "Commercial Real Estate",
-        logo: "/s2/clients/prm-11.webp",
+        logo: "/clients/onyx-by-splendor.png",
         quote:
           "The team has supported us in promoting ONYX by Splendor through lead generation, creative design, and social media marketing. Their work has helped us showcase the project’s commercial spaces, share updates across social platforms, and reach potential investors and businesses looking for commercial property in Noida.",
       },
@@ -306,6 +306,7 @@ export const site = {
         role: "Vedvan",
         company: "Creative Design & Social Media",
         industry: "Wellness Living",
+        logo: "/clients/vedvan.png",
         quote:
           "The team has done an impressive job supporting Vedvan’s brand through creative design and social media marketing. They understood our vision of nature-inspired, wellness-focused living and helped communicate it through engaging visuals and content. We appreciate their creative approach and efforts in presenting Vedvan’s unique lifestyle concept to the right audience.",
       },

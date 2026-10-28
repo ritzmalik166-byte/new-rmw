@@ -1856,17 +1856,18 @@ export const SERVICES_LIST: ServiceDetail[] = [
     slug: "ai-services",
     name: "AI Services",
     uppercaseName: "AI SERVICES",
-    engine: "Engine Three · 3D, AI & Production",
-    kicker: "KM 10 · Intelligence on the road",
-    heroTitle: { lead: "AI Services for Brands", accent: "built to move at your speed." },
-    tagline: "Bring AI into your creative, content, search, and everyday workflows without losing the human point of view.",
+    engine: "Engine Three · 3D Rendering & AI",
+    kicker: "KM 10 · Work smarter",
+    heroTitle: { lead: "AI Services", accent: "that help you create more and work faster." },
+    tagline:
+      "From AI-powered creatives and brand videos to complete AI implementation and workflow automation, we help businesses use AI to create more, work faster, and spend less time on repetitive tasks, with a human team guiding every step.",
     heading: "Practical AI services for faster creative and smarter growth",
     shortDescription:
       "AI-assisted creative production, content systems, AI search visibility, and workflow automation for modern brands.",
     definitionText:
       "AI services help brands use artificial intelligence thoughtfully across creative production, marketing, customer journeys, and internal workflows.",
     fullOverview:
-      "Ritz Media World's AI services bring strategy, creativity, and technology together. We use AI to help teams explore ideas faster, produce more useful content, become easier to discover in AI-led search, and automate repetitive work. Every system is guided by a clear brand brief and reviewed by people, so speed never replaces judgement.",
+      "Ritz Media World's AI services bring strategy, creativity, and technology together. From AI-powered creatives and brand videos to complete AI implementation and workflow automation, we help businesses use AI to create more, work faster, and spend less time on repetitive tasks. Every system is guided by a clear brand brief and reviewed by people, so speed never replaces judgement.",
     image: "/services/ai-services-logo.png",
     accentColor: "#167a68",
     tags: ["AI Creative", "AI Search", "Automation", "Content Systems", "Strategy"],
@@ -1878,24 +1879,24 @@ export const SERVICES_LIST: ServiceDetail[] = [
     ],
     capabilities: [
       {
-        title: "AI Creative Production",
-        copy: "Explore campaign directions, visual concepts, scripts, storyboards, and social variations faster, while our creative team keeps the work on-brand and ready to use.",
-        details: ["Campaign concepts", "AI-assisted key visuals", "Video scripts and storyboards", "Social content variations"],
+        title: "AI Creatives",
+        copy: "Campaign visuals, social media posts, and ad creatives produced with AI tools and refined by our designers, so you get more variations in less time while staying on brand.",
+        details: ["Campaign visuals", "Social media posts", "Ad creatives", "Designer refinement"],
       },
       {
-        title: "AI Search & Answer Visibility",
-        copy: "Help your brand show up when customers ask ChatGPT, Gemini, Perplexity, or Google AI Overviews about your category, your city, and the problems you solve.",
-        details: ["Answer-first content", "Entity and schema strategy", "Authority signals", "AI visibility reporting"],
+        title: "AI Brand Reels & Videos",
+        copy: "Short brand reels, promotional videos, and social content created with AI-powered video tools, built for Instagram, YouTube Shorts, and WhatsApp, and finished by our editors.",
+        details: ["Brand reels", "Promotional videos", "Social content", "Editor finishing"],
       },
       {
-        title: "Marketing Workflow Automation",
-        copy: "Connect briefs, approvals, content calendars, reporting, and follow-ups so your team spends less time moving information and more time making decisions.",
-        details: ["Brief-to-content workflows", "Lead routing", "Approval systems", "Reporting automation"],
+        title: "End-to-End AI Implementation",
+        copy: "We help your business adopt AI the right way, from identifying where it adds value and choosing the right tools to setting them up and integrating them with your existing systems.",
+        details: ["Opportunity mapping", "Tool selection", "System setup", "Existing-system integration"],
       },
       {
-        title: "AI Strategy & Training",
-        copy: "Turn AI from a collection of tools into a practical operating system with use-case discovery, safe prompts, team playbooks, and ongoing optimisation.",
-        details: ["AI opportunity audit", "Team workshops", "Prompt libraries", "Governance playbooks"],
+        title: "Workflow Automations",
+        copy: "We automate repetitive tasks such as content publishing, reporting, lead handling, and data entry, so your team spends less time on manual work and more time on what matters.",
+        details: ["Content publishing", "Reporting", "Lead handling", "Data entry"],
       },
     ],
     deliverables: [

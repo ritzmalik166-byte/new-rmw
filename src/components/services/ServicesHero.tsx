@@ -16,7 +16,7 @@ const TITLE = [
 const CONSIGNMENT = [
   { engine: "E-01", goods: "Brand & Creative", contents: "Branding, websites, print" },
   { engine: "E-02", goods: "Digital & Media", contents: "Performance, SEO, social, media buying" },
-  { engine: "E-03", goods: "3D Rendering & AI Services", contents: "3D renders, AI creatives and workflow automation" },
+  { engine: "E-03", goods: "3D Rendering & AI", contents: "3D renders, AI creatives & automation" },
 ] as const;
 
 export function ServicesHero() {
