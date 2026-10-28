@@ -1851,6 +1851,151 @@ export const SERVICES_LIST: ServiceDetail[] = [
       ],
     },
   },
+  {
+    id: "ai",
+    slug: "ai-services",
+    name: "AI Services",
+    uppercaseName: "AI SERVICES",
+    engine: "Engine Three · 3D, AI & Production",
+    kicker: "KM 10 · Intelligence on the road",
+    heroTitle: { lead: "AI Services for Brands", accent: "built to move at your speed." },
+    tagline: "Bring AI into your creative, content, search, and everyday workflows without losing the human point of view.",
+    heading: "Practical AI services for faster creative and smarter growth",
+    shortDescription:
+      "AI-assisted creative production, content systems, AI search visibility, and workflow automation for modern brands.",
+    definitionText:
+      "AI services help brands use artificial intelligence thoughtfully across creative production, marketing, customer journeys, and internal workflows.",
+    fullOverview:
+      "Ritz Media World's AI services bring strategy, creativity, and technology together. We use AI to help teams explore ideas faster, produce more useful content, become easier to discover in AI-led search, and automate repetitive work. Every system is guided by a clear brand brief and reviewed by people, so speed never replaces judgement.",
+    image: "/services/ai-services-logo.png",
+    accentColor: "#167a68",
+    tags: ["AI Creative", "AI Search", "Automation", "Content Systems", "Strategy"],
+    stats: [
+      { value: "4X", label: "Faster Idea Exploration" },
+      { value: "24/7", label: "Workflow Intelligence" },
+      { value: "1", label: "Human-led Brand System" },
+      { value: "10", label: "Services On One Route" },
+    ],
+    capabilities: [
+      {
+        title: "AI Creative Production",
+        copy: "Explore campaign directions, visual concepts, scripts, storyboards, and social variations faster, while our creative team keeps the work on-brand and ready to use.",
+        details: ["Campaign concepts", "AI-assisted key visuals", "Video scripts and storyboards", "Social content variations"],
+      },
+      {
+        title: "AI Search & Answer Visibility",
+        copy: "Help your brand show up when customers ask ChatGPT, Gemini, Perplexity, or Google AI Overviews about your category, your city, and the problems you solve.",
+        details: ["Answer-first content", "Entity and schema strategy", "Authority signals", "AI visibility reporting"],
+      },
+      {
+        title: "Marketing Workflow Automation",
+        copy: "Connect briefs, approvals, content calendars, reporting, and follow-ups so your team spends less time moving information and more time making decisions.",
+        details: ["Brief-to-content workflows", "Lead routing", "Approval systems", "Reporting automation"],
+      },
+      {
+        title: "AI Strategy & Training",
+        copy: "Turn AI from a collection of tools into a practical operating system with use-case discovery, safe prompts, team playbooks, and ongoing optimisation.",
+        details: ["AI opportunity audit", "Team workshops", "Prompt libraries", "Governance playbooks"],
+      },
+    ],
+    deliverables: [
+      "AI Opportunity Audit and Priority Roadmap",
+      "Brand-Safe Prompt and Content System",
+      "Campaign Concept, Script and Visual Exploration Packs",
+      "AI Search Visibility Content and Entity Plan",
+      "Automated Brief, Approval and Reporting Workflows",
+      "Team Training, Playbooks and Ongoing Optimisation",
+    ],
+    process: [
+      {
+        step: "01",
+        km: "KM 01",
+        title: "Find the right opportunities",
+        copy: "We understand your goals, audience, team, tools, and constraints before recommending where AI can create real value.",
+      },
+      {
+        step: "02",
+        km: "KM 02",
+        title: "Build the brand guardrails",
+        copy: "We define your voice, visual rules, approval points, data boundaries, and quality checks before production begins.",
+      },
+      {
+        step: "03",
+        km: "KM 03",
+        title: "Prototype and improve",
+        copy: "We test the workflow or creative system with a focused pilot, measure what works, and refine it with your team.",
+      },
+      {
+        step: "04",
+        km: "KM 04",
+        title: "Launch with human oversight",
+        copy: "We document the system, train the people using it, and keep improving the output as your brand and tools evolve.",
+      },
+    ],
+    whyUs: [
+      {
+        title: "Creative judgement stays in the room",
+        copy: "AI helps us explore and execute faster, but experienced strategists, writers, designers, and marketers decide what is right for your brand.",
+      },
+      {
+        title: "Built around your existing team",
+        copy: "We fit practical AI into the tools and approvals you already use instead of handing over a complicated system nobody adopts.",
+      },
+      {
+        title: "Made for measurable business work",
+        copy: "Every AI engagement connects back to a useful outcome: stronger creative, better visibility, less repetitive work, or more qualified demand.",
+      },
+    ],
+    layout: {
+      problemFlags: [
+        {
+          title: "Too many tools, no clear system",
+          copy: "New AI tools arrive every week, but your team still needs a practical way to decide what belongs in the workflow.",
+        },
+        {
+          title: "Fast content that feels generic",
+          copy: "Speed only helps when the output still sounds, looks, and behaves like your brand.",
+        },
+        {
+          title: "Customers are asking AI first",
+          copy: "If answer engines cannot understand your expertise, your brand may be missing from the conversation before a search click happens.",
+        },
+      ],
+      wallLede: "AI systems that make the work move faster without making the brand feel less human.",
+      faqs: [
+        {
+          question: "What AI services do you offer?",
+          answer:
+            "We offer AI-assisted creative production, AI search and answer visibility, marketing workflow automation, content systems, and AI strategy and training for brands.",
+        },
+        {
+          question: "Will AI replace our creative team?",
+          answer:
+            "No. We use AI as an accelerator for research, exploration, production, and repetitive work. Human strategists and creatives remain responsible for the idea, judgement, brand fit, and final approval.",
+        },
+        {
+          question: "Can you connect AI to our existing marketing workflow?",
+          answer:
+            "Yes. We first map your current tools and approvals, then recommend focused automations that reduce manual work without disrupting the systems your team depends on.",
+        },
+        {
+          question: "How do you make AI content feel like our brand?",
+          answer:
+            "We build brand guardrails from your existing voice, visual identity, audience, examples, and approval rules, then test the system against real campaign requirements.",
+        },
+        {
+          question: "Can AI help customers find our brand?",
+          answer:
+            "Yes. We structure useful, authoritative content and strengthen the signals that help AI answer engines understand when your brand is relevant to a question.",
+        },
+        {
+          question: "Do you provide AI training for internal teams?",
+          answer:
+            "Yes. We provide practical workshops, prompt libraries, playbooks, and governance guidance so your team can use AI consistently and responsibly.",
+        },
+      ],
+    },
+  },
 ];
 
 export const MENU_SERVICES = SERVICES_LIST;

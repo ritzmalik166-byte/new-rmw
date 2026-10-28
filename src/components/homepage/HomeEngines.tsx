@@ -3,7 +3,7 @@
   import { useRef, type CSSProperties } from "react";
   import { TransitionLink } from "@/components/motion/TransitionLink";
   import { ServicesRouteTruck } from "@/components/services/ServicesRouteTruck";
-  import { RENDER_ICONS, SERVICE_ICONS, iconThumb } from "@/lib/service-icons";
+  import { SERVICE_ICONS, iconThumb } from "@/lib/service-icons";
   import { HmArrow, HmTitle, useHomeReveal } from "./shared";
 
   const TITLE = [{ text: "One agency." }, { text: "Three engines.", accent: true }] as const;
@@ -20,14 +20,6 @@
   };
 
   const RENDER_HREF = "/services/3d-rendering";
-  const RENDER_TYPES = [
-    { slug: "3d-exterior-rendering", name: "3D Exterior Rendering", icon: RENDER_ICONS.exterior },
-    { slug: "3d-interior-rendering", name: "3D Interior Rendering", icon: RENDER_ICONS.interior },
-    { slug: "aerial-township", name: "Aerial & Township", icon: RENDER_ICONS.aerial },
-    { slug: "3d-floor-plan-rendering", name: "3D Floor Plans", icon: RENDER_ICONS.plan },
-    { slug: "amenity-landscape-rendering", name: "Amenity Rendering", icon: RENDER_ICONS.amenity },
-  ];
-
   const ENGINES: Engine[] = [
     {
       id: "brand",
@@ -63,10 +55,13 @@
       id: "film",
       index: "03",
       kicker: "See it before it exists.",
-      title: "3D Rendering Services",
-      copy: "Brand films, photorealistic 3D rendering, and AI-assisted production that let audiences see your product, project, or space before it is even built.",
+      title: "3D Rendering & AI Services",
+      copy: "Photorealistic 3D renders, AI-powered creatives and videos, and AI solutions that automate your workflows, helping you create more and work faster without compromising on quality.",
       tone: "#167a7d",
-      cargo: RENDER_TYPES.map((type) => ({ ...type, href: `${RENDER_HREF}#${type.slug}` })),
+      cargo: [
+        { slug: "3d-rendering", name: "3D Rendering", href: RENDER_HREF },
+        { slug: "ai-services", name: "AI Services", href: "/services/ai-services" },
+      ],
       extras: [],
     },
   ];
@@ -100,7 +95,7 @@
               </p>
               <HmTitle id="hm-engines-title" lines={TITLE} />
               <p data-hm-fade className="hm-lede">
-              Our three engines cover every stage of brand building, from creative and content to digital marketing and media.
+              Three engines covering creative, digital, media, 3D, and AI, working together without the handoffs that slow good work down.
               </p>
             </div>
             <TransitionLink data-hm-fade href="/services" className="hm-btn is-ink">

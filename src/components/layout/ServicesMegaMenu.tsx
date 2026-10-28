@@ -134,6 +134,10 @@ export function ServicesMegaMenu({
         <div className="smm-foot">
           <p className="smm-foot-route">
             <span className="smm-foot-label">{MENU_SERVICES.length} services · one route</span>
+            <Link href="/services/ai-services" onClick={onClose} className="smm-foot-ai">
+              Explore our new AI Services
+              <ArrowIcon />
+            </Link>
           </p>
           {phone ? (
             <a href={`tel:${phone.replace(/\s/g, "")}`} className="smm-foot-call">

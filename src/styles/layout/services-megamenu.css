@@ -491,6 +491,32 @@
   text-transform: uppercase;
 }
 
+.smm-foot-ai {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--smm-pink);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.smm-foot-ai svg {
+  width: 15px;
+  height: 15px;
+}
+
+.smm-foot-ai:hover,
+.smm-foot-ai:focus-visible {
+  color: var(--smm-navy);
+  transform: translateX(2px);
+}
+
 .smm-foot-call {
   display: inline-flex;
   align-items: center;

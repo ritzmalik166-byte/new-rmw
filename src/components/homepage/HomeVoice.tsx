@@ -26,8 +26,8 @@ function Avatar({ review, index, size }: { review: Testimonial; index: number; s
       className="hm-receipt-avatar"
       style={{ "--tone": TONES[index % TONES.length] } as CSSProperties}
     >
-      {review.photo ? (
-        <Image src={review.photo} alt={`${review.role}, ${review.company}`} width={size} height={size} />
+      {review.logo ? (
+        <Image src={review.logo} alt={`${review.role} logo`} width={size} height={size} />
       ) : (
         <span aria-hidden>{initials(review)}</span>
       )}

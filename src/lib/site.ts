@@ -3,6 +3,7 @@ export type Testimonial = {
   company: string;
   industry: string;
   photo?: string;
+  logo?: string;
   quote: string;
 };
 
@@ -265,6 +266,7 @@ export const site = {
         role: "GHD Infra",
         company: "SEO, Creative, Social Media & Paid Campaigns",
         industry: "Real Estate",
+        logo: "/s2/clients/prm-5.webp",
         quote:
           "We’ve had a great experience working with the team on our digital marketing needs. From SEO and creative designs to social media management and paid campaigns, they have been supportive, responsive, and committed to our goals. Their efforts have helped us strengthen our online presence and promote our real estate projects in Goa.",
       },
@@ -272,7 +274,7 @@ export const site = {
         role: "Eldeco Group",
         company: "Lead Generation",
         industry: "Real Estate",
-        photo: "/s8/51e3ade5d235d3158f1e504c1ea3497f09c9d0c9.jpg",
+        logo: "/s2/clients/prm-22.webp",
         quote:
           "We’ve had a positive experience working with the team on lead generation for Eldeco Group. They understood our real estate business needs and focused on reaching potential homebuyers through targeted campaigns. Their efforts have helped us connect with relevant audiences and generate enquiries for our property projects.",
       },
@@ -280,6 +282,7 @@ export const site = {
         role: "ONYX by Splendor",
         company: "Lead Generation, Creative & Social Media",
         industry: "Commercial Real Estate",
+        logo: "/s2/clients/prm-11.webp",
         quote:
           "The team has supported us in promoting ONYX by Splendor through lead generation, creative design, and social media marketing. Their work has helped us showcase the project’s commercial spaces, share updates across social platforms, and reach potential investors and businesses looking for commercial property in Noida.",
       },
@@ -287,6 +290,7 @@ export const site = {
         role: "Exotica Housing",
         company: "Lead Generation",
         industry: "Real Estate",
+        logo: "/s2/clients/exotica-logo.webp",
         quote:
           "The team has been helpful in promoting Exotica Housing’s residential projects through lead generation campaigns. They focused on reaching potential homebuyers interested in properties across Delhi-NCR and understood our project requirements well. We appreciate their efforts in bringing relevant enquiries and supporting our property marketing goals.",
       },
@@ -294,6 +298,7 @@ export const site = {
         role: "Renox Group",
         company: "Lead Generation",
         industry: "Real Estate",
+        logo: "/clients/renox.png",
         quote:
           "We’ve had a great experience working with the team on lead generation for our real estate projects. They understood our business needs and helped us reach potential homebuyers through targeted campaigns. Their approach has supported our efforts to generate enquiries and connect with people interested in our properties.",
       },
@@ -427,7 +432,7 @@ export const site = {
     faqs: [
       {
         q: "What services does Ritz Media World offer?",
-        a: "Ritz Media World is a full-service advertising agency offering branding, creative campaigns, media planning and buying, digital marketing, SEO, social media, film production, 3D visualization, and AI-led creative solutions, all delivered by one integrated team.",
+        a: "Ritz Media World is a full-service advertising agency offering branding, creative campaigns, media planning and buying, digital marketing, SEO, social media, film production, 3D rendering, and AI services, from AI creatives and brand videos to AI implementation and workflow automation, all delivered by one integrated team.",
       },
       {
         q: "Which industries do you work with?",
@@ -442,8 +447,8 @@ export const site = {
         a: "Yes. Our strategy, creative, media, and digital teams work together on every campaign, so the idea, the design, and the media plan stay consistent, and you deal with one partner instead of several.",
       },
       {
-        q: "Do you produce brand films, 3D visualization and AI-driven content?",
-        a: "Yes. Our in-house production team creates brand films, ad films, 3D walkthroughs, product visualizations, and AI-assisted content, which helps keep timelines shorter and quality consistent.",
+        q: "Do you produce brand films, 3D rendering, and AI content?",
+        a: "Yes. Our in-house teams create brand films, ad films, 3D renders and walkthroughs, and AI-powered creatives and videos. We also help businesses implement AI and automate everyday workflows, which keeps timelines shorter and quality consistent.",
       },
       {
         q: "How do you measure and report campaign ROI?",

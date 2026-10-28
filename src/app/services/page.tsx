@@ -67,9 +67,9 @@ export default function ServicesPage() {
         id="film"
         index="03"
         kicker="Engine Three"
-        title="3D Rendering Services"
-        copy="Photorealistic exteriors, interiors, townships, floor plans, and landscapes that let buyers and investors see a project before a single brick is laid."
-        km="KM 09"
+        title="3D Rendering & AI Services"
+        copy="Photorealistic 3D renders, AI-powered creatives and videos, and AI solutions that automate your workflows, helping you create more and work faster without compromising on quality."
+        km="KM 09 – 10"
         tone="#167a7d"
         border="scallop"
       />
