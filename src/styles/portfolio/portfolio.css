@@ -82,6 +82,359 @@
   list-style: none;
 }
 
+.pf-video-page {
+  min-height: 100vh;
+  padding-top: clamp(120px, 14vw, 170px);
+  background: var(--hm-cream);
+}
+
+.pf-video-head {
+  margin: 0 auto clamp(42px, 6vw, 72px);
+  text-align: center;
+}
+
+.pf-video-back {
+  display: inline-block;
+  margin-bottom: 28px;
+  color: var(--hm-navy);
+  font-family: var(--hm-mono);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.pf-video-head .hm-kicker {
+  justify-content: center;
+}
+
+.pf-video-head .hm-title {
+  margin: 18px 0;
+  color: var(--hm-navy);
+  font-family: var(--hm-serif);
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 0.98;
+}
+
+.pf-video-head .hm-title em {
+  display: block;
+  color: var(--hm-pink);
+  font-style: normal;
+}
+
+.pf-video-head .hm-lede {
+  max-width: 660px;
+  margin: 0 auto 24px;
+}
+
+.pf-video-playlist-link {
+  display: inline-block;
+  padding: 7px 13px;
+  border: 1.5px solid var(--hm-navy);
+  border-radius: 999px;
+  color: var(--hm-navy);
+  font-family: var(--hm-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.25s var(--hm-ease);
+}
+
+.pf-video-playlist-link:hover,
+.pf-video-playlist-link:focus-visible {
+  background: var(--hm-navy);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.pf-video-wall {
+  padding: var(--hm-pad-y) 0;
+  background:
+    radial-gradient(60% 40% at 100% 0%, rgb(201 53 110 / 22%), transparent 70%),
+    radial-gradient(50% 40% at 0% 100%, rgb(255 255 255 / 65%), rgb(243 195 60 / 12%) 32%, transparent 70%),
+    var(--hm-navy);
+  color: #fff;
+}
+
+.pf-video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(22px, 3vw, 42px) clamp(14px, 1.6vw, 24px);
+  margin: 0 auto;
+}
+
+.pf-video-card {
+  min-width: 0;
+}
+
+.pf-video-frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 8%);
+  box-shadow: 0 18px 40px -22px rgb(0 0 0 / 70%);
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s var(--hm-ease);
+}
+
+.pf-video-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  pointer-events: none;
+}
+
+.pf-video-open {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pf-video-frame:hover {
+  box-shadow:
+    0 22px 46px -22px rgb(0 0 0 / 82%),
+    0 0 0 2px var(--hm-yellow);
+  transform: translateY(-4px);
+}
+
+.pf-video-open:hover,
+.pf-video-open:focus-visible {
+  background: rgb(243 195 60 / 12%);
+  outline: 3px solid var(--hm-yellow);
+  outline-offset: -5px;
+}
+
+.pf-video-card-copy {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 2px 0;
+  font-family: var(--hm-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pf-video-card-copy span {
+  color: #fff;
+}
+
+.pf-video-card-copy h2 {
+  margin: 0;
+  color: var(--hm-yellow);
+  font: inherit;
+}
+
+.pf-video-modal {
+  box-sizing: border-box;
+  width: min(1120px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid var(--hm-yellow);
+  border-radius: 18px;
+  background: var(--hm-navy);
+  color: #fff;
+  box-shadow: 8px 8px 0 rgb(0 0 0 / 45%);
+}
+
+.pf-video-modal::backdrop {
+  background: rgb(15 14 40 / 78%);
+  backdrop-filter: blur(7px);
+}
+
+.pf-video-modal-inner {
+  position: relative;
+  box-sizing: border-box;
+  max-height: calc(100dvh - 36px);
+  overflow: hidden;
+  padding: clamp(18px, 2.4vw, 30px);
+}
+
+.pf-video-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 0 16px;
+}
+
+.pf-video-modal-head div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.pf-video-modal-head span {
+  color: var(--hm-yellow);
+  font-family: var(--hm-mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pf-video-modal-head strong {
+  overflow: hidden;
+  color: #fff;
+  font-family: var(--hm-serif);
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.05;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pf-video-modal-frame {
+  width: 100%;
+  max-height: calc(100dvh - 190px);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #000;
+}
+
+.pf-video-modal-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.pf-video-modal-foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px 2px 0;
+  font-family: var(--hm-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pf-video-modal-foot span:first-child {
+  color: rgb(255 255 255 / 62%);
+}
+
+.pf-video-modal-foot a {
+  color: var(--hm-yellow);
+  text-decoration: none;
+}
+
+.pf-video-modal-foot a:hover,
+.pf-video-modal-foot a:focus-visible {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pf-video-modal-close {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  border: 1px solid rgb(255 255 255 / 55%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 8%);
+  color: #fff;
+  cursor: pointer;
+  font-family: var(--hm-mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pf-video-modal-close span {
+  color: var(--hm-yellow);
+  font-size: 18px;
+  line-height: 0.7;
+  transition: transform 0.25s var(--hm-ease), color 0.2s ease;
+}
+
+.pf-video-modal-close:hover,
+.pf-video-modal-close:focus-visible {
+  border-color: var(--hm-yellow);
+  background: var(--hm-yellow);
+  color: var(--hm-ink);
+}
+
+.pf-video-modal-close:hover span,
+.pf-video-modal-close:focus-visible span {
+  color: var(--hm-ink);
+  transform: rotate(90deg);
+}
+
+@media (min-width: 701px) {
+  .pf-video-modal {
+    width: min(1200px, calc(100vw - 48px), calc((100dvh - 190px) * 16 / 9 + 60px));
+  }
+}
+
+@media (max-width: 700px) {
+  .pf-video-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 500px) {
+  .pf-video-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pf-video-modal-head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .pf-video-modal-head strong {
+    white-space: normal;
+  }
+
+  .pf-video-modal-close {
+    align-self: flex-start;
+  }
+
+  .pf-video-modal-foot {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .pf-video-modal {
+    width: min(calc(100vw - 20px), calc((100dvh - 230px) * 16 / 9 + 28px));
+    max-height: calc(100dvh - 20px);
+    border-radius: 14px;
+  }
+
+  .pf-video-modal-inner {
+    max-height: calc(100dvh - 24px);
+    padding: 14px;
+  }
+
+  .pf-video-modal-frame {
+    max-height: calc(100dvh - 230px);
+  }
+}
+
 .pf-hero-chips a {
   display: inline-block;
   padding: 7px 13px;
@@ -420,10 +773,34 @@
     color 0.2s ease;
 }
 
+.pf-arrow-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: currentColor;
+  -webkit-mask: url("/icons/arrow.png") center / contain no-repeat;
+  mask: url("/icons/arrow.png") center / contain no-repeat;
+  transition: transform 0.25s var(--hm-ease);
+}
+
+.pf-lightbox button.is-prev .pf-arrow-icon {
+  transform: rotate(180deg);
+}
+
 .pf-lightbox button:hover {
   border-color: var(--hm-yellow);
   background: var(--hm-yellow);
   color: var(--hm-ink);
+}
+
+.pf-lightbox button:hover .pf-arrow-icon,
+.pf-lightbox button:focus-visible .pf-arrow-icon {
+  transform: translateX(3px);
+}
+
+.pf-lightbox button.is-prev:hover .pf-arrow-icon,
+.pf-lightbox button.is-prev:focus-visible .pf-arrow-icon {
+  transform: rotate(180deg) translateX(3px);
 }
 
 .pf-lightbox button:focus-visible {

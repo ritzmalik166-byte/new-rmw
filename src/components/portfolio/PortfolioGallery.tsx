@@ -35,6 +35,7 @@ function balanceColumns() {
 }
 
 const columns = balanceColumns();
+const displayOrder = columns.flat().map(({ index }) => index);
 
 export function PortfolioGallery() {
   const rootRef = useRef<HTMLElement>(null);
@@ -91,11 +92,14 @@ export function PortfolioGallery() {
   }, [open]);
 
   const step = (delta: number) =>
-    setOpen((current) =>
-      current === null ? current : (current + delta + PORTFOLIO_GALLERY.length) % PORTFOLIO_GALLERY.length,
-    );
+    setOpen((current) => {
+      if (current === null) return current;
+      const position = displayOrder.indexOf(current);
+      return displayOrder[(position + delta + displayOrder.length) % displayOrder.length];
+    });
 
   const current = open === null ? null : PORTFOLIO_GALLERY[open];
+  const displayPosition = open === null ? -1 : displayOrder.indexOf(open);
 
   return (
     <section ref={rootRef} id="gallery" className="hm pf-gallery" aria-labelledby="pf-gallery-title">
@@ -163,7 +167,7 @@ export function PortfolioGallery() {
             </div>
             <figcaption>
               <span className="pf-lightbox-count">
-                {String((open ?? 0) + 1).padStart(2, "0")} / {PORTFOLIO_GALLERY.length}
+                {String(displayPosition + 1).padStart(2, "0")} / {PORTFOLIO_GALLERY.length}
               </span>
               <span className="pf-lightbox-client">{current.client}</span>
               <span className="pf-lightbox-medium">{current.medium}</span>
@@ -171,11 +175,11 @@ export function PortfolioGallery() {
           </figure>
         ) : null}
         <div className="pf-lightbox-nav">
-          <button type="button" aria-label="Previous piece" onClick={() => step(-1)}>
-            ←
+          <button type="button" className="is-prev" aria-label="Previous piece" onClick={() => step(-1)}>
+            <span className="pf-arrow-icon" aria-hidden />
           </button>
-          <button type="button" aria-label="Next piece" onClick={() => step(1)}>
-            →
+          <button type="button" className="is-next" aria-label="Next piece" onClick={() => step(1)}>
+            <span className="pf-arrow-icon" aria-hidden />
           </button>
         </div>
         <button type="button" className="pf-lightbox-close" aria-label="Close" onClick={() => setOpen(null)}>
