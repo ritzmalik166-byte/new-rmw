@@ -1,0 +1,55 @@
+# Ritz Media World
+
+> Ritz Media World is a full-service creative, strategy, and media advertising agency based in Sector 142, Noida, Delhi NCR, India, with 18+ years of experience. The agency helps brands grow through digital marketing, creative design, print and radio advertising, content marketing, web development, celebrity and influencer marketing, and 3D rendering/visualization, serving 300+ clients across industries in the Indian subcontinent.
+
+## Company
+
+- [About Us](https://ritzmediaworld.com/about.html): Agency history, vision, team culture, and track record (18+ years, 300+ clients, 40+ service categories, 35+ awards)
+- [Contact Us](https://ritzmediaworld.com/contact): Contact details, office address (Corporate Park, Sector 142, Noida), phone and email
+- [Career](https://ritzmediaworld.com/career): Job openings and careers at Ritz Media World
+- [Case Studies](https://ritzmediaworld.com/case-study): Client success stories and campaign results
+- [Portfolio](https://ritzmediaworld.com/portfolio): Work samples across brand identity, creative design, web design, and video
+
+## Services
+
+- [All Services](https://ritzmediaworld.com/services): Overview of all service offerings
+- [Digital Marketing](https://ritzmediaworld.com/services/digital-marketing): Performance marketing, SEO, and social media marketing services
+- [Creative Services](https://ritzmediaworld.com/services/creative-services): Branding and creative design solutions
+- [Content Marketing](https://ritzmediaworld.com/services/contents-marketing): Content strategy and content production services
+- [Web Development](https://ritzmediaworld.com/services/web-designing-and-development): Website design and development
+- [Print Advertising](https://ritzmediaworld.com/services/print-advertising): Newspaper and print ad campaigns
+- [Radio Advertising](https://ritzmediaworld.com/services/radio-advertising): Radio ad planning and buying
+- [Celebrity Endorsements](https://ritzmediaworld.com/services/celebrity-endorsements): Celebrity partnership and endorsement campaigns
+- [Influencer Marketing](https://ritzmediaworld.com/services/influencer-marketing-agency-in-india): Influencer marketing campaigns in India
+- [3D Rendering Services](https://ritzmediaworld.com/services/3d-rendering): 3D visualization and rendering for real estate and other industries
+- [AI Services](https://ritzmediaworld.com/services/ai-services): AI Services for Brands built to move at your speed.
+
+
+## Portfolio & Work
+
+- [Brand Identity](https://ritzmediaworld.com/portfolio/brand-identity): Branding and identity design work
+- [Creative Design](https://ritzmediaworld.com/portfolio/creative): Creative design projects
+- [Website Design](https://ritzmediaworld.com/portfolio/web-design): Web design portfolio
+- [Brand Films](https://ritzmediaworld.com/portfolio/brand-films): Brand film production work
+- [Walk-Through Videos](https://ritzmediaworld.com/portfolio/walk-through-videos): Real estate/project walkthrough video production
+- [Influencer Marketing Videos](https://ritzmediaworld.com/portfolio/influencer-marketing-videos): Influencer video campaign work
+
+## Resources
+
+- [Blog](https://ritzmediaworld.com/blog): Industry insights, marketing tips, and agency updates
+
+## Optional
+
+- [Facebook](https://www.facebook.com/ritzmediaworld/): Agency Facebook page
+- [Instagram](https://www.instagram.com/ritzmediaworld/): Agency Instagram page
+- [LinkedIn](https://www.linkedin.com/company/ritzmediaworld/): Agency LinkedIn page
+- [Twitter/X](https://twitter.com/ritzmediaworld): Agency Twitter/X page
+- [YouTube](https://www.youtube.com/@ritzmediaworld): Agency YouTube channel
+
+## Crawl & Discovery
+
+- [XML Sitemap](https://ritzmediaworld.com/sitemap.xml): Primary crawl source for discoverable URLs.
+- [Robots](https://ritzmediaworld.com/robots.txt): Crawl policy.
+
+
+

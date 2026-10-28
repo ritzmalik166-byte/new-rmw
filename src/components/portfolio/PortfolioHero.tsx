@@ -86,6 +86,12 @@ export function PortfolioHero() {
                 <TransitionLink href={category.href}>{category.title}</TransitionLink>
               </li>
             ))}
+            <li className="pf-hero-video-link">
+              <TransitionLink href="/portfolio/radio-advertising">Radio Ads ↗</TransitionLink>
+            </li>
+            <li className="pf-hero-video-link">
+              <TransitionLink href="/portfolio/celebrity-endorsements">Celebrity Spotlight ↗</TransitionLink>
+            </li>
           </ul>
         </div>
 
