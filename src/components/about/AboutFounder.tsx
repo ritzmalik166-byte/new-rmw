@@ -272,7 +272,8 @@ export function AboutFounder() {
         <img
           className="about-founder-stripes"
           src="/about/founder-stripes.png"
-          alt=""
+          alt="Decorative founder section stripe pattern"
+          title="Decorative founder section stripe pattern"
           aria-hidden="true"
           width={83}
           height={754}

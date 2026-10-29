@@ -2,7 +2,7 @@
 
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { HmArrow, HmStamp, HmTitle, useHomeReveal } from "@/components/homepage/shared";
 import { TransitionLink } from "@/components/motion/TransitionLink";
 import { useMotion } from "@/components/providers/MotionProvider";
@@ -15,6 +15,16 @@ export function PortfolioHero() {
   const rootRef = useRef<HTMLElement>(null);
   const { ready, reduced } = useMotion();
   useHomeReveal(rootRef, "top 90%");
+
+  useEffect(() => {
+    const value = new URLSearchParams(window.location.search).get("highlight");
+    if (value !== "radio-ads" && value !== "celebrity-spotlight") return;
+
+    const target = rootRef.current?.querySelector(`[data-portfolio-highlight="${value}"]`);
+    if (!target) return;
+    target.classList.add("is-pulsing");
+    window.history.replaceState(null, "", window.location.pathname);
+  }, [rootRef]);
 
   useGSAP(
     () => {
@@ -87,10 +97,20 @@ export function PortfolioHero() {
               </li>
             ))}
             <li className="pf-hero-video-link">
-              <TransitionLink href="/portfolio/radio-advertising">Radio Ads</TransitionLink>
+              <TransitionLink
+                href="/portfolio/radio-advertising"
+                data-portfolio-highlight="radio-ads"
+              >
+                Radio Ads ↗
+              </TransitionLink>
             </li>
             <li className="pf-hero-video-link">
-              <TransitionLink href="/portfolio/celebrity-endorsements">Celebrity Spotlight</TransitionLink>
+              <TransitionLink
+                href="/portfolio/celebrity-endorsements"
+                data-portfolio-highlight="celebrity-spotlight"
+              >
+                Celebrity Spotlight ↗
+              </TransitionLink>
             </li>
           </ul>
         </div>

@@ -213,6 +213,7 @@ export function Footer() {
           <img
             src="/footer/milestone.png"
             alt="Ritz Media World milestone stone"
+            title="Ritz Media World milestone stone"
             width={256}
             height={256}
             loading="lazy"

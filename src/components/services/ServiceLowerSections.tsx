@@ -47,6 +47,12 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
   useHomeReveal(rootRef);
   const { wall } = getServiceCreatives(service.slug);
   const { wallKicker, wallTitle, wallLede } = getServiceLayout(service);
+  const portfolioHref =
+    service.slug === "radio-advertising"
+      ? "/portfolio?highlight=radio-ads"
+      : service.slug === "celebrity-endorsements"
+        ? "/portfolio?highlight=celebrity-spotlight"
+        : "/portfolio";
 
   const syncSlide = useCallback(() => {
     const grid = gridRef.current;
@@ -98,7 +104,7 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
               {wallLede}
             </p>
           </div>
-          <TransitionLink data-hm-fade href="/portfolio" className="hm-link">
+          <TransitionLink data-hm-fade href={portfolioHref} className="hm-link">
             See all work
             <HmArrow />
           </TransitionLink>

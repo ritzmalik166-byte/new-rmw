@@ -459,6 +459,29 @@
   transform: translateY(-2px);
 }
 
+.pf-hero-chips a.is-pulsing {
+  animation: pf-chip-pulse 1.4s ease-in-out 3;
+  animation-delay: 0.8s;
+  animation-fill-mode: both;
+}
+
+@keyframes pf-chip-pulse {
+  0%,
+  100% {
+    background: transparent;
+    color: var(--hm-navy);
+    box-shadow: 0 0 0 0 rgb(201 53 110 / 0%);
+    transform: scale(1);
+  }
+
+  50% {
+    background: var(--hm-yellow);
+    color: var(--hm-navy);
+    box-shadow: 0 0 0 8px rgb(201 53 110 / 24%);
+    transform: scale(1.1);
+  }
+}
+
 .pf-hero-stage {
   position: relative;
   justify-self: end;
@@ -1249,6 +1272,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .pf-hero-chips a,
+  .pf-hero-chips a.is-pulsing,
   .pf-shot-media img,
   .pf-shot-media::after,
   .pf-reason,
@@ -1257,6 +1281,10 @@
   }
 
   .pf-lightbox[open] {
+    animation: none;
+  }
+
+  .pf-hero-chips a.is-pulsing {
     animation: none;
   }
 }
