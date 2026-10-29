@@ -13,10 +13,19 @@ import {
 export async function POST(request: Request) {
   let phone = "";
   let email = "";
+  let name = "";
+  let enquiry = "";
+  let message = "";
+  let number = ""
   try {
-    const body = (await request.json()) as { phone?: unknown; email?: unknown };
+    const body = (await request.json()) as { phone?: unknown; email?: unknown, userName?: string, enquiry_for?: string, message?: string, number?: string };
     phone = typeof body.phone === "string" ? digitsOnly(body.phone) : "";
     email = typeof body.email === "string" ? body.email.trim().slice(0, 160) : "";
+    name = body.userName ? body.userName : "";
+    enquiry = body.enquiry_for ? body.enquiry_for : "";
+    message = body.message ? body.message : "";
+    number = body.number ? body.number : ""
+
   } catch {
     return NextResponse.json({ ok: false, error: "Invalid request." }, { status: 400 });
   }
@@ -38,7 +47,8 @@ export async function POST(request: Request) {
 
   try {
     const { otp, token } = createOtp(subject);
-    if (byEmail) await sendOtpEmail(email, otp);
+
+    if (byEmail) await sendOtpEmail(email, otp, name, enquiry, message, number);
     else await sendOtpSms(phone, otp);
     recordSend(subject, ip);
     return NextResponse.json({ ok: true, token });
