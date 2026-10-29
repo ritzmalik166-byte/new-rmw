@@ -17,7 +17,6 @@ const nextConfig: NextConfig = {
       { source: "/contact", destination: "/contact.html", permanent: true },
       { source: "/work", destination: "/portfolio", permanent: true },
       { source: "/services/seo", destination: "/services/digital-marketing", permanent: true },
-      { source: "/gallery", destination: "/portfolio", permanent: true },
       { source: "/component/influencer-marketing", destination: "/portfolio/influencer-marketing-videos", permanent: true },
       ...[
         ["", ""],

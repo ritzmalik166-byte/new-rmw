@@ -515,7 +515,7 @@ export const site = {
     email: "info@ritzmediaworld.com",
     phones: ["+91 7290002168", "+91 9220516777"],
     company: [
-      { label: "Home", href: "/" },
+      { label: "Home", href: "/#home-hero" },
       { label: "Services", href: "/services" },
       { label: "Portfolio", href: "/portfolio" },
       { label: "About", href: "/about.html" },

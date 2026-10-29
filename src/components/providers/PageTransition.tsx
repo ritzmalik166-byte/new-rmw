@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
+import { useLenis } from "lenis/react";
 import {
   createContext,
   useCallback,
@@ -26,9 +27,24 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const { reduced } = useMotion();
+  const lenis = useLenis();
   const overlayRef = useRef<HTMLDivElement>(null);
   const pendingRef = useRef<string | null>(null);
   const busyRef = useRef(false);
+
+  const scrollToHash = useCallback(
+    (hash: string) => {
+      const target = document.querySelector(hash);
+      if (!target) return;
+
+      if (lenis) {
+        lenis.scrollTo(target, { duration: reduced ? 0 : 1.2, force: true });
+      } else {
+        target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+      }
+    },
+    [lenis, reduced],
+  );
 
   useEffect(() => {
     const overlay = overlayRef.current;
@@ -58,16 +74,37 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   }, [reduced]);
 
   useEffect(() => {
-    if (!pendingRef.current) return;
+    const pending = pendingRef.current;
+    if (!pending) return;
     uncover();
-  }, [pathname, uncover]);
+
+    const hash = new URL(pending, window.location.origin).hash;
+    if (!hash) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}${hash}`);
+      scrollToHash(hash);
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname, uncover, scrollToHash]);
 
   const navigate = useCallback(
     (href: string) => {
-      if (href === pathname || busyRef.current) return;
+      if (busyRef.current) return;
 
+      const url = new URL(href, window.location.origin);
+      const route = `${url.pathname}${url.search}`;
+      if (route === pathname && url.hash) {
+        window.history.pushState(null, "", href);
+        scrollToHash(url.hash);
+        return;
+      }
+      if (route === pathname && !url.hash) return;
+
+      const destination = route;
+      pendingRef.current = href;
       if (reduced) {
-        router.push(href);
+        router.push(destination);
         return;
       }
 
@@ -78,18 +115,17 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       }
 
       busyRef.current = true;
-      pendingRef.current = href;
       gsap.set(overlay, { yPercent: 100, pointerEvents: "auto" });
       gsap.to(overlay, {
         yPercent: 0,
         duration: 0.7,
         ease: "power4.inOut",
         onComplete: () => {
-          router.push(href);
+          router.push(destination);
         },
       });
     },
-    [pathname, reduced, router],
+    [pathname, reduced, router, scrollToHash],
   );
 
   const value = useMemo(() => ({ navigate }), [navigate]);

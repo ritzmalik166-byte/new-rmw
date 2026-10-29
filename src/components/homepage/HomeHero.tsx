@@ -310,7 +310,7 @@ export function HomeHero() {
   );
 
   return (
-    <section ref={rootRef} className="hm hm-hero" aria-labelledby="hm-hero-title">
+    <section id="home-hero" ref={rootRef} className="hm hm-hero" aria-labelledby="hm-hero-title">
       <NightSky />
       <div className="hm-wrap hm-hero-inner">
         <div className="hm-hero-copy">
