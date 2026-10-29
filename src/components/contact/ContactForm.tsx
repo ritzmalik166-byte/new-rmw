@@ -170,7 +170,10 @@ export function ContactForm() {
     setOtpError("");
     const result = await postJson<{ ok: boolean; token?: string; error?: string; retryIn?: number }>(
       "/api/contact/otp/send",
-      otpTarget(),
+      {
+        ...otpTarget(), userName: `${values.firstName} ${values.lastName}`, enquiry_for: values.reason, message: values.message, number: values.phone
+
+      },
     );
     if (result.ok && result.token) {
       setOtpToken(result.token);
