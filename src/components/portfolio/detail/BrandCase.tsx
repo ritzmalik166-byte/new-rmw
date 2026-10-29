@@ -1017,7 +1017,13 @@ export function BrandCase({
                   aria-current={i === index ? "true" : undefined}
                   onClick={() => go(i)}
                 >
-                  <Image src={item.src} alt="" fill sizes="64px" />
+                  <Image
+                    src={item.src}
+                    alt={`${item.brand.client} brand identity thumbnail`}
+                    title={`${item.brand.client} brand identity thumbnail`}
+                    fill
+                    sizes="64px"
+                  />
                 </button>
               </li>
             ))}

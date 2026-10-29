@@ -72,6 +72,7 @@ export function RealTruck({
         srcSet={small ? undefined : TRUCK_SRCSET}
         sizes={small ? undefined : sizes}
         alt="Ritz Media World painted Indian truck"
+        title="Ritz Media World painted Indian truck"
         width={REAL_TRUCK.width}
         height={REAL_TRUCK.height}
         loading={priority ? "eager" : "lazy"}
@@ -96,7 +97,8 @@ export function RealTruck({
                 className="real-truck-pose"
                 data-pose={pose}
                 src={`/trucks/driver/sm/${pose}.webp`}
-                alt="Truck driver at the wheel"
+                alt={`Truck driver ${pose} pose`}
+                title={`Truck driver ${pose} pose`}
                 width={168}
                 height={96}
                 loading={priority ? "eager" : "lazy"}
@@ -122,7 +124,8 @@ function TruckWheel({ position, priority }: { position: string; priority?: boole
       <img
         className="real-truck-wheel-spin"
         src="/trucks/rmw-wheel.svg"
-        alt="Truck wheel"
+        alt="Ritz Media World truck wheel"
+        title="Ritz Media World truck wheel"
         width={140}
         height={140}
         loading={loading}
@@ -132,7 +135,8 @@ function TruckWheel({ position, priority }: { position: string; priority?: boole
       <img
         className="real-truck-wheel-light"
         src="/trucks/rmw-wheel-light.svg"
-        alt=""
+        alt="Ritz Media World truck wheel light"
+        title="Ritz Media World truck wheel light"
         width={140}
         height={140}
         loading={loading}

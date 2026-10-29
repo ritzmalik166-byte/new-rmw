@@ -99,7 +99,8 @@ export function PortfolioExplore() {
                 <TransitionLink href={category.href} className="pf-card-media" tabIndex={-1} aria-hidden>
                   <Image
                     src={category.image}
-                    alt={`${category.title} work by Ritz Media World`}
+                    alt={`${category.title} portfolio work by Ritz Media World`}
+                    title={`${category.title} portfolio work by Ritz Media World`}
                     fill
                     sizes="(max-width: 860px) 100vw, 50vw"
                   />
