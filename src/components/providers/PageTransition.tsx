@@ -34,7 +34,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
 
   const scrollToHash = useCallback(
     (hash: string) => {
-      const target = document.querySelector(hash);
+      const target = document.querySelector<HTMLElement>(hash);
       if (!target) return;
 
       if (lenis) {
