@@ -1666,7 +1666,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     uppercaseName: "3D RENDERING SERVICES",
     engine: "Engine Three · 3D Rendering Services",
     kicker: "KM 09 · Worlds you can walk through",
-    heroTitle: { lead: "3D Rendering Services", accent: "that sell the project before it’s built." },
+    heroTitle: { lead: "3D Rendering Services", accent: "that sells before launch." },
     tagline:
       "Photorealistic exterior, interior, township, and floor plan renders that help developers, architects, and designers sell, present, and launch projects before construction begins.",
     heading: "Show buyers the home, the township, and the view before a single brick is laid",
@@ -1856,47 +1856,75 @@ export const SERVICES_LIST: ServiceDetail[] = [
     slug: "ai-services",
     name: "AI Services",
     uppercaseName: "AI SERVICES",
-    engine: "Engine Three · 3D Rendering & AI",
+    engine: "Engine Three · AI Services",
     kicker: "KM 10 · Work smarter",
-    heroTitle: { lead: "AI Services", accent: "that help you create more and work faster." },
+    heroTitle: { lead: "AI Services", accent: "that help you work faster." },
     tagline:
-      "From AI-powered creatives and brand videos to complete AI implementation and workflow automation, we help businesses use AI to create more, work faster, and spend less time on repetitive tasks, with a human team guiding every step.",
-    heading: "Practical AI services for faster creative and smarter growth",
+      "AI-powered creatives, brand reels and videos, AI implementation and workflow automation, with a human team guiding every step.",
+    heading: "Practical AI Services for Faster, Creative, & Smarter Work",
     shortDescription:
-      "AI-assisted creative production, content systems, AI search visibility, and workflow automation for modern brands.",
+      "AI-powered creatives, videos, and automations that help brands move faster without feeling less human.",
     definitionText:
-      "AI services help brands use artificial intelligence thoughtfully across creative production, marketing, customer journeys, and internal workflows.",
+      "AI services help businesses use artificial intelligence to create content faster, adopt the right AI tools, and automate repetitive work, while people stay in control of quality and decisions.",
     fullOverview:
-      "Ritz Media World's AI services bring strategy, creativity, and technology together. From AI-powered creatives and brand videos to complete AI implementation and workflow automation, we help businesses use AI to create more, work faster, and spend less time on repetitive tasks. Every system is guided by a clear brand brief and reviewed by people, so speed never replaces judgement.",
+      "Our AI services bring strategy, creativity, and technology together. We use AI to produce more creatives and videos in less time, help businesses adopt the right AI tools, and automate the repetitive tasks that slow teams down. Every output is guided by a clear brief and reviewed by people, so speed never replaces judgement.",
     image: "/services/ai-services-logo.png",
     accentColor: "#167a68",
     tags: ["AI Creative", "AI Search", "Automation", "Content Systems", "Strategy"],
     stats: [
-      { value: "4X", label: "Faster Idea Exploration" },
-      { value: "24/7", label: "Workflow Intelligence" },
-      { value: "1", label: "Human-led Brand System" },
-      { value: "10", label: "Services On One Route" },
+      { value: "01", label: "Generative AI Campaign of the Year, AdAura" },
+      { value: "4", label: "AI services, from creatives to automation" },
+      { value: "100%", label: "Human-reviewed before delivery" },
+      { value: "18", label: "Years of brand building" },
     ],
     capabilities: [
       {
         title: "AI Creatives",
         copy: "Campaign visuals, social media posts, and ad creatives produced with AI tools and refined by our designers, so you get more variations in less time while staying on brand.",
-        details: ["Campaign visuals", "Social media posts", "Ad creatives", "Designer refinement"],
+        details: [
+          "AI-Generated Key Visuals",
+          "Social Media Creatives",
+          "Ad Creatives & Variations",
+          "Campaign Concepts",
+          "Product & Lifestyle Visuals",
+          "Brand-Consistent Design",
+        ],
       },
       {
         title: "AI Brand Reels & Videos",
         copy: "Short brand reels, promotional videos, and social content created with AI-powered video tools, built for Instagram, YouTube Shorts, and WhatsApp, and finished by our editors.",
-        details: ["Brand reels", "Promotional videos", "Social content", "Editor finishing"],
+        details: [
+          "AI Brand Reels",
+          "Promotional Videos",
+          "Social Media Videos",
+          "Scripts & Storyboards",
+          "AI Voiceovers & Visuals",
+          "Editing & Finishing",
+        ],
       },
       {
         title: "End-to-End AI Implementation",
         copy: "We help your business adopt AI the right way, from identifying where it adds value and choosing the right tools to setting them up and integrating them with your existing systems.",
-        details: ["Opportunity mapping", "Tool selection", "System setup", "Existing-system integration"],
+        details: [
+          "AI Opportunity Assessment",
+          "Tool Selection",
+          "Setup & Configuration",
+          "System Integration",
+          "Brand & Quality Guardrails",
+          "Ongoing Support",
+        ],
       },
       {
         title: "Workflow Automations",
         copy: "We automate repetitive tasks such as content publishing, reporting, lead handling, and data entry, so your team spends less time on manual work and more time on what matters.",
-        details: ["Content publishing", "Reporting", "Lead handling", "Data entry"],
+        details: [
+          "Content Publishing Automation",
+          "Reporting Automation",
+          "Lead Handling & Routing",
+          "Data Entry & Updates",
+          "Social Media Scheduling",
+          "Custom Workflow Builds",
+        ],
       },
     ],
     deliverables: [
@@ -1924,13 +1952,13 @@ export const SERVICES_LIST: ServiceDetail[] = [
         step: "03",
         km: "KM 03",
         title: "Prototype and improve",
-        copy: "We test the workflow or creative system with a focused pilot, measure what works, and refine it with your team.",
+        copy: "We test the creative or workflow with a focused pilot, measure what works, and refine it with you.",
       },
       {
         step: "04",
         km: "KM 04",
         title: "Launch with human oversight",
-        copy: "We document the system, train the people using it, and keep improving the output as your brand and tools evolve.",
+        copy: "We launch the system, document how it works, and keep improving the output as your brand and tools evolve.",
       },
     ],
     whyUs: [
@@ -1939,60 +1967,63 @@ export const SERVICES_LIST: ServiceDetail[] = [
         copy: "AI helps us explore and execute faster, but experienced strategists, writers, designers, and marketers decide what is right for your brand.",
       },
       {
-        title: "Built around your existing team",
-        copy: "We fit practical AI into the tools and approvals you already use instead of handing over a complicated system nobody adopts.",
+        title: "Built around the way you already work",
+        copy: "We fit AI into the tools and approvals you already use, instead of adding a complicated system nobody adopts.",
       },
       {
-        title: "Made for measurable business work",
-        copy: "Every AI engagement connects back to a useful outcome: stronger creative, better visibility, less repetitive work, or more qualified demand.",
+        title: "Made for real business outcomes",
+        copy: "Every AI project is tied to a clear goal, whether that’s more content in less time, faster turnarounds, or fewer hours spent on manual work.",
       },
     ],
     layout: {
+      problemSummary:
+        "Our AI services bring strategy, creativity, and technology together. We use AI to produce more creatives and videos in less time, help businesses adopt the right AI tools, and automate the repetitive tasks that slow teams down. Every output is guided by a clear brief and reviewed by people, so speed never replaces judgement.",
       problemFlags: [
         {
           title: "Too many tools, no clear system",
-          copy: "New AI tools arrive every week, but your team still needs a practical way to decide what belongs in the workflow.",
+          copy: "New AI tools arrive every week, but businesses still need a practical way to decide what’s worth using.",
         },
         {
           title: "Fast content that feels generic",
-          copy: "Speed only helps when the output still sounds, looks, and behaves like your brand.",
+          copy: "Speed only helps when the output still looks, sounds, and feels like your brand.",
         },
         {
-          title: "Customers are asking AI first",
-          copy: "If answer engines cannot understand your expertise, your brand may be missing from the conversation before a search click happens.",
+          title: "Hours lost to repetitive work",
+          copy: "Teams still spend hours on manual tasks that could run on their own, leaving less time for the work that matters.",
         },
       ],
-      wallLede: "AI systems that make the work move faster without making the brand feel less human.",
+      intentTitle: { lead: "AI that speeds up the work,", accent: "not the shortcuts." },
+      wallLede: "AI-powered creatives, videos, and automations that help brands move faster without feeling less human.",
       faqs: [
         {
           question: "What AI services do you offer?",
           answer:
-            "We offer AI-assisted creative production, AI search and answer visibility, marketing workflow automation, content systems, and AI strategy and training for brands.",
+            "We offer four AI services for brands: AI creatives, AI brand reels and videos, end-to-end AI implementation, and workflow automations, all guided and reviewed by our team.",
         },
         {
           question: "Will AI replace our creative team?",
           answer:
-            "No. We use AI as an accelerator for research, exploration, production, and repetitive work. Human strategists and creatives remain responsible for the idea, judgement, brand fit, and final approval.",
+            "No. We use AI to speed up research, production, and repetitive work. People remain responsible for the idea, the judgment, brand fit, and final approval.",
         },
         {
-          question: "Can you connect AI to our existing marketing workflow?",
+          question: "How do you make AI-generated content feel like our brand?",
           answer:
-            "Yes. We first map your current tools and approvals, then recommend focused automations that reduce manual work without disrupting the systems your team depends on.",
+            "We build brand guardrails from your existing voice, visual identity, audience, and examples, and every creative or video is reviewed and refined by our designers and editors before delivery.",
         },
         {
-          question: "How do you make AI content feel like our brand?",
+          question: "Can you set up AI tools for our business?",
           answer:
-            "We build brand guardrails from your existing voice, visual identity, audience, examples, and approval rules, then test the system against real campaign requirements.",
+            "Yes. Our end-to-end AI implementation covers identifying where AI adds value, choosing the right tools, setting them up, and integrating them with your existing systems.",
         },
         {
-          question: "Can AI help customers find our brand?",
+          question: "What kind of tasks can you automate?",
           answer:
-            "Yes. We structure useful, authoritative content and strengthen the signals that help AI answer engines understand when your brand is relevant to a question.",
+            "Common examples include content publishing, reporting, lead handling, data entry, and social media scheduling. We first map your current workflow, then automate the steps that take the most manual time.",
         },
         {
-          question: "Do you provide AI training for internal teams?",
+          question: "How much do AI services cost?",
           answer:
-            "Yes. We provide practical workshops, prompt libraries, playbooks, and governance guidance so your team can use AI consistently and responsibly.",
+            "The cost depends on the service and scope, whether it’s a set of AI creatives, a series of brand reels, or a custom automation. We share a clear proposal after understanding your goals.",
         },
       ],
     },

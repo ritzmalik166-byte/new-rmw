@@ -216,7 +216,6 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
                   >
                     <span className="sd-plan-tab-no">{pad(index + 1)}</span>
                     <span className="sd-plan-tab-name">{item.title}</span>
-                    <HmArrow />
                   </button>
                 ))}
               </div>

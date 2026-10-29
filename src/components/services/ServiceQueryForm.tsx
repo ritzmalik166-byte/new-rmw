@@ -89,7 +89,7 @@ type ServiceQueryFormProps = {
 
 export function ServiceQueryForm({
   service,
-  title = "Quick query",
+  title = "Quick Inquiry",
   lede = `Tell us what you need for ${service}.`,
   doneText = `Our ${service} team will call you within one working day.`,
   context = `Service: ${service}`,
