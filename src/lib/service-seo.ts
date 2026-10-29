@@ -49,6 +49,6 @@ export const SERVICE_SEO: Record<string, ServiceSeo> = {
   "ai-services": {
     title: "AI Services for Brands | Ritz Media World",
     description:
-      "Use AI to create faster, smarter brand campaigns with Ritz Media World's AI creative production, content workflows, automation, and AI search strategy services.",
+      "Explore AI services for brands, including AI creatives, brand videos, AI implementation and workflow automation to streamline work and strengthen your brand.",
   },
 };

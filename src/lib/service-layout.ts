@@ -59,7 +59,9 @@ export function getServiceLayout(service: ServiceDetail, parts = service.capabil
     problemFlags: layout.problemFlags ?? DEFAULT_FLAGS,
     planKicker:
       layout.planKicker ?? (/\bservices$/i.test(service.name) ? service.name : `${service.name} services`),
-    planTitle: `${NUMBER_WORDS[parts] ?? parts} parts.`,
+    planTitle: layout.planTitle ?? `${NUMBER_WORDS[parts] ?? parts} parts.`,
+    processTitle: layout.processTitle ?? "Four stops on the route.",
+    faqTitle: layout.faqTitle ?? { lead: "Questions at the", accent: "dhaba." },
     planLede:
       layout.planLede ??
       `Explore the work behind a complete ${service.name.replace(/\b[A-Z][a-z]+\b/g, (word) => word.toLowerCase())} programme.`,

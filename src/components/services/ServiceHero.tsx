@@ -22,7 +22,9 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
       : service.name;
   const { badge, scene, poster } = getServiceCreatives(service.slug);
   const art = service.truckArt ?? { before: "Horn", hindi: "ओके", after: "Please" };
-  const titleLines: HmLine[] = service.heroTitle
+  const titleLines: HmLine[] = service.slug === "ai-services"
+    ? [{ text: "AI Services for Brands" }]
+    : service.heroTitle
     ? [{ text: service.heroTitle.lead }, { text: service.heroTitle.accent, accent: true }]
     : [{ text: heading }];
   const lockedLines = titleLines.length > 1;

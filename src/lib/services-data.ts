@@ -30,6 +30,9 @@ export interface ServiceFaq {
  */
 export interface ServiceLayoutCopy {
   problemSummary?: string;
+  processTitle?: string;
+  faqTitle?: { lead: string; accent: string };
+  planTitle?: string;
   problemFlags?: ServicePoint[];
   planKicker?: string;
   planLede?: string;
@@ -1862,6 +1865,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     tagline:
       "AI-powered creatives, brand reels and videos, AI implementation and workflow automation, with a human team guiding every step.",
     heading: "Practical AI Services for Faster, Creative, & Smarter Work",
+    problemHeading: "AI-Powered Creative Solutions",
     shortDescription:
       "AI-powered creatives, videos, and automations that help brands move faster without feeling less human.",
     definitionText:
@@ -1879,7 +1883,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     ],
     capabilities: [
       {
-        title: "AI Creatives",
+        title: "AI-Generated Creatives and Visuals",
         copy: "Campaign visuals, social media posts, and ad creatives produced with AI tools and refined by our designers, so you get more variations in less time while staying on brand.",
         details: [
           "AI-Generated Key Visuals",
@@ -1891,7 +1895,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
         ],
       },
       {
-        title: "AI Brand Reels & Videos",
+        title: "AI-Powered Brand Videos",
         copy: "Short brand reels, promotional videos, and social content created with AI-powered video tools, built for Instagram, YouTube Shorts, and WhatsApp, and finished by our editors.",
         details: [
           "AI Brand Reels",
@@ -1903,7 +1907,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
         ],
       },
       {
-        title: "End-to-End AI Implementation",
+        title: "AI Workflow Automation",
         copy: "We help your business adopt AI the right way, from identifying where it adds value and choosing the right tools to setting them up and integrating them with your existing systems.",
         details: [
           "AI Opportunity Assessment",
@@ -1915,7 +1919,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
         ],
       },
       {
-        title: "Workflow Automations",
+        title: "AI Solutions for Business Growth",
         copy: "We automate repetitive tasks such as content publishing, reporting, lead handling, and data entry, so your team spends less time on manual work and more time on what matters.",
         details: [
           "Content Publishing Automation",
@@ -1978,6 +1982,9 @@ export const SERVICES_LIST: ServiceDetail[] = [
     layout: {
       problemSummary:
         "Our AI services bring strategy, creativity, and technology together. We use AI to produce more creatives and videos in less time, help businesses adopt the right AI tools, and automate the repetitive tasks that slow teams down. Every output is guided by a clear brief and reviewed by people, so speed never replaces judgement.",
+      planTitle: "AI Implementation and Automation",
+      processTitle: "Our AI-Powered Approach",
+      faqTitle: { lead: "Frequently Asked Questions About", accent: "AI Services." },
       problemFlags: [
         {
           title: "Too many tools, no clear system",
@@ -1992,7 +1999,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
           copy: "Teams still spend hours on manual tasks that could run on their own, leaving less time for the work that matters.",
         },
       ],
-      intentTitle: { lead: "AI that speeds up the work,", accent: "not the shortcuts." },
+      intentTitle: { lead: "Benefits of AI Services for", accent: "Your Brand" },
       wallLede: "AI-powered creatives, videos, and automations that help brands move faster without feeling less human.",
       faqs: [
         {
