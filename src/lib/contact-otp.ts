@@ -1,6 +1,7 @@
 import { createHmac, randomInt, timingSafeEqual } from "node:crypto";
 import nodemailer, { type Transporter } from "nodemailer";
 import { OTP_LENGTH, OTP_RESEND_SECONDS } from "@/lib/contact";
+import { buildOtpEmail } from "@/lib/otp-email";
 
 const OTP_TTL_MS = 10 * 60 * 1000;
 const VERIFIED_TTL_MS = 30 * 60 * 1000;
@@ -20,7 +21,7 @@ export function emailSubject(email: string) {
 }
 
 function secret() {
-  const value = process.env.OTP_SECRET;
+  const value = process.env.EMAIL_OTP_SECRET;
   if (!value || value.length < 16) throw new Error("OTP_SECRET is not configured.");
   return value;
 }
@@ -165,18 +166,8 @@ function getMailer() {
 
 export async function sendOtpEmail(email: string, otp: string) {
   const from = process.env.SMTP_FROM || `Ritz Media World <${process.env.SMTP_USER}>`;
-  await getMailer().sendMail({
-    from,
-    to: email,
-    subject: `${otp} is your Ritz Media World verification code`,
-    text: DEFAULT_TEMPLATE.replace("{otp}", otp),
-    html: `<div style="font-family:Arial,sans-serif;font-size:15px;color:#1d1a3a;line-height:1.5">
-  <p>Your one-time code to verify your enquiry with Ritz Media World is:</p>
-  <p style="font-size:30px;font-weight:700;letter-spacing:6px;margin:16px 0">${otp}</p>
-  <p>It is valid for 10 minutes. Do not share it with anyone.</p>
-  <p style="color:#777;font-size:12px">If you didn't request this, you can ignore this email.</p>
-</div>`,
-  });
+  const { subject, text, html } = buildOtpEmail(otp);
+  await getMailer().sendMail({ from, to: email, subject, text, html });
 }
 
 export function clientIp(request: Request) {
