@@ -9,7 +9,7 @@ export function BlogEnquiryForm({ source }: BlogEnquiryFormProps) {
   return (
     <ServiceQueryForm
       service="Blog"
-      title="Quick enquiry"
+      title="Quick Inquiry"
       lede="Have a project? Let's discuss."
       doneText="Our team will call you within one working day."
       context={`Source: ${source}`}

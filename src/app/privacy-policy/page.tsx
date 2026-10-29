@@ -16,7 +16,7 @@ export const metadata: Metadata = pageMetadata({
 const UPDATED = "26 October 2026";
 const EMAIL = "info@ritzmediaworld.com";
 const PHONE = "+91-9220516777";
-const ADDRESS = "Unit No. 404, 4th Floor, Corporate Park Tower A1, Sector 142, Noida, Uttar Pradesh 201305, India";
+const ADDRESS = site.footer.address;
 
 const SECTIONS = [
   { id: "information-we-collect", title: "Information we collect" },
