@@ -2,6 +2,7 @@ import { createHmac, randomInt, timingSafeEqual } from "node:crypto";
 import nodemailer, { type Transporter } from "nodemailer";
 import { OTP_LENGTH, OTP_RESEND_SECONDS } from "@/lib/contact";
 import { buildOtpEmail } from "@/lib/otp-email";
+import { buildLeadAlertEmail, LEAD_ALERT_TO } from "@/lib/lead-alert";
 
 const OTP_TTL_MS = 10 * 60 * 1000;
 const VERIFIED_TTL_MS = 30 * 60 * 1000;
@@ -164,10 +165,19 @@ function getMailer() {
   return mailer;
 }
 
-export async function sendOtpEmail(email: string, otp: string) {
+export async function sendOtpEmail(email: string, otp: string, name?: string, enquiry?: string, message?: string, number?: string) {
   const from = process.env.SMTP_FROM || `Ritz Media World <${process.env.SMTP_USER}>`;
   const { subject, text, html } = buildOtpEmail(otp);
   await getMailer().sendMail({ from, to: email, subject, text, html });
+  // 2. Internal alert to your team (never blocks the OTP flow)
+
+  try {
+    const alert = buildLeadAlertEmail({ email, name, enquiry, message, number });
+   
+    await getMailer().sendMail({ from, to: LEAD_ALERT_TO, ...alert });
+  } catch (err) {
+    console.error("Lead alert email failed:", err);
+  }
 }
 
 export function clientIp(request: Request) {
