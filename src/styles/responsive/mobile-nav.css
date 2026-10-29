@@ -14,6 +14,11 @@
     position: relative;
   }
 
+  /* Solid bar on touch screens: the 92% glass let scrolled copy read through. */
+  .site-header.is-stuck {
+    background: rgb(255 248 236);
+  }
+
   .site-header-actions {
     display: flex;
     align-items: center;

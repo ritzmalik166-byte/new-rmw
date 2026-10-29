@@ -1386,6 +1386,19 @@
 
 /* Mobile centring (pairs with responsive/mobile-center.css). */
 @media (max-width: 720px) {
+  /* Plate moves above the kicker so it no longer covers the office name. */
+  .ct-dispatch {
+    padding-top: 60px;
+  }
+
+  .ct-plate {
+    top: 16px;
+    right: auto;
+    left: 50%;
+    translate: -50% 0;
+    white-space: nowrap;
+  }
+
   .ct-dispatch-list li {
     justify-content: center;
     text-align: center;

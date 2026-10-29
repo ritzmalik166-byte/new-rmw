@@ -211,6 +211,16 @@
   transform: scale(1.06);
 }
 
+/* Sanskar and Lumora files carry wide empty margins, so the artwork read small
+   beside the rest; the margin absorbs the extra size without crowding neighbours. */
+.hm-cargo-logo img[src$="/prm-2.webp"] {
+  scale: 1.45;
+}
+
+.hm-cargo-logo img[src$="/prm-7.webp"] {
+  scale: 1.7;
+}
+
 /* Most logos are drawn for light paper; at night they ride on a light chip instead of the navy. */
 html[data-theme="dark"] .hm-cargo-logo {
   box-sizing: content-box;
