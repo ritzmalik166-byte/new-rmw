@@ -42,7 +42,7 @@ const CARGO: { name: string; tone: string }[] = [
   { name: "Influencer Marketing", tone: "pink" },
   { name: "Celebrity Endorsements", tone: "orange" },
   { name: "3D Rendering", tone: "teal" },
-  { name: "AI Services", tone: "yellow" },
+  // { name: "AI Services", tone: "yellow" }, 
 ];
 
 /* Where stickers sit on the cargo roof: centre (% of truck), lift above it (px), tilt. */
