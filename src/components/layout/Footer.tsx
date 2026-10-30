@@ -107,6 +107,8 @@ export function Footer() {
                 href={data.googleSource}
                 target="_blank"
                 rel="noopener noreferrer"
+                title="Add as a preferred source on Google"
+
                 className="site-footer-google"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}

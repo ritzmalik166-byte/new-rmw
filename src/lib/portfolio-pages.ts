@@ -94,18 +94,17 @@ const youtube = (folder: string, prefix: string, films: [string, string, string]
 const INFLUENCER_VIDEOS: [string, string | null][] = [
   ["https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%201%20(1).mp4", "Eldeco"],
   ["https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%202%20(1).mp4", "Onyx by Splendor"],
-  ["https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%203%20(1).mp4", null],
-  ["https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%204%20(1).mp4", null],
+  ["https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%204%20(1).mp4", "Ritz Media World"],
   ["https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%2010%20(1).mp4", "Ashiana Malhar"],
   ["https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%209%20(1).mp4", "Ashiana Malhar"],
-  ["https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%207.mp4", null],
-  ["https://contenaissance.blob.core.windows.net/ct-assets/644Px%20X%20621Px%20-%203%20(1).mp4", null],
+  ["https://otherassets.blob.core.windows.net/rmw/644Px%20X%20621Px%20-%207.mp4", "Ashiana OMA"],
+  ["https://contenaissance.blob.core.windows.net/ct-assets/644Px%20X%20621Px%20-%203%20(1).mp4", "Ritz Media World"],
   ["https://contenaissance.blob.core.windows.net/ct-assets/2nd.mp4", "Eldeco"],
   ["https://contenaissance.blob.core.windows.net/ct-assets/3rd.mp4", "EON, Eye of Noida"],
   ["https://contenaissance.blob.core.windows.net/ct-assets/4th.mp4", "Risland"],
   ["https://contenaissance.blob.core.windows.net/ct-assets/5th.mp4", "Onyx by Splendor"],
   ["https://contenaissance.blob.core.windows.net/ct-assets/6th.mp4", "VVIP"],
-  ["https://contenaissance.blob.core.windows.net/ct-assets/7th.mp4", null],
+  ["https://contenaissance.blob.core.windows.net/ct-assets/7th.mp4", "VVIP Namah"],
 ];
 
 const WHY_RMW = {
@@ -306,7 +305,7 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
     },
     h1: ["Creative Design", "Portfolio"],
     tagline: "Hoardings, print ads, and social creatives that get noticed.",
-    workTitle: ["Five formats", "70 pieces."],
+    workTitle: ["Five formats", "68 pieces."],
     workLede: "Stationery · Hoardings · Print Ads · Social Media · Brochures",
     groups: [
       {
@@ -396,7 +395,7 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
         ]),
       },
       {
-        title: "Sanfran Group",
+        title: "Brochure",
         aspect: "4 / 5",
         items: images("creative", "brochure", range(1, 6), "Brochure design", [
           "Kingsun",

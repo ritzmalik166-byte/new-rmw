@@ -22,7 +22,7 @@ export default async function CaseStudyPage() {
     <article className="hm cs-page">
       <CaseStudyHero caseStudies={caseStudies} />
       <CaseStudyShowcase caseStudies={caseStudies} />
-      <CaseStudyReports />
+      <div id="download-outlooks"><CaseStudyReports /></div>
     </article>
   );
 }
