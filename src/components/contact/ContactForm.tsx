@@ -274,7 +274,7 @@ export function ContactForm() {
       return;
     }
     if (result.errors) setErrors(result.errors);
-    setSubmitError(result.error ?? "We couldn't send your enquiry. Please try again.");
+    setSubmitError(result.error ?? "We couldn't send your inquiry. Please try again.");
   };
 
   const bookAnother = () => {
@@ -295,7 +295,7 @@ export function ContactForm() {
         <header className="ct-slip-head">
           <div>
             <p className="ct-slip-brand">Ritz Media World Roadways</p>
-            <p className="ct-slip-sub">Booking slip · Enquiry</p>
+            <p className="ct-slip-sub">Booking slip · Inquiry</p>
           </div>
           <p className="ct-slip-note">
             Fields marked <span aria-hidden>*</span>
@@ -575,11 +575,11 @@ export function ContactForm() {
               Thank you, {sentName}!
             </h2>
             <p className="ct-booked-copy">
-              Your enquiry form is filled and on the road. The right person from our team will call
+              Your inquiry form is filled and on the road. The right person from our team will call
               you within one working day.
             </p>
             <button type="button" className="ct-btn" onClick={bookAnother}>
-              Send another enquiry
+              Send another inquiry
             </button>
           </div>
         </div>

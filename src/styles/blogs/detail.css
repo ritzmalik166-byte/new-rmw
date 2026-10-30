@@ -568,6 +568,8 @@ a.blog-tag-chip:focus-visible {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+  object-position: left top;
+  transform-origin: left top;
   transition: transform 0.4s var(--hm-ease);
 }
 

@@ -34,7 +34,7 @@
 }
 
 .sd-hero .hm-title {
-  font-size: clamp(40px, 4.4vw, 64px);
+  font-size: clamp(40px, 3.28vw, 42px);
 }
 
 /* --title-chars (longest line) gives a first-paint size that roughly fits the column;
@@ -44,7 +44,11 @@
 }
 
 .sd-hero .hm-title.is-line-locked {
-  font-size: min(clamp(40px, 4.4vw, 64px), calc(100cqi / (var(--title-chars, 24) * 0.5)));
+  font-size: min(clamp(40px, 3.28vw, 42px), calc(100cqi / (var(--title-chars, 24) * 0.5)));
+}
+
+.sd-hero .hm-lede {
+  font-size: 17px;
 }
 
 .sd-crumbs ol {

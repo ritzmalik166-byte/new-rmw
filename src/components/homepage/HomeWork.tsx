@@ -21,17 +21,17 @@ const WORK = [
     tilt: -2,
   },
   {
-    src: "/s6/VVIP-1.jpg",
-    medium: "Social",
-    title: "Bring home nature",
-    copy: "A world built for the campaign, then used again across sales and digital.",
+    src: "/s6/black-and-white-avenue.jpg",
+    medium: "Print",
+    title: "Black and White Avenue",
+    copy: "Double-height ground-floor retail with 8% assured annual rental, starting from ₹2.99 Cr* on Noida Expressway.",
     tilt: 1.5,
   },
   {
-    src: "/s6/risland-edm.jpg",
+    src: "/s6/risland-sky-mansion.png",
     medium: "Digital",
-    title: "Where style finds its address",
-    copy: "A place, a name, and a picture that can hold both.",
+    title: "The art of living in harmony",
+    copy: "Risland Sky Mansion: a skyline address, framed as a lifestyle.",
     tilt: -1,
   },
   {
@@ -215,7 +215,7 @@ export function HomeWork() {
               >
                 <span className="hm-tag-peg" aria-hidden />
                 <article className="hm-tag-card">
-                  <div className="hm-tag-media">
+                  <div className={`hm-tag-media${"fit" in item && item.fit === "contain" ? " is-contain" : ""}`}>
                     <Image
                       src={item.src}
                       alt={item.title}

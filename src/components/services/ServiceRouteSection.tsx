@@ -185,7 +185,14 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
             <HmTitle
               id="sd-plan-title"
              
-              lines={[{ text: `${layout.planTitle} One engine.` }]}
+              lines={[
+                {
+                  text:
+                    layout.planTitle === "AI Implementation and Automation"
+                      ? layout.planTitle
+                      : `${layout.planTitle} One engine.`,
+                },
+              ]}
             />
             <p data-hm-fade className="hm-lede">
               {layout.planLede}
@@ -216,7 +223,6 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
                   >
                     <span className="sd-plan-tab-no">{pad(index + 1)}</span>
                     <span className="sd-plan-tab-name">{item.title}</span>
-                    <HmArrow />
                   </button>
                 ))}
               </div>

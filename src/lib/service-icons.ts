@@ -9,6 +9,7 @@ export const SERVICE_ICONS: Partial<Record<string, string>> = {
   "celebrity-endorsements": "/services/icons/celebrity-endorsements.png",
   "influencer-marketing-agency-in-india": "/services/icons/influencer-marketing.png",
   "3d-rendering": "/services/icons/3d-rendering-services.png",
+  "ai-services": "/services/icons/ai-services.png",
 };
 
 /** The kinds of render offered under 3D Rendering Services. */

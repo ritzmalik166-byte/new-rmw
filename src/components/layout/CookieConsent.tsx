@@ -37,7 +37,7 @@ export function CookieConsent() {
       className={cn("cc theme-keep", open && "is-open")}
       role="dialog"
       aria-modal="false"
-      aria-labelledby="cc-title"
+      aria-label="Cookie and privacy preferences"
       aria-describedby="cc-copy"
       inert={!open}
     >
@@ -61,9 +61,6 @@ export function CookieConsent() {
               ज़रा रुकिए
             </span>
           </p>
-          <h2 id="cc-title" className="cc-title">
-            Cookies &amp; privacy, before you drive on
-          </h2>
           <p id="cc-copy" className="cc-copy">
             We use essential cookies and local storage to keep this site running and remember your
             preferences. With your permission, embedded services like Google Maps and YouTube may set

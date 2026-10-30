@@ -46,4 +46,9 @@ export const SERVICE_SEO: Record<string, ServiceSeo> = {
     description:
       "Ritz Media World delivers premium 3D rendering and architectural visualization for real estate, interiors, exteriors, floor plans, townships and landscapes.",
   },
+  "ai-services": {
+    title: "AI Services for Brands | Ritz Media World",
+    description:
+      "Explore AI services for brands, including AI creatives, brand videos, AI implementation and workflow automation to streamline work and strengthen your brand.",
+  },
 };

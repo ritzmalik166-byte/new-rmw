@@ -1,5 +1,6 @@
 "use client";
 
+import { useLenis } from "lenis/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { BlogImage } from "@/components/blogs/BlogImage";
@@ -12,6 +13,32 @@ const FILE_TILTS = ["is-back", "is-mid", "is-front"] as const;
 export function CaseStudyHero({ caseStudies }: { caseStudies: CaseStudy[] }) {
   const rootRef = useRef<HTMLElement>(null);
   const router = useRouter();
+  const lenis = useLenis();
+
+  // Scroll to an in-page section below the fixed header, without adding a #hash to the URL.
+  const scrollToSection = (event: MouseEvent, id: string) => {
+    const target = document.getElementById(id);
+    if (!target) return;
+    event.preventDefault();
+    // The header bar turns fixed once scrolled, so measure it and re-check after landing
+    // (lazy images above can shift the section while the scroll is running).
+    const topOf = () => {
+      const bar = document.querySelector<HTMLElement>(".site-header-bar");
+      return target.getBoundingClientRect().top + window.scrollY - (bar?.offsetHeight ?? 0);
+    };
+    const settle = () => {
+      const top = topOf();
+      if (Math.abs(window.scrollY - top) > 4) {
+        if (lenis) lenis.scrollTo(top, { duration: 0.4 });
+        else window.scrollTo({ top, behavior: "smooth" });
+      }
+    };
+    if (lenis) lenis.scrollTo(topOf(), { onComplete: settle });
+    else {
+      window.scrollTo({ top: topOf(), behavior: "smooth" });
+      window.setTimeout(settle, 900);
+    }
+  };
   const [picked, setPicked] = useState<number | null>(null);
   useHomeReveal(rootRef, "top 90%");
 
@@ -74,10 +101,10 @@ export function CaseStudyHero({ caseStudies }: { caseStudies: CaseStudy[] }) {
           </p>
 
           <div data-hm-fade className="hm-actions">
-            <a href="#case-studies" className="hm-btn">
+            <a href="#case-studies" className="hm-btn" onClick={(e) => scrollToSection(e, "case-studies")}>
               Browse case studies <span aria-hidden>→</span>
             </a>
-            <a href="#reports" className="hm-link">
+            <a href="#reports" className="hm-link" onClick={(e) => scrollToSection(e, "reports")}>
               Download reports
               <HmArrow />
             </a>

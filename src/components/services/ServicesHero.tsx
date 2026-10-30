@@ -16,7 +16,7 @@ const TITLE = [
 const CONSIGNMENT = [
   { engine: "E-01", goods: "Brand & Creative", contents: "Branding, websites, print" },
   { engine: "E-02", goods: "Digital & Media", contents: "Performance, SEO, social, media buying" },
-  { engine: "E-03", goods: "3D Rendering Services", contents: "Brand films, 3D renders, AI creative" },
+  { engine: "E-03", goods: "3D Rendering & AI", contents: "3D renders, AI creatives & automation" },
 ] as const;
 
 export function ServicesHero() {
@@ -108,7 +108,7 @@ export function ServicesHero() {
           </h1>
 
           <p className="svch-lede">
-            From branding and creative services to digital marketing, media, and 3D rendering,
+            From branding and creative services to digital marketing, media, 3D rendering, and AI,
             every service is packed, loaded, and delivered by three integrated engines working as
             one team.
           </p>

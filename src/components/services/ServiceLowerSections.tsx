@@ -192,6 +192,7 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
 function ServiceProcess({ service }: { service: ServiceDetail }) {
   const rootRef = useRef<HTMLElement>(null);
   useHomeReveal(rootRef);
+  const { processTitle } = getServiceLayout(service);
 
   return (
     <section ref={rootRef} id="roadmap" className="hm sd-process" aria-labelledby="sd-process-title">
@@ -199,9 +200,9 @@ function ServiceProcess({ service }: { service: ServiceDetail }) {
         <header className="sd-head">
           <p data-hm-fade className="hm-kicker">
             <span className="hm-pill">KM 04</span>
-            <span>The Ritz Media World process</span>
+            <span>{processTitle === "Our AI-Powered Approach" ? "The AI services process" : "The Ritz Media World process"}</span>
           </p>
-          <HmTitle id="sd-process-title" lines={[{ text: "Four stops on the route." }]} />
+          <HmTitle id="sd-process-title" lines={[{ text: processTitle }]} />
         </header>
 
         <ol className="sd-stops">

@@ -42,6 +42,7 @@ const CARGO: { name: string; tone: string }[] = [
   { name: "Influencer Marketing", tone: "pink" },
   { name: "Celebrity Endorsements", tone: "orange" },
   { name: "3D Rendering", tone: "teal" },
+  { name: "AI Services", tone: "yellow" },
 ];
 
 /* Where stickers sit on the cargo roof: centre (% of truck), lift above it (px), tilt. */
@@ -309,7 +310,7 @@ export function HomeHero() {
   );
 
   return (
-    <section ref={rootRef} className="hm hm-hero" aria-labelledby="hm-hero-title">
+    <section id="home-hero" ref={rootRef} className="hm hm-hero" aria-labelledby="hm-hero-title">
       <NightSky />
       <div className="hm-wrap hm-hero-inner">
         <div className="hm-hero-copy">

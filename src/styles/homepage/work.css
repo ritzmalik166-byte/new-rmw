@@ -81,6 +81,10 @@
   transition: transform 0.8s var(--hm-ease);
 }
 
+.hm-tag-media.is-contain img {
+  object-fit: contain;
+}
+
 .hm-tag:hover .hm-tag-media img {
   transform: scale(1.05);
 }

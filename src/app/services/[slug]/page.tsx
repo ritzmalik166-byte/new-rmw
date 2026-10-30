@@ -73,6 +73,7 @@ export default async function SubServicePage({
   }
 
   const relatedServices = getRelatedServices(service.slug, 3);
+  const layout = getServiceLayout(service);
 
   return (
     <article className="sd-page">
@@ -82,9 +83,16 @@ export default async function SubServicePage({
       <HomeFaq
         id="service-faq"
         kicker="KM 07"
-        title={SERVICE_FAQ_TITLE}
+        title={
+          service.slug === "ai-services"
+            ? [
+                { text: layout.faqTitle.lead },
+                { text: layout.faqTitle.accent, accent: true },
+              ]
+            : SERVICE_FAQ_TITLE
+        }
         lede={null}
-        faqs={getServiceLayout(service).faqs.map((faq) => ({ q: faq.question, a: faq.answer }))}
+        faqs={layout.faqs.map((faq) => ({ q: faq.question, a: faq.answer }))}
       />
       <StartProject />
     </article>

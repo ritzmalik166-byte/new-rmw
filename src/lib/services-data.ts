@@ -1,3 +1,4 @@
+import { SHOW_AI_SERVICES } from "@/lib/feature-flags";
 export interface ServiceCapability {
   title: string;
   copy: string;
@@ -30,6 +31,9 @@ export interface ServiceFaq {
  */
 export interface ServiceLayoutCopy {
   problemSummary?: string;
+  processTitle?: string;
+  faqTitle?: { lead: string; accent: string };
+  planTitle?: string;
   problemFlags?: ServicePoint[];
   planKicker?: string;
   planLede?: string;
@@ -103,7 +107,7 @@ const DIGITAL_WHY_US: ServicePoint[] = [
   },
 ];
 
-export const SERVICES_LIST: ServiceDetail[] = [
+const ALL_SERVICES: ServiceDetail[] = [
   {
     id: "digital",
     slug: "digital-marketing",
@@ -243,7 +247,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
         {
           question: "Do you provide digital marketing for real estate developers?",
           answer:
-            "Yes. Real estate is one of our core sectors. Ritz Media World runs real estate lead generation, Google and Meta campaigns, SEO, and launch marketing for developers in Noida, Delhi NCR, and across India, and was named Best Creative Agency (Real Estate) in Delhi NCR by Big FM in 2024 and 2025.",
+            "Yes. Real estate is one of our core sectors. Ritz Media World runs real estate lead generation, Google and Meta campaigns, SEO, and launch marketing for developers in Noida, Delhi NCR, and across India, and was named Best Creative Agency (Real Estate) in Delhi NCR by Big FM in 2025.",
         },
         {
           question: "Can you help our brand appear in ChatGPT and Google AI Overviews?",
@@ -427,7 +431,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
         {
           question: "How do I choose the best creative agency for my brand?",
           answer:
-            "Look for an agency with a strong portfolio, experience in your industry, a clear creative process, and work that has run for real brands. Ritz Media World has 18 years of creative experience and was named Best Creative Agency (Real Estate) in Delhi NCR by Big FM in 2024 and 2025.",
+            "Look for an agency with a strong portfolio, experience in your industry, a clear creative process, and work that has run for real brands. Ritz Media World has 18 years of creative experience and was named Best Creative Agency (Real Estate) in Delhi NCR by Big FM in 2025.",
         },
         {
           question: "Are you a creative agency for real estate developers?",
@@ -804,7 +808,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
       },
       {
         title: "Recognised by the radio industry",
-        copy: "Red FM 93.5 and Big FM named us Best Creative Agency (Real Estate) in Delhi NCR in 2024 and 2025.",
+        copy: "Red FM 93.5 and Big FM named us Best Creative Agency (Real Estate) in Delhi NCR in 2025.",
       },
     ],
     layout: {
@@ -1666,7 +1670,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     uppercaseName: "3D RENDERING SERVICES",
     engine: "Engine Three · 3D Rendering Services",
     kicker: "KM 09 · Worlds you can walk through",
-    heroTitle: { lead: "3D Rendering Services", accent: "that sell the project before it’s built." },
+    heroTitle: { lead: "3D Rendering Services", accent: "that sells before launch." },
     tagline:
       "Photorealistic exterior, interior, township, and floor plan renders that help developers, architects, and designers sell, present, and launch projects before construction begins.",
     heading: "Show buyers the home, the township, and the view before a single brick is laid",
@@ -1851,7 +1855,193 @@ export const SERVICES_LIST: ServiceDetail[] = [
       ],
     },
   },
+  {
+    id: "ai",
+    slug: "ai-services",
+    name: "AI Services",
+    uppercaseName: "AI SERVICES",
+    engine: "Engine Three · AI Services",
+    kicker: "KM 10 · Work smarter",
+    heroTitle: { lead: "AI Services", accent: "that help you work faster." },
+    tagline:
+      "AI-powered creatives, brand reels and videos, AI implementation and workflow automation, with a human team guiding every step.",
+    heading: "Practical AI Services for Faster, Creative, & Smarter Work",
+    problemHeading: "AI-Powered Creative Solutions",
+    shortDescription:
+      "AI-powered creatives, videos, and automations that help brands move faster without feeling less human.",
+    definitionText:
+      "AI services help businesses use artificial intelligence to create content faster, adopt the right AI tools, and automate repetitive work, while people stay in control of quality and decisions.",
+    fullOverview:
+      "Our AI services bring strategy, creativity, and technology together. We use AI to produce more creatives and videos in less time, help businesses adopt the right AI tools, and automate the repetitive tasks that slow teams down. Every output is guided by a clear brief and reviewed by people, so speed never replaces judgement.",
+    image: "/services/ai-services-logo.png",
+    accentColor: "#167a68",
+    tags: ["AI Creative", "AI Search", "Automation", "Content Systems", "Strategy"],
+    stats: [
+      { value: "01", label: "Generative AI Campaign of the Year, AdAura" },
+      { value: "4", label: "AI services, from creatives to automation" },
+      { value: "100%", label: "Human-reviewed before delivery" },
+      { value: "18", label: "Years of brand building" },
+    ],
+    capabilities: [
+      {
+        title: "AI-Generated Creatives and Visuals",
+        copy: "Campaign visuals, social media posts, and ad creatives produced with AI tools and refined by our designers, so you get more variations in less time while staying on brand.",
+        details: [
+          "AI-Generated Key Visuals",
+          "Social Media Creatives",
+          "Ad Creatives & Variations",
+          "Campaign Concepts",
+          "Product & Lifestyle Visuals",
+          "Brand-Consistent Design",
+        ],
+      },
+      {
+        title: "AI-Powered Brand Videos",
+        copy: "Short brand reels, promotional videos, and social content created with AI-powered video tools, built for Instagram, YouTube Shorts, and WhatsApp, and finished by our editors.",
+        details: [
+          "AI Brand Reels",
+          "Promotional Videos",
+          "Social Media Videos",
+          "Scripts & Storyboards",
+          "AI Voiceovers & Visuals",
+          "Editing & Finishing",
+        ],
+      },
+      {
+        title: "AI Workflow Automation",
+        copy: "We help your business adopt AI the right way, from identifying where it adds value and choosing the right tools to setting them up and integrating them with your existing systems.",
+        details: [
+          "AI Opportunity Assessment",
+          "Tool Selection",
+          "Setup & Configuration",
+          "System Integration",
+          "Brand & Quality Guardrails",
+          "Ongoing Support",
+        ],
+      },
+      {
+        title: "AI Solutions for Business Growth",
+        copy: "We automate repetitive tasks such as content publishing, reporting, lead handling, and data entry, so your team spends less time on manual work and more time on what matters.",
+        details: [
+          "Content Publishing Automation",
+          "Reporting Automation",
+          "Lead Handling & Routing",
+          "Data Entry & Updates",
+          "Social Media Scheduling",
+          "Custom Workflow Builds",
+        ],
+      },
+    ],
+    deliverables: [
+      "AI Opportunity Audit and Priority Roadmap",
+      "Brand-Safe Prompt and Content System",
+      "Campaign Concept, Script and Visual Exploration Packs",
+      "AI Search Visibility Content and Entity Plan",
+      "Automated Brief, Approval and Reporting Workflows",
+      "Team Training, Playbooks and Ongoing Optimisation",
+    ],
+    process: [
+      {
+        step: "01",
+        km: "KM 01",
+        title: "Find the right opportunities",
+        copy: "We understand your goals, audience, team, tools, and constraints before recommending where AI can create real value.",
+      },
+      {
+        step: "02",
+        km: "KM 02",
+        title: "Build the brand guardrails",
+        copy: "We define your voice, visual rules, approval points, data boundaries, and quality checks before production begins.",
+      },
+      {
+        step: "03",
+        km: "KM 03",
+        title: "Prototype and improve",
+        copy: "We test the creative or workflow with a focused pilot, measure what works, and refine it with you.",
+      },
+      {
+        step: "04",
+        km: "KM 04",
+        title: "Launch with human oversight",
+        copy: "We launch the system, document how it works, and keep improving the output as your brand and tools evolve.",
+      },
+    ],
+    whyUs: [
+      {
+        title: "Creative judgement stays in the room",
+        copy: "AI helps us explore and execute faster, but experienced strategists, writers, designers, and marketers decide what is right for your brand.",
+      },
+      {
+        title: "Built around the way you already work",
+        copy: "We fit AI into the tools and approvals you already use, instead of adding a complicated system nobody adopts.",
+      },
+      {
+        title: "Made for real business outcomes",
+        copy: "Every AI project is tied to a clear goal, whether that’s more content in less time, faster turnarounds, or fewer hours spent on manual work.",
+      },
+    ],
+    layout: {
+      problemSummary:
+        "Our AI services bring strategy, creativity, and technology together. We use AI to produce more creatives and videos in less time, help businesses adopt the right AI tools, and automate the repetitive tasks that slow teams down. Every output is guided by a clear brief and reviewed by people, so speed never replaces judgement.",
+      planTitle: "AI Implementation and Automation",
+      processTitle: "Our AI-Powered Approach",
+      faqTitle: { lead: "Frequently Asked Questions About", accent: "AI Services." },
+      problemFlags: [
+        {
+          title: "Too many tools, no clear system",
+          copy: "New AI tools arrive every week, but businesses still need a practical way to decide what’s worth using.",
+        },
+        {
+          title: "Fast content that feels generic",
+          copy: "Speed only helps when the output still looks, sounds, and feels like your brand.",
+        },
+        {
+          title: "Hours lost to repetitive work",
+          copy: "Teams still spend hours on manual tasks that could run on their own, leaving less time for the work that matters.",
+        },
+      ],
+      intentTitle: { lead: "Benefits of AI Services for", accent: "Your Brand" },
+      wallLede: "AI-powered creatives, videos, and automations that help brands move faster without feeling less human.",
+      faqs: [
+        {
+          question: "What AI services do you offer?",
+          answer:
+            "We offer four AI services for brands: AI creatives, AI brand reels and videos, end-to-end AI implementation, and workflow automations, all guided and reviewed by our team.",
+        },
+        {
+          question: "Will AI replace our creative team?",
+          answer:
+            "No. We use AI to speed up research, production, and repetitive work. People remain responsible for the idea, the judgment, brand fit, and final approval.",
+        },
+        {
+          question: "How do you make AI-generated content feel like our brand?",
+          answer:
+            "We build brand guardrails from your existing voice, visual identity, audience, and examples, and every creative or video is reviewed and refined by our designers and editors before delivery.",
+        },
+        {
+          question: "Can you set up AI tools for our business?",
+          answer:
+            "Yes. Our end-to-end AI implementation covers identifying where AI adds value, choosing the right tools, setting them up, and integrating them with your existing systems.",
+        },
+        {
+          question: "What kind of tasks can you automate?",
+          answer:
+            "Common examples include content publishing, reporting, lead handling, data entry, and social media scheduling. We first map your current workflow, then automate the steps that take the most manual time.",
+        },
+        {
+          question: "How much do AI services cost?",
+          answer:
+            "The cost depends on the service and scope, whether it’s a set of AI creatives, a series of brand reels, or a custom automation. We share a clear proposal after understanding your goals.",
+        },
+      ],
+    },
+  },
 ];
+
+// AI Services stays local-only until launch (see feature-flags.ts).
+export const SERVICES_LIST: ServiceDetail[] = ALL_SERVICES.filter(
+  (s) => SHOW_AI_SERVICES || s.slug !== "ai-services",
+);
 
 export const MENU_SERVICES = SERVICES_LIST;
 

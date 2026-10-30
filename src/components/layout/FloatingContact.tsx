@@ -94,6 +94,11 @@ export function FloatingContact() {
   const visible = usePastHero();
   const { parked, expanded } = useFooterDock();
 
+  useEffect(() => {
+    document.body.classList.toggle("has-floating-contact", visible);
+    return () => document.body.classList.remove("has-floating-contact");
+  }, [visible]);
+
   return (
     <div
       className={cn(

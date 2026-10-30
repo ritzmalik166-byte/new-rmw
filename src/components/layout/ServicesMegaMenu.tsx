@@ -8,6 +8,7 @@ import { cn } from "@/lib/cn";
 import { SERVICE_ACCENTS, SERVICE_ICONS } from "@/lib/service-icons";
 import { MENU_SERVICES } from "@/lib/services-data";
 import { site } from "@/lib/site";
+import { SHOW_AI_SERVICES } from "@/lib/feature-flags";
 
 interface ServicesMegaMenuProps {
   isOpen: boolean;
@@ -128,12 +129,38 @@ export function ServicesMegaMenu({
                 </li>
               );
             })}
+            {/* Hidden on the live site so the services grid ends cleanly at 9 cards. */}
+            {SHOW_AI_SERVICES ? (
+              <li className="smm-feature">
+                <div className="smm-feature-card">
+                  <span className="smm-feature-orbit smm-feature-orbit-one" aria-hidden />
+                  <span className="smm-feature-orbit smm-feature-orbit-two" aria-hidden />
+                  <span className="smm-feature-spark smm-feature-spark-one" aria-hidden>✦</span>
+                  <span className="smm-feature-spark smm-feature-spark-two" aria-hidden>✦</span>
+                  <div className="smm-feature-copy">
+                    <span className="smm-feature-kicker">Have a bigger idea?</span>
+                    <strong>Let’s make it impossible to ignore.</strong>
+                    <span>Tell us what you’re building. We’ll bring the right experts to the table.</span>
+                  </div>
+                  <Link href="/contact.html" target="_blank" rel="noopener noreferrer" onClick={onClose} className="smm-feature-link">
+                    Start a conversation
+                    <ArrowIcon />
+                  </Link>
+                </div>
+              </li>
+            ) : null}
           </ul>
         </div>
 
         <div className="smm-foot">
           <p className="smm-foot-route">
             <span className="smm-foot-label">{MENU_SERVICES.length} services · one route</span>
+            {SHOW_AI_SERVICES ? (
+              <Link href="/services/ai-services" onClick={onClose} className="smm-foot-ai">
+                Explore our new AI Services
+                <ArrowIcon />
+              </Link>
+            ) : null}
           </p>
           {phone ? (
             <a href={`tel:${phone.replace(/\s/g, "")}`} className="smm-foot-call">

@@ -3,6 +3,7 @@ import { StartProject } from "@/components/home/StartProject";
 import { ServicesContentMarketing } from "@/components/services/ServicesContentMarketing";
 import { ServicesCreative } from "@/components/services/ServicesCreative";
 import { ServicesDigitalMarketing } from "@/components/services/ServicesDigitalMarketing";
+import { ServicesAi } from "@/components/services/ServicesAi";
 import { ServicesEngineBanner } from "@/components/services/ServicesEngineBanner";
 import { ServicesHero } from "@/components/services/ServicesHero";
 import { ServicesIndustries } from "@/components/services/ServicesIndustries";
@@ -21,14 +22,16 @@ import "@/styles/services/web-print.css";
 import "@/styles/services/web-mockup.css";
 import "@/styles/services/radio.css";
 import "@/styles/services/render.css";
+import "@/styles/services/ai.css";
 import "@/styles/services/industries.css";
 import "@/styles/services/explore.css";
 import "@/styles/services/responsive.css";
+import { SHOW_AI_SERVICES } from "@/lib/feature-flags";
 
 export const metadata: Metadata = pageMetadata({
   title: "Advertising & Digital Services | Ritz Media World Delhi-NCR",
   description:
-    "Discover Ritz Media World's full-service solutions in digital, print, radio and creative advertising designed to grow your brand and drive real results.",
+    "Explore Ritz Media World’s full-service solutions in creative, digital, print, radio, 3D rendering, and AI, designed to grow your brand and drive real results.",
   keywords: SERVICE_KEYWORDS,
   path: "/services",
 });
@@ -67,13 +70,14 @@ export default function ServicesPage() {
         id="film"
         index="03"
         kicker="Engine Three"
-        title="3D Rendering Services"
-        copy="Photorealistic exteriors, interiors, townships, floor plans, and landscapes that let buyers and investors see a project before a single brick is laid."
-        km="KM 09"
+        title="3D Rendering & AI Services"
+        copy="Photorealistic renders that show a project before it’s built, and AI services that help brands create content faster, adopt AI across their business and automate everyday work."
+        km="KM 09 – 10"
         tone="#167a7d"
         border="scallop"
       />
       <ServicesRendering />
+      {SHOW_AI_SERVICES ? <ServicesAi /> : null}
       <ServicesIndustries />
       <StartProject />
     </div>

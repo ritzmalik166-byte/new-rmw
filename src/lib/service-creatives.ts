@@ -469,6 +469,49 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
       },
     ],
   },
+  "ai-services": {
+    badge: ["Built for", "what's next"],
+    scene: {
+      src: "/services/device-phone.jpg",
+      alt: "AI Automations Built by AI, guided by people.",
+      medium: "AI creative",
+      caption: "A human face for smarter brand systems.",
+    },
+    poster: {
+      src: "/services/small-phone.jpg",
+      alt: "Colourful AI mascot illustrated in a truck-art style",
+      medium: "AI identity",
+      caption: "Creative technology with a point of view.",
+    },
+    wall: [
+      {
+        src: "/services/ai-seo-command-center.png",
+        alt: "SEO, AEO and GEO Agent Command Center dashboard orchestrating keyword, content, AEO, GEO and rank tracking agents",
+        medium: "AI agents",
+        caption: "SEO, AEO and GEO agents, orchestrated from one command center.",
+      },
+      {
+        src: "/services/ai-linkedin-calendar.png",
+        alt: "AI content calendar with a LinkedIn caption, hashtags and Gemini-generated image options ready for approval",
+        medium: "AI content",
+        caption: "Captions, images and approvals for a LinkedIn calendar, produced with AI.",
+      },
+      {
+        src: "/services/ai-vedvan-section-plan.png",
+        alt: "AI-built homepage section plan for Vedvan, laid out across arrival, story, wellness and residences",
+        medium: "AI design",
+        caption: "A full homepage section plan, mapped out with AI before a pixel is designed.",
+      },
+      {
+        // Placeholder artwork: swap for the final image.
+        src: "/services/ai-services-logo.png",
+        alt: "Colourful AI mascot illustrated in a truck-art style",
+        medium: "AI creative",
+        caption: "A visual language for the next generation of campaigns.",
+        fit: "contain",
+      },
+    ],
+  },
 };
 
 const FALLBACK: ServiceCreativeSet = {

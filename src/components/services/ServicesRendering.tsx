@@ -143,7 +143,7 @@ export function ServicesRendering() {
       <header className="svc-render-head">
         <div className="svc-render-head-inner">
           <div>
-            <p className="svc-render-kicker">KM 09</p>
+            <p className="svc-render-kicker">KM 09 · 3D Rendering</p>
             <h2 id="svc-render-title" className="svc-render-title">
               3D Rendering Services
             </h2>
