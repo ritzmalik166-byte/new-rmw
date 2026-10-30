@@ -69,7 +69,7 @@ export function ServiceHero({ service }: { service: ServiceDetail }) {
               Start your project <span aria-hidden>→</span>
             </a>
             <a href="#creatives" className="hm-link">
-              See the work
+              Explore our work
               <HmArrow />
             </a>
           </div>

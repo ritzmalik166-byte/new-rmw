@@ -29,7 +29,7 @@ export const CASE_STUDY_REPORTS: CaseStudyReport[] = [
     title: "The Outer Ring Report",
     label: "NCR Periphery Outlook",
     summary:
-      "The Ring Awakens: Infrastructure, Premiumisation and the Next Wave of North India's Real Estate Story.",
+      "The ring awakens: Infrastructure, premiumisation and the next wave of North India's real estate story.",
     period: "Mid-Year 2026",
     pages: 13,
   },
@@ -39,7 +39,7 @@ export const CASE_STUDY_REPORTS: CaseStudyReport[] = [
     title: "Noida Luxury Outlook",
     label: "Market Intelligence Report",
     summary:
-      "Beyond the Affordable Tag: How Infrastructure, Wealth and a New Buyer Are Re-Rating Noida's Real Estate Market.",
+      "Beyond the affordable tag: How infrastructure, wealth and a new buyer are re-rating Noida's real estate market.",
     period: "Mid-Year 2026",
     pages: 12,
   },
@@ -49,7 +49,7 @@ export const CASE_STUDY_REPORTS: CaseStudyReport[] = [
     title: "Gurgaon Luxury Outlook",
     label: "Market Intelligence Report",
     summary:
-      "India's Most Mature Luxury Market and What Comes Next: Corridors, Circle Rates, and the Capital.",
+      "India's most mature luxury market and what comes next: Corridors, circle rates, and the capital.",
     period: "Mid-Year 2026",
     pages: 13,
   },
@@ -59,7 +59,7 @@ export const CASE_STUDY_REPORTS: CaseStudyReport[] = [
     title: "Ghaziabad Luxury Outlook",
     label: "Market Intelligence Report",
     summary:
-      "Gateway Reimagined: Infrastructure, National Developers and a New Buyer Class Are Writing Ghaziabad's First Luxury Chapter.",
+      "Gateway reimagined: Infrastructure, national developers and a new buyer class are writing Ghaziabad's first luxury chapter.",
     period: "Mid-Year 2026",
     pages: 13,
   },

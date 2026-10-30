@@ -470,8 +470,8 @@
 }
 
 .ct-slip-note {
-  color: var(--ct-muted);
-  font-weight: 400;
+  color: black;
+  font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: none;
 }

@@ -48,7 +48,9 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
   const { wall } = getServiceCreatives(service.slug);
   const { wallKicker, wallTitle, wallLede } = getServiceLayout(service);
   const portfolioHref =
-    service.slug === "radio-advertising"
+  service.slug === "digital-marketing"
+    ? "/case-study#download-outlooks"
+    : service.slug === "radio-advertising"
       ? "/portfolio?highlight=radio-ads"
       : service.slug === "celebrity-endorsements"
         ? "/portfolio?highlight=celebrity-spotlight"
@@ -105,7 +107,7 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
             </p>
           </div>
           <TransitionLink data-hm-fade href={portfolioHref} className="hm-link">
-            See all work
+            Explore our work
             <HmArrow />
           </TransitionLink>
         </header>
