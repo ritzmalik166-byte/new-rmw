@@ -395,11 +395,11 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
         ]),
       },
       {
-        title: "Brochure",
+        title: "Brochures",
         aspect: "4 / 5",
         items: images("creative", "brochure", range(1, 6), "Brochure design", [
           "Kingsun",
-          null,
+          "Sanfran Group",
           "KB Mart",
           "Aangan",
           "Gulshan Empire, Wave City",
