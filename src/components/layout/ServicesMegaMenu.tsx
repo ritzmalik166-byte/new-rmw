@@ -63,6 +63,9 @@ export function ServicesMegaMenu({
               <span className="smm-kicker-pill">Our services</span>
               <span className="smm-kicker-hindi">हमारी सेवाएं</span>
             </p>
+            <h3 className="smm-title">
+              Creative solutions for <em>modern brands.</em>
+            </h3>
             <p className="smm-lede">
               From strategy to execution, we help brands grow with creativity,
               technology and results.
