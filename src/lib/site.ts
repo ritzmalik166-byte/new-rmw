@@ -473,7 +473,7 @@ export const site = {
       },
       {
         q: "What Awards and Recognition Has Ritz Media World Received?",
-        a: "Ritz Media World was named Best Creative Agency (Real Estate) in Delhi NCR by Big FM in both 2024 and 2025.",
+        a: "Ritz Media World was named Best Creative Agency (Real Estate) in Delhi NCR by Big FM in 2025.",
       },
       {
         q: "What Partnerships and Accreditations Does Ritz Media World Hold?",
