@@ -28,11 +28,10 @@ const WORK = [
     tilt: 1.5,
   },
   {
-    src: "/s6/risland-edm.jpg",
+    src: "/s6/risland-sky-mansion.png",
     medium: "Digital",
-    title: "Where style finds its address",
-    copy: "A place, a name, and a picture that can hold both.",
-    fit: "contain",
+    title: "The art of living in harmony",
+    copy: "Risland Sky Mansion: a skyline address, framed as a lifestyle.",
     tilt: -1,
   },
   {

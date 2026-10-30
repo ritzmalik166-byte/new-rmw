@@ -126,23 +126,26 @@ export function ServicesMegaMenu({
                 </li>
               );
             })}
-            <li className="smm-feature">
-              <div className="smm-feature-card">
-                <span className="smm-feature-orbit smm-feature-orbit-one" aria-hidden />
-                <span className="smm-feature-orbit smm-feature-orbit-two" aria-hidden />
-                <span className="smm-feature-spark smm-feature-spark-one" aria-hidden>✦</span>
-                <span className="smm-feature-spark smm-feature-spark-two" aria-hidden>✦</span>
-                <div className="smm-feature-copy">
-                  <span className="smm-feature-kicker">Have a bigger idea?</span>
-                  <strong>Let’s make it impossible to ignore.</strong>
-                  <span>Tell us what you’re building. We’ll bring the right experts to the table.</span>
+            {/* Hidden on the live site so the services grid ends cleanly at 9 cards. */}
+            {SHOW_AI_SERVICES ? (
+              <li className="smm-feature">
+                <div className="smm-feature-card">
+                  <span className="smm-feature-orbit smm-feature-orbit-one" aria-hidden />
+                  <span className="smm-feature-orbit smm-feature-orbit-two" aria-hidden />
+                  <span className="smm-feature-spark smm-feature-spark-one" aria-hidden>✦</span>
+                  <span className="smm-feature-spark smm-feature-spark-two" aria-hidden>✦</span>
+                  <div className="smm-feature-copy">
+                    <span className="smm-feature-kicker">Have a bigger idea?</span>
+                    <strong>Let’s make it impossible to ignore.</strong>
+                    <span>Tell us what you’re building. We’ll bring the right experts to the table.</span>
+                  </div>
+                  <Link href="/contact.html" target="_blank" rel="noopener noreferrer" onClick={onClose} className="smm-feature-link">
+                    Start a conversation
+                    <ArrowIcon />
+                  </Link>
                 </div>
-                <Link href="/contact.html" target="_blank" rel="noopener noreferrer" onClick={onClose} className="smm-feature-link">
-                  Start a conversation
-                  <ArrowIcon />
-                </Link>
-              </div>
-            </li>
+              </li>
+            ) : null}
           </ul>
         </div>
 
