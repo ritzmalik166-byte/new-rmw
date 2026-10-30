@@ -259,6 +259,16 @@ html[data-theme="dark"] .hm-cargo-logo {
     font-size: 10.5px;
   }
 
+  /* No edge fade on phones: logos simply flow across the full width. */
+  .hm-cargo-lane {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .hm-cargo-track {
+    animation-duration: 45s;
+  }
+
   .hm-cargo-logo {
     height: 40px;
   }

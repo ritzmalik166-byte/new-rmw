@@ -1,5 +1,5 @@
 :root {
-  --background: #f7eef6;
+  --background: #ffffff;
   --foreground: #14151c;
   --muted: #5b5d68;
   --accent: #db023d;
@@ -15,16 +15,7 @@
   --hero-title-c1: var(--truck-yellow);
   --hero-title-c2: var(--truck-orange);
   --hero-title-c3: var(--truck-pink);
-  --hero-fill: linear-gradient(
-    135deg,
-    #ceb9ec 0%,
-    #f2d3e4 12.73%,
-    #f0d9d2 25.46%,
-    #f0e8d0 36.77%,
-    #d2f3f1 49.5%,
-    #e2e9f7 60.81%,
-    #e0cfef 70.71%
-  );
+  --hero-fill: #ffffff;
 }
 
 @theme inline {

@@ -255,8 +255,21 @@
   }
 
   .svc-star-list {
-    width: fit-content;
-    max-width: 100%;
-    margin-inline: auto;
+    width: 100%;
+    margin-inline: 0;
+  }
+}
+
+/* Web and Radio section headings match the other service headings (48px / 38px). */
+.svc-web .svc-web-title,
+.svc-radio .svc-radio-title {
+  font-size: 48px;
+  line-height: 1.1;
+}
+
+@media (max-width: 720px) {
+  .svc-web .svc-web-title,
+  .svc-radio .svc-radio-title {
+    font-size: 38px;
   }
 }

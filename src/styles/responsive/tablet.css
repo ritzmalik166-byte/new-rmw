@@ -118,9 +118,8 @@
   }
 
   html .svc-star-list {
-    width: fit-content;
-    max-width: 100%;
-    margin-inline: auto;
+    width: 100%;
+    margin-inline: 0;
   }
 
   html .svc-star-list li {
