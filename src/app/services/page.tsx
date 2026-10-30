@@ -26,6 +26,7 @@ import "@/styles/services/ai.css";
 import "@/styles/services/industries.css";
 import "@/styles/services/explore.css";
 import "@/styles/services/responsive.css";
+import { SHOW_AI_SERVICES } from "@/lib/feature-flags";
 
 export const metadata: Metadata = pageMetadata({
   title: "Advertising & Digital Services | Ritz Media World Delhi-NCR",
@@ -76,7 +77,7 @@ export default function ServicesPage() {
         border="scallop"
       />
       <ServicesRendering />
-      <ServicesAi />
+      {SHOW_AI_SERVICES ? <ServicesAi /> : null}
       <ServicesIndustries />
       <StartProject />
     </div>

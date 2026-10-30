@@ -96,7 +96,7 @@ export function ServicesContentMarketing() {
                     <span>{service.index}</span>
                   </span>
                 </span>
-                <h3 className="svc-content-card-title">
+                <h3 className="svc-content-card-title" aria-label={service.title}>
                   <RollText text={service.title} />
                 </h3>
                 <p className="svc-content-card-copy">{service.copy}</p>
@@ -120,26 +120,23 @@ function RollText({ text }: { text: string }) {
   const offsets = words.map((_, w) => words.slice(0, w).join("").length);
 
   return (
-    <>
-      <span className="sr-only">{text}</span>
-      <span aria-hidden>
-        {words.map((word, w) => (
-          <Fragment key={w}>
-            {w > 0 && " "}
-            <span className="svc-content-word">
-              {Array.from(word).map((char, c) => (
-                <span
-                  key={c}
-                  className="svc-content-char"
-                  style={{ "--i": offsets[w] + c } as CSSProperties}
-                >
-                  {char}
-                </span>
-              ))}
-            </span>
-          </Fragment>
-        ))}
-      </span>
-    </>
+    <span aria-hidden>
+      {words.map((word, w) => (
+        <Fragment key={w}>
+          {w > 0 && " "}
+          <span className="svc-content-word">
+            {Array.from(word).map((char, c) => (
+              <span
+                key={c}
+                className="svc-content-char"
+                style={{ "--i": offsets[w] + c } as CSSProperties}
+              >
+                {char}
+              </span>
+            ))}
+          </span>
+        </Fragment>
+      ))}
+    </span>
   );
 }

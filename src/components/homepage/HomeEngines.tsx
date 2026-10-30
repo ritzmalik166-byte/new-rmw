@@ -5,6 +5,7 @@
   import { ServicesRouteTruck } from "@/components/services/ServicesRouteTruck";
   import { SERVICE_ICONS, iconThumb } from "@/lib/service-icons";
   import { HmArrow, HmTitle, useHomeReveal } from "./shared";
+  import { SHOW_AI_SERVICES } from "@/lib/feature-flags";
 
   const TITLE = [{ text: "One agency." }, { text: "Three engines.", accent: true }] as const;
 
@@ -60,7 +61,7 @@
       tone: "#167a7d",
       cargo: [
         { slug: "3d-rendering", name: "3D Rendering", href: RENDER_HREF },
-        { slug: "ai-services", name: "AI Services", href: "/services/ai-services" },
+        ...(SHOW_AI_SERVICES ? [{ slug: "ai-services", name: "AI Services", href: "/services/ai-services" }] : []),
       ],
       extras: [],
     },

@@ -1,3 +1,4 @@
+import { SHOW_AI_SERVICES } from "@/lib/feature-flags";
 export interface ServiceCapability {
   title: string;
   copy: string;
@@ -106,7 +107,7 @@ const DIGITAL_WHY_US: ServicePoint[] = [
   },
 ];
 
-export const SERVICES_LIST: ServiceDetail[] = [
+const ALL_SERVICES: ServiceDetail[] = [
   {
     id: "digital",
     slug: "digital-marketing",
@@ -246,7 +247,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
         {
           question: "Do you provide digital marketing for real estate developers?",
           answer:
-            "Yes. Real estate is one of our core sectors. Ritz Media World runs real estate lead generation, Google and Meta campaigns, SEO, and launch marketing for developers in Noida, Delhi NCR, and across India, and was named Best Creative Agency (Real Estate) in Delhi NCR by Big FM in 2024 and 2025.",
+            "Yes. Real estate is one of our core sectors. Ritz Media World runs real estate lead generation, Google and Meta campaigns, SEO, and launch marketing for developers in Noida, Delhi NCR, and across India, and was named Best Creative Agency (Real Estate) in Delhi NCR by Big FM in 2025.",
         },
         {
           question: "Can you help our brand appear in ChatGPT and Google AI Overviews?",
@@ -430,7 +431,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
         {
           question: "How do I choose the best creative agency for my brand?",
           answer:
-            "Look for an agency with a strong portfolio, experience in your industry, a clear creative process, and work that has run for real brands. Ritz Media World has 18 years of creative experience and was named Best Creative Agency (Real Estate) in Delhi NCR by Big FM in 2024 and 2025.",
+            "Look for an agency with a strong portfolio, experience in your industry, a clear creative process, and work that has run for real brands. Ritz Media World has 18 years of creative experience and was named Best Creative Agency (Real Estate) in Delhi NCR by Big FM in 2025.",
         },
         {
           question: "Are you a creative agency for real estate developers?",
@@ -807,7 +808,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
       },
       {
         title: "Recognised by the radio industry",
-        copy: "Red FM 93.5 and Big FM named us Best Creative Agency (Real Estate) in Delhi NCR in 2024 and 2025.",
+        copy: "Red FM 93.5 and Big FM named us Best Creative Agency (Real Estate) in Delhi NCR in 2025.",
       },
     ],
     layout: {
@@ -2036,6 +2037,11 @@ export const SERVICES_LIST: ServiceDetail[] = [
     },
   },
 ];
+
+// AI Services stays local-only until launch (see feature-flags.ts).
+export const SERVICES_LIST: ServiceDetail[] = ALL_SERVICES.filter(
+  (s) => SHOW_AI_SERVICES || s.slug !== "ai-services",
+);
 
 export const MENU_SERVICES = SERVICES_LIST;
 

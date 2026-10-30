@@ -8,6 +8,7 @@ import { cn } from "@/lib/cn";
 import { SERVICE_ACCENTS, SERVICE_ICONS } from "@/lib/service-icons";
 import { MENU_SERVICES } from "@/lib/services-data";
 import { site } from "@/lib/site";
+import { SHOW_AI_SERVICES } from "@/lib/feature-flags";
 
 interface ServicesMegaMenuProps {
   isOpen: boolean;
@@ -62,9 +63,6 @@ export function ServicesMegaMenu({
               <span className="smm-kicker-pill">Our services</span>
               <span className="smm-kicker-hindi">हमारी सेवाएं</span>
             </p>
-            <h3 className="smm-title">
-              Creative solutions for <em>modern brands.</em>
-            </h3>
             <p className="smm-lede">
               From strategy to execution, we help brands grow with creativity,
               technology and results.
@@ -151,10 +149,12 @@ export function ServicesMegaMenu({
         <div className="smm-foot">
           <p className="smm-foot-route">
             <span className="smm-foot-label">{MENU_SERVICES.length} services · one route</span>
-            <Link href="/services/ai-services" onClick={onClose} className="smm-foot-ai">
-              Explore our new AI Services
-              <ArrowIcon />
-            </Link>
+            {SHOW_AI_SERVICES ? (
+              <Link href="/services/ai-services" onClick={onClose} className="smm-foot-ai">
+                Explore our new AI Services
+                <ArrowIcon />
+              </Link>
+            ) : null}
           </p>
           {phone ? (
             <a href={`tel:${phone.replace(/\s/g, "")}`} className="smm-foot-call">

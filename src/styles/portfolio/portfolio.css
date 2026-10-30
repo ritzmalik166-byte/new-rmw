@@ -1239,6 +1239,17 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .pf-card-items li {
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr);
+    align-items: start;
+    gap: 10px;
+  }
+
+  .pf-card-items span {
+    text-align: right;
+  }
+
   .pf-reasons {
     grid-template-columns: minmax(0, 1fr);
   }

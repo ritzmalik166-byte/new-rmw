@@ -316,7 +316,7 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
           "Lumora Estates",
           "Pincode Infra",
           "Gulshan Empire, Wave City",
-          null,
+          "Gulshan",
           "Blanco Thornton",
           "Mirage",
           "Highway Greens",
@@ -332,7 +332,7 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
       {
         title: "Hoardings",
         aspect: "4 / 5",
-        items: images("creative", "ooh", [...range(1, 12), ...range(15, 19)], "Hoarding design", [
+        items: images("creative", "ooh", [...range(1, 12), 15, 16, 17, 19], "Hoarding design", [
           "Fab Luxe",
           "RudraDhara",
           "GHD Group, Goa",
@@ -346,7 +346,6 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
           "Gulshan Empire, Wave City",
           "Lumora Estates × Avacasa",
           "Renox Thrive",
-          "Risland Sky Mansion",
           "Risland Sky Mansion",
           "Risland Sky Mansion",
           "Navrang Square by Renox Group",
@@ -373,7 +372,7 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
       {
         title: "Social Media",
         aspect: "4 / 5",
-        items: images("creative", "social", range(1, 21), "Social media creative", [
+        items: images("creative", "social", [...range(1, 7), ...range(9, 21)], "Social media creative", [
           "Roots Courtyard 2",
           "Lumora Estates × Avacasa",
           "Onyx by Splendor",
@@ -381,7 +380,6 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
           "Gulshan Group",
           "Grace Resilviaa",
           "Highway Greens",
-          null,
           "Highway Greens",
           "Highway Greens",
           "Highway Greens",
@@ -389,16 +387,16 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
           "GHD Group, Goa",
           "Highway Greens",
           "Highway Greens",
-          null,
-          null,
-          null,
-          null,
+          "Mansha",
+          "Mansha",
+          "Mansha",
+          "Mansha",
           "Renox Thrive",
           "Renox Thrive",
         ]),
       },
       {
-        title: "Brochures",
+        title: "Sanfran Group",
         aspect: "4 / 5",
         items: images("creative", "brochure", range(1, 6), "Brochure design", [
           "Kingsun",
