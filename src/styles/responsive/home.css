@@ -42,7 +42,7 @@
     line-height: 1.08;
   }
 
-  /* "Idea Ka Dhamaka" is the longest cycling line. */
+  /* "Idea Ka Pathaka" is the longest cycling line. */
   .hero-title[data-headline="1"] {
     font-size: clamp(1.35rem, 5.1vw, 2.3rem);
   }

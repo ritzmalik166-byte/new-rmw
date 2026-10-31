@@ -11,7 +11,7 @@ gsap.registerPlugin(useGSAP);
 
 const HERO_HEADLINES = [
   { lines: ["Creative ओके", "Please"] },
-  { lines: ["Idea Ka Dhamaka,", "Brand Ka पटाखा"] },
+  { lines: ["Idea Ka Pathaka,", "Brand Ka धमाका"] },
   { lines: ["Soch Desi,", "Reach Videshi"] },
 ] as const;
 
