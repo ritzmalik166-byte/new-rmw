@@ -23,9 +23,9 @@ const HEADLINES: { tone: string; lines: [ReactNode, ReactNode] }[] = [
   {
     tone: "orange",
     lines: [
-      "Idea Ka Dhamaka,",
+      "Idea Ka Pathaka,",
       <>
-        Brand Ka <span lang="hi">पटाखा</span>.
+        Brand Ka <span lang="hi">धमाका</span>.
       </>,
     ],
   },
