@@ -29,7 +29,7 @@ const FOUNDERS: Founder[] = [
     alt: "Ritz Malik, founder of Ritz Media World since 2008",
     kicker: "Founder details & journey",
     title: ["The Visionary", "Behind the Wheel"],
-    role: "Ritz Malik · Founder & Promoter, Ritz Media World And Creative Thinks Media",
+    role: "Ritz Malik · Founder & Promoter, Ritz Media World & Creative Thinks Media",
     lede: "Mr. Ritz Malik founded Ritz Media World in August 2008 with a simple belief: brands deserve ideas built on insight, not assumption. For 18 years, he has shaped the agency's vision and creative direction, growing it into a full-service creative, digital, and media partner, and he also founded Creative Thinks Media. He believes brands win through clear, authentic storytelling.",
   },
   {
