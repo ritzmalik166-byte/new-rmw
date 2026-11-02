@@ -192,11 +192,11 @@ export function StartProject({ cta }: { cta?: string } = {}) {
         <div className="audit-left">
           <div className="audit-copy">
             <p className="audit-kicker">{data.kicker}</p>
-            <h2 className="audit-title">
+            <p className="audit-title">
               {titleBefore}
               {accentAt >= 0 ? <span className="audit-title-accent">Free</span> : null}
               {titleAfter}
-            </h2>
+            </p>
             <ul className="audit-pills">
               {data.pills.map((pill) => (
                 <li key={pill}>
