@@ -64,10 +64,17 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
     const maxScroll = grid.scrollWidth - grid.clientWidth;
     const atStart = grid.scrollLeft <= 2;
     const atEnd = grid.scrollLeft >= maxScroll - 2;
-    const index = atEnd ? cards.length - 1 : Math.min(cards.length - 1, Math.round(grid.scrollLeft / step));
-    setSlide((prev) =>
-      prev.index === index && prev.atStart === atStart && prev.atEnd === atEnd ? prev : { index, atStart, atEnd },
-    );
+    const pad = parseFloat(getComputedStyle(grid).paddingLeft);
+    // The last few cards share the end stop; keep whichever of them the arrows picked.
+    const firstAtEnd = Array.from(cards).findIndex((card) => (card as HTMLElement).offsetLeft - pad >= maxScroll - 2);
+    setSlide((prev) => {
+      const index = atEnd
+        ? Math.max(prev.index, firstAtEnd < 0 ? cards.length - 1 : firstAtEnd)
+        : Math.min(cards.length - 1, Math.round(grid.scrollLeft / step));
+      return prev.index === index && prev.atStart === atStart && prev.atEnd === atEnd
+        ? prev
+        : { index, atStart, atEnd };
+    });
   }, []);
 
   useEffect(() => {
@@ -82,14 +89,21 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
     };
   }, [syncSlide]);
 
-  const goTo = (index: number) => {
+  /* Move one card at a time. Near the end several cards share the same scroll
+     stop, so there the arrows only advance the counter instead of scrolling. */
+  const step = (dir: 1 | -1) => {
     const grid = gridRef.current;
-    const card = grid?.children[index] as HTMLElement | undefined;
-    if (!grid || !card) return;
-    grid.scrollTo({
-      left: card.offsetLeft - parseFloat(getComputedStyle(grid).paddingLeft),
-      behavior: reduced ? "auto" : "smooth",
-    });
+    if (!grid) return;
+    const cards = grid.children;
+    const index = Math.min(cards.length - 1, Math.max(0, slide.index + dir));
+    const card = cards[index] as HTMLElement | undefined;
+    if (!card || index === slide.index) return;
+    const maxScroll = grid.scrollWidth - grid.clientWidth;
+    const target = Math.min(maxScroll, card.offsetLeft - parseFloat(getComputedStyle(grid).paddingLeft));
+    setSlide((prev) => ({ ...prev, index }));
+    if (Math.abs(target - grid.scrollLeft) > 2) {
+      grid.scrollTo({ left: target, behavior: reduced ? "auto" : "smooth" });
+    }
   };
 
   return (
@@ -117,8 +131,8 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
             type="button"
             className="hm-work-arrow"
             aria-label="Previous creative"
-            disabled={slide.atStart}
-            onClick={() => goTo(slide.index - 1)}
+            disabled={slide.index === 0}
+            onClick={() => step(-1)}
           >
             <svg viewBox="0 0 24 24" aria-hidden>
               <path d="M15 5l-7 7 7 7" />
@@ -134,8 +148,8 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
             type="button"
             className="hm-work-arrow"
             aria-label="Next creative"
-            disabled={slide.atEnd}
-            onClick={() => goTo(slide.index + 1)}
+            disabled={slide.index >= wall.length - 1}
+            onClick={() => step(1)}
           >
             <svg viewBox="0 0 24 24" aria-hidden>
               <path d="M9 5l7 7-7 7" />
