@@ -1,15 +1,21 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 export function BlogImage({
   src,
   alt,
   className = "news-card-media",
+  preload = false,
+  sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
 }: {
   src: string | null;
   alt: string;
   className?: string;
+  /** Set on the above-the-fold (LCP) image so it loads eagerly with high priority. */
+  preload?: boolean;
+  sizes?: string;
 }) {
   const [failedSrc, setFailedSrc] = useState<string | null>(null);
   const hasImage = src !== null && src !== failedSrc;
@@ -17,13 +23,14 @@ export function BlogImage({
   return (
     <div className={className}>
       {hasImage ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
+        // Backend banners are full-size uploads; next/image serves resized WebP/AVIF.
+        <Image
           src={src}
           alt={alt}
           width={1280}
           height={720}
-          loading="lazy"
+          sizes={sizes}
+          preload={preload}
           onError={() => setFailedSrc(src)}
         />
       ) : (

@@ -239,7 +239,7 @@ export function StartProject({ cta }: { cta?: string } = {}) {
             </svg>
           </div>
 
-          <h3 className="audit-card-title">{data.formTitle}</h3>
+          <p className="audit-card-title">{data.formTitle}</p>
 
           <div className="audit-fields">
             <label className="audit-field">

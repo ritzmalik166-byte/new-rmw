@@ -133,7 +133,12 @@ export function BlogArchive({
           rel="noopener noreferrer"
         >
           <span className="blog-featured-media">
-            <BlogImage src={featuredBlog.image} alt={featuredBlog.title} />
+            <BlogImage
+              src={featuredBlog.image}
+              alt={featuredBlog.title}
+              preload
+              sizes="(max-width: 900px) 100vw, 60vw"
+            />
           </span>
           <div className="blog-featured-copy">
             <p className="hm-kicker">

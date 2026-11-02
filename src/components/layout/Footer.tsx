@@ -89,14 +89,14 @@ export function Footer() {
               <span className="site-footer-pill">Last stop</span>
               <span className="site-footer-hindi">मंज़िल यहीं है</span>
             </p>
-            <h2 className="site-footer-title">
+            <p className="site-footer-title">
               <span>{data.title[0]}</span>{" "}
               <span className="site-footer-title-row">
                 <span className="site-footer-title-accent">{data.title[1]}</span>{" "}
                 <span>{data.title[2]}</span>
               </span>{" "}
               <span>{data.title[3]}</span>
-            </h2>
+            </p>
             <p className="site-footer-blurb">{data.blurb}</p>
             <div className="site-footer-actions">
               <TransitionLink href="/contact.html" target="_blank" rel="noopener noreferrer" className="site-footer-cta">
@@ -130,7 +130,7 @@ export function Footer() {
               </p>
               <div className="site-footer-sign-cols">
                 <div>
-                  <h3 className="site-footer-sign-title">Company</h3>
+                  <p className="site-footer-sign-title">Company</p>
                   <ul className="site-footer-sign-list">
                     {data.company.map((link, index) => (
                       <li key={link.label}>
@@ -146,7 +146,7 @@ export function Footer() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="site-footer-sign-title">Connect</h3>
+                  <p className="site-footer-sign-title">Connect</p>
                   <ul className="site-footer-sign-list">
                     {data.socials.map((link) => (
                       <li key={link.label}>

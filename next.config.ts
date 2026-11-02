@@ -6,7 +6,12 @@ const nextConfig: NextConfig = {
   htmlLimitedBots: /.*/,
   images: {
     qualities: [75, 95],
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 60 * 60 * 24 * 30,
     remotePatterns: [
+      // Blog banners and inline images uploaded through the admin panel.
+      { protocol: "https", hostname: "www.ritzmediaworld.com", pathname: "/**" },
+      { protocol: "https", hostname: "ritzmediaworld.com", pathname: "/**" },
       {
         protocol: "https",
         hostname: "images.unsplash.com",

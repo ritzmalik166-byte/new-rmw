@@ -18,7 +18,7 @@ function usePastHero() {
 
   useEffect(() => {
     const check = () => {
-      const hero = document.querySelector("main section");
+      const hero = document.querySelector("main section, main header");
       const bottom = hero ? hero.getBoundingClientRect().bottom : window.innerHeight - window.scrollY;
       setPast(bottom < 80);
     };

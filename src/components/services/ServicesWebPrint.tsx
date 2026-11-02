@@ -94,7 +94,7 @@ export function ServicesWebPrint() {
               <Link className="svc-web-btn" href={WEB_SERVICE_HREF}>
                 Explore Web Development <span aria-hidden>→</span>
               </Link>
-              <Link className="svc-web-cta" href="/portfolio">
+              <Link className="svc-web-cta" href="/portfolio/web-design">
                 See sites we&rsquo;ve built <span aria-hidden>→</span>
               </Link>
             </div>

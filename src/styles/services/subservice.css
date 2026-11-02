@@ -731,7 +731,14 @@
 }
 
 .sd-query-select.is-dial .sx-select-button {
-  padding-inline: 10px 8px;
+  gap: 4px;
+  padding-inline: 10px 6px;
+}
+
+/* Never ellipsise the dial code; "+91" must stay readable. */
+.sd-query-select.is-dial .sx-select-button > span:first-child {
+  overflow: visible;
+  text-overflow: clip;
 }
 
 .sd-query-select.is-dial .sx-select-list {
@@ -759,7 +766,7 @@
 
 .sd-query-phone {
   display: grid;
-  grid-template-columns: 78px minmax(0, 1fr);
+  grid-template-columns: 88px minmax(0, 1fr);
   gap: 6px;
 }
 
@@ -1228,7 +1235,7 @@
 
 .sd-query.is-compact .sd-query-field:has(> .sd-query-phone) > .sd-query-phone {
   grid-column: 1;
-  grid-template-columns: 70px minmax(0, 1fr);
+  grid-template-columns: 84px minmax(0, 1fr);
 }
 
 .sd-query.is-compact .sd-query-field:has(> .sd-query-phone) > .sd-query-otp-send {

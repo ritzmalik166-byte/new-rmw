@@ -178,6 +178,8 @@ export default async function BlogDetailPage({
               src={blog.image}
               alt={blog.title}
               className="blog-featured-img"
+              preload
+              sizes="(max-width: 900px) 100vw, 800px"
             />
           ) : null}
 

@@ -268,6 +268,24 @@
   }
 }
 
+/* Tablets: the meter stacks centred below, so centre the copy above it too. */
+@media (min-width: 721px) and (max-width: 900px) {
+  .bh-copy {
+    text-align: center;
+  }
+
+  .bh-copy .sd-crumbs ol,
+  .bh-copy .hm-kicker,
+  .bh-chips {
+    justify-content: center;
+  }
+
+  .bh-lede,
+  .bh-search {
+    margin-inline: auto;
+  }
+}
+
 @media (max-width: 600px) {
   .bh-lede {
     font-size: 15px;

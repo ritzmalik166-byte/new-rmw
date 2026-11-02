@@ -68,7 +68,7 @@ export function ServicesContentMarketing() {
           <div>
             <p className="svc-content-kicker">KM 02</p>
             <h2 id="svc-content-title" className="svc-content-title">
-              Content Marketing
+              Content Marketing{" "}
               <br />
               Services
             </h2>

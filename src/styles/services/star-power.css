@@ -176,6 +176,11 @@
     margin-top: 40px;
   }
 
+  /* Keep the cards clear of the truck riding the rail at left: 37px. */
+  .svc-star-inner {
+    padding-left: 68px;
+  }
+
   .svc-star-card {
     min-height: 0;
     padding: 30px 26px;
