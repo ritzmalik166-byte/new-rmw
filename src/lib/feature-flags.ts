@@ -1,1 +1,1 @@
-export const SHOW_AI_SERVICES = true;
+export const SHOW_AI_SERVICES = false;
