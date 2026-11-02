@@ -73,6 +73,8 @@ function formatDate(date: string | null) {
  *  paragraphs (manual bullets padded with spaces) rendered as real bullet points. */
 function prepareContent(html: string) {
   const normalized = html
+    // The page already renders the post title as its only <h1>; demote any in the body.
+    .replace(/<(\/?)h1\b/gi, "<$1h2")
     .replace(/<table\b/gi, '<div class="blog-table-wrap"><table')
     .replace(/<\/table>/gi, "</table></div>")
     .replace(/<p\b([^>]*)>\s*(?:•|&bull;|●|▪)(?:\s|&nbsp;|&#160;)*/gi, "<p data-blog-bullet$1>")

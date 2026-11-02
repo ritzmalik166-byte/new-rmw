@@ -23,7 +23,9 @@ type BlogPageProps = {
 export default async function BlogPage({
   searchParams,
 }: BlogPageProps) {
-  const blogs = await getBlogsOrEmpty();
+  // The archive is a client component and never shows post bodies; sending every
+  // post's full HTML made /blog over 2MB.
+  const blogs = (await getBlogsOrEmpty()).map((blog) => ({ ...blog, content: "" }));
   const { page: pageParam, q } = await searchParams;
   const requestedPage = Number(pageParam);
   const initialPage = Number.isInteger(requestedPage) && requestedPage > 0

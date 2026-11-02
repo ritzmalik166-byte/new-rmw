@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Render title/robots/canonical in <head> for every user agent, not just known bots,
+  // so SEO crawlers (Screaming Frog, Sitebulb, etc.) don't flag them as outside <head>.
+  htmlLimitedBots: /.*/,
   images: {
     qualities: [75, 95],
     remotePatterns: [

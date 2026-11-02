@@ -503,12 +503,10 @@ export const SERVICE_CREATIVES: Record<string, ServiceCreativeSet> = {
         caption: "A full homepage section plan, mapped out with AI before a pixel is designed.",
       },
       {
-        // Placeholder artwork: swap for the final image.
-        src: "/services/ai-services-logo.png",
-        alt: "Colourful AI mascot illustrated in a truck-art style",
-        medium: "AI creative",
-        caption: "A visual language for the next generation of campaigns.",
-        fit: "contain",
+        src: "/services/ai-blog-agent-command-center.png",
+        alt: "Blog Agent Command Center orchestrating SEO research, brand and competitor scraping, blog writing, image generation and panel publishing agents",
+        medium: "AI agents",
+        caption: "A blog agent that researches, writes, designs and drafts posts end to end.",
       },
     ],
   },
