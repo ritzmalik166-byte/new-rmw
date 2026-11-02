@@ -155,7 +155,7 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
           <header>
             <p data-hm-fade className="hm-kicker">
               <span className="hm-pill">KM 01</span>
-              <span>The business problem</span>
+              <span>why print still works</span>
             </p>
             <HmTitle
               id="sd-problem-title"

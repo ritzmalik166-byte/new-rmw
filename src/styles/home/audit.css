@@ -364,20 +364,20 @@
   margin-bottom: 10px;
 }
 
-.audit-captcha {
+/* With the captcha gone the button takes the whole row. */
+.audit-actions .audit-submit {
   flex: 1;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
+  justify-content: center;
 }
 
-.audit-captcha:empty {
-  display: none;
-}
-
-.audit-captcha iframe {
-  display: block;
+/* Spam honeypot: off-screen, never seen or tabbed to by people. */
+.audit-trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .audit-human {

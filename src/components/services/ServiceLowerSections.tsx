@@ -29,6 +29,7 @@ export function ServiceLowerSections({ service, relatedServices }: ServiceLowerS
       <ServiceCreatives service={service} />
       <ServiceProcess service={service} />
       <ServiceWhy
+        slug={service.slug}
         name={service.name}
         title={layout.intentTitle}
         points={layout.intentPoints}
@@ -240,11 +241,13 @@ function ServiceProcess({ service }: { service: ServiceDetail }) {
 }
 
 function ServiceWhy({
+  slug,
   name,
   title,
   points,
   tape,
 }: {
+  slug: string;
   name: string;
   title: { lead: string; accent: string };
   points: { title: string; copy: string }[];
@@ -255,7 +258,7 @@ function ServiceWhy({
   const tapeItems = [...tape, ...tape, ...tape];
 
   return (
-    <section ref={rootRef} id="why-rmw" className="hm sd-why" aria-labelledby="sd-why-title">
+    <section ref={rootRef} id="why-rmw" className="hm sd-why" data-service={slug} aria-labelledby="sd-why-title">
       <div className="hm-wrap sd-why-inner">
         <header>
           <p data-hm-fade className="hm-kicker is-light">

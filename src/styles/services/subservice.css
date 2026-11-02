@@ -1501,6 +1501,17 @@
   color: var(--hm-yellow);
 }
 
+/* Print: keep "Why brands trust us / with their print ads." to exactly two lines. */
+@media (min-width: 641px) {
+  .sd-why[data-service="print-advertising"] .hm-title {
+    font-size: clamp(32px, 3.5vw, 56px);
+  }
+
+  .sd-why[data-service="print-advertising"] .hm-line {
+    white-space: nowrap;
+  }
+}
+
 .sd-why-inner {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
