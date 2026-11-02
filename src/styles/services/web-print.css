@@ -1003,12 +1003,27 @@
     line-height: 16px;
   }
 
-  .svc-paper-classifieds ul {
-    display: none;
+  /* Phones: everything stacks and centres: label, both ads, then the buttons. */
+  .svc-paper-classifieds {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
-  .svc-paper-classifieds {
-    justify-content: space-between;
+  .svc-paper-classifieds ul {
+    flex: none;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    text-wrap: balance;
+  }
+
+  .svc-print .svc-paper-classifieds li {
+    text-align: center;
+  }
+
+  .svc-paper-classifieds .svc-paper-cta.is-alt {
+    margin-left: 0;
   }
 }
 
