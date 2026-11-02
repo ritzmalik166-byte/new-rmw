@@ -2043,7 +2043,7 @@ const ALL_SERVICES: ServiceDetail[] = [
   },
 ];
 
-// AI Services stays local-only until launch (see feature-flags.ts).
+// AI Services can be hidden everywhere via feature-flags.ts.
 export const SERVICES_LIST: ServiceDetail[] = ALL_SERVICES.filter(
   (s) => SHOW_AI_SERVICES || s.slug !== "ai-services",
 );
