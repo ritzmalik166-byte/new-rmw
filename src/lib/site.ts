@@ -266,7 +266,7 @@ export const site = {
         role: "GHD Infra",
         company: "SEO, Creative, Social Media & Paid Campaigns",
         industry: "Real Estate",
-        logo: "/s2/clients/prm-5.webp",
+        logo: "/clients/GHD Infra.png",
         quote:
           "We’ve had a great experience working with the team on our digital marketing needs. From SEO and creative designs to social media management and paid campaigns, they have been supportive, responsive, and committed to our goals. Their efforts have helped us strengthen our online presence and promote our real estate projects in Goa.",
       },
