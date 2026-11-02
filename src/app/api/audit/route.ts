@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
 
-const VERIFY_URL = "https://api.hcaptcha.com/siteverify";
-
 type AuditBody = {
   name?: string;
   email?: string;
@@ -9,7 +7,7 @@ type AuditBody = {
   service?: string;
   subject?: string;
   message?: string;
-  captcha?: string;
+  website?: string;
 };
 
 function asString(value: unknown) {
@@ -31,7 +29,7 @@ export async function POST(request: Request) {
   const service = asString(body.service);
   const subject = asString(body.subject);
   const message = asString(body.message);
-  const captcha = asString(body.captcha);
+  const website = asString(body.website);
 
   if (!name || !email || !phone || !service || !subject) {
     return NextResponse.json({ ok: false, error: "Please fill in all required fields." }, { status: 400 });
@@ -41,30 +39,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "Please enter a valid email address." }, { status: 400 });
   }
 
-  const secret = process.env.HCAPTCHA_SECRET;
-  if (!secret) {
-    return NextResponse.json({ ok: false, error: "Captcha is not configured." }, { status: 500 });
-  }
-
-  if (!captcha) {
-    return NextResponse.json({ ok: false, error: "Please complete the captcha." }, { status: 400 });
-  }
-
-  const params = new URLSearchParams({ secret, response: captcha });
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
-  const sitekey = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
-  if (ip) params.set("remoteip", ip);
-  if (sitekey) params.set("sitekey", sitekey);
-
-  const verify = await fetch(VERIFY_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: params,
-  });
-
-  const result = (await verify.json()) as { success?: boolean; "error-codes"?: string[] };
-  if (!result.success) {
-    return NextResponse.json({ ok: false, error: "Captcha verification failed. Please try again." }, { status: 400 });
+  // Honeypot filled in: a bot. Pretend it worked so it doesn't retry.
+  if (website) {
+    return NextResponse.json({ ok: true });
   }
 
   console.info("[audit] new enquiry", { name, email, phone, service, subject, message: message.slice(0, 280) });

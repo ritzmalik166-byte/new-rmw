@@ -1,15 +1,8 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { SelectMenu } from "@/components/ui/SelectMenu";
 import { site } from "@/lib/site";
-
-const sitekey = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY ?? "";
-
-/* hCaptcha's api.js and its checksiteconfig call are heavy, so the widget is
-   only mounted once the form is near the viewport or a field is focused. */
-const HCaptcha = dynamic(() => import("@hcaptcha/react-hcaptcha"), { ssr: false });
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -106,10 +99,6 @@ function FieldIcon({ name }: { name: "user" | "mail" | "phone" | "tag" | "doc" |
 
 export function StartProject({ cta }: { cta?: string } = {}) {
   const data = site.startProject;
-  const formRef = useRef<HTMLFormElement>(null);
-  const [captchaArmed, setCaptchaArmed] = useState(false);
-  const [captchaKey, setCaptchaKey] = useState(0);
-  const [token, setToken] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
   const [service, setService] = useState("");
@@ -117,25 +106,6 @@ export function StartProject({ cta }: { cta?: string } = {}) {
   const accentAt = data.title.indexOf("Free");
   const titleBefore = accentAt >= 0 ? data.title.slice(0, accentAt) : data.title;
   const titleAfter = accentAt >= 0 ? data.title.slice(accentAt + "Free".length) : "";
-
-  useEffect(() => {
-    const form = formRef.current;
-    if (!sitekey || captchaArmed || !form) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) setCaptchaArmed(true);
-      },
-      { rootMargin: "400px 0px" },
-    );
-    observer.observe(form);
-    return () => observer.disconnect();
-  }, [captchaArmed]);
-
-  function resetCaptcha() {
-    setToken("");
-    setCaptchaKey((key) => key + 1);
-  }
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -149,12 +119,6 @@ export function StartProject({ cta }: { cta?: string } = {}) {
       return;
     }
 
-    if (!token) {
-      setStatus("error");
-      setMessage("Please complete the captcha.");
-      return;
-    }
-
     setStatus("submitting");
     setMessage("");
 
@@ -162,7 +126,7 @@ export function StartProject({ cta }: { cta?: string } = {}) {
       const response = await fetch("/api/audit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...payload, captcha: token }),
+        body: JSON.stringify(payload),
       });
       const result = (await response.json()) as { ok?: boolean; error?: string };
 
@@ -172,11 +136,9 @@ export function StartProject({ cta }: { cta?: string } = {}) {
 
       form.reset();
       setService("");
-      resetCaptcha();
       setStatus("success");
       setMessage("Thanks — we’ll get back to you with your audit shortly.");
     } catch (error) {
-      resetCaptcha();
       setStatus("error");
       setMessage(
         error instanceof Error ? error.message : "Something went wrong. Please try again.",
@@ -220,10 +182,8 @@ export function StartProject({ cta }: { cta?: string } = {}) {
         </div>
 
         <form
-          ref={formRef}
           className="audit-card"
           onSubmit={onSubmit}
-          onFocus={() => setCaptchaArmed(true)}
           noValidate
         >
           <div className="audit-notch" aria-hidden>
@@ -240,6 +200,16 @@ export function StartProject({ cta }: { cta?: string } = {}) {
           </div>
 
           <p className="audit-card-title">{data.formTitle}</p>
+
+          {/* Honeypot: hidden from people, bots fill it and get silently dropped. */}
+          <input
+            className="audit-trap"
+            name="website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
 
           <div className="audit-fields">
             <label className="audit-field">
@@ -316,25 +286,6 @@ export function StartProject({ cta }: { cta?: string } = {}) {
           ) : null}
 
           <div className="audit-actions">
-            <div className="audit-captcha">
-              {!sitekey ? (
-                <p className="audit-human">
-                  <span className="audit-human-box" aria-hidden />
-                  I am human · hCaptcha
-                </p>
-              ) : captchaArmed ? (
-                <HCaptcha
-                  key={captchaKey}
-                  sitekey={sitekey}
-                  size="compact"
-                  onVerify={setToken}
-                  onExpire={() => setToken("")}
-                  onError={() => setToken("")}
-                  theme="dark"
-                />
-              ) : null}
-            </div>
-
             <button className="audit-submit" type="submit" disabled={status === "submitting"}>
               {status === "submitting" ? "Sending..." : (cta ?? data.cta)}
               <svg viewBox="0 0 20 14" aria-hidden>
