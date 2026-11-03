@@ -35,6 +35,18 @@ function NavArrow({ direction }: { direction: "prev" | "next" }) {
    precedence over both. */
 const MIN_SUB_SERVICES_FOR_BOARD = 3;
 const HEADER_OFFSET = 110;
+const PROBLEM_KICKERS: Record<string, string> = {
+  "digital-marketing": "why digital marketing works",
+  "creative-services": "why great creative matters",
+  "content-marketing": "why content marketing works",
+  "web-designing-and-development": "why your website matters",
+  "print-advertising": "why print still works",
+  "radio-advertising": "why radio still works",
+  "celebrity-endorsements": "why celebrity endorsements work",
+  "influencer-marketing-agency-in-india": "why influencer marketing works",
+  "3d-rendering": "why 3D rendering works",
+  "ai-services": "why AI services matter",
+};
 /* Lets the page-transition overlay lift and the hero lay out before scrolling. */
 const PAGE_SETTLE_MS = 1000;
 const HASH_SCROLL_DURATION = 1.6;
@@ -155,7 +167,7 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
           <header>
             <p data-hm-fade className="hm-kicker">
               <span className="hm-pill">KM 01</span>
-              <span>why print still works</span>
+              <span>{PROBLEM_KICKERS[service.slug] ?? "why print still works"}</span>
             </p>
             <HmTitle
               id="sd-problem-title"

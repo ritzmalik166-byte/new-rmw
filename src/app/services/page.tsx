@@ -31,7 +31,7 @@ import { SHOW_AI_SERVICES } from "@/lib/feature-flags";
 export const metadata: Metadata = pageMetadata({
   title: "Advertising & Digital Services | Ritz Media World Delhi-NCR",
   description:
-    "Explore Ritz Media World’s full-service solutions in creative, digital, print, radio, 3D rendering, and AI, designed to grow your brand and drive real results.",
+    "Explore Ritz Media World’s full-service solutions in creative, digital, print, radio, and 3D rendering, designed to grow your brand and drive real results.",
   keywords: SERVICE_KEYWORDS,
   path: "/services",
 });
@@ -70,9 +70,9 @@ export default function ServicesPage() {
         id="film"
         index="03"
         kicker="Engine Three"
-        title="3D Rendering & AI Services"
-        copy="Photorealistic renders that show a project before it’s built, and AI services that help brands create content faster, adopt AI across their business and automate everyday work."
-        km="KM 09 – 10"
+        title="3D Rendering Services"
+        copy="Photorealistic renders that show a project before it’s built, with the detail and clarity needed to make confident decisions."
+        km="KM 09"
         tone="#167a7d"
         border="scallop"
       />

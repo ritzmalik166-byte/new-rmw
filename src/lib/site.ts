@@ -433,7 +433,7 @@ export const site = {
     faqs: [
       {
         q: "What services does Ritz Media World offer?",
-        a: "Ritz Media World is a full-service advertising agency offering branding, creative campaigns, media planning and buying, digital marketing, SEO, social media, film production, 3D rendering, and AI services, from AI creatives and brand videos to AI implementation and workflow automation, all delivered by one integrated team.",
+        a: "Ritz Media World is a full-service advertising agency offering branding, creative campaigns, media planning and buying, digital marketing, SEO, social media, film production, and 3D rendering, all delivered by one integrated team.",
       },
       {
         q: "Which industries do you work with?",
