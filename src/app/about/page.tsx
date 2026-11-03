@@ -5,7 +5,6 @@ import { AboutOfficeTour } from "@/components/about/AboutOfficeTour";
 import { AboutJourney } from "@/components/about/AboutJourney";
 import { AboutMileage } from "@/components/about/AboutMileage";
 import { AboutProofs } from "@/components/about/AboutProofs";
-import { AboutServices } from "@/components/about/AboutServices";
 import { AboutTruckBack } from "@/components/about/AboutTruckBack";
 import { StartProject } from "@/components/home/StartProject";
 import { HomeFaq } from "@/components/homepage/HomeFaq";
@@ -19,7 +18,6 @@ import "@/styles/about/truck-back.css";
 import "@/styles/about/mileage.css";
 import "@/styles/about/journey.css";
 import "@/styles/about/proofs.css";
-import "@/styles/about/services.css";
 import "@/styles/about/founder.css";
 import "@/styles/about/office-tour.css";
 
@@ -60,12 +58,11 @@ export default function AboutPage() {
       <AboutTruckBack />
       <AboutMileage />
       <AboutJourney />
-      <AboutServices />
       <AboutProofs />
       <AboutFounder />
       <HomeFaq
         kicker="Before you set off"
-        title={[{ text: "Common" }, { text: "Highways (FAQs)", accent: true }]}
+        title={[{ text: "Common" }, { text: "highways.", accent: true }]}
         faqs={site.about.faqs}
       />
       <StartProject headingLevel="h2" />
