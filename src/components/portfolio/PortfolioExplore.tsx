@@ -109,7 +109,6 @@ export function PortfolioExplore() {
                   </span>
                 </TransitionLink>
                 <div className="pf-card-copy">
-                  <p className="pf-card-km">KM {pad(index + 1)}</p>
                   <h3 id={`${category.id}-title`}>{category.title} Portfolio</h3>
                   <p className="pf-card-text">{category.copy}</p>
                   <ul className="pf-card-items">
