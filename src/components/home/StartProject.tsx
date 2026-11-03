@@ -97,7 +97,7 @@ function FieldIcon({ name }: { name: "user" | "mail" | "phone" | "tag" | "doc" |
   );
 }
 
-export function StartProject({ cta }: { cta?: string } = {}) {
+export function StartProject({ cta, headingLevel = "p" }: { cta?: string; headingLevel?: "p" | "h2" } = {}) {
   const data = site.startProject;
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
@@ -154,11 +154,19 @@ export function StartProject({ cta }: { cta?: string } = {}) {
         <div className="audit-left">
           <div className="audit-copy">
             <p className="audit-kicker">{data.kicker}</p>
-            <p className="audit-title">
-              {titleBefore}
-              {accentAt >= 0 ? <span className="audit-title-accent">Free</span> : null}
-              {titleAfter}
-            </p>
+            {headingLevel === "h2" ? (
+              <h2 className="audit-title">
+                {titleBefore}
+                {accentAt >= 0 ? <span className="audit-title-accent">Free</span> : null}
+                {titleAfter}
+              </h2>
+            ) : (
+              <p className="audit-title">
+                {titleBefore}
+                {accentAt >= 0 ? <span className="audit-title-accent">Free</span> : null}
+                {titleAfter}
+              </p>
+            )}
             <ul className="audit-pills">
               {data.pills.map((pill) => (
                 <li key={pill}>

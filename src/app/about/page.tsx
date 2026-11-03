@@ -5,6 +5,7 @@ import { AboutOfficeTour } from "@/components/about/AboutOfficeTour";
 import { AboutJourney } from "@/components/about/AboutJourney";
 import { AboutMileage } from "@/components/about/AboutMileage";
 import { AboutProofs } from "@/components/about/AboutProofs";
+import { AboutServices } from "@/components/about/AboutServices";
 import { AboutTruckBack } from "@/components/about/AboutTruckBack";
 import { StartProject } from "@/components/home/StartProject";
 import { HomeFaq } from "@/components/homepage/HomeFaq";
@@ -18,24 +19,29 @@ import "@/styles/about/truck-back.css";
 import "@/styles/about/mileage.css";
 import "@/styles/about/journey.css";
 import "@/styles/about/proofs.css";
+import "@/styles/about/services.css";
 import "@/styles/about/founder.css";
 import "@/styles/about/office-tour.css";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Ritz Media World | Award-Winning Delhi NCR Advertising Agency",
+  title: "About Ritz Media World | Advertising & Digital Marketing",
   description:
-    "Learn how Ritz Media World crafts data-driven brand stories and digital campaigns. Over 18 years of experience turning brands into household names in Delhi NCR.",
+    "Discover Ritz Media World, a creative agency in Noida offering advertising, branding, digital marketing, media planning, 3D rendering and AI solutions.",
   keywords: [
-    "Ritz Media World",
-    "advertising agency Delhi NCR",
-    "creative agency Delhi",
-    "full service ad agency Noida",
-    "digital marketing agency Delhi NCR",
-    "brand storytelling agency India",
-    "print radio advertising Delhi NCR",
-    "award winning ad agency Delhi",
-    "client-centric marketing agency India",
-    "advertising & media services Delhi India",
+    "creative advertising agency in Noida",
+    "advertising agency in Noida",
+    "digital marketing agency in Noida",
+    "full-service advertising agency",
+    "branding agency in Noida",
+    "SEO agency in Noida",
+    "social media marketing agency",
+    "performance marketing agency",
+    "media planning and buying agency",
+    "influencer marketing agency",
+    "3D rendering services",
+    "AI creative agency",
+    "print advertising agency",
+    "outdoor advertising agency",
   ],
   path: "/about.html",
 });
@@ -54,14 +60,15 @@ export default function AboutPage() {
       <AboutTruckBack />
       <AboutMileage />
       <AboutJourney />
+      <AboutServices />
       <AboutProofs />
       <AboutFounder />
       <HomeFaq
         kicker="Before you set off"
-        title={[{ text: "Common" }, { text: "highways.", accent: true }]}
+        title={[{ text: "Common" }, { text: "Highways (FAQs)", accent: true }]}
         faqs={site.about.faqs}
       />
-      <StartProject />
+      <StartProject headingLevel="h2" />
     </>
   );
 }

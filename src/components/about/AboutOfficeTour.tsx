@@ -86,7 +86,7 @@ export function AboutOfficeTour() {
           <header className="about-office-tour-modal-head">
             <div>
               <span className="about-office-tour-kicker">Ritz Media World · New office</span>
-              <h2>Welcome to our 7th floor</h2>
+              <h3>Welcome to our 7th floor</h3>
             </div>
             <button type="button" className="about-office-tour-modal-close" onClick={() => setIsOpen(false)}>
               <span aria-hidden>×</span>
