@@ -5,7 +5,7 @@ import { getCaseStudies } from "@/lib/case-studies";
 import { AGENCY_KEYWORDS, pageMetadata } from "@/lib/seo";
 import "@/styles/case-study/case-study.css";
 
-export const revalidate = 300;
+export const revalidate = 60;
 
 export const metadata = pageMetadata({
   title: "Ritz Media World Case Studies & Market Insights",

@@ -91,7 +91,7 @@ function yearFromImage(image: string) {
 }
 
 export async function loadCaseStudyList() {
-  const payload = await fetchJson(CASE_STUDY_LIST_URL);
+  const payload = await fetchJson(CASE_STUDY_LIST_URL, 60);
   if (!Array.isArray(payload)) {
     throw new TypeError("The case study API returned an unexpected response format.");
   }

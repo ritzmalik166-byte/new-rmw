@@ -176,7 +176,7 @@ async function limited<T>(task: () => Promise<T>): Promise<T> {
   }
 }
 
-export async function fetchJson(url: string): Promise<unknown> {
+export async function fetchJson(url: string, revalidate = 300): Promise<unknown> {
   let lastError: unknown;
 
   for (let attempt = 0; attempt <= RETRY_DELAYS_MS.length; attempt++) {
@@ -188,7 +188,7 @@ export async function fetchJson(url: string): Promise<unknown> {
     try {
       result = await limited(async () => {
         const response = await fetch(url, {
-          next: { revalidate: 300 },
+          next: { revalidate },
           signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
         });
         if (!response.ok) {
