@@ -43,6 +43,13 @@ function RubyBot() {
     }
     const { isRubyOpen, setIsRubyOpen } = context;
     const lenis = useLenis();
+    const initialMessage: Message = {
+        id: '1',
+        text: "Hello 👋 I'm Ruby.\nWelcome to Ritz Media World.\n\nIf you're exploring our services, campaigns, or capabilities,\nI'm here to help you 😊",
+        sender: 'bot',
+        timestamp: new Date(),
+        isFirstInSequence: true,
+    };
 
     // On phones the panel is full-screen: freeze the page behind it while open.
     useEffect(() => {
@@ -55,20 +62,13 @@ function RubyBot() {
             lenis?.start();
         };
     }, [isRubyOpen, lenis]);
-    const [messages, setMessages] = useState<Message[]>([
-        {
-            id: '1',
-            text: "Hello 👋 I'm Ruby.\nWelcome to Ritz Media World.\n\nIf you're exploring our services, campaigns, or capabilities,\nI'm here to help you 😊",
-            sender: 'bot',
-            timestamp: new Date(),
-            isFirstInSequence: true,
-        },
-    ]);
+    const [messages, setMessages] = useState<Message[]>([initialMessage]);
     const [inputValue, setInputValue] = useState('');
     const [selectedService, setSelectedService] = useState<string>('Select a service');
     const [isTyping, setIsTyping] = useState(false);
     const [showEnquiryButton, setShowEnquiryButton] = useState(false);
     const [showEnquiryForm, setShowEnquiryForm] = useState(false);
+    const [chatFinished, setChatFinished] = useState(false);
     const [isSubmittingEnquiry, setIsSubmittingEnquiry] = useState(false);
     const [uniqueId, setUniqueId] = useState<string | null>(null);
 
@@ -522,6 +522,7 @@ function RubyBot() {
             setSelectedService('Select a service');
             setShowEnquiryForm(false);
             setShowEnquiryButton(false);
+            setChatFinished(true);
         } catch (error) {
             addFrontendNotice(error instanceof Error ? error.message : "Your enquiry couldn't be sent. Please try again.");
         } finally {
@@ -592,6 +593,21 @@ function RubyBot() {
         setEnquiryOtpStage('idle');
         setEnquiryOtpError('');
         setSelectedService('Select a service');
+    };
+
+    const handleRestartChat = () => {
+        setMessages([{ ...initialMessage, timestamp: new Date() }]);
+        setInputValue('');
+        setShowEnquiryButton(false);
+        setShowEnquiryForm(false);
+        setChatFinished(false);
+        setEnquiryForm({ firstName: '', lastName: '', phone: '', email: '', message: '' });
+        setEnquiryPhoneCountry(DEFAULT_CONTACT_COUNTRY);
+        setEnquiryOtp('');
+        setEnquiryOtpToken('');
+        setEnquiryOtpStage('idle');
+        setEnquiryOtpError('');
+        addFrontendNotice('Ruby Bot is ready for a new conversation.');
     };
 
     if (!isPanelMounted) {
@@ -717,7 +733,7 @@ function RubyBot() {
                         <div ref={messagesEndRef} />
 
                         {/* Permanent Enquiry Form Button - Fixed position right side in chat history */}
-                        {!showEnquiryForm && (
+                        {!showEnquiryForm && !chatFinished && (
                             <div className="w-full flex justify-end items-end">
                                 <button
                                     onClick={() => setShowEnquiryForm(true)}
@@ -727,6 +743,17 @@ function RubyBot() {
                                     <span>📋</span>
                                     <span className="hidden sm:inline">Enquiry</span>
                                 </button></div>
+                        )}
+                        {chatFinished && !showEnquiryForm && (
+                                <div className="flex justify-center pt-2">
+                                    <button
+                                        type="button"
+                                        onClick={handleRestartChat}
+                                        className="rounded-full border-2 border-[#161b46] bg-[#c9356e] px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#a92b5b] touch-manipulation active:scale-95"
+                                    >
+                                        Start a new chat
+                                    </button>
+                                </div>
                         )}
                     </div>
 
