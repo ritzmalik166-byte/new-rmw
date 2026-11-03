@@ -236,7 +236,7 @@ export function Highways({ faqs = site.highways.faqs }: { faqs?: { q: string; a:
           <div data-highways-item className="highways-copy">
             <h2 className="highways-title">
               <span>Common</span>
-              <span>Highways.</span>
+              <span>highways.</span>
             </h2>
             <p className="highways-lede">{data.lede}</p>
           </div>
