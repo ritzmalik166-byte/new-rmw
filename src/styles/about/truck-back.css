@@ -311,6 +311,29 @@
 }
 
 @media (max-width: 520px) {
+  /* An empty column the width of the number balances it, so each label sits
+     dead centre in its pill rather than nudged right by the number. */
+  .about-tb-item {
+    display: grid;
+    grid-template-columns: 20px minmax(0, max-content) 20px;
+    justify-content: center;
+    column-gap: 8px;
+    text-align: center;
+  }
+
+  .about-tb-item::after {
+    content: "";
+  }
+
+  .about-tb-num {
+    width: 20px;
+    text-align: right;
+  }
+
+  .about-tb-label {
+    text-align: center;
+  }
+
   .about-tb-panel {
     padding: 2% 4%;
   }
