@@ -3,7 +3,6 @@
 import dynamic from "next/dynamic";
 import { Grain } from "@/components/layout/Grain";
 import RubyProvider from "@/components/ruby-bot/RubyContext";
-import { RubyLauncher } from "@/components/ruby-bot/RubyLauncher";
 import { MotionProvider } from "@/components/providers/MotionProvider";
 import { PageTransition } from "@/components/providers/PageTransition";
 import { ScrollMemory } from "@/components/providers/ScrollMemory";
@@ -20,7 +19,6 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
           <ScrollMemory />
           <RubyProvider>
             {children}
-            <RubyLauncher />
             <RubyBot />
           </RubyProvider>
         </PageTransition>

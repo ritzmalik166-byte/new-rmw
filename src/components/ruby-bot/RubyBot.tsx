@@ -31,6 +31,11 @@ interface QuickReply {
     text: string;
 }
 
+interface FrontendNotice {
+    id: string;
+    text: string;
+}
+
 function RubyBot() {
     const context = useContext(RubyContext);
     if (!context) {
@@ -138,7 +143,7 @@ function RubyBot() {
     const [isSpeechSupported, setIsSpeechSupported] = useState(true);
     const [isPanelMounted, setIsPanelMounted] = useState(false);
     const [isPanelActive, setIsPanelActive] = useState(false);
-    const [otpNotice, setOtpNotice] = useState('');
+    const [frontendNotices, setFrontendNotices] = useState<FrontendNotice[]>([]);
     const clearSilenceTimer = () => {
         if (silenceTimeoutRef.current) {
             clearTimeout(silenceTimeoutRef.current);
@@ -176,11 +181,13 @@ function RubyBot() {
         return () => window.clearTimeout(closeTimer);
     }, [isRubyOpen]);
 
-    useEffect(() => {
-        if (!otpNotice) return;
-        const timer = window.setTimeout(() => setOtpNotice(''), 6000);
-        return () => window.clearTimeout(timer);
-    }, [otpNotice]);
+    const addFrontendNotice = (text: string) => {
+        const id = `${Date.now()}-${Math.random()}`;
+        setFrontendNotices((previous) => [...previous.slice(-3), { id, text }]);
+        window.setTimeout(() => {
+            setFrontendNotices((previous) => previous.filter((notice) => notice.id !== id));
+        }, 6000);
+    };
 
     // Initialize audio on mount
     useEffect(() => {
@@ -426,15 +433,6 @@ function RubyBot() {
         }));
     };
 
-    const addEnquiryMessage = (text: string) => {
-        setMessages((prev) => [...prev, {
-            id: Date.now().toString(),
-            text,
-            sender: 'bot',
-            timestamp: new Date(),
-        }]);
-    };
-
     const sendEnquiryOtp = async () => {
         setEnquiryOtpStage('sending');
         setEnquiryOtpError('');
@@ -452,13 +450,12 @@ function RubyBot() {
             setEnquiryOtpToken(response.data.token);
             setEnquiryOtp('');
             setEnquiryOtpStage('sent');
-            setOtpNotice('Verification code sent to your mobile number.');
-            addEnquiryMessage(`A ${OTP_LENGTH}-digit verification code was sent to your mobile number.`);
+            addFrontendNotice(`A ${OTP_LENGTH}-digit verification code was sent to your mobile number.`);
         } catch (error) {
             setEnquiryOtpStage('idle');
             const message = error instanceof Error ? error.message : "We couldn't send the verification code.";
             setEnquiryOtpError(message);
-            setOtpNotice(message);
+            addFrontendNotice(message);
         }
     };
 
@@ -477,14 +474,13 @@ function RubyBot() {
                 throw new Error(response.data.error || "That code didn't work. Please try again.");
             }
             setEnquiryOtpStage('verified');
-            setOtpNotice('Mobile number verified successfully.');
-            addEnquiryMessage("Mobile number verified. Sending your enquiry now.");
+            addFrontendNotice('Mobile number verified successfully.');
             await submitEnquiry(response.data.verifiedToken);
         } catch (error) {
             setEnquiryOtpStage('sent');
             const message = error instanceof Error ? error.message : "Verification failed. Please try again.";
             setEnquiryOtpError(message);
-            setOtpNotice(message);
+            addFrontendNotice(message);
         }
     };
 
@@ -494,7 +490,8 @@ function RubyBot() {
         const phoneResult = validateContactPhone(nationalDigits, enquiryPhoneCountry);
         if (!phoneResult.ok) {
             setIsSubmittingEnquiry(false);
-            addEnquiryMessage(phoneResult.error);
+            setEnquiryOtpError(phoneResult.error);
+            addFrontendNotice(phoneResult.error);
             return;
         }
         let enquiryMessage = enquiryForm.message.trim() || "Enquiry from Ruby Chatbot";
@@ -508,23 +505,24 @@ function RubyBot() {
                 email: enquiryForm.email.trim(),
                 dial: enquiryPhoneCountry.dial_code,
                 phone: nationalDigits,
-                reason: selectedService === 'Select a service' ? 'General Inquiry' : 'New Project',
+                reason: 'New Project',
                 country: enquiryPhoneCountry.name,
                 heardFrom: 'Other',
                 message: enquiryMessage,
                 verifiedToken,
             }, { headers: { 'Content-Type': 'application/json' } });
             if (!response.data.ok) throw new Error(response.data.error || "Failed to submit enquiry. Please try again.");
-            addEnquiryMessage("Thank you for your enquiry! We'll get back to you soon. 😊");
+            addFrontendNotice("Thank you for your enquiry! We'll get back to you soon.");
             setEnquiryForm({ name: '', phone: '', email: '', message: '' });
             setEnquiryPhoneCountry(DEFAULT_CONTACT_COUNTRY);
             setEnquiryOtp('');
             setEnquiryOtpToken('');
             setEnquiryOtpStage('idle');
+            setSelectedService('Select a service');
             setShowEnquiryForm(false);
             setShowEnquiryButton(false);
         } catch (error) {
-            addEnquiryMessage(error instanceof Error ? error.message : "Your enquiry couldn't be sent. Please try again.");
+            addFrontendNotice(error instanceof Error ? error.message : "Your enquiry couldn't be sent. Please try again.");
         } finally {
             setIsSubmittingEnquiry(false);
         }
@@ -532,14 +530,17 @@ function RubyBot() {
 
     const handleSubmitEnquiry = async () => {
         // Validate form
+        if (selectedService === 'Select a service') {
+            const message = "Please select a service before requesting OTP.";
+            setEnquiryOtpError(message);
+            addFrontendNotice(message);
+            return;
+        }
+
         if (!enquiryForm.name.trim() || !enquiryForm.phone.trim() || !enquiryForm.email.trim()) {
-            const errorMessage: Message = {
-                id: Date.now().toString(),
-                text: "Please fill in all required fields (Name, Phone, Email)",
-                sender: 'bot',
-                timestamp: new Date(),
-            };
-            setMessages((prev) => [...prev, errorMessage]);
+            const message = "Please fill in all required fields (Name, Phone, Email).";
+            setEnquiryOtpError(message);
+            addFrontendNotice(message);
             return;
         }
 
@@ -549,26 +550,17 @@ function RubyBot() {
             enquiryPhoneCountry,
         );
         if (!phoneResult.ok) {
-            const errorMessage: Message = {
-                id: Date.now().toString(),
-                text: phoneResult.error,
-                sender: 'bot',
-                timestamp: new Date(),
-            };
-            setMessages((prev) => [...prev, errorMessage]);
+            setEnquiryOtpError(phoneResult.error);
+            addFrontendNotice(phoneResult.error);
             return;
         }
 
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(enquiryForm.email)) {
-            const errorMessage: Message = {
-                id: Date.now().toString(),
-                text: "Please enter a valid email address",
-                sender: 'bot',
-                timestamp: new Date(),
-            };
-            setMessages((prev) => [...prev, errorMessage]);
+            const message = "Please enter a valid email address.";
+            setEnquiryOtpError(message);
+            addFrontendNotice(message);
             return;
         }
 
@@ -577,7 +569,9 @@ function RubyBot() {
             return;
         }
         if (enquiryOtpStage !== 'verified') {
-            addEnquiryMessage(`Please enter the ${OTP_LENGTH}-digit verification code sent to your email.`);
+            const message = `Please enter the ${OTP_LENGTH}-digit verification code sent to your mobile number.`;
+            setEnquiryOtpError(message);
+            addFrontendNotice(message);
             return;
         }
         await submitEnquiry(enquiryOtpToken);
@@ -591,6 +585,7 @@ function RubyBot() {
         setEnquiryOtpToken('');
         setEnquiryOtpStage('idle');
         setEnquiryOtpError('');
+        setSelectedService('Select a service');
     };
 
     if (!isPanelMounted) {
@@ -599,10 +594,14 @@ function RubyBot() {
 
     return createPortal(
         <>
-        {otpNotice ? (
-            <div className="ruby-otp-notice theme-keep" role="status" aria-live="polite">
-                <span className="ruby-otp-notice-mark" aria-hidden>✓</span>
-                <span>{otpNotice}</span>
+        {frontendNotices.length ? (
+            <div className="ruby-otp-notices" role="status" aria-live="polite">
+                {frontendNotices.map((notice) => (
+                    <div className="ruby-otp-notice theme-keep" key={notice.id}>
+                        <span className="ruby-otp-notice-mark" aria-hidden>✓</span>
+                        <span>{notice.text}</span>
+                    </div>
+                ))}
             </div>
         ) : null}
         <div
@@ -668,10 +667,10 @@ function RubyBot() {
                                                 <RubyMark className="w-full h-full p-px" />
                                             </div>
                                         )}
-                                        {!isFirstInSequence && <div className="w-5 sm:w-6"></div>}
-                                        <div className="flex flex-col gap-1 max-w-[85%] sm:max-w-[75%]">
+                                        {!isFirstInSequence && <div className="w-5 sm:w-6 flex-shrink-0" aria-hidden></div>}
+                                        <div className="flex flex-col gap-1 min-w-0 max-w-[82%] sm:max-w-[75%]">
                                             <div
-                                                className="bg-white border border-[#ded5c7] text-[#161616] px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl rounded-bl-md text-xs sm:text-sm leading-relaxed whitespace-pre-line"
+                                                className="bg-white border border-[#ded5c7] text-[#161616] px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl rounded-bl-md text-[13px] sm:text-sm leading-relaxed text-left whitespace-pre-line break-words [overflow-wrap:anywhere]"
                                             >
                                                 {message.text}
                                             </div>
@@ -681,8 +680,8 @@ function RubyBot() {
                             } else {
                                 return (
                                     <div key={message.id} className="flex justify-end">
-                                        <div className="flex flex-col gap-1 max-w-[85%] sm:max-w-[75%]">
-                                            <div className="bg-[#161b46] text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl rounded-br-md text-xs sm:text-sm leading-relaxed whitespace-pre-line">
+                                        <div className="flex flex-col gap-1 min-w-0 max-w-[82%] sm:max-w-[75%]">
+                                            <div className="bg-[#161b46] text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl rounded-br-md text-[13px] sm:text-sm leading-relaxed text-left whitespace-pre-line break-words [overflow-wrap:anywhere]">
                                                 {message.text}
                                             </div>
                                         </div>
@@ -697,7 +696,7 @@ function RubyBot() {
                                 <div className="w-5 h-5 sm:w-6 sm:h-6 border border-[#c9356e] bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-1 overflow-hidden">
                                     <RubyMark className="w-full h-full p-px" />
                                 </div>
-                                <div className="flex flex-col gap-1 max-w-[85%] sm:max-w-[75%]">
+                                <div className="flex flex-col gap-1 min-w-0 max-w-[82%] sm:max-w-[75%]">
                                     <div className="bg-white border border-[#ded5c7] text-[#161616] px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl rounded-bl-md text-xs sm:text-sm leading-relaxed">
                                         <div className="flex gap-1.5 items-center py-1">
                                             <span className="w-2 h-2 bg-[#6b7280] rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
@@ -797,7 +796,12 @@ function RubyBot() {
                                 {/* Service Select Dropdown */}
                                 <select
                                     value={selectedService}
-                                    onChange={(e) => setSelectedService(e.target.value)}
+                                    onChange={(e) => {
+                                        setSelectedService(e.target.value);
+                                        setEnquiryOtpError('');
+                                    }}
+                                    required
+                                    aria-label="Select a service"
                                     className="w-full px-3 py-2 text-base sm:text-sm border border-[#cfc3b2] rounded-lg outline-none focus:border-[#c9356e] focus:ring-1 focus:ring-[#c9356e] bg-white text-[#161616] cursor-pointer"
                                 >
                                     {services.map((service, index) => (
