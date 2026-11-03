@@ -1200,13 +1200,13 @@
     width: min(100%, 560px);
   }
 
-  .pf-stats {
+  /* .pf-stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  } */
 
-  .pf-stat:nth-child(3) {
+  /* .pf-stat:nth-child(3) {
     border-left: 0;
-  }
+  } */
 
   .pf-stat:nth-child(n + 3) {
     border-top: 1.5px dashed var(--hm-rule);

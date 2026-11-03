@@ -177,9 +177,9 @@ function ResultBody() {
           <span className="svc-dm-result-url">https://www.ritzmediaworld.com</span>
         </span>
       </div>
-      <p className="svc-dm-result-title">Ritz Media World — Creative, Digital, 3D &amp; AI Agency</p>
+      <p className="svc-dm-result-title">Ritz Media World — Creative, Digital &amp; 3D Agency</p>
       <p className="svc-dm-result-snippet">
-        Creative, digital, media, 3D rendering and AI services in Noida since 2008.
+        Creative, digital, media and 3D rendering services in Noida since 2008.
       </p>
       <p className="svc-dm-result-links">
         <span>Services</span>

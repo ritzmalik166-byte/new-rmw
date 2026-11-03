@@ -1875,6 +1875,10 @@ body:has(.site-header.is-stuck:not(.is-hidden)) .pfd-group-nav {
 }
 
 @media (max-width: 980px) {
+  .pfd-hero .pf-hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .pfd-hero-stage {
     justify-self: center;
     width: min(100%, 520px);

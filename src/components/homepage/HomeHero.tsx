@@ -41,7 +41,7 @@ const CARGO: { name: string; tone: string }[] = [
   { name: "Content Marketing", tone: "blue" },
   { name: "Influencer Marketing", tone: "pink" },
   { name: "Celebrity Endorsements", tone: "orange" },
-  { name: "3D Rendering", tone: "teal" },
+  { name: "3D Rendering Services", tone: "teal" },
   // { name: "AI Services", tone: "yellow" }, 
 ];
 

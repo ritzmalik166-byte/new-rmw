@@ -54,6 +54,7 @@
 /* Arrow badge shared by the featured ticket and the cards. */
 .blog-go,
 .blog-archive .news-card-go {
+  position: static;
   display: grid;
   flex: 0 0 auto;
   place-items: center;
