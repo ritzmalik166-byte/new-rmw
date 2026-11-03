@@ -11,7 +11,7 @@ import { SEO_ORIGIN } from "@/lib/seo";
 import { tagHref } from "@/lib/taxonomy";
 import "@/styles/blogs/detail.css";
 
-export const revalidate = 300;
+export const revalidate = 60;
 export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
@@ -117,10 +117,25 @@ export default async function BlogDetailPage({
 }) {
   const { slug } = await params;
   const allBlogs = await getBlogsOrEmpty();
-  const blog = (await getBlogPost(slug)) ?? findBlog(allBlogs, slug);
+  let blog = (await getBlogPost(slug)) ?? findBlog(allBlogs, slug);
 
   if (!blog) {
-    notFound();
+    const caseStudy = (await getCaseStudies()).find((item) => item.slug.toLowerCase() === slug.toLowerCase());
+    if (caseStudy) {
+      blog = {
+        slug: caseStudy.slug,
+        title: caseStudy.title,
+        metaTitle: caseStudy.title,
+        image: caseStudy.image,
+        excerpt: caseStudy.excerpt,
+        content: "",
+        createdAt: caseStudy.createdAt,
+        updatedAt: null,
+        keywords: caseStudy.keywords,
+      };
+    } else {
+      notFound();
+    }
   }
 
   const isCaseStudy = (await getCaseStudySlugs()).has(blog.slug.toLowerCase());

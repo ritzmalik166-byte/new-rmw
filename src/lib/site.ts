@@ -415,7 +415,7 @@ export const site = {
     href: "/blog",
   },
   highways: {
-    title: "Common Highways.",
+    title: "Common highways.",
     lede: "Clear answers about how we work, what we offer, and how we help brands grow across creative, media, digital, and technology.",
     card: {
       slogan: ["BURI NAZAR WALE,", "RANKING DEKH"],
@@ -460,27 +460,27 @@ export const site = {
   about: {
     faqs: [
       {
-        q: "When Was Ritz Media World Founded, and by Whom?",
+        q: "When was Ritz Media World founded, and by whom?",
         a: "Ritz Media World was founded in August 2008 by Mr. Ritz Malik, who has led the agency ever since. He also founded Creative Thinks Media, a sister agency.",
       },
       {
-        q: "Where Is Ritz Media World Based?",
+        q: "Where is Ritz Media World based?",
         a: "Ritz Media World is headquartered in Noida, Delhi NCR, and works with brands across India.",
       },
       {
-        q: "How Has Ritz Media World Grown Since 2008?",
+        q: "How has Ritz Media World grown since 2008?",
         a: "The agency began with a mission to reimagine brand communication for India's growth markets. In 2012, it pioneered centrespread storytelling in Hindustan Times, and in 2016 it expanded into 360° digital marketing. In 2026, it introduced AI-powered 3D rendering, continuing 18 years of adapting to every major shift in Indian marketing.",
       },
       {
-        q: "What Awards and Recognition Has Ritz Media World Received?",
+        q: "What awards and recognition has Ritz Media World received?",
         a: "Ritz Media World was named Best Creative Agency (Real Estate) in Delhi NCR by Big FM in 2025.",
       },
       {
-        q: "What Partnerships and Accreditations Does Ritz Media World Hold?",
+        q: "What partnerships and accreditations does Ritz Media World hold?",
         a: "Ritz Media World is a Google Partner, a Meta Business Partner, a member of the Indian Newspaper Society, and a registered MSME.",
       },
       {
-        q: "What Makes Ritz Media World Different from Other Agencies?",
+        q: "What makes Ritz Media World different from other agencies?",
         a: "As an independent agency, Ritz Media World combines 18 years of experience across print, radio and digital with newer capabilities in AI and 3D. This means clients get the judgement of a long-established agency together with the speed and tools of a modern one, all from a single team.",
       },
       {
