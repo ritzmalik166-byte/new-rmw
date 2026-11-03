@@ -15,7 +15,7 @@ export interface BrandAnatomy {
 export type PortfolioWorkItem =
   | { kind: "image"; src: string; alt: string; full?: string; caption?: string; brand?: BrandAnatomy }
   | { kind: "youtube"; src: string; alt: string; youtubeId: string; caption?: string }
-  | { kind: "video"; video: string; alt: string; caption?: string };
+  | { kind: "video"; video: string; alt: string; caption?: string; heroImage?: string };
 
 export interface PortfolioWorkGroup {
   title: string;
@@ -877,6 +877,8 @@ export const PORTFOLIO_DETAILS: PortfolioDetail[] = [
             ? `${client} influencer marketing video by Ritz Media World`
             : `Influencer marketing video ${index + 1} by Ritz Media World`,
           ...(client ? { caption: client } : {}),
+          ...(index === 0 ? { heroImage: "/portfolio/influencer-nimbus.jpg" } : {}),
+          ...(index === 1 ? { heroImage: "/portfolio/influencer-ashiana-aaroham.jpg" } : {}),
         })),
       },
     ],

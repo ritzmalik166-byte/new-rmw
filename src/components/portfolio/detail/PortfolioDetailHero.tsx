@@ -103,7 +103,11 @@ export function PortfolioDetailHero({ detail }: { detail: PortfolioDetail }) {
           {picks.map((item, index) => (
             <figure key={index} className={`pfd-hero-card is-${index + 1}`}>
               <span className="pfd-hero-card-media">
-                <WorkThumb item={item} sizes="220px" priority />
+                {item.kind === "video" && item.heroImage ? (
+                  <Image src={item.heroImage} alt={item.alt} fill sizes="220px" priority />
+                ) : (
+                  <WorkThumb item={item} sizes="220px" priority />
+                )}
               </span>
             </figure>
           ))}
