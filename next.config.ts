@@ -55,7 +55,16 @@ const nextConfig: NextConfig = {
     ];
   },
   async rewrites() {
-    return [{ source: "/about.html", destination: "/about" }];
+    return [
+      { source: "/about.html", destination: "/about" },
+      // Ruby chatbot logs chats and enquiries through the old site's backend,
+      // so they keep landing in the same admin panel.
+      { source: "/api/chatting", destination: "https://rmw.ritzmediaworld.in/api/chatting" },
+      {
+        source: "/api/system-settings/contact-enquiry",
+        destination: "https://rmw.ritzmediaworld.in/api/system-settings/contact-enquiry",
+      },
+    ];
   },
 };
 

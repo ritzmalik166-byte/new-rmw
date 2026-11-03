@@ -55,6 +55,8 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
       ? "/portfolio?highlight=radio-ads"
       : service.slug === "celebrity-endorsements"
         ? "/portfolio?highlight=celebrity-spotlight"
+        : service.slug === "creative-services"
+          ? "/portfolio?highlight=creative-trio"
         : "/portfolio";
 
   const syncSlide = useCallback(() => {
@@ -123,7 +125,6 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
           </div>
           <TransitionLink data-hm-fade href={portfolioHref} className="hm-link">
             Explore our work
-            <HmArrow />
           </TransitionLink>
         </header>
 

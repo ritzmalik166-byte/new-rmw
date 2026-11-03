@@ -352,13 +352,13 @@
 
 @media (min-width: 768px) {
   body.has-floating-contact .about-office-tour {
-    bottom: calc(clamp(14px, 2.2vw, 28px) + 122px);
+    bottom: calc(clamp(14px, 2.2vw, 28px) + 190px);
   }
 }
 
 @media (max-width: 560px) {
   body.has-floating-contact .about-office-tour {
-    bottom: calc(78px + env(safe-area-inset-bottom) + 12px);
+    bottom: calc(78px + env(safe-area-inset-bottom) + 76px);
   }
 
   .about-office-tour {
@@ -390,7 +390,7 @@
 
 @media (min-width: 768px) and (max-width: 1023px) {
   body.has-floating-contact .about-office-tour {
-    bottom: calc(16px + 122px);
+    bottom: calc(16px + 190px);
   }
 }
 

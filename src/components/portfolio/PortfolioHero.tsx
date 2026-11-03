@@ -18,11 +18,11 @@ export function PortfolioHero() {
 
   useEffect(() => {
     const value = new URLSearchParams(window.location.search).get("highlight");
-    if (value !== "radio-ads" && value !== "celebrity-spotlight") return;
+    if (value !== "radio-ads" && value !== "celebrity-spotlight" && value !== "creative-trio") return;
 
-    const target = rootRef.current?.querySelector(`[data-portfolio-highlight="${value}"]`);
-    if (!target) return;
-    target.classList.add("is-pulsing");
+    const targets = rootRef.current?.querySelectorAll(`[data-portfolio-highlight="${value}"]`);
+    if (!targets?.length) return;
+    targets.forEach((target) => target.classList.add("is-pulsing"));
     window.history.replaceState(null, "", window.location.pathname);
   }, [rootRef]);
 
@@ -82,7 +82,7 @@ export function PortfolioHero() {
 
           <div data-hm-fade className="hm-actions">
             <a href="#explore" className="hm-btn">
-              Explore the work <span aria-hidden>→</span>
+              Explore the work
             </a>
             <a href="/contact.html" target="_blank" rel="noopener noreferrer" className="hm-link">
               Start your project
@@ -93,7 +93,12 @@ export function PortfolioHero() {
           <ul data-hm-fade className="pf-hero-chips" aria-label="Portfolio categories">
             {PORTFOLIO_CATEGORIES.map((category) => (
               <li key={category.id}>
-                <TransitionLink href={category.href}>{category.title}</TransitionLink>
+                <TransitionLink
+                  href={category.href}
+                  data-portfolio-highlight={["brand-identity", "creative-design", "brand-films"].includes(category.id) ? "creative-trio" : undefined}
+                >
+                  {category.title}
+                </TransitionLink>
               </li>
             ))}
             <li className="pf-hero-video-link">
