@@ -460,8 +460,7 @@
 }
 
 .pf-hero-chips a.is-pulsing {
-  animation: pf-chip-pulse 1.4s ease-in-out 3;
-  animation-delay: 0.8s;
+  animation: pf-chip-pulse 0.9s ease-in-out 5;
   animation-fill-mode: both;
 }
 

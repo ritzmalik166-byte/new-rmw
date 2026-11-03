@@ -18,13 +18,38 @@ export function PortfolioHero() {
 
   useEffect(() => {
     const value = new URLSearchParams(window.location.search).get("highlight");
-    if (value !== "radio-ads" && value !== "celebrity-spotlight" && value !== "creative-trio") return;
+    if (
+      value !== "radio-ads" &&
+      value !== "celebrity-spotlight" &&
+      value !== "creative-trio" &&
+      value !== "website-design" &&
+      value !== "walk-through-videos" &&
+      value !== "influencer-marketing"
+    ) return;
 
-    const targets = rootRef.current?.querySelectorAll(`[data-portfolio-highlight="${value}"]`);
-    if (!targets?.length) return;
-    targets.forEach((target) => target.classList.add("is-pulsing"));
-    window.history.replaceState(null, "", window.location.pathname);
-  }, [rootRef]);
+    let attempts = 0;
+    let timer: number | undefined;
+    const highlight = () => {
+      const targets = rootRef.current?.querySelectorAll(`[data-portfolio-highlight="${value}"]`);
+      if (!targets?.length && attempts < 10) {
+        attempts += 1;
+        timer = window.setTimeout(highlight, 100);
+        return;
+      }
+      if (!targets?.length) return;
+      targets.forEach((target) => {
+        target.classList.remove("is-pulsing");
+        void (target as HTMLElement).offsetWidth;
+        target.classList.add("is-pulsing");
+      });
+      window.history.replaceState(null, "", window.location.pathname);
+    };
+
+    highlight();
+    return () => {
+      if (timer) window.clearTimeout(timer);
+    };
+  }, []);
 
   useGSAP(
     () => {
@@ -95,7 +120,11 @@ export function PortfolioHero() {
               <li key={category.id}>
                 <TransitionLink
                   href={category.href}
-                  data-portfolio-highlight={["brand-identity", "creative-design", "brand-films"].includes(category.id) ? "creative-trio" : undefined}
+                  data-portfolio-highlight={
+                    ["brand-identity", "creative-design", "brand-films"].includes(category.id)
+                      ? "creative-trio"
+                      : category.id
+                  }
                 >
                   {category.title}
                 </TransitionLink>
@@ -106,7 +135,7 @@ export function PortfolioHero() {
                 href="/portfolio/radio-advertising"
                 data-portfolio-highlight="radio-ads"
               >
-                Radio Ads ↗
+                Radio Ads
               </TransitionLink>
             </li>
             <li className="pf-hero-video-link">
@@ -114,7 +143,7 @@ export function PortfolioHero() {
                 href="/portfolio/celebrity-endorsements"
                 data-portfolio-highlight="celebrity-spotlight"
               >
-                Celebrity Spotlight ↗
+                Celebrity Spotlight
               </TransitionLink>
             </li>
           </ul>

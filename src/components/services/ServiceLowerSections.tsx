@@ -57,6 +57,12 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
         ? "/portfolio?highlight=celebrity-spotlight"
         : service.slug === "creative-services"
           ? "/portfolio?highlight=creative-trio"
+        : service.slug === "web-designing-and-development"
+          ? "/portfolio?highlight=website-design"
+        : service.slug === "3d-rendering"
+          ? "/portfolio?highlight=walk-through-videos"
+        : service.slug === "influencer-marketing-agency-in-india"
+          ? "/portfolio?highlight=influencer-marketing"
         : "/portfolio";
 
   const syncSlide = useCallback(() => {
