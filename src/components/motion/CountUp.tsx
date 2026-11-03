@@ -1,7 +1,7 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap } from "@/lib/gsap";
 
@@ -22,16 +22,11 @@ export function CountUp({
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const { ready, reduced } = useMotion();
-  const [live, setLive] = useState(false);
-
-  useEffect(() => {
-    setLive(true);
-  }, []);
 
   useGSAP(
     () => {
       const element = ref.current;
-      if (!element || !ready || !live) return;
+      if (!element || !ready) return;
 
       if (reduced) {
         element.textContent = `${prefix}${value}${suffix}`;
@@ -39,21 +34,33 @@ export function CountUp({
       }
 
       const counter = { value: 0 };
-      gsap.to(counter, {
-        value,
-        duration: 2.6,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: element,
-          start: "top 85%",
-          once: true,
+      let started = false;
+      const animate = () => {
+        if (started) return;
+        started = true;
+        gsap.to(counter, {
+          value,
+          duration: 2.6,
+          ease: "power2.out",
+          onUpdate: () => {
+            element.textContent = `${prefix}${Math.round(counter.value)}${suffix}`;
+          },
+        });
+      };
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry?.isIntersecting) return;
+          animate();
+          observer.disconnect();
         },
-        onUpdate: () => {
-          element.textContent = `${prefix}${Math.round(counter.value)}${suffix}`;
-        },
-      });
+        { rootMargin: "0px 0px -15% 0px", threshold: 0 },
+      );
+      observer.observe(element);
+
+      return () => observer.disconnect();
     },
-    { dependencies: [ready, reduced, live, value, prefix, suffix] },
+    { dependencies: [ready, reduced, value, prefix, suffix] },
   );
 
   return (
