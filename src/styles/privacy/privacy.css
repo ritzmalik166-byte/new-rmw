@@ -450,6 +450,41 @@
   }
 }
 
+@media (max-width: 720px) {
+  main > .pv {
+    width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+    text-align: start;
+  }
+
+  .pv-hero,
+  .pv-body {
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .pv-hero {
+    padding-top: 112px;
+  }
+
+  .pv-kicker {
+    justify-content: flex-start;
+  }
+
+  .pv-title,
+  .pv-lede,
+  .pv-updated {
+    margin-inline: 0;
+    text-align: start;
+  }
+
+  .pv-section :is(h2, h3, p, li),
+  .pv-contact :is(dt, dd) {
+    text-align: start;
+  }
+}
+
 @media (max-width: 560px) {
   .pv-toc ol {
     grid-template-columns: minmax(0, 1fr);

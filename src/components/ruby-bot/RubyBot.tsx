@@ -84,7 +84,8 @@ function RubyBot() {
     }, []);
 
     const [enquiryForm, setEnquiryForm] = useState({
-        name: '',
+        firstName: '',
+        lastName: '',
         phone: '',
         email: '',
         message: '',
@@ -439,7 +440,7 @@ function RubyBot() {
         try {
             const response = await axios.post('/api/contact/otp/send', {
                 phone: enquiryForm.phone.replace(/\D/g, ''),
-                userName: enquiryForm.name.trim(),
+                userName: `${enquiryForm.firstName.trim()} ${enquiryForm.lastName.trim()}`.trim(),
                 enquiry_for: selectedService,
                 message: enquiryForm.message.trim(),
                 number: enquiryForm.phone,
@@ -500,8 +501,8 @@ function RubyBot() {
         }
         try {
             const response = await axios.post('/api/contact', {
-                firstName: enquiryForm.name.trim().split(/\s+/)[0],
-                lastName: enquiryForm.name.trim().split(/\s+/).slice(1).join(' ') || " ",
+                firstName: enquiryForm.firstName.trim(),
+                lastName: enquiryForm.lastName.trim(),
                 email: enquiryForm.email.trim(),
                 dial: enquiryPhoneCountry.dial_code,
                 phone: nationalDigits,
@@ -513,7 +514,7 @@ function RubyBot() {
             }, { headers: { 'Content-Type': 'application/json' } });
             if (!response.data.ok) throw new Error(response.data.error || "Failed to submit enquiry. Please try again.");
             addFrontendNotice("Thank you for your enquiry! We'll get back to you soon.");
-            setEnquiryForm({ name: '', phone: '', email: '', message: '' });
+            setEnquiryForm({ firstName: '', lastName: '', phone: '', email: '', message: '' });
             setEnquiryPhoneCountry(DEFAULT_CONTACT_COUNTRY);
             setEnquiryOtp('');
             setEnquiryOtpToken('');
@@ -537,8 +538,13 @@ function RubyBot() {
             return;
         }
 
-        if (!enquiryForm.name.trim() || !enquiryForm.phone.trim() || !enquiryForm.email.trim()) {
-            const message = "Please fill in all required fields (Name, Phone, Email).";
+        if (
+            !enquiryForm.firstName.trim() ||
+            !enquiryForm.lastName.trim() ||
+            !enquiryForm.phone.trim() ||
+            !enquiryForm.email.trim()
+        ) {
+            const message = "Please fill in all required fields (First name, Last name, Phone, Email).";
             setEnquiryOtpError(message);
             addFrontendNotice(message);
             return;
@@ -579,7 +585,7 @@ function RubyBot() {
 
     const handleCloseEnquiryForm = () => {
         setShowEnquiryForm(false);
-        setEnquiryForm({ name: '', phone: '', email: '', message: '' });
+        setEnquiryForm({ firstName: '', lastName: '', phone: '', email: '', message: '' });
         setEnquiryPhoneCountry(DEFAULT_CONTACT_COUNTRY);
         setEnquiryOtp('');
         setEnquiryOtpToken('');
@@ -741,9 +747,19 @@ function RubyBot() {
 
                                 <input
                                     type="text"
-                                    placeholder="Your Name *"
-                                    value={enquiryForm.name}
-                                    onChange={(e) => handleEnquiryFormChange('name', e.target.value)}
+                                    placeholder="First Name *"
+                                    value={enquiryForm.firstName}
+                                    autoComplete="given-name"
+                                    onChange={(e) => handleEnquiryFormChange('firstName', e.target.value)}
+                                    className="w-full px-3 py-2 text-base sm:text-sm border border-[#cfc3b2] rounded-lg outline-none focus:border-[#c9356e] focus:ring-1 focus:ring-[#c9356e] bg-white"
+                                />
+
+                                <input
+                                    type="text"
+                                    placeholder="Last Name *"
+                                    value={enquiryForm.lastName}
+                                    autoComplete="family-name"
+                                    onChange={(e) => handleEnquiryFormChange('lastName', e.target.value)}
                                     className="w-full px-3 py-2 text-base sm:text-sm border border-[#cfc3b2] rounded-lg outline-none focus:border-[#c9356e] focus:ring-1 focus:ring-[#c9356e] bg-white"
                                 />
 
