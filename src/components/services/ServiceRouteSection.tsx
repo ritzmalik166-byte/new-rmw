@@ -167,7 +167,10 @@ export function ServiceRouteSection({ service, subServices = [] }: Props) {
           <header>
             <p data-hm-fade className="hm-kicker">
               <span className="hm-pill">KM 01</span>
-              <span>{PROBLEM_KICKERS[service.slug] ?? "why print still works"}</span>
+              <span>
+                {PROBLEM_KICKERS[service.slug] ??
+                  `why ${service.name.replace(/\s+services$/i, "").toLowerCase()} works`}
+              </span>
             </p>
             <HmTitle
               id="sd-problem-title"

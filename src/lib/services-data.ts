@@ -1675,7 +1675,7 @@ const ALL_SERVICES: ServiceDetail[] = [
     uppercaseName: "3D RENDERING SERVICES",
     engine: "Engine Three · 3D Rendering Services",
     kicker: "KM 09 · Worlds you can walk through",
-    heroTitle: { lead: "3D Rendering Services", accent: "that sells before launch." },
+    heroTitle: { lead: "3D Rendering Services", accent: "that sell before launch." },
     tagline:
       "Photorealistic exterior, interior, township, and floor plan renders that help developers, architects, and designers sell, present, and launch projects before construction begins.",
     heading: "Show buyers the home, the township, and the view before a single brick is laid",
@@ -1761,6 +1761,18 @@ const ALL_SERVICES: ServiceDetail[] = [
         ],
         subService: "amenity-landscape-rendering",
       },
+      {
+        title: "3D Walkthrough Videos",
+        copy: "Animated 3D tours that move through your project room by room and from above, letting buyers experience the space long before construction begins.",
+        details: [
+          "Full Project Walkthroughs",
+          "Interior Walkthroughs",
+          "Amenity & Clubhouse Tours",
+          "Aerial Flythroughs",
+          "Short Cuts for Social Media",
+          "Sales Gallery Videos",
+        ],
+      },
     ],
     deliverables: [
       "Ultra-High-Resolution 4K & 8K Exterior Stills for Hoardings",
@@ -1826,11 +1838,17 @@ const ALL_SERVICES: ServiceDetail[] = [
         },
       ],
       wallLede: "Renders created for real projects, from first drawing to launch campaign.",
+      intentTitle: { lead: "Why 3D rendering", accent: "works" },
       faqs: [
         {
           question: "What 3D rendering services do you offer?",
           answer:
-            "We offer 3D exterior rendering, 3D interior rendering, aerial and township visualization, 3D floor plan rendering, and amenity and landscape rendering for real estate developers, architects, interior designers, and builders.",
+            "We offer 3D exterior rendering, 3D interior rendering, aerial and township visualization, 3D floor plan rendering, amenity and landscape rendering, and 3D walkthrough videos for real estate developers, architects, interior designers, and builders.",
+        },
+        {
+          question: "What is the difference between a 3D render and a walkthrough video?",
+          answer:
+            "A 3D render is a single still image of a space, while a walkthrough video is an animated tour that moves through it. Renders suit brochures and hoardings, while walkthroughs work best on websites, in sales galleries, and on social media.",
         },
         {
           question: "What is architectural visualization?",
