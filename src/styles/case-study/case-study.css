@@ -955,7 +955,8 @@
 .cs-report-actions {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  /* Baseline, so the underlined text link reads on the same line as the button label. */
+  align-items: baseline;
   gap: 14px 22px;
   margin-top: 18px;
 }
@@ -1066,6 +1067,16 @@
     padding: 14px 16px 14px 20px;
   }
 
+  .cs-index {
+    margin-bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+
+  .cs-index-list {
+    max-height: 360px;
+    padding-bottom: calc(76px + env(safe-area-inset-bottom));
+    scroll-padding-bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+
   .cs-index-go,
   .cs-index-go-slot {
     display: none;
@@ -1137,5 +1148,46 @@
   .cs-year,
   .cs-report {
     transition: none;
+  }
+}
+
+/* ---------- Phones: index header spans the card, year span stays on one line ---------- */
+@media (max-width: 720px) {
+  /* The global mobile rule auto-margins every <p>, which shrinks this flex child. */
+  main .cs-index-head {
+    align-self: stretch;
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .cs-hero-stats dd {
+    white-space: nowrap;
+  }
+
+  .cs-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .cs-hero-stats div {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .cs-hero-stats dt {
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .cs-hero-stats div {
+    padding: 10px 8px;
+  }
+
+  .cs-hero-stats dd {
+    font-size: 22px;
   }
 }

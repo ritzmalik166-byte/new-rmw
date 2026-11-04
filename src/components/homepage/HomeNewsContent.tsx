@@ -58,7 +58,7 @@ export function HomeNewsContent({ blogs }: { blogs: Blog[] }) {
                   <span className="hm-post-title">{blog.title}</span>
                   {blog.excerpt ? <span className="hm-post-excerpt">{blog.excerpt}</span> : null}
                   <span className="hm-post-more">
-                    Read article
+                    <span className="hm-post-more-label">Read article</span>
                     <span className="hm-post-go">
                       <HmArrow />
                     </span>

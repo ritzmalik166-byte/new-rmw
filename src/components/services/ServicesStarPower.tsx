@@ -163,7 +163,17 @@ export function ServicesStarPower() {
               style={{ "--tone": card.tone } as CSSProperties}
             >
               <p className="svc-star-kicker">{card.kicker}</p>
-              <h3 className="svc-star-card-title">{card.title}</h3>
+              <h3 className="svc-star-card-title">
+                {card.id === "influencer" ? (
+                  <>
+                    Influencer
+                    <br className="svc-star-influencer-break" />
+                    Marketing Services
+                  </>
+                ) : (
+                  card.title
+                )}
+              </h3>
               <ol className="svc-star-list">
                 {card.items.map((item, i) => (
                   <li key={item} style={{ "--i": i } as CSSProperties}>

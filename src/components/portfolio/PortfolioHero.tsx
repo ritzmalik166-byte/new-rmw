@@ -22,6 +22,7 @@ export function PortfolioHero() {
       value !== "radio-ads" &&
       value !== "celebrity-spotlight" &&
       value !== "creative-trio" &&
+      value !== "creative-design" &&
       value !== "website-design" &&
       value !== "walk-through-videos" &&
       value !== "influencer-marketing"
@@ -121,7 +122,9 @@ export function PortfolioHero() {
                 <TransitionLink
                   href={category.href}
                   data-portfolio-highlight={
-                    ["brand-identity", "creative-design", "brand-films"].includes(category.id)
+                    category.id === "creative-design"
+                      ? "creative-design"
+                      : ["brand-identity", "brand-films"].includes(category.id)
                       ? "creative-trio"
                       : category.id
                   }
