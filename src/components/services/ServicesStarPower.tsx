@@ -166,7 +166,7 @@ export function ServicesStarPower() {
               <h3 className="svc-star-card-title">
                 {card.id === "influencer" ? (
                   <>
-                    Influencer
+                    Influencer{" "}
                     <br className="svc-star-influencer-break" />
                     Marketing Services
                   </>
