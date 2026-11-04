@@ -1399,12 +1399,20 @@
     white-space: nowrap;
   }
 
+  /* Icon + text rows stay left-aligned so the icons line up in one column. */
   .ct-dispatch-list li {
-    justify-content: center;
-    text-align: center;
+    justify-content: flex-start;
+    text-align: start;
   }
 
-  .ct-dispatch-list li > span:last-child,
+  .ct-dispatch-list li > span:last-child {
+    align-items: flex-start;
+  }
+
+  .ct-dispatch-list li > span:last-child > * {
+    text-align: start !important;
+  }
+
   .ct-route li {
     align-items: center;
   }

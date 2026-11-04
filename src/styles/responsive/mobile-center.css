@@ -13,6 +13,7 @@
       form,
       table,
       .blog-prose,
+      .pv-body,
       .hm-faq-list,
       .hm-chip,
       .svch-note,
@@ -35,6 +36,7 @@
           form,
           table,
           .blog-prose,
+          .pv-body,
           .hm-faq-list,
           .svch-note,
           .svc-dm-search,
@@ -48,7 +50,7 @@
   }
 
   /* Centres width-capped ledes; list rows keep their flex spacing. */
-  main :is(h1, h2, h3, h4, h5, h6, p, blockquote):not(form *, table *, .blog-prose *, .bc *, li > *) {
+  main :is(h1, h2, h3, h4, h5, h6, p, blockquote):not(form *, table *, .blog-prose *, .pv-body *, .bc *, li > *) {
     margin-inline: auto;
   }
 
@@ -67,7 +69,7 @@
       .sd-crumbs ol,
       .blog-breadcrumb ol,
       .blog-post-tag-list
-    ):not(:is(form, .svch-note, .svc-dm-search, .wm-frame, .bc) *) {
+    ):not(:is(form, .pv-body, .svch-note, .svc-dm-search, .wm-frame, .bc) *) {
     justify-content: center;
   }
 
