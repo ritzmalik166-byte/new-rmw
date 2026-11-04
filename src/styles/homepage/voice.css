@@ -534,11 +534,37 @@
   text-align: center;
 }
 
-.hm-receipt-who {
+/* ---------- Consignee row ----------
+   Tablet and desktop: a fixed grid (logo | client | signature), so every card
+   lines up the same however long the client line is. Phones: one centred stack. */
+.hm-receipt-foot {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
   align-items: center;
-  text-align: center;
+  justify-content: stretch;
+}
+
+.hm-receipt-who {
+  align-items: flex-start;
+  text-align: left;
 }
 
 .hm-receipt-sign {
   margin-left: 0;
+}
+
+@media (max-width: 720px) {
+  .hm-receipt-foot {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+
+  .hm-receipt-who {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hm-receipt-sign {
+    align-items: center;
+  }
 }
