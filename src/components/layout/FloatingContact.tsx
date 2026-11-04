@@ -1,8 +1,10 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PhoneGlyph } from "@/components/layout/FooterContact";
+import { RubyContext } from "@/components/ruby-bot/RubyContext";
+import { RubyMark } from "@/components/ruby-bot/RubyMark";
 import { cn } from "@/lib/cn";
 import { site } from "@/lib/site";
 
@@ -93,6 +95,7 @@ function useFooterDock() {
 export function FloatingContact() {
   const visible = usePastHero();
   const { parked, expanded } = useFooterDock();
+  const ruby = useContext(RubyContext);
 
   useEffect(() => {
     document.body.classList.toggle("has-floating-contact", visible);
@@ -111,6 +114,21 @@ export function FloatingContact() {
       aria-label="Quick contact"
       inert={!visible}
     >
+      <button
+        type="button"
+        onClick={() => ruby?.setIsRubyOpen(true)}
+        className="fab-btn is-ruby"
+        aria-label="Chat with Ruby, our assistant"
+        aria-expanded={ruby?.isRubyOpen ?? false}
+      >
+        <span className="fab-icon">
+          <RubyMark />
+        </span>
+        <span className="fab-label">Ask Ruby</span>
+        <span className="fab-text" aria-hidden>
+          Ask Ruby
+        </span>
+      </button>
       <a
         href={WHATSAPP_HREF}
         target="_blank"
