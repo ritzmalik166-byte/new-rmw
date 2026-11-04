@@ -1207,9 +1207,6 @@
     border-left: 0;
   } */
 
-  .pf-stat:nth-child(n + 3) {
-    border-top: 1.5px dashed var(--hm-rule);
-  }
 }
 
 @media (max-width: 860px) {
@@ -1260,15 +1257,34 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .pf-stat {
-    padding-inline: 12px;
+  /* Four columns are too narrow on phones: two by two, with whole words. */
+  .pf-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pf-stat,
+  .pf-stat:first-child {
+    align-items: center;
+    padding: 22px 12px;
+  }
+
+  .pf-stat:nth-child(3) {
+    border-left: 0;
+  }
+
+  .pf-stat:nth-child(n + 3) {
+    border-top: 1.5px dashed var(--hm-rule);
+  }
+
+  .pf-stat dd {
+    font-size: clamp(40px, 12vw, 52px);
   }
 
   .pf-stat dt {
     font-size: 11px;
     letter-spacing: 0.04em;
-    overflow-wrap: break-word;
-    hyphens: auto;
+    overflow-wrap: normal;
+    hyphens: none;
   }
 
   .pf-hero-photo.is-front {

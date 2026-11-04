@@ -1162,11 +1162,28 @@
   .cs-hero-stats dd {
     white-space: nowrap;
   }
+
+  .cs-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .cs-hero-stats div {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .cs-hero-stats dt {
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
 }
 
 @media (max-width: 400px) {
   .cs-hero-stats div {
-    padding: 10px 10px;
+    padding: 10px 8px;
   }
 
   .cs-hero-stats dd {
