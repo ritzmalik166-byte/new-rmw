@@ -164,15 +164,11 @@ export function ServicesStarPower() {
             >
               <p className="svc-star-kicker">{card.kicker}</p>
               <h3 className="svc-star-card-title">
-                {card.id === "influencer" ? (
-                  <>
-                    Influencer{" "}
-                    <br className="svc-star-influencer-break" />
-                    Marketing Services
-                  </>
-                ) : (
-                  card.title
-                )}
+                {/* First word on its own line where the break shows, so both titles
+                    split the same way: "Celebrity / Endorsement Services". */}
+                {card.title.split(" ")[0]}{" "}
+                <br className="svc-star-title-break" />
+                {card.title.split(" ").slice(1).join(" ")}
               </h3>
               <ol className="svc-star-list">
                 {card.items.map((item, i) => (

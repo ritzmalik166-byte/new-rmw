@@ -34,7 +34,7 @@ interface QuickReply {
 interface FrontendNotice {
     id: string;
     text: string;
-}
+}/*  */
 
 function RubyBot() {
     const context = useContext(RubyContext);

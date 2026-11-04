@@ -2016,3 +2016,11 @@
     transition: none;
   }
 }
+
+/* Where service copy is centred (tablets and phones), centre the capped
+   section header too, or its centred text sits left of the page centre. */
+@media (max-width: 980px) {
+  .sd-head:not(.is-row) {
+    margin-inline: auto;
+  }
+}
