@@ -361,7 +361,7 @@ function RubyBot() {
             setIsTyping(true);
 
             // Call API to get bot response with concatenated message
-            axios.post('https://api.ritzmediaworld.in/api/v1/chat', {
+            axios.post('/api/chat', {
                 message: finalMessage,
             }, {
                 headers: {

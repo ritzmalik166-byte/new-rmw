@@ -1,0 +1,129 @@
+/* ---------- Diwali: footer and lower homepage sections ---------- */
+/* Same switch as the hero (DIWALI_THEME): everything is scoped to a page whose
+   hero carries `data-diwali`, so it is inert elsewhere and when the theme is off. */
+
+:root:has(.hm-hero[data-diwali]) {
+  --dw-swag: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27240%27 height=%2748%27 viewBox=%270 0 240 48%27%3E%3Cg filter=%27drop-shadow(0 1.5px 1px rgba(80,30,0,.35))%27%3E%3Ccircle cx=%270.0%27 cy=%276.0%27 r=%276.4%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%270.0%27 cy=%276.0%27 r=%273.2%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%2710.0%27 cy=%279.8%27 r=%276.6%27 fill=%27%23f6b416%27/%3E%3Ccircle cx=%2710.0%27 cy=%279.8%27 r=%273.3%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%2720.0%27 cy=%2713.3%27 r=%276.1%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%2720.0%27 cy=%2713.3%27 r=%273.1%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%2730.0%27 cy=%2716.5%27 r=%276.6%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%2730.0%27 cy=%2716.5%27 r=%273.3%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%2740.0%27 cy=%2719.3%27 r=%277.1%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%2740.0%27 cy=%2719.3%27 r=%273.6%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%2750.0%27 cy=%2721.8%27 r=%276.3%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%2750.0%27 cy=%2721.8%27 r=%273.2%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%2760.0%27 cy=%2724.0%27 r=%276.5%27 fill=%27%23f6b416%27/%3E%3Ccircle cx=%2760.0%27 cy=%2724.0%27 r=%273.3%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%2770.0%27 cy=%2725.8%27 r=%277.2%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%2770.0%27 cy=%2725.8%27 r=%273.6%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%2780.0%27 cy=%2727.3%27 r=%276.3%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%2780.0%27 cy=%2727.3%27 r=%273.2%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%2790.0%27 cy=%2728.5%27 r=%277.2%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%2790.0%27 cy=%2728.5%27 r=%273.6%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%27100.0%27 cy=%2729.3%27 r=%277.1%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%27100.0%27 cy=%2729.3%27 r=%273.6%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%27110.0%27 cy=%2729.8%27 r=%276.2%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%27110.0%27 cy=%2729.8%27 r=%273.1%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%27120.0%27 cy=%2730.0%27 r=%276.9%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%27120.0%27 cy=%2730.0%27 r=%273.4%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%27130.0%27 cy=%2729.8%27 r=%277.3%27 fill=%27%23f6b416%27/%3E%3Ccircle cx=%27130.0%27 cy=%2729.8%27 r=%273.7%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%27140.0%27 cy=%2729.3%27 r=%276.1%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%27140.0%27 cy=%2729.3%27 r=%273.1%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%27150.0%27 cy=%2728.5%27 r=%276.5%27 fill=%27%23f6b416%27/%3E%3Ccircle cx=%27150.0%27 cy=%2728.5%27 r=%273.2%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%27160.0%27 cy=%2727.3%27 r=%276.7%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%27160.0%27 cy=%2727.3%27 r=%273.4%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%27170.0%27 cy=%2725.8%27 r=%276.3%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%27170.0%27 cy=%2725.8%27 r=%273.2%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%27180.0%27 cy=%2724.0%27 r=%276.1%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%27180.0%27 cy=%2724.0%27 r=%273.1%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%27190.0%27 cy=%2721.8%27 r=%277.2%27 fill=%27%23f6b416%27/%3E%3Ccircle cx=%27190.0%27 cy=%2721.8%27 r=%273.6%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%27200.0%27 cy=%2719.3%27 r=%277.3%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%27200.0%27 cy=%2719.3%27 r=%273.6%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%27210.0%27 cy=%2716.5%27 r=%277.0%27 fill=%27%23f6b416%27/%3E%3Ccircle cx=%27210.0%27 cy=%2716.5%27 r=%273.5%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%27220.0%27 cy=%2713.3%27 r=%277.2%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%27220.0%27 cy=%2713.3%27 r=%273.6%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%27230.0%27 cy=%279.8%27 r=%276.3%27 fill=%27%23f6b416%27/%3E%3Ccircle cx=%27230.0%27 cy=%279.8%27 r=%273.1%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Ccircle cx=%27240.0%27 cy=%276.0%27 r=%276.8%27 fill=%27%23f08a0c%27/%3E%3Ccircle cx=%27240.0%27 cy=%276.0%27 r=%273.4%27 fill=%27none%27 stroke=%27%239a4a0a%27 stroke-opacity=%27.4%27 stroke-dasharray=%271.3 1.1%27/%3E%3Cg transform=%27translate(0 4)%27%3E%3Cg transform=%27rotate(-24)%27%3E%3Cpath d=%27M0 0C6 9 6 22 0 32C-6 22-6 9 0 0Z%27 fill=%27%233d7f31%27/%3E%3C/g%3E%3Cpath d=%27M0 0C6 9 6 22 0 32C-6 22-6 9 0 0Z%27 fill=%27%233d7f31%27/%3E%3Cg transform=%27rotate(22)%27%3E%3Cpath d=%27M0 0C6 9 6 22 0 32C-6 22-6 9 0 0Z%27 fill=%27%233d7f31%27/%3E%3C/g%3E%3Ccircle cy=%272%27 r=%276.5%27 fill=%27%23e2780a%27/%3E%3C/g%3E%3Cg transform=%27translate(240 4)%27%3E%3Cg transform=%27rotate(-24)%27%3E%3Cpath d=%27M0 0C6 9 6 22 0 32C-6 22-6 9 0 0Z%27 fill=%27%233d7f31%27/%3E%3C/g%3E%3Cpath d=%27M0 0C6 9 6 22 0 32C-6 22-6 9 0 0Z%27 fill=%27%233d7f31%27/%3E%3Cg transform=%27rotate(22)%27%3E%3Cpath d=%27M0 0C6 9 6 22 0 32C-6 22-6 9 0 0Z%27 fill=%27%233d7f31%27/%3E%3C/g%3E%3Ccircle cy=%272%27 r=%276.5%27 fill=%27%23e2780a%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  --dw-diya: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2764%27 height=%2740%27 viewBox=%270 0 64 40%27%3E%3Cdefs%3E%3CradialGradient id=%27g%27%3E%3Cstop offset=%270%27 stop-color=%27%23ffd36b%27 stop-opacity=%27.7%27/%3E%3Cstop offset=%271%27 stop-color=%27%23ffb03a%27 stop-opacity=%270%27/%3E%3C/radialGradient%3E%3CradialGradient id=%27f%27 cx=%27.5%27 cy=%27.75%27 r=%27.6%27%3E%3Cstop offset=%270%27 stop-color=%27%23fff%27/%3E%3Cstop offset=%27.4%27 stop-color=%27%23ffd36b%27/%3E%3Cstop offset=%271%27 stop-color=%27%23ff7a1a%27/%3E%3C/radialGradient%3E%3ClinearGradient id=%27c%27 x1=%270%27 y1=%270%27 x2=%270%27 y2=%271%27%3E%3Cstop offset=%270%27 stop-color=%27%23c4622a%27/%3E%3Cstop offset=%271%27 stop-color=%27%236b2a0b%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx=%2732%27 cy=%2718%27 r=%2716%27 fill=%27url(%23g)%27/%3E%3Cpath d=%27M20 28Q32 40 44 28L46 26H18Z%27 fill=%27url(%23c)%27/%3E%3Cpath d=%27M44 27L49 24%27 stroke=%27%238a3a12%27 stroke-width=%272%27 stroke-linecap=%27round%27/%3E%3Cpath d=%27M32 12C35 17 35 22 32 25C29 22 29 17 32 12Z%27 fill=%27url(%23f)%27/%3E%3C/svg%3E");
+  --dw-rangoli: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-120 -120 240 240%27%3E%3Cg transform=%27rotate(0.0)%27%3E%3Cpath d=%27M0 -14C10 -24 6 -30 0 -38C-6 -30 -10 -24 0 -14Z%27 fill=%27%23e2780a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(45.0)%27%3E%3Cpath d=%27M0 -14C10 -24 6 -30 0 -38C-6 -30 -10 -24 0 -14Z%27 fill=%27%23e2780a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(90.0)%27%3E%3Cpath d=%27M0 -14C10 -24 6 -30 0 -38C-6 -30 -10 -24 0 -14Z%27 fill=%27%23e2780a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(135.0)%27%3E%3Cpath d=%27M0 -14C10 -24 6 -30 0 -38C-6 -30 -10 -24 0 -14Z%27 fill=%27%23e2780a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(180.0)%27%3E%3Cpath d=%27M0 -14C10 -24 6 -30 0 -38C-6 -30 -10 -24 0 -14Z%27 fill=%27%23e2780a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(225.0)%27%3E%3Cpath d=%27M0 -14C10 -24 6 -30 0 -38C-6 -30 -10 -24 0 -14Z%27 fill=%27%23e2780a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(270.0)%27%3E%3Cpath d=%27M0 -14C10 -24 6 -30 0 -38C-6 -30 -10 -24 0 -14Z%27 fill=%27%23e2780a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(315.0)%27%3E%3Cpath d=%27M0 -14C10 -24 6 -30 0 -38C-6 -30 -10 -24 0 -14Z%27 fill=%27%23e2780a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Ccircle r=%2742%27 fill=%27none%27 stroke=%27%23e2780a%27 stroke-opacity=%27.35%27 stroke-width=%271.5%27 stroke-dasharray=%272 5%27/%3E%3Cg transform=%27rotate(0.0)%27%3E%3Cpath d=%27M0 -38C10 -48 6 -54 0 -62C-6 -54 -10 -48 0 -38Z%27 fill=%27%23c9356e%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(30.0)%27%3E%3Cpath d=%27M0 -38C10 -48 6 -54 0 -62C-6 -54 -10 -48 0 -38Z%27 fill=%27%23c9356e%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(60.0)%27%3E%3Cpath d=%27M0 -38C10 -48 6 -54 0 -62C-6 -54 -10 -48 0 -38Z%27 fill=%27%23c9356e%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(90.0)%27%3E%3Cpath d=%27M0 -38C10 -48 6 -54 0 -62C-6 -54 -10 -48 0 -38Z%27 fill=%27%23c9356e%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(120.0)%27%3E%3Cpath d=%27M0 -38C10 -48 6 -54 0 -62C-6 -54 -10 -48 0 -38Z%27 fill=%27%23c9356e%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(150.0)%27%3E%3Cpath d=%27M0 -38C10 -48 6 -54 0 -62C-6 -54 -10 -48 0 -38Z%27 fill=%27%23c9356e%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(180.0)%27%3E%3Cpath d=%27M0 -38C10 -48 6 -54 0 -62C-6 -54 -10 -48 0 -38Z%27 fill=%27%23c9356e%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(210.0)%27%3E%3Cpath d=%27M0 -38C10 -48 6 -54 0 -62C-6 -54 -10 -48 0 -38Z%27 fill=%27%23c9356e%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(240.0)%27%3E%3Cpath d=%27M0 -38C10 -48 6 -54 0 -62C-6 -54 -10 -48 0 -38Z%27 fill=%27%23c9356e%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(270.0)%27%3E%3Cpath d=%27M0 -38C10 -48 6 -54 0 -62C-6 -54 -10 -48 0 -38Z%27 fill=%27%23c9356e%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(300.0)%27%3E%3Cpath d=%27M0 -38C10 -48 6 -54 0 -62C-6 -54 -10 -48 0 -38Z%27 fill=%27%23c9356e%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(330.0)%27%3E%3Cpath d=%27M0 -38C10 -48 6 -54 0 -62C-6 -54 -10 -48 0 -38Z%27 fill=%27%23c9356e%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Ccircle r=%2766%27 fill=%27none%27 stroke=%27%23c9356e%27 stroke-opacity=%27.35%27 stroke-width=%271.5%27 stroke-dasharray=%272 5%27/%3E%3Cg transform=%27rotate(0.0)%27%3E%3Cpath d=%27M0 -62C10 -72 6 -78 0 -86C-6 -78 -10 -72 0 -62Z%27 fill=%27%23f3a712%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(22.5)%27%3E%3Cpath d=%27M0 -62C10 -72 6 -78 0 -86C-6 -78 -10 -72 0 -62Z%27 fill=%27%23f3a712%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(45.0)%27%3E%3Cpath d=%27M0 -62C10 -72 6 -78 0 -86C-6 -78 -10 -72 0 -62Z%27 fill=%27%23f3a712%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(67.5)%27%3E%3Cpath d=%27M0 -62C10 -72 6 -78 0 -86C-6 -78 -10 -72 0 -62Z%27 fill=%27%23f3a712%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(90.0)%27%3E%3Cpath d=%27M0 -62C10 -72 6 -78 0 -86C-6 -78 -10 -72 0 -62Z%27 fill=%27%23f3a712%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(112.5)%27%3E%3Cpath d=%27M0 -62C10 -72 6 -78 0 -86C-6 -78 -10 -72 0 -62Z%27 fill=%27%23f3a712%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(135.0)%27%3E%3Cpath d=%27M0 -62C10 -72 6 -78 0 -86C-6 -78 -10 -72 0 -62Z%27 fill=%27%23f3a712%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(157.5)%27%3E%3Cpath d=%27M0 -62C10 -72 6 -78 0 -86C-6 -78 -10 -72 0 -62Z%27 fill=%27%23f3a712%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(180.0)%27%3E%3Cpath d=%27M0 -62C10 -72 6 -78 0 -86C-6 -78 -10 -72 0 -62Z%27 fill=%27%23f3a712%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(202.5)%27%3E%3Cpath d=%27M0 -62C10 -72 6 -78 0 -86C-6 -78 -10 -72 0 -62Z%27 fill=%27%23f3a712%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(225.0)%27%3E%3Cpath d=%27M0 -62C10 -72 6 -78 0 -86C-6 -78 -10 -72 0 -62Z%27 fill=%27%23f3a712%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(247.5)%27%3E%3Cpath d=%27M0 -62C10 -72 6 -78 0 -86C-6 -78 -10 -72 0 -62Z%27 fill=%27%23f3a712%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(270.0)%27%3E%3Cpath d=%27M0 -62C10 -72 6 -78 0 -86C-6 -78 -10 -72 0 -62Z%27 fill=%27%23f3a712%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(292.5)%27%3E%3Cpath d=%27M0 -62C10 -72 6 -78 0 -86C-6 -78 -10 -72 0 -62Z%27 fill=%27%23f3a712%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(315.0)%27%3E%3Cpath d=%27M0 -62C10 -72 6 -78 0 -86C-6 -78 -10 -72 0 -62Z%27 fill=%27%23f3a712%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(337.5)%27%3E%3Cpath d=%27M0 -62C10 -72 6 -78 0 -86C-6 -78 -10 -72 0 -62Z%27 fill=%27%23f3a712%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Ccircle r=%2790%27 fill=%27none%27 stroke=%27%23f3a712%27 stroke-opacity=%27.35%27 stroke-width=%271.5%27 stroke-dasharray=%272 5%27/%3E%3Cg transform=%27rotate(0.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(15.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(30.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(45.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(60.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(75.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(90.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(105.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(120.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(135.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(150.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(165.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(180.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(195.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(210.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(225.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(240.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(255.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(270.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(285.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(300.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(315.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(330.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Cg transform=%27rotate(345.0)%27%3E%3Cpath d=%27M0 -84C10 -94 6 -100 0 -108C-6 -100 -10 -94 0 -84Z%27 fill=%27%231f8a7a%27 fill-opacity=%27.55%27/%3E%3C/g%3E%3Ccircle r=%27112%27 fill=%27none%27 stroke=%27%231f8a7a%27 stroke-opacity=%27.35%27 stroke-width=%271.5%27 stroke-dasharray=%272 5%27/%3E%3Ccircle r=%2710%27 fill=%27%23f08a0c%27 fill-opacity=%27.7%27/%3E%3C/svg%3E");
+
+  /* ---------- Section kickers: a small lit diya before the pill ---------- */
+  .hm-pill {
+    position: relative;
+    padding-left: 34px;
+  }
+
+  .hm-pill::before {
+    position: absolute;
+    top: 50%;
+    left: 6px;
+    width: 24px;
+    height: 15px;
+    background: var(--dw-diya) center / contain no-repeat;
+    content: "";
+    translate: 0 -62%;
+    animation: dw-diya-flicker 1.8s ease-in-out infinite alternate;
+  }
+
+  /* ---------- Rangoli watermarks, tucked into section corners ---------- */
+  :is(.hm-faq, .audit) {
+    position: relative;
+  }
+
+  :is(.hm-faq, .audit)::after {
+    position: absolute;
+    width: clamp(220px, 24vw, 360px);
+    aspect-ratio: 1;
+    background: var(--dw-rangoli) center / contain no-repeat;
+    content: "";
+    opacity: 0.22;
+    pointer-events: none;
+  }
+
+  .hm-faq::after {
+    top: -60px;
+    right: -80px;
+  }
+
+  .audit::after {
+    bottom: -90px;
+    left: -90px;
+  }
+
+  /* ---------- Footer ---------- */
+  /* A marigold toran across the top edge of the footer. */
+  .site-footer::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 3;
+    height: 48px;
+    background: var(--dw-swag) 0 0 / 240px 48px repeat-x;
+    content: "";
+    pointer-events: none;
+  }
+
+  /* Lamplight spilling down from the toran onto the navy. */
+  .site-footer::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 0;
+    height: 220px;
+    background: radial-gradient(60% 100% at 50% 0%, rgb(255 180 70 / 16%), transparent 70%);
+    content: "";
+    pointer-events: none;
+  }
+
+  /* A garland hung across the top of the green highway sign. */
+  .site-footer-sign-board::after {
+    position: absolute;
+    top: -8px;
+    right: 10px;
+    left: 10px;
+    z-index: 2;
+    height: 36px;
+    background: var(--dw-swag) 0 0 / 180px 36px repeat-x;
+    content: "";
+    pointer-events: none;
+  }
+
+  /* A row of diyas along the bottom bar. */
+  .site-footer-bottom {
+    position: relative;
+  }
+
+  .site-footer-bottom::before {
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    left: 0;
+    height: 30px;
+    background: var(--dw-diya) 0 100% / 110px 30px repeat-x;
+    content: "";
+    pointer-events: none;
+    animation: dw-diya-flicker 2.2s ease-in-out infinite alternate;
+  }
+
+  .site-footer-cta {
+    box-shadow: 0 0 22px -4px rgb(255 170 60 / 55%);
+  }
+}
+
+@keyframes dw-diya-flicker {
+  from {
+    filter: brightness(1);
+  }
+
+  to {
+    filter: brightness(1.15) drop-shadow(0 0 3px rgb(255 170 50 / 60%));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root:has(.hm-hero[data-diwali]) :is(.hm-pill, .site-footer-bottom)::before {
+    animation: none;
+  }
+}

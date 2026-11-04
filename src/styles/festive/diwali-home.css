@@ -1,0 +1,89 @@
+/* ---------- Diwali touches across the rest of the homepage ---------- */
+/* Light by design: a marigold on the buttons, a garland on the work rope, glowing
+   marigolds in the ticker. Active only while the hero carries `data-diwali`
+   (DIWALI_THEME in src/config/festive.ts), so this file is inert otherwise. */
+
+:root:has(.hm-hero[data-diwali]) {
+  /* Shared marigold: a ruffled orange bloom with a darker heart. */
+  --dw-marigold:
+    radial-gradient(circle at 50% 50%, #9a4a0a 0 14%, transparent 15%),
+    repeating-conic-gradient(from 8deg, #ffb52e 0 14deg, #f08a0c 14deg 26deg),
+    #f08a0c;
+
+  /* ---------- Buttons: a marigold with two leaves tucked on the corner ---------- */
+  .hm-btn {
+    position: relative;
+  }
+
+  .hm-btn::after {
+    position: absolute;
+    top: -7px;
+    left: 10px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--dw-marigold);
+    box-shadow:
+      -7px 5px 0 -4px #3f8f3a,
+      7px 5px 0 -4px #2f6b2a,
+      0 1px 2px rgb(90 40 0 / 40%);
+    content: "";
+    pointer-events: none;
+    transition: rotate 0.6s var(--hm-ease, ease);
+  }
+
+  .hm-btn:hover::after {
+    rotate: 90deg;
+  }
+
+  /* A warm lamp glow instead of a flat lift on hover. */
+  .hm-btn:hover {
+    box-shadow: 0 8px 24px -6px rgb(255 160 50 / 55%);
+  }
+
+  .hm-btn.is-ink:hover {
+    box-shadow:
+      4px 4px 0 var(--hm-ink),
+      0 8px 26px -6px rgb(255 160 50 / 55%);
+  }
+
+  .site-header-cta {
+    box-shadow:
+      3px 3px 0 #c9356e,
+      0 0 22px -4px rgb(255 170 60 / 55%);
+  }
+
+  /* ---------- Work rope: a marigold garland wound along it ---------- */
+  .hm-work-rope::after {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    height: 14px;
+    background:
+      radial-gradient(circle at 7px 7px, #fff0a0 0 1.5px, #ffc93a 2.5px, #f59e0b 5px, #c76a0a 6.5px, transparent 7px)
+        0 0 / 20px 14px repeat-x,
+      radial-gradient(circle at 7px 7px, #ffd76a 0 1.5px, #f08a0c 3px, #b9530a 6px, transparent 6.5px)
+        10px 1px / 20px 14px repeat-x;
+    filter: drop-shadow(0 2px 1.5px rgb(90 40 0 / 30%));
+    content: "";
+    translate: 0 -50%;
+    pointer-events: none;
+  }
+
+  /* ---------- Ticker: marigolds instead of diamonds ---------- */
+  .ticker-diamond {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--dw-marigold);
+    box-shadow: 0 0 10px 1px rgb(255 170 50 / 55%);
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root:has(.hm-hero[data-diwali]) .hm-btn::after {
+    transition: none;
+  }
+}

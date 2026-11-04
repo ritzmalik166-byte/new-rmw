@@ -1,0 +1,442 @@
+/* ---------- Diwali theme for the homepage hero (src/components/festive/DiwaliHero.tsx) ---------- */
+/* Everything here is decorative: no pointer events, and it sits in the band
+   between the header and the copy, or on the truck, never over text or buttons. */
+
+.dw-decor {
+  /* Bottom of the header band: matches .hm-hero's padding-top. */
+  --dw-line: clamp(116px, min(14vh, 8.75vw), 140px);
+  --dw-top: calc(var(--dw-line) - 26px);
+
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Lamplight falling from the string onto the wall, strongest near the lanterns. */
+.dw-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(70% 16% at 50% calc(var(--dw-top) + 14px), rgb(255 196 110 / 16%), transparent 70%),
+    radial-gradient(16% 22% at 82% 34%, rgb(255 170 70 / 12%), transparent 70%);
+}
+
+/* ---------- Toran: marigold swags with mango leaves at the ties ---------- */
+.dw-toran {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  overflow: visible;
+}
+
+.dw-tie-sway {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  animation: dw-sway 5.5s ease-in-out calc(var(--i) * -0.7s) infinite alternate;
+}
+
+/* ---------- String lights ---------- */
+.dw-lights {
+  position: absolute;
+  top: var(--dw-top);
+  right: 0;
+  left: 0;
+  height: 40px;
+}
+
+.dw-wire {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.dw-wire path {
+  fill: none;
+  stroke: #2c2219;
+  stroke-width: 1.6;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.75;
+}
+
+/* A glass bulb hanging from a little dark socket, with a hot core and a soft
+   halo; each one breathes on its own clock so the string never pulses in sync. */
+.dw-bulb,
+.dw-truck-bulb {
+  --c: #ffd79a;
+
+  position: absolute;
+  width: 7px;
+  height: 10px;
+  border-radius: 50% 50% 50% 50% / 42% 42% 58% 58%;
+  background:
+    radial-gradient(circle at 50% 62%, #fffaf0 0 16%, var(--c) 52%, color-mix(in srgb, var(--c) 70%, #8a4a10) 100%);
+  box-shadow:
+    0 0 3px 0.5px var(--c),
+    0 0 12px 3px color-mix(in srgb, var(--c) 38%, transparent);
+  transform-origin: 50% 0;
+  translate: -50% 0;
+  animation: dw-breathe 3.4s ease-in-out var(--d, 0s) infinite;
+}
+
+.dw-bulb::before {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 1px 1px 0 0;
+  background: #2c2219;
+  content: "";
+  translate: -50% 0;
+}
+
+:is(.dw-bulb, .dw-truck-bulb)[data-tone="amber"] {
+  --c: #ffb347;
+}
+
+:is(.dw-bulb, .dw-truck-bulb)[data-tone="gold"] {
+  --c: #ffd24a;
+}
+
+:is(.dw-bulb, .dw-truck-bulb)[data-tone="saffron"] {
+  --c: #ff8a2a;
+}
+
+/* ---------- Akash kandil lanterns, right side above the truck ---------- */
+.dw-kandil {
+  position: absolute;
+  top: var(--dw-line);
+  width: 58px;
+  transform-origin: 50% calc(var(--len) * -1);
+  animation: dw-swing 6s ease-in-out infinite alternate;
+}
+
+/* The cord up to the string. */
+.dw-kandil::before {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 1px;
+  height: var(--len);
+  background: #2c2219;
+  content: "";
+  opacity: 0.7;
+}
+
+/* Candle glow showing through the paper. */
+.dw-kandil::after {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(255 190 90 / 30%), transparent);
+  content: "";
+  translate: -50% -25%;
+  animation: dw-candle 2.8s ease-in-out infinite;
+}
+
+.dw-kandil svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 6px 6px rgb(90 40 0 / 18%));
+}
+
+.dw-fringe rect {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  animation: dw-sway 2.4s ease-in-out infinite alternate;
+}
+
+.dw-fringe rect:nth-child(even) {
+  animation-delay: -1.1s;
+}
+
+.dw-kandil.is-a {
+  right: 30%;
+  --len: 26px;
+  animation-delay: -1.2s;
+}
+
+.dw-kandil.is-b {
+  right: 18.5%;
+  width: 68px;
+  --len: 64px;
+  animation-duration: 7s;
+}
+
+.dw-kandil.is-c {
+  right: 7%;
+  --len: 36px;
+  animation-delay: -3s;
+}
+
+/* ---------- Truck: fairy lights, dashboard mala, diya ---------- */
+/* Positions are shares of the truck image (src/components/ui/RealTruck.tsx). */
+.dw-truck {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.dw-truck-strand {
+  position: absolute;
+  height: 0;
+  border-top: 1px solid rgb(30 20 10 / 60%);
+}
+
+.dw-truck-strand.is-roof {
+  top: 3.5%;
+  right: 1.5%;
+  left: 32%;
+}
+
+.dw-truck-strand.is-rail {
+  top: 62%;
+  right: 1.5%;
+  left: 32%;
+}
+
+.dw-truck-strand.is-cab {
+  top: 6%;
+  right: 69%;
+  left: 19%;
+}
+
+/* Truck lights chase in three phases, like a real controller box. */
+.dw-truck-bulb {
+  top: -1px;
+  width: 4px;
+  height: 5px;
+  box-shadow:
+    0 0 3px 0.5px var(--c),
+    0 0 8px 2px color-mix(in srgb, var(--c) 40%, transparent);
+  animation: dw-chase 1.5s steps(1) calc(var(--k) * 0.5s) infinite;
+}
+
+/* Marigold mala hanging across the windscreen, swinging with the road. */
+.dw-truck-mala {
+  position: absolute;
+  top: 18.5%;
+  left: 19.5%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 9%;
+  height: 6%;
+  transform-origin: 50% 0;
+  animation: dw-mala 1.3s ease-in-out infinite alternate;
+}
+
+.dw-truck-mala i {
+  flex: none;
+  width: 10%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 45% 40%, #ffc23d, #e57a0a 65%, #a8470a);
+  box-shadow: 0 1px 1px rgb(80 30 0 / 40%);
+}
+
+/* Each bead sits lower toward the middle so the mala hangs in a curve. */
+.dw-truck-mala i:nth-child(2),
+.dw-truck-mala i:nth-child(8) {
+  translate: 0 30%;
+}
+
+.dw-truck-mala i:nth-child(3),
+.dw-truck-mala i:nth-child(7) {
+  translate: 0 55%;
+}
+
+.dw-truck-mala i:nth-child(4),
+.dw-truck-mala i:nth-child(6) {
+  translate: 0 72%;
+}
+
+.dw-truck-mala i:nth-child(5) {
+  translate: 0 78%;
+}
+
+/* A small clay diya on the front bumper. */
+.dw-truck-diya {
+  position: absolute;
+  bottom: 22%;
+  left: 1.5%;
+  width: 14px;
+  height: 7px;
+  border-radius: 0 0 8px 8px;
+  background: linear-gradient(#b4561f, #6b2a0b);
+}
+
+.dw-truck-diya::before {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  width: 5px;
+  height: 10px;
+  border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+  background: radial-gradient(circle at 50% 75%, #fff 0 18%, #ffd36b 45%, #ff8a1a 80%, transparent);
+  box-shadow: 0 0 10px 3px rgb(255 170 50 / 55%);
+  content: "";
+  transform-origin: 50% 100%;
+  translate: -50% 0;
+  animation: dw-flame 0.9s ease-in-out infinite alternate;
+}
+
+/* Lights burn brighter once the truck's own lamps switch on. */
+.hm-hero:not(.is-lit) :is(.dw-truck-bulb, .dw-bulb) {
+  opacity: 0.6;
+}
+
+html[data-theme="dark"] .dw-glow {
+  background:
+    radial-gradient(70% 18% at 50% calc(var(--dw-top) + 14px), rgb(255 180 80 / 26%), transparent 70%),
+    radial-gradient(18% 26% at 82% 34%, rgb(255 160 60 / 20%), transparent 70%);
+}
+
+@keyframes dw-breathe {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  45% {
+    filter: brightness(0.82);
+  }
+
+  52% {
+    filter: brightness(1.08);
+  }
+}
+
+@keyframes dw-chase {
+  0% {
+    opacity: 1;
+  }
+
+  33% {
+    opacity: 0.35;
+  }
+
+  66% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes dw-candle {
+  0%,
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+
+  30% {
+    opacity: 0.82;
+    scale: 0.97;
+  }
+
+  60% {
+    opacity: 0.95;
+    scale: 1.02;
+  }
+}
+
+@keyframes dw-flame {
+  from {
+    rotate: -6deg;
+    scale: 1 0.92;
+  }
+
+  to {
+    rotate: 5deg;
+    scale: 0.92 1.08;
+  }
+}
+
+@keyframes dw-sway {
+  from {
+    rotate: -3deg;
+  }
+
+  to {
+    rotate: 3deg;
+  }
+}
+
+@keyframes dw-swing {
+  from {
+    rotate: -2deg;
+  }
+
+  to {
+    rotate: 2.2deg;
+  }
+}
+
+@keyframes dw-mala {
+  from {
+    rotate: -7deg;
+  }
+
+  to {
+    rotate: 6deg;
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1099px) {
+  /* The copy fills the width here, so lanterns stay small and far right. */
+  .dw-kandil.is-a {
+    display: none;
+  }
+
+  .dw-kandil.is-b {
+    right: 12%;
+    width: 36px;
+    --len: 30px;
+  }
+
+  .dw-kandil.is-c {
+    right: 3%;
+    width: 30px;
+    --len: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dw-decor {
+    --dw-line: 92px;
+  }
+
+  .dw-toran {
+    height: 52px;
+  }
+
+  .dw-bulb:nth-child(odd) {
+    display: none;
+  }
+
+  .dw-kandil {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dw-decor *,
+  .dw-decor *::before,
+  .dw-decor *::after,
+  .dw-truck *,
+  .dw-truck *::before {
+    animation: none !important;
+  }
+}

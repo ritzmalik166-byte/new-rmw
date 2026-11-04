@@ -594,3 +594,115 @@ html[data-theme="dark"] .hm-hero.is-lit .hm-hero-light.is-beam::before {
 .hm-hero.is-offscreen * {
   animation-play-state: paused !important;
 }
+
+/* ---------- Ride: the body rocks on its springs while the wheels stay on the road ---------- */
+.hm-hero-truck :is(.real-truck-body, .real-truck-cab),
+.hm-hero-rig .dw-truck {
+  animation: hm-hero-ride 2.2s linear infinite;
+}
+
+.hm-hero-truck .real-truck-cab {
+  /* The cab sits on its own mounts, so it trails the body by a beat. */
+  animation-delay: -0.08s;
+}
+
+/* Mostly smooth tarmac with the odd pothole, never a regular bounce. */
+@keyframes hm-hero-ride {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+
+  12% {
+    translate: 0 -0.6px;
+  }
+
+  24% {
+    translate: 0 0.4px;
+  }
+
+  38% {
+    translate: 0 -1.8px;
+    rotate: -0.35deg;
+  }
+
+  44% {
+    translate: 0 1px;
+    rotate: 0.2deg;
+  }
+
+  52% {
+    translate: 0 -0.5px;
+    rotate: 0deg;
+  }
+
+  70% {
+    translate: 0 0.5px;
+  }
+
+  82% {
+    translate: 0 -2.4px;
+    rotate: 0.4deg;
+  }
+
+  88% {
+    translate: 0 1.2px;
+    rotate: -0.2deg;
+  }
+}
+
+/* Exhaust puffs from under the chassis, left behind as the truck drives. */
+.hm-hero-exhaust {
+  position: absolute;
+  right: 4%;
+  bottom: 22%;
+  z-index: -1;
+  width: 0;
+  height: 0;
+}
+
+.hm-hero-exhaust i {
+  position: absolute;
+  width: 26px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(120 110 100 / 30%), transparent);
+  filter: blur(2px);
+  opacity: 0;
+  animation: hm-hero-puff 2.4s ease-out infinite;
+}
+
+.hm-hero-exhaust i:nth-child(2) {
+  animation-delay: 0.8s;
+}
+
+.hm-hero-exhaust i:nth-child(3) {
+  animation-delay: 1.6s;
+}
+
+@keyframes hm-hero-puff {
+  0% {
+    opacity: 0;
+    translate: 0 0;
+    scale: 0.4;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    translate: 140px -34px;
+    scale: 3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hm-hero-truck :is(.real-truck-body, .real-truck-cab),
+  .hm-hero-rig .dw-truck,
+  .hm-hero-exhaust i {
+    animation: none;
+  }
+}

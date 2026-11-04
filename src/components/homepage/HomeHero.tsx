@@ -2,10 +2,12 @@
 
 import { useGSAP } from "@gsap/react";
 import { useRef, type ReactNode } from "react";
+import { DiwaliHeroDecor, DiwaliTruckLights } from "@/components/festive/DiwaliHero";
 import { TransitionLink } from "@/components/motion/TransitionLink";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { NightSky } from "@/components/ui/NightSky";
 import { type DriverPose, REAL_TRUCK, RealTruck } from "@/components/ui/RealTruck";
+import { DIWALI_THEME } from "@/config/festive";
 import { gsap, registerGsap } from "@/lib/gsap";
 
 registerGsap();
@@ -310,8 +312,15 @@ export function HomeHero() {
   );
 
   return (
-    <section id="home-hero" ref={rootRef} className="hm hm-hero" aria-labelledby="hm-hero-title">
+    <section
+      id="home-hero"
+      ref={rootRef}
+      className="hm hm-hero"
+      aria-labelledby="hm-hero-title"
+      data-diwali={DIWALI_THEME || undefined}
+    >
       <NightSky />
+      {DIWALI_THEME && <DiwaliHeroDecor />}
       <div className="hm-wrap hm-hero-inner">
         <div className="hm-hero-copy">
           <p data-hero-fade className="hm-kicker">
@@ -377,12 +386,18 @@ export function HomeHero() {
           <span className="hm-hero-light is-pool" />
           <span className="hm-hero-light is-beam" />
           <span className="hm-hero-shadow" />
+          <span className="hm-hero-exhaust">
+            <i />
+            <i />
+            <i />
+          </span>
           <RealTruck
             className="hm-hero-truck"
             priority
             driver
             sizes="(max-width: 1099px) min(90vw, 700px, 50vh), clamp(360px, min(42vw, 74vh), 640px)"
           />
+          {DIWALI_THEME && <DiwaliTruckLights />}
           <span className="hm-hero-light is-lamp" />
           {CARGO.map((item) => (
             <span key={item.name} className="hm-hero-sticker" data-tone={item.tone}>
