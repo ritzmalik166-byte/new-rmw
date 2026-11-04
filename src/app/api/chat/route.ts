@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const CHAT_API_URL = "https://api.ritzmediaworld.in/api/v1/chat";
+const CHAT_API_URL = process.env.CHAT_API_URL || "";
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -22,6 +22,7 @@ export async function POST(request: Request) {
 
   let response: Response;
   try {
+     
     response = await fetch(CHAT_API_URL, {
       method: "POST",
       headers: {
