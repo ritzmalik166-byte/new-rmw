@@ -392,7 +392,7 @@
     bottom: 0;
     left: 0;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
     padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
     border-top: 2px solid var(--fab-ink);
@@ -402,8 +402,7 @@
     transform: translateY(110%);
   }
 
-  .fab-btn,
-  .fab-btn.is-ruby {
+  .fab-btn {
     display: flex;
     gap: 6px;
     align-items: center;
@@ -430,11 +429,6 @@
   .fab-btn.is-call .fab-icon svg {
     width: 18px;
     height: 18px;
-  }
-
-  .fab-btn.is-ruby .fab-icon svg {
-    width: 22px;
-    height: 22px;
   }
 
   .fab-label {
@@ -465,8 +459,7 @@
       padding-left: 8px;
     }
 
-    .fab-btn,
-    .fab-btn.is-ruby {
+    .fab-btn {
       gap: 4px;
       padding: 0 6px;
     }
