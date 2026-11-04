@@ -175,11 +175,12 @@ export function HmStamp({
   word: string;
   className?: string;
 }) {
-  /* The word has to sit inside the inner ring (~80 units across): two-word labels
-     stack like a rubber stamp, and anything still too wide shrinks. */
+  /* The word has to sit inside the inner ring (~96 units across, so ~72 leaves a
+     margin): two-word labels stack like a rubber stamp, and anything still too
+     wide shrinks. 0.66em is the bold serif's average glyph width. */
   const lines = word.includes(" ") && word.length > 7 ? word.split(/\s+/) : [word];
   const longest = Math.max(...lines.map((line) => line.length));
-  const wordSize = Math.min(lines.length > 1 ? 20 : 21, 80 / (longest * 0.56));
+  const wordSize = Math.min(lines.length > 1 ? 20 : 21, 72 / (longest * 0.66));
 
   return (
     <svg data-hm-stamp className={cn("hm-stamp", className)} viewBox="0 0 120 120" aria-hidden>

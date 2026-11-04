@@ -955,7 +955,8 @@
 .cs-report-actions {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  /* Baseline, so the underlined text link reads on the same line as the button label. */
+  align-items: baseline;
   gap: 14px 22px;
   margin-top: 18px;
 }
