@@ -78,6 +78,8 @@ export interface ServiceDetail {
   stats: {
     value: string;
     label: string;
+    /** Receipt tag in "Proof on the tailgate"; defaults to "Benchmark". */
+    tag?: "Benchmark" | "On record";
   }[];
   capabilities: ServiceCapability[];
   deliverables: string[];
@@ -683,10 +685,10 @@ const ALL_SERVICES: ServiceDetail[] = [
     accentColor: "#f07828",
     tags: ["FM Advertising", "Radio Jingles", "Voiceover Casting", "Media Buying", "Podcast Audio", "Sonic Branding"],
     stats: [
-      { value: "98.3%", label: "Ear Recall On Signature Jingles" },
-      { value: "50+ Cities", label: "Radio Network Coverage" },
-      { value: "1,200+", label: "Radio Spots Scripted & Produced" },
-      { value: "18+", label: "Years Audio Excellence" },
+      { value: "50M+", label: "Listeners reached across FM campaigns", tag: "Benchmark" },
+      { value: "-40%", label: "Lower cost per spot through network rates", tag: "Benchmark" },
+      { value: "4", label: "Radio awards and industry recognitions", tag: "On record" },
+      { value: "18+", label: "Years navigating Indian markets", tag: "On record" },
     ],
     capabilities: [
       {
@@ -836,7 +838,6 @@ const ALL_SERVICES: ServiceDetail[] = [
       wallLede:
         "From impactful radio campaigns to industry recognition, our journey reflects the power of strategic media planning, creative storytelling, and effective radio advertising. Explore the milestones that celebrate our work in the radio advertising industry.",
       intentTitle: { lead: "Ads people turn up,", accent: "not tune out." },
-      hideProof: true,
       faqs: [
         {
           question: "What radio advertising services does Ritz Media World offer?",
