@@ -62,31 +62,9 @@
   color: var(--hm-pink);
 }
 
-.hm-voice-progress {
-  position: relative;
-  width: 72px;
-  height: 3px;
-  overflow: hidden;
-  background: rgb(27 26 74 / 14%);
-}
 
-.hm-voice-progress s {
-  position: absolute;
-  inset: 0;
-  background: var(--hm-orange);
-  transform: scaleX(0);
-  transform-origin: left center;
-}
 
-.hm-voice-progress s[data-running="true"] {
-  animation: hm-voice-progress 7s linear forwards;
-}
 
-@keyframes hm-voice-progress {
-  to {
-    transform: scaleX(1);
-  }
-}
 
 /* ---------- Deck of slips: the front one is read, the next two peek out ---------- */
 .hm-voice-deck {
@@ -530,4 +508,37 @@
   .hm-voice-belt-track {
     animation: none;
   }
+}
+
+/* Phones: centre the arrows and counter. */
+@media (max-width: 720px) {
+  .hm-voice-controls {
+    justify-content: center;
+  }
+}
+
+/* ---------- Receipt content centred ---------- */
+.hm-receipt-head {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hm-receipt-meta,
+.hm-receipt-foot {
+  justify-content: center;
+}
+
+.hm-receipt-quote {
+  justify-content: center;
+  text-align: center;
+}
+
+.hm-receipt-who {
+  align-items: center;
+  text-align: center;
+}
+
+.hm-receipt-sign {
+  margin-left: 0;
 }

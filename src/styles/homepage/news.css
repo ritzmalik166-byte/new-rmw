@@ -166,3 +166,12 @@
     transition: none;
   }
 }
+
+/* Phones: the mobile centring shrinks this row, so stretch it back across the
+   card: label on the left, arrow on the right, as on the blog cards. */
+@media (max-width: 720px) {
+  .hm-post-more {
+    align-self: stretch;
+    width: 100%;
+  }
+}

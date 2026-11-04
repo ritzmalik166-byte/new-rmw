@@ -85,9 +85,6 @@ export function HomeVoice() {
               <button type="button" aria-label="Next testimonial" onClick={() => go(1)}>
                 →
               </button>
-              <span className="hm-voice-progress" aria-hidden>
-                <s key={`${active}-${paused}`} data-running={!paused && !reduced} />
-              </span>
             </div>
           ) : null}
         </div>
