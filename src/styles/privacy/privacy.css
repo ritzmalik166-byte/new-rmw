@@ -468,17 +468,6 @@
     padding-top: 112px;
   }
 
-  .pv-kicker {
-    justify-content: flex-start;
-  }
-
-  .pv-title,
-  .pv-lede,
-  .pv-updated {
-    margin-inline: 0;
-    text-align: start;
-  }
-
   .pv-section :is(h2, h3, p, li),
   .pv-contact :is(dt, dd) {
     text-align: start;

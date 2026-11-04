@@ -1,1 +1,1 @@
-export const DIWALI_THEME = true;
+export const DIWALI_THEME = false;
