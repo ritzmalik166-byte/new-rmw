@@ -145,6 +145,7 @@ function RubyBot() {
     const [isPanelMounted, setIsPanelMounted] = useState(false);
     const [isPanelActive, setIsPanelActive] = useState(false);
     const [frontendNotices, setFrontendNotices] = useState<FrontendNotice[]>([]);
+    const MSG_HANDLING = process.env.MSG_HANDLING || ""
     const clearSilenceTimer = () => {
         if (silenceTimeoutRef.current) {
             clearTimeout(silenceTimeoutRef.current);
@@ -326,7 +327,7 @@ function RubyBot() {
     }, [messages, isTyping]);
 
     const handleChatting = async (message: { user_message: string, bot_reply: string }) => {
-        const response = await axios.post('/api/chatting', {
+        const response = await axios.post(MSG_HANDLING, {
             message: message,
         });
         return response.data;
