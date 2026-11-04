@@ -51,6 +51,8 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
   const portfolioHref =
   service.slug === "digital-marketing"
     ? "/case-study#download-outlooks"
+    : service.slug === "print-advertising"
+      ? "/portfolio?highlight=creative-design"
     : service.slug === "radio-advertising"
       ? "/portfolio?highlight=radio-ads"
       : service.slug === "celebrity-endorsements"

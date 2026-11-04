@@ -484,7 +484,7 @@ export const site = {
         a: "As an independent agency, Ritz Media World combines 18 years of experience across print, radio and digital with newer capabilities in AI and 3D. This means clients get the judgement of a long-established agency together with the speed and tools of a modern one, all from a single team.",
       },
       {
-        q: "How Can I Start Working with Ritz Media World?",
+        q: "How can I start working with Ritz Media World?",
         a: "You can reach the team through the contact form on the website, by email at info@ritzmediaworld.com, or by phone at +91 7290002168. We usually begin with a conversation about your brand's goals, followed by a free audit and a tailored plan.",
       },
     ],
