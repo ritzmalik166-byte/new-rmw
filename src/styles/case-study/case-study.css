@@ -1066,6 +1066,16 @@
     padding: 14px 16px 14px 20px;
   }
 
+  .cs-index {
+    margin-bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+
+  .cs-index-list {
+    max-height: 360px;
+    padding-bottom: calc(76px + env(safe-area-inset-bottom));
+    scroll-padding-bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+
   .cs-index-go,
   .cs-index-go-slot {
     display: none;
@@ -1137,5 +1147,29 @@
   .cs-year,
   .cs-report {
     transition: none;
+  }
+}
+
+/* ---------- Phones: index header spans the card, year span stays on one line ---------- */
+@media (max-width: 720px) {
+  /* The global mobile rule auto-margins every <p>, which shrinks this flex child. */
+  main .cs-index-head {
+    align-self: stretch;
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .cs-hero-stats dd {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 400px) {
+  .cs-hero-stats div {
+    padding: 10px 10px;
+  }
+
+  .cs-hero-stats dd {
+    font-size: 22px;
   }
 }
