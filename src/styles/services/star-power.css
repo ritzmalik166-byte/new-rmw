@@ -122,7 +122,7 @@
   vertical-align: middle;
 }
 
-.svc-star-influencer-break {
+.svc-star-title-break {
   display: none;
 }
 
@@ -215,7 +215,7 @@
 }
 
 @media (min-width: 721px) and (max-width: 1100px) {
-  .svc-star-influencer-break {
+  .svc-star-title-break {
     display: block;
   }
 }
@@ -270,5 +270,32 @@
   .svc-star-card:hover .svc-star-badge,
   .svc-star-card:hover .svc-star-item {
     transform: none;
+  }
+}
+
+/* Both CTAs fill the card width at one height and sit on the card's floor, so
+   they line up even when one label wraps to two lines. */
+.svc-star-card .svc-explore {
+  align-self: stretch;
+  justify-content: space-between;
+  min-height: 52px;
+  margin-top: auto;
+  font-size: 0.82rem;
+  text-align: left;
+}
+
+/* The list grows to push the CTA down; keep its rows at the top so both cards'
+   items share the same spacing instead of stretching apart. */
+.svc-star-list {
+  align-content: start;
+}
+
+/* Tablets: "Explore Celebrity Endorsements" wraps to two lines, so give both
+   CTAs that two-line height and the same padding to keep them identical. */
+@media (min-width: 721px) and (max-width: 1100px) {
+  .svc-star-card .svc-explore {
+    min-height: 64px;
+    margin-top: 28px;
+    padding: 12px 22px;
   }
 }
