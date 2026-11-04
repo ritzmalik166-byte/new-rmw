@@ -1182,6 +1182,11 @@
   gap: 14px 24px;
 }
 
+/* Sit the text link on the button's centre line, not the top of the row. */
+.pf-card-actions .hm-link {
+  align-self: center;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1200px) {
   .pf-reasons {
