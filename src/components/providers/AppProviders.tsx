@@ -1,14 +1,10 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { Grain } from "@/components/layout/Grain";
-import RubyProvider from "@/components/ruby-bot/RubyContext";
 import { MotionProvider } from "@/components/providers/MotionProvider";
 import { PageTransition } from "@/components/providers/PageTransition";
 import { ScrollMemory } from "@/components/providers/ScrollMemory";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
-
-const RubyBot = dynamic(() => import("@/components/ruby-bot/RubyBot"), { ssr: false });
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
@@ -17,10 +13,7 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
         <PageTransition>
           <Grain />
           <ScrollMemory />
-          <RubyProvider>
-            {children}
-            <RubyBot />
-          </RubyProvider>
+          {children}
         </PageTransition>
       </SmoothScroll>
     </MotionProvider>
