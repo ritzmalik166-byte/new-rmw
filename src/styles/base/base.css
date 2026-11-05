@@ -18,7 +18,11 @@ html {
   font-size: max(100%, min(1.1111vw, 1.7778vh));
   background: var(--background);
   color: var(--foreground);
+  /* `hidden` first for browsers without `clip` (iOS Safari < 16, older Android):
+     otherwise any wide element lets the page scroll sideways and leaves a strip on the right. */
+  overflow-x: hidden;
   overflow-x: clip;
+  max-width: 100%;
 }
 
 body {
@@ -27,6 +31,7 @@ body {
   background: var(--hero-fill);
   background-attachment: fixed;
   overflow-x: clip;
+  max-width: 100%;
 }
 
 ::selection {

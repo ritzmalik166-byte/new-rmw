@@ -1,8 +1,9 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
-import { useRef, type ReactNode } from "react";
-import { DiwaliHeroDecor, DiwaliTruckLights } from "@/components/festive/DiwaliHero";
+import { useEffect, useRef, type ReactNode } from "react";
+import { DiwaliHeroDecor, DiwaliNight, DiwaliTruckLights } from "@/components/festive/DiwaliHero";
+import { DiwaliStreet } from "@/components/festive/DiwaliStreet";
 import { TransitionLink } from "@/components/motion/TransitionLink";
 import { useMotion } from "@/components/providers/MotionProvider";
 import { NightSky } from "@/components/ui/NightSky";
@@ -71,6 +72,15 @@ const WHEEL_RATIO = REAL_TRUCK.wheel / REAL_TRUCK.width;
 export function HomeHero() {
   const rootRef = useRef<HTMLElement>(null);
   const { ready, reduced } = useMotion();
+
+  /* Park the festive layers while the hero is off screen so scrolling stays smooth. */
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root || !DIWALI_THEME) return;
+    const io = new IntersectionObserver(([entry]) => root.toggleAttribute("data-offscreen", !entry.isIntersecting));
+    io.observe(root);
+    return () => io.disconnect();
+  }, []);
 
   useGSAP(
     () => {
@@ -320,6 +330,7 @@ export function HomeHero() {
       data-diwali={DIWALI_THEME || undefined}
     >
       <NightSky />
+      {DIWALI_THEME && <DiwaliNight />}
       {DIWALI_THEME && <DiwaliHeroDecor />}
       <div className="hm-wrap hm-hero-inner">
         <div className="hm-hero-copy">
@@ -378,6 +389,7 @@ export function HomeHero() {
       </div>
 
       <div className="hm-hero-stage" aria-hidden>
+        {DIWALI_THEME && <DiwaliStreet />}
         <span className="hm-hero-verge" />
         <span className="hm-hero-road">
           <span className="hm-hero-lane" />

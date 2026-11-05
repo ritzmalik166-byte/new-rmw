@@ -13,6 +13,7 @@ import { site } from "@/lib/site";
 
 import { ServicesMegaMenu } from "@/components/layout/ServicesMegaMenu";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
+import { DARK_ONLY } from "@/lib/theme";
 import { SERVICE_ICONS } from "@/lib/service-icons";
 import { MENU_SERVICES } from "@/lib/services-data";
 
@@ -222,7 +223,7 @@ export function Header() {
         </nav>
 
         <div className="site-header-actions">
-          <ThemeToggle />
+          {!DARK_ONLY && <ThemeToggle />}
           <TransitionLink href="/contact.html" className="site-header-cta">
             <span className="site-header-cta-label">Contact Us</span>
             <span className="site-header-cta-arrow" aria-hidden>

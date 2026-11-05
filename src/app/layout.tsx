@@ -13,6 +13,8 @@ import { organizationJsonLd, websiteJsonLd } from "@/lib/schema";
 import { SEO_ORIGIN } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { THEME_BOOT_SCRIPT } from "@/lib/theme";
+import { DIWALI_THEME } from "@/config/festive";
+import { DiwaliSiteLights } from "@/components/festive/DiwaliSite";
 import "./globals.css";
 
 /* Fonts are self-hosted (Latin subsets from Google Fonts) so builds never
@@ -141,6 +143,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${outfit.variable} ${archivo.variable} ${inter.variable} ${montserrat.variable} ${jakarta.variable} ${playfair.variable} ${quicksand.variable} ${quattrocento.variable} ${rye.variable} ${yatraLatin.variable} ${yatraDevanagari.variable} ${yeseva.variable} ${caveat.variable} antialiased`}
+      data-diwali={DIWALI_THEME || undefined}
       suppressHydrationWarning
     >
       <head>
@@ -157,6 +160,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ThemeFilters />
         <AppProviders>
           <Header />
+          {DIWALI_THEME && <DiwaliSiteLights />}
           <main>{children}</main>
           <Footer />
           <FloatingContact />

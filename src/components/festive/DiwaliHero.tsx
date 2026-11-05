@@ -13,92 +13,14 @@ function rng(seed: number) {
 }
 
 const W = 1600;
-const SWAGS = 8;
-const SWAG_DROP = 34;
 const LIGHTS = 46;
 const LIGHT_LOOPS = 5;
 const LIGHT_DROP = 13;
 /* Mostly warm-white filament bulbs with a few amber and marigold, like a real festive string. */
 const BULB_TONES = ["warm", "warm", "amber", "warm", "gold", "warm", "saffron"] as const;
 
-/* Marigold garland swags with mango leaves at each tie point. */
-function Toran() {
-  const rand = rng(7);
-  const step = W / SWAGS;
-  const flowers: { x: number; y: number; r: number; tone: number; rot: number }[] = [];
-  for (let s = 0; s < SWAGS; s++) {
-    const n = 26;
-    for (let i = 0; i <= n; i++) {
-      const t = i / n;
-      flowers.push({
-        x: s * step + step * t + (rand() - 0.5) * 2,
-        y: 6 + 4 * SWAG_DROP * t * (1 - t) + (rand() - 0.5) * 2,
-        r: 6.2 + rand() * 1.6,
-        tone: rand() < 0.68 ? 0 : 1,
-        rot: rand() * 360,
-      });
-    }
-  }
-  const ties = Array.from({ length: SWAGS + 1 }, (_, i) => i * step);
-
-  return (
-    <svg className="dw-toran" viewBox={`0 0 ${W} 70`} preserveAspectRatio="xMidYMin slice">
-      <defs>
-        <filter id="dw-ruffle" x="-20%" y="-20%" width="140%" height="140%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" />
-          <feDisplacementMap in="SourceGraphic" scale="3.2" />
-          <feDropShadow dx="0" dy="1.2" stdDeviation="0.8" floodColor="#5a2600" floodOpacity="0.35" />
-        </filter>
-        <radialGradient id="dw-mg-0" cx="45%" cy="40%" r="60%">
-          <stop offset="0" stopColor="#ffb52e" />
-          <stop offset="0.55" stopColor="#f08a0c" />
-          <stop offset="1" stopColor="#b9530a" />
-        </radialGradient>
-        <radialGradient id="dw-mg-1" cx="45%" cy="40%" r="60%">
-          <stop offset="0" stopColor="#ffe066" />
-          <stop offset="0.55" stopColor="#f6bd16" />
-          <stop offset="1" stopColor="#c7860a" />
-        </radialGradient>
-        <linearGradient id="dw-leaf" x1="0" x2="1">
-          <stop offset="0" stopColor="#2f6b2a" />
-          <stop offset="0.5" stopColor="#4c8f37" />
-          <stop offset="1" stopColor="#24521f" />
-        </linearGradient>
-      </defs>
-      <g filter="url(#dw-ruffle)">
-        {flowers.map((f, i) => (
-          <g key={i} transform={`translate(${f.x.toFixed(1)} ${f.y.toFixed(1)}) rotate(${f.rot.toFixed(0)})`}>
-            <circle r={f.r.toFixed(2)} fill={`url(#dw-mg-${f.tone})`} />
-            <circle
-              r={(f.r * 0.55).toFixed(2)}
-              fill="none"
-              stroke="#a5470a"
-              strokeOpacity="0.35"
-              strokeWidth="1"
-              strokeDasharray="1.4 1.2"
-            />
-          </g>
-        ))}
-      </g>
-      {ties.map((x, i) => (
-        <g key={i} transform={`translate(${x} 4)`}>
-          <g className="dw-tie-sway" style={{ "--i": i } as CSSProperties}>
-            {[-24, 0, 22].map((a) => (
-              <g key={a} transform={`rotate(${a})`}>
-                <path d="M0 0 C 7 10, 7 26, 0 38 C -7 26, -7 10, 0 0 Z" fill="url(#dw-leaf)" />
-                <path d="M0 2 L0 36" stroke="#b9d78a" strokeOpacity="0.55" strokeWidth="0.7" />
-              </g>
-            ))}
-            <circle cy="2" r="7" fill="url(#dw-mg-0)" filter="url(#dw-ruffle)" />
-          </g>
-        </g>
-      ))}
-    </svg>
-  );
-}
-
 /* Filament bulbs on a dark wire, draped in shallow loops. */
-function StringLights() {
+export function StringLights() {
   const rand = rng(21);
   const span = W / LIGHT_LOOPS;
   const wire =
@@ -185,12 +107,11 @@ function Kandil({ hue, className }: { hue: keyof typeof KANDIL; className: strin
   );
 }
 
-/* Toran, string lights and lanterns hung under the header. */
+/* String lights and lanterns hung under the header. */
 export function DiwaliHeroDecor() {
   return (
-    <div className="dw-decor" aria-hidden data-theme-keep>
+    <div className="dw-decor theme-keep" aria-hidden>
       <span className="dw-glow" />
-      <Toran />
       <StringLights />
       <Kandil hue="saffron" className="is-a" />
       <Kandil hue="gold" className="is-b" />
@@ -215,9 +136,12 @@ export function DiwaliTruckLights() {
   );
 
   return (
-    <span className="dw-truck" aria-hidden data-theme-keep>
+    <span className="dw-truck theme-keep" aria-hidden>
+      <span className="dw-truck-glow" />
       {strand("is-roof", 22)}
+      {strand("is-mid", 22)}
       {strand("is-rail", 22)}
+      {strand("is-bumper", 24)}
       {strand("is-cab", 7)}
       <span className="dw-truck-mala">
         {Array.from({ length: 9 }, (_, i) => (
@@ -225,6 +149,49 @@ export function DiwaliTruckLights() {
         ))}
       </span>
       <span className="dw-truck-diya" />
+    </span>
+  );
+}
+
+/* ---------- Dark mode only: the Diwali night (styles: src/styles/festive/diwali-dark.css) ---------- */
+const nightRand = rng(1410);
+const EMBERS = Array.from({ length: 26 }, () => ({
+  left: `${(nightRand() * 100).toFixed(2)}%`,
+  "--size": `${(1.5 + nightRand() * 2.5).toFixed(2)}px`,
+  "--rise": `${(7 + nightRand() * 7).toFixed(2)}s`,
+  "--delay": `${(-nightRand() * 14).toFixed(2)}s`,
+  "--drift": `${((nightRand() - 0.5) * 60).toFixed(0)}px`,
+})) as unknown as CSSProperties[];
+
+/* Bursts sit in the open sky above the truck, clear of the copy. */
+const BURSTS = [
+  { left: "62%", top: "30%", "--s": "150px", "--hue": "#ffd36b", "--delay": "0s" },
+  { left: "86%", top: "18%", "--s": "110px", "--hue": "#ff9a3c", "--delay": "1.7s" },
+  { left: "74%", top: "46%", "--s": "90px", "--hue": "#ff5f6d", "--delay": "3.1s" },
+  { left: "94%", top: "40%", "--s": "70px", "--hue": "#fff1c4", "--delay": "4.4s" },
+] as unknown as CSSProperties[];
+
+const SIDE_BULBS = 18;
+
+export function DiwaliNight() {
+  return (
+    <span className="dw-night theme-keep" aria-hidden>
+      <span className="dw-night-sky" />
+      {BURSTS.map((style, i) => (
+        <span key={i} className="dw-burst" style={style}>
+          <i />
+        </span>
+      ))}
+      {EMBERS.map((style, i) => (
+        <i key={i} className="dw-ember" style={style} />
+      ))}
+      {["is-left", "is-right"].map((side) => (
+        <span key={side} className={`dw-side ${side}`}>
+          {Array.from({ length: SIDE_BULBS }, (_, i) => (
+            <i key={i} style={{ "--i": i } as CSSProperties} />
+          ))}
+        </span>
+      ))}
     </span>
   );
 }

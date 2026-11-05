@@ -1,7 +1,15 @@
+import { DIWALI_DARK_UNTIL, DIWALI_THEME } from "@/config/festive";
+
 export type Theme = "light" | "dark";
 
 export const THEME_STORAGE_KEY = "rmw-theme";
+/* Dark-only switch: `true` locks the whole site to dark and hides the header toggle.
+   Set it back to `false` to bring back the light theme and the toggle. */
+export const DARK_ONLY = false;
+
 export const DEFAULT_THEME: Theme = "light";
+/* Default for the festive window; checked in the browser so it flips back on its own after it ends. */
+const DARK_UNTIL = DIWALI_THEME ? DIWALI_DARK_UNTIL : 0;
 
 /* Entries saved before the theme stopped following the clock carry an `until`; they still expire then. */
 export function readStoredTheme(): Theme | null {
@@ -22,4 +30,6 @@ export function storeTheme(theme: Theme) {
 }
 
 /* Runs in <head> before first paint so a visitor who picked dark never sees a light flash. */
-export const THEME_BOOT_SCRIPT = `(function(){try{var t="${DEFAULT_THEME}",s=JSON.parse(localStorage.getItem("${THEME_STORAGE_KEY}")||"null");if(s&&(!s.until||s.until>Date.now())&&(s.theme==="dark"||s.theme==="light"))t=s.theme;document.documentElement.dataset.theme=t;}catch(e){}})();`;
+export const THEME_BOOT_SCRIPT = DARK_ONLY
+  ? `document.documentElement.dataset.theme="dark";`
+  : `(function(){try{var t=Date.now()<${DARK_UNTIL}?"dark":"${DEFAULT_THEME}",s=JSON.parse(localStorage.getItem("${THEME_STORAGE_KEY}")||"null");if(s&&(!s.until||s.until>Date.now())&&(s.theme==="dark"||s.theme==="light"))t=s.theme;document.documentElement.dataset.theme=t;}catch(e){}})();`;
