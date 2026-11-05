@@ -5,7 +5,7 @@ export type Theme = "light" | "dark";
 export const THEME_STORAGE_KEY = "rmw-theme";
 /* Dark-only switch: `true` locks the whole site to dark and hides the header toggle.
    Set it back to `false` to bring back the light theme and the toggle. */
-export const DARK_ONLY = true;
+export const DARK_ONLY = false;
 
 export const DEFAULT_THEME: Theme = "light";
 /* Default for the festive window; checked in the browser so it flips back on its own after it ends. */
