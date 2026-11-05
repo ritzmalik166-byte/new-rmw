@@ -332,7 +332,7 @@ function ServiceProof({ service, relatedServices }: ServiceLowerSectionsProps) {
             <li data-hm-fade key={stat.label} className="sd-receipt">
               <p className="sd-receipt-top">
                 <span>Receipt {pad(index + 1)}</span>
-                <span>Benchmark</span>
+                <span>{stat.tag ?? "Benchmark"}</span>
               </p>
               <p className="sd-receipt-value">{stat.value}</p>
               <p className="sd-receipt-label">{stat.label}</p>
