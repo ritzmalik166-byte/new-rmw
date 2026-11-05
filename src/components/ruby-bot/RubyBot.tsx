@@ -327,10 +327,16 @@ function RubyBot() {
     }, [messages, isTyping]);
 
     const handleChatting = async (message: { user_message: string, bot_reply: string }) => {
-        const response = await axios.post(MSG_HANDLING, {
-            message: message,
-        });
-        return response.data;
+        try {
+     
+            const response = await axios.post(`https://rmw.ritzmediaworld.in/api/chatting`, {
+                message: message,
+            });
+            return response.data;
+        } catch (error) {
+            console.log("Error in conversation saving controller ", error);
+            return;
+        }
     };
 
     const handleSendMessage = (text?: string) => {
@@ -617,36 +623,34 @@ function RubyBot() {
 
     return createPortal(
         <>
-        {frontendNotices.length ? (
-            <div className="ruby-otp-notices" role="status" aria-live="polite">
-                {frontendNotices.map((notice) => (
-                    <div className="ruby-otp-notice theme-keep" key={notice.id}>
-                        <span className="ruby-otp-notice-mark" aria-hidden>✓</span>
-                        <span>{notice.text}</span>
-                    </div>
-                ))}
-            </div>
-        ) : null}
-        <div
-            data-lenis-prevent
-            role="dialog"
-            aria-modal="false"
-            aria-label="Chat with Ruby"
-            className={`ruby-panel theme-keep fixed inset-0 sm:inset-auto sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8 z-[250] flex items-end justify-center sm:justify-end transition-opacity duration-500 ease-out ${
-                isPanelActive
-                    ? "opacity-100 pointer-events-auto"
-                    : "opacity-0 pointer-events-none"
-            }`}
-            aria-hidden={!isPanelActive}
-        >
+            {frontendNotices.length ? (
+                <div className="ruby-otp-notices" role="status" aria-live="polite">
+                    {frontendNotices.map((notice) => (
+                        <div className="ruby-otp-notice theme-keep" key={notice.id}>
+                            <span className="ruby-otp-notice-mark" aria-hidden>✓</span>
+                            <span>{notice.text}</span>
+                        </div>
+                    ))}
+                </div>
+            ) : null}
             <div
-                className={`w-full h-[100dvh] sm:w-[min(400px,calc(100vw-3rem))] sm:h-[min(620px,calc(100dvh-3rem))] lg:w-[400px] border-0 sm:border-2 border-[#161616] sm:rounded-[18px] bg-[#fff8ed] sm:shadow-[7px_7px_0_#c9356e] flex flex-col relative overflow-hidden will-change-transform transition-[transform,opacity] duration-700 ease-out ${
-                    isPanelActive
-                        ? "translate-y-0 scale-100 opacity-100"
-                        : "translate-y-10 scale-90 opacity-0 sm:translate-y-8"
-                }`}
-                style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}
+                data-lenis-prevent
+                role="dialog"
+                aria-modal="false"
+                aria-label="Chat with Ruby"
+                className={`ruby-panel theme-keep fixed inset-0 sm:inset-auto sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8 z-[250] flex items-end justify-center sm:justify-end transition-opacity duration-500 ease-out ${isPanelActive
+                        ? "opacity-100 pointer-events-auto"
+                        : "opacity-0 pointer-events-none"
+                    }`}
+                aria-hidden={!isPanelActive}
             >
+                <div
+                    className={`w-full h-[100dvh] sm:w-[min(400px,calc(100vw-3rem))] sm:h-[min(620px,calc(100dvh-3rem))] lg:w-[400px] border-0 sm:border-2 border-[#161616] sm:rounded-[18px] bg-[#fff8ed] sm:shadow-[7px_7px_0_#c9356e] flex flex-col relative overflow-hidden will-change-transform transition-[transform,opacity] duration-700 ease-out ${isPanelActive
+                            ? "translate-y-0 scale-100 opacity-100"
+                            : "translate-y-10 scale-90 opacity-0 sm:translate-y-8"
+                        }`}
+                    style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}
+                >
                     {/* Header */}
                     <div className="bg-[#161b46] px-3 sm:px-4 pb-2.5 pt-[max(0.625rem,env(safe-area-inset-top))] sm:py-3 flex items-center justify-between flex-shrink-0 border-b-2 border-[#161616]">
                         <div className="flex items-center gap-2 sm:gap-3">
@@ -746,15 +750,15 @@ function RubyBot() {
                                 </button></div>
                         )}
                         {chatFinished && !showEnquiryForm && (
-                                <div className="flex justify-center pt-2">
-                                    <button
-                                        type="button"
-                                        onClick={handleRestartChat}
-                                        className="rounded-full border-2 border-[#161b46] bg-[#c9356e] px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#a92b5b] touch-manipulation active:scale-95"
-                                    >
-                                        Start a new chat
-                                    </button>
-                                </div>
+                            <div className="flex justify-center pt-2">
+                                <button
+                                    type="button"
+                                    onClick={handleRestartChat}
+                                    className="rounded-full border-2 border-[#161b46] bg-[#c9356e] px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#a92b5b] touch-manipulation active:scale-95"
+                                >
+                                    Start a new chat
+                                </button>
+                            </div>
                         )}
                     </div>
 
@@ -987,9 +991,9 @@ function RubyBot() {
                         </div>
                     </div>
                 </div>
-        </div>
+            </div>
         </>
-    , document.body);
+        , document.body);
 }
 
 export default RubyBot;
