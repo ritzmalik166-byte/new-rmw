@@ -433,10 +433,12 @@ html[data-theme="dark"] .dw-truck-glow {
 .dw-site-rangoli {
   position: absolute;
   top: calc(var(--dw-line) + 20px);
-  right: -110px;
-  width: 300px;
-  aspect-ratio: 1;
-  background: var(--dw-rangoli) center / contain no-repeat;
+  /* Only the visible slice is drawn (the pattern is pulled left inside it), so the
+     box never sticks out past the right edge and widens the page on phones. */
+  right: 0;
+  width: 190px;
+  height: 300px;
+  background: var(--dw-rangoli) left center / 300px 300px no-repeat;
   opacity: 0.22;
 }
 
@@ -491,8 +493,9 @@ html[data-theme="dark"] .dw-site-rangoli {
   }
 
   .dw-site-rangoli {
-    right: -90px;
-    width: 200px;
+    width: 110px;
+    height: 200px;
+    background-size: 200px 200px;
   }
 }
 
