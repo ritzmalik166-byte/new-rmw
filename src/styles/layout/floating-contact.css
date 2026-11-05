@@ -392,7 +392,8 @@
     bottom: 0;
     left: 0;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas: "ruby wa call";
     gap: 8px;
     padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
     border-top: 2px solid var(--fab-ink);
@@ -407,10 +408,23 @@
     gap: 6px;
     align-items: center;
     justify-content: center;
-    width: auto;
+    width: 100%;
     min-width: 0;
     height: 46px;
     padding: 0 8px;
+    box-sizing: border-box;
+  }
+
+  .fab-btn.is-ruby {
+    grid-area: ruby;
+  }
+
+  .fab-btn.is-wa {
+    grid-area: wa;
+  }
+
+  .fab-btn.is-call {
+    grid-area: call;
   }
 
   .fab-btn.is-wa {
