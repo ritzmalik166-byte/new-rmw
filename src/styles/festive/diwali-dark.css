@@ -1,0 +1,543 @@
+/* ---------- Diwali night: the hero in dark mode (DiwaliNight in src/components/festive/DiwaliHero.tsx) ----------
+   Tagged `.theme-keep`, so it paints in true colours under the night filter.
+   Black-and-gold campaign look: a deep sky, soft gold glows, a few firework bursts,
+   rising embers, fairy-light strands on the edges and a festive roadside. */
+
+.dw-night {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.9s ease,
+    visibility 0s linear 0.9s;
+}
+
+html[data-theme="dark"] .dw-night {
+  visibility: visible;
+  opacity: 1;
+  transition:
+    opacity 0.9s ease,
+    visibility 0s;
+}
+
+/* The plain night sky gives way to the Diwali one; its stars stay, warmed to gold. */
+html[data-theme="dark"] .hm-hero[data-diwali] .night-sky {
+  background: none;
+}
+
+html[data-theme="dark"] .hm-hero[data-diwali] :is(.night-moon, .night-shooter) {
+  display: none;
+}
+
+html[data-theme="dark"] .hm-hero[data-diwali] .night-star {
+  background: #ffe2a0;
+  box-shadow: 0 0 calc(var(--size) * 2.6) rgb(255 200 110 / 70%);
+}
+
+html[data-theme="dark"] .hm-hero[data-diwali] .night-star.is-big::before,
+html[data-theme="dark"] .hm-hero[data-diwali] .night-star.is-big::after {
+  background: linear-gradient(180deg, transparent, #ffd780 45% 55%, transparent);
+}
+
+/* Sits under the stars (.night-sky is z-index 0 and comes first, so lift the stars instead). */
+.hm-hero[data-diwali] .night-sky {
+  z-index: 1;
+}
+
+.dw-night-sky {
+  position: absolute;
+  inset: 0;
+}
+
+/* The black-and-gold sky is the hero's own background, not a keep layer: Chrome's GPU
+   path sometimes leaves keep layers outside the page's night filter and sometimes not
+   (it flipped when scrolling back to the hero), so the sky lives where the filter
+   always applies. These are the colours the night filter turns into near-black with
+   warm gold, orange and red glows (pre-images of #050302 → #1a0f07 and the glows). */
+html[data-theme="dark"] .hm-hero[data-diwali] {
+  background:
+    radial-gradient(40% 34% at 78% 58%, rgb(155 65 0 / 10%), transparent 70%),
+    radial-gradient(60% 30% at 50% 100%, rgb(218 85 0 / 9%), transparent 72%),
+    radial-gradient(30% 40% at 8% 20%, rgb(255 149 147 / 7%), transparent 70%),
+    radial-gradient(50% 40% at 50% 8%, rgb(95 41 0 / 5%), transparent 70%),
+    linear-gradient(180deg, #fffcdc 0%, #fffbda 60%, #fff6d5 100%);
+}
+
+/* Phones use the plain invert + hue-rotate night filter (base/dark.css), so their pre-images differ. */
+@media (pointer: coarse), (max-width: 820px) {
+  html[data-theme="dark"] .hm-hero[data-diwali] {
+    background:
+      radial-gradient(40% 34% at 78% 58%, rgb(150 65 0 / 10%), transparent 70%),
+      radial-gradient(60% 30% at 50% 100%, rgb(210 85 0 / 9%), transparent 72%),
+      radial-gradient(30% 40% at 8% 20%, rgb(255 148 168 / 7%), transparent 70%),
+      radial-gradient(50% 40% at 50% 8%, rgb(91 41 0 / 5%), transparent 70%),
+      linear-gradient(180deg, #fdfbfa 0%, #fcfaf8 60%, #faf5f2 100%);
+  }
+}
+
+/* A faint gold lattice, like a festive wrapper, fading toward the copy. */
+.dw-night-sky::after {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgb(255 210 130 / 9%) 0 1.2px, transparent 1.6px) 0 0 / 34px 34px,
+    conic-gradient(from 45deg at 50% 50%, transparent 0 25%, rgb(255 200 110 / 4%) 0 50%, transparent 0 75%, rgb(255 200 110 / 4%) 0)
+      0 0 / 68px 68px;
+  -webkit-mask: linear-gradient(90deg, transparent 0%, transparent 40%, #000 80%);
+  mask: linear-gradient(90deg, transparent 0%, transparent 40%, #000 80%);
+  content: "";
+}
+
+/* ---------- Firework bursts: a ring of sparks that blooms and fades ---------- */
+.dw-burst {
+  position: absolute;
+  width: var(--s);
+  height: var(--s);
+  translate: -50% -50%;
+}
+
+.dw-burst::before,
+.dw-burst i,
+.dw-burst::after {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  content: "";
+  opacity: 0;
+}
+
+/* Spokes of sparks, masked so only the outer tips show. */
+.dw-burst::before {
+  background: repeating-conic-gradient(var(--hue) 0 2.2deg, transparent 2.2deg 15deg);
+  -webkit-mask: radial-gradient(circle, transparent 0 38%, #000 40% 66%, transparent 70%);
+  mask: radial-gradient(circle, transparent 0 38%, #000 40% 66%, transparent 70%);
+}
+
+.dw-burst::after {
+  background: repeating-conic-gradient(from 7deg, #fff6dc 0 1.4deg, transparent 1.4deg 22deg);
+  -webkit-mask: radial-gradient(circle, transparent 0 20%, #000 22% 40%, transparent 44%);
+  mask: radial-gradient(circle, transparent 0 20%, #000 22% 40%, transparent 44%);
+}
+
+/* The flash at the heart. */
+.dw-burst i {
+  inset: 38%;
+  background: radial-gradient(circle, #fff 0 20%, var(--hue) 45%, transparent 70%);
+}
+
+html[data-theme="dark"] .dw-burst::before,
+html[data-theme="dark"] .dw-burst::after {
+  animation: dw-bloom 5.6s cubic-bezier(0.2, 0.7, 0.3, 1) var(--delay) infinite;
+}
+
+html[data-theme="dark"] .dw-burst i {
+  animation: dw-flash 5.6s ease-out var(--delay) infinite;
+}
+
+/* ---------- Embers drifting up from the street ---------- */
+.dw-ember {
+  position: absolute;
+  bottom: 12%;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: #ffd580;
+  box-shadow:
+    0 0 6px 1px rgb(255 190 80 / 80%),
+    0 0 14px 3px rgb(255 140 40 / 30%);
+  opacity: 0;
+}
+
+html[data-theme="dark"] .dw-ember {
+  animation: dw-rise var(--rise) linear var(--delay) infinite;
+}
+
+/* ---------- Fairy-light strands down the edges, like a campaign banner frame ---------- */
+.dw-side {
+  position: absolute;
+  top: 18%;
+  bottom: 24%;
+  width: 10px;
+}
+
+.dw-side.is-left {
+  left: 12px;
+}
+
+.dw-side.is-right {
+  right: 12px;
+}
+
+.dw-side i {
+  position: absolute;
+  left: 2px;
+  top: calc(var(--i) * (100% / 17));
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffaf0 0 25%, #ffcf6a 60%, #e98a12 100%);
+  box-shadow:
+    0 0 4px 1px #ffcf6a,
+    0 0 12px 3px rgb(255 170 60 / 40%);
+}
+
+html[data-theme="dark"] .dw-side i {
+  animation: dw-edge-twinkle 2.4s ease-in-out calc(var(--i) * -0.18s) infinite;
+}
+
+/* ---------- Roadside: cracker stalls and children with sparklers (DiwaliStreet) ----------
+   Stands on the verge behind the milestones and scrolls with the road. */
+.dw-street {
+  --tile: 1500px;
+  --scale: 1;
+
+  position: absolute;
+  right: 0;
+  bottom: calc(var(--road-h) + 6px);
+  left: 0;
+  display: none;
+  height: calc(104px * var(--scale));
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Not rendered at all in light mode, so its SMIL sparks never tick there. */
+html[data-theme="dark"] .dw-street {
+  display: block;
+  animation: dw-fade-in 0.9s ease both;
+}
+
+/* Inline SVG copies slid along; only the small sparks repaint. */
+.dw-street-track {
+  display: flex;
+  width: max-content;
+  translate: calc(mod(var(--road-x, 0px), var(--tile)) - var(--tile)) 0;
+  scale: var(--scale);
+  transform-origin: 0 100%;
+}
+
+.dw-street-track svg {
+  flex: none;
+  display: block;
+}
+
+@keyframes dw-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ---------- Golden accents on the copy and chrome while the night is up ---------- */
+html[data-theme="dark"] .hm-hero[data-diwali] .hm-pill {
+  box-shadow: 0 0 22px -4px rgb(0 120 255 / 55%); /* reads as warm gold through the night filter */
+}
+
+html[data-theme="dark"] .hm-hero[data-diwali] .hm-btn:hover {
+  box-shadow: 0 8px 28px -6px rgb(0 110 220 / 60%);
+}
+
+@keyframes dw-bloom {
+  0% {
+    opacity: 0;
+    scale: 0.2;
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  34% {
+    opacity: 0.85;
+    scale: 1;
+  }
+
+  52%,
+  100% {
+    opacity: 0;
+    scale: 1.12;
+    translate: 0 8px;
+  }
+}
+
+@keyframes dw-flash {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  4% {
+    opacity: 1;
+  }
+
+  16% {
+    opacity: 0;
+  }
+}
+
+@keyframes dw-rise {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+
+  12% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(var(--drift), -70vh);
+  }
+}
+
+@keyframes dw-edge-twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes dw-flicker {
+  from {
+    scale: 1 1;
+    rotate: -3deg;
+  }
+
+  to {
+    scale: 0.88 1.08;
+    rotate: 3deg;
+  }
+}
+
+@media (max-width: 820px) {
+  /* On phones the copy runs full width: bursts go higher and smaller, edges stay clean. */
+  .dw-burst {
+    --s: 80px !important;
+  }
+
+  .dw-burst:nth-of-type(n + 4) {
+    display: none;
+  }
+
+  .dw-side {
+    top: 22%;
+    bottom: 34%;
+    width: 6px;
+  }
+
+  .dw-side.is-left {
+    left: 4px;
+  }
+
+  .dw-side.is-right {
+    right: 4px;
+  }
+
+  .dw-side i {
+    width: 4px;
+    height: 4px;
+  }
+
+  .dw-street {
+    --tile: 1125px;
+    --scale: 0.75;
+  }
+
+  .dw-night-sky::after {
+    -webkit-mask: linear-gradient(180deg, #000, transparent 40%);
+    mask: linear-gradient(180deg, #000, transparent 40%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="dark"] :is(.dw-ember, .dw-side i, .dw-burst i),
+  html[data-theme="dark"] .dw-burst::before,
+  html[data-theme="dark"] .dw-burst::after {
+    animation: none;
+  }
+
+  .dw-ember {
+    display: none;
+  }
+
+  html[data-theme="dark"] .dw-burst::before {
+    opacity: 0.5;
+  }
+}
+
+/* ---------- Inner pages: string lights under the header (DiwaliSite) ---------- */
+.dw-site {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  inset: 0 0 auto;
+  z-index: 40;
+  height: calc(var(--dw-line) + 60px);
+}
+
+/* The homepage hero hangs its own. */
+:root:has(.hm-hero[data-diwali]) .dw-site {
+  display: none;
+}
+
+html[data-theme="dark"] .dw-site .dw-wire path {
+  stroke: #6b5232;
+}
+
+
+.dw-truck-strand.is-mid {
+  top: 33%;
+  right: 1.5%;
+  left: 32%;
+}
+
+.dw-truck-strand.is-bumper {
+  top: 79%;
+  right: 3%;
+  left: 21%;
+}
+
+/* A warm pool of light on the road under the body, and a soft halo around the cargo. */
+.dw-truck-glow {
+  position: absolute;
+  inset: -6% -4% -10% 14%;
+  z-index: -1;
+  border-radius: 40%;
+  background:
+    radial-gradient(60% 18% at 55% 96%, rgb(255 170 60 / 50%), transparent 70%),
+    radial-gradient(56% 50% at 62% 45%, rgb(255 190 90 / 22%), transparent 72%);
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+html[data-theme="dark"] .dw-truck-glow {
+  opacity: 1;
+}
+
+/* ---------- Smooth scrolling: nothing animates once the hero is off screen ---------- */
+.hm-hero[data-offscreen] :is(.dw-night, .dw-street, .dw-decor, .dw-truck, .night-sky) {
+  display: none;
+}
+
+
+/* ---------- Inner pages: a rangoli peeking in from the top-right corner ---------- */
+.dw-site-rangoli {
+  position: absolute;
+  top: calc(var(--dw-line) + 20px);
+  right: -110px;
+  width: 300px;
+  aspect-ratio: 1;
+  background: var(--dw-rangoli) center / contain no-repeat;
+  opacity: 0.22;
+}
+
+html[data-theme="dark"] .dw-site-rangoli {
+  opacity: 0.4;
+  filter: drop-shadow(0 0 18px rgb(255 170 60 / 35%));
+}
+
+/* ---------- Every page: a small greeting with a lit diya, bottom-left ---------- */
+.dw-greeting {
+  position: fixed;
+  bottom: clamp(16px, 3vh, 28px);
+  left: clamp(16px, 2vw, 28px);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 7px 14px 7px 10px;
+  border: 1px solid rgb(200 120 20 / 55%);
+  border-radius: 999px;
+  /* Light paper in light mode; the night filter turns it into deep brown with gold type. */
+  background: linear-gradient(135deg, #fff6e6, #ffe9c7);
+  box-shadow:
+    0 6px 18px -6px rgb(90 50 0 / 35%),
+    0 0 18px -4px rgb(255 160 50 / 45%);
+  color: #7a3a06;
+  font: 700 13px/1 var(--font-yatra, "Nirmala UI"), sans-serif;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  animation: dw-greet-in 0.8s cubic-bezier(0.2, 0.7, 0.3, 1) 1.2s both;
+}
+
+.dw-greeting-diya {
+  width: 26px;
+  height: 18px;
+  background: var(--dw-diya) center / contain no-repeat;
+  animation: dw-diya-flicker 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes dw-greet-in {
+  from {
+    opacity: 0;
+    translate: 0 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dw-greeting {
+    padding: 5px 11px 5px 7px;
+    font-size: 11.5px;
+  }
+
+  .dw-site-rangoli {
+    right: -90px;
+    width: 200px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dw-greeting,
+  .dw-greeting-diya {
+    animation: none;
+  }
+}
+
+
+/* Keep the lamplight under the string a soft halo, not a brown band, on the black sky. */
+html[data-theme="dark"] .hm-hero[data-diwali] .dw-glow {
+  background:
+    radial-gradient(70% 10% at 50% calc(var(--dw-top) + 14px), rgb(255 190 90 / 12%), transparent 70%),
+    radial-gradient(14% 18% at 82% 34%, rgb(255 170 70 / 9%), transparent 70%);
+}
+
+/* The lattice stays a whisper so the sky reads black. */
+html[data-theme="dark"] .dw-night-sky::after {
+  opacity: 0.5;
+}
+
+/* ---------- Night glow on every bulb: string lights, edge strands and the truck ---------- */
+html[data-theme="dark"] .dw-bulb {
+  box-shadow:
+    0 0 4px 1px var(--c),
+    0 0 14px 4px color-mix(in srgb, var(--c) 60%, transparent),
+    0 0 28px 8px color-mix(in srgb, var(--c) 22%, transparent);
+}
+
+html[data-theme="dark"] .dw-truck-bulb {
+  width: 5px;
+  height: 6px;
+  box-shadow:
+    0 0 4px 1.5px var(--c),
+    0 0 12px 4px color-mix(in srgb, var(--c) 65%, transparent),
+    0 0 24px 7px color-mix(in srgb, var(--c) 25%, transparent);
+}
+
+/* Lit at full strength at night, not waiting for the headlamps. */
+html[data-theme="dark"] .hm-hero:not(.is-lit) :is(.dw-truck-bulb, .dw-bulb) {
+  opacity: 1;
+}
+
+html[data-theme="dark"] .dw-wire path {
+  stroke: #5a4630;
+}
