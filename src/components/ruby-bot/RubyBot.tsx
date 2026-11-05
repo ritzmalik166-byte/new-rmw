@@ -17,6 +17,7 @@ import { FiMic, FiMicOff, FiSend } from 'react-icons/fi';
 import axios from 'axios';
 import { RubyContext } from '@/components/ruby-bot/RubyContext';
 import uniqueIdGenerator from '@/lib/ruby/unique-id';
+import { saveConversations } from '@/lib/saveConversations';
 
 interface Message {
     id: string;
@@ -326,16 +327,18 @@ function RubyBot() {
         scrollToBottom();
     }, [messages, isTyping]);
 
-    const handleChatting = async (message: { user_message: string, bot_reply: string }) => {
+    const handleChatting = async (message: { user_message: string, bot_reply: string, user_id: string | null }) => {
         try {
-     
-            const response = await axios.post(`https://rmw.ritzmediaworld.in/api/chatting`, {
-                message: message,
+            const res = await axios.post("/api/chat/save", {
+                messages: message
             });
-            return response.data;
+            if (res.status !== 201) {
+                console.error("Error In conversation handle controller ", res)
+            }
+            return { status: res.status }
         } catch (error) {
             console.log("Error in conversation saving controller ", error);
-            return;
+            return { status: 500 };
         }
     };
 
@@ -386,12 +389,12 @@ function RubyBot() {
                             sender: 'bot',
                             timestamp: new Date(),
                         };
-                        const user_conversations = {
+                        const user_conversations: { user_message: string, bot_reply: string, user_id: string | null } = {
                             user_message: messageText,
                             bot_reply: botResponseText,
                             user_id: uniqueId
                         }
-                        handleChatting(user_conversations);
+                        handleChatting(user_conversations)
                         setMessages((prev) => [...prev, botResponse]);
                         setIsTyping(false);
 
@@ -639,15 +642,15 @@ function RubyBot() {
                 aria-modal="false"
                 aria-label="Chat with Ruby"
                 className={`ruby-panel theme-keep fixed inset-0 sm:inset-auto sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8 z-[250] flex items-end justify-center sm:justify-end transition-opacity duration-500 ease-out ${isPanelActive
-                        ? "opacity-100 pointer-events-auto"
-                        : "opacity-0 pointer-events-none"
+                    ? "opacity-100 pointer-events-auto"
+                    : "opacity-0 pointer-events-none"
                     }`}
                 aria-hidden={!isPanelActive}
             >
                 <div
                     className={`w-full h-[100dvh] sm:w-[min(400px,calc(100vw-3rem))] sm:h-[min(620px,calc(100dvh-3rem))] lg:w-[400px] border-0 sm:border-2 border-[#161616] sm:rounded-[18px] bg-[#fff8ed] sm:shadow-[7px_7px_0_#c9356e] flex flex-col relative overflow-hidden will-change-transform transition-[transform,opacity] duration-700 ease-out ${isPanelActive
-                            ? "translate-y-0 scale-100 opacity-100"
-                            : "translate-y-10 scale-90 opacity-0 sm:translate-y-8"
+                        ? "translate-y-0 scale-100 opacity-100"
+                        : "translate-y-10 scale-90 opacity-0 sm:translate-y-8"
                         }`}
                     style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}
                 >
