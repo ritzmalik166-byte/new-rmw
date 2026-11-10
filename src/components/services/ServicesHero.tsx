@@ -1,12 +1,8 @@
-"use client";
-
-import { useGSAP } from "@gsap/react";
-import { Fragment, useRef } from "react";
+import { Fragment } from "react";
 import { TransitionLink } from "@/components/motion/TransitionLink";
-import { useMotion } from "@/components/providers/MotionProvider";
-import { gsap, registerGsap } from "@/lib/gsap";
 
-registerGsap();
+/* Server component: the entrance animation is pure CSS (see styles/services/hero.css),
+   so the hero, the page's LCP, paints without waiting for JS. */
 
 const TITLE = [
   { text: "We deliver brands from", accent: false },
@@ -20,66 +16,8 @@ const CONSIGNMENT = [
 ] as const;
 
 export function ServicesHero() {
-  const rootRef = useRef<HTMLElement>(null);
-  const { ready, reduced } = useMotion();
-
-  useGSAP(
-    () => {
-      const root = rootRef.current;
-      if (!root || !ready) return;
-
-      const q = gsap.utils.selector(root);
-      const lines = q(".svch-line-inner");
-      const crumbs = q(".svch-crumbs");
-      const fades = q(".svch-kicker, .svch-lede, .svch-cta");
-      const note = q(".svch-note-wrap");
-      const stamp = q(".svch-stamp");
-      const rows = q(".svch-note-table tbody tr");
-
-      if (reduced) {
-        gsap.set([crumbs, lines, fades, note, stamp, rows], { autoAlpha: 1, clearProps: "transform" });
-        return;
-      }
-
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.fromTo([crumbs, fades[0]], { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6 })
-        .fromTo(
-          lines,
-          { yPercent: 110, autoAlpha: 1 },
-          { yPercent: 0, duration: 1, ease: "expo.out", stagger: 0.09 },
-          0.1,
-        )
-        .fromTo(
-          fades.slice(1),
-          { y: 18, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.7, stagger: 0.1 },
-          0.55,
-        )
-        .fromTo(
-          note,
-          { y: 60, rotate: 9, autoAlpha: 0 },
-          { y: 0, rotate: 0, autoAlpha: 1, duration: 1.1, ease: "expo.out" },
-          0.25,
-        )
-        .fromTo(
-          rows,
-          { x: -12, autoAlpha: 0 },
-          { x: 0, autoAlpha: 1, duration: 0.5, stagger: 0.1 },
-          0.85,
-        )
-        .fromTo(
-          stamp,
-          { scale: 2.4, autoAlpha: 0 },
-          { scale: 1, autoAlpha: 0.9, duration: 0.45, ease: "power4.in" },
-          1.35,
-        )
-        .to(note, { y: 3, duration: 0.08, yoyo: true, repeat: 1, ease: "power1.inOut" });
-    },
-    { dependencies: [ready, reduced], scope: rootRef },
-  );
-
   return (
-    <section ref={rootRef} className="hm svch" aria-labelledby="svch-title">
+    <section className="hm svch" aria-labelledby="svch-title">
       <div className="svch-inner">
         <div className="svch-copy">
           <nav className="sd-crumbs svch-crumbs" aria-label="Breadcrumb">
