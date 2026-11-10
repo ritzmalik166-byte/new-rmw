@@ -3,7 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import { useRef } from "react";
-import { useMotion } from "@/components/providers/MotionProvider";
+import { useDeferredMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap } from "@/lib/gsap";
 import { ServicesPrintPaper } from "./ServicesPrintPaper";
 import { ServicesWebMockup, WEB_SERVICE_HREF } from "./ServicesWebMockup";
@@ -12,7 +12,7 @@ registerGsap();
 
 export function ServicesWebPrint() {
   const rootRef = useRef<HTMLElement>(null);
-  const { ready, reduced } = useMotion();
+  const { ready, reduced } = useDeferredMotion();
 
   /* The section before this one holds still while this one slides up over
      it, until this section fills the screen. */

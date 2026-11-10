@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRef, useState, type KeyboardEvent } from "react";
-import { useMotion } from "@/components/providers/MotionProvider";
+import { useDeferredMotion } from "@/components/providers/MotionProvider";
 import { cn } from "@/lib/cn";
 import { gsap, registerGsap } from "@/lib/gsap";
 import { RENDER_ICONS, iconThumb } from "@/lib/service-icons";
@@ -56,7 +56,7 @@ export function ServicesRendering() {
   const rootRef = useRef<HTMLElement>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [active, setActive] = useState(0);
-  const { ready, reduced } = useMotion();
+  const { ready, reduced } = useDeferredMotion();
   const render = RENDERS[active];
 
   /* Section entrance. */

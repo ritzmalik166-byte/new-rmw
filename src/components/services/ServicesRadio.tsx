@@ -3,7 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import { useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from "react";
-import { useMotion } from "@/components/providers/MotionProvider";
+import { useDeferredMotion } from "@/components/providers/MotionProvider";
 import { cn } from "@/lib/cn";
 import { gsap, registerGsap } from "@/lib/gsap";
 
@@ -68,7 +68,7 @@ export function ServicesRadio() {
   const staticTimer = useRef<number | undefined>(undefined);
   const [active, setActive] = useState(0);
   const [dragFreq, setDragFreq] = useState<number | null>(null);
-  const { ready, reduced } = useMotion();
+  const { ready, reduced } = useDeferredMotion();
 
   /* On arrival the tuner scans up the band and locks onto the first station. */
   useGSAP(

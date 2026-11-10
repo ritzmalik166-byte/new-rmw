@@ -3,7 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import { Fragment, useRef, type PointerEvent, type ReactNode } from "react";
-import { useMotion } from "@/components/providers/MotionProvider";
+import { useDeferredMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap } from "@/lib/gsap";
 import { ServicesSearchGlimpse } from "./ServicesSearchGlimpse";
 
@@ -61,7 +61,7 @@ const MAX_TILT = 7;
 
 export function ServicesDigitalMarketing() {
   const rootRef = useRef<HTMLElement>(null);
-  const { ready, reduced } = useMotion();
+  const { ready, reduced } = useDeferredMotion();
 
   useGSAP(
     () => {

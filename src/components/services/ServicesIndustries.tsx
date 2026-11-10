@@ -2,7 +2,7 @@
 
 import { useGSAP } from "@gsap/react";
 import { useRef, type CSSProperties } from "react";
-import { useMotion } from "@/components/providers/MotionProvider";
+import { useDeferredMotion } from "@/components/providers/MotionProvider";
 import { RealTruck, setWheelTurn } from "@/components/ui/RealTruck";
 import { gsap, registerGsap } from "@/lib/gsap";
 
@@ -73,7 +73,7 @@ const SKYLINE_NEAR = buildSkyline(5, 80, 24);
 
 export function ServicesIndustries() {
   const rootRef = useRef<HTMLElement>(null);
-  const { ready, reduced } = useMotion();
+  const { ready, reduced } = useDeferredMotion();
 
   useGSAP(
     () => {

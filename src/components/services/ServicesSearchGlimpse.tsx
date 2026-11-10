@@ -2,7 +2,7 @@
 
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
-import { useMotion } from "@/components/providers/MotionProvider";
+import { useDeferredMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap, ScrollTrigger } from "@/lib/gsap";
 
 registerGsap();
@@ -12,7 +12,7 @@ const LENS_SCALE = 1.8;
 
 export function ServicesSearchGlimpse() {
   const rootRef = useRef<HTMLDivElement>(null);
-  const { ready, reduced } = useMotion();
+  const { ready, reduced } = useDeferredMotion();
 
   useGSAP(
     () => {
