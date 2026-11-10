@@ -4,6 +4,10 @@ const nextConfig: NextConfig = {
   // Render title/robots/canonical in <head> for every user agent, not just known bots,
   // so SEO crawlers (Screaming Frog, Sitebulb, etc.) don't flag them as outside <head>.
   htmlLimitedBots: /.*/,
+  experimental: {
+    // Inline page CSS into the HTML instead of render-blocking <link> requests (better FCP/LCP).
+    inlineCss: true,
+  },
   images: {
     qualities: [75, 95],
     formats: ["image/avif", "image/webp"],
