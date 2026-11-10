@@ -3,7 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import { useRef, type PointerEvent } from "react";
-import { useMotion } from "@/components/providers/MotionProvider";
+import { useDeferredMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap, ScrollTrigger } from "@/lib/gsap";
 
 registerGsap();
@@ -26,7 +26,7 @@ const rodPct = `${((ROD_BOTTOM / ART_H) * 100).toFixed(3)}%`;
 
 export function ServicesCreative() {
   const rootRef = useRef<HTMLElement>(null);
-  const { ready, reduced } = useMotion();
+  const { ready, reduced } = useDeferredMotion();
   const swings = useRef(new WeakMap<HTMLElement, gsap.core.Timeline>());
 
   const playSwing = (card: HTMLElement, dir: number, amp: number, delay = 0) => {

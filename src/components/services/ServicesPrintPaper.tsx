@@ -3,7 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import { useRef } from "react";
-import { useMotion } from "@/components/providers/MotionProvider";
+import { useDeferredMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap } from "@/lib/gsap";
 
 registerGsap();
@@ -34,7 +34,7 @@ const CLASSIFIEDS = [
 
 export function ServicesPrintPaper() {
   const rootRef = useRef<HTMLDivElement>(null);
-  const { ready, reduced } = useMotion();
+  const { ready, reduced } = useDeferredMotion();
 
   /* The page rolls out of the press under a roller, then the ad gets stamped. */
   useGSAP(

@@ -3,7 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import { useRef, type CSSProperties } from "react";
-import { useMotion } from "@/components/providers/MotionProvider";
+import { useDeferredMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap } from "@/lib/gsap";
 import { ServicesRouteTruck } from "./ServicesRouteTruck";
 
@@ -52,7 +52,7 @@ const RAIL_END = "bottom 70%";
 
 export function ServicesStarPower() {
   const rootRef = useRef<HTMLElement>(null);
-  const { ready, reduced } = useMotion();
+  const { ready, reduced } = useDeferredMotion();
 
   useGSAP(
     () => {

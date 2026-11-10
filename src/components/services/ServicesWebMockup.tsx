@@ -9,7 +9,7 @@ import {
   type CSSProperties,
   type KeyboardEvent,
 } from "react";
-import { useMotion } from "@/components/providers/MotionProvider";
+import { useDeferredMotion, useMotion } from "@/components/providers/MotionProvider";
 import { cn } from "@/lib/cn";
 import { gsap, registerGsap, ScrollTrigger } from "@/lib/gsap";
 
@@ -223,7 +223,7 @@ type SceneContext = {
    Every scene must add a "hold" label: reduced motion parks the scene there. */
 function useScene(build: (ctx: SceneContext) => void) {
   const ref = useRef<HTMLDivElement>(null);
-  const { ready, reduced } = useMotion();
+  const { ready, reduced } = useDeferredMotion();
 
   useGSAP(
     () => {

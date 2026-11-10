@@ -2,7 +2,7 @@
 
 import { useGSAP } from "@gsap/react";
 import { useEffect, useRef } from "react";
-import { useMotion } from "@/components/providers/MotionProvider";
+import { useDeferredMotion } from "@/components/providers/MotionProvider";
 import { cn } from "@/lib/cn";
 import { gsap, registerGsap } from "@/lib/gsap";
 
@@ -34,7 +34,7 @@ export function ServicesRouteTruck({
   end = "bottom 60%",
 }: Props) {
   const truckRef = useRef<HTMLSpanElement>(null);
-  const { ready, reduced } = useMotion();
+  const { ready, reduced } = useDeferredMotion();
 
   useEffect(() => {
     const truck = truckRef.current;

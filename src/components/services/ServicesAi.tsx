@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { useMotion } from "@/components/providers/MotionProvider";
+import { useDeferredMotion } from "@/components/providers/MotionProvider";
 import { gsap, registerGsap } from "@/lib/gsap";
 
 registerGsap();
@@ -36,7 +36,7 @@ const AI_SERVICES = [
 
 export function ServicesAi() {
   const rootRef = useRef<HTMLElement>(null);
-  const { ready, reduced } = useMotion();
+  const { ready, reduced } = useDeferredMotion();
 
   useEffect(() => {
     const root = rootRef.current;
