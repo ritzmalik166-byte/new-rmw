@@ -1,4 +1,4 @@
-export const DIWALI_THEME = true;
+export const DIWALI_THEME = false;
 
 /* Until this moment (end of 9 Nov 2026, IST) the site opens in dark mode, where the
    Diwali night looks best. A visitor's own toggle choice still wins. */
