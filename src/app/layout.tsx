@@ -149,6 +149,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
         <script dangerouslySetInnerHTML={{ __html: GA_INIT }} />
+        <script defer src="https://analytics-api.ritzmediaworld.com/tracker.js" data-site-id="site_i4cb3qgotapg" />
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
