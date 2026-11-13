@@ -1,5 +1,6 @@
 "use client";
 
+import { getAttribution } from "@/lib/attribution";
 import {
   useEffect,
   useRef,
@@ -263,6 +264,7 @@ export function ContactForm() {
       lastName: values.lastName.trim(),
       email: values.email.trim(),
       verifiedToken,
+      tracking: getAttribution(),
     });
     setSubmitting(false);
 

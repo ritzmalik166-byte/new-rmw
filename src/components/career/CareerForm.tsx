@@ -1,5 +1,6 @@
 "use client";
 
+import { getAttribution } from "@/lib/attribution";
 import {
   useEffect,
   useRef,
@@ -233,6 +234,7 @@ export function CareerForm() {
     body.set("website", values.website);
     body.set("verifiedToken", verifiedToken);
     body.set("resume", resume);
+    body.set("tracking", JSON.stringify(getAttribution()));
 
     setSubmitting(true);
     const result = await post<{ ok: boolean; error?: string; errors?: Errors }>("/api/career", body, false);

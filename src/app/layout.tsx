@@ -16,6 +16,7 @@ import { THEME_BOOT_SCRIPT } from "@/lib/theme";
 import { DIWALI_THEME } from "@/config/festive";
 import { DiwaliSiteLights } from "@/components/festive/DiwaliSite";
 import "./globals.css";
+import AttributionCapture from "@/components/AttributionCapture";
 
 /* Fonts are self-hosted (Latin subsets from Google Fonts) so builds never
    depend on reaching fonts.googleapis.com. */
@@ -158,6 +159,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         className="bg-background font-sans text-foreground"
         suppressHydrationWarning
       >
+        <AttributionCapture />
         <ThemeFilters />
         <AppProviders>
           <Header />
