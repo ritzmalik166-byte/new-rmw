@@ -1,5 +1,6 @@
 "use client";
 
+import { getAttribution } from "@/lib/attribution";
 import { useEffect, useId, useState, type ChangeEvent, type FormEvent } from "react";
 import { HmArrow } from "@/components/homepage/shared";
 import { SelectMenu } from "@/components/ui/SelectMenu";
@@ -241,6 +242,7 @@ export function ServiceQueryForm({
       email: values.email.trim(),
       message: [context, values.message.trim()].filter(Boolean).join("\n"),
       verifiedToken,
+      tracking: getAttribution(),
     });
     setSubmitting(false);
 

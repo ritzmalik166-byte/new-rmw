@@ -12,6 +12,7 @@ import {
 } from "@/lib/contact";
 import { emailSubject, isVerified } from "@/lib/contact-otp";
 import { ENQUIRY_URL, postRemote, remoteMessage } from "@/lib/enquiry";
+import { trackingBlock, trackingFields } from "@/lib/attribution";
 
 type ContactBody = Record<string, unknown>;
 
@@ -80,7 +81,8 @@ export async function POST(request: Request) {
         `How did you hear about us: ${heardFrom || "N/A"}`,
         "",
         `Message: ${message || "N/A"}`,
-      ].join("\n"),
+      ].join("\n") + trackingBlock(body.tracking),
+      ...trackingFields(body.tracking),
     },
     "contact",
   );

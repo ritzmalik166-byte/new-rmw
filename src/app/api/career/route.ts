@@ -3,6 +3,7 @@ import { CAREER_UPLOAD_URL, isCareerRole, resumeError } from "@/lib/career";
 import { digitsOnly, isIndianMobile, isValidEmail, isValidName } from "@/lib/contact";
 import { isVerified } from "@/lib/contact-otp";
 import { ENQUIRY_URL, postRemote, remoteMessage } from "@/lib/enquiry";
+import { parseTracking, trackingBlock, trackingFields } from "@/lib/attribution";
 
 function text(form: FormData, key: string, max = 120) {
   const value = form.get(key);
@@ -66,7 +67,9 @@ export async function POST(request: Request) {
   enquiry.append("email", email);
   enquiry.append("phone", phone);
   enquiry.append("category", role);
-  enquiry.append("message", message);
+  const tracking = parseTracking(form.get("tracking"));
+  enquiry.append("message", message + trackingBlock(tracking));
+  for (const [k, v] of Object.entries(trackingFields(tracking))) enquiry.append(k, v);
   enquiry.append("resumePath", filePath);
   enquiry.append("etype", "career");
   const submitted = await postRemote(ENQUIRY_URL, enquiry, "career");
