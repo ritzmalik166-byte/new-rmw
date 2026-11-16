@@ -135,7 +135,8 @@ export async function sendOtpSms(phone: string, otp: string) {
     apikey,
     senderid,
     number: phone,
-    message: template.replace("{otp}", otp),
+    // Accept both our "{otp}" token and DLT-style variables like "{#num#}" / "{#var#}".
+    message: template.replace(/\{otp\}|\{#\w+#\}/gi, otp),
   });
   if (process.env.SMS_TEMPLATE_ID) params.set("templateid", process.env.SMS_TEMPLATE_ID);
 
