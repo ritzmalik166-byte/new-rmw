@@ -13,7 +13,6 @@ const MAX_SENDS_PER_IP_PER_HOUR = 15;
 const DEFAULT_TEMPLATE =
   "{otp} is your OTP to verify your enquiry with Ritz Media World. It is valid for 10 minutes. Do not share it with anyone.";
 
-/** A subject is what the OTP proves ownership of: an Indian mobile number, or `email:<address>`. */
 type OtpPayload = { kind: "otp"; subject: string; exp: number; hash: string };
 type VerifiedPayload = { kind: "verified"; subject: string; exp: number };
 

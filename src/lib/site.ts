@@ -12,7 +12,7 @@ export const site = {
   fullName: "Ritz Media World",
   tagline: "Creative OK Please",
   description:
-    "Explore Ritz Media World’s full-service solutions in creative, digital, print, radio, 3D rendering, and AI, designed to grow your brand and drive real results.",
+  "Best Advertising Agency - Ritz Media World is the Most Trusted Advertising Agency in Delhi NCR. Provides Advertising, SEO, Radio & Print Ads services Noida. ",
   nav: [
     { href: "/about.html", label: "About" },
     { href: "/services", label: "Services" },
