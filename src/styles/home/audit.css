@@ -302,6 +302,26 @@
   cursor: pointer;
 }
 
+.audit-field textarea {
+  width: 100%;
+  min-height: 72px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--audit-gold);
+  border-radius: 8px;
+  background: transparent;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #ffffff;
+  outline: none;
+  resize: vertical;
+}
+
+.audit-field textarea:focus {
+  border-color: #ffe7a3;
+}
+
+.audit-field textarea::placeholder,
 .audit-field input::placeholder {
   color: rgb(255 255 255 / 0.62);
 }
@@ -340,6 +360,117 @@
 
 .audit-select .sx-select-button svg {
   color: var(--audit-gold);
+}
+
+/* Phone + OTP (same flow as the contact page form). */
+.audit-field-wide {
+  grid-column: 1 / -1;
+}
+
+.audit-phone {
+  display: flex;
+  gap: 8px;
+  min-width: 0;
+}
+
+.audit-phone input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.audit-dial {
+  flex: 0 0 92px;
+}
+
+.audit-otp-btn {
+  flex: 0 0 auto;
+  height: 40px;
+  padding: 0 14px;
+  border: 1.5px solid var(--audit-gold);
+  border-radius: 8px;
+  background: var(--audit-gold);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--audit-navy);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.audit-otp-btn:disabled {
+  cursor: not-allowed;
+  background: transparent;
+  color: rgb(255 255 255 / 0.7);
+}
+
+.audit-verified {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 4px;
+  padding: 0 6px;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: #86efac;
+}
+
+.audit-otp {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.audit-otp input {
+  letter-spacing: 0.4em;
+}
+
+.audit-error,
+.audit-help {
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 11.5px;
+  line-height: 1.35;
+}
+
+.audit-error {
+  color: #fca5a5;
+}
+
+.audit-help {
+  color: rgb(255 255 255 / 0.72);
+}
+
+.audit-field.has-error > input,
+.audit-field.has-error .audit-phone > input {
+  border-color: #fca5a5;
+}
+
+.audit-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--audit-gold);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.audit-done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 4px 22px;
+  text-align: center;
+}
+
+.audit-done-title {
+  margin: 0;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: #ffffff;
 }
 
 .audit-note {
