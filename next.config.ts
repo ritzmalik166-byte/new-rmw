@@ -4,10 +4,10 @@ const nextConfig: NextConfig = {
   // Render title/robots/canonical in <head> for every user agent, not just known bots,
   // so SEO crawlers (Screaming Frog, Sitebulb, etc.) don't flag them as outside <head>.
   htmlLimitedBots: /.*/,
-  experimental: {
-    // Inline page CSS into the HTML instead of render-blocking <link> requests (better FCP/LCP).
-    inlineCss: true,
-  },
+  // experimental.inlineCss is deliberately off. With ~330KB of CSS it put a giant <style>
+  // block at the top of <head>, burying <title>, meta description and JSON-LD 330KB deep
+  // in the page source, and the CSS was also duplicated in the RSC payload (~1.2MB HTML per
+  // page). External stylesheets are cached once and shared across every page instead.
   images: {
     qualities: [75, 95],
     formats: ["image/avif", "image/webp"],
