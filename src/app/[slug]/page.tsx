@@ -120,6 +120,9 @@ export default async function BlogDetailPage({
   let blog = (await getBlogPost(slug)) ?? findBlog(allBlogs, slug);
 
   if (!blog) {
+    // Unknown URLs (mostly bots) used to build the whole case-study list, which costs
+    // two API calls per case study. The slug list is one cached call, so check it first.
+    if (!(await getCaseStudySlugs()).has(slug.toLowerCase())) notFound();
     const caseStudy = (await getCaseStudies()).find((item) => item.slug.toLowerCase() === slug.toLowerCase());
     if (caseStudy) {
       blog = {
