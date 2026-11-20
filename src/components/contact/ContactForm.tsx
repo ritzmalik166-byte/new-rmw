@@ -89,6 +89,8 @@ export function ContactForm() {
   const [otpMessage, setOtpMessage] = useState("");
   const [otpError, setOtpError] = useState("");
   const [resendIn, setResendIn] = useState(0);
+  // +91 visitors who don't receive the SMS can switch to verifying their email instead.
+  const [useEmail, setUseEmail] = useState(false);
   const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const [submitting, setSubmitting] = useState(false);
@@ -97,7 +99,8 @@ export function ContactForm() {
   const [bookedOn, setBookedOn] = useState("");
   const bookedRef = useRef<HTMLHeadingElement>(null);
 
-  const bySms = values.dial === OTP_DIAL_CODE;
+  const smsAvailable = values.dial === OTP_DIAL_CODE;
+  const bySms = smsAvailable && !useEmail;
   const otpLocked = otpStage === "verified" || otpStage === "verifying";
   const otpOpen = otpStage === "sent" || otpStage === "verifying";
 
@@ -143,6 +146,7 @@ export function ContactForm() {
     update("dial", dial);
     update("phone", values.phone.slice(0, dial === OTP_DIAL_CODE ? 10 : 14));
     resetOtp();
+    setUseEmail(false);
   };
 
   const onCountryChange = (country: string) => {
@@ -159,11 +163,14 @@ export function ContactForm() {
     setErrors(validate(values));
   };
 
-  const otpTarget = () => (bySms ? { phone: values.phone } : { email: values.email.trim() });
+  const otpTarget = (sms = bySms) => (sms ? { phone: values.phone } : { email: values.email.trim() });
 
-  const sendOtp = async () => {
-    if (bySms ? !isIndianMobile(values.phone) : !isValidEmail(values.email.trim())) {
-      setTouched((current) => ({ ...current, [bySms ? "phone" : "email"]: true }));
+  /* `forceEmail` sends the code by email right away when the visitor switches from SMS,
+     before the `useEmail` state change has re-rendered this function. */
+  const sendOtp = async (forceEmail = false) => {
+    const sms = bySms && !forceEmail;
+    if (sms ? !isIndianMobile(values.phone) : !isValidEmail(values.email.trim())) {
+      setTouched((current) => ({ ...current, [sms ? "phone" : "email"]: true }));
       setErrors(validate(values));
       return;
     }
@@ -172,7 +179,7 @@ export function ContactForm() {
     const result = await postJson<{ ok: boolean; token?: string; error?: string; retryIn?: number }>(
       "/api/contact/otp/send",
       {
-        ...otpTarget(), userName: `${values.firstName} ${values.lastName}`, enquiry_for: values.reason, message: values.message, number: values.phone
+        ...otpTarget(sms), userName: `${values.firstName} ${values.lastName}`, enquiry_for: values.reason, message: values.message, number: values.phone
 
       },
     );
@@ -180,14 +187,28 @@ export function ContactForm() {
       setOtpToken(result.token);
       setOtp("");
       setOtpStage("sent");
-      setOtpMessage(bySms ? `Sent to +91 ${values.phone}` : `Sent to ${values.email.trim()}`);
+      setOtpMessage(sms ? `Sent to +91 ${values.phone}` : `Sent to ${values.email.trim()}`);
       setResendIn(OTP_RESEND_SECONDS);
       window.setTimeout(() => otpRefs.current[0]?.focus(), 60);
     } else {
-      setOtpStage(otpToken ? "sent" : "idle");
+      // After switching to email, the old SMS token is no longer valid for this mode.
+      setOtpStage(otpToken && !forceEmail ? "sent" : "idle");
       setOtpError(result.error ?? "We couldn't send the OTP. Please try again.");
       if (result.retryIn) setResendIn(result.retryIn);
     }
+  };
+
+  const switchToEmail = () => {
+    resetOtp();
+    setResendIn(0);
+    setUseEmail(true);
+    void sendOtp(true);
+  };
+
+  const switchToSms = () => {
+    resetOtp();
+    setResendIn(0);
+    setUseEmail(false);
   };
 
   const verify = async (code: string) => {
@@ -285,6 +306,7 @@ export function ContactForm() {
     setErrors({});
     setSubmitError("");
     resetOtp();
+    setUseEmail(false);
     setSentName("");
   };
 
@@ -396,7 +418,7 @@ export function ContactForm() {
                 <button
                   type="button"
                   className="ct-otp-send"
-                  onClick={sendOtp}
+                  onClick={() => void sendOtp()}
                   disabled={otpStage === "sending" || otpStage === "verifying" || resendIn > 0}
                 >
                   {otpStage === "sending"
@@ -414,6 +436,14 @@ export function ContactForm() {
             {phoneError ? (
               <span id="ct-phone-help" className="ct-error" role={otpError ? "alert" : undefined}>
                 {phoneError}
+                {bySms && !otpOpen && otpError ? (
+                  <>
+                    {" "}
+                    <button type="button" className="ct-link" onClick={switchToEmail}>
+                      Verify via email instead
+                    </button>
+                  </>
+                ) : null}
               </span>
             ) : otpStage === "verified" ? (
               <span id="ct-phone-help" className="ct-help">
@@ -427,6 +457,14 @@ export function ContactForm() {
                 {bySms
                   ? "We'll text you a one-time code to confirm it's you."
                   : "We'll email a one-time code to the address above to confirm it's you."}
+                {smsAvailable && useEmail && !otpOpen ? (
+                  <>
+                    {" "}
+                    <button type="button" className="ct-link" onClick={switchToSms}>
+                      Use SMS instead
+                    </button>
+                  </>
+                ) : null}
               </span>
             )}
 
@@ -466,6 +504,30 @@ export function ContactForm() {
                 {otpError ? (
                   <p className="ct-error ct-otp-error" role="alert">
                     {otpError}
+                  </p>
+                ) : null}
+                {bySms ? (
+                  <p className="ct-help ct-otp-alt">
+                    Didn&apos;t get the SMS?{" "}
+                    <button
+                      type="button"
+                      className="ct-link"
+                      onClick={switchToEmail}
+                      disabled={otpStage === "verifying"}
+                    >
+                      Verify via email instead
+                    </button>
+                  </p>
+                ) : smsAvailable ? (
+                  <p className="ct-help ct-otp-alt">
+                    <button
+                      type="button"
+                      className="ct-link"
+                      onClick={switchToSms}
+                      disabled={otpStage === "verifying"}
+                    >
+                      Use SMS instead
+                    </button>
                   </p>
                 ) : null}
               </div>

@@ -865,6 +865,12 @@
   margin: 0;
 }
 
+/* "Didn't get the SMS? Verify by email instead" line under the OTP boxes. */
+.ct-otp-alt {
+  flex-basis: 100%;
+  margin: 0;
+}
+
 /* ---------- Buttons ---------- */
 .ct-btn {
   display: inline-flex;

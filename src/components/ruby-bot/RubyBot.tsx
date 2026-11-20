@@ -97,6 +97,9 @@ function RubyBot() {
     const [enquiryOtpToken, setEnquiryOtpToken] = useState('');
     const [enquiryOtpStage, setEnquiryOtpStage] = useState<'idle' | 'sending' | 'sent' | 'verifying' | 'verified'>('idle');
     const [enquiryOtpError, setEnquiryOtpError] = useState('');
+    // Visitors who don't receive the SMS can switch to verifying their email instead.
+    const [enquiryUseEmail, setEnquiryUseEmail] = useState(false);
+    const [enquirySmsFailed, setEnquirySmsFailed] = useState(false);
     const [quickReplies] = useState<QuickReply[]>([
         { id: '1', text: 'Get Started' },
         { id: '2', text: 'Learn More' },
@@ -444,12 +447,18 @@ function RubyBot() {
         }));
     };
 
-    const sendEnquiryOtp = async () => {
+    const enquiryOtpTarget = (viaEmail: boolean) =>
+        viaEmail ? { email: enquiryForm.email.trim() } : { phone: enquiryForm.phone.replace(/\D/g, '') };
+
+    /* `viaEmail` is passed explicitly when switching from SMS, before the
+       `enquiryUseEmail` state change has re-rendered this function. */
+    const sendEnquiryOtp = async (viaEmail = enquiryUseEmail) => {
         setEnquiryOtpStage('sending');
         setEnquiryOtpError('');
+        setEnquirySmsFailed(false);
         try {
             const response = await axios.post('/api/contact/otp/send', {
-                phone: enquiryForm.phone.replace(/\D/g, ''),
+                ...enquiryOtpTarget(viaEmail),
                 userName: `${enquiryForm.firstName.trim()} ${enquiryForm.lastName.trim()}`.trim(),
                 enquiry_for: selectedService,
                 message: enquiryForm.message.trim(),
@@ -461,13 +470,42 @@ function RubyBot() {
             setEnquiryOtpToken(response.data.token);
             setEnquiryOtp('');
             setEnquiryOtpStage('sent');
-            addFrontendNotice(`A ${OTP_LENGTH}-digit verification code was sent to your mobile number.`);
+            addFrontendNotice(`A ${OTP_LENGTH}-digit verification code was sent to your ${viaEmail ? 'email address' : 'mobile number'}.`);
         } catch (error) {
             setEnquiryOtpStage('idle');
-            const message = error instanceof Error ? error.message : "We couldn't send the verification code.";
+            // axios throws on 4xx/5xx; the API's own message is in the response body.
+            const apiError = axios.isAxiosError(error) ? (error.response?.data as { error?: string } | undefined)?.error : undefined;
+            const message = apiError || (error instanceof Error ? error.message : "We couldn't send the verification code.");
             setEnquiryOtpError(message);
+            setEnquirySmsFailed(!viaEmail);
             addFrontendNotice(message);
         }
+    };
+
+    const switchEnquiryToEmail = () => {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(enquiryForm.email.trim())) {
+            setEnquiryUseEmail(true);
+            setEnquiryOtp('');
+            setEnquiryOtpToken('');
+            setEnquiryOtpStage('idle');
+            const message = 'Enter a valid email address to get the code by email.';
+            setEnquiryOtpError(message);
+            addFrontendNotice(message);
+            return;
+        }
+        setEnquiryUseEmail(true);
+        setEnquiryOtp('');
+        setEnquiryOtpToken('');
+        void sendEnquiryOtp(true);
+    };
+
+    const switchEnquiryToSms = () => {
+        setEnquiryUseEmail(false);
+        setEnquirySmsFailed(false);
+        setEnquiryOtp('');
+        setEnquiryOtpToken('');
+        setEnquiryOtpStage('idle');
+        setEnquiryOtpError('');
     };
 
     const verifyEnquiryOtp = async () => {
@@ -477,7 +515,7 @@ function RubyBot() {
         setEnquiryOtpError('');
         try {
             const response = await axios.post('/api/contact/otp/verify', {
-                phone: enquiryForm.phone.replace(/\D/g, ''),
+                ...enquiryOtpTarget(enquiryUseEmail),
                 otp: code,
                 token: enquiryOtpToken,
             });
@@ -485,11 +523,12 @@ function RubyBot() {
                 throw new Error(response.data.error || "That code didn't work. Please try again.");
             }
             setEnquiryOtpStage('verified');
-            addFrontendNotice('Mobile number verified successfully.');
+            addFrontendNotice(enquiryUseEmail ? 'Email verified successfully.' : 'Mobile number verified successfully.');
             await submitEnquiry(response.data.verifiedToken);
         } catch (error) {
             setEnquiryOtpStage('sent');
-            const message = error instanceof Error ? error.message : "Verification failed. Please try again.";
+            const apiError = axios.isAxiosError(error) ? (error.response?.data as { error?: string } | undefined)?.error : undefined;
+            const message = apiError || (error instanceof Error ? error.message : "Verification failed. Please try again.");
             setEnquiryOtpError(message);
             addFrontendNotice(message);
         }
@@ -529,6 +568,7 @@ function RubyBot() {
             setEnquiryOtp('');
             setEnquiryOtpToken('');
             setEnquiryOtpStage('idle');
+            setEnquiryUseEmail(false);
             setSelectedService('Select a service');
             setShowEnquiryForm(false);
             setShowEnquiryButton(false);
@@ -541,6 +581,7 @@ function RubyBot() {
     };
 
     const handleSubmitEnquiry = async () => {
+        setEnquirySmsFailed(false);
         // Validate form
         if (selectedService === 'Select a service') {
             const message = "Please select a service before requesting OTP.";
@@ -586,7 +627,7 @@ function RubyBot() {
             return;
         }
         if (enquiryOtpStage !== 'verified') {
-            const message = `Please enter the ${OTP_LENGTH}-digit verification code sent to your mobile number.`;
+            const message = `Please enter the ${OTP_LENGTH}-digit verification code sent to your ${enquiryUseEmail ? 'email address' : 'mobile number'}.`;
             setEnquiryOtpError(message);
             addFrontendNotice(message);
             return;
@@ -602,6 +643,7 @@ function RubyBot() {
         setEnquiryOtpToken('');
         setEnquiryOtpStage('idle');
         setEnquiryOtpError('');
+        setEnquiryUseEmail(false);
         setSelectedService('Select a service');
     };
 
@@ -617,6 +659,7 @@ function RubyBot() {
         setEnquiryOtpToken('');
         setEnquiryOtpStage('idle');
         setEnquiryOtpError('');
+        setEnquiryUseEmail(false);
         addFrontendNotice('Ruby Bot is ready for a new conversation.');
     };
 
@@ -873,7 +916,7 @@ function RubyBot() {
                                 {enquiryOtpStage === 'sent' || enquiryOtpStage === 'verifying' ? (
                                     <div className="rounded-lg border border-[#c9356e] bg-white p-3">
                                         <label className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.08em] text-[#161b46]">
-                                            Mobile verification code
+                                            {enquiryUseEmail ? 'Email verification code' : 'Mobile verification code'}
                                         </label>
                                         <div className="flex gap-2">
                                             <input
@@ -896,10 +939,47 @@ function RubyBot() {
                                             </button>
                                         </div>
                                         {enquiryOtpError ? <p className="mt-2 text-[10px] text-[#c9356e]">{enquiryOtpError}</p> : null}
+                                        <p className="mt-2 text-[10px] text-[#5c5c5c]">
+                                            {enquiryUseEmail ? null : <>Didn&apos;t get the SMS?{' '}</>}
+                                            <button
+                                                type="button"
+                                                onClick={enquiryUseEmail ? switchEnquiryToSms : switchEnquiryToEmail}
+                                                disabled={enquiryOtpStage === 'verifying'}
+                                                className="font-semibold text-[#c9356e] underline underline-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                            >
+                                                {enquiryUseEmail ? 'Use SMS instead' : 'Verify via email instead'}
+                                            </button>
+                                        </p>
                                     </div>
                                 ) : null}
                                 {enquiryOtpError && enquiryOtpStage === 'idle' ? (
-                                    <p className="text-[10px] text-[#c9356e]">{enquiryOtpError}</p>
+                                    <p className="text-[10px] text-[#c9356e]">
+                                        {enquiryOtpError}
+                                        {!enquiryUseEmail && enquirySmsFailed ? (
+                                            <>
+                                                {' '}
+                                                <button
+                                                    type="button"
+                                                    onClick={switchEnquiryToEmail}
+                                                    className="font-semibold underline underline-offset-2"
+                                                >
+                                                    Verify via email instead
+                                                </button>
+                                            </>
+                                        ) : null}
+                                    </p>
+                                ) : null}
+                                {enquiryUseEmail && enquiryOtpStage === 'idle' && !enquiryOtpError ? (
+                                    <p className="text-[10px] text-[#5c5c5c]">
+                                        We&apos;ll email the code to the address above.{' '}
+                                        <button
+                                            type="button"
+                                            onClick={switchEnquiryToSms}
+                                            className="font-semibold text-[#c9356e] underline underline-offset-2"
+                                        >
+                                            Use SMS instead
+                                        </button>
+                                    </p>
                                 ) : null}
 
                                 <div className="flex gap-2 pt-1">

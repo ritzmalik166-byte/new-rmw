@@ -54,11 +54,14 @@ export function ReportDownloadForm({ report, onClose }: { report: CaseStudyRepor
   const [verifiedToken, setVerifiedToken] = useState("");
   const [otpError, setOtpError] = useState("");
   const [resendIn, setResendIn] = useState(0);
+  // Visitors who don't receive the SMS can switch to verifying their email instead.
+  const [useEmail, setUseEmail] = useState(false);
 
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [file, setFile] = useState("");
 
+  const bySms = !useEmail;
   const otpLocked = otpStage === "verified" || otpStage === "verifying";
   const otpOpen = otpStage === "sent" || otpStage === "verifying";
 
@@ -83,19 +86,33 @@ export function ReportDownloadForm({ report, onClose }: { report: CaseStudyRepor
 
   const onPhoneChange = (event: ChangeEvent<HTMLInputElement>) => {
     update("phone", digitsOnly(event.target.value).slice(0, 10));
-    if (otpStage !== "idle") resetOtp();
+    if (bySms && otpStage !== "idle") resetOtp();
   };
 
-  const sendOtp = async () => {
-    if (!isIndianMobile(values.phone)) {
+  const onEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+    update("email", event.target.value);
+    if (!bySms && otpStage !== "idle") resetOtp();
+  };
+
+  const otpTarget = (sms = bySms) => (sms ? { phone: values.phone } : { email: values.email.trim() });
+
+  /* `forceEmail` sends the code by email right away when the visitor switches from SMS,
+     before the `useEmail` state change has re-rendered this function. */
+  const sendOtp = async (forceEmail = false) => {
+    const sms = bySms && !forceEmail;
+    if (sms && !isIndianMobile(values.phone)) {
       setErrors((current) => ({ ...current, phone: "Enter a 10-digit Indian mobile number." }));
+      return;
+    }
+    if (!sms && !isValidEmail(values.email.trim())) {
+      setErrors((current) => ({ ...current, email: "Enter a valid email address." }));
       return;
     }
     setOtpStage("sending");
     setOtpError("");
     const result = await postJson<{ ok: boolean; token?: string; error?: string; retryIn?: number }>(
       "/api/contact/otp/send",
-      { phone: values.phone },
+      otpTarget(sms),
     );
     if (result.ok && result.token) {
       setOtpToken(result.token);
@@ -103,10 +120,24 @@ export function ReportDownloadForm({ report, onClose }: { report: CaseStudyRepor
       setOtpStage("sent");
       setResendIn(OTP_RESEND_SECONDS);
     } else {
-      setOtpStage(otpToken ? "sent" : "idle");
+      // After switching to email, the old SMS token is no longer valid for this mode.
+      setOtpStage(otpToken && !forceEmail ? "sent" : "idle");
       setOtpError(result.error ?? "We couldn't send the OTP. Please try again.");
       if (result.retryIn) setResendIn(result.retryIn);
     }
+  };
+
+  const switchToEmail = () => {
+    resetOtp();
+    setResendIn(0);
+    setUseEmail(true);
+    void sendOtp(true);
+  };
+
+  const switchToSms = () => {
+    resetOtp();
+    setResendIn(0);
+    setUseEmail(false);
   };
 
   const verify = async (code: string) => {
@@ -115,7 +146,7 @@ export function ReportDownloadForm({ report, onClose }: { report: CaseStudyRepor
     setOtpError("");
     const result = await postJson<{ ok: boolean; verifiedToken?: string; error?: string }>(
       "/api/contact/otp/verify",
-      { phone: values.phone, otp: code, token: otpToken },
+      { ...otpTarget(), otp: code, token: otpToken },
     );
     if (result.ok && result.verifiedToken) {
       setVerifiedToken(result.verifiedToken);
@@ -140,7 +171,11 @@ export function ReportDownloadForm({ report, onClose }: { report: CaseStudyRepor
     if (!isValidName(values.name.trim())) nextErrors.name = "Enter your name.";
     if (!isValidEmail(values.email.trim())) nextErrors.email = "Enter a valid email address.";
     if (!isIndianMobile(values.phone)) nextErrors.phone = "Enter a 10-digit Indian mobile number.";
-    else if (otpStage !== "verified") nextErrors.phone = "Verify your number with the OTP to continue.";
+    else if (otpStage !== "verified") {
+      nextErrors.phone = bySms
+        ? "Verify your number with the OTP to continue."
+        : "Verify your email with the OTP to continue.";
+    }
     setErrors(nextErrors);
     setSubmitError("");
     if (Object.values(nextErrors).some(Boolean)) return;
@@ -222,7 +257,8 @@ export function ReportDownloadForm({ report, onClose }: { report: CaseStudyRepor
             name="email"
             autoComplete="email"
             value={values.email}
-            onChange={(event) => update("email", event.target.value)}
+            onChange={onEmailChange}
+            readOnly={!bySms && otpLocked}
             aria-invalid={Boolean(errors.email)}
             required
           />
@@ -244,7 +280,7 @@ export function ReportDownloadForm({ report, onClose }: { report: CaseStudyRepor
               placeholder="10-digit mobile"
               value={values.phone}
               onChange={onPhoneChange}
-              readOnly={otpLocked}
+              readOnly={bySms && otpLocked}
               aria-invalid={Boolean(phoneError)}
               required
             />
@@ -252,7 +288,7 @@ export function ReportDownloadForm({ report, onClose }: { report: CaseStudyRepor
 
           {otpStage === "verified" ? (
             <p className="sd-query-verified">
-              <span aria-hidden>✓</span> Number verified.{" "}
+              <span aria-hidden>✓</span> {bySms ? "Number" : "Email"} verified.{" "}
               <button type="button" className="sd-query-link" onClick={resetOtp}>
                 Change
               </button>
@@ -261,13 +297,15 @@ export function ReportDownloadForm({ report, onClose }: { report: CaseStudyRepor
             <button
               type="button"
               className="sd-query-otp-send"
-              onClick={sendOtp}
+              onClick={() => void sendOtp()}
               disabled={otpStage === "sending" || otpStage === "verifying" || resendIn > 0}
             >
               {otpStage === "sending"
                 ? "Sending…"
                 : otpStage === "idle"
-                  ? "Send OTP"
+                  ? bySms
+                    ? "Send OTP"
+                    : "Email OTP to verify"
                   : resendIn > 0
                     ? `Resend OTP in ${resendIn}s`
                     : "Resend OTP"}
@@ -276,9 +314,24 @@ export function ReportDownloadForm({ report, onClose }: { report: CaseStudyRepor
 
           {phoneError ? <small role={otpError ? "alert" : undefined}>{phoneError}</small> : null}
 
+          {bySms && !otpOpen && otpError ? (
+            <p className="sd-query-alt">
+              <button type="button" className="sd-query-link" onClick={switchToEmail}>
+                Verify via email instead
+              </button>
+            </p>
+          ) : !bySms && !otpOpen && otpStage !== "verified" ? (
+            <p className="sd-query-alt">
+              We&apos;ll email a code to the address above.{" "}
+              <button type="button" className="sd-query-link" onClick={switchToSms}>
+                Use SMS instead
+              </button>
+            </p>
+          ) : null}
+
           {otpOpen ? (
             <div className="sd-query-otp">
-              <label htmlFor={otpId}>Enter the code sent to +91 {values.phone}</label>
+              <label htmlFor={otpId}>Enter the code sent to {bySms ? `+91 ${values.phone}` : values.email.trim()}</label>
               <div className="sd-query-otp-row">
                 <input
                   id={otpId}
@@ -300,6 +353,17 @@ export function ReportDownloadForm({ report, onClose }: { report: CaseStudyRepor
                 </button>
               </div>
               {otpError ? <small role="alert">{otpError}</small> : null}
+              <p className="sd-query-alt">
+                {bySms ? <>Didn&apos;t get the SMS? </> : null}
+                <button
+                  type="button"
+                  className="sd-query-link"
+                  onClick={bySms ? switchToEmail : switchToSms}
+                  disabled={otpStage === "verifying"}
+                >
+                  {bySms ? "Verify via email instead" : "Use SMS instead"}
+                </button>
+              </p>
             </div>
           ) : null}
         </div>
@@ -332,7 +396,11 @@ export function ReportDownloadForm({ report, onClose }: { report: CaseStudyRepor
           </p>
         ) : (
           <p className="sd-query-note">
-            {otpStage === "verified" ? "You're verified. Your PDF is ready." : "Verify your number to unlock the download."}
+            {otpStage === "verified"
+              ? "You're verified. Your PDF is ready."
+              : bySms
+                ? "Verify your number to unlock the download."
+                : "Verify your email to unlock the download."}
           </p>
         )}
       </div>

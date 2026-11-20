@@ -111,15 +111,18 @@ export function ServiceQueryForm({
   const [verifiedToken, setVerifiedToken] = useState("");
   const [otpError, setOtpError] = useState("");
   const [resendIn, setResendIn] = useState(0);
+  // +91 visitors who don't receive the SMS can switch to verifying their email instead.
+  const [useEmail, setUseEmail] = useState(false);
 
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [sentName, setSentName] = useState("");
 
-  const bySms = values.dial === OTP_DIAL_CODE;
+  const smsAvailable = values.dial === OTP_DIAL_CODE;
+  const bySms = smsAvailable && !useEmail;
   const otpLocked = otpStage === "verified" || otpStage === "verifying";
   const otpOpen = otpStage === "sent" || otpStage === "verifying";
-  const phoneMax = bySms ? 10 : 14;
+  const phoneMax = smsAvailable ? 10 : 14;
 
   useEffect(() => {
     if (resendIn <= 0) return;
@@ -154,6 +157,7 @@ export function ServiceQueryForm({
     update("dial", dial);
     update("phone", values.phone.slice(0, dial === OTP_DIAL_CODE ? 10 : 14));
     resetOtp();
+    setUseEmail(false);
   };
 
   const onCountryChange = (country: string) => {
@@ -165,14 +169,17 @@ export function ServiceQueryForm({
     }
   };
 
-  const otpTarget = () => (bySms ? { phone: values.phone } : { email: values.email.trim() });
+  const otpTarget = (sms = bySms) => (sms ? { phone: values.phone } : { email: values.email.trim() });
 
-  const sendOtp = async () => {
-    if (bySms && !isIndianMobile(values.phone)) {
+  /* `forceEmail` sends the code by email right away when the visitor switches from SMS,
+     before the `useEmail` state change has re-rendered this function. */
+  const sendOtp = async (forceEmail = false) => {
+    const sms = bySms && !forceEmail;
+    if (sms && !isIndianMobile(values.phone)) {
       setErrors((current) => ({ ...current, phone: "Enter a 10-digit mobile number." }));
       return;
     }
-    if (!bySms && !isValidEmail(values.email.trim())) {
+    if (!sms && !isValidEmail(values.email.trim())) {
       setErrors((current) => ({ ...current, email: "Enter a valid email address." }));
       return;
     }
@@ -180,7 +187,7 @@ export function ServiceQueryForm({
     setOtpError("");
     const result = await postJson<{ ok: boolean; token?: string; error?: string; retryIn?: number }>(
       "/api/contact/otp/send",
-      otpTarget(),
+      otpTarget(sms),
     );
     if (result.ok && result.token) {
       setOtpToken(result.token);
@@ -188,10 +195,24 @@ export function ServiceQueryForm({
       setOtpStage("sent");
       setResendIn(OTP_RESEND_SECONDS);
     } else {
-      setOtpStage(otpToken ? "sent" : "idle");
+      // After switching to email, the old SMS token is no longer valid for this mode.
+      setOtpStage(otpToken && !forceEmail ? "sent" : "idle");
       setOtpError(result.error ?? "We couldn't send the OTP. Please try again.");
       if (result.retryIn) setResendIn(result.retryIn);
     }
+  };
+
+  const switchToEmail = () => {
+    resetOtp();
+    setResendIn(0);
+    setUseEmail(true);
+    void sendOtp(true);
+  };
+
+  const switchToSms = () => {
+    resetOtp();
+    setResendIn(0);
+    setUseEmail(false);
   };
 
   const verify = async (code: string) => {
@@ -259,6 +280,7 @@ export function ServiceQueryForm({
     setErrors({});
     setSubmitError("");
     resetOtp();
+    setUseEmail(false);
     setSentName("");
   };
 
@@ -381,7 +403,7 @@ export function ServiceQueryForm({
             <button
               type="button"
               className="sd-query-otp-send"
-              onClick={sendOtp}
+              onClick={() => void sendOtp()}
               disabled={otpStage === "sending" || otpStage === "verifying" || resendIn > 0}
             >
               {otpStage === "sending"
@@ -397,6 +419,21 @@ export function ServiceQueryForm({
           )}
 
           {phoneError ? <small role={otpError ? "alert" : undefined}>{phoneError}</small> : null}
+
+          {bySms && !otpOpen && otpError ? (
+            <p className="sd-query-alt">
+              <button type="button" className="sd-query-link" onClick={switchToEmail}>
+                Verify via email instead
+              </button>
+            </p>
+          ) : smsAvailable && !bySms && !otpOpen && otpStage !== "verified" ? (
+            <p className="sd-query-alt">
+              We&apos;ll email a code to the address above.{" "}
+              <button type="button" className="sd-query-link" onClick={switchToSms}>
+                Use SMS instead
+              </button>
+            </p>
+          ) : null}
 
           {otpOpen ? (
             <div className="sd-query-otp">
@@ -422,6 +459,30 @@ export function ServiceQueryForm({
                 </button>
               </div>
               {otpError ? <small role="alert">{otpError}</small> : null}
+              {bySms ? (
+                <p className="sd-query-alt">
+                  Didn&apos;t get the SMS?{" "}
+                  <button
+                    type="button"
+                    className="sd-query-link"
+                    onClick={switchToEmail}
+                    disabled={otpStage === "verifying"}
+                  >
+                    Verify via email instead
+                  </button>
+                </p>
+              ) : smsAvailable ? (
+                <p className="sd-query-alt">
+                  <button
+                    type="button"
+                    className="sd-query-link"
+                    onClick={switchToSms}
+                    disabled={otpStage === "verifying"}
+                  >
+                    Use SMS instead
+                  </button>
+                </p>
+              ) : null}
             </div>
           ) : null}
         </div>
