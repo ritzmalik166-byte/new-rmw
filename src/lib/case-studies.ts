@@ -1,6 +1,6 @@
-import { fetchJson, getBlogPost, getBlogsOrEmpty, normalizeImage } from "@/lib/blogs";
+import { BLOG_API_ORIGIN, fetchJson, getBlogPost, getBlogsOrEmpty, normalizeImage } from "@/lib/blogs";
 
-const CASE_STUDY_LIST_URL = "https://www.ritzmediaworld.com/api/category/case-study";
+const CASE_STUDY_LIST_URL = `${BLOG_API_ORIGIN}/api/category/case-study`;
 
 export type CaseStudy = {
   slug: string;
@@ -113,7 +113,32 @@ export async function getCaseStudySlugs(): Promise<Set<string>> {
   }
 }
 
+/* Building the list costs two API calls per case study missing from the archive, so a
+   built list is reused for a few minutes (matching the API cache) instead of being
+   rebuilt on every request. */
+const CASE_STUDIES_TTL_MS = 5 * 60_000;
+let cachedCaseStudies: { at: number; studies: CaseStudy[] } | null = null;
+let caseStudiesInFlight: Promise<CaseStudy[]> | null = null;
+
 export async function getCaseStudies(): Promise<CaseStudy[]> {
+  if (cachedCaseStudies && Date.now() - cachedCaseStudies.at < CASE_STUDIES_TTL_MS) {
+    return cachedCaseStudies.studies;
+  }
+  // A refresh is already running: reuse the previous list rather than starting another.
+  if (caseStudiesInFlight && cachedCaseStudies) return cachedCaseStudies.studies;
+
+  const load = loadCaseStudies();
+  caseStudiesInFlight = load;
+  try {
+    const studies = await load;
+    if (studies.length > 0) cachedCaseStudies = { at: Date.now(), studies };
+    return studies.length > 0 ? studies : (cachedCaseStudies?.studies ?? studies);
+  } finally {
+    if (caseStudiesInFlight === load) caseStudiesInFlight = null;
+  }
+}
+
+async function loadCaseStudies(): Promise<CaseStudy[]> {
   let list: Awaited<ReturnType<typeof loadCaseStudyList>>;
   try {
     list = await loadCaseStudyList();

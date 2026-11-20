@@ -1,9 +1,16 @@
 import { cache } from "react";
 
-const LATEST_BLOGS_URL = "https://www.ritzmediaworld.com/api/get_all_blogs";
-const ALL_BLOGS_URL = "https://www.ritzmediaworld.com/api/all_blogs";
-const BLOG_POST_URL = "https://www.ritzmediaworld.com/api/blog";
-const ADMIN_BLOG_POST_URL = "https://www.ritzmediaworld.com/api/ritz_blogs/get-single-blog";
+/* Where server-side code reads the blog API. On the droplet, set
+   BLOG_API_ORIGIN=http://127.0.0.1:3003 so these calls go straight to the backend
+   instead of out through nginx, whose per-IP rate limit (api_limit) otherwise
+   throttles the site's own requests. The default skips the www -> apex redirect,
+   which cost every call a second trip through nginx. */
+export const BLOG_API_ORIGIN = (process.env.BLOG_API_ORIGIN || "https://ritzmediaworld.com").replace(/\/+$/, "");
+
+const LATEST_BLOGS_URL = `${BLOG_API_ORIGIN}/api/get_all_blogs`;
+const ALL_BLOGS_URL = `${BLOG_API_ORIGIN}/api/all_blogs`;
+const BLOG_POST_URL = `${BLOG_API_ORIGIN}/api/blog`;
+const ADMIN_BLOG_POST_URL = `${BLOG_API_ORIGIN}/api/ritz_blogs/get-single-blog`;
 const BLOG_ARCHIVE_LIMIT = 59;
 
 export type Blog = {
@@ -145,7 +152,9 @@ function validDate(value: string) {
 }
 
 const RETRY_DELAYS_MS = [500, 1500, 3000];
-const SHARED_REQUEST_TTL_MS = 60_000;
+/* API responses are already cached for 5 minutes (fetchJson's revalidate = 300), so
+   rebuilding the archive more often only re-downloads the same data. */
+const SHARED_REQUEST_TTL_MS = 5 * 60_000;
 const FETCH_TIMEOUT_MS = 12_000;
 const ARCHIVE_LOCK_STALE_MS = 45_000;
 
@@ -160,12 +169,33 @@ function isRetryableStatus(status: number) {
 /* The API host drops new connections when one client opens too many at once
    (20+ parallel requests time out), so requests to it are queued. */
 const MAX_PARALLEL_REQUESTS = 4;
+/* The queue used to be unbounded: when the API slowed down, waiting requests (each
+   holding its page render in memory) piled up until the process ran out of heap.
+   Past these limits a call fails fast and the page falls back to cached data. */
+const MAX_QUEUED_REQUESTS = 100;
+const MAX_QUEUE_WAIT_MS = 15_000;
 let activeRequests = 0;
 const requestQueue: (() => void)[] = [];
 
+class QueueFullError extends Error {}
+
 async function limited<T>(task: () => Promise<T>): Promise<T> {
   if (activeRequests >= MAX_PARALLEL_REQUESTS) {
-    await new Promise<void>((resolve) => requestQueue.push(resolve));
+    if (requestQueue.length >= MAX_QUEUED_REQUESTS) {
+      throw new QueueFullError("Blog API request queue is full.");
+    }
+    await new Promise<void>((resolve, reject) => {
+      const timer = setTimeout(() => {
+        const index = requestQueue.indexOf(wake);
+        if (index !== -1) requestQueue.splice(index, 1);
+        reject(new QueueFullError("Timed out waiting for a blog API slot."));
+      }, MAX_QUEUE_WAIT_MS);
+      const wake = () => {
+        clearTimeout(timer);
+        resolve();
+      };
+      requestQueue.push(wake);
+    });
   }
   activeRequests++;
   try {
@@ -198,6 +228,8 @@ export async function fetchJson(url: string, revalidate = 300): Promise<unknown>
         return { status: response.status, data: await response.json() };
       });
     } catch (error) {
+      // Retrying a full queue would only add to the backlog that caused it.
+      if (error instanceof QueueFullError) throw error;
       lastError = error;
       continue;
     }
@@ -362,12 +394,27 @@ async function archiveLockExists() {
   }
 }
 
+async function archiveFileMtime() {
+  try {
+    const fs = await import("node:fs");
+    return fs.statSync(/*turbopackIgnore: true*/ (await archiveCachePaths()).file).mtimeMs;
+  } catch {
+    return 0;
+  }
+}
+
+/* Waits for another worker to finish writing the archive. The file is only parsed
+   once it has actually changed: parsing the multi-MB archive on every 250ms poll,
+   for every waiting request, was a major source of memory churn. */
 async function waitForArchiveCache() {
+  const startMtime = await archiveFileMtime();
   for (let attempt = 0; attempt < 80; attempt++) {
     await wait(250);
-    const snapshot = await readArchiveCache();
-    if (snapshot) return snapshot;
-    if (!(await archiveLockExists())) return null;
+    const lockGone = !(await archiveLockExists());
+    if (lockGone || (await archiveFileMtime()) !== startMtime) {
+      const snapshot = await readArchiveCache();
+      if (snapshot || lockGone) return snapshot;
+    }
   }
   return null;
 }
@@ -385,6 +432,9 @@ async function loadSharedBlogs(): Promise<Blog[]> {
     if (cached) return rememberBlogs(cached.blogs, true);
 
     if (!(await tryArchiveLock())) {
+      // Another request is already refreshing the archive: serve the copy in memory
+      // rather than holding this request open until the refresh finishes.
+      if (lastLoadedBlogs && lastLoadedComplete) return lastLoadedBlogs;
       const waited = await waitForArchiveCache();
       if (waited) return rememberBlogs(waited.blogs, true);
       continue;

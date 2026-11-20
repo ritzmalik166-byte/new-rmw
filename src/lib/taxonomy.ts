@@ -1,9 +1,9 @@
 import { cache } from "react";
-import { fetchJson, getBlogsOrEmpty, normalizeImage, type Blog } from "@/lib/blogs";
+import { BLOG_API_ORIGIN, fetchJson, getBlogsOrEmpty, normalizeImage, type Blog } from "@/lib/blogs";
 import { getCaseStudies } from "@/lib/case-studies";
 
-const CATEGORIES_URL = "https://www.ritzmediaworld.com/api/blog/categories";
-const CATEGORY_POSTS_URL = "https://www.ritzmediaworld.com/api/category";
+const CATEGORIES_URL = `${BLOG_API_ORIGIN}/api/blog/categories`;
+const CATEGORY_POSTS_URL = `${BLOG_API_ORIGIN}/api/category`;
 
 export type Category = { name: string; slug: string };
 
