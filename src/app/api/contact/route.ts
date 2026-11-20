@@ -59,7 +59,12 @@ export async function POST(request: Request) {
   }
 
   const bySms = dial === OTP_DIAL_CODE;
-  if (!isVerified(bySms ? phone : emailSubject(email), verifiedToken)) {
+  // Indian numbers verify by SMS, but a visitor who doesn't get the SMS can verify their
+  // email instead; either proof is accepted. Other countries always verify by email.
+  const verified = bySms
+    ? isVerified(phone, verifiedToken) || isVerified(emailSubject(email), verifiedToken)
+    : isVerified(emailSubject(email), verifiedToken);
+  if (!verified) {
     return NextResponse.json(
       bySms
         ? { ok: false, error: "Please verify your mobile number with the OTP first.", errors: { phone: "Verify this number." } }

@@ -832,6 +832,19 @@
   font-size: 12.5px;
 }
 
+/* "Didn't get the SMS? Verify via email instead" / "Use SMS instead" line. */
+.sd-query-alt {
+  margin: 0;
+  color: var(--hm-muted);
+  font-family: var(--hm-sans);
+  font-size: 12.5px;
+}
+
+.sd-query-alt .sd-query-link {
+  margin: 0;
+  font-size: 12.5px;
+}
+
 .sd-query-note {
   margin: 0;
   color: var(--hm-muted);

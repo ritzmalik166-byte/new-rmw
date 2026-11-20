@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { CASE_STUDY_REPORTS } from "@/lib/case-studies";
 import { digitsOnly, isIndianMobile, isValidEmail, isValidName } from "@/lib/contact";
-import { isVerified } from "@/lib/contact-otp";
+import { emailSubject, isVerified } from "@/lib/contact-otp";
 import { ENQUIRY_URL, postRemote, remoteMessage } from "@/lib/enquiry";
 import { REPORT_FILES } from "@/lib/report-files";
 
@@ -37,8 +37,12 @@ export async function POST(request: Request) {
   const errors: Record<string, string> = {};
   if (!isValidName(name)) errors.name = "Enter your name.";
   if (!isValidEmail(email)) errors.email = "Enter a valid email address.";
+  const verifiedToken = field(body, "verifiedToken", 600);
   if (!isIndianMobile(phone)) errors.phone = "Enter a 10-digit mobile number.";
-  else if (!isVerified(phone, field(body, "verifiedToken", 600))) errors.phone = "Verify this number with the OTP.";
+  // The SMS OTP is the default; verifying the email instead (when the SMS doesn't arrive) also counts.
+  else if (!isVerified(phone, verifiedToken) && !(isValidEmail(email) && isVerified(emailSubject(email), verifiedToken))) {
+    errors.phone = "Verify this number with the OTP.";
+  }
   if (Object.keys(errors).length) {
     return NextResponse.json({ ok: false, error: "Please check the highlighted fields.", errors }, { status: 400 });
   }
