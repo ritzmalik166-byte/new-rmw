@@ -518,6 +518,7 @@ export const site = {
       { label: "Home", href: "/#home-hero" },
       { label: "Services", href: "/services" },
       { label: "Portfolio", href: "/portfolio" },
+      { label: "Case Studies", href: "/case-study" },
       { label: "About", href: "/about.html" },
       { label: "Blogs", href: "/blog" },
       { label: "Career", href: "/career" },
