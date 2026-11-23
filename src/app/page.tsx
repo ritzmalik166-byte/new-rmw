@@ -11,7 +11,10 @@ import { HomeProof } from "@/components/homepage/HomeProof";
 import { HomeRoute } from "@/components/homepage/HomeRoute";
 import { HomeVoice } from "@/components/homepage/HomeVoice";
 import { HomeWork } from "@/components/homepage/HomeWork";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqPageJsonLd } from "@/lib/schema";
 import { AGENCY_KEYWORDS, pageMetadata } from "@/lib/seo";
+import { site } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 
@@ -21,11 +24,18 @@ export const metadata: Metadata = pageMetadata({
     "Ritz Media World is a leading advertising and creative agency in Delhi NCR with 18 years of experience in brand strategy, creative campaigns, and marketing.",
   keywords: AGENCY_KEYWORDS,
   path: "/",
+  image: {
+    url: "/hero-section/truck-drive.png",
+    width: 1280,
+    height: 720,
+    alt: "Ritz Media World — creative, media and digital marketing agency",
+  },
 });
 
 export default function Home() {
   return (
     <>
+      <JsonLd data={faqPageJsonLd(site.highways.faqs)} />
       <HomeHero />
       <div className="hm-ticker">
         <Ticker />

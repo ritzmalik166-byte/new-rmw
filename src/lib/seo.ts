@@ -91,9 +91,11 @@ type PageSeo = {
   description: string;
   keywords: string[];
   path: string;
+  image?: { url: string; width: number; height: number; alt: string };
 };
 
-export function pageMetadata({ title, description, keywords, path }: PageSeo): Metadata {
+export function pageMetadata({ title, description, keywords, path, image }: PageSeo): Metadata {
+  const url = `${SEO_ORIGIN}${path}`;
   return {
     title: { absolute: title },
     description,
@@ -102,5 +104,23 @@ export function pageMetadata({ title, description, keywords, path }: PageSeo): M
     robots: { index: true, follow: true },
     authors: [{ name: "Ritz Media World" }],
     publisher: "Ritz Media World",
+    ...(image && {
+      openGraph: {
+        type: "website",
+        url,
+        siteName: "Ritz Media World",
+        locale: "en_IN",
+        title,
+        description,
+        images: [image],
+      },
+      twitter: {
+        card: "summary_large_image",
+        site: "@ritzmediaworld",
+        title,
+        description,
+        images: [image.url],
+      },
+    }),
   };
 }
