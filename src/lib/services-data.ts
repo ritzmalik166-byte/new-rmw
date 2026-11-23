@@ -815,7 +815,7 @@ const ALL_SERVICES: ServiceDetail[] = [
       },
       {
         title: "Recognised by the radio industry",
-        copy: "Red FM 93.5 and Big FM named us Best Creative Agency (Real Estate) in Delhi NCR in 2025.",
+        copy: "Big FM named us Best Creative Agency (Real Estate) in Delhi NCR in 2025.",
       },
     ],
     layout: {
