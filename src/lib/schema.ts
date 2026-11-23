@@ -113,3 +113,18 @@ export function blogFaqJsonLd(blog: Blog) {
     })),
   };
 }
+
+export function faqPageJsonLd(faqs: readonly { q: string; a: string }[], path = "/") {
+  const pageUrl = `${SEO_ORIGIN}${path}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${pageUrl}#faq`,
+    url: pageUrl,
+    mainEntity: faqs.map(({ q, a }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  };
+}
