@@ -69,6 +69,35 @@ function formatDate(date: string | null) {
   }).format(new Date(date));
 }
 
+/** Plain, comparable text of an HTML fragment: tags stripped, common entities decoded,
+ *  whitespace collapsed, lower-cased. */
+function headingText(html: string) {
+  return html
+    .replace(/<[^>]*>/g, "")
+    .replace(/&nbsp;|&#160;/gi, " ")
+    .replace(/&amp;|&#38;/gi, "&")
+    .replace(/&quot;|&#34;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+/** Removes the body's first heading (h1/h2 – h1s are demoted to h2 anyway) when it just
+ *  repeats the post's meta title or page title. Any other heading is left untouched. */
+function removeDuplicateTitleHeading(html: string, titles: (string | null | undefined)[]) {
+  const match = /<h([12])\b[^>]*>([\s\S]*?)<\/h\1\s*>/i.exec(html);
+  if (!match) return html;
+
+  const heading = headingText(match[2]);
+  const wanted = titles.filter(Boolean).map((t) => headingText(t as string));
+  if (!heading || !wanted.includes(heading)) return html;
+
+  return html.slice(0, match.index) + html.slice(match.index + match[0].length);
+}
+
 /** Normalises content pasted from Google Docs: scrollable tables, and "•   text"
  *  paragraphs (manual bullets padded with spaces) rendered as real bullet points. */
 function prepareContent(html: string) {
@@ -118,7 +147,8 @@ export default async function BlogDetailPage({
   const { slug } = await params;
   const allBlogs = await getBlogsOrEmpty();
   let blog = (await getBlogPost(slug)) ?? findBlog(allBlogs, slug);
-
+  // console.log("Blog ", blog);
+  
   if (!blog) {
     // Unknown URLs (mostly bots) used to build the whole case-study list, which costs
     // two API calls per case study. The slug list is one cached call, so check it first.
@@ -203,7 +233,11 @@ export default async function BlogDetailPage({
 
           <div
             className="blog-prose blog-post-content"
-            dangerouslySetInnerHTML={{ __html: prepareContent(blog.content) }}
+            dangerouslySetInnerHTML={{
+              __html: prepareContent(
+                removeDuplicateTitleHeading(blog.content, [blog.metaTitle, blog.title]),
+              ),
+            }}
           />
 
           <footer className="blog-post-footer">
