@@ -131,9 +131,11 @@ function ServiceCreatives({ service }: { service: ServiceDetail }) {
               {wallLede}
             </p>
           </div>
-          <TransitionLink data-hm-fade href={portfolioHref} className="hm-link">
-            Explore our work
-          </TransitionLink>
+          {service.slug !== "ai-services" && (
+            <TransitionLink data-hm-fade href={portfolioHref} className="hm-link">
+              Explore our work
+            </TransitionLink>
+          )}
         </header>
 
         <div className="hm-work-nav sd-wall-nav">
