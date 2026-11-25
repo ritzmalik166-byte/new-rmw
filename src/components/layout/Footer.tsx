@@ -235,6 +235,7 @@ export function Footer() {
           <p>© {new Date().getFullYear()} {site.fullName}. All rights reserved.</p>
           <nav className="site-footer-legal-links" aria-label="Legal">
             <TransitionLink href="/privacy-policy">Privacy Policy</TransitionLink>
+            <TransitionLink href="/cookies-policy">Cookies Policy</TransitionLink>
           </nav>
         </div>
         <p className="site-footer-horn">Horn OK Please</p>

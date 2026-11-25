@@ -524,6 +524,7 @@ export const site = {
       { label: "Career", href: "/career" },
       { label: "Contact Us", href: "/contact.html" },
       { label: "Privacy Policy", href: "/privacy-policy" },
+      { label: "Cookies Policy", href: "/cookies-policy" },
     ],
     socials: [
       { label: "Facebook", href: "https://www.facebook.com/ritzmediaworld/" },

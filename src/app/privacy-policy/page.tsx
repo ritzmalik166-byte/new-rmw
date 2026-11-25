@@ -151,7 +151,8 @@ export default function PrivacyPage() {
               way.
             </p>
             <p>
-              A separate Cookies Policy covers the specific categories of cookies this site uses, for
+              A separate{" "}
+              <TransitionLink href="/cookies-policy">Cookies Policy</TransitionLink> covers the specific categories of cookies this site uses, for
               anyone who wants the finer details.
             </p>
           </section>
