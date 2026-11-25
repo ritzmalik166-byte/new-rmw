@@ -57,6 +57,7 @@ export async function POST(request: Request) {
       message: `Report download: ${report.title} (${report.period})`,
     },
     "reports",
+    request,
   );
   if (!submitted.ok) {
     console.error("[reports] contact-enquiry failed", submitted.status, submitted.body);

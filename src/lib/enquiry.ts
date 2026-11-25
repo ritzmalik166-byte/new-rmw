@@ -2,11 +2,25 @@ export const ENQUIRY_URL = "https://ritzmediaworld.com/api/system-settings/conta
 
 export type RemoteBody = Record<string, unknown> | null;
 
-export async function postRemote(url: string, payload: FormData | Record<string, string>, tag: string) {
+
+function visitorIpHeaders(from?: Request): Record<string, string> {
+  if (!from) return {};
+  const forwarded = from.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  const ip = forwarded || from.headers.get("x-real-ip")?.trim();
+  return ip ? { "X-Forwarded-For": ip, "X-Real-IP": ip } : {};
+}
+
+export async function postRemote(
+  url: string,
+  payload: FormData | Record<string, string>,
+  tag: string,
+  from?: Request,
+) {
+  const ipHeaders = visitorIpHeaders(from);
   const init: RequestInit =
     payload instanceof FormData
-      ? { body: payload }
-      : { body: JSON.stringify(payload), headers: { "Content-Type": "application/json" } };
+      ? { body: payload, headers: ipHeaders }
+      : { body: JSON.stringify(payload), headers: { "Content-Type": "application/json", ...ipHeaders } };
   try {
     const response = await fetch(url, { method: "POST", ...init, cache: "no-store", signal: AbortSignal.timeout(30_000) });
     const json = (await response.json().catch(() => null)) as RemoteBody;

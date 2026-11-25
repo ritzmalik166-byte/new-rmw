@@ -90,6 +90,7 @@ export async function POST(request: Request) {
       ...trackingFields(body.tracking),
     },
     "contact",
+    request,
   );
   if (!submitted.ok) {
     console.error("[contact] contact-enquiry failed", submitted.status, submitted.body);

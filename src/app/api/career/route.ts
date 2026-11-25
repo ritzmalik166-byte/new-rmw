@@ -52,7 +52,7 @@ export async function POST(request: Request) {
 
   const upload = new FormData();
   upload.append("resume", resume as File, (resume as File).name);
-  const uploaded = await postRemote(CAREER_UPLOAD_URL, upload, "career");
+  const uploaded = await postRemote(CAREER_UPLOAD_URL, upload, "career", request);
   const filePath = typeof uploaded.body?.filePath === "string" ? uploaded.body.filePath : "";
   if (!uploaded.ok || !filePath) {
     console.error("[career] upload-resume failed", uploaded.status, uploaded.body);
@@ -72,7 +72,7 @@ export async function POST(request: Request) {
   for (const [k, v] of Object.entries(trackingFields(tracking))) enquiry.append(k, v);
   enquiry.append("resumePath", filePath);
   enquiry.append("etype", "career");
-  const submitted = await postRemote(ENQUIRY_URL, enquiry, "career");
+  const submitted = await postRemote(ENQUIRY_URL, enquiry, "career", request);
   if (!submitted.ok) {
     console.error("[career] contact-enquiry failed", submitted.status, submitted.body);
     return NextResponse.json(
