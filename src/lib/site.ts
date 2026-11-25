@@ -511,7 +511,7 @@ export const site = {
     title: ["Have a", "destination", "in", "mind?"],
     blurb:
       "Ritz Media World is a creative, branding, digital, and media agency, founded in 2008 and based in Noida.",
-    address: "402–404, 4th Floor, Corporate Park, Tower A1, Sector 142, Noida 201305",
+    address: "7th Floor, Tower A2, Corporate Park, Sector 142, Noida 201305, Uttar Pradesh, India",
     email: "info@ritzmediaworld.com",
     phones: ["+91 7290002168", "+91 9220516777"],
     company: [

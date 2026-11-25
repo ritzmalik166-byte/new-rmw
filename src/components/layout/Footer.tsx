@@ -21,7 +21,7 @@ registerGsap();
 gsap.registerPlugin(useGSAP);
 
 const TRUCK_GAP = 8;
-const MAP_QUERY = "Ritz Media World, Corporate Park, Tower A1, Sector 142, Noida 201305";
+const MAP_QUERY = "Ritz Media World, Corporate Park, Tower A2, Sector 142, Noida 201305";
 
 export function Footer() {
   const data = site.footer;

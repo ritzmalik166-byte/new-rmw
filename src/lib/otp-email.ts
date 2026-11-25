@@ -9,7 +9,7 @@ const BRAND = {
     { label: "+91 9220516777", href: "tel:+919220516777" },
   ],
   addressLines: [
-    "402–404, 4th Floor, Corporate Park, Tower A1,",
+    "7th Floor, Tower A2, Corporate Park,",
     "Sector 142, Noida 201305",
   ],
   mapUrl:
