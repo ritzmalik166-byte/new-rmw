@@ -67,6 +67,10 @@ export function CookieConsent() {
             their own cookies. By choosing &ldquo;Accept all&rdquo; you agree to our{" "}
             <TransitionLink href="/privacy-policy" className="cc-link">
               Privacy Policy
+            </TransitionLink>{" "}
+            and{" "}
+            <TransitionLink href="/cookies-policy" className="cc-link">
+              Cookies Policy
             </TransitionLink>
             .
           </p>
