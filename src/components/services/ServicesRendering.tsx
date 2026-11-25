@@ -46,6 +46,11 @@ const RENDERS: { id: RenderKind; title: string; video?: string }[] = [
     title: "Amenity & Landscape Rendering",
     video: "/services/3d-amenity-landscape.mp4",
   },
+  {
+    // No walkthrough video yet: shows the live 3D scene. Add `video` once one exists.
+    id: "walkthrough",
+    title: "3D Walkthrough Videos",
+  },
 ];
 
 const BUCKET_COLS = 8;

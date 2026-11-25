@@ -19,6 +19,8 @@ export const RENDER_ICONS = {
   aerial: "/services/icons/3d/aerial.png",
   plan: "/services/icons/3d/floor-plan.png",
   amenity: "/services/icons/3d/amenity.png",
+  // TODO: swap for a dedicated walkthrough icon (also needs an sm/.webp copy).
+  walkthrough: "/services/icons/3d/exterior.png",
 } as const;
 
 /** 80px WebP copy of an icon for plain `<img>` tags (built by scripts/optimize-images.mjs). */
