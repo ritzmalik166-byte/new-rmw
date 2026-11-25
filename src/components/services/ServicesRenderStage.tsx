@@ -21,7 +21,7 @@ import {
   type Texture,
 } from "three";
 
-export type RenderKind = "exterior" | "interior" | "aerial" | "plan" | "amenity";
+export type RenderKind = "exterior" | "interior" | "aerial" | "plan" | "amenity" | "walkthrough";
 
 type Vec3 = [number, number, number];
 
@@ -1539,6 +1539,8 @@ function Scene({ kind, reduced }: { kind: RenderKind; reduced: boolean }) {
       return <PlanScene reduced={reduced} />;
     case "amenity":
       return <AmenityScene reduced={reduced} />;
+    case "walkthrough":
+      return <ExteriorScene reduced={reduced} />;
   }
 }
 
