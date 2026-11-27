@@ -13,7 +13,7 @@ const BRAND = {
     "Sector 142, Noida 201305",
   ],
   mapUrl:
-    "https://www.google.com/maps/search/?api=1&query=402%E2%80%93404%2C%204th%20Floor%2C%20Corporate%20Park%2C%20Tower%20A1%2C%20Sector%20142%2C%20Noida%20201305",
+    "https://www.google.com/maps/search/?api=1&query=Ritz%20Media%20World%2C%207th%20Floor%2C%20Tower%20A2%2C%20Corporate%20Park%2C%20Sector%20142%2C%20Noida%20201305",
   replyTime: "Within one working day",
   // Colours
   ink: "#1d1a3a",

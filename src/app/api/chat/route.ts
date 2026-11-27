@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { fixRubyAddress, fixRubyAddressDeep } from "@/lib/ruby-address";
 
 const CHAT_API_URL = process.env.CHAT_API_URL || "";
 
@@ -40,7 +41,13 @@ export async function POST(request: Request) {
     );
   }
 
-  const responseBody = await response.text();
+  let responseBody = await response.text();
+  // Correct the old office address in Ruby's reply (see lib/ruby-address.ts).
+  try {
+    responseBody = JSON.stringify(fixRubyAddressDeep(JSON.parse(responseBody)));
+  } catch {
+    responseBody = fixRubyAddress(responseBody);
+  }
   return new NextResponse(responseBody, {
     status: response.status,
     headers: {
